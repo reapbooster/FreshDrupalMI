@@ -104,3 +104,7 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+/.env
+/html
+/web/sites/default/temp
+/web/sites/default/private

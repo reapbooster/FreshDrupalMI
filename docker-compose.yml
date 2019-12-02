@@ -1,0 +1,52 @@
+# Use this docker-compose file to host the site locally
+version: '3.7'
+services:
+  nginx:
+    build: docker/nginx-container
+    image: milkin-institute/nginx-dev
+    expose:
+      - 80
+    depends_on:
+      - php
+      - mysql
+    links:
+      - php
+      - mysql
+    volumes:
+      - ".:/var/www"
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+
+  php:
+    build: docker/php-container
+    image: milkin-institute/php-dev
+    expose:
+      - '9000'
+    volumes:
+      - ".:/var/www"
+      - "$HOME/.ssh:/root/.ssh"
+    env_file:
+      - .env
+
+  mysql:
+    build: docker/mysql-container
+    image: milkin-institute/mysql-dev
+    expose:
+      - '3306'
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'db:/var/lib/mysql'
+    env_file:
+      - .env
+
+  redis:
+    image: redis
+    expose:
+      - '6379'
+
+volumes:
+  web: {}
+  db: {}
