@@ -17,13 +17,6 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
 include __DIR__ . "/settings.pantheon.php";
 
 /**
- * Place the config directory outside of the Drupal root.
- */
-$config_directories = array(
-  CONFIG_SYNC_DIRECTORY => dirname(DRUPAL_ROOT) . '/config',
-);
-
-/**
  * If there is a local settings file, then include it
  */
 $local_settings = __DIR__ . "/settings.local.php";
@@ -36,3 +29,45 @@ if (file_exists($local_settings)) {
  * modifying settings.php.
  */
 $settings['install_profile'] = 'standard';
+
+
+/**
+ * Configuration for Redis Cache
+ *
+ * Make sure that the module is already installed and enabled prior to adding this config
+ * The site will die with a WSOD Drupal Error if the module is not enabled
+ */
+
+if (defined('PANTHEON_ENVIRONMENT')) {
+  $env = getenv('PANTHEON_ENV');
+  if (PHP_SAPI == 'cli') {
+    ini_set('max_execution_time', 999);
+  }
+  // Include the Redis services.yml file. Adjust the path if you installed to a contrib or other subdirectory.
+  $settings['container_yamls'][] = 'modules/redis/example.services.yml';
+  if (false) {
+    //phpredis is built into the Pantheon application container.
+    $settings['redis.connection']['interface'] = 'PhpRedis';
+    // These are dynamic variables handled by Pantheon.
+    $settings['redis.connection']['host']      = $_ENV['CACHE_HOST'];
+    $settings['redis.connection']['port']      = $_ENV['CACHE_PORT'];
+    $settings['redis.connection']['password']  = $_ENV['CACHE_PASSWORD'];
+
+    $settings['cache']['default'] = 'cache.backend.redis'; // Use Redis as the default cache.
+    $settings['cache_prefix']['default'] = 'pantheon-redis';
+
+    // Set Redis to not get the cache_form (no performance difference).
+    $settings['cache']['bins']['form']      = 'cache.backend.database';
+  }
+
+}
+
+/**
+ * Place the config directory outside of the Drupal root.
+ */
+$config_directories = array(
+  CONFIG_SYNC_DIRECTORY => dirname(DRUPAL_ROOT) . '/config/live',
+);
+if ($env) {
+  $config['config_split.config_split.config_' . $env]['status'] = TRUE;
+}
