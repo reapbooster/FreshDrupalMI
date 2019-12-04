@@ -26,4 +26,7 @@ cd /root
 
 curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/master/builds/installer.phar && php installer.phar install
 
-cd /var/www/web
+cd /var/www
+
+composer install --prefer-dist --optimize-autoloader
+

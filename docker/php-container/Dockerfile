@@ -62,7 +62,6 @@ RUN printf "\n\nexport COMPOSER_ALLOW_SUPERUSER=1\n" >> $HOME/.bash_profile
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN export PATH="/var/www/vendor/bin:./bin:$(composer config -g home)/vendor/bin:$PATH"
 ENV PATH /var/www/vendor/bin:$PATH:/root/.composer/vendor/bin
-RUN composer global require drush/drush
 
 
 # PHP ${PHP_VERSION}
@@ -75,6 +74,8 @@ RUN docker-php-ext-install -j$(nproc) zip
 RUN docker-php-ext-install -j$(nproc) pdo
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
 RUN docker-php-ext-install -j$(nproc) opcache
+RUN pear update-channels
+RUN pear upgrade pear/archive_tar
 
 # Uploadprogress.
 RUN mkdir -p /usr/src/php/ext/uploadprogress; \
