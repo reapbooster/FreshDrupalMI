@@ -86,6 +86,33 @@ jobs:
           paths:
             - $HOME/.composer/cache
 
+
+  build_css_js:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - composer-cache-{{ checksum "composer.lock" }}
+            - composer-cache-
+            - vendor-{{ checksum "composer.lock" }}
+            - vendor-
+
+      - run:
+          # Set TERMINUS_ENV and related environment variables.
+          # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
+          name: setup-environment-vars
+          command: /build-tools-ci/scripts/set-environment
+
+      - run:
+          name: Build CSS & JS
+          command: npm install && npm run build
+
+      - run:
+          name: PHP-SASS
+          command: vendor/bin/pscss web/themes/custom/milken/scss/milken.scss --format=compressed > web/themes/custom/milken/css/milken.css
+
   build_php:
     <<: *defaults
     steps:
@@ -240,6 +267,7 @@ workflows:
       - configure_env_vars
       - static_tests
       - build_php
+      - build_css_js
       - deploy_to_pantheon:
           requires:
             - static_tests

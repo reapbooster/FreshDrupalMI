@@ -53,6 +53,7 @@ RUN apt-get update && apt-get install -y libmagick++-dev libmagickcore-dev libma
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
+RUN npm install -g yarn
 
 # Amazon RDS public certificate chain
 ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem  /etc/ssl/certs/rds-combined-ca-bundle.pem
