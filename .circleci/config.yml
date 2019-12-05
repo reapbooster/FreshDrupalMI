@@ -272,6 +272,7 @@ workflows:
       - build_php
       - build_css_js:
           requires:
+            - static_tests
             - build_php
       - deploy_to_pantheon:
           requires:
