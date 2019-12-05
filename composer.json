@@ -1,6 +1,6 @@
 {
-    "name": "pantheon-systems/example-drops-8-composer",
-    "description": "Install drops-8 with Composer on Pantheon.",
+    "name": "Milken Institute",
+    "description": "Main site development repo",
     "type": "project",
     "license": "MIT",
     "repositories": [
