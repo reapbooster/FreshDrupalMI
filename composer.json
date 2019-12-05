@@ -1,5 +1,5 @@
 {
-    "name": "Milken Institute",
+    "name": "milken-institute/freshdrupalmi",
     "description": "Main site development repo",
     "type": "project",
     "license": "MIT",
@@ -82,7 +82,6 @@
         "drush/drush": "^9.7",
         "pantheon-systems/quicksilver-pushback": "^2",
         "rvtraveller/qs-composer-installer": "^1.1",
-        "webflo/drupal-core-strict": "^8.6.15",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
