@@ -270,7 +270,9 @@ workflows:
       - configure_env_vars
       - static_tests
       - build_php
-      - build_css_js
+      - build_css_js:
+          requires:
+            - build_php
       - deploy_to_pantheon:
           requires:
             - static_tests
