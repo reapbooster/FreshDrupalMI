@@ -106,12 +106,15 @@ jobs:
           command: /build-tools-ci/scripts/set-environment
 
       - run:
-          name: Build CSS & JS
-          command: npm install && npm run build
-
-      - run:
           name: PHP-SASS
           command: vendor/bin/pscss web/themes/custom/milken/scss/milken.scss --format=compressed > web/themes/custom/milken/css/milken.css
+
+      - run:
+          name: Build CSS & JS
+          command: npm install && npm run build
+          path: web/core
+
+
 
   build_php:
     <<: *defaults
