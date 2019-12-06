@@ -8,7 +8,9 @@ description: ''
 folder: ''
 module: {  }
 theme: {  }
-blacklist: {  }
+blacklist:
+  - core.extension
+  - system.performance
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
