@@ -5,6 +5,11 @@ ARG ENV
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV LANG en_US.utf8
 
+ENV CODELINT_COMMAND="~/.composer/vendor/bin/phpcs --colors --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt,md' -v "
+ENV CODELINT="\n\nalias drupalcs=\"${CODELINT_COMMAND}\"\n"
+ENV CODELINT_FIX_COMMAND="phpcbf --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,css,info,txt,md' -v "
+ENV CODELINT_FIX="\nalias drupalcbf=\"${CODELINT_FIX_COMMAND}\"\n"
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG PHP_VERSION=7.3
@@ -91,6 +96,18 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 # as of 2019-AUG-06 drupal redis module didn't work with redis 5
 RUN pecl install redis-4.3.0 \
     && docker-php-ext-enable redis
+
+RUN composer global require drupal/coder
+RUN composer global require friendsofphp/php-cs-fixer
+RUN composer global require squizlabs/php_codesniffer
+
+RUN export command=
+
+RUN echo ${CODELINT} >> /root/.bashrc
+RUN echo ${CODELINT_FIX} >> /root/.bashrc
+
+RUN ln -s ~/.composer/vendor/drupal/coder/coder_sniffer/Drupal ~/.composer/vendor/squizlabs/php_codesniffer/src/Standards/Drupal
+RUN ln -s ~/.composer/vendor/drupal/coder/coder_sniffer/DrupalPractice ~/.composer/vendor/squizlabs/php_codesniffer/src/Standards/DrupalPractice
 
 COPY php/overrides.ini /usr/local/etc/php-fpm.d
 COPY php/php.ini /usr/local/etc/php
