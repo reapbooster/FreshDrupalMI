@@ -1,4 +1,4 @@
-uuid: abbdeeb1-413e-4922-8da1-e3a477764c67
+uuid: 6260581e-6b21-48a5-ac3d-64008a277aab
 langcode: en
 status: true
 dependencies:
@@ -9,7 +9,7 @@ _core:
 id: seven_local_actions
 theme: seven
 region: content
-weight: -10
+weight: -1
 provider: null
 plugin: local_actions_block
 settings:
