@@ -1,0 +1,38 @@
+schemas:
+  bootstrap: 8000
+  milken: 8000
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: ''
+  url: 'https://dev-freshdrupalmi.pantheonsite.io/themes/custom/milken/favicon.ico'
+  use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: false
+logo:
+  path: ''
+  url: ''
+  use_default: true
+table_responsive: '-1'
+navbar_inverse: 1
+navbar_position: fixed-top
+region_wells:
+  sidebar_first: ''
+  sidebar_second: well
+  content: ''
+  header: ''
+  primary_menu: ''
+  secondary_menu: ''
+  footer: ''
+  highlighted: ''
+  help: ''
+  breadcrumb: ''
+cdn_theme: bootstrap
+cdn_cache_ttl_versions: '604800'
+cdn_cache_ttl_themes: '604800'
+cdn_cache_ttl_assets: '0'
+cdn_cache_ttl_library: '0'
+reset_http_request_cache: ''
+table: ''
