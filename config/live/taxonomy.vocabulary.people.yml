@@ -1,0 +1,8 @@
+uuid: c389efa4-1e09-4ee0-8299-55569c7ab2ab
+langcode: en
+status: true
+dependencies: {  }
+name: People
+vid: people
+description: ''
+weight: 0

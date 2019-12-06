@@ -1,0 +1,28 @@
+uuid: f88e58c3-e752-4d88-b865-eb030fa14c63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.career.body
+    - node.type.career
+  module:
+    - text
+    - user
+id: node.career.default
+targetEntityType: node
+bundle: career
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
