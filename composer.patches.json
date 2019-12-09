@@ -1,0 +1,7 @@
+{
+  "patches": {
+    "drupal/core": {
+      "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch"
+    }
+  }
+}

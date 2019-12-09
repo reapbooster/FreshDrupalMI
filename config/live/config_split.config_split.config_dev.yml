@@ -11,6 +11,8 @@ theme: {  }
 blacklist:
   - core.extension
   - system.performance
+  - devel.settings
+  - devel.toolbar
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
