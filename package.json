@@ -1,0 +1,25 @@
+{
+  "name": "milken",
+  "version": "1.0.0",
+  "description": "Supporting JS for the milken Institute site",
+  "main": "index.php",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-shell": "^0.7.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "node-sass": "^4.13.0",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {}
+}

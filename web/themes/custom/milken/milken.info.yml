@@ -3,7 +3,8 @@ type: theme
 description: 'Milken Institute'
 package: milken
 core: 8.x
-libraries:
-  - milken/js/milken
 
 base theme: bootstrap
+libraries:
+  - milken/global-styling
+  - milken/global-scripts

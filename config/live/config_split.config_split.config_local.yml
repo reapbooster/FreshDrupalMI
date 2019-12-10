@@ -1,0 +1,18 @@
+langcode: en
+status: false
+dependencies: {  }
+id: config_local
+label: config_local
+description: ''
+folder: ''
+module: {  }
+theme: {  }
+blacklist:
+  - core.extension
+  - system.performance
+  - devel.settings
+  - devel.toolbar
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

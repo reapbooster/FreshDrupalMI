@@ -109,3 +109,6 @@ Thumbs.db
 /web/sites/default/temp
 /web/sites/default/private
 /web/themes/custom/milken/css/*.css
+/node_modules
+/web/themes/custom/milken/scss/milken.css.map
+/web/themes/custom/milken/scss/milken.css
