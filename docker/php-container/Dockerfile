@@ -1,5 +1,7 @@
 FROM php:7.3-fpm
 
+RUN apt-get update -y --fix-missing && apt-get install -y \
+      gnupg2
 
 ARG ENV
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -13,6 +15,13 @@ ENV CODELINT_FIX="\nalias drupalcbf=\"${CODELINT_FIX_COMMAND}\"\n"
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG PHP_VERSION=7.3
+
+WORKDIR /tmp
+
+RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN echo "deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+RUN update-ca-certificates --verbose --fresh
+RUN mkdir -p /usr/share/man/man1
 
 RUN apt-get update -y --fix-missing && apt-get install -y \
       supervisor \
@@ -45,8 +54,16 @@ RUN apt-get update -y --fix-missing && apt-get install -y \
       default-mysql-client \
       zip \
       libzip-dev \
-      redis-tools
+      redis-tools \
+      xvfb \
+      libgconf-2-4 \
+      libxi6 \
+      unzip \
+      google-chrome-stable \
+      gvfs \
+      pcscd
 
+RUN apt-get update -y --fix-missing && apt-get -yf install   default-jre-headless default-jdk-headless default-jre default-jdk
 
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
   && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
@@ -56,9 +73,20 @@ ENV LANG en_US.utf8
 RUN apt-get update && apt-get install -y libmagick++-dev libmagickcore-dev libmagickwand-6-headers libmagickwand-dev --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
+RUN wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
+RUN unzip chromedriver_linux64.zip
+RUN mv chromedriver /usr/bin/chromedriver
+RUN chown root:root /usr/bin/chromedriver
+RUN chmod +x /usr/bin/chromedriver
+RUN wget https://selenium-release.storage.googleapis.com/3.9/selenium-server-standalone-3.9.1.jar
+RUN mv selenium-server-standalone-3.9.1.jar /opt/selenium-server-standalone.jar
+
+
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
-RUN npm install -g yarn
+RUN npm install -g npm
+RUN npm install -g gulp-cli
+
 
 # Amazon RDS public certificate chain
 ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem  /etc/ssl/certs/rds-combined-ca-bundle.pem
@@ -166,6 +194,8 @@ RUN chmod +x /docker-entrypoint.sh
 #RUN touch /tmp/www/.env
 
 STOPSIGNAL SIGQUIT
+
+WORKDIR /var/www
 
 EXPOSE 9000
 ENTRYPOINT [ "/docker-entrypoint.sh"]

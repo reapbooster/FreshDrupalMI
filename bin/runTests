@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#
+# This script runs the Behat tests for docker environments.
+#
+
+# Dynamically set Behat configuration parameters
+export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "https://localhost:8080"}, "Drupal\\DrupalExtension" : {"drush" : { "root": "web/"}}}}'
+
+
+./vendor/bin/behat --config=tests/behat/behat-docker.yml --strict --colors  "$@"

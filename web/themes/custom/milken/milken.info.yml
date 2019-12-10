@@ -5,3 +5,6 @@ package: milken
 core: 8.x
 
 base theme: bootstrap
+libraries:
+  - milken/global-styling
+  - milken/global-scripts

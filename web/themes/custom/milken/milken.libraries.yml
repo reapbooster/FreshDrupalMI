@@ -1,7 +1,8 @@
-framework:
+global-styling:
   css:
     theme:
       css/milken.css: {}
+global-scripts:
   js:
     theme:
       js/milken.js: {}
