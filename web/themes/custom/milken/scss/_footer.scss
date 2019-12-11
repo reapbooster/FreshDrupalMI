@@ -1,0 +1,315 @@
+footer {
+  .footer-links {
+    .region {
+      display: flex;
+    }
+    nav#block-footerlinksmenu--3 {
+      width: 100%;
+    }
+    a {
+      letter-spacing: 1px;
+    }
+  }
+  .footer-social {
+    li {
+      padding: 0 10px;
+    }
+  }
+  .newsletter-text {
+    font-family: 'LatoWeb';
+    font-size: 12px;
+    color: #999aa3;
+  }
+  .newsletter-sign-up {
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      background-color: #ff6237;
+      text-decoration: none;
+      text-transform: uppercase;
+      width: 200px;
+      height: 38px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+  }
+
+  .footer-desktop {
+    display: none;
+    padding: 0 85px;
+    @media (min-width: $breakpointTablet) {
+      display: flex;
+      flex-direction: column;
+    }
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+
+      .footer-social {
+        margin: -5px;
+        padding-top: 5px;
+      }
+      .newsletter-sign-up {
+      }
+    }
+  }
+  .footer-mobile-tablet {
+    display: none;
+    flex-direction: column;
+    @media (max-width: $breakpointTablet - 1) {
+      display: flex;
+      padding: 0 30px;
+    }
+    @media (max-width: $breakpointPhone) {
+      display: flex;
+      padding: 0;
+    }
+    .footer-links {
+      .region {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+    }
+    .newsletter-text {
+      text-align: center;
+      @media (max-width: $breakpointTablet) {
+        padding: 10px 50px 10px 50px;
+      }
+    }
+    .newsletter-sign-up {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+// Necessary code left from original footer layout
+footer {
+  background-color: $backgroundDark;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  .links-group {
+    display: flex;
+    flex-direction: column;
+    @media (max-width: $breakpointTablet) {
+      flex-direction: row;
+      padding-left: 30px;
+    }
+    @media (max-width: $breakpointPhone) {
+      flex-direction: column;
+    }
+  }
+  .links-footer,
+  .menu--footer-links-menu {
+    list-style: none;
+    display: block;
+    float: none;
+    clear: both;
+    color: $lightTitle;
+    li {
+      @media (max-width: $breakpointPhone) {
+        margin-right: 20px;
+      }
+
+      @media (max-width: 320px) {
+        margin-right: 3px;
+      }
+
+      a {
+        color: $lightTitle;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 0 11px;
+        font-weight: bold;
+        font-size: 12px;
+        margin-right: 20px;
+        &:hover {
+          color: $orangeButtons;
+          background-color: $backgroundDark;
+        }
+        @media (max-width: $breakpointTablet) {
+          margin-right: 14px;
+          padding-right: 0;
+          padding-left: 0;
+          font-size: 12px;
+        }
+        @media (max-width: $breakpointPhone) {
+          margin-right: 0;
+        }
+      }
+    }
+
+    li {
+      float: left;
+    }
+  }
+
+  .title-milkenform-newsletter{
+    @media (max-width: $breakpointTablet){
+      display: none;
+    }
+  }
+
+  #social-footer-loaded.social-footer {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+    color: $lightTitle;
+    display: flex;
+    justify-content: center;
+    span {
+      color: $lightTitle;
+    }
+
+    li {
+      float: left;
+      display: inline-block;
+      a {
+        color: $lightTitle;
+        &:hover {
+          color: $orangeButtons;
+        }
+        svg {
+          width: 25px;
+          height: 25px;
+          @media (max-width: $breakpointTablet) {
+            width: 15px;
+            height: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  .region-bottom-menu1 {
+    @media (max-width: $breakpointTableMD) {
+      margin-left: 0px;
+      display: inline-block;
+    }
+
+    nav {
+      ul {
+        @media (max-width: $breakpointPhone) {
+          float: none;
+          li {
+            @media (max-width: $breakpointPhone) {
+              display: inline-block;
+              float: none;
+              padding-bottom: 10px;
+              margin-right: 0;
+              margin: 0px 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .region-bottom-menu2 {
+    @media (max-width: $breakpointTableMD) {
+      display: inline-block;
+    }
+
+    @media (max-width: $breakpointPhone) {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+/**** BEGIN -FOOTER STYLES ****/
+.region-bottom-form {
+
+  // form-type-webform-markup
+  #edit-markup-01--2 {
+    display: none;
+  }
+
+  .form-no-label {
+    color: $lightgrayFont;
+    @media (max-width: $breakpointPhone) {
+      text-align: center;
+    }
+  }
+
+  .webform-actions {
+    float: left;
+    @media (max-width: $breakpointTablet) {
+      margin-right: 31px;
+    }
+    @media (max-width: $breakpointPhone) {
+      margin-left: 75px;
+    }
+  }
+
+  form {
+    border: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    background-color: $backgroundDark !important;
+  }
+
+  input {
+    border-radius: 0px !important;
+    background-color: $backgroundDarkest;
+    padding: 9px;
+    width: 60%;
+    margin-right: -3px;
+    padding: 20px !important;
+  }
+
+  button#edit-actions-submit--2 {
+    border-radius: 0px !important;
+    padding: 12px !important;
+    border: 1px solid $orangeButtons !important;
+    line-height: normal !important;
+    color: $lightTitle;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: $orangeButtons;
+    vertical-align: middle;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 40px;
+    margin-right: 0;
+    &:hover {
+      background-color: $backgroundDarkest !important;
+      border: 1px solid $backgroundDarkest !important;
+    }
+  }
+
+  .form-item-email-address {
+    display: none;
+    @media (max-width: $breakpointTablet) {
+      float: left !important;
+    }
+
+    @media (max-width: $breakpointPhone) {
+      float: none !important;
+      width: 100% !important;
+    }
+  }
+
+  input {
+    width: 100% !important;
+  }
+
+}
+.region-bottom-menu1 {
+}
+/**** END - FOOTER STYLES ****/
