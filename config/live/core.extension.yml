@@ -9,6 +9,7 @@ module:
   config: 0
   config_filter: 0
   config_split: 0
+  contextual: 0
   ctools: 0
   ctools_block: 0
   ctools_views: 0
@@ -16,6 +17,7 @@ module:
   datetime_range: 0
   dblog: 0
   delete_all: 0
+  devel: 0
   diff: 0
   dynamic_page_cache: 0
   editor: 0
@@ -28,9 +30,13 @@ module:
   file: 0
   filter: 0
   image: 0
+  imagick: 0
   inline_entity_form: 0
+  jsonapi: 0
   kint: 0
   language: 0
+  layout_builder: 0
+  layout_discovery: 0
   link: 0
   markdown: 0
   media: 0
