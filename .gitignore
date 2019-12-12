@@ -112,3 +112,5 @@ Thumbs.db
 /node_modules
 /web/themes/custom/milken/scss/milken.css.map
 /web/themes/custom/milken/scss/milken.css
+web/themes/custom/milken/**/*.js
+/web/sites/default/services.yml
