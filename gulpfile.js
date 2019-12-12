@@ -1,9 +1,12 @@
-const gulp  = require('gulp');
-const shell = require('gulp-shell');
-const sass = require('gulp-sass');
-const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer');
-const concat = require("gulp-concat");
+"use strict";
+
+const gulp            = require('gulp'),
+      shell           = require('gulp-shell'),
+      sass            = require('gulp-sass'),
+      sourcemaps      = require('gulp-sourcemaps'),
+      autoprefixer    = require('gulp-autoprefixer'),
+      concat          = require("gulp-concat"),
+      path            = require('path');
 
 function typescriptCompileCallback(error, stdout, stderr) {
   console.error(stderr);
@@ -18,10 +21,13 @@ gulp.task('themeBuild', () => {
   return gulp.src("/var/www/web/themes/custom/milken/scss/milken.scss")
     .pipe(sourcemaps.init())
     .pipe(autoprefixer())
-    .pipe(sass())
-    .on('error', sass.logError)
+    .pipe(sass({
+      'allowEmpty': true,
+      outputStyle: 'compressed'
+    }).on('error', sass.logError))
     .pipe(sourcemaps.write("../css"))
-    .pipe(gulp.dest('/var/www/web/themes/custom/milken/css'));
+    .pipe(gulp.dest('/var/www/web/themes/custom/milken/css'))
+    .on('error', typescriptCompileCallback);
 });
 
 gulp.task('mergePackgageJsonFiles', (done) => {
