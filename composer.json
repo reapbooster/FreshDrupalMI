@@ -122,7 +122,7 @@
         "build-assets": [
             "@prepare-for-pantheon",
             "composer install --optimize-autoloader --no-dev",
-            "npm install && npm run build"
+            "gulp"
         ],
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
         "code-sniff": [
@@ -136,10 +136,14 @@
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "post-install-cmd": [
             "@drupal-scaffold",
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "npm install -g gulp",
+            "npm install -g typescript",
+            "npm install"
         ],
         "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+            "npm update"
         ],
         "post-create-project-cmd": [
             "@drupal-scaffold",
