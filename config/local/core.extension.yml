@@ -2,6 +2,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
+  adminimal_admin_toolbar: 0
   block: 0
   block_content: 0
   breakpoint: 0
@@ -10,7 +11,7 @@ module:
   config: 0
   config_filter: 0
   config_split: 0
-  contextual_links: 0
+  contextual: 0
   ctools: 0
   ctools_block: 0
   ctools_views: 0
@@ -44,6 +45,7 @@ module:
   media_entity_browser: 0
   media_entity_browser_media_library: 0
   media_library: 0
+  menu_ui: 0
   node: 0
   options: 0
   page_cache: 0
@@ -83,6 +85,7 @@ theme:
   bootstrap_barrio: 0
   adminimal_theme: 0
   milken: 0
+  bartik: 0
 profile: minimal
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
