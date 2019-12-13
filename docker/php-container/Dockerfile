@@ -85,6 +85,7 @@ RUN mv selenium-server-standalone-3.9.1.jar /opt/selenium-server-standalone.jar
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g npm
+RUN npm install -g yarn
 RUN npm install -g gulp-cli
 RUN npm install -g typescript
 
@@ -128,8 +129,6 @@ RUN pecl install redis-4.3.0 \
 RUN composer global require drupal/coder
 RUN composer global require friendsofphp/php-cs-fixer
 RUN composer global require squizlabs/php_codesniffer
-
-RUN export command=
 
 RUN echo ${CODELINT} >> /root/.bashrc
 RUN echo ${CODELINT_FIX} >> /root/.bashrc
