@@ -19,6 +19,7 @@ module:
   dblog: 0
   delete_all: 0
   diff: 0
+  ds: 0
   dynamic_page_cache: 0
   editor: 0
   embed: 0
