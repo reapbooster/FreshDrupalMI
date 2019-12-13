@@ -19,6 +19,8 @@
         "drupal/authorization": "^1.0",
         "drupal/better_normalizers": "^1.0",
         "drupal/bootstrap": "^3.21",
+        "drupal/bootstrap_barrio": "^4.22",
+        "drupal/bootstrap_library": "^1.11",
         "drupal/cdn": "^3.2",
         "drupal/coder": "^8.3",
         "drupal/config_direct_save": "^1.0",

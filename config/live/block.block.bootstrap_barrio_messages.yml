@@ -1,17 +1,17 @@
-uuid: f8060d96-973f-45d5-91e5-64bf82f5ed88
+uuid: 7c809974-23f0-41db-88c7-eba8f174f756
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - bootstrap
+    - bootstrap_barrio
 _core:
-  default_config_hash: 9RnnTUBcn0WRWXfrGOnId2H0Q31uQUeu_F5TnDxl2yg
-id: bootstrap_messages
-theme: bootstrap
-region: header
-weight: -50
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: bootstrap_barrio_messages
+theme: bootstrap_barrio
+region: highlighted
+weight: 0
 provider: null
 plugin: system_messages_block
 settings:

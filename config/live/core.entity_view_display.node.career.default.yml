@@ -6,8 +6,45 @@ dependencies:
     - field.field.node.career.body
     - node.type.career
   module:
+    - layout_builder
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          de43069a-e39d-4808-ac9e-505e9fe114fb:
+            uuid: de43069a-e39d-4808-ac9e-505e9fe114fb
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:career:links'
+            additional: {  }
+            weight: 0
+          314d04cb-846e-40d5-a6e8-de4b8b9783eb:
+            uuid: 314d04cb-846e-40d5-a6e8-de4b8b9783eb
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:career:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
 id: node.career.default
 targetEntityType: node
 bundle: career
