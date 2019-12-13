@@ -10,10 +10,13 @@
         "alwaysStrict": true,
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "jsx": "react"
     },
     "include": [
-        "./web/themes/custom/**/*"
+        "./web/themes/custom/milken/js",
+        "./web/themes/custom/milken/config",
+        "./web/themes/custom/milken/gulp"
     ],
     "lib": [
       "es2016"
