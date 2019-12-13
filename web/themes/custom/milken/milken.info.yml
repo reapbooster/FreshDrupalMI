@@ -4,7 +4,7 @@ description: 'Milken Institute'
 package: milken
 core: 8.x
 
-base theme: bootstrap
+base theme: bootstrap_barrio
 libraries:
   - milken/global-styling
-  - milken/global-scripts
+  - milken/bootstrap_cdn
