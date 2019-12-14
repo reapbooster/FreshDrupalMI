@@ -31,7 +31,7 @@ gulp.task('tsCompile',
     })
 );
 gulp.task('themeBuild', () => {
-  return gulp.src("/var/www/web/themes/custom/milken/scss/milken.scss")
+  return gulp.src(path.resolve("./web/themes/custom/milken/scss/milken.scss"))
     .pipe(sourcemaps.init())
     .pipe(autoprefixer())
     .pipe(sass({

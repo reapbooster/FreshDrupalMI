@@ -83,7 +83,8 @@ module.exports = () => {
       new TsconfigPathsPlugin({
         configFile: path.resolve('./web/themes/custom/milken/config/tsconfig-frontend.json'),
         logInfoToStdOut: true,
-        logLevel: 'info'
+        logLevel: 'info',
+        baseUrl: "./web/themes/custom/milken"
       }),
       webpackFailPlugin
     ],

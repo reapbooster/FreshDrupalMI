@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseDir": ".",
         "outDir": "./web/themes/custom/milken/components",
         "sourceMap": true,
         "noImplicitAny": true,
