@@ -77,4 +77,4 @@ gulp.task('buildComponents', (done) => {
 
 
 
-gulp.task('default', gulp.series(['tsCompile', 'drupalCoreBuild', 'themeBuild', 'buildComponents']));
+gulp.task('default', gulp.series(['tsCompile', 'themeBuild', 'buildComponents']));
