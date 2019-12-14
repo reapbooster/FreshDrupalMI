@@ -1,30 +1,29 @@
 <?php
 
-
 namespace Drupal\milken\Plugin\Layout;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefault;
 
 /**
-* A very advanced custom layout.
-*
-* @Layout(
-*   id = "react_component",
-*   label = @Translation("React Component"),
-*   category = @Translation("milken"),
-*   template = "templates/react_component",
-*   library = "milken/react-component",
-*   default_region = "main",
-*   regions = {
-*     "main" = {
-*       "label" = @Translation("Main content"),
-*     }
-*   }
-* )
-*/
-
+ * A very advanced custom layout.
+ *
+ * @Layout(
+ *   id = "react_component",
+ *   label = @Translation("React Component"),
+ *   category = @Translation("milken"),
+ *   template = "templates/react_component",
+ *   library = "milken/react-component",
+ *   default_region = "main",
+ *   regions = {
+ *     "main" = {
+ *       "label" = @Translation("Main content"),
+ *     }
+ *   }
+ * )
+ */
 class ReactComponent extends LayoutDefault {
+
   /**
    * {@inheritdoc}
    */
