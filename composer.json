@@ -122,7 +122,8 @@
     "scripts": {
         "build-assets": [
             "@prepare-for-pantheon",
-            "composer install --optimize-autoloader --no-dev"
+            "composer install --optimize-autoloader --no-dev",
+            "gulp"
         ],
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
         "code-sniff": [
