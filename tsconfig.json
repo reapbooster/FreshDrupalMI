@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "target": "ES6",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "module": "commonjs",
+        "sourceMap": false,
+        "listEmittedFiles": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "jsx": "react"
+    },
+    "include": [
+        "./web/themes/custom/milken/js",
+        "./web/themes/custom/milken/config",
+        "./web/themes/custom/milken/gulp"
+    ],
+    "lib": [
+      "es2016"
+    ],
+    "exclude": [
+        "node_modules",
+    ]
+}

@@ -42,9 +42,8 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   $env = getenv('PANTHEON_ENV');
   if (PHP_SAPI == 'cli') {
     ini_set('max_execution_time', 999);
-  }
-  // Include the Redis services.yml file. Adjust the path if you installed to a contrib or other subdirectory.
-  $settings['container_yamls'][] = 'modules/redis/example.services.yml';
+  } else {
+    $settings['container_yamls'][] = 'modules/redis/example.services.yml';
     //phpredis is built into the Pantheon application container.
     $settings['redis.connection']['interface'] = 'PhpRedis';
     // These are dynamic variables handled by Pantheon.
@@ -57,7 +56,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 
     // Set Redis to not get the cache_form (no performance difference).
     $settings['cache']['bins']['form']      = 'cache.backend.database';
-
+  }
 }
 
 /**

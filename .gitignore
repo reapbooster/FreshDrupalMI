@@ -14,7 +14,7 @@
 /web/themes/contrib/
 /web/profiles/contrib/
 /web/private/scripts/quicksilver
-/console/
+/console/config.yml
 
 # Ignore scaffold files
 web/.csslintrc
@@ -112,3 +112,7 @@ Thumbs.db
 /node_modules
 /web/themes/custom/milken/scss/milken.css.map
 /web/themes/custom/milken/scss/milken.css
+web/themes/custom/milken/**/*.js
+/web/sites/default/services.yml
+*.map
+*.css.map

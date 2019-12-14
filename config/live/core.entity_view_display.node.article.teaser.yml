@@ -1,10 +1,11 @@
 uuid: 30830daf-2697-4974-bf9d-063f533d86bd
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.article.body
+    - field.field.node.article.layout_builder__layout
     - node.type.article
   module:
     - text
@@ -29,4 +30,5 @@ content:
     region: content
 hidden:
   langcode: true
+  layout_builder__layout: true
   search_api_excerpt: true

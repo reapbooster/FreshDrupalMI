@@ -1,6 +1,7 @@
 <?php
 
 if (!defined('PANTHEON_ENVIRONMENT')) {
+  $env = getenv('ENV');
   $databases['default']['default'] = [
     'database' => getenv('DB_NAME'),
     'username' => getenv('DB_USER'),
@@ -14,8 +15,8 @@ if (!defined('PANTHEON_ENVIRONMENT')) {
   ];
   $settings['hash_salt'] = $_SERVER['DRUPAL_HASH_SALT'];
   $settings['cache']['bins']['config'] = 'cache.backend.chainedfast';
-  $redis_host = getenv('REDIS_HOST');
-  if (!empty($redis_host)) {
+  $redis_host = getenv('CACHE_HOST');
+  if (php_sapi_name() != "cli") {
 
     $settings['redis.connection']['interface'] = 'PhpRedis';
     $settings['redis.connection']['host'] = getenv('CACHE_HOST');

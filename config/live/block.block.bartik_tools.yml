@@ -1,4 +1,4 @@
-uuid: 345ea90a-4b4d-47f7-8ee5-14b6560856b2
+uuid: cae6676e-63ba-479d-9e96-eb75c79dcbf2
 langcode: en
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - milken
+    - bartik
 _core:
   default_config_hash: uUF2GYN2x5fcmOu26M-gwqUA-yVWMDD_MRmnYfmPzlM
-id: milken_tools
-theme: milken
+id: bartik_tools
+theme: bartik
 region: sidebar_first
 weight: 0
 provider: null

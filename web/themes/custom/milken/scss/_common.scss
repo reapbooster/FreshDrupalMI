@@ -1,0 +1,29 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  font-family: $mainFont;
+  overflow-x: hidden;
+}
+html {
+  overflow-y: auto;
+}
+body {
+  overflow-y: hidden;
+}
+h1 {
+  font-family: 'LatoWebBold';
+  font-size: 45px;
+}
+.hide-from-tablet {
+  @media (max-width: $breakpointTablet) {
+    display: none;
+  }
+}
+.show-from-tablet {
+  display: none;
+  @media (max-width: $breakpointTablet) {
+    display: block;
+  }
+}

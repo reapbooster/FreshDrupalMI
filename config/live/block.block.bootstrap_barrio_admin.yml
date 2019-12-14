@@ -1,4 +1,4 @@
-uuid: a79cc10d-0087-49f5-a121-4397321f54a4
+uuid: 91e98ce3-4b1a-48e6-ae28-4fa5744c1451
 langcode: en
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - milken
+    - bootstrap_barrio
 _core:
   default_config_hash: OFEDxrButmQ8Vac1kiVr1gtw6vYKuSJPr9cJQZVKCKg
-id: milken_admin
-theme: milken
+id: bootstrap_barrio_admin
+theme: bootstrap_barrio
 region: sidebar_first
 weight: 1
 provider: null
