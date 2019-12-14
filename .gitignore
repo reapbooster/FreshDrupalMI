@@ -14,7 +14,7 @@
 /web/themes/contrib/
 /web/profiles/contrib/
 /web/private/scripts/quicksilver
-/console/
+/console/config.yml
 
 # Ignore scaffold files
 web/.csslintrc

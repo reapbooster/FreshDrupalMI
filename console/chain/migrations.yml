@@ -1,0 +1,10 @@
+command:
+  name: site:milken:migrations
+  description: 'Migrate d7 data from sources to this instance'
+commands:
+  - command: exec
+    arguments:
+      bin: drush migrate:import umg_article
+  - command: exec
+    arguments:
+      bin: drush migrate:import umg_links
