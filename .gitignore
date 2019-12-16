@@ -116,3 +116,4 @@ web/themes/custom/milken/**/*.js
 /web/sites/default/services.yml
 *.map
 *.css.map
+src/**/*.js

@@ -2,35 +2,21 @@
 
 module.exports = () => {
   const path = require('path');
-  const webpackFailPlugin = require('webpack-fail-plugin');
-  const webpack = require('webpack-cli');
-  const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 
   var babelLoader = {
     loader: 'babel-loader',
     options: {
       cacheDirectory: true,
       presets: [
-        "react",
-        [
-          "es2015",
-          {
-            "modules": false
-          }
-        ],
-        "es2016"
+        '@babel/preset-env'
+      ],
+      plugins: [
+        '@babel/plugin-proposal-object-rest-spread'
       ]
     }
   };
 
-  var tsLoader = {
-    loader: "ts-loader",
-    options: {
-      configFile: path.resolve('./web/themes/custom/milken/config/tsconfig-frontend.json'),
-      logInfoToStdOut: true,
-      logLevel: 'info'
-    }
-  };
 
 
   return {
@@ -38,16 +24,19 @@ module.exports = () => {
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
     cache: true,
-    entry: {
-
-    },
     output: {
-      filename: '[name].js',
-      path: path.resolve('./web/themes/custom/milken/components')
+      filename: '[name].entry.js',
+      path: path.resolve('./web/themes/custom/milken/js')
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
+      extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
+      plugins: [
+
+      ],
+      alias: {
+        components: path.resolve('./src/components/')
+      }
     },
 
     module: {
@@ -57,7 +46,6 @@ module.exports = () => {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
           use: [
-            tsLoader,
             babelLoader
           ]
         },
@@ -70,7 +58,6 @@ module.exports = () => {
         }
       ]
     },
-
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.
     // This is important because it allows us to avoid bundling all of our
@@ -80,16 +67,13 @@ module.exports = () => {
       "react-dom": "ReactDOM"
     },
     plugins: [
-      new TsconfigPathsPlugin({
-        configFile: path.resolve('./web/themes/custom/milken/config/tsconfig-frontend.json'),
-        logInfoToStdOut: true,
-        logLevel: 'info',
-        baseUrl: "./web/themes/custom/milken"
-      }),
-      webpackFailPlugin
     ],
     stats: {
-      warnings: false
+      warnings: true,
+      colors: true,
+      modules: true,
+      reasons: true,
+      errorDetails: true
     }
   }
 };

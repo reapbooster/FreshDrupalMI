@@ -88,6 +88,8 @@ RUN npm install -g npm
 RUN npm install -g yarn
 RUN npm install -g gulp-cli
 RUN npm install -g typescript
+RUN npm install -g eslint
+
 
 # Amazon RDS public certificate chain
 ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem  /etc/ssl/certs/rds-combined-ca-bundle.pem
