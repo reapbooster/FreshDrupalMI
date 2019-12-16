@@ -1,8 +1,10 @@
 {
   "patches": {
     "drupal/core": {
-      "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch",
-      "Layout Builder unable to save": "patches/drupal-layout_builder_unable_to_save-3045171-105.patch"
+      "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch"
+    },
+    "drupal/bootstrap_barrio": {
+      "Fixing issue with layout builder" : "patches/bootstrap_barrio-disable_default_layouts-2976934-38.patch"
     }
   }
 }
