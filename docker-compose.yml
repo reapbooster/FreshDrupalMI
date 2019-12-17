@@ -3,7 +3,7 @@ version: '3.7'
 services:
   nginx:
     build: docker/nginx-container
-    image: milkin-institute/nginx-dev
+    image: milken/nginx-dev
     expose:
       - 80
     depends_on:
@@ -21,7 +21,7 @@ services:
 
   php:
     build: docker/php-container
-    image: milkin-institute/php-dev
+    image: milken/php-dev
     expose:
       - '9000'
     volumes:
@@ -32,7 +32,7 @@ services:
 
   mysql:
     build: docker/mysql-container
-    image: milkin-institute/mysql-dev
+    image: milken/mysql-dev
     expose:
       - '3306'
     ports:

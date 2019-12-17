@@ -112,7 +112,7 @@ RUN docker-php-ext-install -j$(nproc) pdo
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
 RUN docker-php-ext-install -j$(nproc) opcache
 RUN pear update-channels
-RUN pear upgrade pear/archive_tar
+#RUN pear upgrade pear/archive_tar
 
 # Uploadprogress.
 RUN mkdir -p /usr/src/php/ext/uploadprogress; \
