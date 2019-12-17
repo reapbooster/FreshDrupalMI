@@ -1,4 +1,5 @@
 {
+    "baseUrl": ".",
     "compilerOptions": {
         "allowJs": false,
         "target": "ES6",
@@ -16,12 +17,14 @@
     "include": [
         "./web/themes/custom/milken/js",
         "./web/themes/custom/milken/config",
-        "./web/themes/custom/milken/gulp"
+        "./web/themes/custom/milken/gulp",
+        "./src"
     ],
     "lib": [
       "es2016"
     ],
     "exclude": [
         "node_modules",
+        "web/themes/custom/milken/js/*.entry.*"
     ]
 }
