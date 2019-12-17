@@ -36,7 +36,7 @@ cdn_cache_ttl_assets: '0'
 cdn_cache_ttl_library: '0'
 reset_http_request_cache: ''
 table: ''
-bootstrap_barrio_library: cdn
+bootstrap_barrio_library: development
 bootstrap_barrio_fluid_container: 0
 bootstrap_barrio_region_clean_sidebar_first: 1
 bootstrap_barrio_region_class_sidebar_first: ''
