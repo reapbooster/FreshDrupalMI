@@ -139,9 +139,6 @@
         "post-install-cmd": [
             "@drupal-scaffold",
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "npm install -g gulp",
-            "npm install -g typescript",
-            "npm install -g yarn",
             "yarn install"
         ],
         "post-update-cmd": [
