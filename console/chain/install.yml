@@ -41,11 +41,12 @@ commands:
       learning: true
       uri: "http://default"
 
-    # YES, REALLY DO TWO OF THEM
-  - command: "config:import"
+    # now, import the split profile
+  - command: "exec"
+    arguments:
+      bin: "drush config-split:import --yes"
     options:
-      learning: true
-      uri: "http://default"
+      working-directory: /var/www
 
   - command: "cache:rebuild"
     arguments:
