@@ -41,7 +41,7 @@ gulp.task("themeBuild", () => {
     .pipe(
       sass({
         allowEmpty: true,
-        outputStyle: "compressed"
+        outputStyle: "expanded"
       })
     )
     .pipe(sourcemaps.write("../css"))

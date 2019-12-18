@@ -168,13 +168,7 @@
 }
 /*** END - HEADER MENU BLOCKS STYLES (FORMS & SOCIAL) ***/
 
-header {
-  .menu-site-main {
-    margin-left: -30px;
-    margin-right: -30px;
-    margin-bottom: -11px;
-  }
-}
+
 .user-logged-in {
   header {
     // logged
@@ -185,14 +179,44 @@ header {
 }
 
 
-header#menu-sticky-main {
+header#header {
   position: fixed;
-  top: 0px;
+  top: 0;
   max-height: 100vh;
   height: 64px;
   display: table;
   padding: 0 20px;
-  z-index: 200;
+  width: 100%;
+  overflow:hidden;
+  z-index: 6;
+  background-color: white;
+  -webkit-box-shadow: 0 1px 4px 0 #d7dbdd;
+  -moz-box-shadow: 0 1px 4px 0 #d7dbdd;
+  box-shadow: 0 1px 4px 0 #d7dbdd;
+
+  h1 { display:none; }
+  .menu-site-main {
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-bottom: -11px;
+  }
+  img#site-logo {
+    width: 50%;
+    max-width: none;
+    @media (min-width: $breakpointTablet) {
+      max-width: 280px;
+      max-height: 54px;
+      width: 160%;
+    }
+    @media (max-width: $breakpointPhone) {
+      max-width: 280px;
+      width: 280px;
+      height: auto;
+    }
+    @media (max-width: $breakpointTablet) {
+      margin-top: 2px;
+    }
+  }
 
   @media (min-width: ($breakpointPhone + 2px)) {
     height: 76px;
@@ -235,23 +259,6 @@ header#menu-sticky-main {
     }
   }
 
-
-  .header-img-ctc{
-    display: flex;
-    align-items: center;
-    .desktop-logo-img{
-      img {
-        width: 50%;
-        max-width: none;
-        @media (min-width: $breakpointTablet) {
-          max-width: 280px;
-          max-height: 54px;
-          width: 160%;
-        }
-      }
-    }
-  }
-
   &.header-unpin {
     transform: translateY(-75px);
     @media (max-width: $breakpointTablet) {
@@ -270,6 +277,8 @@ header#menu-sticky-main {
     }
   }
 }
+
+
 
 @media (min-width: $breakpointTablet) {
   .ui-widget.ui-widget-content {
@@ -293,20 +302,14 @@ header#menu-sticky-main {
       line-height: 22px;
     }
   }
-
-
 }
 
-/*  NAVBAR  */
-#menu-sticky-main {
-  width: 100%;
-  overflow:hidden;
-  z-index: 6;
-  background-color: white;
-  -webkit-box-shadow: 0px 1px 4px 0px #d7dbdd;
-  -moz-box-shadow: 0px 1px 4px 0px #d7dbdd;
-  box-shadow: 0px 1px 4px 0px #d7dbdd;
+body.toolbar-fixed {
+  header#header {
+    top: 39px;
+  }
 }
+
 .form-type-search-api-autocomplete {
 
   .input-group {
@@ -357,17 +360,7 @@ header#menu-sticky-main {
 
 }
 
-/*  NAVBAR > Vertically align elements  */
-header .header-img-ctc img {
-  @media (max-width: $breakpointPhone) {
-    max-width: 280px;
-    width: 280px;
-    height: auto;
-  }
-  @media (max-width: $breakpointTablet) {
-    margin-top: 2px;
-  }
-}
+
 div.hamburguer-menu.perfectly-centered {
   transition: all 0.5s ease;
   margin-top: 10px;

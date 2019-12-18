@@ -4,7 +4,7 @@ command:
 commands:
   - command: "site:install"
     options:
-      db-type: {{env("DB_DRIVER")}}
+      db-type: "mysql"
       db-host: {{env("DB_HOST")}}
       db-name: {{env("DB_NAME")}}
       db-user: {{env("DB_USER")}}
@@ -35,19 +35,6 @@ commands:
     arguments:
       module:
         - redis
-        - search_api
-        - default_content
-        - default_content_extra
-        - media
-        - media_entity_browser
-        - media_library
-        - media_entity_browser_media_library
-
-  - command: 'exec'
-    arguments:
-      bin: chown -R www-data.www-data /var/www/html/sites/default
-    options:
-      working-directory: "/var/www"
 
   - command: "config:import"
     options:
