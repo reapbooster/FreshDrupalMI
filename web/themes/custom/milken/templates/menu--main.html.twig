@@ -1,0 +1,132 @@
+{% macro main_menu_links(items) %}
+
+    {% for item in items %}
+        {% set templateType =item.title | lower %}
+        {% if 'other' in templateType |render|render %}
+
+            <div class="col-lg-3 col-sm-12 menudelcentro" style="display: none" >
+                <h5>{{ 'Program' | t }}</h5>
+                <ul class="menu-content">
+                    <li>
+                        <h6><a class="centerlnk1" href="/search?keywords=&f%5B0%5D=content_type%3Avideo&f%5B1%5D=centers%3A">{{ 'Videos'|t }}</a></h6>
+                        <p class="hidden-sm hidden-xs">{{ 'Watch videos from our past events' | t }}</p>
+                    </li>
+
+                    <li>
+                        <h6><a class="centerlnk1" href="/search?keywords=&f%5B0%5D=content_type%3Aarticle&f%5B1%5D=centers%3A">{{ 'Articles'|t }}</a></h6>
+                        <p class="hidden-sm hidden-xs">{{ 'Read articles from our subject matter experts' | t }}</p>
+                    </li>
+
+                    <li>
+                        <h6><a class="centerlnk1" href="/search?keywords=&f%5B0%5D=content_type%3Aprogram_initiative&f%5B1%5D=centers%3A">{{ 'Programs'|t }}</a></h6>
+                        <p class="hidden-sm hidden-xs">{{ 'Learn about our programs' | t }}</p>
+                    </li>
+
+                    <li>
+                        <h6><a class="centerlnk1" href="/search?keywords=&f%5B0%5D=content_type%3Areport&f%5B1%5D=centers%3A">{{ 'Research & Analysis'|t }}</a></h6>
+                        <p class="hidden-sm hidden-xs">{{ 'Explore content created by our subject matter experts' | t }}</p>
+                    </li>
+
+                    <li>
+                        <h6><a class="centerlnk1" href="/search?keywords=&f%5B0%5D=content_type%3Aevent&f%5B1%5D=centers%3A">{{ 'Events'|t }}</a></h6>
+                        <p class="hidden-sm hidden-xs">{{ 'Learn more about our upcoming events' | t }}</p>
+                    </li>
+
+                </ul>
+            </div>
+
+            {% set url = url('<current>') %}
+            {% if '/centers/' in url|render|render %}
+                <div class="col-xs-12 visible-xs visible-sm bottom-menu-ctc">
+                    <ul>
+
+                        <li><a id="menudelcentro-milken-menu-aa" class="center-menu-aa"></a></li>
+                        <li><a class="milken-menu-aa">{{ 'Milken Institute'| t }}</a></li>
+                        <span class="caret-down"></span>
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="col-xs-12 col-lg-3 col-sm-12">
+
+                <ul class="menu-content right-column">
+                    {% for child in item.below %}
+                        <li>
+                            <h4><a href="{{ child.url }}">{{ child.title }}</a></h4>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <ul class="social-footer" id="social-header-ctc">
+                </ul>
+
+                <div class=" col-xs-12 newsletter-links only-header-links">
+                    {{ drupal_entity('block_content', 7) }}
+                </div>
+            </div>
+        {% endif %}
+
+
+        {% if 'other' not in templateType |render|render %}
+            <div class="col-lg-3 col-sm-12 menucito-{{ item.title }}">
+                <h5>{{ item.title }}</h5>
+                <ul class="menu-content">
+                    {% for child in item.below %}
+                        <li>
+                            <h6><a href="{{ child.url }}">{{ child.title }}</a></h6>
+                            <p class="hidden-sm hidden-xs"> {{ child.original_link.getDescription() }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro menu_links(items, attributes, menu_level, classes, subMenu) %}
+    {% if items %}
+        <div class="row menu-site-main">
+
+            {% if subMenu %}
+            <div class="col-xs-12 hidden-xs hidden-sm above-menu-ctc" style="display: block;">
+                <a class="milken-menu-aa">{{ 'Milken Institute'| t }}</a>
+                <a class="center-menu-aa selected-a-sub">{{ subMenu.title }}</a>
+            </div>
+            {% endif %}
+
+            {% set menuMainAttrs = create_attribute() %}
+
+            {% set menuMainClasses = [
+                'menu-main',
+                subMenu ? 'hidden',
+            ] %}
+
+            <div{{ menuMainAttrs.addClass(menuMainClasses) }}>
+                {{ _self.main_menu_links(items) }}
+            </div>
+
+            {% if subMenu %}
+                <div class="menu-main-secondary">
+                {{ _self.main_menu_links(subMenu.content['#items'])}}
+
+									<div class="col-xs-12 visible-xs visible-sm bottom-menu-ctc">
+											<ul>
+													<li><a id="menu-main-secondary-center-menu-aa" class="center-menu-aa">{{ subMenu.title }}</a></li>
+													<li><a class="milken-menu-aa">{{ 'Milken Institute'| t }}</a></li>
+													<span class="caret-down"></span>
+											</ul>
+									</div>
+
+                </div>
+            {% endif %}
+
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{#
+  Invoke the custom macro defined above. If classes were provided, use them.
+  This allows the template to be extended without having to also duplicate the
+  code above. @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ _self.menu_links(items, attributes, 0, classes ? classes : ['menu', 'menu--' ~ menu_name|clean_class, 'nav'], subMenu) }}

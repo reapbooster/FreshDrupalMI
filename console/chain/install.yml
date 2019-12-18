@@ -4,7 +4,7 @@ command:
 commands:
   - command: "site:install"
     options:
-      db-type: {{env("DB_DRIVER")}}
+      db-type: "mysql"
       db-host: {{env("DB_HOST")}}
       db-name: {{env("DB_NAME")}}
       db-user: {{env("DB_USER")}}
@@ -35,30 +35,18 @@ commands:
     arguments:
       module:
         - redis
-        - search_api
-        - default_content
-        - default_content_extra
-        - media
-        - media_entity_browser
-        - media_library
-        - media_entity_browser_media_library
 
-  - command: 'exec'
+  - command: "config:import"
+    options:
+      learning: true
+      uri: "http://default"
+
+    # now, import the split profile
+  - command: "exec"
     arguments:
-      bin: chown -R www-data.www-data /var/www/html/sites/default
+      bin: "drush config-split:import --yes"
     options:
-      working-directory: "/var/www"
-
-  - command: "config:import"
-    options:
-      learning: true
-      uri: "http://default"
-
-    # YES, REALLY DO TWO OF THEM
-  - command: "config:import"
-    options:
-      learning: true
-      uri: "http://default"
+      working-directory: /var/www
 
   - command: "cache:rebuild"
     arguments:
