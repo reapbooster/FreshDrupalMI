@@ -63,7 +63,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
  * Place the config directory outside of the Drupal root.
  */
 $config_directories = array(
-  CONFIG_SYNC_DIRECTORY => dirname(DRUPAL_ROOT) . '/config/live',
+  'config_sync_directory' => dirname(DRUPAL_ROOT) . '/config/live',
 );
 if ($env) {
   $config['config_split.config_split.config_' . $env]['status'] = TRUE;
