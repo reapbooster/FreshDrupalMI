@@ -28,8 +28,8 @@ module:
   entity_browser_entity_form: 0
   entity_embed: 0
   field: 0
-  field_ui: 0
   field_group: 0
+  field_ui: 0
   file: 0
   filter: 0
   image: 0
@@ -46,6 +46,7 @@ module:
   media_entity_browser: 0
   media_entity_browser_media_library: 0
   media_library: 0
+  menu_export: 0
   menu_ui: 0
   node: 0
   options: 0
@@ -68,12 +69,11 @@ module:
   token: 0
   toolbar: 0
   user: 0
+  webpack: 0
   menu_link_content: 1
   pathauto: 1
   views: 10
   minimal: 1000
-  webpack: 0
-
 theme:
   stark: 0
   stable: 0
