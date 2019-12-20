@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains milken_migrate.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function milken_migrate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the milken_migrate module.
+    case 'help.page.milken_migrate':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Migration classes and data for move to re-organized d8 site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
