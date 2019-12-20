@@ -60,7 +60,6 @@
         "drupal/markdown": "^1.2",
         "drupal/masquerade": "^2.0@beta",
         "drupal/media_entity_browser": "^2.0@alpha",
-        "drupal/menu_export": "^1.2",
         "drupal/migrate_d2d": "3.x-dev",
         "drupal/migrate_plus": "^4.1",
         "drupal/migrate_source_csv": "^2.2",
