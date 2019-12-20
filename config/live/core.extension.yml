@@ -18,6 +18,8 @@ module:
   datetime: 0
   datetime_range: 0
   dblog: 0
+  default_content: 0
+  default_content_extra: 0
   delete_all: 0
   diff: 0
   ds: 0
@@ -32,6 +34,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  hal: 0
   image: 0
   imagick: 0
   inline_entity_form: 0
@@ -46,7 +49,6 @@ module:
   media_entity_browser: 0
   media_entity_browser_media_library: 0
   media_library: 0
-  menu_export: 0
   menu_ui: 0
   node: 0
   options: 0
@@ -54,6 +56,7 @@ module:
   path: 0
   path_alias: 0
   rdf: 0
+  react_component: 0
   redis: 0
   responsive_image: 0
   search_api: 0
@@ -73,6 +76,7 @@ module:
   menu_link_content: 1
   pathauto: 1
   views: 10
+  milken_migrate: 30
   minimal: 1000
 theme:
   stark: 0

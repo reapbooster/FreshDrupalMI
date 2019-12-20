@@ -47,7 +47,6 @@ module:
   media_entity_browser: 0
   media_entity_browser_media_library: 0
   media_library: 0
-  menu_export: 0
   menu_ui: 0
   node: 0
   options: 0
@@ -57,6 +56,7 @@ module:
   rdf: 0
   redis: 0
   responsive_image: 0
+  react_component: 0
   search_api: 0
   search_api_solr: 0
   serialization: 0
@@ -74,7 +74,13 @@ module:
   menu_link_content: 1
   pathauto: 1
   views: 10
+  views_ui: 20
   minimal: 1000
+  milken_migrate: 30
+  default_content: 0
+  default_content_extra: 0
+  hal: 0
+
 theme:
   stark: 0
   stable: 0
