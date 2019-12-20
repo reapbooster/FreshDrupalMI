@@ -1,0 +1,5 @@
+name: 'Milken Migrate'
+type: module
+description: 'Migration classes and data for move to re-organized d8 site'
+core: 8.x
+package: 'milken'

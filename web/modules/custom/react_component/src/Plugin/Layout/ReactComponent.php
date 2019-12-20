@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\milken\Plugin\Layout;
+namespace Drupal\react_component\Plugin\Layout;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefault;
@@ -14,10 +14,10 @@ use Drupal\Core\Layout\LayoutDefault;
  *   category = @Translation("milken"),
  *   template = "templates/react_component",
  *   library = "milken/react-component",
- *   default_region = "main",
+ *   default_region = "content",
  *   regions = {
- *     "main" = {
- *       "label" = @Translation("Main content"),
+ *     "content" = {
+ *       "label" = @Translation("React Coponent"),
  *     }
  *   }
  * )
