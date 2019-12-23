@@ -78,6 +78,10 @@ module:
   views: 10
   milken_migrate: 30
   minimal: 1000
+  rest: 0
+  restui: 0
+  twig_tweak: 0
+  fontawesome: 0
 theme:
   stark: 0
   stable: 0

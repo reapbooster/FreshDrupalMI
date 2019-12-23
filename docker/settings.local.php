@@ -17,13 +17,14 @@ if (!defined('PANTHEON_ENVIRONMENT')) {
   $settings['cache']['bins']['config'] = 'cache.backend.chainedfast';
   $redis_host = getenv('CACHE_HOST');
   if (php_sapi_name() != "cli") {
-
+    $settings['container_yamls'][] = 'modules/redis/example.services.yml';
     $settings['redis.connection']['interface'] = 'PhpRedis';
     $settings['redis.connection']['host'] = getenv('CACHE_HOST');
     $settings['redis.connection']['port'] = getenv('CACHE_PORT');
     $settings['cache']['bins']['bootstrap'] = 'cache.backend.redis';
     $settings['cache']['bins']['config'] = 'cache.backend.redis';
     $settings['cache']['bins']['render'] = 'cache.backend.redis';
+
     /**
      * $settings['cache']['bins']['bootstrap']           = 'cache.backend.chainedfast';
      * $settings['cache']['bins']['discovery']           = 'cache.backend.chainedfast';
@@ -43,7 +44,9 @@ if (!defined('PANTHEON_ENVIRONMENT')) {
   $settings['rebuild_access'] = FALSE;
   $settings['skip_permissions_hardening'] = TRUE;
 
-  $settings['file_public_path'] = 'sites/default/files';
+  $settings['file_public_path']  = 'sites/default/files';
   $settings['file_private_path'] = 'sites/default/private';
-  $config['file_temporary_path'] = 'sites/default/temp';
+  $settings["file_temp_path"]    = 'sites/default/temp';
+  $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
+
 }

@@ -35,6 +35,7 @@ commands:
     arguments:
       module:
         - redis
+        - config_split
 
   - command: "config:import"
     options:

@@ -10,7 +10,6 @@ module:
   config: 0
   config_filter: 0
   config_split: 0
-  content_sync: 0
   contextual: 0
   ctools: 0
   ctools_block: 0
@@ -80,6 +79,10 @@ module:
   default_content: 0
   default_content_extra: 0
   hal: 0
+  rest: 0
+  restui: 0
+  twig_tweak: 0
+  fontawesome: 0
 
 theme:
   stark: 0
