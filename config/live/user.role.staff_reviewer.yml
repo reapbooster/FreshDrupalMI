@@ -1,0 +1,9 @@
+uuid: 71c78ccd-4f6f-4717-b0e1-a21d08e84406
+langcode: en
+status: true
+dependencies: {  }
+id: staff_reviewer
+label: 'Staff reviewer'
+weight: 66
+is_admin: false
+permissions: {  }

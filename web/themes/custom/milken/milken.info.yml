@@ -9,7 +9,3 @@ libraries:
   - milken/global-styling
   - bootstrap_barrio/global-styling
   - milken/bootstrap_cdn
-  - fontawesome.webfonts
-  - fontawesome.webfonts.base
-  - fontawesome.webfonts.solid
-  - fontawesome.webfonts.brands

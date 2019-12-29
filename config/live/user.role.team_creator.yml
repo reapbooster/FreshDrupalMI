@@ -1,0 +1,9 @@
+uuid: c91255de-6475-4527-8585-c0744d26a3b9
+langcode: en
+status: true
+dependencies: {  }
+id: team_creator
+label: 'Team creator'
+weight: 67
+is_admin: false
+permissions: {  }

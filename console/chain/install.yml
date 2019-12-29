@@ -35,12 +35,12 @@ commands:
     arguments:
       module:
         - redis
-        - config_split
 
-  - command: "config:import"
+  - command: "exec"
+    arguments:
+      bin: "drush config:import --yes"
     options:
-      learning: true
-      uri: "http://default"
+      working-directory: /var/www
 
     # now, import the split profile
   - command: "exec"

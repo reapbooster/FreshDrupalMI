@@ -1,0 +1,9 @@
+uuid: 7b5ba80e-8320-4752-8224-1d47bfc2ff6f
+langcode: en
+status: true
+dependencies: {  }
+id: team_reviewer
+label: 'Team reviewer'
+weight: 68
+is_admin: false
+permissions: {  }

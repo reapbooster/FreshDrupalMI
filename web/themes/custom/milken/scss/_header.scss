@@ -1,4 +1,6 @@
 /*** BEGIN - HEADER MENU BLOCKS STYLES (FORMS & SOCIAL) ***/
+
+
 .only-header-links {
   #edit-actions {
     width: 100% !important;
@@ -179,7 +181,7 @@
 }
 
 
-header#header {
+#page > header {
   position: fixed;
   top: 0;
   max-height: 100vh;
@@ -195,169 +197,26 @@ header#header {
   box-shadow: 0 1px 4px 0 #d7dbdd;
 
   h1 { display:none; }
-  .menu-site-main {
-    margin-left: -30px;
-    margin-right: -30px;
-    margin-bottom: -11px;
-  }
+
   img#site-logo {
-    width: 50%;
-    max-width: none;
-    @media (min-width: $breakpointTablet) {
-      max-width: 280px;
-      max-height: 54px;
-      width: 160%;
-    }
-    @media (max-width: $breakpointPhone) {
-      max-width: 280px;
-      width: 280px;
-      height: auto;
-    }
-    @media (max-width: $breakpointTablet) {
-      margin-top: 2px;
-    }
-  }
-
-  @media (min-width: ($breakpointPhone + 2px)) {
-    height: 76px;
-    padding: 0 20px;
-    display: table;
-  }
-
-  .menu-main-container {
-    display: flex;
-    &.scrolled-nav {
-      .mainlogohiddenoncenter{
-        transform: scale(0.9);
-        -webkit-transition: transform .5s;
-        transition: transform .5s;
-        transform-origin: top left;
-      }
-
-
-      .input-group {
-        @media (min-width: $breakpointPhone + 2px) {
-          input{
-            transform: scale(0.9);
-            margin-top: 0px;
-            margin-right: 0px;
-            -webkit-transition: opacity .5s,height .5s;
-            transition: opacity .5s,height .5s;
-          }
-        }
-      }
-
-      .hamburguer-menu {
-        @media (min-width: $breakpointPhone + 2px) {
-
-        transform: scale(0.9);
-        }
-        margin-top: 10px;
-        -webkit-transition: transform .5s;
-        transition: transform .5s;
-      }
-    }
-  }
-
-  &.header-unpin {
-    transform: translateY(-75px);
-    @media (max-width: $breakpointTablet) {
-      transform: translateY(-132px);
-    }
+    min-width: 150px;
+    max-width: 280px;
+    width: 100%;
   }
 
 
-  &.header-pin {
-    transform: translateY(0);
+  #navbar-search.form-inline {
+
+
   }
-  + * {
-    padding-top: 64px;
-    @media (min-width: ($breakpointPhone + 2px)) {
-      padding-top: 76px;
-    }
-  }
+
 }
 
-
-
-@media (min-width: $breakpointTablet) {
-  .ui-widget.ui-widget-content {
-    top: 70px !important;
-    border-radius: 2px;
-    border:none;
-    -webkit-box-shadow: 1px 0px 17px -3px rgba(0,0,0,0.75);
-    -moz-box-shadow: 1px 0px 17px -3px rgba(0,0,0,0.75);
-    box-shadow: 1px 0px 17px -3px rgba(0,0,0,0.75);
-    padding-top: 15px;
-    padding-right: 0px;
-    padding-bottom: 15px;
-    padding-left: 0px;
-    z-index: 99999;
-
-    .ui-menu-item{
-      font-family: 'LatoWeb';
-      font-size: 18px;
-      font-weight: 500;
-      color: #404040;
-      line-height: 22px;
-    }
-  }
-}
 
 body.toolbar-fixed {
-  header#header {
+  #page > header {
     top: 39px;
   }
-}
-
-.form-type-search-api-autocomplete {
-
-  .input-group {
-    display: table;
-    border-collapse: separate;
-    width: 90%;
-    font-size: 16px;
-    right: 0px;
-
-    @media (max-width: $breakpointPhone) {
-      right: 12px;
-    }
-    -webkit-transition: all 0.5s, background-position 1ms; /* For Safari 3.1 to 6.0 */
-    transition: all 0.5s, background-position 1ms;
-    position: absolute;
-    top: 0;
-
-    bottom: 0;
-    margin: auto;
-
-    input {
-      font-size: 16px;
-      color: #252d32;
-    }
-  }
-
-
-  .user-is-searching {
-    @media (min-width: $breakpointTablet) {
-      width: 95%;
-    }
-    @media (max-width: $breakpointTablet) {
-      width: 150%;
-    }
-
-    @media (min-width: $breakpointTablet) {
-      .ui-autocomplete-input{
-        width: 90%;
-        max-width: 800px;
-        -webkit-transition: all 1s ease-in-out;
-        -moz-transition: all 1s ease-in-out;
-        -o-transition: all 1s ease-in-out;
-        transition: all 1s ease-in-out;
-      }
-    }
-
-  }
-
 }
 
 
