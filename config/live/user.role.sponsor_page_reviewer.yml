@@ -1,0 +1,9 @@
+uuid: 045173f5-3ff3-407c-91d3-d8b91318fb7a
+langcode: en
+status: true
+dependencies: {  }
+id: sponsor_page_reviewer
+label: 'Sponsor Page reviewer'
+weight: 70
+is_admin: false
+permissions: {  }

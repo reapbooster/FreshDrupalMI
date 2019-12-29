@@ -1,17 +1,15 @@
 global-styling:
-  version: VERSION
+  version: 1.0
   js:
     js/milken.js: {}
   css:
     component:
       css/milken.css: {}
+
 bootstrap:
   js:
     /libraries/popper/popper.min.js: {}
     /libraries/bootstrap/dist/js/bootstrap.min.js: {}
-  css:
-    component:
-      /libraries/bootstrap/dist/css/bootstrap.min.css: {}
 bootstrap_cdn:
   js:
     //cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js: {}

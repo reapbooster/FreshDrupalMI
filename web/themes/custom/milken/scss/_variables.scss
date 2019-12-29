@@ -1,8 +1,12 @@
 
+@import "libraries/bootstrap/scss/variables";
+
+
 /****** FONTS ********/
-$mainFont : 'LatoWeb';
+$font-family-base : 'LatoWeb';
+
 $secondaryFont : 'monospace';
-$fa-font-path:        "../scss/fontawesome/webfonts";
+$enable-responsive-font-sizes : true;
 
 /***** RESPONISVE VARIABLES *****/
 $breakpointDesktop: 1600px;

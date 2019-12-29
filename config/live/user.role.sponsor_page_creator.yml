@@ -1,0 +1,9 @@
+uuid: 42a8d722-7046-4314-bde4-f9dc5db62a51
+langcode: en
+status: true
+dependencies: {  }
+id: sponsor_page_creator
+label: 'Sponsor Page creator'
+weight: 69
+is_admin: false
+permissions: {  }

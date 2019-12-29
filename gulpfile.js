@@ -41,8 +41,12 @@ gulp.task("themeBuild", () => {
     .pipe(
       sass({
         allowEmpty: true,
-        outputStyle: "expanded"
-      })
+        outputStyle: "expanded",
+        includePaths: [
+          "/var/www/web/themes/custom/milken/scss",
+          "/var/www/web"
+        ]
+      }).on("error", sass.logError)
     )
     .pipe(sourcemaps.write("../css"))
     .pipe(gulp.dest(path.resolve("./web/themes/custom/milken/css")));
@@ -77,3 +81,7 @@ gulp.task(
   "default",
   gulp.series(["tsCompile", "themeBuild", "buildComponents"])
 );
+
+gulp.task('watch', () => {
+  return gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
+});

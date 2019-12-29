@@ -1,6 +1,62 @@
 
-@import "variables";
+/**
+ * Boostrap includes are included from the /libraries folder
+ * includes WITHOUT the prefix are included from the theme folder locally
+ */
+
+
+/**
+ * Font definitions from local
+ *
+ */
+
 @import "fonts";
+
+@import "libraries/bootstrap/scss/functions";
+
+
+/* override bootstrap variables with local shit */
+@import "variables";
+
+@import "libraries/bootstrap/scss/mixins";
+@import "libraries/bootstrap/scss/root";
+@import "libraries/bootstrap/scss/reboot";
+@import "libraries/bootstrap/scss/type";
+@import "libraries/bootstrap/scss/images";
+@import "libraries/bootstrap/scss/code";
+@import "libraries/bootstrap/scss/grid";
+@import "libraries/bootstrap/scss/tables";
+@import "libraries/bootstrap/scss/forms";
+@import "libraries/bootstrap/scss/buttons";
+@import "libraries/bootstrap/scss/transitions";
+@import "libraries/bootstrap/scss/dropdown";
+@import "libraries/bootstrap/scss/button-group";
+@import "libraries/bootstrap/scss/input-group";
+@import "libraries/bootstrap/scss/custom-forms";
+@import "libraries/bootstrap/scss/nav";
+@import "libraries/bootstrap/scss/navbar";
+@import "libraries/bootstrap/scss/card";
+@import "libraries/bootstrap/scss/breadcrumb";
+@import "libraries/bootstrap/scss/pagination";
+@import "libraries/bootstrap/scss/badge";
+@import "libraries/bootstrap/scss/jumbotron";
+@import "libraries/bootstrap/scss/alert";
+@import "libraries/bootstrap/scss/progress";
+@import "libraries/bootstrap/scss/media";
+@import "libraries/bootstrap/scss/list-group";
+@import "libraries/bootstrap/scss/close";
+@import "libraries/bootstrap/scss/toasts";
+@import "libraries/bootstrap/scss/modal";
+@import "libraries/bootstrap/scss/tooltip";
+@import "libraries/bootstrap/scss/popover";
+@import "libraries/bootstrap/scss/carousel";
+@import "libraries/bootstrap/scss/spinners";
+@import "libraries/bootstrap/scss/utilities";
+@import "libraries/bootstrap/scss/print";
+
+
+
+
 @import "mixins";
 @import "common";
 @import "header";

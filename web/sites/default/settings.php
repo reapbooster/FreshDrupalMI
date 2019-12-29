@@ -43,7 +43,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   if (PHP_SAPI == 'cli') {
     ini_set('max_execution_time', 999);
   } else {
-    $settings['container_yamls'][] = 'modules/redis/example.services.yml';
+    $settings['container_yamls'][] = 'modules/contrib/redis/example.services.yml';
     //phpredis is built into the Pantheon application container.
     $settings['redis.connection']['interface'] = 'PhpRedis';
     // These are dynamic variables handled by Pantheon.
@@ -65,6 +65,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 
 $settings["config_sync_directory"] =  dirname(DRUPAL_ROOT) . "/config/live";
 
-if ($env) {
+if (isset($env) && $env !== 'live') {
   $config['config_split.config_split.config_' . $env]['status'] = TRUE;
 }
+

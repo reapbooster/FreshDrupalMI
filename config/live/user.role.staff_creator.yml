@@ -1,0 +1,9 @@
+uuid: 427d2730-6976-4eb2-b965-818d6f6efd82
+langcode: en
+status: true
+dependencies: {  }
+id: staff_creator
+label: 'Staff creator'
+weight: 65
+is_admin: false
+permissions: {  }

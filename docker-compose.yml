@@ -24,6 +24,7 @@ services:
     image: milken/php-dev
     expose:
       - '9000'
+      - '4444'
     volumes:
       - ".:/var/www"
       - "$HOME/.ssh:/root/.ssh"
