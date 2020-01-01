@@ -205,6 +205,7 @@ jobs:
       - run: echo "export CI_BUILD_URL='${CIRCLE_BUILD_URL}'" >> $BASH_ENV
       - run: echo "export CI_NODE_INDEX='${CIRCLE_NODE_INDEX}'" >> $BASH_ENV
       - run: echo "export CI_REPOSITORY_URL='${CIRCLE_REPOSITORY_URL}'" >> $BASH_ENV
+      - run: echo "export TERMINUS_TOKEN='${TERMINUS_TOKEN}'" >> $BASH_ENV
       - run: echo "export ARTIFACTS_DIR_URL='${CIRCLE_BUILD_URL}/artifacts/${CIRCLE_NODE_INDEX}/artifacts'" >> $BASH_ENV
       - run: source $BASH_ENV
 
@@ -254,10 +255,10 @@ workflows:
             branches:
               ignore:
                 - master
-      #- behat_test:
-      #    requires:
-      #      - deploy_to_pantheon
-      #      - visual_regression_test
+      - behat_test:
+          requires:
+            - deploy_to_pantheon
+            - visual_regression_test
 
   scheduled_update_check:
     triggers:

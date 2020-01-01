@@ -118,3 +118,4 @@ web/themes/custom/milken/**/*.js
 *.css.map
 src/**/*.js
 /web/info.php
+/.phpunit.result.cache

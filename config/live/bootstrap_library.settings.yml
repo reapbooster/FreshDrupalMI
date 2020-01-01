@@ -16,7 +16,6 @@ theme:
   visibility: '1'
   themes:
     bootstrap_barrio: bootstrap_barrio
-    milken: milken
 minimized:
   options: '2'
 cdn:
