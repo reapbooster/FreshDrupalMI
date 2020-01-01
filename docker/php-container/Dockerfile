@@ -80,7 +80,7 @@ RUN chown root:root /usr/bin/chromedriver
 RUN chmod +x /usr/bin/chromedriver
 RUN wget https://selenium-release.storage.googleapis.com/3.9/selenium-server-standalone-3.9.1.jar
 RUN mv selenium-server-standalone-3.9.1.jar /opt/selenium-server-standalone.jar
-
+RUN curl -fLSs https://circle.ci/cli | bash
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
@@ -157,6 +157,7 @@ RUN echo "env[DB_PORT] = \$DB_PORT" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[DRUPAL_HASH_SALT] = \$DRUPAL_HASH_SALT" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[CACHE_HOST] = \$CACHE_HOST" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[CACHE_PORT] = \$CACHE_PORT" >> /usr/local/etc/php-fpm.d/www.conf
+RUN echo "env[DRUSH_OPTIONS_URI] = \$DRUSH_OPTIONS_URI" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[PREPROCESS_CSS] = \$PREPROCESS_CSS" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[PREPROCESS_JS] = \$PREPROCESS_JS" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[PHP_IDE_CONFIG] = \$PHP_IDE_CONFIG" >> /usr/local/etc/php-fpm.d/www.conf
