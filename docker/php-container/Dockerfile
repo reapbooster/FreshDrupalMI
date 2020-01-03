@@ -171,6 +171,7 @@ RUN echo "export LANG=en_US.UTF-8" >> ~/.bashrc
 RUN echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
 
 COPY init /opt/init
+COPY drush /root/.drush
 RUN chmod +x /opt/init
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
