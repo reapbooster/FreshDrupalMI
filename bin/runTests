@@ -4,10 +4,6 @@
 # This script runs the Behat tests on the local docker instance.
 #
 
-
-# Source $BASH_ENV
-source $BASH_ENV
-
 # Verbose mode and exit on errors
 set -ex
 
@@ -16,7 +12,7 @@ export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "ht
 
 # Start headless Chrome
 echo "\n Starting Chrome in headless mode ..."
-google-chrome --disable-gpu --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 --no-sandbox </dev/null &>/dev/null &
+supervisorctl restart googlechrome 2>/dev/null
 
 echo "::::::::::::::::::::::::::::::::::::::::::::::::"
 echo "Behat test site: http://localhost:8080"
@@ -24,4 +20,4 @@ echo "::::::::::::::::::::::::::::::::::::::::::::::::"
 echo
 
 # Run the Behat tests
-./vendor/bin/behat --config=tests/behat/behat-docker.yml --strict  "$@"
+./vendor/bin/behat --config=tests/behat/behat-docker.yml --snippets-for=cli "$@"
