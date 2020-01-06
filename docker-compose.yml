@@ -6,6 +6,7 @@ services:
     image: milken/nginx-dev
     expose:
       - 80
+      - 9222
     depends_on:
       - php
       - mysql
@@ -16,6 +17,7 @@ services:
       - ".:/var/www"
     ports:
       - "8080:80"
+      - "9222:9222"
     env_file:
       - .env
 

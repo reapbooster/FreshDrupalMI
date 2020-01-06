@@ -97,7 +97,7 @@ RUN chmod 755 /etc/ssl/certs/rds-combined-ca-bundle.pem
 
 RUN printf "\n\nexport COMPOSER_ALLOW_SUPERUSER=1\n" >> $HOME/.bash_profile
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN export PATH="/var/www/vendor/bin:./bin:$(composer config -g home)/vendor/bin:$PATH"
+RUN export PATH="/var/www/vendor/bin:/root/.composer/global:./bin:$(composer config -g home)/vendor/bin:$PATH"
 ENV PATH /var/www/vendor/bin:$PATH:/root/.composer/vendor/bin
 
 
@@ -128,15 +128,13 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN pecl install redis-4.3.0 \
     && docker-php-ext-enable redis
 
-RUN composer global require drupal/coder
-RUN composer global require friendsofphp/php-cs-fixer
-RUN composer global require squizlabs/php_codesniffer
+RUN composer global require consolidation/cgr
+RUN cgr drupal/coder
+RUN cgr friendsofphp/php-cs-fixer
 
 RUN echo ${CODELINT} >> /root/.bashrc
 RUN echo ${CODELINT_FIX} >> /root/.bashrc
 
-RUN ln -s ~/.composer/vendor/drupal/coder/coder_sniffer/Drupal ~/.composer/vendor/squizlabs/php_codesniffer/src/Standards/Drupal
-RUN ln -s ~/.composer/vendor/drupal/coder/coder_sniffer/DrupalPractice ~/.composer/vendor/squizlabs/php_codesniffer/src/Standards/DrupalPractice
 
 COPY php/overrides.ini /usr/local/etc/php-fpm.d
 COPY php/php.ini /usr/local/etc/php
@@ -171,6 +169,7 @@ RUN echo "export LANG=en_US.UTF-8" >> ~/.bashrc
 RUN echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
 
 COPY init /opt/init
+COPY drush /root/.drush
 RUN chmod +x /opt/init
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
