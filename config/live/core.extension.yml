@@ -29,6 +29,8 @@ module:
   entity_browser: 0
   entity_browser_entity_form: 0
   entity_embed: 0
+  entity_reference_revisions: 0
+  entityqueue: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -50,6 +52,7 @@ module:
   media_entity_browser: 0
   media_entity_browser_media_library: 0
   media_library: 0
+  metatag: 0
   menu_ui: 0
   node: 0
   options: 0
@@ -82,6 +85,7 @@ module:
   menu_link_content: 1
   pathauto: 1
   views: 10
+  paragraphs: 11
   milken_migrate: 30
   minimal: 1000
 theme:

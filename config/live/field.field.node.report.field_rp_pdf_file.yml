@@ -1,0 +1,27 @@
+uuid: f1bc866f-1641-4024-8d74-96247055ab5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rp_pdf_file
+    - node.type.report
+  module:
+    - file
+id: node.report.field_rp_pdf_file
+field_name: field_rp_pdf_file
+entity_type: node
+bundle: report
+label: 'Pdf file'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: reports-pdf
+  file_extensions: pdf
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

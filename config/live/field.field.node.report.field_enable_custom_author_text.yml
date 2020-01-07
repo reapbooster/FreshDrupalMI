@@ -1,0 +1,23 @@
+uuid: d4c5f416-bfc4-46fb-8e46-47282c473141
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_enable_custom_author_text
+    - node.type.report
+id: node.report.field_enable_custom_author_text
+field_name: field_enable_custom_author_text
+entity_type: node
+bundle: report
+label: 'Enable Custom Author Text'
+description: 'Replaces the author default display with the Custom Author Text field'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
