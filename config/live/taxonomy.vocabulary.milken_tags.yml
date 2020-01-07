@@ -1,0 +1,9 @@
+uuid: d0f6fe45-a4bf-42d8-a939-2b4481fbb6a2
+langcode: en
+status: true
+dependencies: {  }
+name: 'Milken Tags'
+vid: milken_tags
+description: 'Global Milken general tags'
+hierarchy: 0
+weight: 1

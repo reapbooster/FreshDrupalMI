@@ -1,0 +1,21 @@
+uuid: f3caaa71-56c1-4736-9799-b7f2aefb02ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_publication_on
+    - node.type.report
+  module:
+    - datetime
+id: node.report.field_publication_on
+field_name: field_publication_on
+entity_type: node
+bundle: report
+label: 'Publication On'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

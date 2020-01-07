@@ -1,0 +1,9 @@
+uuid: 5a24ae56-5fb3-4660-85f3-78c5059a50d2
+langcode: en
+status: true
+dependencies: {  }
+id: pull_quote
+label: 'Pull Quote'
+icon_uuid: null
+description: 'Rich pull quote text'
+behavior_plugins: {  }

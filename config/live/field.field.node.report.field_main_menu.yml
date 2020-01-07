@@ -1,0 +1,23 @@
+uuid: 3a49e29e-c82f-4d34-8e50-145a6670ae14
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_main_menu
+    - node.type.report
+id: node.report.field_main_menu
+field_name: field_main_menu
+entity_type: node
+bundle: report
+label: 'Main Menu'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference
