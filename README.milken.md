@@ -1,4 +1,5 @@
-# Milken Institute #
+#### Milken Institute Website Rebuild 2.0 ####
+
 
 ## Installation ##
 
@@ -16,6 +17,18 @@ Then from inside the container
 
 then open a browser and navigate to http://localhost:8080/
 
+
+## Wipe and Re-create the docker environment ##
+
+1. If you happen to break something in the environment, it is often better to remove the image cache and rebuild the docker instances from scratch. To do so, simply run the following commands.
+
+2. ```docker-compose down --rmi all``` from your project root to shutdown and remove all docker images.
+
+3. ```docker/bin/cleanDocker``` from your project root to prune the docker environment.
+
+4. After wiping the environment, follow the Installation steps starting from ```docker-compose up -d```
+
+
 ## Basic Development Practices ##
 
 1. Never check anything into the pantheon repo. Always check into github and allow CircleCI to do a build
@@ -24,11 +37,12 @@ then open a browser and navigate to http://localhost:8080/
 
 3. Never check in files/packages/etc that composer downloads.
 
-4. ```drupal site:milken:destroy && drupal site:milken:install``` from inside the container will completely rebuild the docker container.
+4. ```drupal site:milken:destroy && drupal site:milken:install``` from inside the container will completely rebuild the Drupal site.
 
 5. Config file directory is /config/live with config-split overrides in the various environment folder. IF YOU DO NOT UNDERSTAND HOW CONFIG-SPLIT WORKS, PLEASE DO NOT CHANGE THE CONFIG SPLIT SETTINGS. You will break the build if you do.
 
 6. Once the build has run, your development environment should have a copy of the fully-deployed code on Pantheon. You can wipe your environment and use the Terminus command line library to verify your new code will install and config:import correctly.
+
 
 ## Exporting Content Types ##
 
