@@ -1,0 +1,85 @@
+id: Article
+label: JSON feed of Articles
+migration_group: Article
+migration_tags:
+  - article
+source:
+  # We use the JSON source plugin.
+  plugin: url
+  # In this example we get data from a local file, to get data from a URL
+  # define http as data_fetcher_plugin.
+  # data_fetcher_plugin: http
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  # The data_parser normally limits the fields passed on to the source plugin
+  # to fields configured to be used as part of the migration. To support more
+  # dynamic migrations, the JSON data parser supports including the original
+  # data for the current row. Simply include the 'include_raw_data' flag set
+  # to `true` to enable this. This option is disabled by default to minimize
+  # memory footprint for migrations that do not need this capability.
+  # include_raw_data: true
+  # Flags whether to track changes to incoming data. If TRUE, we will maintain
+  # hashed source rows to determine whether incoming data has changed.
+  # track_changes: true
+  # Copy the example JSON file in artifacts folder to sites/default/files folder.
+  urls: https://milkeninstitute.org/jsonapi/node/article
+  # An xpath-like selector corresponding to the items to be imported.
+  item_selector: article
+  # Under 'fields', we list the data items to be imported. The first level keys
+  # are the source field names we want to populate (the names to be used as
+  # sources in the process configuration below). For each field we're importing,
+  # we provide a label (optional - this is for display in migration tools) and
+  # an xpath for retrieving that value. It's important to note that this xpath
+  # is relative to the elements retrieved by item_selector.
+  fields:
+    - name: id
+      label: 'Node ID'
+      selector: attributes.drupal_internal__nid
+    -
+      name: uuid
+      label: 'Unique ID'
+      selector: id
+    -
+      name: name
+      label: 'title/name'
+      selector: attributes.title
+    -
+      name: body
+      label: 'Body'
+      selector: attributes.body
+    -
+      name: path
+      label: 'Product price'
+      selector: attributes.path.alias
+  # Under 'ids', we identify source fields populated above which will uniquely
+  # identify each imported item. The 'type' makes sure the migration map table
+  # uses the proper schema type for stored the IDs.
+  ids:
+    id:
+      type: integer
+process:
+  # Note that the source field names here (name, description and price) were
+  # defined by the 'fields' configuration for the source plugin above.
+  type:
+    plugin: default_value
+    default_value: article
+  title: name
+  uuid: uuid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  uid:
+    plugin: default_value
+    default_value: 2
+  body.value: body.value
+  body.format:
+    plugin: default_value
+    default_value: full_html
+
+destination:
+  plugin: 'entity:node'
+migration_dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - milken_migrate
