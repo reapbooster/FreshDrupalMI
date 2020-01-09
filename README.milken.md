@@ -1,35 +1,43 @@
-#### Milken Institute Website Rebuild 2.0 ####
+# Milken Institute Website Rebuild 2.0 #
 
 
 ## Installation ##
 
-This is a repo for the new MI site. To initialize local development, run the following commands:
+This is a repo for the new MI site. To initialize a local development environment, run the following commands from the project root on the container host:
 
 1. ```cp .env.dist .env```
+
 2. ```cp docker/settings.local.php web/sites/default```
+
 3. ```docker-compose up -d```
-4. ```docker exec -it freshdrupalmi_php_1 bash```
 
-Then from inside the container
+If the ```docker-compose``` command complete successfully, you can now launch a shell on the PHP container:
 
-5. ```composer install && gulp```
-6. ```drupal site:milken:install```
+1. ```docker exec -it freshdrupalmi_php_1 bash```
 
-then open a browser and navigate to http://localhost:8080/
+Then from inside the docker container do the following to install the drupal site:
+
+1. ```composer install && gulp```
+
+2. ```drupal site:milken:install```
+
+After installation completes, open a browser and navigate to http://localhost:8080/
 
 
 ## Wipe and Re-create the docker environment ##
 
-1. If you happen to break something in the environment, it is often better to remove the image cache and rebuild the docker instances from scratch. To do so, simply run the following commands.
+If you happen to break something in the environment, it is often better to remove the image cache and rebuild the docker instances from scratch. To do so, simply run the following commands from the project root on the container host.
 
-2. ```docker-compose down --rmi all``` from your project root to shutdown and remove all docker images.
+1. ```docker-compose down --rmi all``` To shutdown and remove all docker images.
 
-3. ```docker/bin/cleanDocker``` from your project root to prune the docker environment.
+2. ```docker/bin/cleanDocker``` To prune the docker environment.
 
-4. After wiping the environment, follow the Installation steps starting from ```docker-compose up -d```
+3. After wiping the environment, follow the Installation steps starting from ```docker-compose up -d```
 
 
 ## Basic Development Practices ##
+
+Here are a few tips to avoid ( or solve ) problems while developing.
 
 1. Never check anything into the pantheon repo. Always check into github and allow CircleCI to do a build
 
@@ -62,3 +70,15 @@ To export a content type to the config folder:
 
 4. Most of the time ```language.entity.en.yml``` will have a UUID added to the top of the file. Discard the changes to this file. The uuid on the default language will only cause problems with importing the config.
 
+
+## Exporting Content ( Nodes, Taxonomy terms etc... ) ##
+
+To export content in order to have it import automatically on site build, follow the next steps.
+
+1. ```drush dcer taxonomy_term --folder=some/folder/within/web/root``` To export all taxonomy_term content into the given path
+
+2. Then place the exported files into web/modules/custom/milken_migrate/content/taxonomy_term
+
+3. When the module Milken_Migrate is enabled, it will load the content into the site automatically. 
+
+4. The content will also be loaded automatically on every site build. 
