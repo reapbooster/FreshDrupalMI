@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Program and Initiatives'
 vid: program_initiatives
 description: 'This taxonomy will serve as 1:1 relationship between a content type "Program Initiative" and the rest of the content types'
-hierarchy: 0
 weight: 0

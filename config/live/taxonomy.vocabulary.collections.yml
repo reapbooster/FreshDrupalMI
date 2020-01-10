@@ -5,5 +5,4 @@ dependencies: {  }
 name: Collections
 vid: collections
 description: 'This vocabulary is intended to be used associated in content types so it generates a different grouping than MIlken Tags'
-hierarchy: 1
 weight: 0
