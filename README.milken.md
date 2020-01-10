@@ -51,6 +51,11 @@ Here are a few tips to avoid ( or solve ) problems while developing.
 
 6. Once the build has run, your development environment should have a copy of the fully-deployed code on Pantheon. You can wipe your environment and use the Terminus command line library to verify your new code will install and config:import correctly.
 
+7. You may choose to install the Drupal Console plugin for Pantheon Terminus on your local machine, to do so, run:
+   a. ```mkdir -p ~/.terminus/plugins```
+
+   b.```composer create-project --no-dev -d ~/.terminus/plugins pantheon-systems/terminus-drupal-console-plugin:~1```
+
 
 ## Exporting Content Types ##
 
