@@ -55,7 +55,7 @@ Here are a few tips to avoid ( or solve ) problems while developing.
 
    a. ```mkdir -p ~/.terminus/plugins```
 
-   b.```composer create-project --no-dev -d ~/.terminus/plugins pantheon-systems/terminus-drupal-console-plugin:~1```
+   b. ```composer create-project --no-dev -d ~/.terminus/plugins pantheon-systems/terminus-drupal-console-plugin:~1```
 
 
 ## Exporting Content Types ##
