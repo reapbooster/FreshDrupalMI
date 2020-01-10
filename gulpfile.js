@@ -10,7 +10,7 @@ const PluginError = require("plugin-error");
 const Logger = require('fancy-log');
 const shell = require("gulp-shell");
 const sass = require("gulp-sass");
-const sourcemaps = require("gulp-sourcemaps");
+//const sourcemaps = require("gulp-sourcemaps");
 const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
 const webpack = require("webpack");
@@ -36,7 +36,7 @@ gulp.task(
 gulp.task("themeBuild", () => {
   return gulp
     .src(path.resolve("./web/themes/custom/milken/scss/milken.scss"))
-    .pipe(sourcemaps.init())
+    //.pipe(sourcemaps.init())
     .pipe(autoprefixer())
     .pipe(
       sass({
@@ -48,7 +48,7 @@ gulp.task("themeBuild", () => {
         ]
       }).on("error", sass.logError)
     )
-    .pipe(sourcemaps.write("../css"))
+    //.pipe(sourcemaps.write("../css"))
     .pipe(gulp.dest(path.resolve("./web/themes/custom/milken/css")));
 });
 

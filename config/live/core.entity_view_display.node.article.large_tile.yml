@@ -1,8 +1,9 @@
-uuid: 140d4d41-8aae-4d55-a29d-f671843808fb
+uuid: b054e0b5-2546-4555-a38b-8b769a502dcb
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.large_tile
     - field.field.node.article.body
     - field.field.node.article.field_authors
     - field.field.node.article.field_hero_image
@@ -25,8 +26,8 @@ third_party_settings:
         layout_settings:
           label: ''
         components:
-          05ac2434-d0b8-43ac-a1f2-8e5fe68f6517:
-            uuid: 05ac2434-d0b8-43ac-a1f2-8e5fe68f6517
+          440f7552-85f7-45f4-a42d-0db7923076ff:
+            uuid: 440f7552-85f7-45f4-a42d-0db7923076ff
             region: content
             configuration:
               label_display: '0'
@@ -35,8 +36,8 @@ third_party_settings:
               id: 'extra_field_block:node:article:links'
             additional: {  }
             weight: 0
-          e8069601-a0fb-47e6-9177-04c0d2cb19ba:
-            uuid: e8069601-a0fb-47e6-9177-04c0d2cb19ba
+          d9233583-1fc5-48d2-96d9-c1807736dd4f:
+            uuid: d9233583-1fc5-48d2-96d9-c1807736dd4f
             region: content
             configuration:
               label_display: '0'
@@ -51,10 +52,10 @@ third_party_settings:
             additional: {  }
             weight: 1
         third_party_settings: {  }
-id: node.article.default
+id: node.article.large_tile
 targetEntityType: node
 bundle: article
-mode: default
+mode: large_tile
 content:
   body:
     label: hidden
