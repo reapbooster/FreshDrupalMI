@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92ddabacd9a4d628175c4047308316f9",
+    "content-hash": "33487310583266e040b76877c373acbf",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -6625,6 +6625,158 @@
                 "source": "https://git.drupalcode.org/project/migrate_d2d"
             },
             "time": "2016-07-15T20:04:23+00:00"
+        },
+        {
+            "name": "drupal/migrate_file",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_file.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/migrate_file-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "4a24edc577541b5aa67682a4f89c8dfd7c0788d5"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1539064380",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "drclaw",
+                    "homepage": "https://www.drupal.org/user/823702"
+                }
+            ],
+            "description": "Additional support for migrating files including downloading remote files and using remote uris (without download)",
+            "homepage": "https://www.drupal.org/project/migrate_file",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/migrate_file",
+                "issues": "https://www.drupal.org/project/issues/migrate_file"
+            }
+        },
+        {
+            "name": "drupal/migrate_manifest",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_manifest.git",
+                "reference": "8.x-1.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/migrate_manifest-8.x-1.9.zip",
+                "reference": "8.x-1.9",
+                "shasum": "75a68d7b513ca0ed00943cb791a9e0c28fe03dc2"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.9",
+                    "datestamp": "1562733187",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "James Gilliland",
+                    "homepage": "https://www.drupal.org/u/neclimdul",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "neclimdul",
+                    "homepage": "https://www.drupal.org/user/48673"
+                }
+            ],
+            "description": "Supports the running of migrations using a structured manifest file.",
+            "homepage": "https://www.drupal.org/project/migrate_manifest",
+            "support": {
+                "source": "https://cgit.drupalcode.org/migrate_manifest",
+                "issues": "https://www.drupal.org/project/issues/migrate_manifest",
+                "irc": "irc://irc.freenode.org/drupal-migrate"
+            }
+        },
+        {
+            "name": "drupal/migrate_media_handler",
+            "version": "1.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_media_handler.git",
+                "reference": "8.x-1.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/migrate_media_handler-8.x-1.0-rc2.zip",
+                "reference": "8.x-1.0-rc2",
+                "shasum": "85c5a78ecb29d436e608b0e2775f4c73b0c14512"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-rc2",
+                    "datestamp": "1566883685",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "srjosh",
+                    "homepage": "https://www.drupal.org/user/165878"
+                }
+            ],
+            "description": "Converts inline image and document references, and file fields, to media entity references.",
+            "homepage": "https://www.drupal.org/project/migrate_media_handler",
+            "support": {
+                "source": "https://git.drupalcode.org/project/migrate_media_handler"
+            }
         },
         {
             "name": "drupal/migrate_plus",
@@ -15708,6 +15860,7 @@
         "drupal/masquerade": 10,
         "drupal/media_entity_browser": 15,
         "drupal/migrate_d2d": 20,
+        "drupal/migrate_media_handler": 5,
         "drupal/npm": 15,
         "drupal/openid_connect": 10,
         "drupal/purge": 10,
