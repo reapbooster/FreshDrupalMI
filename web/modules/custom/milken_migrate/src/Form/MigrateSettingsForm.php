@@ -17,7 +17,7 @@ class MigrateSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'migrate_jsonapi_migrate_settings';
+    return 'milken_migrate_migrate_settings';
   }
 
   /**
