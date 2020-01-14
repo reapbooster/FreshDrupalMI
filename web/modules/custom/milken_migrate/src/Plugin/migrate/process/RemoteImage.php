@@ -51,14 +51,14 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       $sourceURL = array_shift($source['urls']);
       $parsedURL = parse_url($sourceURL);
       if (empty($value) || !isset($value['type']) || !isset($value['id'])) {
-        echo "Skip this value: EMPTY" . PHP_EOL;
+        //echo "Skip this value: EMPTY" . PHP_EOL;
         $row->setDestinationProperty($destination_property, []);
         return NULL;
         //throw new MigrateSkipProcessException('value is false');
       }
       // TODO: figure out a way to derive "node/article".
       $sourceURL = str_replace("node/article", str_replace("--", "/", $value['type']), $sourceURL) . "/" . $value['id'];
-      echo "SOURCE_URL: " . $sourceURL . PHP_EOL;
+      //echo "SOURCE_URL: " . $sourceURL . PHP_EOL;
       $client = new Client();
       $response = $client->get($sourceURL);
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
@@ -91,7 +91,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     catch (\Exception $e) {
       throw new MigrateException($e->getMessage());
     }
-    echo "Returning $value" . PHP_EOL;
+   // echo "Returning $value" . PHP_EOL;
     return $value;
   }
 

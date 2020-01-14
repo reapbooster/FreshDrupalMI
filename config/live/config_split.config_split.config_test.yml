@@ -6,11 +6,13 @@ id: config_test
 label: config_test
 description: ''
 folder: ''
-module: {  }
+module:
+  devel: 0
+  devel_generate: 0
 theme: {  }
 blacklist:
-  - system.performance
   - devel.settings
+  - system.performance
   - devel.toolbar
 graylist: {  }
 graylist_dependents: true
