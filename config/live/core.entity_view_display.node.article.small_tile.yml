@@ -1,0 +1,80 @@
+uuid: 0e597a29-1ecd-49f5-b21f-3eff3cf2c8b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.small_tile
+    - field.field.node.article.body
+    - field.field.node.article.field_authors
+    - field.field.node.article.field_hero_image
+    - field.field.node.article.field_hero_subtitle
+    - field.field.node.article.field_hero_title
+    - field.field.node.article.field_topics
+    - node.type.article
+  module:
+    - layout_builder
+    - layout_discovery
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          2d6431f4-5006-4c01-bb01-86e88a6f1c0c:
+            uuid: 2d6431f4-5006-4c01-bb01-86e88a6f1c0c
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:article:links'
+            additional: {  }
+            weight: 0
+          f9b3f9eb-f768-4ede-9031-c5d189fc7422:
+            uuid: f9b3f9eb-f768-4ede-9031-c5d189fc7422
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:article:body'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
+id: node.article.small_tile
+targetEntityType: node
+bundle: article
+mode: small_tile
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_authors: true
+  field_hero_image: true
+  field_hero_subtitle: true
+  field_hero_title: true
+  field_topics: true
+  langcode: true
+  layout_builder__layout: true
+  search_api_excerpt: true

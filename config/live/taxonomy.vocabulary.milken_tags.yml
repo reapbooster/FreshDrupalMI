@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Milken Tags'
 vid: milken_tags
 description: 'Global Milken general tags'
-hierarchy: 0
 weight: 1

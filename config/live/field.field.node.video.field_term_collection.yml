@@ -1,0 +1,29 @@
+uuid: bb32728f-778b-473e-8a59-9cd67fd364e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_term_collection
+    - node.type.video
+    - taxonomy.vocabulary.collections
+id: node.video.field_term_collection
+field_name: field_term_collection
+entity_type: node
+bundle: video
+label: Collection
+description: 'This vocabulary is intended to be used associated in content types so it generates a different grouping than MIlken Tags'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      collections: collections
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

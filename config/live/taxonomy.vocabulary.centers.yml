@@ -5,5 +5,4 @@ dependencies: {  }
 name: Centers
 vid: centers
 description: 'This vocabulary automatic filled when a user create a new Center, this action add a new term on the vocabulary.'
-hierarchy: 0
 weight: 0
