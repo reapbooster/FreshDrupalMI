@@ -48,24 +48,24 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
 
     try {
       $source = $row->getSource();
-      $sourceURL = array_shift($source['urls']);
-      $parsedURL = parse_url($sourceURL);
+
       if (empty($value) || !isset($value['type']) || !isset($value['id'])) {
-        echo "Skip this value: EMPTY" . PHP_EOL;
+        \Drupal::logger('milken_migrate')
+          ->notice("SKIP importing hero image. JSON data is empty: ");
         $row->setDestinationProperty($destination_property, []);
         return NULL;
-        //throw new MigrateSkipProcessException('value is false');
       }
       // TODO: figure out a way to derive "node/article".
-      $sourceURL = str_replace("node/article", str_replace("--", "/", $value['type']), $sourceURL) . "/" . $value['id'];
-      echo "SOURCE_URL: " . $sourceURL . PHP_EOL;
-      $client = new Client();
-      $response = $client->get($sourceURL);
+      $sourcePath = '/jsonapi/' . str_replace("--", "/", $value['type']) . "/" . $value['id'];
+      \Drupal::logger('milken_migrate')->notice($sourcePath);
+      $client = new Client(['base_uri' => $source['jsonapi_host']]);
+      $response = $client->get($sourcePath);
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
         $responseData = json_decode($response->getBody(), TRUE);
         $attributes = $responseData['data']['attributes'];
         if (isset($attributes['uri']['url'])) {
-          $url = "{$parsedURL['scheme']}://{$parsedURL['host']}{$attributes['uri']['url']}";
+          $url = $source['jsonapi_host'] . $attributes['uri']['url'];
+          \Drupal::logger('milken_migrate')->notice($url);
           $file = $this->getRemoteFile($attributes['filename'], $url);
         }
         if ($file instanceof FileInterface) {
@@ -83,15 +83,16 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           if ($media instanceof MediaInterface) {
             $media->setPublished(TRUE);
             $media->save();
+            $row->setDestinationProperty('field_hero_image', ['entity' => $media]);
             return ['entity' => $media];
           }
         }
       }
     }
     catch (\Exception $e) {
+      \Drupal::logger('milken_migrate')->error("IMPORT ERROR: " . $e->getMessage());
       throw new MigrateException($e->getMessage());
     }
-    echo "Returning $value" . PHP_EOL;
     return $value;
   }
 

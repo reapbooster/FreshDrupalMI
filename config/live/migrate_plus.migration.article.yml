@@ -16,8 +16,9 @@ label: 'Articles VIA JSON API'
 source:
   plugin: url
   data_fetcher_plugin: http
-  data_parser_plugin: json
-  urls: 'https://milkeninstitute.org/jsonapi/node/article'
+  data_parser_plugin: jsonapi
+  jsonapi_host: 'https://milkeninstitute.org'
+  jsonapi_endpoint: /jsonapi/node/article
   item_selector: data
   fields:
     -
