@@ -108,8 +108,10 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     $toReturn = file_save_data($response->getBody(), "public://" . $name, FILE_EXISTS_REPLACE);
     if ($toReturn instanceof FileInterface) {
       $realpath = \Drupal::service('file_system')->realpath($toReturn->getFileUri());
-      chown($realpath, 'www-data');
-      chgrp($realpath, 'www-data');
+      if (isset($_SERVER['USER'])) {
+        chown($realpath, $_SERVER['USER']);
+        chgrp($realpath, $_SERVER['USER']);
+      }
       return $toReturn;
     }
     return NULL;

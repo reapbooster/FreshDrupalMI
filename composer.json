@@ -11,6 +11,8 @@
     ],
     "require": {
         "php": ">=7.2.1",
+        "ext-json": "*",
+        "ext-mbstring": "*",
         "composer/installers": "^1.6",
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/drupal-scaffold": "^2.0.1",
@@ -64,6 +66,7 @@
         "drupal/masquerade": "^2.0@beta",
         "drupal/media_entity_browser": "^2.0@alpha",
         "drupal/media_migration": "^1.0@alpha",
+        "drupal/media_parent_entity_link": "^1.0@beta",
         "drupal/metatag": "^1.11",
         "drupal/migrate_d2d": "3.x-dev",
         "drupal/migrate_file": "^1.1",
