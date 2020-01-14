@@ -175,6 +175,10 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
+## Install the Drupal Console plugin for Pantheon Terminus
+RUN mkdir -p /root/.terminus/plugins
+RUN composer create-project --no-dev -d /root/.terminus/plugins pantheon-systems/terminus-drupal-console-plugin:~1
+
 ## these are used if the container is NOT going to share a filesystem with the host e.g. remote stack deploy
 #RUN composer install
 #RUN mkdir -p /tmp/www/web/sites/default/files
