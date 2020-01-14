@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\migrate_jsonapi\Plugin\migrate_plus\data_parser;
+namespace Drupal\milken_migrate\Plugin\migrate_plus\data_parser;
 
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Url;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\Extension\ModuleHandler;
 use Drupal\migrate\MigrateException;
-use Drupal\migrate_jsonapi\Form\MigrateSettingsForm;
+use Drupal\milken_migrate\Form\MigrateSettingsForm;
 use Drupal\migrate_plus\DataParserPluginBase;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\migrate_jsonapi\Form;
+namespace Drupal\milken_migrate\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;

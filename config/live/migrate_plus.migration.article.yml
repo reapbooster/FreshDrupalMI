@@ -17,7 +17,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: https://milkeninstitute.com
+  jsonapi_host: https://milkeninstitute.org
   jsonapi_endpoint: /jsonapi/node/article
   item_selector: data
   fields:
