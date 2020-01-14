@@ -30,8 +30,16 @@ source:
       selector: id
     -
       name: name
-      label: 'title/name'
+      label: title/name
       selector: /attributes/title
+    -
+      name: langcode
+      label: "Language Code"
+      selector: /attributes/langcode
+    -
+      name: body
+      label: 'body array'
+      selector: /attributes/body
     -
       name: body_value
       label: 'Body Value'
@@ -46,46 +54,59 @@ source:
       selector: /attributes/path/alias
     -
       name: created
-      label: 'Created'
+      label: Created
       selector: /attributes/created
     -
       name: changed
-      label: 'Changed'
+      label: Changed
       selector: /attributes/changed
     -
       name: promote
-      label: "Promoted"
+      label: Promoted
       selector: /attributes/promote
     -
       name: sticky
-      label: "Sticky"
+      label: Sticky
       selector: /attributes/sticky
     -
       name: hero_title
-      label: "Hero Title"
+      label: 'Hero Title'
       selector: /attributes/field_ar_hero_title
-
+    -
+      name: hero_image
+      label: "Hero Image"
+      selector: /relationships/field_ar_hero_image
   ids:
     id:
       type: integer
 process:
-  type:
-    plugin: default_value
-    default_value: article
   title: name
   uuid: uuid
-  sticky:
-    plugin: default_value
-    default_value: 0
+  language: langcode
+  sticky: sticky
+  promote: promote
   uid:
     plugin: default_value
     default_value: 2
   body/value: body_value
   body/format: body_format
-  created: created
-  changed: changed
+  created:
+    plugin: 'milken_migrate:unix_date'
+    source: created
+  changed:
+    plugin: 'milken_migrate:unix_date'
+    source: changed
   field_hero_title: hero_title
+  field_hero_image:
+    -
+      plugin: skip_on_empty
+    -
+      plugin: migration_lookup
+      migration: media_image
+      source: hero_image
+
 
 destination:
   plugin: 'entity:node'
+  default_bundle: article
 migration_dependencies: {  }
