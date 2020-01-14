@@ -3,3 +3,10 @@ type: module
 description: 'Migration classes and data for move to re-organized d8 site'
 core: 8.x
 package: 'milken'
+
+dependencies:
+  - drupal:migrate (>=8.3)
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools
+
+configure: milken_migrate.migrate_settings
