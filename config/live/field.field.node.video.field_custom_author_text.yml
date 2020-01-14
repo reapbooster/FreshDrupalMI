@@ -1,0 +1,21 @@
+uuid: 8912e0d8-7f47-4dc1-b2c1-a51b6fcddfe3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_custom_author_text
+    - node.type.video
+  module:
+    - text
+id: node.video.field_custom_author_text
+field_name: field_custom_author_text
+entity_type: node
+bundle: video
+label: 'Custom Author Text'
+description: 'Custom HTML formatted text to be displayed instead of the regular author display'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

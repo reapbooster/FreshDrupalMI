@@ -1,26 +1,32 @@
-uuid: 6f6235ec-c965-4f0d-b1dc-21b8fc08ce64
+uuid: 1296dac6-326d-4801-bffc-0fac7a756b82
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.career.body
-    - field.field.node.career.field_careers_apply
-    - field.field.node.career.field_centers_general
-    - field.field.node.career.field_department
-    - field.field.node.career.field_hero_image
-    - field.field.node.career.field_link_to_video
-    - field.field.node.career.field_location
-    - field.field.node.career.field_meta_tags
-    - field.field.node.career.field_seniority_level
-    - node.type.career
+    - field.field.node.video.body
+    - field.field.node.video.field_centers_general
+    - field.field.node.video.field_custom_author_text
+    - field.field.node.video.field_event_reference
+    - field.field.node.video.field_hero_image
+    - field.field.node.video.field_link_to_video
+    - field.field.node.video.field_meta_tags
+    - field.field.node.video.field_moderator
+    - field.field.node.video.field_publication_on
+    - field.field.node.video.field_related_event
+    - field.field.node.video.field_speakers
+    - field.field.node.video.field_sub_header
+    - field.field.node.video.field_term_collection
+    - field.field.node.video.field_term_program_initiatives
+    - field.field.node.video.field_topics
+    - node.type.video
   module:
-    - link
+    - datetime
     - metatag
     - path
     - text
-id: node.career.default
+id: node.video.default
 targetEntityType: node
-bundle: career
+bundle: video
 mode: default
 content:
   body:
@@ -39,17 +45,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_careers_apply:
+  field_centers_general:
     weight: 122
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-    region: content
-  field_centers_general:
-    weight: 123
-    settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
@@ -57,17 +55,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_department:
+  field_custom_author_text:
     weight: 124
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: text_textarea
     region: content
-  field_hero_image:
+  field_event_reference:
     weight: 125
     settings:
       match_operator: CONTAINS
@@ -77,15 +73,31 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_hero_image:
+    weight: 134
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_link_to_video:
-    weight: 126
+    weight: 135
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_location:
+  field_meta_tags:
+    weight: 126
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_moderator:
     weight: 127
     settings:
       match_operator: CONTAINS
@@ -95,14 +107,62 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_meta_tags:
-    weight: 128
+  field_publication_on:
+    weight: 129
     settings: {  }
     third_party_settings: {  }
-    type: metatag_firehose
+    type: datetime_default
     region: content
-  field_seniority_level:
-    weight: 129
+  field_related_event:
+    weight: 130
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_speakers:
+    weight: 131
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_sub_header:
+    weight: 132
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_term_collection:
+    weight: 123
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_term_program_initiatives:
+    weight: 128
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 133
     settings:
       match_operator: CONTAINS
       match_limit: 10

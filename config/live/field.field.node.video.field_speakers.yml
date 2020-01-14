@@ -1,0 +1,29 @@
+uuid: 0dab3284-4b1b-4692-a929-64399a2a4baf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_speakers
+    - node.type.video
+    - taxonomy.vocabulary.people
+id: node.video.field_speakers
+field_name: field_speakers
+entity_type: node
+bundle: video
+label: Speakers
+description: 'People who served as speakers on this content. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      people: people
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
