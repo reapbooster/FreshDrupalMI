@@ -20,7 +20,7 @@ source:
   urls: 'https://milkeninstitute.org/jsonapi/file/file'
   item_selector: data
   constants:
-    file_destination: 'public://images/'
+    FILE_DESTINATION: 'public://'
   fields:
     -
       name: id
@@ -62,7 +62,21 @@ source:
     id:
       type: integer
 process:
-  name: filename
+  pseudo_destination_filename:
+    -
+      plugin: callback
+      callable: basename
+      source: url
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Cannot import empty image filename.'
+  pseudo_destination_path:
+    -
+      plugin: concat
+      source:
+        - constants/DRUPAL_FILE_DIRECTORY
+        - '@pseudo_destination_filename'
   uuid: uuid
   uid:
     plugin: default_value
@@ -75,12 +89,18 @@ process:
     source: changed
   filesize: filesize
   filemime: filemime
-  field_image:
-    plugin: image_import
-    source: file
-    destination: 'constants/file_destination'
-    title: file_title
-    alt: !title
+  uri:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: image
+    -
+      plugin: file_copy
+      source:
+        - image
+        - '@pseudo_destination_path'
+      file_exists: rename
+      move: false
 destination:
   plugin: 'entity:file'
 migration_dependencies: {  }

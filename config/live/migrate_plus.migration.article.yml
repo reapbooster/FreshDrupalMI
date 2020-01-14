@@ -1,4 +1,4 @@
-uuid: 076a243a-43b4-4254-a985-a2b74d5283d7
+uuid: 07b1d26d-8676-40f9-abfe-701e4d9191de
 langcode: en
 status: true
 dependencies:
@@ -34,7 +34,7 @@ source:
       selector: /attributes/title
     -
       name: langcode
-      label: "Language Code"
+      label: 'Language Code'
       selector: /attributes/langcode
     -
       name: body
@@ -74,17 +74,24 @@ source:
       selector: /attributes/field_ar_hero_title
     -
       name: hero_image
-      label: "Hero Image"
+      label: 'Hero Image'
       selector: /relationships/field_ar_hero_image
   ids:
     id:
       type: integer
+    uuid:
+      type: string
 process:
   title: name
   uuid: uuid
-  language: langcode
+  language:
+    plugin: default_value
+    default_value: en
   sticky: sticky
   promote: promote
+  status:
+    plugin: default_value
+    default_value: true
   uid:
     plugin: default_value
     default_value: 2
@@ -99,13 +106,8 @@ process:
   field_hero_title: hero_title
   field_hero_image:
     -
-      plugin: skip_on_empty
-    -
-      plugin: migration_lookup
-      migration: media_image
+      plugin: 'milken_migrate:remote_image'
       source: hero_image
-
-
 destination:
   plugin: 'entity:node'
   default_bundle: article

@@ -31,6 +31,10 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_filemime: true
+  field_filesize: true
+  field_height: true
+  field_width: true
   name: true
   path: true
   status: true

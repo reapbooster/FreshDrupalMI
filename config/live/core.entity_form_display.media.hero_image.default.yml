@@ -66,4 +66,8 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_filemime: true
+  field_filesize: true
+  field_height: true
+  field_width: true
