@@ -7,7 +7,6 @@ use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -27,17 +26,21 @@ use GuzzleHttp\Client;
  */
 class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
 
-
   /**
    * Transform remote image ref into local Media Object.
+   *
    * @param mixed $value
    *   Value to import.
    * @param \Drupal\migrate\MigrateExecutableInterface $migrate_executable
    *   Executable migration interface.
    * @param \Drupal\migrate\Row $row
+   *   Row object with imported/tranformed data.
    * @param string $destination_property
+   *   The property to which this value is destined.
    *
    * @return array|int|mixed|string|null
+   *   The Value that the trasformation returns.
+   *
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {

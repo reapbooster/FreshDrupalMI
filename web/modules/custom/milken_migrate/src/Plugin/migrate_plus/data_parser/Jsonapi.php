@@ -238,7 +238,8 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
 
     $path = $parts['path'];
 
-    // Add hook_migrate_plus_data_parser_jsonapi_pre_request_alter() to update jsonapi filter or relationships.
+    // Add hook_migrate_plus_data_parser_jsonapi_pre_request_alter() to update
+    // jsonapi filter or relationships.
     $this->moduleHandler->alter('migrate_plus_data_parser_jsonapi_pre_request', $path, $options, $this);
 
     $url = Url::fromUri($path, $options)->toString();
@@ -262,7 +263,8 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
       foreach ($this->fieldSelectors() as $field_name => $field_info) {
         if (isset($field_info['relationship'])) {
           $field_data = $current;
-          // Explode for multiple level relationships, eg: field_thumbnail.image .
+          // Explode for multiple level relationships,
+          // eg: field_thumbnail.image.
           $relationship_fields = explode('.', $field_info['relationship']);
 
           // For relationship in multiple levels.
