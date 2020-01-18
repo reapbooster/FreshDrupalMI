@@ -32,10 +32,10 @@ function milken_migrate_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_migrate_prepare_row().
  */
 function milken_migrate_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
-  \Kint::enabled(true);
-  //print_r($row);
-  //echo PHP_EOL . "==============================" . PHP_EOL;
-  //exit();
+  \Kint::enabled(TRUE);
+  // print_r($row);
+  // echo PHP_EOL . "==============================" . PHP_EOL;
+  // exit();
 }
 
 /**

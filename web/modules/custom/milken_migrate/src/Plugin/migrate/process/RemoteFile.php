@@ -77,7 +77,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       \Drupal::logger('milken_migrate')->error("IMPORT ERROR: " . $e->getMessage());
       throw new MigrateException($e->getMessage());
     }
-    return null;
+    return NULL;
   }
 
   /**

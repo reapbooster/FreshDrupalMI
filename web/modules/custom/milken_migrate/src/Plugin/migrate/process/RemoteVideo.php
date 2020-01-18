@@ -2,18 +2,15 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
-
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use Drupal\migrate_media_handler\MediaMaker;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Filter to download video URL's improperly stored to fully-fledged
- * media entities.
+ * Filter to download video URL's improperly stored to fully-fledged entities.
+ *
  *
  * @code
  * oembed_video_vidle:
@@ -26,7 +23,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * );
  */
 class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
-
 
   /**
    * Transform remote image ref into local Media Object.
@@ -51,8 +47,7 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
     }
 
     try {
-      $source = $row->getSource();
-
+      // $source = $row->getSource();
       if (!empty($value)) {
         $video_url = str_replace('https://www.youtube.com/embed/', 'https://youtu.be/', $value);
         \Drupal::logger('milken_migrate')
@@ -69,7 +64,5 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
     }
     return $value;
   }
-
-
 
 }
