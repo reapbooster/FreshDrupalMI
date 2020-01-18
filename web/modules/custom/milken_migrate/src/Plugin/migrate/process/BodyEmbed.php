@@ -47,7 +47,7 @@ class BodyEmbed extends ProcessPluginBase {
       if (!empty($value)) {
         $toReturn = $this->stripWordHtml($value);
         $row->setDestinationProperty($destination_property, $toReturn);
-        Drupal::logger('milken_migrate')->notice($toReturn);
+        Drupal::logger('milken_migrate')->debug($toReturn);
         return $toReturn;
       }
     }

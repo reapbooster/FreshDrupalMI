@@ -1,0 +1,38 @@
+uuid: 4f3c1fd0-5d58-4685-b228-2e06d24a9657
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.video.field_media_oembed_video
+    - media.type.video
+id: media.video.media_library
+targetEntityType: media
+bundle: video
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    settings:
+      size: 60
+      placeholder: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_body: true
+  field_event_reference: true
+  field_media_oembed_video: true
+  field_meta_tags: true
+  field_program_initiatives: true
+  field_related_event: true
+  field_speakers: true
+  field_subheader: true
+  field_term_collection: true
+  field_thumbnail: true
+  field_topics: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

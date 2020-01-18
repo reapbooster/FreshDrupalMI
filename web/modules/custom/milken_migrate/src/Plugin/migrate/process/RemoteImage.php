@@ -54,13 +54,13 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
 
       if (empty($value) || !isset($value['type']) || !isset($value['id'])) {
         \Drupal::logger('milken_migrate')
-          ->notice("SKIP importing hero image. JSON data is empty: ");
+          ->debug("SKIP importing hero image. JSON data is empty: ");
         $row->setDestinationProperty($destination_property, []);
         return NULL;
       }
       // TODO: figure out a way to derive "node/article".
       $sourcePath = '/jsonapi/' . str_replace("--", "/", $value['type']) . "/" . $value['id'];
-      \Drupal::logger('milken_migrate')->notice($sourcePath);
+      \Drupal::logger('milken_migrate')->debug($sourcePath);
       $client = new Client(['base_uri' => $source['jsonapi_host']]);
       $response = $client->get($sourcePath);
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
@@ -68,7 +68,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
         $attributes = $responseData['data']['attributes'];
         if (isset($attributes['uri']['url'])) {
           $url = $source['jsonapi_host'] . $attributes['uri']['url'];
-          \Drupal::logger('milken_migrate')->notice($url);
+          \Drupal::logger('milken_migrate')->debug($url);
           $file = $this->getRemoteFile($attributes['filename'], $url);
         }
         if ($file instanceof FileInterface) {

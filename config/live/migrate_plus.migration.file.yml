@@ -16,8 +16,11 @@ label: 'File VIA JSON API'
 source:
   plugin: url
   data_fetcher_plugin: http
-  data_parser_plugin: json
-  urls: 'https://milkeninstitute.org/jsonapi/file/file'
+  data_parser_plugin: jsonapi
+  urls:
+    - 'https://milkeninstitute.org/jsonapi/file/file'
+  jsonapi_host: 'https://milkeninstitute.org'
+  jsonapi_endpoint: /jsonapi/file/file
   item_selector: data
   constants:
     FILE_DESTINATION: 'public://'
@@ -89,15 +92,18 @@ process:
     source: changed
   filesize: filesize
   filemime: filemime
+  status:
+    plugin: default_value
+    default_value: true
   uri:
     -
       plugin: skip_on_empty
       method: process
-      source: image
+      source: url
     -
       plugin: file_copy
       source:
-        - image
+        - url
         - '@pseudo_destination_path'
       file_exists: rename
       move: false
