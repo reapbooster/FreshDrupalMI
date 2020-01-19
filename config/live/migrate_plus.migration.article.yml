@@ -15,6 +15,7 @@ migration_group: milken
 label: 'Articles VIA JSON API'
 source:
   plugin: url
+  urls: 'https://milkeninstitute.org/jsonapi/node/article'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
   jsonapi_host: 'https://milkeninstitute.org'
@@ -96,7 +97,10 @@ process:
   uid:
     plugin: default_value
     default_value: 2
-  body/value: body_value
+  body/value:
+    -
+      plugin: 'milken_migrate:body_embed'
+      source: body_value
   body/format: body_format
   created:
     plugin: 'milken_migrate:unix_date'

@@ -218,5 +218,6 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_meta_tags: true
   langcode: true
   search_api_excerpt: true
