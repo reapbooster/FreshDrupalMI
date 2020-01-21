@@ -12,9 +12,9 @@ $enable-responsive-font-sizes : true;
 
 /***** RESPONISVE VARIABLES *****/
 $breakpointDesktop: 1600px;
-$breakpointTablet: 1200px; // up to lg on bootstrap (1200px in Bootstrap 3)
-$breakpointTableMD: 992px; // sm to medium device (1200px in Bootstrap 3)
-$breakpointPhone: 767px; // up to sm on bootstrap
+$breakpointTablet: 1200px;
+$breakpointTableMD: 992px;
+$breakpointPhone: 767px;
 $breakpointExtraSmall: 320px;
 
 /***** MOBILE FIRST RESPONISVE VARIABLES *****/
@@ -23,7 +23,7 @@ $mobileFirstBreakpointPhone: 426px;
 
 /**** COLORS ***/
 $mainFontColor: #000;
-$darkBlue: #0063ca; // #3856D4
+$darkBlue: #0063ca;
 $newsBlue: #0065CC;
 $newsGray: #d2d4da;
 $tagsViolet: #9a6397;

@@ -30,7 +30,6 @@ if (file_exists($local_settings)) {
  */
 $settings['install_profile'] = 'minimal';
 
-
 /**
  * Configuration for Redis Cache
  *
