@@ -58,6 +58,7 @@
         "drupal/field_group": "^1.0",
         "drupal/file_entity": "^2.0@beta",
         "drupal/fontawesome": "^2.14",
+        "drupal/gatsby": "^1.0@beta",
         "drupal/image_style_warmer": "^1.0@beta",
         "drupal/imagick": "^1.2",
         "drupal/inline_entity_form": "^1.0@RC",
