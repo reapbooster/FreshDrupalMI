@@ -32,49 +32,58 @@ source:
       selector: id
     -
       name: name
-      label: title/name
+      label: 'title/name'
       selector: /attributes/name
     -
       name: description
-      label: title/name
+      label: 'Description'
       selector: /attributes/description
     -
       name: langcode
       label: Language
       selector: /attirbutes/langcode
     -
-      name: vid
-      label: 'Vocabulary Id'
-      selector: /relationships/vid
+      name: weight
+      label: Weight
+      selector: /attirbutes/weight
     -
       name: parent
       label: Parent
-      selector: /relationships/parent
+      selector: /relationships/parent/id
   ids:
     id:
       type: integer
-    uuid:
-      type: string
 process:
   tid: id
   uuid: uuid
   name: name
-  weight: weight
+  weight:
+    -
+      plugin: get
+      source: weight
+    -
+      plugin: default_value
+      default_value: 0
   description/value: description
   description/format: format
   vid:
-    plugin: migration
-    migration: taxonomy_vocabulary
-    source: vid
+    plugin: default_value
+    default_value: collections
   parent_id:
     -
       plugin: skip_on_empty
       method: process
       source: parent
     -
+      plugin: skip_on_value
+      method: process
+      value: 'virtual'
+      source: parent
+    -
       plugin: migration_lookup
-      migration: taxonomy_collections
+      migration: taxonomy_centers
+      source: parent
 destination:
   plugin: 'entity:taxonomy_term'
-  default_bundle: milken_tags
+  default_bundle: collections
 migration_dependencies: null
