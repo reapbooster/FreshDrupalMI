@@ -49,6 +49,12 @@ commands:
     options:
       working-directory: /var/www
 
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import --tag=taxonomy"
+    options:
+      working-directory: /var/www
+
   - command: "cache:rebuild"
     arguments:
       cache: all

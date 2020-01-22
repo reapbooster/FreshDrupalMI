@@ -11,6 +11,7 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
   - article
+  - node
 migration_group: milken
 label: 'Articles VIA JSON API'
 source:
@@ -83,18 +84,44 @@ source:
       label: 'Term Collection Taxonomy'
       selector: /relationships/field_term_collection
     -
+      name: term_collection_tax_id
+      label: 'Term Collection Taxonomy ID'
+      selector: /relationships/field_term_collection_id
+    -
       name: program_initiatives_tax
       label: 'Program Initiatives Taxonomy'
       selector: /relationships/field_term_program_initiatives
     -
+      name: program_initiatives_tax_id
+      label: 'Program Initiatives Taxonomy ID'
+      selector: /relationships/field_term_program_initiatives/id
+    -
+      name: topics_tax
+      label: 'Topics Taxonomy'
+      selector: /relationships/field_topics
+    -
+      name: topics_tax_id
+      label: 'Topics Taxonomy ID'
+      selector: /relationships/field_topics/id
+    -
       name: centers_tax
       label: 'Centers Taxonomy'
       selector: /relationships/field_centers_general
+    -
+      name: centers_tax_id
+      label: 'Centers Taxonomy ID'
+      selector: /relationships/field_centers_general/id
+    -
+      name: pdf_file
+      label: "Pdf File"
+      selector: /relationships/field_ar_pdf_file
+
   ids:
     id:
       type: integer
     uuid:
       type: string
+
 process:
   title: name
   uuid: uuid
@@ -114,6 +141,7 @@ process:
       plugin: 'milken_migrate:body_embed'
       source: body_value
   body/format: body_format
+  path/alias: path
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -134,7 +162,7 @@ process:
       plugin: skip_on_value
       method: process
       value: 'missing'
-      source: centers_tax/id
+      source: centers_tax_id
     -
       plugin: migration_lookup
       migration: taxonomy_centers
@@ -148,7 +176,7 @@ process:
       plugin: skip_on_value
       method: process
       value: 'missing'
-      source: term_collection_tax/id
+      source: term_collection_tax_id
     -
       plugin: migration_lookup
       migration: taxonomy_centers
@@ -162,7 +190,7 @@ process:
       plugin: skip_on_value
       method: process
       value: 'missing'
-      source: program_initiatives_tax/id
+      source: program_initiatives_tax_id
     -
       plugin: migration_lookup
       migration: taxonomy_program_initiatives
