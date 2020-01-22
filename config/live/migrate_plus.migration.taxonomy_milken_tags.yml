@@ -50,6 +50,11 @@ source:
       name: parent
       label: Parent
       selector: /relationships/parent
+  ids:
+    id:
+      type: integer
+    uuid:
+      type: string
 process:
   tid: id
   uuid: uuid

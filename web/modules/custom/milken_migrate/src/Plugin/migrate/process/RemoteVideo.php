@@ -50,8 +50,8 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
       // $source = $row->getSource();
       if (!empty($value)) {
         $video_url = str_replace('https://www.youtube.com/embed/', 'https://youtu.be/', $value);
-        \Drupal::logger('milken_migrate')
-          ->info(\Kint::dump($video_url));
+        // \Drupal::logger('milken_migrate')
+        // ->info(\Kint::dump($video_url));
         $row->setDestinationProperty($destination_property, $video_url);
         return $video_url;
       }

@@ -54,6 +54,11 @@ source:
       name: status
       table: Status
       selector: attributes/status
+  ids:
+    id:
+      type: integer
+    uuid:
+      type: string
 process:
   vid: id
   uuid: uuid
