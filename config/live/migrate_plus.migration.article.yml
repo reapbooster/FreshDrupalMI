@@ -157,13 +157,8 @@ process:
       method: process
       source: centers_tax
     -
-      plugin: skip_on_value
-      method: process
-      value: missing
-      source: centers_tax_id
-    -
-      plugin: migration_lookup
-      migration: taxonomy_centers
+      plugin: jsonapi_taxonomy
+      vocabulary: centers
       source: centers_tax
   field_term_collection:
     -
@@ -171,13 +166,8 @@ process:
       method: process
       source: term_collection_tax
     -
-      plugin: skip_on_value
-      method: process
-      value: missing
-      source: term_collection_tax_id
-    -
-      plugin: migration_lookup
-      migration: taxonomy_centers
+      plugin: jsonapi_taxonomy
+      vocabulary: collections
       source: term_collection_tax
   field_term_program_initiatives:
     -
@@ -185,13 +175,8 @@ process:
       method: process
       source: program_initiatives_tax
     -
-      plugin: skip_on_value
-      method: process
-      value: missing
-      source: program_initiatives_tax_id
-    -
-      plugin: migration_lookup
-      migration: taxonomy_program_initiatives
+      plugin: jsonapi_taxonomy
+      vocabulary: program_initiatives
       source: program_initiatives_tax
 destination:
   plugin: 'entity:node'

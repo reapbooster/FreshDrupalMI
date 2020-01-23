@@ -163,42 +163,30 @@ process:
       plugin: skip_on_empty
       method: process
       source: centers_tax
+      message: 'Empty Reference.'
     -
-      plugin: skip_on_value
-      method: process
-      value: missing
-      source: centers_tax/id
-    -
-      plugin: migration_lookup
-      migration: taxonomy_centers
+      plugin: jsonapi_taxonomy
+      vocabulary: centers
       source: centers_tax
   field_term_collection:
     -
       plugin: skip_on_empty
       method: process
       source: term_collection_tax
+      message: 'Empty Reference.'
     -
-      plugin: skip_on_value
-      method: process
-      value: missing
-      source: term_collection_tax/id
-    -
-      plugin: migration_lookup
-      migration: taxonomy_centers
+      plugin: jsonapi_taxonomy
+      vocabulary: collections
       source: term_collection_tax
   field_term_program_initiatives:
     -
       plugin: skip_on_empty
       method: process
       source: program_initiatives_tax
+      message: 'Empty Reference.'
     -
-      plugin: skip_on_value
-      method: process
-      value: missing
-      source: program_initiatives_tax/id
-    -
-      plugin: migration_lookup
-      migration: taxonomy_program_initiatives
+      plugin: jsonapi_taxonomy
+      vocabulary: program_initiatives
       source: program_initiatives_tax
   field_event_reference:
     plugin: migration_lookup
