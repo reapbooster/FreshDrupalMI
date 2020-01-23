@@ -11,6 +11,7 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
   - video
+  - media
 migration_group: milken
 label: 'Video VIA JSON API'
 source:
@@ -94,15 +95,48 @@ source:
       name: path
       label: Path
       selector: /attributes/path/alias
+    -
+      name: term_collection_tax
+      label: 'Term Collection Taxonomy'
+      selector: /relationships/field_term_collection
+    -
+      name: term_collection_tax_id
+      label: 'Term Collection Taxonomy ID'
+      selector: /relationships/field_term_collection_id
+    -
+      name: program_initiatives_tax
+      label: 'Program Initiatives Taxonomy'
+      selector: /relationships/field_term_program_initiatives
+    -
+      name: program_initiatives_tax_id
+      label: 'Program Initiatives Taxonomy ID'
+      selector: /relationships/field_term_program_initiatives/id
+    -
+      name: topics_tax
+      label: 'Topics Taxonomy'
+      selector: /relationships/field_topics
+    -
+      name: topics_tax_id
+      label: 'Topics Taxonomy ID'
+      selector: /relationships/field_topics/id
+    -
+      name: centers_tax
+      label: 'Centers Taxonomy'
+      selector: /relationships/field_centers_general
+    -
+      name: centers_tax_id
+      label: 'Centers Taxonomy ID'
+      selector: /relationships/field_centers_general/id
   ids:
     id:
       type: integer
     uuid:
       type: string
 process:
+  mid: id
+  uuid: uuid
   name: name
   title: name
-  uuid: uuid
   bundle:
     plugin: default_value
     default_value: video
@@ -133,6 +167,36 @@ process:
     -
       plugin: 'milken_migrate:remote_video'
       source: video_url
+  field_centers:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: centers_tax
+      message: 'Empty Reference.'
+    -
+      plugin: jsonapi_taxonomy
+      vocabulary: centers
+      source: centers_tax
+  field_term_collection:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: term_collection_tax
+      message: 'Empty Reference.'
+    -
+      plugin: jsonapi_taxonomy
+      vocabulary: collections
+      source: term_collection_tax
+  field_term_program_initiatives:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: program_initiatives_tax
+      message: 'Empty Reference.'
+    -
+      plugin: jsonapi_taxonomy
+      vocabulary: program_initiatives
+      source: program_initiatives_tax
 destination:
   plugin: 'entity:media'
   default_bundle: video

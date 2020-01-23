@@ -3,11 +3,25 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video.field_body
+    - field.field.media.video.field_centers
+    - field.field.media.video.field_event_reference
     - field.field.media.video.field_media_oembed_video
+    - field.field.media.video.field_meta_tags
+    - field.field.media.video.field_program_initiatives
+    - field.field.media.video.field_related_event
+    - field.field.media.video.field_speakers
+    - field.field.media.video.field_subheader
+    - field.field.media.video.field_term_collection
+    - field.field.media.video.field_thumbnail
+    - field.field.media.video.field_topics
     - media.type.video
   module:
+    - file
     - media
+    - metatag
     - path
+    - text
 id: media.video.default
 targetEntityType: media
 bundle: video
@@ -15,18 +29,119 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_body:
+    type: text_textarea_with_summary
+    weight: 4
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_centers:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_event_reference:
+    type: entity_reference_autocomplete
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_media_oembed_video:
     type: oembed_textfield
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     region: content
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_program_initiatives:
+    type: entity_reference_autocomplete
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_related_event:
+    type: entity_reference_autocomplete
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_speakers:
+    type: entity_reference_autocomplete
+    weight: 13
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_subheader:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_term_collection:
+    type: entity_reference_autocomplete
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_thumbnail:
+    type: file_generic
+    weight: 16
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_topics:
+    type: entity_reference_autocomplete
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -34,9 +149,17 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -44,12 +167,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 100
+    weight: 7
     region: content
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -57,15 +180,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  field_body: true
-  field_event_reference: true
-  field_meta_tags: true
-  field_program_initiatives: true
-  field_related_event: true
-  field_speakers: true
-  field_subheader: true
-  field_term_collection: true
-  field_thumbnail: true
-  field_topics: true
-  name: true
+hidden: {  }

@@ -17,3 +17,11 @@ bootstrap_cdn:
   css:
     component:
       //stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css: {}
+
+react_landing_page:
+  versino: 1.0
+  js:
+    js/react_landing_page.js: {}
+  css:
+    component:
+      css/react_landing_page.css: {}

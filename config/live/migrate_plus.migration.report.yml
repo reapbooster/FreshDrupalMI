@@ -1,26 +1,26 @@
-uuid: 07b1d26d-8676-40f9-abfe-701e4d9191de
+uuid: c008ebdd-ef3e-42ad-9aa5-896838116889
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - milken_migrate
-id: article
+id: report
 class: null
 field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
-  - article
+  - report
   - node
 migration_group: milken
-label: 'Articles VIA JSON API'
+label: 'Report content type VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milkeninstitute.org/jsonapi/node/article'
+  urls: 'https://milkeninstitute.org/jsonapi/node/report'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
   jsonapi_host: 'https://milkeninstitute.org'
-  jsonapi_endpoint: /jsonapi/node/article
+  jsonapi_endpoint: /jsonapi/node/report
   item_selector: data
   fields:
     -
@@ -72,13 +72,25 @@ source:
       label: Sticky
       selector: /attributes/sticky
     -
-      name: hero_title
-      label: 'Hero Title'
-      selector: /attributes/field_ar_hero_title
+      name: cover_image
+      label: 'Cover Image'
+      selector: /relationships/field_cover_image
+    -
+      name: report_content
+      label: 'Body Content Alternative'
+      selector: /relationships/field_rp_content
+    -
+      name: event_reference
+      label: 'Event Reference'
+      selector: /relationships/field_event_reference
     -
       name: hero_image
       label: 'Hero Image'
-      selector: /relationships/field_ar_hero_image
+      selector: /relationships/field_rp_hero_image
+    -
+      name: pdf_file
+      label: 'PDF File'
+      selector: /relationships/field_rp_pdf_file
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'
@@ -111,21 +123,16 @@ source:
       name: centers_tax_id
       label: 'Centers Taxonomy ID'
       selector: /relationships/field_centers_general/id
-    -
-      name: pdf_file
-      label: 'Pdf File'
-      selector: /relationships/field_ar_pdf_file
   ids:
     id:
       type: integer
     uuid:
       type: string
 process:
+  nid: id
   title: name
   uuid: uuid
-  langcode:
-    plugin: default_value
-    default_value: en
+  langcode: langcode
   sticky: sticky
   promote: promote
   status:
@@ -134,12 +141,12 @@ process:
   uid:
     plugin: default_value
     default_value: 2
+  path/alias: path
   body/value:
     -
       plugin: 'milken_migrate:body_embed'
       source: body_value
   body/format: body_format
-  path/alias: path
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -147,7 +154,7 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
   field_hero_title: hero_title
-  field_hero_image:
+  field_cover_image:
     -
       plugin: 'milken_migrate:remote_image'
       source: hero_image
@@ -156,6 +163,7 @@ process:
       plugin: skip_on_empty
       method: process
       source: centers_tax
+      message: 'Empty Reference.'
     -
       plugin: jsonapi_taxonomy
       vocabulary: centers
@@ -165,6 +173,7 @@ process:
       plugin: skip_on_empty
       method: process
       source: term_collection_tax
+      message: 'Empty Reference.'
     -
       plugin: jsonapi_taxonomy
       vocabulary: collections
@@ -174,11 +183,16 @@ process:
       plugin: skip_on_empty
       method: process
       source: program_initiatives_tax
+      message: 'Empty Reference.'
     -
       plugin: jsonapi_taxonomy
       vocabulary: program_initiatives
       source: program_initiatives_tax
+  field_event_reference:
+    plugin: migration_lookup
+    migration: event
+    source: event_reference
 destination:
   plugin: 'entity:node'
-  default_bundle: article
+  default_bundle: report
 migration_dependencies: {  }

@@ -29,6 +29,16 @@ third_party_settings:
               id: 'extra_field_block:node:landing_page:links'
             additional: {  }
             weight: 0
+          b802917b-1754-474e-88a5-aa662bfc5f88:
+            uuid: b802917b-1754-474e-88a5-aa662bfc5f88
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'extra_field_block:node:landing_page:links'
+            additional: {  }
+            weight: 1
         third_party_settings: {  }
 id: node.landing_page.full
 targetEntityType: node

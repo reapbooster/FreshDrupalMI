@@ -49,6 +49,24 @@ commands:
     options:
       working-directory: /var/www
 
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import --tag=taxonomy"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import video"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import article"
+    options:
+      working-directory: /var/www
+
   - command: "cache:rebuild"
     arguments:
       cache: all
