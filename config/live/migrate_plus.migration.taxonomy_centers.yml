@@ -15,11 +15,11 @@ migration_group: milken
 label: 'Taxonomy Term => Centers VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milkeninstitute.org/jsonapi/taxonomy_term/milken_tags'
+  urls: 'https://milkeninstitute.org/jsonapi/taxonomy_term/centers'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
   jsonapi_host: 'https://milkeninstitute.org'
-  jsonapi_endpoint: /jsonapi/taxonomy_term/milken_tags
+  jsonapi_endpoint: /jsonapi/taxonomy_term/centers
   item_selector: data
   fields:
     -
@@ -32,11 +32,11 @@ source:
       selector: id
     -
       name: name
-      label: 'title/name'
+      label: title/name
       selector: /attributes/name
     -
       name: description
-      label: 'Description'
+      label: Description
       selector: /attributes/description
     -
       name: langcode
@@ -66,7 +66,6 @@ process:
     -
       plugin: default_value
       default_value: 0
-
   description/value: description
   description/format: format
   vid:
@@ -80,7 +79,7 @@ process:
     -
       plugin: skip_on_value
       method: process
-      value: 'virtual'
+      value: virtual
       source: parent
     -
       plugin: migration_lookup

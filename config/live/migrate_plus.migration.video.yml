@@ -172,46 +172,49 @@ process:
       plugin: skip_on_empty
       method: process
       source: centers_tax
+      message: 'Empty Reference.'
     -
       plugin: skip_on_value
       method: process
-      value: 'missing'
+      value: missing
       source: program_initiatives_tax_id
+      message: 'Missing Reference.'
     -
       plugin: migration_lookup
       migration: taxonomy_centers
       source: centers_tax
-
   field_term_collection:
     -
       plugin: skip_on_empty
       method: process
       source: term_collection_tax
+      message: 'Empty Reference.'
     -
       plugin: skip_on_value
       method: process
-      value: 'missing'
-      source: term_collection_tax/id
+      value: missing
+      source: term_collection_tax
+      message: 'Missing Reference.'
     -
       plugin: migration_lookup
       migration: taxonomy_centers
       source: term_collection_tax
-
   field_term_program_initiatives:
     -
       plugin: skip_on_empty
       method: process
       source: program_initiatives_tax
+      message: 'Empty Reference.'
     -
       plugin: skip_on_value
       method: process
-      value: 'missing'
-      source: program_initiatives_tax/id
+      value: missing
+      source: program_initiatives_tax_id
+      message: 'Missing Reference.'
     -
       plugin: migration_lookup
       migration: taxonomy_program_initiatives
       source: program_initiatives_tax
-
 destination:
   plugin: 'entity:media'
   default_bundle: video

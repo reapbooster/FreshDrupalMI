@@ -32,11 +32,11 @@ source:
       selector: id
     -
       name: name
-      label: 'title/name'
+      label: title/name
       selector: /attributes/name
     -
       name: description
-      label: 'Description'
+      label: Description
       selector: /attributes/description
     -
       name: langcode
@@ -77,7 +77,7 @@ process:
     -
       plugin: skip_on_value
       method: process
-      value: 'virtual'
+      value: virtual
       source: parent
     -
       plugin: migration_lookup

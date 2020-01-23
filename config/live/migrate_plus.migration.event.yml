@@ -73,59 +73,59 @@ source:
       selector: /attributes/sticky
     -
       name: event_address
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address
     -
       name: event_address_langcode
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/langcode
     -
       name: event_address_country
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/country_code
     -
       name: event_address_langcode
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/langcode
     -
       name: event_address_aa
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/administrative_area
     -
       name: event_address_locality
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/locality
     -
       name: event_address_dependent_locality
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/dependent_locality
     -
       name: event_address_postal_code
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/postal_code
     -
       name: event_address_sorting_code
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/sorting_code
     -
       name: event_address_address_line1
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/address_line1
     -
       name: event_address_address_line2
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/address_line2
     -
       name: event_address_dependent_organization
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/organization
     -
       name: event_address_additional_name
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/additional_name
     -
       name: event_address_family_name
-      label: "Event Address"
+      label: 'Event Address'
       selector: /attributes/field_event_address/family_name
     -
       name: hero_title
@@ -203,18 +203,6 @@ process:
       plugin: 'milken_migrate:remote_image'
       source: hero_image
   field_event_location: event_address
-  #field_event_location/langcode: event_address_langcode
-  #field_event_location/country_code: event_address_country
-  #field_event_location/administrative_area: event_address_aa
-  #field_event_location/locality: event_address_locality
-  #field_event_location/dependent_locality: event_address_dependent_locality
-  #field_event_location/country_postal_code: event_address_postal_code
-  #field_event_location/address_line1: event_address_address_line1
-  #field_event_location/address_line2: event_address_address_line2
-  #field_event_location/given_name: event_address_given_name
-  #field_event_location/additional_name: event_address_additional_name
-  #field_event_location/family_name: event_address_family_name
-
   field_centers_general:
     -
       plugin: skip_on_empty
@@ -223,7 +211,7 @@ process:
     -
       plugin: skip_on_value
       method: process
-      value: 'missing'
+      value: missing
       source: centers_tax/id
     -
       plugin: migration_lookup
@@ -237,7 +225,7 @@ process:
     -
       plugin: skip_on_value
       method: process
-      value: 'missing'
+      value: missing
       source: term_collection_tax/id
     -
       plugin: migration_lookup
@@ -251,7 +239,7 @@ process:
     -
       plugin: skip_on_value
       method: process
-      value: 'missing'
+      value: missing
       source: program_initiatives_tax/id
     -
       plugin: migration_lookup
