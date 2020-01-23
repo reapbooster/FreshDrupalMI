@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\article_migrate\Plugin\migrate\process\TextToTaxonomy.
- */
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
