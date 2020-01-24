@@ -65,6 +65,7 @@
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jsonapi_include": "^1.2",
         "drupal/kint": "^2.1",
+        "drupal/layout_builder_styles": "^1.0@beta",
         "drupal/markdown": "^1.2",
         "drupal/masquerade": "^2.0@beta",
         "drupal/media_entity_browser": "^2.0@alpha",
