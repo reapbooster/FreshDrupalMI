@@ -1,4 +1,4 @@
-uuid: 3bbf21af-f7eb-4306-af42-6bebef45454a
+uuid: 28edcb09-ef58-4b97-a296-2ee1df6b8eba
 langcode: en
 status: true
 dependencies:
@@ -19,8 +19,8 @@ third_party_settings:
         layout_settings:
           label: ''
         components:
-          1e9d8c6e-8358-405c-b70f-77d80189c114:
-            uuid: 1e9d8c6e-8358-405c-b70f-77d80189c114
+          aeb7cb85-a8c6-4666-bbdc-63269b05d313:
+            uuid: aeb7cb85-a8c6-4666-bbdc-63269b05d313
             region: content
             configuration:
               label_display: '0'
@@ -34,23 +34,6 @@ third_party_settings:
                 third_party_settings: {  }
             additional: {  }
             weight: 0
-          c5b8c516-cbb4-4e3c-9f49-2d7564b1d767:
-            uuid: c5b8c516-cbb4-4e3c-9f49-2d7564b1d767
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:taxonomy_term:centers:langcode'
-              formatter:
-                type: language
-                label: above
-                settings:
-                  link_to_entity: false
-                  native_language: false
-                third_party_settings: {  }
-            additional: {  }
-            weight: 1
         third_party_settings: {  }
 id: taxonomy_term.centers.default
 targetEntityType: taxonomy_term
@@ -64,15 +47,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  langcode:
-    type: language
-    weight: 1
-    region: content
-    label: above
-    settings:
-      link_to_entity: false
-      native_language: false
-    third_party_settings: {  }
 hidden:
+  langcode: true
   layout_builder__layout: true
   search_api_excerpt: true

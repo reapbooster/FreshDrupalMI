@@ -1,0 +1,58 @@
+uuid: ce853457-6ff6-48c0-9cc2-7800bca26303
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.token
+    - field.field.media.video.field_body
+    - field.field.media.video.field_centers
+    - field.field.media.video.field_event_reference
+    - field.field.media.video.field_media_oembed_video
+    - field.field.media.video.field_meta_tags
+    - field.field.media.video.field_program_initiatives
+    - field.field.media.video.field_related_event
+    - field.field.media.video.field_speakers
+    - field.field.media.video.field_subheader
+    - field.field.media.video.field_term_collection
+    - field.field.media.video.field_thumbnail
+    - field.field.media.video.field_topics
+    - media.type.video
+  module:
+    - layout_builder
+    - media
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: media.video.token
+targetEntityType: media
+bundle: video
+mode: token
+content:
+  field_media_oembed_video:
+    type: oembed
+    label: visually_hidden
+    weight: 0
+    settings:
+      max_width: 0
+      max_height: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_body: true
+  field_centers: true
+  field_event_reference: true
+  field_meta_tags: true
+  field_program_initiatives: true
+  field_related_event: true
+  field_speakers: true
+  field_subheader: true
+  field_term_collection: true
+  field_thumbnail: true
+  field_topics: true
+  langcode: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

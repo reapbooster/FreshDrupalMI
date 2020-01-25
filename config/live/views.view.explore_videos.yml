@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - media.type.video
+    - taxonomy.vocabulary.centers
   module:
     - media
     - rest
     - serialization
+    - taxonomy
     - user
 id: explore_videos
 label: 'Explore Videos'
@@ -173,6 +175,112 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
+      tags: {  }
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: Block
+    position: 3
+    display_options:
+      display_extenders: {  }
+      block_description: 'Videos By Tag'
+      filters:
+        status:
+          value: '1'
+          table: media_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: media
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        bundle:
+          id: bundle
+          table: media_field_data
+          field: bundle
+          value:
+            video: video
+          entity_type: media
+          entity_field: bundle
+          plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+        field_centers_target_id:
+          id: field_centers_target_id
+          table: media__field_centers
+          field: field_centers_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_centers_target_id_op
+            label: 'Centers (field_centers)'
+            description: ''
+            use_operator: false
+            operator: field_centers_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_centers_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_creator: '0'
+              editors: '0'
+              staff_creator: '0'
+              staff_reviewer: '0'
+              team_creator: '0'
+              team_reviewer: '0'
+              sponsor_page_creator: '0'
+              sponsor_page_reviewer: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: textfield
+          limit: true
+          vid: centers
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+      defaults:
+        filters: false
+        filter_groups: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
         - user.permissions
       tags: {  }
   page_1:
