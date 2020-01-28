@@ -33,7 +33,7 @@ class OEmbedThumbnailUri extends FormatterBase {
       // should equal the output, including newlines.
       $elements[$delta] = [
         '#type' => 'inline_template',
-        '#template' => '<img src="{{ file_url(value) }}" width="100%" height="auto" />',
+        '#template' => '<img src="{{ file_url(value) }}" class="img-fluid" />',
         '#context' => ['value' => $item->value],
       ];
     }

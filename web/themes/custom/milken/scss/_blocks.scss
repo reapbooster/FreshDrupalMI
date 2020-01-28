@@ -15,13 +15,18 @@
       font-family: $headings-font-family;
       font-size: 17px;
     }
-    .field--name-name, .field--name-created {
+    .field--name-field-thumbnail-uri { }
+    .field--name-name {
       margin: 10px;
+      min-height: 80px;
     }
     .field--name-created {
+      margin: 10px;
       color: #999AA3;
       font-family: 'LatoWeb', serif;
       font-size: 10px;
     }
   }
 }
+
+
