@@ -181,10 +181,54 @@ display:
         - url
         - user.permissions
       tags: {  }
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: generic_videos_bloack
+    position: 3
+    display_options:
+      display_extenders: {  }
+      arguments: {  }
+      defaults:
+        arguments: false
+        relationships: false
+        style: false
+        row: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+      relationships: {  }
+      style:
+        type: grid
+        options:
+          uses_fields: false
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: 'col-lg-3 col-sm-4'
+          row_class_default: false
+          row_class_custom: ''
+      row:
+        type: 'entity:media'
+        options:
+          relationship: none
+          view_mode: small
+      use_more: true
+      use_more_always: true
+      use_more_text: more
+      display_description: 'Generic Videos Block'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - user.permissions
+      tags: {  }
   explore_videos:
     display_plugin: block
     id: explore_videos
-    display_title: Block
+    display_title: taxonomy_page_block
     position: 3
     display_options:
       display_extenders: {  }
@@ -256,6 +300,7 @@ display:
       use_more: true
       use_more_always: true
       use_more_text: more
+      display_description: 'Block for Taxonomy Pages'
     cache_metadata:
       max-age: -1
       contexts:

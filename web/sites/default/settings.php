@@ -63,7 +63,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   }
 }
 
-$settings['default_content_deploy_content_directory'] = DRUPAL_ROOT . '../content';
+$settings['default_content_deploy_content_directory'] = 'modules/custom/milken_migrate/content';
 
 /**
  * Place the config directory outside of the Drupal root.

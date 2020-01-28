@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d340142182b7566d050a52e662e5031f",
+    "content-hash": "539e44838d1858099ea7e3135ea700f9",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4207,7 +4207,8 @@
                 },
                 "patches_applied": {
                     "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch",
-                    "Media sources should handle empty source field values more gracefully": "patches/3059950-36.patch"
+                    "Media sources should handle empty source field values more gracefully": "patches/3059950-36.patch",
+                    "Layout builder exports": "patches/layout_builder-export-content-2942975-67.patch"
                 }
             },
             "autoload": {
@@ -6780,6 +6781,66 @@
             }
         },
         {
+            "name": "drupal/layout_builder_restrictions",
+            "version": "2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_restrictions.git",
+                "reference": "8.x-2.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_restrictions-8.x-2.5.zip",
+                "reference": "8.x-2.5",
+                "shasum": "7f5e70e70011769c19989ff099ab0b09870bc27e"
+            },
+            "require": {
+                "drupal/core": "^8.6.0 || ^9"
+            },
+            "require-dev": {
+                "drupal/dashboards": "*",
+                "drupal/layout_library": "*",
+                "drupal/mini_layouts": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-2.5",
+                    "datestamp": "1578955383",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "eiriksm",
+                    "homepage": "https://www.drupal.org/user/1014468"
+                },
+                {
+                    "name": "mark_fullmer",
+                    "homepage": "https://www.drupal.org/user/2612816"
+                },
+                {
+                    "name": "twfahey",
+                    "homepage": "https://www.drupal.org/user/3403722"
+                }
+            ],
+            "description": "Manage which fields & layouts are available in Layout Builder",
+            "homepage": "https://www.drupal.org/project/layout_builder_restrictions",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_builder_restrictions"
+            }
+        },
+        {
             "name": "drupal/layout_builder_styles",
             "version": "1.0.0-beta1",
             "source": {
@@ -6836,6 +6897,69 @@
             "homepage": "https://www.drupal.org/project/layout_builder_styles",
             "support": {
                 "source": "https://git.drupalcode.org/project/layout_builder_styles"
+            }
+        },
+        {
+            "name": "drupal/layout_library",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_library.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_library-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "87f15b6efb4748d010282bffc30828c43793f57a"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1560804485",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "EclipseGc",
+                    "homepage": "https://www.drupal.org/user/61203"
+                },
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "samuel.mortenson",
+                    "homepage": "https://www.drupal.org/user/2582268"
+                },
+                {
+                    "name": "tim.plunkett",
+                    "homepage": "https://www.drupal.org/user/241634"
+                },
+                {
+                    "name": "xjm",
+                    "homepage": "https://www.drupal.org/user/65776"
+                }
+            ],
+            "description": "Provides a library of layouts for content-editors to select from",
+            "homepage": "https://www.drupal.org/project/layout_library",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_library"
             }
         },
         {
@@ -8314,7 +8438,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api_solr.git",
-                "reference": "cb651840607bb3635dc1c097b26421623c30e31b"
+                "reference": "f0ee0b2f4ab5c75dd08d0003bdeff335b9be4c43"
             },
             "require": {
                 "consolidation/annotated-command": "^2.12",
@@ -8404,7 +8528,7 @@
                 "issues": "https://www.drupal.org/project/issues/search_api_solr",
                 "irc": "https://drupalchat.me/channel/search"
             },
-            "time": "2020-01-02T15:16:38+00:00"
+            "time": "2020-01-28T14:01:05+00:00"
         },
         {
             "name": "drupal/select2",
@@ -16839,6 +16963,7 @@
         "drupal/image_style_warmer": 10,
         "drupal/inline_entity_form": 5,
         "drupal/layout_builder_styles": 10,
+        "drupal/layout_library": 10,
         "drupal/masquerade": 10,
         "drupal/media_entity_browser": 15,
         "drupal/media_migration": 15,

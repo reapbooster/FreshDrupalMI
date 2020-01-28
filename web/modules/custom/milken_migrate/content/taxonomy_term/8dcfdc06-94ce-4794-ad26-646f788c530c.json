@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/localhost:8080\/centers\/centerforpublichealth?_format=hal_json"
+            "href": "http:\/\/localhost:8080\/centers\/researchgroup?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/centers"
@@ -12,17 +12,17 @@
     },
     "tid": [
         {
-            "value": 132
+            "value": 264
         }
     ],
     "uuid": [
         {
-            "value": "bf0d6fa4-53a2-4436-8d84-277ec6a3881c"
+            "value": "8dcfdc06-94ce-4794-ad26-646f788c530c"
         }
     ],
     "revision_id": [
         {
-            "value": 10
+            "value": 28
         }
     ],
     "langcode": [
@@ -38,7 +38,7 @@
     ],
     "revision_created": [
         {
-            "value": "2020-01-28T18:59:13+00:00",
+            "value": "2020-01-28T19:14:56+00:00",
             "format": "Y-m-d\\TH:i:sP"
         }
     ],
@@ -50,7 +50,7 @@
     ],
     "name": [
         {
-            "value": "Center for Public Health",
+            "value": "Research Group",
             "lang": "en"
         }
     ],
@@ -90,15 +90,15 @@
     ],
     "path": [
         {
-            "alias": "\/centers\/centerforpublichealth",
-            "pid": 10,
+            "alias": "\/centers\/researchgroup",
+            "pid": 29,
             "langcode": "en",
             "lang": "en"
         }
     ],
     "machine_name": [
         {
-            "value": "center_for_public_health"
+            "value": "research_group"
         }
     ]
 }

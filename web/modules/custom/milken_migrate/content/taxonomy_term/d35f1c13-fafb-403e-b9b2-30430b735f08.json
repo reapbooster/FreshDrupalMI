@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/dev-milken-institute.pantheonsite.io\/taxonomy\/term\/198?_format=hal_json"
+            "href": "http:\/\/localhost:8080\/centers\/fastercures?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/centers"
@@ -20,6 +20,11 @@
             "value": "d35f1c13-fafb-403e-b9b2-30430b735f08"
         }
     ],
+    "revision_id": [
+        {
+            "value": 4
+        }
+    ],
     "langcode": [
         {
             "value": "en",
@@ -29,6 +34,12 @@
     "vid": [
         {
             "target_id": "centers"
+        }
+    ],
+    "revision_created": [
+        {
+            "value": "2020-01-28T18:59:13+00:00",
+            "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "status": [
@@ -45,7 +56,7 @@
     ],
     "weight": [
         {
-            "value": 8
+            "value": 0
         }
     ],
     "_embedded": {
@@ -55,7 +66,7 @@
     },
     "changed": [
         {
-            "value": "2019-09-17T18:54:12+00:00",
+            "value": "2020-01-28T19:14:56+00:00",
             "lang": "en",
             "format": "Y-m-d\\TH:i:sP"
         }
@@ -66,23 +77,28 @@
             "lang": "en"
         }
     ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
     "metatag": [
         {
-            "value": {
-                "title": "FasterCures | Milken Institute",
-                "twitter_cards_type": "summary_large_image",
-                "canonical_url": "http:\/\/dev-milken-institute.pantheonsite.io\/taxonomy\/term\/198",
-                "twitter_cards_site": "@MilkenInstitute",
-                "article_publisher": "https:\/\/www.facebook.com\/milkeninstitute\/"
-            }
+            "value": []
         }
     ],
     "path": [
         {
-            "alias": null,
-            "pid": null,
+            "alias": "\/centers\/fastercures",
+            "pid": 4,
             "langcode": "en",
             "lang": "en"
+        }
+    ],
+    "machine_name": [
+        {
+            "value": "fastercures"
         }
     ]
 }
