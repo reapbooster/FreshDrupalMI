@@ -27,12 +27,6 @@ commands:
     options:
       working-directory: /var/www
 
-  - command: 'exec'
-    arguments:
-      bin: "drush config:set language.entity.en uuid 841ae596-b487-4051-afb1-c6eb1dd4bb1e --yes"
-    options:
-      working-directory: /var/www
-
   - command: "module:install"
     options:
       uri: "http://default"
@@ -51,24 +45,6 @@ commands:
   - command: "exec"
     arguments:
       bin: "drush config-split:import --yes"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import --tag=taxonomy"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import video"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import article"
     options:
       working-directory: /var/www
 
