@@ -7,6 +7,7 @@ dependencies:
     - field.field.media.video.field_body
     - field.field.media.video.field_centers
     - field.field.media.video.field_event_reference
+    - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
     - field.field.media.video.field_program_initiatives
@@ -14,8 +15,11 @@ dependencies:
     - field.field.media.video.field_speakers
     - field.field.media.video.field_subheader
     - field.field.media.video.field_term_collection
-    - field.field.media.video.field_thumbnail
+    - field.field.media.video.field_thumbnail_uri
     - field.field.media.video.field_topics
+    - field.field.media.video.field_video_height
+    - field.field.media.video.field_video_width
+    - field.field.media.video.field_width
     - media.type.video
   module:
     - layout_builder
@@ -43,14 +47,18 @@ hidden:
   field_body: true
   field_centers: true
   field_event_reference: true
+  field_height: true
   field_meta_tags: true
   field_program_initiatives: true
   field_related_event: true
   field_speakers: true
   field_subheader: true
   field_term_collection: true
-  field_thumbnail: true
+  field_thumbnail_uri: true
   field_topics: true
+  field_video_height: true
+  field_video_width: true
+  field_width: true
   langcode: true
   name: true
   search_api_excerpt: true

@@ -1,0 +1,25 @@
+
+
+
+.block-views-blockexplore-videos-explore-videos {
+  background-color: $backgroundGrey;
+  h2 {
+    padding: 20px;
+  }
+  .video-small {
+    background-color: $white;
+    padding-bottom: 10px;
+    h5 {
+      font-family: $headings-font-family;
+      font-size: 17px;
+    }
+    .field--name-name, .field--name-created {
+      margin: 10px;
+    }
+    .field--name-created {
+      color: #999AA3;
+      font-family: 'LatoWeb', serif;
+      font-size: 10px;
+    }
+  }
+}

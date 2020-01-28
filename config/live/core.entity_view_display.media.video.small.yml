@@ -7,6 +7,7 @@ dependencies:
     - field.field.media.video.field_body
     - field.field.media.video.field_centers
     - field.field.media.video.field_event_reference
+    - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
     - field.field.media.video.field_program_initiatives
@@ -14,111 +15,91 @@ dependencies:
     - field.field.media.video.field_speakers
     - field.field.media.video.field_subheader
     - field.field.media.video.field_term_collection
-    - field.field.media.video.field_thumbnail
+    - field.field.media.video.field_thumbnail_uri
     - field.field.media.video.field_topics
+    - field.field.media.video.field_video_height
+    - field.field.media.video.field_video_width
+    - field.field.media.video.field_width
     - media.type.video
   module:
+    - element_class_formatter
+    - field_group
     - layout_builder
-    - layout_discovery
-    - media
+    - milken_base
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          663ea8b1-d718-442f-81ef-c59d16dc42f5:
-            uuid: 663ea8b1-d718-442f-81ef-c59d16dc42f5
-            region: content
-            configuration:
-              id: 'field_block:media:video:field_media_oembed_video'
-              label: 'Remote video URL'
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: visually_hidden
-                type: oembed
-                settings:
-                  max_width: 0
-                  max_height: 0
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 0
-          3901cebc-bf79-4a6f-aac3-a09bf85269ef:
-            uuid: 3901cebc-bf79-4a6f-aac3-a09bf85269ef
-            region: content
-            configuration:
-              id: 'field_block:media:video:name'
-              label: Name
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: string
-                settings:
-                  link_to_entity: true
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 1
-          7cd627d5-23e3-483d-ac52-8e527e145ef6:
-            uuid: 7cd627d5-23e3-483d-ac52-8e527e145ef6
-            region: content
-            configuration:
-              id: 'field_block:media:video:field_subheader'
-              label: Subheader
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: string
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 2
-        third_party_settings: {  }
+    enabled: false
+  field_group:
+    group_small_thumbnail:
+      children:
+        - field_thumbnail_uri
+        - name
+        - created
+      parent_name: ''
+      weight: 20
+      format_type: html_element
+      format_settings:
+        label: 'Small Thumbnail'
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: video-small
+      label: 'Small Thumbnail'
 id: media.video.small
 targetEntityType: media
 bundle: video
 mode: small
 content:
-  field_media_oembed_video:
-    type: oembed
-    label: visually_hidden
-    weight: 0
-    settings:
-      max_width: 0
-      max_height: 0
-    third_party_settings: {  }
+  created:
+    type: timestamp
+    weight: 2
     region: content
+    label: hidden
+    settings:
+      date_format: long
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  field_thumbnail_uri:
+    type: oembed_thumbnail_uri
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: wrapper_class
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_class: ''
+      tag: h5
+      class: ''
+      link: false
+    third_party_settings: {  }
 hidden:
-  created: true
   field_body: true
   field_centers: true
   field_event_reference: true
+  field_height: true
+  field_media_oembed_video: true
   field_meta_tags: true
   field_program_initiatives: true
   field_related_event: true
   field_speakers: true
   field_subheader: true
   field_term_collection: true
-  field_thumbnail: true
   field_topics: true
+  field_video_height: true
+  field_video_width: true
+  field_width: true
   langcode: true
-  name: true
   search_api_excerpt: true
   thumbnail: true
   uid: true
