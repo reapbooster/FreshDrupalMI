@@ -1,7 +1,7 @@
 react_landing_page:
   label: 'React Landing Page'
   category: milken
-  template: 'templates/react-landing-page'
+  template: '/templates/react-landing-page'
   libraries: milken/react_landing_page
   default_region: main
   regions:

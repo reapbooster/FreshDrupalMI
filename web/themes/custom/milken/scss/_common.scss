@@ -12,10 +12,7 @@ html {
 body {
   overflow-y: hidden;
 }
-h1 {
-  font-family: 'LatoWebBold';
-  font-size: 45px;
-}
+
 .hide-from-tablet {
   @media (max-width: $breakpointTablet) {
     display: none;
@@ -37,3 +34,6 @@ h1 {
 }
 
 
+.block-views-blockslideshow-block-1 {
+  border: 1px solid #dfdfdf;
+}

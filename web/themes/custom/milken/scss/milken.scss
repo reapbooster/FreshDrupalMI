@@ -1,6 +1,6 @@
 
 /**
- * Boostrap includes are included from the /libraries folder
+ * Bootstrap includes are included from the /libraries folder
  * includes WITHOUT the prefix are included from the theme folder locally
  */
 
@@ -16,7 +16,7 @@
 
 
 /* override bootstrap variables with local shit */
-@import "variables";
+@import "variables_milken";
 
 @import "libraries/bootstrap/scss/mixins";
 @import "libraries/bootstrap/scss/root";
@@ -59,6 +59,7 @@
 
 @import "mixins";
 @import "common";
+@import "blocks";
 @import "header";
 @import "footer";
 

@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/dev-milken-institute.pantheonsite.io\/taxonomy\/term\/211?_format=hal_json"
+            "href": "http:\/\/localhost:8080\/centers\/asiacenter?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/centers"
@@ -31,6 +31,12 @@
             "target_id": "centers"
         }
     ],
+    "revision_created": [
+        {
+            "value": "2020-01-28T18:59:13+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
     "status": [
         {
             "value": true,
@@ -55,7 +61,7 @@
     },
     "changed": [
         {
-            "value": "2019-06-04T04:29:54+00:00",
+            "value": "2020-01-28T20:09:49+00:00",
             "lang": "en",
             "format": "Y-m-d\\TH:i:sP"
         }
@@ -66,23 +72,82 @@
             "lang": "en"
         }
     ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
     "metatag": [
         {
-            "value": {
-                "title": "Asia Center | Milken Institute",
-                "twitter_cards_type": "summary_large_image",
-                "canonical_url": "http:\/\/dev-milken-institute.pantheonsite.io\/taxonomy\/term\/211",
-                "twitter_cards_site": "@MilkenInstitute",
-                "article_publisher": "https:\/\/www.facebook.com\/milkeninstitute\/"
-            }
+            "value": []
         }
     ],
     "path": [
         {
-            "alias": null,
-            "pid": null,
+            "alias": "\/centers\/asiacenter",
+            "pid": 19,
             "langcode": "en",
             "lang": "en"
+        }
+    ],
+    "machine_name": [
+        {
+            "value": "asia_center"
+        }
+    ],
+    "layout_builder__layout": [
+        {
+            "section": {
+                "layout_id": "layout_onecol",
+                "layout_settings": {
+                    "label": "Hero"
+                },
+                "components": {
+                    "83ab99e6-925c-42d1-bfab-7519cdad92c0": {
+                        "uuid": "83ab99e6-925c-42d1-bfab-7519cdad92c0",
+                        "region": "content",
+                        "configuration": {
+                            "id": "views_block:slideshow-block_1",
+                            "label": "",
+                            "provider": "views",
+                            "label_display": "visible",
+                            "views_label": "",
+                            "items_per_page": "3",
+                            "context_mapping": []
+                        },
+                        "additional": [],
+                        "weight": 0
+                    }
+                },
+                "third_party_settings": []
+            }
+        },
+        {
+            "section": {
+                "layout_id": "layout_onecol",
+                "layout_settings": {
+                    "label": ""
+                },
+                "components": {
+                    "5adbe7d5-f099-4c88-a2fe-c622633c0375": {
+                        "uuid": "5adbe7d5-f099-4c88-a2fe-c622633c0375",
+                        "region": "content",
+                        "configuration": {
+                            "id": "views_block:explore_videos-explore_videos",
+                            "label": "",
+                            "provider": "views",
+                            "label_display": "visible",
+                            "views_label": "",
+                            "items_per_page": "4",
+                            "context_mapping": []
+                        },
+                        "additional": [],
+                        "weight": 0
+                    }
+                },
+                "third_party_settings": []
+            }
         }
     ]
 }

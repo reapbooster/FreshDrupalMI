@@ -9,71 +9,83 @@ dependencies:
     - field.field.node.article.field_hero_image
     - field.field.node.article.field_hero_subtitle
     - field.field.node.article.field_hero_title
+    - field.field.node.article.field_meta_tags
     - field.field.node.article.field_topics
+    - image.style.medium
     - node.type.article
   module:
+    - ds
+    - element_class_formatter
     - layout_builder
-    - layout_discovery
-    - text
+    - media
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          2d6431f4-5006-4c01-bb01-86e88a6f1c0c:
-            uuid: 2d6431f4-5006-4c01-bb01-86e88a6f1c0c
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'extra_field_block:node:article:links'
-            additional: {  }
-            weight: 0
-          f9b3f9eb-f768-4ede-9031-c5d189fc7422:
-            uuid: f9b3f9eb-f768-4ede-9031-c5d189fc7422
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:body'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
-            additional: {  }
-            weight: 1
-        third_party_settings: {  }
+    enabled: false
+  ds:
+    layout:
+      id: ds_1col_wrapper
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+    regions:
+      ds_content:
+        - field_hero_image
+        - field_hero_title
+        - field_hero_subtitle
+        - links
 id: node.article.small_tile
 targetEntityType: node
 bundle: article
 mode: small_tile
 content:
-  body:
+  field_hero_image:
+    type: media_thumbnail
+    weight: 0
+    region: ds_content
     label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
+    settings:
+      image_style: medium
+      image_link: content
     third_party_settings: {  }
-    region: content
+  field_hero_subtitle:
+    type: string
+    weight: 2
+    region: ds_content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_hero_title:
+    type: wrapper_class
+    weight: 1
+    region: ds_content
+    label: hidden
+    settings:
+      link: true
+      link_class: ''
+      tag: h5
+      class: ''
+    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 3
+    region: ds_content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
+  body: true
   field_authors: true
-  field_hero_image: true
-  field_hero_subtitle: true
-  field_hero_title: true
   field_meta_tags: true
   field_topics: true
   langcode: true

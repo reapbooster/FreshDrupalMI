@@ -1,0 +1,32 @@
+
+
+
+.block-views.block-views-blockexplore-videos-explore-videos,
+.block-views.block-views-blockexplore-videos-block-1
+{
+  background-color: $backgroundGrey;
+  h2 {
+    padding: 20px;
+  }
+  .video-small {
+    background-color: $white;
+    padding-bottom: 10px;
+    h5 {
+      font-family: $headings-font-family;
+      font-size: 17px;
+    }
+    .field--name-field-thumbnail-uri { }
+    .field--name-name {
+      margin: 10px;
+      min-height: 80px;
+    }
+    .field--name-created {
+      margin: 10px;
+      color: #999AA3;
+      font-family: 'LatoWeb', serif;
+      font-size: 10px;
+    }
+  }
+}
+
+

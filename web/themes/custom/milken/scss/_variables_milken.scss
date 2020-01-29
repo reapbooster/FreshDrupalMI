@@ -3,12 +3,17 @@
 
 
 /****** FONTS ********/
-$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-$font-family-base:            'LatoWeb', $font-family-sans-serif;
+$font-family-sans-serif: "LatoWeb", "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:  $font-family-sans-serif;
 
 $secondaryFont : 'monospace';
 $enable-responsive-font-sizes : true;
+
+/**** Headings ****/
+
+$headings-font-family: 'LatoWebBlack', $font-family-sans-serif;
+$headings-font-weight: 700;
 
 /***** RESPONISVE VARIABLES *****/
 $breakpointDesktop: 1600px;
@@ -34,6 +39,7 @@ $backgroundLittleBitLighter: #ddd;
 $backgroundDark: #2E2E34;
 $backgroundDarkest: #111;
 $backgroundSocial: #f1f4f6;
+$backgroundGrey: #e2e7ea;
 $lightTitle: #fff;
 $darkTitle: #000;
 $grayFont: #444;
@@ -57,3 +63,4 @@ $blueHeaders: #0066cc;
 $afterDemoBlack: #35363c;
 $finalGrayForText: #999AA3;
 $mediumGray: #CCC;
+

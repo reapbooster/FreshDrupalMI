@@ -16,6 +16,9 @@ source_configuration:
   source_field: field_media_oembed_video
 field_map:
   title: name
-  provider_url: field_media_oembed_video
   default_name: name
-  thumbnail_uri: field_thumbnail
+  thumbnail_uri: field_thumbnail_uri
+  thumbnail_width: field_width
+  thumbnail_height: field_height
+  width: field_video_width
+  height: field_video_height
