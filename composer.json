@@ -108,7 +108,7 @@
         "drupal/vbo_export": "^3.0",
         "drupal/video_embed_field": "^2.2",
         "drupal/views_infinite_scroll": "^1.5",
-        "drupal/views_slideshow": "^4.6",
+        "drupal/views_slideshow": "4.x-dev",
         "drupal/webpack": "@dev",
         "drupal/workflow": "^1.1",
         "drush-ops/behat-drush-endpoint": "^9",

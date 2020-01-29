@@ -4,10 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.centers.layout_builder__layout
+    - field.field.taxonomy_term.centers.layout_selection
     - taxonomy.vocabulary.centers
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
+    - layout_library
     - text
 third_party_settings:
   layout_builder:
@@ -35,6 +38,12 @@ third_party_settings:
             additional: {  }
             weight: 0
         third_party_settings: {  }
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
+  layout_library:
+    enable: true
 id: taxonomy_term.centers.default
 targetEntityType: taxonomy_term
 bundle: centers
@@ -50,4 +59,5 @@ content:
 hidden:
   langcode: true
   layout_builder__layout: true
+  layout_selection: true
   search_api_excerpt: true

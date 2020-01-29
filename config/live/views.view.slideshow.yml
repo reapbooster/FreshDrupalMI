@@ -1,16 +1,16 @@
-uuid: 58c2185d-c598-497b-8cc8-0d5175163938
+uuid: 74147de9-24a6-4b17-b352-7415090b53c2
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_hero_image
-    - node.type.article
+    - core.entity_view_mode.node.full
+    - node.type.slide
   module:
     - node
     - user
     - views_slideshow
 id: slideshow
-label: Slideshow
+label: slideshow
 module: views
 description: ''
 tag: ''
@@ -55,60 +55,96 @@ display:
           offset: 0
       style:
         type: slideshow
+        options:
+          row_class: ''
+          default_row_class: true
+          slideshow_skin: default
+          slideshow_type: views_slideshow_cycle
+          views_slideshow_cycle:
+            effect: fade
+            transition_advanced: 0
+            timeout: '5000'
+            speed: '700'
+            delay: '0'
+            sync: 1
+            random: 0
+            pause: 1
+            pause_on_click: 0
+            action_advanced: 0
+            start_paused: 0
+            remember_slide: 0
+            remember_slide_days: '1'
+            pause_when_hidden: 0
+            pause_when_hidden_type: full
+            amount_allowed_visible: ''
+            nowrap: 0
+            fixed_height: 1
+            items_per_slide: '1'
+            items_per_slide_first: 0
+            items_per_slide_first_number: '1'
+            wait_for_image_load: 1
+            wait_for_image_load_timeout: '3000'
+            cleartype: 0
+            cleartypenobg: 0
+            advanced_options_choices: width
+            advanced_options_entry: jQuery(this).offsetParent().getWidth()
+            advanced_options: '{"width":"jQuery(this).offsetParent().getWidth()"}'
+          widgets:
+            top:
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_bullets
+                views_slideshow_pager_bullets:
+                  views_slideshow_pager_bullets_hover: 0
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                  views_slideshow_pager_fields_hover: 0
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
+            bottom:
+              views_slideshow_pager:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_pager_bullets
+                views_slideshow_pager_bullets:
+                  views_slideshow_pager_bullets_hover: 0
+                views_slideshow_pager_fields:
+                  views_slideshow_pager_fields_fields:
+                    title: 0
+                  views_slideshow_pager_fields_hover: 0
+              views_slideshow_slide_counter:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+              views_slideshow_controls:
+                enable: false
+                weight: '1'
+                hide_on_single_slide: '0'
+                type: views_slideshow_controls_text
       row:
-        type: fields
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: full
       fields:
         title:
           id: title
           table: node_field_data
           field: title
-          entity_type: node
-          entity_field: title
-          label: ''
-          alter:
-            alter_text: false
-            make_link: false
-            absolute: false
-            trim: false
-            word_boundary: false
-            ellipsis: false
-            strip_tags: false
-            html: false
-          hide_empty: false
-          empty_zero: false
           settings:
             link_to_entity: true
           plugin_id: field
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exclude: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_hero_image:
-          id: field_hero_image
-          table: node__field_hero_image
-          field: field_hero_image
           relationship: none
           group_type: group
           admin_label: ''
@@ -145,7 +181,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -153,11 +189,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_entity_view
-          settings:
-            view_mode: large
-          group_column: target_id
+          click_sort_column: value
+          type: string
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -167,7 +201,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
       filters:
         status:
           value: '1'
@@ -187,53 +220,13 @@ display:
           table: node_field_data
           field: type
           value:
-            article: article
+            slide: slide
           entity_type: node
           entity_field: type
           plugin_id: bundle
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        promote:
-          id: promote
-          table: node_field_data
-          field: promote
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: promote
-          plugin_id: boolean
       sorts:
         created:
           id: created
@@ -250,7 +243,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Slideshow
+      title: slideshow
       header: {  }
       footer: {  }
       empty: {  }
@@ -264,8 +257,7 @@ display:
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_hero_image'
+      tags: {  }
   block_1:
     display_plugin: block
     id: block_1
@@ -280,5 +272,4 @@ display:
         - 'languages:language_interface'
         - 'user.node_grants:view'
         - user.permissions
-      tags:
-        - 'config:field.storage.node.field_hero_image'
+      tags: {  }
