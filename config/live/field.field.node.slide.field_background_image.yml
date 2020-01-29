@@ -1,0 +1,28 @@
+uuid: 513baf23-20b3-4e6e-aa37-b718b7b59b4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_background_image
+    - media.type.hero_image
+    - node.type.slide
+id: node.slide.field_background_image
+field_name: field_background_image
+entity_type: node
+bundle: slide
+label: 'Background Image'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      hero_image: hero_image
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

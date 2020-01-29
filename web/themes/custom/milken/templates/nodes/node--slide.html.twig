@@ -1,0 +1,16 @@
+<div class="jumbotron jumbotron-fluid d-flex align-items-center"
+     style="background-image: url({{ file_url(node.get('field_background_image').entity.field_media_image.entity.uri.value) }});
+       background-position: center;
+       background-clip: content-box;
+       background-repeat: no-repeat;
+       background-size: cover;
+       min-height: 650px;">
+  <div class="container">
+    <h1 class="display-3">{{ node.get('title').value }}</h1>
+    <p class="lead">{{ node.get('field_subtitle').value }}</p>
+    <hr class="my-4">
+    <p><a href="{{ node.get('field_link').uri }}" class="btn btn-primary btn-lg">{{ node.get('field_link').title }}</a></p>
+  </div>
+
+</div>
+

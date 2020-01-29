@@ -7,7 +7,6 @@ dependencies:
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
     - views.view.explore_videos
-    - views.view.slideshow
   module:
     - ds
     - layout_builder
@@ -31,19 +30,6 @@ third_party_settings:
           classes:
             layout_class: {  }
         components:
-          dd250b86-8838-436a-89c6-e27073275a86:
-            uuid: dd250b86-8838-436a-89c6-e27073275a86
-            region: ds_content
-            configuration:
-              id: 'views_block:slideshow-block_1'
-              label: ''
-              provider: views
-              label_display: visible
-              views_label: ''
-              items_per_page: none
-              context_mapping: {  }
-            additional: {  }
-            weight: 0
           b2ff2467-49bf-4481-a3d6-a93b0ea9a535:
             uuid: b2ff2467-49bf-4481-a3d6-a93b0ea9a535
             region: ds_content
