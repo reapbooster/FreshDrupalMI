@@ -3,14 +3,31 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_files
     - field.field.node.slide.field_background_image
     - field.field.node.slide.field_link
     - field.field.node.slide.field_subtitle
+    - field.field.node.slide.layout_selection
     - node.type.slide
   module:
+    - entity_browser
+    - field_group
     - link
-    - media_library
     - path
+third_party_settings:
+  field_group:
+    group_details:
+      children:
+        - field_background_image
+      parent_name: ''
+      weight: 20
+      format_type: details
+      format_settings:
+        id: details
+        classes: ''
+        open: true
+        required_fields: true
+      label: Details
 id: node.slide.default
 targetEntityType: node
 bundle: slide
@@ -23,11 +40,18 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_background_image:
-    type: media_library_widget
-    weight: 2
+    weight: 27
     settings:
-      media_types: {  }
+      entity_browser: browse_files
+      field_widget_remove: true
+      field_widget_replace: true
+      selection_mode: selection_append
+      preview_image_style: thumbnail
+      field_widget_edit: true
+      open: false
+      view_mode: default
     third_party_settings: {  }
+    type: entity_browser_file
     region: content
   field_link:
     weight: 10
@@ -51,6 +75,12 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  layout_selection:
+    type: options_select
+    region: content
+    weight: 26
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path

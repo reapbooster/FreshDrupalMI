@@ -1,17 +1,27 @@
-uuid: b0292ca4-34e7-4b2a-8afa-c941df1e416b
+uuid: 4aad6e46-6635-4ca4-913d-27e2f226245c
 langcode: en
 status: true
 dependencies:
   module:
-    - media
+    - file
+    - image
     - node
 id: node.field_background_image
 field_name: field_background_image
 entity_type: node
-type: entity_reference
+type: image
 settings:
-  target_type: media
-module: core
+  uri_scheme: public
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
 locked: false
 cardinality: 1
 translatable: true

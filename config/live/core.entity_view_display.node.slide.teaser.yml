@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.slide.field_background_image
     - field.field.node.slide.field_link
     - field.field.node.slide.field_subtitle
+    - field.field.node.slide.layout_selection
     - node.type.slide
   module:
     - user
@@ -25,4 +26,5 @@ hidden:
   field_link: true
   field_subtitle: true
   langcode: true
+  layout_selection: true
   search_api_excerpt: true

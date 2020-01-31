@@ -1,28 +1,28 @@
-uuid: 50d3ea0f-a8c6-4d94-86bc-d3c7246b7ca5
+uuid: 4cb4a57c-feea-4467-b2fb-19a79bfce176
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_hero_image
-    - media.type.hero_image
+    - field.storage.node.field_promotional_slide
     - node.type.article
-id: node.article.field_hero_image
-field_name: field_hero_image
+    - node.type.slide
+id: node.article.field_promotional_slide
+field_name: field_promotional_slide
 entity_type: node
 bundle: article
-label: 'Hero Image'
+label: 'Promo Slide'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:media'
+  handler: 'default:node'
   handler_settings:
     target_bundles:
-      hero_image: hero_image
+      slide: slide
     sort:
       field: _none
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference
