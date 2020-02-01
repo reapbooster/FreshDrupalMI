@@ -5,8 +5,6 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
-use Drupal\media\Entity\Media;
-use Drupal\media\MediaInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
@@ -87,7 +85,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
             ],
             'title' => $row->getSourceProperty('name'),
             'subtitle' => $row->getSourceProperty('hero_title'),
-            'field_link' => '/by_uuid/node/' . $row->getSourceProperty('uuid')
+            'field_link' => '/by_uuid/node/' . $row->getSourceProperty('uuid'),
           ]);
           if ($slide instanceof EntityInterface) {
             $slide->setPublished(TRUE);

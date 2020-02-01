@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains milken_base.theme.
+ */
+
 use Drupal\views_bootstrap\ViewsBootstrap;
 
 /**
