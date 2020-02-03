@@ -1,0 +1,19 @@
+uuid: 1aa8eb21-23c0-4009-8d51-2e20c7b99d3e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_promotional_slide
+field_name: field_promotional_slide
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

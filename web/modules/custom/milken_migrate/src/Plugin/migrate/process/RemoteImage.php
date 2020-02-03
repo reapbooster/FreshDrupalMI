@@ -2,14 +2,15 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
-use Drupal\media\Entity\Media;
-use Drupal\media\MediaInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\node\Entity\Node;
 use GuzzleHttp\Client;
 
 /**
@@ -72,22 +73,25 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           $file = $this->getRemoteFile($attributes['filename'], $url);
         }
         if ($file instanceof FileInterface) {
-
-          $media = Media::create([
-            'bundle' => 'hero_image',
+          $slide = Node::create([
+            'type' => 'slide',
             'uid' => 2,
             'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
-            'field_media_image' => [
+            'field_background_image' => [
               'target_id' => $file->id(),
+              'target_type' => 'file',
               'alt' => $file->getFilename(),
               'title' => $file->getFilename(),
             ],
+            'title' => $row->getSourceProperty('name'),
+            'subtitle' => $row->getSourceProperty('hero_title'),
+            'field_link' => '/by_uuid/node/' . $row->getSourceProperty('uuid'),
           ]);
-          if ($media instanceof MediaInterface) {
-            $media->setPublished(TRUE);
-            $media->save();
-            $row->setDestinationProperty('field_hero_image', ['entity' => $media]);
-            return ['entity' => $media];
+          if ($slide instanceof EntityInterface) {
+            $slide->setPublished(TRUE);
+            $slide->save();
+            $row->setDestinationProperty('field_promotional_slide', ['entity' => $slide]);
+            return ['entity' => $slide];
           }
         }
       }
@@ -105,7 +109,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
   public function getRemoteFile($name, $url) : ? FileInterface {
     $client = new Client();
     $response = $client->get($url);
-    $toReturn = file_save_data($response->getBody(), "public://" . $name, FILE_EXISTS_REPLACE);
+    $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
     if ($toReturn instanceof FileInterface) {
       $realpath = \Drupal::service('file_system')->realpath($toReturn->getFileUri());
       if (isset($_SERVER['USER'])) {

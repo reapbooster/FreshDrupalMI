@@ -11,6 +11,7 @@ module:
   config: 0
   config_filter: 0
   config_split: 0
+  content_browser: 0
   content_sync: 0
   contextual: 0
   ctools: 0
@@ -24,20 +25,26 @@ module:
   default_content_extra: 0
   delete_all: 0
   diff: 0
+  dropzonejs: 0
+  dropzonejs_eb_widget: 0
   ds: 0
+  ds_bootstrap_layouts: 0
   dynamic_page_cache: 0
   editor: 0
   element_class_formatter: 0
   embed: 0
   entity_browser: 0
+  entity_browser_enhanced: 0
   entity_browser_entity_form: 0
   entity_embed: 0
+  entity_reference: 0
   entity_reference_revisions: 0
   entityqueue: 0
   field: 0
   field_group: 0
   field_ui: 0
   file: 0
+  file_browser: 0
   filter: 0
   fontawesome: 0
   hal: 0
@@ -95,6 +102,8 @@ module:
   toolbar: 0
   twig_tweak: 0
   user: 0
+  uuid_url: 0
+  views_bootstrap: 0
   views_slideshow: 0
   views_slideshow_cycle: 0
   views_ui: 0

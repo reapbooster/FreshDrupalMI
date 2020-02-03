@@ -3,17 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_content_iframe
     - field.field.node.article.body
     - field.field.node.article.field_authors
-    - field.field.node.article.field_hero_image
-    - field.field.node.article.field_hero_subtitle
-    - field.field.node.article.field_hero_title
     - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_promotional_slide
     - field.field.node.article.field_topics
     - node.type.article
   module:
+    - entity_browser
     - field_group
-    - media_library
+    - metatag
     - path
     - text
 third_party_settings:
@@ -23,7 +23,7 @@ third_party_settings:
         - group_tags
         - group_hero
       parent_name: ''
-      weight: 7
+      weight: 10
       format_type: tabs
       format_settings:
         id: ''
@@ -32,9 +32,7 @@ third_party_settings:
       label: Settings
     group_hero:
       children:
-        - field_hero_title
-        - field_hero_subtitle
-        - field_hero_image
+        - field_promotional_slide
       parent_name: group_settings
       weight: 123
       format_type: tab
@@ -90,29 +88,27 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_hero_image:
-    type: media_library_widget
-    weight: 3
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 8
     region: content
-    settings:
-      media_types: {  }
+    settings: {  }
     third_party_settings: {  }
-  field_hero_subtitle:
-    type: string_textfield
-    weight: 2
+  field_promotional_slide:
+    weight: 124
+    settings:
+      entity_browser: browse_content_iframe
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: small_tile
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: true
+      open: true
+      selection_mode: selection_append
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_hero_title:
-    type: string_textfield
-    weight: 1
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_topics:
     type: entity_reference_autocomplete
     weight: 1
@@ -132,7 +128,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -147,7 +143,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 7
     region: content
     third_party_settings: {  }
   sticky:
@@ -175,5 +171,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  field_meta_tags: true
+hidden: {  }
