@@ -1,0 +1,15 @@
+uuid: a4d58fba-dc18-431d-a785-a8287fc74ae0
+langcode: en
+status: true
+dependencies: {  }
+id: half_half
+label: 'Half / Half'
+targetEntityType: node
+targetBundle: slide
+layout:
+  -
+    layout_id: half_n_half
+    layout_settings:
+      label: Half-Half
+    components: {  }
+    third_party_settings: {  }

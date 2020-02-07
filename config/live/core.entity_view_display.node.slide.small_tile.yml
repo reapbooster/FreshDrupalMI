@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.small_tile
+    - field.field.node.slide.field_background_color
     - field.field.node.slide.field_background_image
     - field.field.node.slide.field_link
     - field.field.node.slide.field_subtitle
+    - field.field.node.slide.field_text_color
     - field.field.node.slide.layout_selection
     - node.type.slide
   module:
@@ -129,7 +131,9 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_background_color: true
   field_background_image: true
+  field_text_color: true
   langcode: true
   layout_selection: true
   search_api_excerpt: true

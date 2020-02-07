@@ -244,7 +244,7 @@ display:
             word_boundary: true
             ellipsis: true
             more_link: false
-            more_link_text: ''
+            more_link_text: 'see all'
             more_link_path: ''
             strip_tags: false
             trim: false

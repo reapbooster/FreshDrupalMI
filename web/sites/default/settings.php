@@ -1,5 +1,7 @@
 <?php
 
+ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
+
 /**
  * @file
  * Load services definition file.
