@@ -29,8 +29,6 @@ module:
   diff: 0
   dropzonejs: 0
   dropzonejs_eb_widget: 0
-  ds: 0
-  ds_bootstrap_layouts: 0
   dynamic_page_cache: 0
   editor: 0
   element_class_formatter: 0
@@ -49,6 +47,7 @@ module:
   file_browser: 0
   filter: 0
   fontawesome: 0
+  form_options_attributes: 0
   hal: 0
   image: 0
   imagick: 0

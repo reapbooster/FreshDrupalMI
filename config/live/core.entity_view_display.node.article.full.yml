@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.article.field_topics
     - node.type.article
   module:
-    - ds
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
@@ -23,39 +22,6 @@ third_party_settings:
     allow_custom: false
     enabled: true
     sections:
-      -
-        layout_id: ds_1col
-        layout_settings:
-          label: ''
-          wrappers:
-            ds_content: div
-          outer_wrapper: div
-          attributes: ''
-          link_attribute: ''
-          link_custom: ''
-          classes:
-            layout_class: {  }
-        components:
-          18a873d9-9b16-437a-a425-68fc93b1f7c7:
-            uuid: 18a873d9-9b16-437a-a425-68fc93b1f7c7
-            region: ds_content
-            configuration:
-              id: 'field_block:node:article:field_promotional_slide'
-              label: 'Promo Slide'
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_entity_view
-                settings:
-                  view_mode: full
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 0
-        third_party_settings: {  }
       -
         layout_id: layout_onecol
         layout_settings:

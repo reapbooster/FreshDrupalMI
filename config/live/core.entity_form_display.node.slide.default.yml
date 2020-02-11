@@ -16,6 +16,7 @@ dependencies:
     - entity_browser
     - field_group
     - link
+    - milken_base
     - path
 third_party_settings:
   field_group:
@@ -76,15 +77,9 @@ content:
     third_party_settings: {  }
   field_background_color:
     weight: 14
-    settings:
-      show_input: false
-      show_palette: false
-      palette: ''
-      show_palette_only: false
-      show_buttons: false
-      allow_empty: false
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_spectrum
+    type: color_field_widget_html5
     region: content
   field_background_image:
     weight: 15
@@ -118,15 +113,9 @@ content:
     region: content
   field_text_color:
     weight: 16
-    settings:
-      show_input: false
-      show_palette: false
-      palette: ''
-      show_palette_only: false
-      show_buttons: false
-      allow_empty: false
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_spectrum
+    type: color_field_widget_html5
     region: content
   langcode:
     type: language_select
@@ -136,7 +125,7 @@ content:
       include_locked: true
     third_party_settings: {  }
   layout_selection:
-    type: options_select
+    type: milken_layouts_selection_icons
     region: content
     weight: 0
     settings: {  }

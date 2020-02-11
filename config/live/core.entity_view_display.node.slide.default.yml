@@ -16,76 +16,15 @@ dependencies:
     - image
     - layout_builder
     - layout_builder_restrictions
-    - layout_discovery
     - layout_library
     - link
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: 'main content'
-        components:
-          c2e8b62b-d397-4ff6-842c-48ca19bae7b6:
-            uuid: c2e8b62b-d397-4ff6-842c-48ca19bae7b6
-            region: content
-            configuration:
-              id: 'field_block:node:slide:field_content'
-              label: Content
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: entity_reference_revisions_entity_view
-                settings:
-                  view_mode: default
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 0
-          fce4c0fc-1bfa-4990-b7a5-76c99afdaa7e:
-            uuid: fce4c0fc-1bfa-4990-b7a5-76c99afdaa7e
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:slide:field_text_color'
-              formatter:
-                label: above
-                settings:
-                  format: hex
-                  opacity: true
-                third_party_settings: {  }
-                type: color_field_formatter_text
-            additional: {  }
-            weight: 1
-          5ff38418-534e-425e-a1ba-cf1d509a06fd:
-            uuid: 5ff38418-534e-425e-a1ba-cf1d509a06fd
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:slide:field_background_color'
-              formatter:
-                label: above
-                settings:
-                  format: hex
-                  opacity: true
-                third_party_settings: {  }
-                type: color_field_formatter_text
-            additional: {  }
-            weight: 2
-        third_party_settings: {  }
+    enabled: false
   layout_library:
-    enable: false
+    enable: true
   layout_builder_restrictions:
     entity_view_mode_restriction:
       allowed_blocks: {  }
@@ -93,16 +32,22 @@ third_party_settings:
   field_group:
     group_fieldset:
       children:
+        - field_background_image
         - field_subtitle
         - field_link
         - links
       parent_name: ''
       weight: 20
-      format_type: fieldset
+      format_type: html_element
       format_settings:
-        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        effect: none
+        speed: fast
+        attributes: ''
         classes: ''
-        description: ''
+        id: ''
       label: Fieldset
 id: node.slide.default
 targetEntityType: node
@@ -114,7 +59,7 @@ content:
     label: above
     settings:
       format: hex
-      opacity: true
+      opacity: '1'
     third_party_settings: {  }
     type: color_field_formatter_text
     region: content
@@ -128,7 +73,7 @@ content:
     type: image
     region: content
   field_link:
-    weight: 103
+    weight: 106
     label: above
     settings:
       trim_length: 80
@@ -140,7 +85,7 @@ content:
     type: link
     region: content
   field_subtitle:
-    weight: 102
+    weight: 105
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -151,12 +96,12 @@ content:
     label: above
     settings:
       format: hex
-      opacity: true
+      opacity: '1'
     third_party_settings: {  }
     type: color_field_formatter_text
     region: content
   links:
-    weight: 104
+    weight: 107
     region: content
     settings: {  }
     third_party_settings: {  }

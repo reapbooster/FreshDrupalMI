@@ -8,22 +8,13 @@ targetEntityType: node
 targetBundle: slide
 layout:
   -
-    layout_id: ds_2col
+    layout_id: layout_onecol
     layout_settings:
-      label: ''
-      wrappers:
-        left: div
-        right: div
-      outer_wrapper: div
-      attributes: ''
-      link_attribute: ''
-      link_custom: ''
-      classes:
-        layout_class: {  }
+      label: 'Test Region'
     components:
-      d58f3735-cd0e-45a8-b23c-24136ca63c59:
-        uuid: d58f3735-cd0e-45a8-b23c-24136ca63c59
-        region: right
+      0088adf8-9355-4946-a4cf-5f0fa5d7cd1a:
+        uuid: 0088adf8-9355-4946-a4cf-5f0fa5d7cd1a
+        region: content
         configuration:
           id: 'field_block:node:slide:title'
           label: Title
@@ -37,71 +28,6 @@ layout:
               link_class: ''
               tag: h1
               class: ''
-            third_party_settings: {  }
-          context_mapping:
-            entity: layout_builder.entity
-            view_mode: view_mode
-        additional: {  }
-        weight: 0
-      0131478b-999a-489e-a892-c8e186ce029a:
-        uuid: 0131478b-999a-489e-a892-c8e186ce029a
-        region: right
-        configuration:
-          id: 'field_block:node:slide:field_subtitle'
-          label: Subtitle
-          provider: layout_builder
-          label_display: '0'
-          formatter:
-            label: hidden
-            type: wrapper_class
-            settings:
-              link: false
-              link_class: ''
-              tag: h3
-              class: ''
-            third_party_settings: {  }
-          context_mapping:
-            entity: layout_builder.entity
-            view_mode: view_mode
-        additional: {  }
-        weight: 1
-      21053df6-eff7-4a3d-89b0-f5da41962a5c:
-        uuid: 21053df6-eff7-4a3d-89b0-f5da41962a5c
-        region: right
-        configuration:
-          id: 'field_block:node:slide:field_link'
-          label: Link
-          provider: layout_builder
-          label_display: '0'
-          formatter:
-            label: hidden
-            type: link_class
-            settings:
-              trim_length: 80
-              url_only: false
-              url_plain: false
-              rel: '0'
-              target: '0'
-              class: ''
-            third_party_settings: {  }
-          context_mapping:
-            entity: layout_builder.entity
-            view_mode: view_mode
-        additional: {  }
-        weight: 2
-      65f5abf7-0739-4b1f-9323-8646779cd82b:
-        uuid: 65f5abf7-0739-4b1f-9323-8646779cd82b
-        region: left
-        configuration:
-          id: 'field_block:node:slide:field_background_image'
-          label: 'Background Image'
-          provider: layout_builder
-          label_display: '0'
-          formatter:
-            label: hidden
-            type: image_url
-            settings:
-              image_style: fullscreen
             third_party_settings: {  }
           context_mapping:
             entity: layout_builder.entity

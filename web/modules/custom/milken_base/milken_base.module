@@ -9,7 +9,8 @@
  * Implements hook_element_plugin_alter().
  */
 function milken_base_element_plugin_alter(array &$definitions) {
-  // \Kint::dump($definitions);
+  $definitions['radio']['class'] = '\Drupal\milken_base\Element\MilkenRadio';
+  $definitions['radios']['class'] = '\Drupal\milken_base\Element\MilkenRadios';
 }
 
 
@@ -17,6 +18,7 @@ function milken_base_element_plugin_alter(array &$definitions) {
  * Implements hook_theme_registry_alter().
  */
 function milken_base_theme_registry_alter(&$theme_registry) {
+  //\Kint::dump($theme_registry);
   // TODO: obtain this list dynamically based on layout group
   $module_theme_hooks = ['one_col_full_width', 'half_n_half'];
   foreach ($theme_registry as $theme_hook => $registry_entry) {
@@ -26,6 +28,3 @@ function milken_base_theme_registry_alter(&$theme_registry) {
   }
 }
 
-function milken_base_template_preprocess_layout_function(&$variables) {
-  $variables['content']['#node'] = \Drupal::routeMatch()->getParameter('node');
-}
