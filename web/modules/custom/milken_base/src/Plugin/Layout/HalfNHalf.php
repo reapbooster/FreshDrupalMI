@@ -2,15 +2,6 @@
 
 namespace Drupal\milken_base\Plugin\Layout;
 
-use Drupal\Core\Entity\Entity;
-use Drupal\Core\Entity\EntityBase;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Layout\LayoutDefault;
-use Drupal\Core\Layout\LayoutDefinition;
-use Drupal\layout_builder\Context\LayoutBuilderContextTrait;
-use Drupal\node\Entity\Node;
-
 /**
  * A custom Layout for Milken "Slides".
  *
@@ -33,8 +24,4 @@ use Drupal\node\Entity\Node;
  *   }
  * )
  */
-class HalfNHalf extends MilkenLayoutBase {
-
-
-
-}
+class HalfNHalf extends MilkenLayoutBase {}

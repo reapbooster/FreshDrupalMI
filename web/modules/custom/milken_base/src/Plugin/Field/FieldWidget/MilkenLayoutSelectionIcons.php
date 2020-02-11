@@ -1,16 +1,12 @@
 <?php
 
-
 namespace Drupal\milken_base\Plugin\Field\FieldWidget;
 
-
-use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManager;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsWidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Form\OptGroup;
 
 /**
  * Plugin implementation of the 'options_buttons' widget.
@@ -26,6 +22,23 @@ use Drupal\Core\Form\OptGroup;
  */
 class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
 
+  /**
+   * Return a render array for the form element.
+   *
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
+   *   Array of items.
+   * @param int $delta
+   *   Delta.
+   * @param array $element
+   *   Element.
+   * @param array $form
+   *   Form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   FormState object.
+   *
+   * @return array
+   *   Render array for form element.
+   */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
     $options = $this->getOptions($items->getEntity());
@@ -45,8 +58,8 @@ class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
       '#default_value' => $selected ? reset($selected) : NULL,
       '#options' => $options,
       '#options_attributes' => [
-        '#attributes' => ['class' => ['form-group', 'row']]
-      ]
+        '#attributes' => ['class' => ['form-group', 'row']],
+      ],
     ];
 
     return $element;
@@ -61,6 +74,18 @@ class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
     }
   }
 
+  /**
+   * Derive a list of options from layout.
+   *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
+   *   Base entity.
+   *
+   * @return array|null[]|string[]
+   *   Returns array of options.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   protected function getOptions(FieldableEntityInterface $entity) {
     if (!isset($this->options)) {
       $options = [];

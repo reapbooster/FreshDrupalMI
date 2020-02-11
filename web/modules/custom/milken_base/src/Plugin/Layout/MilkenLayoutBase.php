@@ -2,48 +2,32 @@
 
 namespace Drupal\milken_base\Plugin\Layout;
 
-
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefault;
-use Drupal\Core\Plugin\Context\ContextRepositoryInterface;
-use Drupal\layout_builder\Context\LayoutBuilderContextTrait;
-use Drupal\layout_builder\SectionStorage\SectionStorageTrait;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class MilkenLayoutBase
+ * Class MilkenLayoutBase.
  *
  * @package Drupal\milken_base\Plugin\Layout
  */
 abstract class MilkenLayoutBase extends LayoutDefault {
 
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *
-   * @return array
+   * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     return $form;
   }
 
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *
-   * @return array
+   * {@inheritdoc}
    */
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
     return $form;
   }
 
   /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *
-   * @return array
+   * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     return $form;
@@ -68,6 +52,5 @@ abstract class MilkenLayoutBase extends LayoutDefault {
     }
     return $build;
   }
-
 
 }

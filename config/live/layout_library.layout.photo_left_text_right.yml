@@ -8,13 +8,34 @@ targetEntityType: node
 targetBundle: slide
 layout:
   -
-    layout_id: layout_onecol
+    layout_id: layout_twocol_section
     layout_settings:
-      label: 'Test Region'
+      label: 'main content'
+      column_widths: 50-50
     components:
-      0088adf8-9355-4946-a4cf-5f0fa5d7cd1a:
-        uuid: 0088adf8-9355-4946-a4cf-5f0fa5d7cd1a
-        region: content
+      649f1f5a-3c83-4240-9362-79c21127314e:
+        uuid: 649f1f5a-3c83-4240-9362-79c21127314e
+        region: first
+        configuration:
+          id: 'field_block:node:slide:field_background_image'
+          label: 'Background Image'
+          provider: layout_builder
+          label_display: '0'
+          formatter:
+            label: hidden
+            type: image
+            settings:
+              image_style: large
+              image_link: ''
+            third_party_settings: {  }
+          context_mapping:
+            entity: layout_builder.entity
+            view_mode: view_mode
+        additional: {  }
+        weight: 0
+      62996225-e172-4996-9850-69ad4f2d72d8:
+        uuid: 62996225-e172-4996-9850-69ad4f2d72d8
+        region: second
         configuration:
           id: 'field_block:node:slide:title'
           label: Title

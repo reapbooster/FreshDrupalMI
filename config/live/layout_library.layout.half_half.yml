@@ -8,8 +8,51 @@ targetEntityType: node
 targetBundle: slide
 layout:
   -
-    layout_id: half_n_half
+    layout_id: layout_twocol_section
     layout_settings:
-      label: Half-Half
-    components: {  }
+      label: 'Main Content'
+      column_widths: 50-50
+    components:
+      b9653741-bd74-4970-a72a-4ce2a5f9bbfe:
+        uuid: b9653741-bd74-4970-a72a-4ce2a5f9bbfe
+        region: first
+        configuration:
+          id: 'field_block:node:slide:title'
+          label: Title
+          provider: layout_builder
+          label_display: '0'
+          formatter:
+            label: hidden
+            type: wrapper_class
+            settings:
+              link: false
+              link_class: ''
+              tag: h1
+              class: ''
+            third_party_settings: {  }
+          context_mapping:
+            entity: layout_builder.entity
+            view_mode: view_mode
+        additional: {  }
+        weight: 0
+      3f253d8b-e8d3-4abc-97e2-5b1f661050ca:
+        uuid: 3f253d8b-e8d3-4abc-97e2-5b1f661050ca
+        region: second
+        configuration:
+          id: 'field_block:node:slide:field_background_image'
+          label: 'Background Image'
+          provider: layout_builder
+          label_display: '0'
+          formatter:
+            label: hidden
+            type: image
+            settings:
+              image_style: large
+              image_link: ''
+            third_party_settings: {  }
+          context_mapping:
+            entity: layout_builder.entity
+            view_mode: view_mode
+        additional: {  }
+        weight: 0
     third_party_settings: {  }
