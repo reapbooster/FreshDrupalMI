@@ -7,6 +7,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsWidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
  * Plugin implementation of the 'options_buttons' widget.
@@ -21,6 +22,8 @@ use Drupal\Core\Form\FormStateInterface;
  * )
  */
 class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
+
+  use StringTranslationTrait;
 
   /**
    * Return a render array for the form element.
@@ -70,7 +73,7 @@ class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
    */
   protected function getEmptyLabel() {
     if (!$this->required && !$this->multiple) {
-      return t('N/A');
+      return $this->t('N/A');
     }
   }
 
