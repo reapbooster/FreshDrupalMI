@@ -116,7 +116,6 @@ third_party_settings:
                 type: address_default
             additional: {  }
             weight: 9
-
         third_party_settings: {  }
 id: node.event.default
 targetEntityType: node
@@ -144,8 +143,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: address_default
-    region: content
-    type: entity_reference_label
     region: content
   field_publication_date:
     weight: 107

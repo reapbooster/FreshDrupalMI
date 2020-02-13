@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_authors
     - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
     - node.type.article
   module:
@@ -20,6 +21,31 @@ third_party_settings:
     allow_custom: false
     enabled: true
     sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: Slide
+        components:
+          18074587-014d-4da8-af54-f2e1c1bb0fe9:
+            uuid: 18074587-014d-4da8-af54-f2e1c1bb0fe9
+            region: content
+            configuration:
+              id: 'field_block:node:article:field_promo_slide'
+              label: promo_slide
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
       -
         layout_id: layout_onecol
         layout_settings:
@@ -119,6 +145,8 @@ content:
 hidden:
   field_authors: true
   field_meta_tags: true
+  field_promo_slide: true
+  field_promotional_slide: true
   field_topics: true
   langcode: true
   layout_builder__layout: true

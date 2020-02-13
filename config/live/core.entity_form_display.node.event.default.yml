@@ -52,8 +52,6 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
-    type: entity_reference_autocomplete
-    region: content
   field_publication_date:
     weight: 127
     settings: {  }
