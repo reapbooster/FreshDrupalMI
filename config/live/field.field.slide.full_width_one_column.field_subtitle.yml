@@ -1,0 +1,19 @@
+uuid: 3685b217-9c91-4437-a500-b68bdc899170
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.slide.full_width_one_column
+    - field.storage.slide.field_subtitle
+id: slide.full_width_one_column.field_subtitle
+field_name: field_subtitle
+entity_type: slide
+bundle: full_width_one_column
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

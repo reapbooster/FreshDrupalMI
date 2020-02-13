@@ -7,7 +7,6 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_authors
     - field.field.node.article.field_meta_tags
-    - field.field.node.article.field_promotional_slide
     - field.field.node.article.field_topics
     - node.type.article
   module:
@@ -21,16 +20,7 @@ id: node.article.small_tile
 targetEntityType: node
 bundle: article
 mode: small_tile
-content:
-  field_promotional_slide:
-    type: entity_reference_entity_view
-    weight: 0
-    region: ds_content
-    label: hidden
-    settings:
-      view_mode: small_tile
-      link: false
-    third_party_settings: {  }
+content: {  }
 hidden:
   body: true
   field_authors: true

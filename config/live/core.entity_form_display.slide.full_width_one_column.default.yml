@@ -1,0 +1,171 @@
+uuid: 9a2e3e36-6963-4134-b983-9372a362f42e
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.slide.full_width_one_column
+    - field.field.slide.full_width_one_column.field_background_color
+    - field.field.slide.full_width_one_column.field_background_image
+    - field.field.slide.full_width_one_column.field_link
+    - field.field.slide.full_width_one_column.field_promoted
+    - field.field.slide.full_width_one_column.field_published
+    - field.field.slide.full_width_one_column.field_subtitle
+    - field.field.slide.full_width_one_column.field_text_color
+    - image.style.thumbnail
+  module:
+    - color_field
+    - field_group
+    - image
+    - link
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_text
+        - group_background
+        - group_publishing
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: slide_tabs
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_text:
+      children:
+        - title
+        - field_subtitle
+        - field_link
+        - field_text_color
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Text
+    group_background:
+      children:
+        - field_background_image
+        - field_background_color
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Background
+    group_publishing:
+      children:
+        - langcode
+        - created
+        - field_published
+        - field_promoted
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publishing
+id: slide.full_width_one_column.default
+targetEntityType: slide
+bundle: full_width_one_column
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 15
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_background_color:
+    weight: 15
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  field_background_image:
+    weight: 12
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_link:
+    weight: -3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_promoted:
+    weight: 18
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_published:
+    weight: 17
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_subtitle:
+    weight: -4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_text_color:
+    weight: -2
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  langcode:
+    type: language_select
+    weight: 14
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

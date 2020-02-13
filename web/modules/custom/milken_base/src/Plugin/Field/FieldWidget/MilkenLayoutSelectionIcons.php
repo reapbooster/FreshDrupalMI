@@ -2,12 +2,16 @@
 
 namespace Drupal\milken_base\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\FieldableEntityInterface;
+
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
-use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsWidgetBase;
+use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsButtonsWidget;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\user\Entity\User;
 
 /**
  * Plugin implementation of the 'options_buttons' widget.
@@ -21,61 +25,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *   multiple_values = FALSE
  * )
  */
-class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
-
-  use StringTranslationTrait;
-
-  /**
-   * Return a render array for the form element.
-   *
-   * @param \Drupal\Core\Field\FieldItemListInterface $items
-   *   Array of items.
-   * @param int $delta
-   *   Delta.
-   * @param array $element
-   *   Element.
-   * @param array $form
-   *   Form array.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   FormState object.
-   *
-   * @return array
-   *   Render array for form element.
-   */
-  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $options = $this->getOptions($items->getEntity());
-    $selected = $this->getSelectedOptions($items);
-
-    // If required and there is one single option, preselect it.
-    if ($this->required && count($options) == 1) {
-      reset($options);
-      $selected = [key($options)];
-    }
-
-    $element += [
-      '#type' => 'radios',
-      // Radio buttons need a scalar value. Take the first default value, or
-      // default to NULL so that the form element is properly recognized as
-      // not having a default value.
-      '#default_value' => $selected ? reset($selected) : NULL,
-      '#options' => $options,
-      '#options_attributes' => [
-        '#attributes' => ['class' => ['form-group', 'row']],
-      ],
-    ];
-
-    return $element;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEmptyLabel() {
-    if (!$this->required && !$this->multiple) {
-      return $this->t('N/A');
-    }
-  }
+class MilkenLayoutSelectionIcons extends OptionsButtonsWidget {
 
   /**
    * Derive a list of options from layout.
@@ -119,6 +69,29 @@ class MilkenLayoutSelectionIcons extends OptionsWidgetBase {
       $this->options = $options;
     }
     return $this->options;
+  }
+
+  protected function getSelectedOptions(FieldItemListInterface $items) {
+    $value = $items->get(0)->getValue();
+    if (is_array($value) && isset($value[$this->column])) {
+      return [ $value[$this->column] ];
+    }
+    return null;
+  }
+
+
+
+  function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
+    $field_name = $this->fieldDefinition->getName();
+
+    // Extract the values from $form_state->getValues().
+    $path = array_merge($form['#parents'], [$field_name]);
+    $key_exists = NULL;
+    $values = NestedArray::getValue($form_state->getValues(), $path, $key_exists);
+    while (is_array($values) && !empty($values) && !isset($values['target_id'])) {
+      $values = array_shift($values);
+    }
+    return $values;
   }
 
 }

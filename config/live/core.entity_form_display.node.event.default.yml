@@ -6,9 +6,6 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_authors
     - field.field.node.event.field_event_location
-    - field.field.node.event.field_hero_image
-    - field.field.node.event.field_hero_subtitle
-    - field.field.node.event.field_hero_title
     - field.field.node.event.field_meta_tags
     - field.field.node.event.field_publication_date
     - field.field.node.event.field_topics
@@ -16,7 +13,6 @@ dependencies:
   module:
     - address
     - datetime
-    - media_library
     - path
     - text
 id: node.event.default
@@ -56,28 +52,7 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
-  field_hero_image:
-    type: media_library_widget
-    weight: 124
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-    region: content
-  field_hero_subtitle:
-    weight: 123
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_hero_title:
-    weight: 122
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
+    type: entity_reference_autocomplete
     region: content
   field_publication_date:
     weight: 127

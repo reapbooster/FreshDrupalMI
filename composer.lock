@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a736e235664ce070cbd975dbc1d9ac0",
+    "content-hash": "e90ac05afc03da5193b5c4cd5c13eb47",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -124,16 +124,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.133.12",
+            "version": "3.133.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "56606a630c442beccd8d4b5fd0ae72ffddc1a768"
+                "reference": "225409f1df6df25c46d72369034e1e5894629173"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/56606a630c442beccd8d4b5fd0ae72ffddc1a768",
-                "reference": "56606a630c442beccd8d4b5fd0ae72ffddc1a768",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/225409f1df6df25c46d72369034e1e5894629173",
+                "reference": "225409f1df6df25c46d72369034e1e5894629173",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-02-11T19:14:18+00:00"
+            "time": "2020-02-12T19:12:46+00:00"
         },
         {
             "name": "behat/behat",
@@ -5731,17 +5731,11 @@
         },
         {
             "name": "drupal/eck",
-            "version": "1.0.0-alpha5",
+            "version": "dev-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/eck.git",
-                "reference": "8.x-1.0-alpha5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/eck-8.x-1.0-alpha5.zip",
-                "reference": "8.x-1.0-alpha5",
-                "shasum": "27f859b0da7dfb3809baa38438c0362662d03add"
+                "reference": "04d270494a403deb1f894bf41a6f5f783f6af437"
             },
             "require": {
                 "drupal/core": "^8"
@@ -5752,8 +5746,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-alpha5",
-                    "datestamp": "1539887880",
+                    "version": "8.x-1.0-alpha5+13-dev",
+                    "datestamp": "1574020985",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -5815,7 +5809,8 @@
             "support": {
                 "source": "http://git.drupal.org/project/eck.git",
                 "issues": "https://www.drupal.org/project/issues/eck"
-            }
+            },
+            "time": "2020-01-18T22:11:08+00:00"
         },
         {
             "name": "drupal/element_class_formatter",
@@ -9123,17 +9118,17 @@
         },
         {
             "name": "drupal/redis",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/redis.git",
-                "reference": "8.x-1.3"
+                "reference": "8.x-1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/redis-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "d3352542732103a5822181df8ba2313a1d4f0aba"
+                "url": "https://ftp.drupal.org/files/projects/redis-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "87165acdda18873c1e3994c670bcb4cdafd3d0ff"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -9147,8 +9142,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1581183007",
+                    "version": "8.x-1.4",
+                    "datestamp": "1581504947",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -9240,7 +9235,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/s3fs.git",
-                "reference": "eb82e19d4166c23b65e5f51d9bc90379ce5f3e30"
+                "reference": "f990c3045c00497afa3ac8078eb39dfe8b3da239"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.18",
@@ -9293,7 +9288,7 @@
                 "source": "https://git.drupalcode.org/project/s3fs",
                 "issues": "https://www.drupal.org/project/issues/s3fs"
             },
-            "time": "2019-09-19T10:47:07+00:00"
+            "time": "2020-02-12T14:41:52+00:00"
         },
         {
             "name": "drupal/s3fs_cors",
@@ -9541,7 +9536,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api_solr.git",
-                "reference": "076e7c9c260f48e238404fae0b7acd1793b9b611"
+                "reference": "25c36d9757d84497cd5a3f998787fefa9d2d6a98"
             },
             "require": {
                 "consolidation/annotated-command": "^2.12",
@@ -9581,7 +9576,7 @@
                 },
                 "drupal": {
                     "version": "8.x-3.x-dev",
-                    "datestamp": "1581098347",
+                    "datestamp": "1581358616",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -9630,7 +9625,7 @@
                 "issues": "https://www.drupal.org/project/issues/search_api_solr",
                 "irc": "https://drupalchat.me/channel/search"
             },
-            "time": "2020-02-10T14:34:36+00:00"
+            "time": "2020-02-12T13:18:55+00:00"
         },
         {
             "name": "drupal/select2",
@@ -18354,7 +18349,7 @@
         "drupal/default_content_extra": 20,
         "drupal/diff": 5,
         "drupal/ds_bootstrap_layouts": 20,
-        "drupal/eck": 15,
+        "drupal/eck": 20,
         "drupal/entity_block": 10,
         "drupal/entity_browser_enhanced": 5,
         "drupal/entityqueue": 15,

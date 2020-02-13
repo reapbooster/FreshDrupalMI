@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
+use Drupal\Core\Entity\Entity;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
@@ -15,6 +16,7 @@ use GuzzleHttp\Client;
 
 /**
  * Filter to download image and return media reference.
+ *
  * @code
  * field_image:
  *   plugin: milken_migrate:remote_image
@@ -73,10 +75,14 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           $file = $this->getRemoteFile($attributes['filename'], $url);
         }
         if ($file instanceof FileInterface) {
-          $slide = Node::create([
-            'type' => 'slide',
+          $entity_type_mgr = \Drupal::getContainer()
+            ->get('entity_type.manager');
+          $slide = $entity_type_mgr->getStorage('slide')->create([
+            'type' => 'full_width_one_column',
             'uid' => 2,
-            'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
+            'langcode' => \Drupal::languageManager()
+              ->getDefaultLanguage()
+              ->getId(),
             'field_background_image' => [
               'target_id' => $file->id(),
               'target_type' => 'file',
@@ -84,20 +90,20 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
               'title' => $file->getFilename(),
             ],
             'title' => $row->getSourceProperty('name'),
-            'subtitle' => $row->getSourceProperty('hero_title'),
+            'field_subtitle' => $row->getSourceProperty('hero_title'),
             'field_link' => '/by_uuid/node/' . $row->getSourceProperty('uuid'),
+            'field_published' => true
           ]);
           if ($slide instanceof EntityInterface) {
-            $slide->setPublished(TRUE);
             $slide->save();
-            $row->setDestinationProperty('field_promotional_slide', ['entity' => $slide]);
+            $row->setDestinationProperty('field_promo_slide', ['entity' => $slide]);
             return ['entity' => $slide];
           }
         }
       }
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')->error("IMPORT ERROR: " . $e->getMessage());
+    } catch (\Exception $e) {
+      \Drupal::logger('milken_migrate')
+        ->error("IMPORT ERROR: " . $e->getMessage());
       throw new MigrateException($e->getMessage());
     }
     return $value;
@@ -106,12 +112,13 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
   /**
    * Turn remote URL into local FileInterface object.
    */
-  public function getRemoteFile($name, $url) : ? FileInterface {
+  public function getRemoteFile($name, $url): ?FileInterface {
     $client = new Client();
     $response = $client->get($url);
     $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
     if ($toReturn instanceof FileInterface) {
-      $realpath = \Drupal::service('file_system')->realpath($toReturn->getFileUri());
+      $realpath = \Drupal::service('file_system')
+        ->realpath($toReturn->getFileUri());
       if (isset($_SERVER['USER'])) {
         chown($realpath, $_SERVER['USER']);
         chgrp($realpath, $_SERVER['USER']);

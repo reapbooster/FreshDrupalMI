@@ -16,12 +16,15 @@
 
   #edit-layout-selection-0 {
     > .js-form-item {
+      position:relative;
       display: inline-flex;
       align-items: center;
       padding-left: 0;
       margin-right: 2px;
       .form-radio {
-        display:none;
+        position: absolute;
+        top: 10px;
+        left: 10px;
       }
       label {
         display:block;

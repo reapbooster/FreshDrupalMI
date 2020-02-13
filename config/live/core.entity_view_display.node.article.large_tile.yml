@@ -7,13 +7,11 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_authors
     - field.field.node.article.field_meta_tags
-    - field.field.node.article.field_promotional_slide
     - field.field.node.article.field_topics
     - node.type.article
   module:
     - layout_builder
     - layout_builder_restrictions
-    - layout_library
     - user
 third_party_settings:
   layout_builder:
@@ -23,22 +21,11 @@ third_party_settings:
     entity_view_mode_restriction:
       allowed_blocks: {  }
       allowed_layouts: {  }
-  layout_library:
-    enable: false
 id: node.article.large_tile
 targetEntityType: node
 bundle: article
 mode: large_tile
-content:
-  field_promotional_slide:
-    type: entity_reference_entity_view
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      view_mode: large_tile
-      link: false
-    third_party_settings: {  }
+content: {  }
 hidden:
   body: true
   field_authors: true
