@@ -11,7 +11,8 @@ set -eo pipefail
 # Build Composer Assets
 composer -n build-assets
 
-pscss web/themes/custom/milken/scss/milken.scss --format=compressed > web/themes/custom/milken/css/milken.css
+# this will be handled by gulp
+# pscss web/themes/custom/milken/scss/milken.scss --format=compressed > web/themes/custom/milken/css/milken.css
 
 cd web/core
 npm install && npm run build
