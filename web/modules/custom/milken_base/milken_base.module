@@ -9,8 +9,9 @@
  * Implements hook_element_plugin_alter().
  */
 function milken_base_element_plugin_alter(array &$definitions) {
-  //$definitions['radio']['class'] = '\Drupal\milken_base\Element\MilkenRadio';
-  //$definitions['radios']['class'] = '\Drupal\milken_base\Element\MilkenRadios';
+  // $definitions['radio']['class'] = '\Drupal\milken_base\Element\MilkenRadio';
+  // $definitions['radios']['class'] =
+  // '\Drupal\milken_base\Element\MilkenRadios';
 }
 
 /**
@@ -25,9 +26,4 @@ function milken_base_theme_registry_alter(&$theme_registry) {
       $theme_registry[$theme_hook]['preprocess functions'][] = 'milken_base_template_preprocess_layout_function';
     }
   }
-}
-
-
-function milken_base_template_preprocess_layout_function(&$variables) {
-  // kint($variables);
 }

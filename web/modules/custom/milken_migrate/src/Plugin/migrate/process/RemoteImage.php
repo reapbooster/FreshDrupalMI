@@ -2,7 +2,6 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
-use Drupal\Core\Entity\Entity;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
@@ -11,7 +10,6 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use Drupal\node\Entity\Node;
 use GuzzleHttp\Client;
 
 /**
@@ -91,8 +89,10 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
             ],
             'title' => $row->getSourceProperty('name'),
             'field_subtitle' => $row->getSourceProperty('hero_title'),
-            'field_link' => '/by_uuid/node/' . $row->getSourceProperty('uuid'),
-            'field_published' => true
+            // 'field_link' => Url::fromUri('/node/'
+            // . $row->getSourceProperty('uuid')),
+            // TODO: figure out how to link it back to the node
+            'field_published' => TRUE,
           ]);
           if ($slide instanceof EntityInterface) {
             $slide->save();
@@ -101,7 +101,8 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           }
         }
       }
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
         ->error("IMPORT ERROR: " . $e->getMessage());
       throw new MigrateException($e->getMessage());

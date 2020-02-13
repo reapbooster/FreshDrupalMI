@@ -9,9 +9,6 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsButtonsWidget;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\user\Entity\User;
 
 /**
  * Plugin implementation of the 'options_buttons' widget.
@@ -71,17 +68,39 @@ class MilkenLayoutSelectionIcons extends OptionsButtonsWidget {
     return $this->options;
   }
 
+  /**
+   * Get selected Options.
+   *
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
+   *   Item list.
+   *
+   * @return array|null
+   *   Returns null.
+   *
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
   protected function getSelectedOptions(FieldItemListInterface $items) {
     $value = $items->get(0)->getValue();
     if (is_array($value) && isset($value[$this->column])) {
-      return [ $value[$this->column] ];
+      return [$value[$this->column]];
     }
-    return null;
+    return NULL;
   }
 
-
-
-  function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
+  /**
+   * Massage form values.
+   *
+   * @param array $values
+   *   Values to massage.
+   * @param array $form
+   *   Form from which they are derived.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Form State object.
+   *
+   * @return array|mixed|null
+   *   Returns array of Items.
+   */
+  public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     $field_name = $this->fieldDefinition->getName();
 
     // Extract the values from $form_state->getValues().
