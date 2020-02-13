@@ -3,11 +3,14 @@ module:
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
+  bg_image_formatter: 0
   block: 0
   block_content: 0
+  book: 0
   bootstrap_library: 0
   breakpoint: 0
   ckeditor: 0
+  color_field: 0
   config: 0
   config_filter: 0
   config_split: 0
@@ -27,9 +30,9 @@ module:
   diff: 0
   dropzonejs: 0
   dropzonejs_eb_widget: 0
-  ds: 0
   ds_bootstrap_layouts: 0
   dynamic_page_cache: 0
+  eck: 0
   editor: 0
   element_class_formatter: 0
   embed: 0
@@ -47,7 +50,9 @@ module:
   file_browser: 0
   filter: 0
   fontawesome: 0
+  form_options_attributes: 0
   hal: 0
+  hook_event_dispatcher: 0
   image: 0
   imagick: 0
   inline_entity_form: 0
@@ -55,10 +60,10 @@ module:
   kint: 0
   language: 0
   layout_builder: 0
+  layout_builder_kit: 0
   layout_builder_restrictions: 0
   layout_builder_styles: 0
   layout_discovery: 0
-  layout_library: 0
   link: 0
   markdown: 0
   media: 0
@@ -74,18 +79,21 @@ module:
   migrate_plus: 0
   migrate_tools: 0
   milken_base: 0
+  milken_migrate: 0
   node: 0
   npm: 0
   options: 0
   page_cache: 0
+  paragraphs: 0
   path: 0
   path_alias: 0
   rdf: 0
-  react_component: 0
   redis: 0
   responsive_image: 0
   rest: 0
   restui: 0
+  schemata: 0
+  schemata_json_schema: 0
   search: 0
   search_api: 0
   search_api_solr: 0
@@ -108,11 +116,10 @@ module:
   views_slideshow_cycle: 0
   views_ui: 0
   webpack: 0
+  ds: 1
   menu_link_content: 1
   pathauto: 1
   views: 10
-  paragraphs: 11
-  milken_migrate: 30
   minimal: 1000
 theme:
   stark: 0
@@ -123,6 +130,7 @@ theme:
   adminimal_theme: 0
   milken: 0
   bartik: 0
+  claro: 0
 profile: minimal
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc

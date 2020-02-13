@@ -7,15 +7,13 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_authors
     - field.field.node.article.field_meta_tags
-    - field.field.node.article.field_promotional_slide
+    - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
     - node.type.article
   module:
-    - ds
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
-    - layout_library
     - text
     - user
 third_party_settings:
@@ -24,31 +22,23 @@ third_party_settings:
     enabled: true
     sections:
       -
-        layout_id: ds_1col
+        layout_id: layout_onecol
         layout_settings:
-          label: ''
-          wrappers:
-            ds_content: div
-          outer_wrapper: div
-          attributes: ''
-          link_attribute: ''
-          link_custom: ''
-          classes:
-            layout_class: {  }
+          label: Slide
         components:
-          18a873d9-9b16-437a-a425-68fc93b1f7c7:
-            uuid: 18a873d9-9b16-437a-a425-68fc93b1f7c7
-            region: ds_content
+          18074587-014d-4da8-af54-f2e1c1bb0fe9:
+            uuid: 18074587-014d-4da8-af54-f2e1c1bb0fe9
+            region: content
             configuration:
-              id: 'field_block:node:article:field_promotional_slide'
-              label: 'Promo Slide'
+              id: 'field_block:node:article:field_promo_slide'
+              label: promo_slide
               provider: layout_builder
               label_display: '0'
               formatter:
                 label: hidden
                 type: entity_reference_entity_view
                 settings:
-                  view_mode: full
+                  view_mode: default
                 third_party_settings: {  }
               context_mapping:
                 entity: layout_builder.entity
@@ -135,8 +125,6 @@ third_party_settings:
     entity_view_mode_restriction:
       allowed_blocks: {  }
       allowed_layouts: {  }
-  layout_library:
-    enable: false
 id: node.article.full
 targetEntityType: node
 bundle: article
@@ -157,6 +145,7 @@ content:
 hidden:
   field_authors: true
   field_meta_tags: true
+  field_promo_slide: true
   field_promotional_slide: true
   field_topics: true
   langcode: true

@@ -7,54 +7,27 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_authors
     - field.field.node.article.field_meta_tags
-    - field.field.node.article.field_promotional_slide
+    - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
     - node.type.article
   module:
-    - ds
     - layout_builder
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-  ds:
-    layout:
-      id: ds_1col_wrapper
-      library: null
-      disable_css: false
-      entity_classes: all_classes
-      settings:
-        label: ''
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        classes:
-          layout_class: {  }
-    regions:
-      ds_content:
-        - field_promotional_slide
 id: node.article.small_tile
 targetEntityType: node
 bundle: article
 mode: small_tile
-content:
-  field_promotional_slide:
-    type: entity_reference_entity_view
-    weight: 0
-    region: ds_content
-    label: hidden
-    settings:
-      view_mode: small_tile
-      link: false
-    third_party_settings: {  }
+content: {  }
 hidden:
   body: true
   field_authors: true
   field_meta_tags: true
+  field_promo_slide: true
+  field_promotional_slide: true
   field_topics: true
   langcode: true
   layout_builder__layout: true

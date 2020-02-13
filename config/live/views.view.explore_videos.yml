@@ -216,7 +216,7 @@ display:
           view_mode: small
       use_more: true
       use_more_always: true
-      use_more_text: more
+      use_more_text: 'see all'
       display_description: 'Generic Videos Block'
     cache_metadata:
       max-age: -1

@@ -1,0 +1,168 @@
+uuid: 5d4a9cb2-3a2b-444e-ab54-c587fb9042e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.slide.photo_left_text_right
+    - field.field.slide.photo_left_text_right.field_background_color
+    - field.field.slide.photo_left_text_right.field_background_image
+    - field.field.slide.photo_left_text_right.field_link
+    - field.field.slide.photo_left_text_right.field_photo_position
+    - field.field.slide.photo_left_text_right.field_promoted
+    - field.field.slide.photo_left_text_right.field_published
+    - field.field.slide.photo_left_text_right.field_subtitle
+    - field.field.slide.photo_left_text_right.field_text_color
+    - image.style.thumbnail
+  module:
+    - color_field
+    - field_group
+    - image
+    - link
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_text
+        - group_background
+        - group_publishing
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_text:
+      children:
+        - field_subtitle
+        - field_text_color
+        - field_link
+      parent_name: group_tabs
+      weight: 12
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Text
+    group_background:
+      children:
+        - field_photo_position
+        - field_background_color
+        - field_background_image
+      parent_name: group_tabs
+      weight: 13
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Background
+    group_publishing:
+      children:
+        - langcode
+        - created
+        - field_promoted
+        - field_published
+      parent_name: group_tabs
+      weight: 14
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publishing
+id: slide.photo_left_text_right.default
+targetEntityType: slide
+bundle: photo_left_text_right
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_background_color:
+    weight: 11
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  field_background_image:
+    weight: 12
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_link:
+    weight: 10
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_photo_position:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_promoted:
+    weight: 6
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_published:
+    weight: 7
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_subtitle:
+    weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_text_color:
+    weight: 9
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  langcode:
+    type: language_select
+    weight: 4
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
