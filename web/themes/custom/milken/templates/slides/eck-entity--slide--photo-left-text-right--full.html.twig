@@ -1,4 +1,5 @@
 {% if eck_entity %}
+  {% set text_color = eck_entity.get('field_text_color').value.color | default("#ffffff") %}
   <div class="row"
     {% if eck_entity.get('field_background_color').value.color != 'transparent' %}
       style="background-color: {{ eck_entity.get('field_background_color').value.color }}"
@@ -30,11 +31,13 @@
     <div class="col col-lg-6 col-sm-12 align-items-center"
          style="color: {{ eck_entity.get('field_text_color').value.color }}">
       <div class="container">
-        <h1 class="display-3">{{ eck_entity.get('title').value }}</h1>
-        <p class="lead">{{ eck_entity.get('field_subtitle').value }}</p>
+        <h1 class="display-3"
+            style="color: {{ text_color }}"
+        >{{ eck_entity.get('title').value }}</h1>
+        <p class="lead" style="color: {{ text_color }}">{{ eck_entity.get('field_subtitle').value }}</p>
         <hr class="my-4">
         <p><a href="{{ eck_entity.get('field_link').uri }}"
-              class="btn btn-primary btn-lg">{{ eck_entity.get('field_link').title }}</a></p>
+              class="btn btn-primary btn-lg" style="color: {{ text_color }}">{{ eck_entity.get('field_link').title }}</a></p>
       </div>
     </div>
     <div class="col col-lg-6 col-sm-12"

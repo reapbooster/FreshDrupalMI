@@ -25,8 +25,9 @@ module:
   dblog: 0
   default_content: 0
   default_content_deploy: 0
-  default_content_extra: 0
   delete_all: 0
+  devel: 0
+  devel_generate: 0
   diff: 0
   dropzonejs: 0
   dropzonejs_eb_widget: 0
