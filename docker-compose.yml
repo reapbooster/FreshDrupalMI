@@ -2,6 +2,7 @@
 version: '3.7'
 services:
   nginx:
+    container_name: nginx
     build: docker/nginx-container
     image: milken/nginx-dev
     expose:
@@ -22,11 +23,14 @@ services:
       - .env
 
   php:
+    container_name: php
     build: docker/php-container
     image: milken/php-dev
     expose:
       - '9000'
       - '4444'
+    links:
+      - solr
     volumes:
       - ".:/var/www"
       - "$HOME/.ssh:/root/.ssh"
@@ -34,6 +38,7 @@ services:
       - .env
 
   mysql:
+    container_name: mysql
     build: docker/mysql-container
     image: milken/mysql-dev
     expose:
@@ -46,9 +51,23 @@ services:
       - .env
 
   redis:
+    container_name: redis
     image: redis
     expose:
       - '6379'
+
+  solr:
+    container_name: solr
+    image: milken/solr-dev
+    build: docker/solr-container
+    environment:
+      - JAVA_HOME=/usr/local/openjdk-11
+    env_file:
+      - .env
+    expose:
+      - "8983"
+    ports:
+      - "8983:8983"
 
 volumes:
   web: {}
