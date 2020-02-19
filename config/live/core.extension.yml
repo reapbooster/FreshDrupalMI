@@ -3,6 +3,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
+  better_normalizers: 0
   bg_image_formatter: 0
   block: 0
   block_content: 0
@@ -11,6 +12,7 @@ module:
   breakpoint: 0
   ckeditor: 0
   color_field: 0
+  comment: 0
   config: 0
   config_filter: 0
   config_split: 0
@@ -26,8 +28,6 @@ module:
   default_content: 0
   default_content_deploy: 0
   delete_all: 0
-  devel: 0
-  devel_generate: 0
   diff: 0
   dropzonejs: 0
   dropzonejs_eb_widget: 0
@@ -44,6 +44,9 @@ module:
   entity_reference: 0
   entity_reference_revisions: 0
   entityqueue: 0
+  facets: 0
+  facets_pretty_paths: 0
+  facets_summary: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -95,9 +98,10 @@ module:
   restui: 0
   schemata: 0
   schemata_json_schema: 0
-  search: 0
-  search_api: 0
-  search_api_solr: 0
+  search: 49
+  search_api: 50
+  search_api_solr: 51
+  search_api_solr_defaults: 52
   serialization: 0
   settings_tray: 0
   svg_image_field: 0
