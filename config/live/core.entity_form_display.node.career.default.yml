@@ -4,8 +4,18 @@ status: true
 dependencies:
   config:
     - field.field.node.career.body
+    - field.field.node.career.field_careers_apply
+    - field.field.node.career.field_centers_general
+    - field.field.node.career.field_department
+    - field.field.node.career.field_hero_image
+    - field.field.node.career.field_link_to_video
+    - field.field.node.career.field_location
+    - field.field.node.career.field_meta_tags
+    - field.field.node.career.field_seniority_level
     - node.type.career
   module:
+    - link
+    - metatag
     - path
     - text
 id: node.career.default
@@ -29,6 +39,78 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_careers_apply:
+    weight: 122
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_centers_general:
+    weight: 123
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_department:
+    weight: 124
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_hero_image:
+    weight: 125
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_link_to_video:
+    weight: 126
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_location:
+    weight: 127
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_meta_tags:
+    weight: 128
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_seniority_level:
+    weight: 129
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   langcode:
     type: language_select
     weight: 2

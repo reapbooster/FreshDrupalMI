@@ -1,0 +1,40 @@
+uuid: b054e0b5-2546-4555-a38b-8b769a502dcb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.large_tile
+    - field.field.node.article.body
+    - field.field.node.article.field_authors
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_promo_slide
+    - field.field.node.article.field_topics
+    - node.type.article
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks: {  }
+      allowed_layouts: {  }
+id: node.article.large_tile
+targetEntityType: node
+bundle: article
+mode: large_tile
+content: {  }
+hidden:
+  body: true
+  field_authors: true
+  field_meta_tags: true
+  field_promo_slide: true
+  field_promotional_slide: true
+  field_topics: true
+  langcode: true
+  layout_builder__layout: true
+  links: true
+  search_api_excerpt: true

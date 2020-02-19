@@ -1,0 +1,23 @@
+uuid: 153a769e-6c47-4506-ba57-fdc1b70888c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.report
+  module:
+    - text
+id: node.report.body
+field_name: body
+entity_type: node
+bundle: report
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -1,21 +1,24 @@
 global-styling:
-  version: VERSION
+  version: 1.0
   js:
     js/milken.js: {}
   css:
     component:
       css/milken.css: {}
+
 bootstrap:
   js:
     /libraries/popper/popper.min.js: {}
     /libraries/bootstrap/dist/js/bootstrap.min.js: {}
-  css:
-    component:
-      /libraries/bootstrap/dist/css/bootstrap.min.css: {}
 bootstrap_cdn:
   js:
     //cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js: {}
     //stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js: {}
+
+react_landing_page:
+  versino: 1.0
+  js:
+    js/react_landing_page.js: {}
   css:
     component:
-      //stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css: {}
+      css/react_landing_page.css: {}

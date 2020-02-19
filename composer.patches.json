@@ -1,7 +1,9 @@
 {
   "patches": {
     "drupal/core": {
-      "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch"
+      "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch",
+      "Media sources should handle empty source field values more gracefully": "patches/3059950-36.patch",
+      "Layout builder exports": "patches/layout_builder-export-content-2942975-67.patch"
     },
     "drupal/bootstrap_barrio": {
       "Fixing issue with layout builder" : "patches/bootstrap_barrio-disable_default_layouts-2976934-38.patch"

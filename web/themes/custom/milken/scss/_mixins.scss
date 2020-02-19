@@ -67,7 +67,7 @@
 
 @mixin boxedLink($color, $padding){
     text-decoration: none;
-    padding: $padding; //8px 30px;
+    padding: $padding;
     border: 1px solid $color;
     color: $color;
 }
@@ -145,7 +145,6 @@
 
 @mixin pdfButton(){
     text-align: left;
-   // width: 100%;
     @media (max-width: $breakpointPhone){
         text-align: center;
         margin-bottom: 10px;
@@ -174,7 +173,6 @@
  * "break" the pull quote into pulling over the right boundery of the container.
  **/
 @mixin rightQuotes1(){
-    // phone
     float: right;
     width: 50%;
     border: none;
@@ -193,7 +191,6 @@
     br{
         display: none;
     }
-    // tablet
     @media (min-width: ($breakpointPhone + 1px)) {
       font-size: 24px;
       line-height: 30px;
@@ -203,7 +200,6 @@
       padding: 20px 25px;
 
     }
-    // desktop
     @media (min-width: $breakpointTableMD) {
       font-size: 28px;
       line-height: 36px;
@@ -225,8 +221,6 @@
         top: 0px;
         @media (min-width: $breakpointTableMD) {
             font-size: 60px;
-            // margin-left: 0;
-            // left: -5px;
 
         }
     }
@@ -244,18 +238,14 @@
         @media (min-width: $breakpointTableMD) {
             font-size: 60px;
             bottom: -35px;
-            // padding-left: 10px;
         }
 
-        // @media (max-width: $breakpointPhone) {
-        //     bottom: -35px;
-        // }
+
     }
 
     @media (max-width: $breakpointPhone){
         float: none;
         width: 94%;
-        //padding-right: 5px;
     }
 }
 

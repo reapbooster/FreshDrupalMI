@@ -25,15 +25,20 @@ default:
     Behat\MinkExtension:
       files_path: './data-files'
       # base_url set by ENV
+      base_url: "http://localhost:8080"
       browser_name: chrome
       sessions:
         default:
           chrome:
-            api_url: "http://localhost:4444"
+            api_url: "http://localhost:9222"
             validate_certificate: false
 
     Drupal\DrupalExtension:
       blackbox: ~
-      api_driver: 'drush'
+      api_driver: 'drupal'
+      drush:
+        alias: 'docker.docker'
+      drupal:
+        drupal_root: '/var/www/web'
 
     DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~

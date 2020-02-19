@@ -1,0 +1,6 @@
+name: 'Milken Base Classes'
+type: module
+description: 'Adds basic functionality and classes'
+core: 8.x
+package: 'milken'
+

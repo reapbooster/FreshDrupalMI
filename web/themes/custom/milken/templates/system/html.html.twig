@@ -73,27 +73,28 @@
 {{ page }}
 {{ page_bottom }}
 
+<!-- Site Footer from html.html.twig -->
 <footer>
   <div class="footer-desktop">
     <div class="top-row">
-        <!-- links -->
+        <!-- links in html.html.twig -->
         <div class="footer-links">
-            {{ page.bottom_menu1 }}
+          {{ drupal_menu('footer-links-menu') }}
         </div>
 
-        <!-- text -->
+        <!-- text in html.html.twig -->
         <div class="newsletter-text">
           Stay up to date on research and event from the Milken Institute
         </div>
     </div>
 
     <div class="bottom-row">
-      <!-- social -->
+      <!-- social menu in html.html.twig -->
       <div class="footer-social">
-          {{ page.bottom_menu2 }}
+          {{ drupal_menu('footer-social-menu') }}
       </div>
 
-      <!-- button -->
+      <!-- button in html.html.twig -->
       <div class="newsletter-sign-up">
         <a href="https://www.cvent.com/Pub/eMarketing/Pages/SignUp.aspx?p=5b49cee6-fb01-4e53-bf27-b8aef82941e6&m=">
             Join Our Mailing List
@@ -105,11 +106,11 @@
   <div class="footer-mobile-tablet">
         <!-- links -->
         <div class="footer-links">
-            {{ page.bottom_menu1 }}
+          {{ drupal_menu('footer-links-menu') }}
         </div>
         <!-- social -->
         <div class="footer-social">
-            {{ page.bottom_menu2 }}
+          {{ drupal_menu('footer-social-menu') }}
         </div>
         <!-- text -->
         <div class="newsletter-text">

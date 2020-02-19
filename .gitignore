@@ -63,6 +63,7 @@ web/sites/default/files
 # Place local settings in settings.local.php
 web/sites/*/settings.local.php
 web/sites/*/services*.yml
+web/sites/*/services.yml
 !web/sites/*/services.pantheon.*.yml
 !web/sites/*/services.yml
 
@@ -113,7 +114,8 @@ Thumbs.db
 /web/themes/custom/milken/scss/milken.css.map
 /web/themes/custom/milken/scss/milken.css
 web/themes/custom/milken/**/*.js
-/web/sites/default/services.yml
 *.map
 *.css.map
 src/**/*.js
+/web/info.php
+/.phpunit.result.cache

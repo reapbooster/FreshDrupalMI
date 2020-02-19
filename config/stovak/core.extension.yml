@@ -1,4 +1,5 @@
 module:
+  address: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
@@ -10,7 +11,6 @@ module:
   config: 0
   config_filter: 0
   config_split: 0
-  content_sync: 0
   contextual: 0
   ctools: 0
   ctools_block: 0
@@ -19,6 +19,7 @@ module:
   datetime_range: 0
   dblog: 0
   delete_all: 0
+  devel: 0
   diff: 0
   ds: 0
   dynamic_page_cache: 0
@@ -29,6 +30,7 @@ module:
   entity_embed: 0
   field: 0
   field_group: 0
+  field_ui: 0
   file: 0
   filter: 0
   image: 0
@@ -54,6 +56,7 @@ module:
   rdf: 0
   redis: 0
   responsive_image: 0
+  react_component: 0
   search_api: 0
   search_api_solr: 0
   serialization: 0
@@ -67,17 +70,20 @@ module:
   token: 0
   toolbar: 0
   user: 0
+  webpack: 0
   menu_link_content: 1
   pathauto: 1
   views: 10
-  views_ui: 10
   minimal: 1000
-  field_ui: 0
-  menu_ui: 0
-  views_ui: 0
-  devel: 0
-  webpack: 0
-
+  views_ui: 20
+  milken_migrate: 30
+  default_content: 0
+  default_content_extra: 0
+  hal: 0
+  rest: 0
+  restui: 0
+  twig_tweak: 0
+  fontawesome: 0
 theme:
   stark: 0
   stable: 0

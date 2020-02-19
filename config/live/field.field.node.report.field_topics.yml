@@ -1,0 +1,33 @@
+uuid: 74103cfc-2962-471b-bbcb-4fbcb2e7e699
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topics
+    - node.type.report
+    - taxonomy.vocabulary.collections
+    - taxonomy.vocabulary.milken_tags
+    - taxonomy.vocabulary.program_initiatives
+id: node.report.field_topics
+field_name: field_topics
+entity_type: node
+bundle: report
+label: Topics
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      collections: collections
+      milken_tags: milken_tags
+      program_initiatives: program_initiatives
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: collections
+field_type: entity_reference

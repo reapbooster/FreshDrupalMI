@@ -1,0 +1,53 @@
+uuid: 2c95030b-f0ca-4db7-888c-dc4fa53ae683
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.content_browser
+    - field.field.node.career.body
+    - field.field.node.career.field_careers_apply
+    - field.field.node.career.field_centers_general
+    - field.field.node.career.field_department
+    - field.field.node.career.field_hero_image
+    - field.field.node.career.field_link_to_video
+    - field.field.node.career.field_location
+    - field.field.node.career.field_meta_tags
+    - field.field.node.career.field_seniority_level
+    - node.type.career
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.career.content_browser
+targetEntityType: node
+bundle: career
+mode: content_browser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_careers_apply: true
+  field_centers_general: true
+  field_department: true
+  field_hero_image: true
+  field_link_to_video: true
+  field_location: true
+  field_meta_tags: true
+  field_seniority_level: true
+  langcode: true
+  search_api_excerpt: true
