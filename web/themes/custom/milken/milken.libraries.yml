@@ -22,3 +22,9 @@ react_landing_page:
   css:
     component:
       css/react_landing_page.css: {}
+
+search:
+  version: 1.0.0
+  footer: true
+  js:
+    js/Search.entry.js: { preprocess: 0 }

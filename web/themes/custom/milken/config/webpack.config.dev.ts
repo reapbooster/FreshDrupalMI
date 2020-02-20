@@ -6,11 +6,20 @@ const PluginError = require("plugin-error");
 const Logger = require('fancy-log');
 
 
-
+function parsePath(incoming) {
+  const basename = path.basename(incoming, path.extname(incoming));
+  return {
+    full: path.resolve(incoming),
+    dirname: path.dirname(incoming),
+    basename: basename,
+    libraryName: basename.replace('.entry', '')
+  };
+}
 
 module.exports = () => {
   var configurator = (name, file) => {
-    console.log(`Configuring: ${file}`)
+    const parsedFileName = parsePath(file);
+    console.log(`Configuring: ${parsedFileName.libraryName}`)
     var babelLoader = {
       loader: 'babel-loader',
       options: {
@@ -31,8 +40,8 @@ module.exports = () => {
       devtool: "source-map",
       cache: true,
       output: {
-        filename: 'js/[name].entry.js',
-        path: path.dirname(file)
+        filename: parsedFileName.libraryName + ".entry.js",
+        path: parsedFileName.dirname
       },
       resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
@@ -68,10 +77,10 @@ module.exports = () => {
       // assume a corresponding global variable exists and use that instead.
       // This is important because it allows us to avoid bundling all of our
       // dependencies, which allows browsers to cache those libraries between builds.
-      externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-      },
+      // externals: {
+      //  "react": "React",
+      //  "react-dom": "ReactDOM"
+      //},
       plugins: [
       ],
       stats: {
@@ -82,28 +91,18 @@ module.exports = () => {
         errorDetails: true
       }
     }
-    toReturn.entry[name] = file;
+    toReturn.entry[parsedFileName.libraryName] = file;
     return toReturn;
   };
 
   var stream = new Stream.Transform({ objectMode: true });
 
-  function parsePath(incoming) {
-    return {
-      full: path.resolve(incoming),
-      dirname: path.dirname(incoming),
-      basename: path.basename(incoming, path.extname(incoming)),
-      libraryName: path.basename(incoming).replace('.entry.' + path.extname(incoming), '')
-    };
-  }
+
   stream._transform = function(originalFile, unused, callback) {
     var file = originalFile.clone({ contents: false });
-    console.log(file);
     var parsedPath = parsePath(file.path);
     console.log(`tranforming ${parsedPath.libraryName}!`);
-    console.log(parsedPath);
     var webPackConfig = configurator(parsedPath.libraryName, parsedPath.full);
-    console.log(webPackConfig);
     webpack(webPackConfig, (err, stats) => {
       if (err) {
         throw new PluginError('webpack:build', err);

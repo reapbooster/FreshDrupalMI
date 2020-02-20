@@ -2,6 +2,13 @@ command:
   name: site:milken:migrations
   description: 'Migrate d7 data from sources to this instance'
 commands:
+  -
+  - command: "exec"
+    arguments:
+      bin: "drush default-content-deploy:import"
+    options:
+      working-directory: /var/www
+
   - command: "exec"
     arguments:
       bin: "drush migrate:import --tag=taxonomy"
@@ -17,11 +24,5 @@ commands:
   - command: "exec"
     arguments:
       bin: "drush migrate:import article"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush default-content-deploy:import"
     options:
       working-directory: /var/www

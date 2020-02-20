@@ -1,0 +1,30 @@
+uuid: f25b1fb3-ddf2-4b88-95b0-db0ed6d4eabc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.react.field_attached_libraries
+    - node.type.react
+  module:
+    - user
+id: node.react.default
+targetEntityType: node
+bundle: react
+mode: default
+content:
+  field_attached_libraries:
+    weight: 101
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
