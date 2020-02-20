@@ -119,3 +119,4 @@ web/themes/custom/milken/**/*.js
 src/**/*.js
 /web/info.php
 /.phpunit.result.cache
+/web/libraries

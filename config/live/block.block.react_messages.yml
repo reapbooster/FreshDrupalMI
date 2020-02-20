@@ -1,0 +1,22 @@
+uuid: 9a796201-8b5d-4090-bdcb-1ac338b48058
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - react
+_core:
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: react_messages
+theme: react
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

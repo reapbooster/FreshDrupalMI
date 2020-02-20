@@ -1,0 +1,16 @@
+uuid: d01f830a-af42-4ff7-81ed-a581f74b9f61
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: search_page
+label: 'Search Page'
+weight: 0
+theme: react
+admin_theme: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: "/search\r\n/search*"
+    negate: false
