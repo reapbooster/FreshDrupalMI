@@ -120,3 +120,4 @@ src/**/*.js
 /web/info.php
 /.phpunit.result.cache
 /web/libraries
+web/themes/custom/*/js/*.entry.js

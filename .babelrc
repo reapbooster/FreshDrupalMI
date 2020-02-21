@@ -6,7 +6,8 @@
         "node": "current"
       }
     }],
-    "@babel/react"
+    "@babel/react",
+    "@babel/preset-typescript"
   ],
   "plugins": [
     "@babel/transform-runtime"
