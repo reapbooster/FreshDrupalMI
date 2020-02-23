@@ -1,23 +1,23 @@
-uuid: a9b7ee32-f0b1-41fe-889a-ad76de248a6c
+uuid: dbeb23e9-124c-44e4-b459-895de9ebaee0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - node.type.article
+    - field.storage.node.field_body
+    - node.type.event
   module:
     - text
-id: node.article.body
-field_name: body
+id: node.event.field_body
+field_name: field_body
 entity_type: node
-bundle: article
-label: Body
+bundle: event
+label: body
 description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
+  display_summary: false
   required_summary: false
 field_type: text_with_summary

@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.event.body
     - field.field.node.event.field_authors
+    - field.field.node.event.field_body
     - field.field.node.event.field_event_location
     - field.field.node.event.field_meta_tags
     - field.field.node.event.field_publication_date
@@ -37,21 +37,6 @@ third_party_settings:
               id: 'extra_field_block:node:event:links'
             additional: {  }
             weight: 0
-          ec5cb439-db75-49f7-9fe5-7d976223138a:
-            uuid: ec5cb439-db75-49f7-9fe5-7d976223138a
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:event:body'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
-            additional: {  }
-            weight: 1
           41e24c38-e32b-4d60-b583-063599204f93:
             uuid: 41e24c38-e32b-4d60-b583-063599204f93
             region: content
@@ -116,19 +101,27 @@ third_party_settings:
                 type: address_default
             additional: {  }
             weight: 9
+          f156ca2f-0277-43e3-a4df-895f423ac47e:
+            uuid: f156ca2f-0277-43e3-a4df-895f423ac47e
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:event:field_body'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: text_default
+            additional: {  }
+            weight: 10
         third_party_settings: {  }
 id: node.event.default
 targetEntityType: node
 bundle: event
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_authors:
     weight: 105
     label: above
@@ -136,6 +129,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_body:
+    weight: 110
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
     region: content
   field_event_location:
     weight: 109
