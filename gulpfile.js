@@ -11,7 +11,7 @@ const shell = require("gulp-shell");
 const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
-
+const sourcemaps = require('gulp-sourcemaps');
 
 
 // eslint-disable-next-line no-unused-vars
@@ -35,8 +35,8 @@ gulp.task(
 
 gulp.task("themeBuild", () => {
   return gulp
-    .src(path.resolve("/scss/*.scss"))
-    //.pipe(sourcemaps.init())
+    .src(path.resolve("./web/themes/custom/milken/scss/*.scss"))
+    .pipe(sourcemaps.init())
     .pipe(autoprefixer())
     .pipe(
       sass({
@@ -49,9 +49,8 @@ gulp.task("themeBuild", () => {
       }).on("error", sass.logError)
     )
     //.pipe(sourcemaps.write("../css"))
-    .pipe(gulp.dest(path.resolve("./web/themes/custom/milken/css")));
+    .pipe(gulp.dest("web/themes/custom/milken/css"));
 });
-
 
 gulp.task("buildComponents", done => {
   /* eslint-disable */
