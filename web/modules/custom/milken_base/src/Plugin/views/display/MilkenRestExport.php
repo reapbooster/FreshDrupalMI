@@ -2,46 +2,47 @@
 
 namespace Drupal\milken_base\Plugin\views\display;
 
-use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Cache\CacheableResponse;
 use Drupal\Core\Render\RenderContext;
 use Drupal\rest\Plugin\views\display\RestExport;
 use Drupal\views\Render\ViewsRenderPipelineMarkup;
 
 /**
-* The plugin that handles Data response callbacks for REST resources.
-*
-* @ingroup views_display_plugins
-*
-* @ViewsDisplay(
-*   id = "milken_rest_export",
-*   title = @Translation("MILKEN REST export"),
-*   help = @Translation("Create a REST export resource specific to Milken Website."),
-*   uses_route = TRUE,
-*   admin = @Translation("Milken REST export"),
-*   returns_response = TRUE
-* )
-*/
+ * The plugin that handles Data response callbacks for REST resources.
+ *
+ * @ingroup views_display_plugins
+ *
+ * @ViewsDisplay(
+ *   id = "milken_rest_export",
+ *   title = @Translation("MILKEN REST export"),
+ *   help = @Translation("Create a REST export resource specific to Milken Website."),
+ *   uses_route = TRUE,
+ *   admin = @Translation("Milken REST export"),
+ *   returns_response = TRUE
+ * )
+ */
 class MilkenRestExport extends RestExport {
 
+  /**
+   * Render Function.
+   */
   public function render() {
     $build = [];
-    $build['#markup'] = $this->renderer->executeInRenderContext(new RenderContext(), function() {
+    $build['#markup'] = $this->renderer->executeInRenderContext(new RenderContext(), function () {
       return $this->view->style_plugin->render();
     });
     $toReturn = [];
     // Decode results.
-    $results = \GuzzleHttp\json_decode($build['#markup'], true);
-    $filters = [ ];
+    $results = \GuzzleHttp\json_decode($build['#markup'], TRUE);
+    $filters = [];
     foreach ($results as $key => $result) {
       if (empty($result['title'])) {
         $results[$key]['title'] = $result['title_1'];
       }
-      unset( $results[$key]['title_1']);
-      if (!isset( $filters[$result['type']])) {
+      unset($results[$key]['title_1']);
+      if (!isset($filters[$result['type']])) {
         $filters[$result['type']] = [
           'facetName' => $result['type'],
-          'facetItemsReturned' => 0
+          'facetItemsReturned' => 0,
         ];
       }
       $filters[$result['type']]['facetItemsReturned']++;
@@ -49,10 +50,10 @@ class MilkenRestExport extends RestExport {
     $toReturn['data'] = $results;
     $toReturn['filters'] = [
       [
-        'facetTypeName'=> "Content Type",
+        'facetTypeName' => "Content Type",
         'facetTypeID' => 'type',
-        'items' => array_values($filters)
-      ]
+        'items' => array_values($filters),
+      ],
     ];
 
     // Convert back to JSON.
@@ -85,7 +86,6 @@ class MilkenRestExport extends RestExport {
     parent::applyDisplayCacheabilityMetadata($build);
 
     return $build;
-
 
   }
 
