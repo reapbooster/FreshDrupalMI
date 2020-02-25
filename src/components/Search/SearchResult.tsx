@@ -44,3 +44,4 @@ SearchResult.defaultProps = {
 }
 
 export default SearchResult;
+export { SearchResultProps }

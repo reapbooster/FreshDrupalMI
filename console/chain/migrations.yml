@@ -4,12 +4,6 @@ command:
 commands:
   - command: "exec"
     arguments:
-      bin: "drush default-content-deploy:import"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
       bin: "drush migrate:import --tag=taxonomy"
     options:
       working-directory: /var/www
@@ -25,3 +19,28 @@ commands:
       bin: "drush migrate:import article"
     options:
       working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush default-content-deploy:import"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush cr"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush search-api:server-clear solr_dev"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush search-api:index"
+    options:
+      working-directory: /var/www
+

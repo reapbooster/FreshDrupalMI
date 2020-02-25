@@ -113,6 +113,7 @@
         "drupal/pathauto": "^1.6",
         "drupal/purge": "^3.0@beta",
         "drupal/redis": "^1.1",
+        "drupal/rest_export_nested": "^1.0@alpha",
         "drupal/restui": "1.x-dev",
         "drupal/s3fs": "3.x-dev",
         "drupal/s3fs_cors": "^1.0@beta",
@@ -133,7 +134,9 @@
         "drupal/uuid_url": "^1.1",
         "drupal/vbo_export": "^3.0",
         "drupal/video_embed_field": "^2.2",
+        "drupal/views_aggregator": "^1.0@alpha",
         "drupal/views_bootstrap": "^4.2",
+        "drupal/views_field_view": "^1.0@beta",
         "drupal/views_infinite_scroll": "^1.5",
         "drupal/views_layout": "^1.1",
         "drupal/views_slideshow": "4.x-dev",
@@ -179,6 +182,9 @@
         ]
     },
     "scripts": {
+        "install-vendor-dir": [
+            "php -d memory_limit=-1 `which composer` install --optimize-autoloader --no-dev"
+        ],
         "build-assets": [
             "@prepare-for-pantheon",
             "php -d memory_limit=-1 `which composer` install --optimize-autoloader --no-dev",
@@ -204,7 +210,7 @@
         ],
         "post-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "yarn install"
+            "npm install"
         ],
         "post-create-project-cmd": [
             "@drupal-scaffold",
@@ -281,6 +287,7 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "process-timeout": 0,
         "fxp-asset": {
             "vcs-driver-options": {
                 "github-no-api": true
