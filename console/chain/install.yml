@@ -34,7 +34,6 @@ commands:
     arguments:
       module:
         - redis
-        - language
 
   - command: "exec"
     arguments:

@@ -142,11 +142,11 @@ process:
     plugin: default_value
     default_value: 2
   path/alias: path
-  body/value:
+  field_body/value:
     -
       plugin: 'milken_migrate:body_embed'
       source: body_value
-  body/format: body_format
+  field_body/format: body_format
   created:
     plugin: 'milken_migrate:unix_date'
     source: created

@@ -1,23 +1,23 @@
-uuid: 76be6e66-d647-4cba-acf0-e695e00ce948
+uuid: d705150f-bbba-4b19-afc2-71e73fe5903d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
-    - node.type.career
+    - field.storage.node.field_body
+    - node.type.report
   module:
     - text
-id: node.career.body
-field_name: body
+id: node.report.field_body
+field_name: field_body
 entity_type: node
-bundle: career
-label: Body
+bundle: report
+label: body
 description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
+  display_summary: false
   required_summary: false
 field_type: text_with_summary

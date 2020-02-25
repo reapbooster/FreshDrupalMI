@@ -25,6 +25,7 @@
     ],
     "exclude": [
         "node_modules",
+        "src/components",
         "web/themes/custom/milken/js/*.entry.*"
     ]
 }

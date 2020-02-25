@@ -6,14 +6,13 @@
 
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
-const PluginError = require("plugin-error");
 const Logger = require('fancy-log');
 const shell = require("gulp-shell");
 const sass = require("gulp-sass");
-//const sourcemaps = require("gulp-sourcemaps");
 const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
-const webpack = require("webpack");
+const sourcemaps = require('gulp-sourcemaps');
+
 
 // eslint-disable-next-line no-unused-vars
 function typescriptCompileCallback(error, stdout, stderr) {
@@ -28,15 +27,16 @@ gulp.task(
 );
 gulp.task("clearDrupalCache", shell.task("drush cr"));
 gulp.task(
-  "tsCompile",
+  "tsCompile-milken",
   shell.task("tsc --esModuleInterop --resolveJsonModule", {
     cwd: path.resolve("./web/themes/custom/milken")
   })
 );
+
 gulp.task("themeBuild", () => {
   return gulp
     .src(path.resolve("./web/themes/custom/milken/scss/*.scss"))
-    //.pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(autoprefixer())
     .pipe(
       sass({
@@ -49,39 +49,24 @@ gulp.task("themeBuild", () => {
       }).on("error", sass.logError)
     )
     //.pipe(sourcemaps.write("../css"))
-    .pipe(gulp.dest(path.resolve("./web/themes/custom/milken/css")));
-});
-
-gulp.task("mergePackgageJsonFiles", done => {
-  gulp.src("./**/package.json").pipe(() => {
-    console.log(arguments);
-  });
-  return done();
+    .pipe(gulp.dest("web/themes/custom/milken/css"));
 });
 
 gulp.task("buildComponents", done => {
   /* eslint-disable */
-  const configurator = require(`./web/themes/custom/milken/config/webpack.config.${env}`);
-  var config = configurator();
-  config.entry = {
-    HelloWorld: path.resolve('./web/themes/custom/milken/js/HelloWorld.entry.tsx')
-  };
-  webpack(config, (err, stats) => {
-    if (err) {
-      throw new PluginError('webpack:build', err);
-    }
-    Logger.info('[webpack:build]', stats.toString({
-      colors: true
-    }));
-    done();
-  });
+  const webpackConfigurator = require(`./web/themes/custom/milken/config/webpack.config.${env}`);
+  gulp.src("./web/themes/custom/**/js/*.entry.tsx", { realpath: true })
+    .pipe(webpackConfigurator());
+  done();
 });
 
 gulp.task(
   "default",
-  gulp.series(["tsCompile", "themeBuild", "buildComponents"])
+  gulp.series(["tsCompile-milken", "themeBuild", "buildComponents"])
 );
 
 gulp.task('watch', () => {
   return gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
 });
+
+

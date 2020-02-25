@@ -132,6 +132,7 @@ RUN pecl install redis-4.3.0 \
 RUN composer global require consolidation/cgr
 RUN cgr drupal/coder
 RUN cgr friendsofphp/php-cs-fixer
+RUN cgr fxp/composer-asset-plugin
 
 RUN echo ${CODELINT} >> /root/.bashrc
 RUN echo ${CODELINT_FIX} >> /root/.bashrc

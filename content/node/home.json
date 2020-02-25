@@ -18,21 +18,6 @@
             }
         ]
     },
-    "nid": [
-        {
-            "value": 1981
-        }
-    ],
-    "uuid": [
-        {
-            "value": "1b005524-8f10-45d6-95c6-f86f9c94fda2"
-        }
-    ],
-    "vid": [
-        {
-            "value": 1982
-        }
-    ],
     "langcode": [
         {
             "value": "en",
@@ -46,7 +31,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": "2020-02-13T16:57:19+00:00",
+            "value": "2020-02-23T01:08:27+00:00",
             "format": "Y-m-d\\TH:i:sP"
         }
     ],
@@ -63,7 +48,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "d88a5539-0ee9-4dbe-8d92-4715686fd523"
+                        "value": "5054b119-053d-4ea3-b01f-8a692fce94f4"
                     }
                 ]
             }
@@ -80,7 +65,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "d88a5539-0ee9-4dbe-8d92-4715686fd523"
+                        "value": "5054b119-053d-4ea3-b01f-8a692fce94f4"
                     }
                 ],
                 "lang": "en"
@@ -95,27 +80,27 @@
     ],
     "title": [
         {
-            "value": "home",
+            "value": "Home",
             "lang": "en"
         }
     ],
     "created": [
         {
-            "value": "2020-02-13T16:54:25+00:00",
+            "value": "2020-02-23T00:57:31+00:00",
             "lang": "en",
             "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "changed": [
         {
-            "value": "2020-02-13T16:57:19+00:00",
+            "value": "2020-02-23T01:08:27+00:00",
             "lang": "en",
             "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "promote": [
         {
-            "value": false,
+            "value": true,
             "lang": "en"
         }
     ],
@@ -145,7 +130,7 @@
     "path": [
         {
             "alias": "\/home",
-            "pid": 2034,
+            "pid": 946,
             "langcode": "en",
             "lang": "en"
         }
@@ -155,11 +140,11 @@
             "section": {
                 "layout_id": "layout_onecol",
                 "layout_settings": {
-                    "label": "Slideshow"
+                    "label": "main"
                 },
                 "components": {
-                    "31f654f9-c10b-48cd-a0e3-053bc9ecc609": {
-                        "uuid": "31f654f9-c10b-48cd-a0e3-053bc9ecc609",
+                    "65235553-5cca-4e25-bd3e-fc913dc41784": {
+                        "uuid": "65235553-5cca-4e25-bd3e-fc913dc41784",
                         "region": "content",
                         "configuration": {
                             "id": "views_block:slideshow-block_1",
@@ -167,37 +152,26 @@
                             "provider": "views",
                             "label_display": 0,
                             "views_label": "",
-                            "items_per_page": "5",
-                            "context_mapping": []
-                        },
-                        "additional": [],
-                        "weight": 0
-                    }
-                },
-                "third_party_settings": []
-            }
-        },
-        {
-            "section": {
-                "layout_id": "layout_onecol",
-                "layout_settings": {
-                    "label": "Explore Videos"
-                },
-                "components": {
-                    "78ff09b5-e7cb-4ac9-927d-181c1d29b8ec": {
-                        "uuid": "78ff09b5-e7cb-4ac9-927d-181c1d29b8ec",
-                        "region": "content",
-                        "configuration": {
-                            "id": "views_block:explore_videos-block_1",
-                            "label": "",
-                            "provider": "views",
-                            "label_display": "visible",
-                            "views_label": "",
                             "items_per_page": "4",
                             "context_mapping": []
                         },
                         "additional": [],
                         "weight": 0
+                    },
+                    "201b1311-d942-4f64-86be-72d6fc34a3ec": {
+                        "uuid": "201b1311-d942-4f64-86be-72d6fc34a3ec",
+                        "region": "content",
+                        "configuration": {
+                            "id": "views_block:explore_videos-block_1",
+                            "label": "",
+                            "provider": "views",
+                            "label_display": 0,
+                            "views_label": "",
+                            "items_per_page": "4",
+                            "context_mapping": []
+                        },
+                        "additional": [],
+                        "weight": 1
                     }
                 },
                 "third_party_settings": []

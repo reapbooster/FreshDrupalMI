@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_body
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
@@ -34,21 +34,6 @@ third_party_settings:
               id: 'extra_field_block:node:article:links'
             additional: {  }
             weight: 0
-          e8069601-a0fb-47e6-9177-04c0d2cb19ba:
-            uuid: e8069601-a0fb-47e6-9177-04c0d2cb19ba
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:body'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
-            additional: {  }
-            weight: 1
           796e4ffe-e994-4f1b-9842-f61723fe277c:
             uuid: 796e4ffe-e994-4f1b-9842-f61723fe277c
             region: content
@@ -81,18 +66,33 @@ third_party_settings:
                 type: entity_reference_label
             additional: {  }
             weight: 3
+          c5e60dd8-23a4-4c57-aac2-bc524165574b:
+            uuid: c5e60dd8-23a4-4c57-aac2-bc524165574b
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:article:field_body'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: text_default
+            additional: {  }
+            weight: 4
         third_party_settings: {  }
 id: node.article.default
 targetEntityType: node
 bundle: article
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
+  field_body:
+    weight: 104
+    label: above
     settings: {  }
     third_party_settings: {  }
+    type: text_default
     region: content
   field_promo_slide:
     weight: 103
