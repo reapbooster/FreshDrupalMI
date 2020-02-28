@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed1ef0d4c6aab03aa37de8703c75556d",
+    "content-hash": "019576924710c75a7b714ee4c054d00a",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -124,16 +124,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.133.22",
+            "version": "3.133.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4dd1cc4416a997769b0c2fab95a586190318ad30"
+                "reference": "fd4a74aff537a4f6a7e9ed7efb14693ae5f3013a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4dd1cc4416a997769b0c2fab95a586190318ad30",
-                "reference": "4dd1cc4416a997769b0c2fab95a586190318ad30",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fd4a74aff537a4f6a7e9ed7efb14693ae5f3013a",
+                "reference": "fd4a74aff537a4f6a7e9ed7efb14693ae5f3013a",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-02-25T19:10:01+00:00"
+            "time": "2020-02-26T19:11:26+00:00"
         },
         {
             "name": "behat/behat",
@@ -7615,6 +7615,53 @@
             }
         },
         {
+            "name": "drupal/jsonapi_image_styles",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/jsonapi_image_styles.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_image_styles-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "4be2b938296dc8a55146e413fb046279c51791a4"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1568319488",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "kirkkala",
+                    "homepage": "https://www.drupal.org/user/390806"
+                }
+            ],
+            "description": "Expose image styles to JSON:API",
+            "homepage": "https://www.drupal.org/project/jsonapi_image_styles",
+            "support": {
+                "source": "https://git.drupalcode.org/project/jsonapi_image_styles"
+            }
+        },
+        {
             "name": "drupal/jsonapi_include",
             "version": "1.2.0",
             "source": {
@@ -13157,6 +13204,18 @@
             ]
         },
         {
+            "name": "npm-asset/bootstrap",
+            "version": "4.4.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.4.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "npm-asset/desandro-matches-selector",
             "version": "2.0.2",
             "dist": {
@@ -13210,6 +13269,21 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/get-size/-/get-size-2.0.3.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/imagesloaded",
+            "version": "4.1.4",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/imagesloaded/-/imagesloaded-4.1.4.tgz"
+            },
+            "require": {
+                "npm-asset/ev-emitter": ">=1.0.0,<2.0.0"
             },
             "type": "npm-asset",
             "license": [

@@ -61,6 +61,8 @@ module:
   imagick: 0
   inline_entity_form: 0
   jsonapi: 0
+  jsonapi_image_styles: 0
+  jsonapi_include: 0
   kint: 0
   language: 0
   layout_builder: 0
@@ -95,6 +97,7 @@ module:
   redis: 0
   responsive_image: 0
   rest: 0
+  rest_export_nested: 0
   restui: 0
   schemata: 0
   schemata_json_schema: 0
@@ -115,7 +118,9 @@ module:
   twig_tweak: 0
   user: 0
   uuid_url: 0
+  views_aggregator: 0
   views_bootstrap: 0
+  views_field_view: 0
   views_layout: 0
   views_slideshow: 0
   views_slideshow_cycle: 0

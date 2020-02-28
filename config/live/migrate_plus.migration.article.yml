@@ -16,17 +16,24 @@ migration_group: milken
 label: 'Articles VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milkeninstitute.org/jsonapi/node/article'
+  urls: 'https://dev-milken-institute.pantheonsite.io//jsonapi/node/article'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://milkeninstitute.org'
+  jsonapi_host: 'https://dev-milken-institute.pantheonsite.io/'
   jsonapi_endpoint: /jsonapi/node/article
   item_selector: data
+  included:
+    - field_ar_content
+  ids:
+    id:
+      type: integer
+    uuid:
+      type: string
   fields:
     -
       name: id
       label: 'Node ID'
-      selector: /attributes/drupal_internal__nid
+      selector: /drupal_internal__nid
     -
       name: uuid
       label: 'Unique ID'
@@ -34,92 +41,96 @@ source:
     -
       name: name
       label: title/name
-      selector: /attributes/title
+      selector: /title
     -
       name: langcode
       label: 'Language Code'
-      selector: /attributes/langcode
+      selector: /langcode
     -
       name: body
       label: 'body array'
-      selector: /attributes/body
+      selector: /body
     -
       name: body_value
       label: 'Body Value'
-      selector: /attributes/body/value
+      selector: /body/value
     -
       name: body_format
       label: 'Body Format'
-      selector: /attributes/body/format
+      selector: /body/format
     -
       name: path
       label: 'Product price'
-      selector: /attributes/path/alias
+      selector: /path/alias
     -
       name: created
       label: Created
-      selector: /attributes/created
+      selector: /created
     -
       name: changed
       label: Changed
-      selector: /attributes/changed
+      selector: /changed
     -
       name: promote
       label: Promoted
-      selector: /attributes/promote
+      selector: /promote
     -
       name: sticky
       label: Sticky
-      selector: /attributes/sticky
+      selector: /sticky
     -
       name: hero_title
       label: 'Hero Title'
-      selector: /attributes/field_ar_hero_title
+      selector: /field_ar_hero_title
     -
       name: hero_image
       label: 'Hero Image'
-      selector: /relationships/field_ar_hero_image
+      selector: /field_ar_hero_image
+      relationship: field_ar_hero_image
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'
-      selector: /relationships/field_term_collection
+      selector: /field_term_collection
+      include: field_term_collection
     -
       name: term_collection_tax_id
       label: 'Term Collection Taxonomy ID'
-      selector: /relationships/field_term_collection_id
+      selector: /field_term_collection_id
     -
       name: program_initiatives_tax
       label: 'Program Initiatives Taxonomy'
-      selector: /relationships/field_term_program_initiatives
+      selector: /field_term_program_initiatives
     -
       name: program_initiatives_tax_id
       label: 'Program Initiatives Taxonomy ID'
-      selector: /relationships/field_term_program_initiatives/id
+      selector: /field_term_program_initiatives/id
     -
       name: topics_tax
       label: 'Topics Taxonomy'
-      selector: /relationships/field_topics
+      selector: /field_topics
     -
       name: topics_tax_id
       label: 'Topics Taxonomy ID'
-      selector: /relationships/field_topics/id
+      selector: /field_topics/id
     -
       name: centers_tax
       label: 'Centers Taxonomy'
-      selector: /relationships/field_centers_general
+      selector: /field_centers_general
     -
       name: centers_tax_id
       label: 'Centers Taxonomy ID'
-      selector: /relationships/field_centers_general/id
+      selector: /field_centers_general/id
     -
       name: pdf_file
       label: 'Pdf File'
-      selector: /relationships/field_ar_pdf_file
-  ids:
-    id:
-      type: integer
-    uuid:
-      type: string
+      selector: /field_ar_pdf_file
+      relationship: field_ar_pdf_file
+    -
+      name: alt_content
+      label: "Alt Content"
+      selector: /field_ar_content
+      relationship: field_ar_content
+
 process:
   title: name
   uuid: uuid
@@ -178,6 +189,7 @@ process:
       plugin: jsonapi_taxonomy
       vocabulary: program_initiatives
       source: program_initiatives_tax
+
 destination:
   plugin: 'entity:node'
   default_bundle: article

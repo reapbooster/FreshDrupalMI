@@ -28,5 +28,5 @@ curl -O https://raw.githubusercontent.com/pantheon-systems/terminus-installer/ma
 
 cd /var/www
 
-composer install --prefer-dist --optimize-autoloader
+composer install-vendor-dir
 
