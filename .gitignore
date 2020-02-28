@@ -36,6 +36,21 @@ web/sites/example.settings.local.php
 web/sites/example.sites.php
 web/update.php
 web/web.config
+/web/themes/custom/milken/scss/milken.css.map
+/web/themes/custom/milken/scss/milken.css
+/web/sites/default/temp
+/web/sites/default/private
+/web/themes/custom/milken/css/*.css
+/node_modules
+
+web/themes/custom/milken/**/*.js
+*.map
+*.css.map
+src/**/*.js
+/web/info.php
+/web/libraries
+web/themes/custom/*/js/*.entry.js
+/web/themes/custom/react/js/Search.entry.js
 
 # Add directories containing build assets below.
 # Keep all additions above the "cut" line.
@@ -107,18 +122,5 @@ Thumbs.db
 .sass-cache
 /.env
 /html
-/web/sites/default/temp
-/web/sites/default/private
-/web/themes/custom/milken/css/*.css
-/node_modules
-/web/themes/custom/milken/scss/milken.css.map
-/web/themes/custom/milken/scss/milken.css
-web/themes/custom/milken/**/*.js
-*.map
-*.css.map
-src/**/*.js
-/web/info.php
 /.phpunit.result.cache
-/web/libraries
-web/themes/custom/*/js/*.entry.js
-/web/themes/custom/react/js/Search.entry.js
+
