@@ -1,0 +1,25 @@
+uuid: 5fa0579b-f010-416f-aee6-35df9b6e706c
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_sync
+    - eck
+    - hal
+    - schemata_json_schema
+    - serialization
+    - user
+id: entity.slide
+plugin_id: 'entity:slide'
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - yaml
+      - hal_json
+      - 'schema_json:json'
+      - json
+      - xml
+      - schema_json
+    supported_auth:
+      - cookie

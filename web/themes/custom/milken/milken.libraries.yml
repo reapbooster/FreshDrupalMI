@@ -22,3 +22,18 @@ react_landing_page:
   css:
     component:
       css/react_landing_page.css: {}
+
+search:
+  version: 1.0.0
+  footer: true
+  js:
+    js/Search.entry.js: { preprocess: 0 }
+
+article:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    node: null
+  js:
+    js/Article.entry.js: { preprocess: 0 }
+

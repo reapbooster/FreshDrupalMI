@@ -34,7 +34,6 @@ third_party_settings:
       label: Tabs
     group_text:
       children:
-        - title
         - field_subtitle
         - field_link
         - field_text_color
@@ -91,11 +90,9 @@ content:
     third_party_settings: {  }
   field_background_color:
     weight: 15
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   field_background_image:
     weight: 12
@@ -136,12 +133,10 @@ content:
     type: string_textarea
     region: content
   field_text_color:
-    weight: -2
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    weight: 10
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   langcode:
     type: language_select
@@ -152,7 +147,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 0
+    weight: -10
     region: content
     settings:
       size: 60

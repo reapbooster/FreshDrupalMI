@@ -5,5 +5,6 @@ dependencies: {  }
 id: body_content_alternative
 label: 'Body Content'
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }

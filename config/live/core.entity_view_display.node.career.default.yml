@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.career.body
+    - field.field.node.career.field_body
     - field.field.node.career.field_careers_apply
     - field.field.node.career.field_centers_general
     - field.field.node.career.field_department
@@ -40,21 +40,6 @@ third_party_settings:
               id: 'extra_field_block:node:career:links'
             additional: {  }
             weight: 0
-          314d04cb-846e-40d5-a6e8-de4b8b9783eb:
-            uuid: 314d04cb-846e-40d5-a6e8-de4b8b9783eb
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:career:body'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
-            additional: {  }
-            weight: 1
           b0ac77f9-0406-4fcf-90f2-d3f3e31192d6:
             uuid: b0ac77f9-0406-4fcf-90f2-d3f3e31192d6
             region: content
@@ -186,18 +171,33 @@ third_party_settings:
                 type: entity_reference_label
             additional: {  }
             weight: 9
+          798e5e44-b9a9-417e-b261-d0bc03672290:
+            uuid: 798e5e44-b9a9-417e-b261-d0bc03672290
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:node:career:field_body'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: text_default
+            additional: {  }
+            weight: 10
         third_party_settings: {  }
 id: node.career.default
 targetEntityType: node
 bundle: career
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
+  field_body:
+    weight: 110
+    label: above
     settings: {  }
     third_party_settings: {  }
+    type: text_default
     region: content
   field_careers_apply:
     weight: 102

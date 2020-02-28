@@ -31,6 +31,11 @@ body {
   @media (min-width: ($breakpointPhone + 2px)) {
     margin-top: 76px;
   }
+  .media-body p.text-muted strong {
+    color: black !important;
+    font-weight: bold;
+    font-family: "LatoWebBlack", Sans-Serif;
+  }
 }
 
 

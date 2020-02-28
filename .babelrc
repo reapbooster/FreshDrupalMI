@@ -6,9 +6,13 @@
         "node": "current"
       }
     }],
-    "@babel/react"
+    "@babel/react",
+    "@babel/preset-typescript"
   ],
   "plugins": [
-    "@babel/transform-runtime"
+    "@babel/transform-runtime",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-optional-chaining"
   ]
 }

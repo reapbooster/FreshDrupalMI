@@ -119,3 +119,6 @@ web/themes/custom/milken/**/*.js
 src/**/*.js
 /web/info.php
 /.phpunit.result.cache
+/web/libraries
+web/themes/custom/*/js/*.entry.js
+/web/themes/custom/react/js/Search.entry.js

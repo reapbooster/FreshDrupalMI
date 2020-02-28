@@ -50,7 +50,7 @@ third_party_settings:
                 label: hidden
                 type: responsive_image
                 settings:
-                  responsive_image_style: full_screen
+                  responsive_image_style: small
                   image_link: ''
                 third_party_settings: {  }
               context_mapping:

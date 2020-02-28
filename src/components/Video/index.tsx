@@ -1,16 +1,32 @@
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
 import { graphql, Link } from "gatsby";
+import VideoFull from "./VideoFull";
 
-class Video extends React.Component {
+interface VideoProps {
+  view: string,
+  id: number,
+  uuid: string,
+}
+
+class Video extends React.Component<VideoProps, VideoInterface> {
+
+  constructor(props) {
+    super(props);
+    this.state = props;
+    // FETCH data if data wasn't in props
+  }
 
   render() {
-    return (
-      <div>
-        <h1>Hello World!</h1>
-      </div>
-    );
+    switch(this.state.view) {
+      case "small":
+
+        break;
+
+
+      default:
+        return <VideoFull {...this.state} />
+    }
   }
 
 }

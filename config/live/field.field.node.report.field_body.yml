@@ -1,0 +1,23 @@
+uuid: d705150f-bbba-4b19-afc2-71e73fe5903d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body
+    - node.type.report
+  module:
+    - text
+id: node.report.field_body
+field_name: field_body
+entity_type: node
+bundle: report
+label: body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

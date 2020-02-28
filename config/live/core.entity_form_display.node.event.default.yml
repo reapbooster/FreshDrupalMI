@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.event.body
     - field.field.node.event.field_authors
+    - field.field.node.event.field_body
     - field.field.node.event.field_event_location
     - field.field.node.event.field_meta_tags
     - field.field.node.event.field_publication_date
@@ -20,16 +20,6 @@ targetEntityType: node
 bundle: event
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 10
@@ -45,6 +35,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_body:
+    weight: 130
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
     region: content
   field_event_location:
     weight: 129

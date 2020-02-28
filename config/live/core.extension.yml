@@ -3,6 +3,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
+  better_normalizers: 0
   bg_image_formatter: 0
   block: 0
   block_content: 0
@@ -13,6 +14,7 @@ module:
   color_field: 0
   config: 0
   config_filter: 0
+  config_ignore: 0
   config_split: 0
   content_browser: 0
   content_sync: 0
@@ -25,7 +27,6 @@ module:
   dblog: 0
   default_content: 0
   default_content_deploy: 0
-  default_content_extra: 0
   delete_all: 0
   diff: 0
   dropzonejs: 0
@@ -43,6 +44,9 @@ module:
   entity_reference: 0
   entity_reference_revisions: 0
   entityqueue: 0
+  facets: 0
+  facets_pretty_paths: 0
+  facets_summary: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -57,6 +61,8 @@ module:
   imagick: 0
   inline_entity_form: 0
   jsonapi: 0
+  jsonapi_image_styles: 0
+  jsonapi_include: 0
   kint: 0
   language: 0
   layout_builder: 0
@@ -91,10 +97,10 @@ module:
   redis: 0
   responsive_image: 0
   rest: 0
+  rest_export_nested: 0
   restui: 0
   schemata: 0
   schemata_json_schema: 0
-  search: 0
   search_api: 0
   search_api_solr: 0
   serialization: 0
@@ -106,12 +112,16 @@ module:
   taxonomy_machine_name: 0
   telephone: 0
   text: 0
+  theme_switcher: 0
   token: 0
   toolbar: 0
   twig_tweak: 0
   user: 0
   uuid_url: 0
+  views_aggregator: 0
   views_bootstrap: 0
+  views_field_view: 0
+  views_layout: 0
   views_slideshow: 0
   views_slideshow_cycle: 0
   views_ui: 0
@@ -131,6 +141,7 @@ theme:
   milken: 0
   bartik: 0
   claro: 0
+  react: 0
 profile: minimal
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc

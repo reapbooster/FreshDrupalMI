@@ -46,33 +46,38 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $file = NULL;
+
     if ($row->isStub()) {
       return NULL;
     }
-
-    try {
-      $source = $row->getSource();
-
-      if (empty($value) || !isset($value['type']) || !isset($value['id'])) {
+    $source = $row->getSource();
+    $value = $row->getSourceProperty('hero_image');
+    if (!empty($value)) {
+      if (!isset($value['uri']['url'])) {
         \Drupal::logger('milken_migrate')
           ->debug("SKIP importing hero image. JSON data is empty: ");
         $row->setDestinationProperty($destination_property, []);
         return NULL;
       }
-      // TODO: figure out a way to derive "node/article".
-      $sourcePath = '/jsonapi/' . str_replace("--", "/", $value['type']) . "/" . $value['id'];
-      \Drupal::logger('milken_migrate')->debug($sourcePath);
-      $client = new Client(['base_uri' => $source['jsonapi_host']]);
-      $response = $client->get($sourcePath);
-      if (in_array($response->getStatusCode(), [200, 201, 202])) {
-        $responseData = json_decode($response->getBody(), TRUE);
-        $attributes = $responseData['data']['attributes'];
-        if (isset($attributes['uri']['url'])) {
-          $url = $source['jsonapi_host'] . $attributes['uri']['url'];
+      try {
+        if (isset($value['uri']['url'])) {
+          $url = $source['jsonapi_host'] . $value['uri']['url'];
           \Drupal::logger('milken_migrate')->debug($url);
-          $file = $this->getRemoteFile($attributes['filename'], $url);
+          $file = $this->getRemoteFile($value['filename'], $url);
         }
         if ($file instanceof FileInterface) {
+          $realpath = \Drupal::service('file_system')->realpath($file->getFileUri());
+          // TODO: I don't think this will work on pantheon.
+          // Figure out how to do this in PHP with iMagick.
+          $baseColor = `convert {$realpath} -colors 16 -depth 8 -format "%c" histogram:info:|sort -rn|head -n 1|grep -oe '#[^\s]*'`;
+          $complmentaryColor = `convert xc:'{$baseColor}' -modulate 100,100,0 -depth 8 txt:`;
+          $complmentaryColor = explode(" ", $complmentaryColor);
+          $textColor = isset($complmentaryColor[7]) ? $complmentaryColor[7] : "#000000";
+          $slide_title = $row->getSourceProperty('hero_title');
+          if ($slide_title == "Article") {
+            $slide_title = $row->getSourceProperty('title');
+          }
+
           $entity_type_mgr = \Drupal::getContainer()
             ->get('entity_type.manager');
           $slide = $entity_type_mgr->getStorage('slide')->create([
@@ -87,12 +92,12 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
               'alt' => $file->getFilename(),
               'title' => $file->getFilename(),
             ],
-            'title' => $row->getSourceProperty('name'),
-            'field_subtitle' => $row->getSourceProperty('hero_title'),
+            'title' => $slide_title,
             // 'field_link' => Url::fromUri('/node/'
             // . $row->getSourceProperty('uuid')),
             // TODO: figure out how to link it back to the node
             'field_published' => TRUE,
+            "field_text_color" => ['color' => $textColor],
           ]);
           if ($slide instanceof EntityInterface) {
             $slide->save();
@@ -101,11 +106,11 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           }
         }
       }
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')
-        ->error("IMPORT ERROR: " . $e->getMessage());
-      throw new MigrateException($e->getMessage());
+      catch (\Exception $e) {
+        \Drupal::logger('milken_migrate')
+          ->error("IMPORT ERROR: " . $e->getMessage());
+        throw new MigrateException($e->getMessage());
+      }
     }
     return $value;
   }

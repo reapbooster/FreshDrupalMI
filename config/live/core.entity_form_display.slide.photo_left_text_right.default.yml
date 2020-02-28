@@ -92,11 +92,9 @@ content:
     third_party_settings: {  }
   field_background_color:
     weight: 11
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   field_background_image:
     weight: 12
@@ -144,11 +142,9 @@ content:
     region: content
   field_text_color:
     weight: 9
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   langcode:
     type: language_select

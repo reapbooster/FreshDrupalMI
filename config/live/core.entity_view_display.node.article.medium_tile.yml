@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.medium_tile
-    - field.field.node.article.body
     - field.field.node.article.field_authors
+    - field.field.node.article.field_body
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
@@ -13,7 +13,6 @@ dependencies:
   module:
     - layout_builder
     - layout_discovery
-    - text
     - user
 third_party_settings:
   layout_builder:
@@ -35,34 +34,12 @@ third_party_settings:
               id: 'extra_field_block:node:article:links'
             additional: {  }
             weight: 0
-          cfc5e935-375f-4232-9475-fc2c0c852c19:
-            uuid: cfc5e935-375f-4232-9475-fc2c0c852c19
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:body'
-              formatter:
-                label: hidden
-                type: text_default
-                settings: {  }
-                third_party_settings: {  }
-            additional: {  }
-            weight: 1
         third_party_settings: {  }
 id: node.article.medium_tile
 targetEntityType: node
 bundle: article
 mode: medium_tile
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     settings: {  }
@@ -70,6 +47,7 @@ content:
     region: content
 hidden:
   field_authors: true
+  field_body: true
   field_meta_tags: true
   field_promo_slide: true
   field_topics: true
