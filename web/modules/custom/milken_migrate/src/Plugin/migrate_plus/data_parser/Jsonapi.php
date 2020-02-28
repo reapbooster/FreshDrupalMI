@@ -15,6 +15,37 @@ use Drupal\migrate_plus\DataParserPluginBase;
 /**
  * Obtain JSON data for migration.
  *
+ * @example
+ * ```yml
+ *  source:
+ *  plugin: url
+ *  jsonapi_host: http://host.com
+ *  jsonapi_endpoint: /jsonapi/nameode/article
+ *  jsonapi_filters:
+ *  conditions:
+ *  -
+ *  key: tags_filter
+ *  path: field_tags.name
+ *  operator: =
+ *  value: t1
+ *  data_parser_plugin: jsonapi
+ *  data_fetcher_plugin: http
+ *  ids:
+ *  nid:
+ *  type: integer
+ *  fields:
+ *  -
+ *  name: nid
+ *  selector: /attributes/drupal_internal__nid
+ *  -
+ *  name: title
+ *  selector: /attributes/title
+ *  -
+ *  name: tags
+ *  selector: /attributes/drupal_internal__tid
+ *  relationship: field_tags
+ *  ```
+ *
  * @DataParser(
  *   id = "jsonapi",
  *   title = @Translation("JSON:API")
@@ -164,7 +195,6 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
     if (!isset($source['included'])) {
       return [];
     }
-
     $included = [];
 
     // Todo.
@@ -235,7 +265,6 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
 
       $options['query'] = array_merge($options['query'], $filters);
     }
-
     $path = $parts['path'];
 
     // Add hook_migrate_plus_data_parser_jsonapi_pre_request_alter() to update

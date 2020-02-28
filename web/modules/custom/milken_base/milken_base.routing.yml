@@ -1,4 +1,0 @@
-milken_base.slide_admin:
-  title: Slides
-  route_name: eck.entity.slide.list
-  base_route: system.admin_content

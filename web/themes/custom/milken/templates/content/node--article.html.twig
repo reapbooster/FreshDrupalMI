@@ -1,0 +1,14 @@
+<div id="node-data">
+  <script type="application/json" data-drupal-selector="drupal-node-json">{
+    "id": "{{ node.uuid.value }}",
+    "entityTypeId": "{{ node.getEntityTypeId }}",
+    "bundle": "{{ node.bundle }}",
+    "view_mode": "{{ view_mode }}"
+    }</script>
+</div>
+
+<div id="node-component">&nbsp;</div>
+
+{{ attach_library('milken/article') }}
+
+

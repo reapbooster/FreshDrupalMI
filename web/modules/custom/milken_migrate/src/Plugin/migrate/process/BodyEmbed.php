@@ -7,7 +7,6 @@ use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use Exception;
 
 /**
  * Filter to download image and return media reference.
@@ -43,18 +42,26 @@ class BodyEmbed extends ProcessPluginBase {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    $toReturn = "";
     try {
       if (!empty($value)) {
         $toReturn = $this->stripWordHtml($value);
-        $row->setDestinationProperty($destination_property, $toReturn);
         Drupal::logger('milken_migrate')->debug($toReturn);
-        return $toReturn;
+      }
+      $altContent = $row->get('alt_content');
+      if (!empty($altContent)) {
+        $toReturn .= $this->fetchAltContent($altContent, $migrate_executable);
+        $row->setDestinationProperty('field_body/format', 'full_html');
       }
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       throw new MigrateException($e->getMessage());
     }
-    return NULL;
+    catch (\Throwable $t) {
+      throw new MigrateException($t->getMessage());
+    }
+    $row->setDestinationProperty($destination_property, $toReturn);
+    return $toReturn;
   }
 
   /**
@@ -120,6 +127,21 @@ class BodyEmbed extends ProcessPluginBase {
       $text = preg_replace('/\<!--(.)*--\>/isu', '', $text);
     }
     return $text;
+  }
+
+  /**
+   * Renders content out of the embedded jsonapi data.
+   */
+  public function fetchAltContent(array $relatedRecord, MigrateExecutableInterface $migrate_executable) {
+    // TODO: handle pull quotes.
+    $toReturn = "";
+    foreach ($relatedRecord as $record) {
+      if (isset($record['field_content_alternative_area']['value'])) {
+        $toReturn .= $record['field_content_alternative_area']['value'];
+      }
+    }
+    Drupal::logger('milken_migrate')->debug($toReturn);
+    return $toReturn;
   }
 
 }

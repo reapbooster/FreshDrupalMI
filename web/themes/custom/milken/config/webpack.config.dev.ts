@@ -28,8 +28,10 @@ module.exports = () => {
           '@babel/preset-env'
         ],
         plugins: [
+          "@babel/transform-runtime",
           '@babel/plugin-proposal-object-rest-spread',
-          "@babel/plugin-proposal-export-default-from"
+          "@babel/plugin-proposal-export-default-from",
+          "@babel/plugin-proposal-optional-chaining"
         ]
       }
     };

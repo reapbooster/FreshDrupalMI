@@ -76,3 +76,15 @@ $settings["config_sync_directory"] = dirname(DRUPAL_ROOT) . "/config/live";
 if (isset($env) && $env !== 'live') {
   $config['config_split.config_split.config_' . $env]['status'] = TRUE;
 }
+
+$settings['twig_sandbox_whitelisted_methods'] = [
+  'toArray',
+  'id',
+  'label',
+  'bundle',
+  'get',
+  '__toString',
+  'toString',
+  'referencedEntities',
+  'view',
+];
