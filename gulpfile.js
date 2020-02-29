@@ -50,7 +50,7 @@ gulp.task("themeBuild", () => {
         ]
       }).on("error", sass.logError)
     )
-    //.pipe(sourcemaps.write("../css"))
+    .pipe(sourcemaps.write("../css"))
     .pipe(gulp.dest("web/themes/custom/milken/css"));
 });
 
