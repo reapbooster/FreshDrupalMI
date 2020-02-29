@@ -45,6 +45,8 @@ gulp.task("themeBuild", () => {
         includePaths: [
           "/var/www/web/themes/custom/milken/scss",
           "/var/www/web"
+          "web/themes/custom/milken/scss",
+          "web"
         ]
       }).on("error", sass.logError)
     )
