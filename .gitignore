@@ -48,7 +48,7 @@ web/themes/custom/milken/**/*.js
 *.css.map
 src/**/*.js
 /web/info.php
-/web/libraries
+/web/libraries/*
 web/themes/custom/*/js/*.entry.js
 /web/themes/custom/react/js/Search.entry.js
 
