@@ -44,7 +44,7 @@ gulp.task("themeBuild", () => {
         outputStyle: "expanded",
         includePaths: [
           "/var/www/web/themes/custom/milken/scss",
-          "/var/www/web"
+          "/var/www/web",
           "web/themes/custom/milken/scss",
           "web"
         ]
