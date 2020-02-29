@@ -41,17 +41,17 @@ gulp.task("themeBuild", () => {
     .pipe(
       sass({
         allowEmpty: true,
-        outputStyle: "expanded",
+        outputStyle: "compressed",
         includePaths: [
           "/var/www/web/themes/custom/milken/scss",
           "/var/www/web",
-          "web/themes/custom/milken/scss",
-          "web"
+          "./web/themes/custom/milken/scss",
+          "./web"
         ]
       }).on("error", sass.logError)
     )
     .pipe(sourcemaps.write("../css"))
-    .pipe(gulp.dest("web/themes/custom/milken/css"));
+    .pipe(gulp.dest("../css"));
 });
 
 gulp.task("buildComponents", done => {
