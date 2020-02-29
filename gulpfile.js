@@ -6,13 +6,16 @@
 
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
-const Logger = require('fancy-log');
 const shell = require("gulp-shell");
 const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
 const sourcemaps = require('gulp-sourcemaps');
+const gsgc = require('gulp-sass-generate-contents');
+const print = require('gulp-print').default;
 
+const basePath = path.resolve(".");
+console.log(basePath);
 
 // eslint-disable-next-line no-unused-vars
 function typescriptCompileCallback(error, stdout, stderr) {
@@ -29,27 +32,27 @@ gulp.task("clearDrupalCache", shell.task("drush cr"));
 gulp.task(
   "tsCompile-milken",
   shell.task("tsc --esModuleInterop --resolveJsonModule", {
-    cwd: path.resolve("./web/themes/custom/milken")
+    cwd: path.resolve(basePath, "web/themes/custom/milken")
   })
 );
 
 gulp.task("themeBuild", () => {
   return gulp
-    .src(path.resolve("./web/themes/custom/milken/scss/*.scss"))
+    .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
     .pipe(sourcemaps.init())
-    .pipe(autoprefixer())
     .pipe(
       sass({
         allowEmpty: true,
-        outputStyle: "expanded",
+        outputStyle: "compressed",
         includePaths: [
-          "/var/www/web/themes/custom/milken/scss",
-          "/var/www/web"
+          path.resolve(basePath, "web/themes/custom/milken/scss"),
+          path.resolve(basePath, "web"),
         ]
       }).on("error", sass.logError)
     )
-    //.pipe(sourcemaps.write("../css"))
-    .pipe(gulp.dest("web/themes/custom/milken/css"));
+    .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
+    .pipe(print())
+    .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
 
 gulp.task("buildComponents", done => {
