@@ -43,7 +43,7 @@ $settings['install_profile'] = 'minimal';
  */
 
 if (defined('PANTHEON_ENVIRONMENT')) {
-  $env = getenv('PANTHEON_ENV');
+  $env = getenv('PANTHEON_ENVIRONMENT');
   if (PHP_SAPI == 'cli') {
     ini_set('max_execution_time', 999);
   }
@@ -73,9 +73,8 @@ $settings['default_content_deploy_content_directory'] = '../content';
 
 $settings["config_sync_directory"] = dirname(DRUPAL_ROOT) . "/config/sync";
 
-if (isset($env) && $env !== 'live') {
-  $config['config_split.config_split.config_' . $env]['status'] = TRUE;
-}
+$config['config_split.config_split.config_' . $env]['status'] = TRUE;
+
 
 $settings['twig_sandbox_whitelisted_methods'] = [
   'toArray',

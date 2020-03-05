@@ -111,6 +111,7 @@ module.exports = () => {
     webpack(webPackConfig, (err, stats) => {
       if (err) {
         throw new PluginError('webpack:build', err);
+        process.exit(1);
       }
       Logger.info('[webpack:build]', stats.toString({
         colors: true

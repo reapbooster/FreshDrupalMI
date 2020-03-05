@@ -70,6 +70,7 @@ class Search extends React.Component {
   }
 
   searchOnSubmitHandler(values) {
+    console.log("Searching...", values);
     this.setCurrentActiveRequest(true);
     this.setKeywords(values.keywords);
     fetch(`/api/v1.0/search?_format=json&keywords=${values.keywords}`)

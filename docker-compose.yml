@@ -33,7 +33,10 @@ services:
       - solr-ssl_solr-network:milkensolr-nginx
     volumes:
       - ".:/var/www"
-      - "$HOME/.ssh:/root/.ssh"
+      - type: bind
+        source: $HOME/.ssh
+        target: /root/.ssh
+        read_only: true
     env_file:
       - .env
 
