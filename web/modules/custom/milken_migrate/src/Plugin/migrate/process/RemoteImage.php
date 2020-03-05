@@ -11,6 +11,7 @@ use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use GuzzleHttp\Client;
+use ColorThief\ColorThief;
 
 /**
  * Filter to download image and return media reference.
@@ -69,10 +70,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           $realpath = \Drupal::service('file_system')->realpath($file->getFileUri());
           // TODO: I don't think this will work on pantheon.
           // Figure out how to do this in PHP with iMagick.
-          $color = $this->matchColorInStringResults(`convert "{$realpath}" -colors 16 -depth 8 -format "%c" histogram:info:|sort -rn|head -n 1|grep -oe '#[^\s]*' 2>&1`);
-          if ($color !== "#000000") {
-            $color = $this->matchColorInStringResults(`convert xc:'{$color}' -modulate 100,100,0 -depth 8 txt: 2>&1`);
-          }
+          $color = $this->generateComplimentaryColorFromImageHistorgram($realpath);
           $slide_title = $row->getSourceProperty('hero_title');
           if ($slide_title == "Article") {
             $slide_title = $row->getSourceProperty('title');
@@ -116,9 +114,28 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
   }
 
   /**
+   * From color thief array return hex color.
    *
+   * @param array $colorArray
+   *   Input array from ColorThief.
+   *
+   * @return string
+   *   Return Hex Color.
    */
-  public function matchColorInStringResults($string_results): ?string {
+  public function arrayToHex(array $colorArray) : string {
+    return "#" . dechex($colorArray[0]) . dechex($colorArray[1]) . dechex($colorArray[2]);
+  }
+
+  /**
+   * Return a hex color if exists in string.
+   *
+   * @param string $string_results
+   *   A longer string from which hex color needs to be derived.
+   *
+   * @return string
+   *   Return string.
+   */
+  public function matchColorInStringResults(string $string_results): string {
     $matches = [];
     $found = preg_match_all('/#(?:[0-9a-fA-F]{6})/', $string_results, $matches);
     if ($found) {
@@ -144,6 +161,24 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       return $toReturn;
     }
     return NULL;
+  }
+
+  /**
+   * Generate a complimentary color for headline text that goes over image.
+   *
+   * @param string $realpath
+   *   Realpath of the image.
+   *
+   * @return string
+   *   A hex color.
+   */
+  public function generateComplimentaryColorFromImageHistorgram(string $realpath) : string {
+    $dominant_color_array = ColorThief::getColor($realpath);
+    $dominant_color = new \ImagickPixel($this->arrayToHex($dominant_color_array));
+    $image = new \Imagick();
+    $image->newImage(100, 100, $dominant_color);
+    $image->modulateImage(100, 100, 0);
+    return $this->arrayToHex(ColorThief::getColor($image));
   }
 
 }
