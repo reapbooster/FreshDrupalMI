@@ -1,18 +1,24 @@
-uuid: a9b9b098-b486-479e-b007-8095437aa491
+uuid: 4abf81ff-881b-4e0f-b8df-44b958251f5c
 langcode: en
 status: false
 dependencies: {  }
-id: config_test
-label: config_test
+id: config_local
+label: config_local
 description: ''
-folder: ''
+folder: ../config/splits/local
 module:
   devel: 0
   devel_generate: 0
+  kint: 0
+  search_api: 0
+  search_api_solr: 0
 theme: {  }
 blacklist:
   - devel.settings
+  - search_api.index.milken_solr
+  - search_api.server.solr_dev
   - system.performance
+  - views.view.search
   - devel.toolbar
 graylist: {  }
 graylist_dependents: true

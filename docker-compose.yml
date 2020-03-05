@@ -29,8 +29,8 @@ services:
     expose:
       - '9000'
       - '4444'
-    links:
-      - solr
+    external_links:
+      - solr-ssl_solr-network:milkensolr-nginx
     volumes:
       - ".:/var/www"
       - "$HOME/.ssh:/root/.ssh"
@@ -56,18 +56,10 @@ services:
     expose:
       - '6379'
 
-  solr:
-    container_name: solr
-    image: milken/solr-dev
-    build: docker/solr-container
-    environment:
-      - JAVA_HOME=/usr/local/openjdk-11
-    env_file:
-      - .env
-    expose:
-      - "8983"
-    ports:
-      - "8983:8983"
+networks:
+  default:
+    external:
+      name: solr-ssl_solr-network
 
 volumes:
   web: {}

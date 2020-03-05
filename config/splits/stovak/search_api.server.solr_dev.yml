@@ -11,11 +11,11 @@ backend: search_api_solr
 backend_config:
   connector: standard
   connector_config:
-    scheme: http
-    host: solr
-    port: 8983
+    scheme: https
+    host: milken-dev.reapbooster.com
+    port: 8443
     path: /
-    core: milken
+    core: stovak_dev
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10

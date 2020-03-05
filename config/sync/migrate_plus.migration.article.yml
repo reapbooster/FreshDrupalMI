@@ -127,10 +127,9 @@ source:
       relationship: field_ar_pdf_file
     -
       name: alt_content
-      label: "Alt Content"
+      label: 'Alt Content'
       selector: /field_ar_content
       relationship: field_ar_content
-
 process:
   title: name
   uuid: uuid
@@ -189,7 +188,6 @@ process:
       plugin: jsonapi_taxonomy
       vocabulary: program_initiatives
       source: program_initiatives_tax
-
 destination:
   plugin: 'entity:node'
   default_bundle: article

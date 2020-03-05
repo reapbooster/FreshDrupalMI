@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
+use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -24,17 +25,22 @@ class JsonAPITaxonomy extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $destination_values = [];
-    foreach ($value['data'] as $relatedRecord) {
-      if (isset($relatedRecord['id'])) {
-        $term = \Drupal::service('entity.repository')
-          ->loadEntityByUuid('taxonomy_term', $relatedRecord['id']);
-        if ($term instanceof Term) {
-          $destination_values['target_id'] = $term->id();
+    if (is_array($value['data'])) {
+      foreach ($value['data'] as $relatedRecord) {
+        if (isset($relatedRecord['id'])) {
+          $term = \Drupal::service('entity.repository')
+            ->loadEntityByUuid('taxonomy_term', $relatedRecord['id']);
+          if ($term instanceof Term) {
+            $destination_values['target_id'] = $term->id();
+            $row->setDestinationProperty($destination_property, $destination_values);
+          }
+          elseif ($relatedRecord['id'] != "missing") {
+            throw new MigrateException("Cannot find the correct taxonomy: " . print_r($value, TRUE));
+          }
         }
-        // TODO: create tax term if not exists.
       }
     }
-    $row->setDestinationProperty($destination_property, $destination_values);
+
     return $destination_values;
   }
 

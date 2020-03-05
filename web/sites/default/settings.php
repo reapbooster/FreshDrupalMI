@@ -71,7 +71,7 @@ $settings['default_content_deploy_content_directory'] = '../content';
  * Place the config directory outside of the Drupal root.
  */
 
-$settings["config_sync_directory"] = dirname(DRUPAL_ROOT) . "/config/live";
+$settings["config_sync_directory"] = dirname(DRUPAL_ROOT) . "/config/sync";
 
 if (isset($env) && $env !== 'live') {
   $config['config_split.config_split.config_' . $env]['status'] = TRUE;
