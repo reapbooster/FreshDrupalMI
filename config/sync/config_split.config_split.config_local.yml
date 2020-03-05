@@ -10,11 +10,15 @@ module:
   devel: 0
   devel_generate: 0
   kint: 0
+  search_api: 0
+  search_api_solr: 0
 theme: {  }
 blacklist:
-  - search_api.server.solr_dev
   - devel.settings
+  - search_api.index.milken_solr
+  - search_api.server.solr_dev
   - system.performance
+  - views.view.search
   - devel.toolbar
 graylist: {  }
 graylist_dependents: true
