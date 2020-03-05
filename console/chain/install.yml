@@ -34,6 +34,8 @@ commands:
     arguments:
       module:
         - redis
+        - config_split
+        - config_filter
 
   - command: "exec"
     arguments:

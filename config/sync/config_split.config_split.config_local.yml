@@ -5,12 +5,14 @@ dependencies: {  }
 id: config_local
 label: config_local
 description: ''
-folder: ''
+folder: ../config/splits/local
 module:
   devel: 0
   devel_generate: 0
+  kint: 0
 theme: {  }
 blacklist:
+  - search_api.server.solr_dev
   - devel.settings
   - system.performance
   - devel.toolbar

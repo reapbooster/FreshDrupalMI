@@ -69,10 +69,10 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           $realpath = \Drupal::service('file_system')->realpath($file->getFileUri());
           // TODO: I don't think this will work on pantheon.
           // Figure out how to do this in PHP with iMagick.
-          $baseColor = `convert {$realpath} -colors 16 -depth 8 -format "%c" histogram:info:|sort -rn|head -n 1|grep -oe '#[^\s]*'`;
-          $complmentaryColor = `convert xc:'{$baseColor}' -modulate 100,100,0 -depth 8 txt:`;
-          $complmentaryColor = explode(" ", $complmentaryColor);
-          $textColor = isset($complmentaryColor[7]) ? $complmentaryColor[7] : "#000000";
+          $color = $this->matchColorInStringResults(`convert "{$realpath}" -colors 16 -depth 8 -format "%c" histogram:info:|sort -rn|head -n 1|grep -oe '#[^\s]*' 2>&1`);
+          if ($color !== "#000000") {
+            $color = $this->matchColorInStringResults(`convert xc:'{$color}' -modulate 100,100,0 -depth 8 txt: 2>&1`);
+          }
           $slide_title = $row->getSourceProperty('hero_title');
           if ($slide_title == "Article") {
             $slide_title = $row->getSourceProperty('title');
@@ -97,7 +97,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
             // . $row->getSourceProperty('uuid')),
             // TODO: figure out how to link it back to the node
             'field_published' => TRUE,
-            "field_text_color" => ['color' => $textColor],
+            "field_text_color" => ['color' => $color],
           ]);
           if ($slide instanceof EntityInterface) {
             $slide->save();
@@ -113,6 +113,18 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       }
     }
     return $value;
+  }
+
+  /**
+   *
+   */
+  public function matchColorInStringResults($string_results): ?string {
+    $matches = [];
+    $found = preg_match_all('/#(?:[0-9a-fA-F]{6})/', $string_results, $matches);
+    if ($found) {
+      return array_shift($matches[0]);
+    }
+    return "#000000";
   }
 
   /**

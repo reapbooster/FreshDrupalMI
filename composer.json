@@ -80,6 +80,7 @@
         "drupal/fontawesome": "^2.14",
         "drupal/form_options_attributes": "^1.1",
         "drupal/gatsby": "^1.0@beta",
+        "drupal/hax": "^3.2",
         "drupal/hook_event_dispatcher": "^1.27",
         "drupal/image_style_warmer": "^1.0@beta",
         "drupal/imageapi_optimize": "^2.0@alpha",
@@ -188,14 +189,14 @@
     },
     "scripts": {
         "update-vendor-dir": [
-            "php -d memory_limit=-1 `which composer` update --optimize-autoloader --no-dev"
+            "php -d memory_limit=-1 `which composer` update --optimize-autoloader"
         ],
         "install-vendor-dir": [
-            "php -d memory_limit=-1 `which composer` install --optimize-autoloader --no-dev"
+            "php -d memory_limit=-1 `which composer` install --optimize-autoloader"
         ],
         "build-assets": [
             "@prepare-for-pantheon",
-            "php -d memory_limit=-1 `which composer` install --optimize-autoloader --no-dev",
+            "php -d memory_limit=-1 `which composer` install --optimize-autoloader",
             "npm run build"
         ],
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
@@ -303,12 +304,6 @@
             "enabled": true,
             "vcs-driver-options": {
                 "github-no-api": true
-            },
-            "installer-paths": {
-                "npm-asset-library": "web/libraries",
-                "bower-asset-library": "web/libraries",
-                "npm-asset": "web/libraries",
-                "bower-asset": "web/libraries"
             }
         }
     }

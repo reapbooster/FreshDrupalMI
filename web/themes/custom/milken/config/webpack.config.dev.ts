@@ -31,7 +31,9 @@ module.exports = () => {
           "@babel/transform-runtime",
           '@babel/plugin-proposal-object-rest-spread',
           "@babel/plugin-proposal-export-default-from",
-          "@babel/plugin-proposal-optional-chaining"
+          "@babel/plugin-proposal-optional-chaining",
+          "transform-custom-element-classes",
+          "transform-es2015-classes"
         ]
       }
     };
