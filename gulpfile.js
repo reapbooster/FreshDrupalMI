@@ -1,7 +1,9 @@
-/* eslint no-console: "error" */
 /**
  * @file
- *
+ * Eslint no-console: "error" .*/
+
+/**
+ * @file
  */
 
 const env = process.env.ENV === "live" ? "prod" : "dev";
@@ -17,7 +19,7 @@ const print = require('gulp-print').default;
 const basePath = path.resolve(".");
 console.log(basePath);
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars.
 function typescriptCompileCallback(error, stdout, stderr) {
   console.error(stderr);
   console.log(stdout);
@@ -56,11 +58,18 @@ gulp.task("themeBuild", () => {
 });
 
 gulp.task("buildComponents", done => {
-  /* eslint-disable */
-  const webpackConfigurator = require(`./web/themes/custom/milken/config/webpack.config.${env}`);
-  gulp.src("./web/themes/custom/**/js/*.entry.tsx", { realpath: true })
-    .pipe(webpackConfigurator());
+  try {
+    /* eslint-disable */
+    const webpackConfigurator = require(`./web/themes/custom/milken/config/webpack.config.${env}`);
+    gulp.src("./web/themes/custom/**/js/*.entry.tsx", { realpath: true })
+      .pipe(webpackConfigurator());
+  }
+  catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
   done();
+
 });
 
 gulp.task(
@@ -71,5 +80,3 @@ gulp.task(
 gulp.task('watch', () => {
   return gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
 });
-
-
