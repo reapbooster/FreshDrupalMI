@@ -173,12 +173,26 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    *   A hex color.
    */
   public function generateComplimentaryColorFromImageHistorgram(string $realpath) : string {
-    $dominant_color_array = ColorThief::getColor($realpath);
-    $dominant_color = new \ImagickPixel($this->arrayToHex($dominant_color_array));
-    $image = new \Imagick();
-    $image->newImage(100, 100, $dominant_color);
-    $image->modulateImage(100, 100, 0);
-    return $this->arrayToHex(ColorThief::getColor($image));
+    try {
+      $dominant_color_array = ColorThief::getColor($realpath);
+      if (empty($dominant_color_array)) {
+        throw new MigrateException("Cannot read image: :realpath", [":realpath" => $realpath]);
+      }
+      $dominant_color = new \ImagickPixel($this->arrayToHex($dominant_color_array));
+      if ($dominant_color instanceof \ImagickPixel) {
+        $image = new \Imagick();
+        $image->newImage(100, 100, $dominant_color);
+        $image->modulateImage(100, 100, 0);
+        return $this->arrayToHex(ColorThief::getColor($image));
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('milken_migrate')->error($e->getMessage());
+    }
+    catch (\Throwable $t) {
+      \Drupal::logger('milken_migrate')->error($t->getMessage());
+    }
+    return "#000000";
   }
 
 }
