@@ -12,7 +12,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keywords: "",
+      keywords: this.getQueryVariable('keywords'),
       results: [],
       filters: <FilterList filters={[]} />,
       currentActiveRequest: false,
@@ -22,7 +22,7 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log(this);
+
     return (
       <Container fluid={true} className={"outline"}>
         <Row>
@@ -97,6 +97,21 @@ class Search extends React.Component {
       });
   }
 
+
+  getQueryVariable(variable: string): string {
+    var query = window.location.search.substring(1);
+    console.log(query)
+    var vars = query.split("&");
+    console.log(vars) 
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      console.log(pair)
+        if(pair[0] == variable){
+          return pair[1];
+        }
+       }
+     return("");
+   }
 
 }
 
