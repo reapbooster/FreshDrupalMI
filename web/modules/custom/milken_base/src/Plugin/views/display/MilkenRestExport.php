@@ -2,14 +2,9 @@
 
 namespace Drupal\milken_base\Plugin\views\display;
 
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Render\RenderContext;
-use Drupal\node\Entity\Node;
-use Drupal\node\NodeInterface;
 use Drupal\rest\Plugin\views\display\RestExport;
 use Drupal\views\Render\ViewsRenderPipelineMarkup;
-use http\Url;
 
 /**
  * The plugin that handles Data response callbacks for REST resources.
@@ -38,7 +33,7 @@ class MilkenRestExport extends RestExport {
     // Decode results.
     $results = \GuzzleHttp\json_decode($build['#markup'], TRUE);
     $filters = [];
-    foreach ($results as $key => $result) {
+    foreach ($results as $result) {
       $toAdd = [];
       $uuid = (!empty($result['uuid'])) ? $result['uuid'] : (!empty($result['uuid_1']) ? $result['uuid_1'] : $result['uuid_2']);
 
@@ -56,7 +51,7 @@ class MilkenRestExport extends RestExport {
         $toAdd['label'] = $entity->label();
         $toAdd['excerpt'] = $result['search_api_excerpt'];
         $toAdd['url'] = $result['url'];
-        //$toAdd['values'] = $entity->toArray();
+        // $toAdd['values'] = $entity->toArray();
         $filters[$toAdd['entityTypeId']][$toAdd['bundle']] += 1;
       }
       $toReturn['data'][] = $toAdd;
@@ -82,7 +77,7 @@ class MilkenRestExport extends RestExport {
       unset($build['#markup']);
     }
     elseif ($this->view->getRequest()
-        ->getFormat($this->view->element['#content_type']) !== 'html') {
+      ->getFormat($this->view->element['#content_type']) !== 'html') {
       // This display plugin is primarily for returning non-HTML formats.
       // However, we still invoke the renderer to collect cacheability metadata.
       // Because the renderer is designed for HTML rendering, it filters
@@ -102,7 +97,10 @@ class MilkenRestExport extends RestExport {
 
   }
 
-  function simplifyValuesArray($incoming) {
+  /**
+   * Create simple array syntax for entity values.
+   */
+  public function simplifyValuesArray($incoming) {
     if (is_array($incoming) && isset($incoming[0]['value'])) {
       return $incoming[0]['value'];
     }

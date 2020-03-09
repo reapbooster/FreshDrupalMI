@@ -121,7 +121,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    * @return string
    *   Return RGB Color.
    */
-  public function arrayToRGBColor(array $colorArray): string {
+  public function arrayToRgbColor(array $colorArray): string {
     if (is_array($colorArray) && count($colorArray) == 3) {
       return "rgb(" . implode(", ", $colorArray) . ")";
     }
@@ -162,10 +162,13 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
   /**
    * Turn remote URL into local FileInterface object.
    *
-   * @param $name
-   * @param $url
+   * @param string $name
+   *   The filename.
+   * @param string $url
+   *   The file Url.
    *
    * @return \Drupal\file\FileInterface|null
+   *   return FileInterface or Null.
    */
   public function getRemoteFile($name, $url): ?FileInterface {
     $client = new Client();
@@ -198,7 +201,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       if (empty($dominant_color_array)) {
         throw new MigrateException("Cannot read image: :realpath", [":realpath" => $realpath]);
       }
-      $dominant_color = $this->arrayToRGBColor($dominant_color_array);
+      $dominant_color = $this->arrayToRgbColor($dominant_color_array);
       if ($dominant_color !== "#FFFFFF" && $dominant_color !== "#000000") {
         $dominant_color_pixel = new \ImagickPixel($dominant_color);
         if ($dominant_color_pixel instanceof \ImagickPixel) {
