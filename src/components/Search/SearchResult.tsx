@@ -3,21 +3,22 @@ import { Media } from 'react-bootstrap';
 
 
 interface SearchResultProps {
-  search_api_relevance: number,
-  nid: number,
-  title: string,
-  search_api_excerpt: string,
-  created: string,
-  type: string,
-  field_department?: string
+  relevance: number,
+  uuid: string,
+  entityTypeId: string,
+  bundle: string,
+  id: string,
+  label: string,
+  excerpt: string,
+  url: string,
 }
 
 
 const SearchResult: React.FunctionComponent = (props: SearchResultProps) => {
   const api_excerpt = () => {
     console.log("SearchResult... parsing", props);
-    if (props.search_api_excerpt !== null){
-      return (<p dangerouslySetInnerHTML={{__html: props.search_api_excerpt}} className={"text-muted"}></p>);
+    if (props.excerpt !== null){
+      return (<p dangerouslySetInnerHTML={{__html: props.excerpt}} className={"text-muted"}></p>);
     } else {
       return (<p></p>);
     }
@@ -26,7 +27,7 @@ const SearchResult: React.FunctionComponent = (props: SearchResultProps) => {
     <>
     <Media>
       <Media.Body>
-        <h5>{props.title}</h5>
+        <h5><a href={props.url}>{props.label}</a></h5>
         {api_excerpt()}
       </Media.Body>
     </Media>
@@ -35,12 +36,14 @@ const SearchResult: React.FunctionComponent = (props: SearchResultProps) => {
 };
 
 SearchResult.defaultProps = {
-  search_api_relevance: 0,
-  nid: 0,
-  title: "Default Value",
-  search_api_excerpt: "",
-  created: "",
-  type: "article",
+  relevance: 0,
+  uuid: "",
+  entityTypeId: "node",
+  bundle: "article",
+  id: "",
+  label: "",
+  excerpt: "",
+  url: "/"
 }
 
 export default SearchResult;

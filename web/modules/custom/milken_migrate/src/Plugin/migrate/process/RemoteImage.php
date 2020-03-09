@@ -68,8 +68,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
         }
         if ($file instanceof FileInterface) {
           $realpath = \Drupal::service('file_system')->realpath($file->getFileUri());
-          // TODO: I don't think this will work on pantheon.
-          // Figure out how to do this in PHP with iMagick.
           $color = $this->generateComplimentaryColorFromImageHistorgram($realpath);
           $slide_title = $row->getSourceProperty('hero_title');
           if ($slide_title == "Article") {
@@ -97,6 +95,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
             'field_published' => TRUE,
             "field_text_color" => ['color' => $color],
           ]);
+
           if ($slide instanceof EntityInterface) {
             $slide->save();
             $row->setDestinationProperty('field_promo_slide', ['entity' => $slide]);
@@ -114,7 +113,23 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
   }
 
   /**
-   * From color thief array return hex color.
+   * From color thief array return a RGB color.
+   *
+   * @param array $colorArray
+   *   Input array from ColorThief.
+   *
+   * @return string
+   *   Return RGB Color.
+   */
+  public function arrayToRGBColor(array $colorArray): string {
+    if (is_array($colorArray) && count($colorArray) == 3) {
+      return "rgb(" . implode(", ", $colorArray) . ")";
+    }
+    return "#FFFFFF";
+  }
+
+  /**
+   * From color thief array return a RGB color.
    *
    * @param array $colorArray
    *   Input array from ColorThief.
@@ -122,7 +137,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    * @return string
    *   Return Hex Color.
    */
-  public function arrayToHex(array $colorArray) : string {
+  public function arrayToHex(array $colorArray): string {
     return "#" . dechex($colorArray[0]) . dechex($colorArray[1]) . dechex($colorArray[2]);
   }
 
@@ -146,6 +161,11 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
 
   /**
    * Turn remote URL into local FileInterface object.
+   *
+   * @param $name
+   * @param $url
+   *
+   * @return \Drupal\file\FileInterface|null
    */
   public function getRemoteFile($name, $url): ?FileInterface {
     $client = new Client();
@@ -172,27 +192,37 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    * @return string
    *   A hex color.
    */
-  public function generateComplimentaryColorFromImageHistorgram(string $realpath) : string {
+  public function generateComplimentaryColorFromImageHistorgram(string $realpath): string {
     try {
       $dominant_color_array = ColorThief::getColor($realpath);
       if (empty($dominant_color_array)) {
         throw new MigrateException("Cannot read image: :realpath", [":realpath" => $realpath]);
       }
-      $dominant_color = new \ImagickPixel($this->arrayToHex($dominant_color_array));
-      if ($dominant_color instanceof \ImagickPixel) {
-        $image = new \Imagick();
-        $image->newImage(100, 100, $dominant_color);
-        $image->modulateImage(100, 100, 0);
-        return $this->arrayToHex(ColorThief::getColor($image));
+      $dominant_color = $this->arrayToRGBColor($dominant_color_array);
+      if ($dominant_color !== "#FFFFFF" && $dominant_color !== "#000000") {
+        $dominant_color_pixel = new \ImagickPixel($dominant_color);
+        if ($dominant_color_pixel instanceof \ImagickPixel) {
+          $image = new \Imagick();
+          $image->newImage(100, 100, $dominant_color_pixel);
+          $image->modulateImage(100, 100, 0);
+          \Drupal::logger('milken_migrate')->info(
+             print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
+          );
+          return $this->arrayToHex(ColorThief::getColor($image));
+        }
       }
     }
     catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')->error($e->getMessage());
+      \Drupal::logger('milken_migrate')->error(
+        $e->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
+          );
     }
     catch (\Throwable $t) {
-      \Drupal::logger('milken_migrate')->error($t->getMessage());
+      \Drupal::logger('milken_migrate')->error(
+        $t->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
+          );
     }
-    return "#000000";
+    return $dominant_color;
   }
 
 }

@@ -10,12 +10,8 @@ dependencies:
     - search_api
   config:
     - field.storage.media.field_body
-    - field.storage.media.field_speakers
     - field.storage.media.field_subheader
-    - field.storage.media.field_term_collection
-    - field.storage.media.field_topics
     - field.storage.node.field_body
-    - field.storage.node.field_rp_content
     - field.storage.node.field_department
     - field.storage.node.field_location
     - field.storage.node.field_centers_general
@@ -89,14 +85,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_body
-  field_body_2:
-    label: body
-    datasource_id: 'entity:media'
-    property_path: field_body
-    type: text
-    dependencies:
-      config:
-        - field.storage.media.field_body
   field_centers_general:
     label: 'Tag: Center'
     datasource_id: 'entity:node'
@@ -113,14 +101,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_department
-  field_department_1:
-    label: Department
-    datasource_id: 'entity:node'
-    property_path: field_department
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_department
   field_location:
     label: Location
     datasource_id: 'entity:node'
@@ -129,43 +109,11 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_location
-  field_location_1:
-    label: Location
-    datasource_id: 'entity:node'
-    property_path: field_location
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_location
-  field_rp_content:
-    label: Content
-    datasource_id: 'entity:node'
-    property_path: field_rp_content
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_rp_content
-  field_speakers:
-    label: Speakers
-    datasource_id: 'entity:media'
-    property_path: field_speakers
-    type: integer
-    dependencies:
-      config:
-        - field.storage.media.field_speakers
   field_subheader:
     label: Subheader
     datasource_id: 'entity:media'
     property_path: field_subheader
     type: text
-    dependencies:
-      config:
-        - field.storage.media.field_subheader
-  field_subheader_1:
-    label: Subheader
-    datasource_id: 'entity:media'
-    property_path: field_subheader
-    type: string
     dependencies:
       config:
         - field.storage.media.field_subheader
@@ -177,14 +125,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.slide.field_subtitle
-  field_term_collection:
-    label: 'Term Collection'
-    datasource_id: 'entity:media'
-    property_path: field_term_collection
-    type: integer
-    dependencies:
-      config:
-        - field.storage.media.field_term_collection
   field_topics:
     label: Topics
     datasource_id: 'entity:node'
@@ -193,30 +133,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_topics
-  field_topics_1:
-    label: topics
-    datasource_id: 'entity:media'
-    property_path: field_topics
-    type: integer
-    dependencies:
-      config:
-        - field.storage.media.field_topics
-  field_topics_2:
-    label: Topics
-    datasource_id: 'entity:node'
-    property_path: field_topics
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_topics
-  id:
-    label: ID
-    datasource_id: 'entity:slide'
-    property_path: id
-    type: integer
-    dependencies:
-      module:
-        - eck
   mid:
     label: ID
     datasource_id: 'entity:media'
@@ -266,22 +182,6 @@ field_settings:
     dependencies:
       module:
         - node
-  type_1:
-    label: 'Content type'
-    datasource_id: 'entity:node'
-    property_path: type
-    type: string
-    dependencies:
-      module:
-        - node
-  type_2:
-    label: Type
-    datasource_id: 'entity:slide'
-    property_path: type
-    type: string
-    dependencies:
-      module:
-        - eck
   url:
     label: URI
     property_path: search_api_url
@@ -294,7 +194,7 @@ field_settings:
     dependencies:
       module:
         - media
-  uuid_2:
+  uuid_1:
     label: UUID
     datasource_id: 'entity:node'
     property_path: uuid
@@ -302,7 +202,7 @@ field_settings:
     dependencies:
       module:
         - node
-  uuid_3:
+  uuid_2:
     label: UUID
     datasource_id: 'entity:slide'
     property_path: uuid

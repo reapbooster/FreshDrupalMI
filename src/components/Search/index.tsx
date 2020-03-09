@@ -5,24 +5,35 @@ import ResultsList from './ResultsList';
 import KeywordForm from './KeywordForm';
 import SearchAPIRequest from './SearchApiRequest';
 import FilterList from './FilterList'
-import SearchResult from "./SearchResult";
+import SearchResult, {SearchResultProps} from "./SearchResult";
 
-class Search extends React.Component {
+interface SearchState {
+  keywords: string,
+  results: Array<SearchResult>,
+  filters: FilterList;
+  currentActiveRequest: boolean
+}
+
+class Search extends React.Component<any, SearchState> {
 
   constructor(props) {
     super(props);
     this.state = {
-      keywords: this.getQueryVariable('keywords'),
+      keywords: "",
       results: [],
       filters: <FilterList filters={[]} />,
       currentActiveRequest: false,
     };
+  }
 
-
+  componentDidMount(): void {
+    let keywords = this.getQueryVariable('keywords');
+    if (keywords) {
+      this.searchOnSubmitHandler({keywords: keywords});
+    }
   }
 
   render() {
-
     return (
       <Container fluid={true} className={"outline"}>
         <Row>
@@ -102,7 +113,7 @@ class Search extends React.Component {
     var query = window.location.search.substring(1);
     console.log(query)
     var vars = query.split("&");
-    console.log(vars) 
+    console.log(vars)
     for (var i=0;i<vars.length;i++) {
       var pair = vars[i].split("=");
       console.log(pair)
@@ -114,6 +125,5 @@ class Search extends React.Component {
    }
 
 }
-
 
 export default Search;

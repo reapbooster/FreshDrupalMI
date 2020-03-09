@@ -22,12 +22,6 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush default-content-deploy:import"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
       bin: "drush cr"
     options:
       working-directory: /var/www

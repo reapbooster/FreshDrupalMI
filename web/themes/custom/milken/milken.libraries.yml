@@ -15,14 +15,6 @@ bootstrap_cdn:
     //cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js: {}
     //stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js: {}
 
-react_landing_page:
-  versino: 1.0
-  js:
-    js/react_landing_page.js: {}
-  css:
-    component:
-      css/react_landing_page.css: {}
-
 search:
   version: 1.0.0
   footer: true
