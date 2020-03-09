@@ -14,9 +14,8 @@ use Drupal\views\Render\ViewsRenderPipelineMarkup;
  * @ViewsDisplay(
  *   id = "milken_rest_export",
  *   title = @Translation("MILKEN REST export"),
- *   help = @Translation("Create a REST export resource specific to Milken Website."),
- *   uses_route = TRUE,
- *   admin = @Translation("Milken REST export"),
+ *   help = @Translation("Create a REST export resource specific to Milken
+ *   Website."), uses_route = TRUE, admin = @Translation("Milken REST export"),
  *   returns_response = TRUE
  * )
  */
@@ -34,20 +33,29 @@ class MilkenRestExport extends RestExport {
     // Decode results.
     $results = \GuzzleHttp\json_decode($build['#markup'], TRUE);
     $filters = [];
-    foreach ($results as $key => $result) {
-      if (empty($result['title'])) {
-        $results[$key]['title'] = $result['title_1'];
+    foreach ($results as $result) {
+      $toAdd = [];
+      $uuid = (!empty($result['uuid'])) ? $result['uuid'] : (!empty($result['uuid_1']) ? $result['uuid_1'] : $result['uuid_2']);
+
+      $enityTypeId = str_replace("entity:", "", $result['search_api_datasource']);
+      $entity = \Drupal::entityTypeManager()
+        ->getStorage($enityTypeId)
+        ->loadByProperties(['uuid' => $uuid]);
+      if ($entity) {
+        $entity = array_shift($entity);
+        $toAdd['relevance'] = $result['search_api_relevance'];
+        $toAdd['uuid'] = $entity->uuid();
+        $toAdd['entityTypeId'] = $entity->getEntityTypeId();
+        $toAdd['bundle'] = $entity->bundle();
+        $toAdd['id'] = $entity->uuid();
+        $toAdd['label'] = $entity->label();
+        $toAdd['excerpt'] = $result['search_api_excerpt'];
+        $toAdd['url'] = $result['url'];
+        // $toAdd['values'] = $entity->toArray();
+        $filters[$toAdd['entityTypeId']][$toAdd['bundle']] += 1;
       }
-      unset($results[$key]['title_1']);
-      if (!isset($filters[$result['type']])) {
-        $filters[$result['type']] = [
-          'facetName' => $result['type'],
-          'facetItemsReturned' => 0,
-        ];
-      }
-      $filters[$result['type']]['facetItemsReturned']++;
+      $toReturn['data'][] = $toAdd;
     }
-    $toReturn['data'] = $results;
     $toReturn['filters'] = [
       [
         'facetTypeName' => "Content Type",
@@ -60,7 +68,6 @@ class MilkenRestExport extends RestExport {
     $build['#markup'] = \GuzzleHttp\json_encode($toReturn);
 
     $this->view->element['#content_type'] = $this->getMimeType();
-    $this->view->element['#cache_properties'][] = '#content_type';
 
     // Encode and wrap the output in a pre tag if this is for a live preview.
     if (!empty($this->view->live_preview)) {
@@ -69,7 +76,8 @@ class MilkenRestExport extends RestExport {
       $build['#suffix'] = '</pre>';
       unset($build['#markup']);
     }
-    elseif ($this->view->getRequest()->getFormat($this->view->element['#content_type']) !== 'html') {
+    elseif ($this->view->getRequest()
+      ->getFormat($this->view->element['#content_type']) !== 'html') {
       // This display plugin is primarily for returning non-HTML formats.
       // However, we still invoke the renderer to collect cacheability metadata.
       // Because the renderer is designed for HTML rendering, it filters
@@ -87,6 +95,16 @@ class MilkenRestExport extends RestExport {
 
     return $build;
 
+  }
+
+  /**
+   * Create simple array syntax for entity values.
+   */
+  public function simplifyValuesArray($incoming) {
+    if (is_array($incoming) && isset($incoming[0]['value'])) {
+      return $incoming[0]['value'];
+    }
+    return $incoming;
   }
 
 }

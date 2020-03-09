@@ -133,6 +133,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_topics
+  mid:
+    label: ID
+    datasource_id: 'entity:media'
+    property_path: mid
+    type: integer
+    dependencies:
+      module:
+        - media
   name:
     label: Name
     datasource_id: 'entity:media'
@@ -141,6 +149,14 @@ field_settings:
     dependencies:
       module:
         - media
+  nid:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+    dependencies:
+      module:
+        - node
   title:
     label: Title
     datasource_id: 'entity:node'
@@ -166,6 +182,34 @@ field_settings:
     dependencies:
       module:
         - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: string
+  uuid:
+    label: UUID
+    datasource_id: 'entity:media'
+    property_path: uuid
+    type: string
+    dependencies:
+      module:
+        - media
+  uuid_1:
+    label: UUID
+    datasource_id: 'entity:node'
+    property_path: uuid
+    type: string
+    dependencies:
+      module:
+        - node
+  uuid_2:
+    label: UUID
+    datasource_id: 'entity:slide'
+    property_path: uuid
+    type: string
+    dependencies:
+      module:
+        - eck
 datasource_settings:
   'entity:media':
     bundles:

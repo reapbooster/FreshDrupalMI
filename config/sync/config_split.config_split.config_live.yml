@@ -1,8 +1,9 @@
+uuid: abc8df7b-b6e3-4bb5-a934-aa8340139d2b
 langcode: en
 status: false
 dependencies: {  }
 id: config_live
-label: Live Config Splitr
+label: 'Live Config Splitr'
 description: ''
 folder: ../config/splits/live
 module:

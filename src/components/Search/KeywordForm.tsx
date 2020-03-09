@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Field } from 'formik';
-import { Form } from 'react-bootstrap';
+import { Formik, Field, Form } from 'formik';
 
 interface KeywordFormProps {
   keywords?: string,
@@ -13,6 +12,8 @@ const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props : KeywordF
       <Formik
         initialValues={{ "keywords": props.keywords }}
         onSubmit={props.onSubmit}
+        isInitialValid={true}
+
       >
         {({
             values,
@@ -22,7 +23,7 @@ const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props : KeywordF
             handleBlur,
             handleSubmit
           }) => (
-          <form
+          <Form
             onSubmit={handleSubmit}
             className="text-align-center"
           >
@@ -32,12 +33,12 @@ const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props : KeywordF
               type={"text"}
               placeholder={"Enter Keywords"}
               className={"text-align-center w-75 p-3"}
-              values={values.keywords}
               onChange={handleChange}
+              value={values.keywords}
               onBlur={handleBlur}
             />
             { errors.keywords && touched.keywords }
-          </form>
+          </Form>
         )}
       </Formik>
     </>
@@ -45,8 +46,5 @@ const KeywordForm: React.FunctionComponent<KeywordFormProps> = (props : KeywordF
 
 };
 
-KeywordForm.defaultProps = {
-  keywords: ""
-}
 
 export default KeywordForm;
