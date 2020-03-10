@@ -24,7 +24,7 @@ source:
   item_selector: data
   fields:
     -
-      name: id
+      name: nid
       label: 'Node ID'
       selector: /attributes/drupal_internal__nid
     -
@@ -129,7 +129,7 @@ source:
     uuid:
       type: string
 process:
-  nid: id
+  nid: nid
   title: name
   uuid: uuid
   langcode: langcode
@@ -153,11 +153,6 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
-  field_hero_title: hero_title
-  field_cover_image:
-    -
-      plugin: 'milken_migrate:remote_image'
-      source: hero_image
   field_centers_general:
     -
       plugin: skip_on_empty
@@ -192,6 +187,9 @@ process:
     plugin: migration_lookup
     migration: event
     source: event_reference
+  field_rp_pdf_file:
+    plugin: file_import
+    source: pdf_file
 destination:
   plugin: 'entity:node'
   default_bundle: report
