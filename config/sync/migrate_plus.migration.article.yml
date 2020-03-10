@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Articles VIA JSON API'
 source:
   plugin: url
-  urls: 'https://dev-milken-institute.pantheonsite.io//jsonapi/node/article'
+  urls: 'https://www.milkeninstitute.org/jsonapi/node/article'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://dev-milken-institute.pantheonsite.io/'
+  jsonapi_host: 'https://www.milkeninstitute.org/'
   jsonapi_endpoint: /jsonapi/node/article
   item_selector: data
   included:
