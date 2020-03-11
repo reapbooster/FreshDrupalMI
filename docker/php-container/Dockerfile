@@ -26,6 +26,7 @@ RUN mkdir -p /usr/share/man/man1
 RUN apt-get update -y --fix-missing && apt-get install -y \
       supervisor \
       curl \
+      cron \
       vim \
       procps \
       apt-utils \

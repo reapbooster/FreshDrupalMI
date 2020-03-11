@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Report content type VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milkeninstitute.org/jsonapi/node/report'
+  urls: 'https://www.milkeninstitute.org/jsonapi/node/report'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://milkeninstitute.org'
+  jsonapi_host: 'https://www.milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/node/report
   item_selector: data
   jsonapi_include: true
@@ -28,7 +28,7 @@ source:
     - field_ar_hero_image
   fields:
     -
-      name: nid
+      name: id
       label: 'Node ID'
       selector: /drupal_internal__nid
     -
@@ -144,7 +144,7 @@ source:
   constants:
     file_destination: 'public://report_covers/'
 process:
-  nid: nid
+  nid: id
   title: name
   uuid: uuid
   langcode: langcode
@@ -211,11 +211,12 @@ process:
     migration: event
     source: event_reference
   field_rp_pdf_file:
-    plugin: file_import
+    plugin: milken_migrate:remote_file
     source: pdf_file
   field_cover_image:
-    plugin: image_import
+    plugin: milken_migrate:remote_image
     source: cover_image
+    media_type: report_cover
     destination: 'constants/file_destination'
     title: name
     alt: name

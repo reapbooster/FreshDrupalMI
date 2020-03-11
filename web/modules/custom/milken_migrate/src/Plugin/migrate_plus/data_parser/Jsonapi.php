@@ -141,11 +141,13 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
    * @throws \GuzzleHttp\Exception\RequestException
    */
   protected function getSource($url) {
+    if (isset($this->configuration['jsonapi_include']) && $this->configuration['jsonapi_include'] === TRUE ) {
+      $conjunction = (strpos("?", $url) ===  false) ? "?" : "&";
+      $url .= $conjunction . "jsonapi_include=true";
+    }
     $response = $this->getDataFetcherPlugin()->getResponseContent($url);
-
     // Convert objects to associative arrays.
     $source = json_decode($response, TRUE);
-
     // If json_decode() has returned NULL, it might be that the data isn't
     // valid utf8 - see http://php.net/manual/en/function.json-decode.php#86997.
     if (is_null($source)) {

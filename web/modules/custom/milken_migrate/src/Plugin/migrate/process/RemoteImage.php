@@ -23,7 +23,7 @@ use ColorThief\ColorThief;
  * @endcode
  *
  * @MigrateProcessPlugin(
- *   id = "milken_migrate:remote_image"
+ *   id = "milken_migrate:remote_image",
  * );
  */
 class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
@@ -67,39 +67,36 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           $file = $this->getRemoteFile($value['filename'], $url);
         }
         if ($file instanceof FileInterface) {
-          $realpath = \Drupal::service('file_system')->realpath($file->getFileUri());
-          $color = $this->generateComplimentaryColorFromImageHistorgram($realpath);
-          $slide_title = $row->getSourceProperty('hero_title');
-          if ($slide_title == "Article") {
-            $slide_title = $row->getSourceProperty('title');
-          }
+          $image_title = (isset($this->configuration['title'])
+            ? $this->configuration['title'] : $file->getFilename());
+          $media_type = (isset($this->configuration['media_type'])
+            ? $this->configuration['media_type'] : "hero_image");
 
           $entity_type_mgr = \Drupal::getContainer()
             ->get('entity_type.manager');
-          $slide = $entity_type_mgr->getStorage('slide')->create([
-            'type' => 'full_width_one_column',
+          $image = $entity_type_mgr->getStorage('media')->create([
+            'type' => $media_type,
             'uid' => 2,
             'langcode' => \Drupal::languageManager()
               ->getDefaultLanguage()
               ->getId(),
-            'field_background_image' => [
+            'field_media_image' => [
               'target_id' => $file->id(),
               'target_type' => 'file',
               'alt' => $file->getFilename(),
               'title' => $file->getFilename(),
             ],
-            'title' => $slide_title,
+            'title' => $image_title,
             // 'field_link' => Url::fromUri('/node/'
             // . $row->getSourceProperty('uuid')),
             // TODO: figure out how to link it back to the node
             'field_published' => TRUE,
-            "field_text_color" => ['color' => $color],
           ]);
 
-          if ($slide instanceof EntityInterface) {
-            $slide->save();
-            $row->setDestinationProperty('field_promo_slide', ['entity' => $slide]);
-            return ['entity' => $slide];
+          if ($image instanceof EntityInterface) {
+            $image->save();
+            $row->setDestinationProperty($destination_property, ['entity' => $image]);
+            return ['entity' => $image];
           }
         }
       }
@@ -110,35 +107,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       }
     }
     return $value;
-  }
-
-  /**
-   * From color thief array return a RGB color.
-   *
-   * @param array $colorArray
-   *   Input array from ColorThief.
-   *
-   * @return string
-   *   Return RGB Color.
-   */
-  public function arrayToRgbColor(array $colorArray): string {
-    if (is_array($colorArray) && count($colorArray) == 3) {
-      return "rgb(" . implode(", ", $colorArray) . ")";
-    }
-    return "#FFFFFF";
-  }
-
-  /**
-   * From color thief array return a RGB color.
-   *
-   * @param array $colorArray
-   *   Input array from ColorThief.
-   *
-   * @return string
-   *   Return Hex Color.
-   */
-  public function arrayToHex(array $colorArray): string {
-    return "#" . dechex($colorArray[0]) . dechex($colorArray[1]) . dechex($colorArray[2]);
   }
 
   /**
@@ -184,48 +152,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       return $toReturn;
     }
     return NULL;
-  }
-
-  /**
-   * Generate a complimentary color for headline text that goes over image.
-   *
-   * @param string $realpath
-   *   Realpath of the image.
-   *
-   * @return string
-   *   A hex color.
-   */
-  public function generateComplimentaryColorFromImageHistorgram(string $realpath): string {
-    try {
-      $dominant_color_array = ColorThief::getColor($realpath);
-      if (empty($dominant_color_array)) {
-        throw new MigrateException("Cannot read image: :realpath", [":realpath" => $realpath]);
-      }
-      $dominant_color = $this->arrayToRgbColor($dominant_color_array);
-      if ($dominant_color !== "#FFFFFF" && $dominant_color !== "#000000") {
-        $dominant_color_pixel = new \ImagickPixel($dominant_color);
-        if ($dominant_color_pixel instanceof \ImagickPixel) {
-          $image = new \Imagick();
-          $image->newImage(100, 100, $dominant_color_pixel);
-          $image->modulateImage(100, 100, 0);
-          \Drupal::logger('milken_migrate')->info(
-             print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
-          );
-          return $this->arrayToHex(ColorThief::getColor($image));
-        }
-      }
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')->error(
-        $e->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
-          );
-    }
-    catch (\Throwable $t) {
-      \Drupal::logger('milken_migrate')->error(
-        $t->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
-          );
-    }
-    return $dominant_color;
   }
 
 }
