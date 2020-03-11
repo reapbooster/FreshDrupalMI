@@ -22,13 +22,10 @@ source:
   jsonapi_host: 'https://www.milkeninstitute.org/'
   jsonapi_endpoint: /jsonapi/node/article
   item_selector: data
+  jsonapi_include: true
   included:
     - field_ar_content
-  ids:
-    id:
-      type: integer
-    uuid:
-      type: string
+    - field_ar_hero_image
   fields:
     -
       name: id
@@ -130,7 +127,13 @@ source:
       label: 'Alt Content'
       selector: /field_ar_content
       relationship: field_ar_content
+  ids:
+    id:
+      type: integer
+    uuid:
+      type: string
 process:
+  id: id
   title: name
   uuid: uuid
   langcode:
@@ -156,11 +159,14 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
-  field_hero_title: hero_title
-  field_hero_image:
-    -
-      plugin: 'milken_migrate:remote_image'
-      source: hero_image
+  field_promo_slide:
+    plugin: 'milken_migrate:promo_slide'
+    title_source: hero_title
+    title_source_backup: name
+    image: hero_image
+    link_id: uuid
+    link_entity_type_id: node
+    link_bundle: article
   field_centers_general:
     -
       plugin: skip_on_empty
