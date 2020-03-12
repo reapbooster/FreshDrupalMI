@@ -5,6 +5,7 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 use ColorThief\ColorThief;
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
@@ -153,12 +154,12 @@ class PromoSlide extends ProcessPluginBase implements MigrateProcessInterface {
     }
     catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
-        ->error("IMPORT ERROR: " . $e->getMessage());
+        ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
       throw new MigrateException($e->getMessage() . print_r($destination, TRUE));
     }
     catch (\Throwable $t) {
       \Drupal::logger('milken_migrate')
-        ->error("IMPORT ERROR: " . $t->getMessage());
+        ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
       throw new MigrateException($t->getMessage() . print_r($destination, TRUE));
     }
 
@@ -175,12 +176,12 @@ class PromoSlide extends ProcessPluginBase implements MigrateProcessInterface {
     }
     catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
-        ->error("Error saving imported slide: " . $e->getMessage());
+        ->error(__CLASS__ . "::Error saving imported slide: " . $e->getMessage());
       throw new MigrateException($e->getMessage() . print_r($destination, TRUE));
     }
     catch (\Throwable $t) {
       \Drupal::logger('milken_migrate')
-        ->error("Error saving imported slide: " . $t->getMessage());
+        ->error(__CLASS__ . "::Error saving imported slide: " . $t->getMessage());
       throw new MigrateException($t->getMessage() . print_r($destination, TRUE));
     }
     return NULL;
@@ -192,7 +193,7 @@ class PromoSlide extends ProcessPluginBase implements MigrateProcessInterface {
   public function getRemoteFile($name, $url): ?FileInterface {
     $client = new Client();
     $response = $client->get($url);
-    $toReturn = file_save_data($response->getBody(), "public://" . $name, FILE_EXISTS_REPLACE);
+    $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
     if ($toReturn instanceof FileInterface) {
       $realpath = \Drupal::service('file_system')
         ->realpath($toReturn->getFileUri());
@@ -287,12 +288,12 @@ class PromoSlide extends ProcessPluginBase implements MigrateProcessInterface {
       }
     }
     catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')->debug(
+      \Drupal::logger('milken_migrate')->debug( "Color Generation Error: " .
         $e->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
           );
     }
     catch (\Throwable $t) {
-      \Drupal::logger('milken_migrate')->debug(
+      \Drupal::logger('milken_migrate')->debug( "Color Generation Error: " .
         $t->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
           );
     }

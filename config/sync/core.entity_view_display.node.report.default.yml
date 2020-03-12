@@ -50,6 +50,7 @@ hidden:
   field_event_reference: true
   field_main_menu: true
   field_meta_tags: true
+  field_promo_slide: true
   field_publication_on: true
   field_report_author: true
   field_rp_content: true

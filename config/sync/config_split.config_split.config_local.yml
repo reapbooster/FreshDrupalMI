@@ -7,12 +7,11 @@ label: config_local
 description: ''
 folder: ../config/splits/local
 module:
-  dblog: 0
   devel: 0
   devel_generate: 0
-  field_ui: 0
   search_api: 50
   search_api_solr: 51
+  search_api_attachments: 52
 theme: {  }
 blacklist:
   - devel.settings

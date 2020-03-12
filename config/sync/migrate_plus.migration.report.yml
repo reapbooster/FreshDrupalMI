@@ -128,14 +128,14 @@ source:
       label: 'Centers Taxonomy ID'
       selector: /field_centers_general/id
     -
-      name: rp_content
-      label: "alternate content"
-      selector: /field_rp_content
+      name: alt_content
+      label: 'Alt Content'
+      selector: /field_rp_content/0/field_content_alternative_area/value
+      relationship: field_ar_content
     -
       name: author
-      label: "Report Author"
+      label: 'Report Author'
       selector: /field_report_author
-
   ids:
     id:
       type: integer
@@ -159,9 +159,17 @@ process:
   path/alias: path
   field_body/value:
     -
+      plugin: concat
+      source:
+        - body_value
+        - alt_content
+    -
+      plugin: dom_inline_image_handler
+    -
       plugin: 'milken_migrate:body_embed'
-      source: body_value
-  field_body/format: body_format
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -211,13 +219,13 @@ process:
     migration: event
     source: event_reference
   field_rp_pdf_file:
-    plugin: milken_migrate:remote_file
+    plugin: 'milken_migrate:remote_file'
     source: pdf_file
   field_cover_image:
-    plugin: milken_migrate:remote_image
+    plugin: 'milken_migrate:remote_image'
     source: cover_image
     media_type: report_cover
-    destination: 'constants/file_destination'
+    destination: constants/file_destination
     title: name
     alt: name
 destination:

@@ -123,6 +123,7 @@
         "drupal/s3fs_cors": "^1.0@beta",
         "drupal/schemata": "^1.0@beta",
         "drupal/search_api": "1.x-dev",
+        "drupal/search_api_attachments": "^1.0@beta",
         "drupal/search_api_solr": "^3.9",
         "drupal/select2": "^1.4",
         "drupal/shield": "^1.2",

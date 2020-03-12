@@ -1,0 +1,11 @@
+uuid: 4e03399b-5ffd-4ab4-927a-45f20a3a4a48
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.report_cover
+id: media.report_cover
+target_entity_type_id: media
+target_bundle: report_cover
+default_langcode: site_default
+language_alterable: false

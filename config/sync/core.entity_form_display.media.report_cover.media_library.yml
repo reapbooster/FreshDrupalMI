@@ -1,0 +1,39 @@
+uuid: 467db2bb-107e-4a27-b55c-3b763b95d8df
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.report_cover.field_filemime
+    - field.field.media.report_cover.field_filesize
+    - field.field.media.report_cover.field_height
+    - field.field.media.report_cover.field_media_image
+    - field.field.media.report_cover.field_width
+    - image.style.thumbnail
+    - media.type.report_cover
+  module:
+    - image
+id: media.report_cover.media_library
+targetEntityType: media
+bundle: report_cover
+mode: media_library
+content:
+  field_media_image:
+    weight: -50
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+hidden:
+  created: true
+  field_filemime: true
+  field_filesize: true
+  field_height: true
+  field_width: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true

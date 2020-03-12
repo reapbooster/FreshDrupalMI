@@ -102,8 +102,13 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       }
       catch (\Exception $e) {
         \Drupal::logger('milken_migrate')
-          ->error("IMPORT ERROR: " . $e->getMessage());
+          ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
         throw new MigrateException($e->getMessage());
+      }
+      catch (\Throwable $t) {
+        \Drupal::logger('milken_migrate')
+          ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
+        throw new MigrateException($t->getMessage());
       }
     }
     return $value;
