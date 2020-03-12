@@ -2,7 +2,6 @@
 version: '3.7'
 services:
   nginx:
-    container_name: nginx
     build: docker/nginx-container
     image: milken/nginx-dev
     expose:
@@ -23,7 +22,6 @@ services:
       - .env
 
   php:
-    container_name: php
     build: docker/php-container
     image: milken/php-dev
     expose:
@@ -41,7 +39,6 @@ services:
       - .env
 
   mysql:
-    container_name: mysql
     build: docker/mysql-container
     image: milken/mysql-dev
     expose:
@@ -54,15 +51,9 @@ services:
       - .env
 
   redis:
-    container_name: redis
     image: redis
     expose:
       - '6379'
-
-networks:
-  default:
-    external:
-      name: solr-ssl_solr-network
 
 volumes:
   web: {}

@@ -11,9 +11,9 @@ backend: search_api_solr
 backend_config:
   connector: standard
   connector_config:
-    scheme: http
-    host: host.docker.internal
-    port: 8983
+    scheme: https
+    host: milken-dev.reapbooster.com
+    port: 8443
     path: /
     core: stovak_dev
     timeout: 5

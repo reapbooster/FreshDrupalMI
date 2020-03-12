@@ -16,17 +16,21 @@ migration_group: milken
 label: 'Report content type VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milkeninstitute.org/jsonapi/node/report'
+  urls: 'https://www.milkeninstitute.org/jsonapi/node/report'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://milkeninstitute.org'
+  jsonapi_host: 'https://www.milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/node/report
   item_selector: data
+  jsonapi_include: true
+  included:
+    - field_ar_content
+    - field_ar_hero_image
   fields:
     -
-      name: nid
+      name: id
       label: 'Node ID'
-      selector: /attributes/drupal_internal__nid
+      selector: /drupal_internal__nid
     -
       name: uuid
       label: 'Unique ID'
@@ -34,102 +38,113 @@ source:
     -
       name: name
       label: title/name
-      selector: /attributes/title
+      selector: /title
     -
       name: langcode
       label: 'Language Code'
-      selector: /attributes/langcode
+      selector: /langcode
     -
       name: body
       label: 'body array'
-      selector: /attributes/body
+      selector: /body
     -
       name: body_value
       label: 'Body Value'
-      selector: /attributes/body/value
+      selector: /body/value
     -
       name: body_format
       label: 'Body Format'
-      selector: /attributes/body/format
+      selector: /body/format
     -
       name: path
       label: 'Product price'
-      selector: /attributes/path/alias
+      selector: /path/alias
     -
       name: created
       label: Created
-      selector: /attributes/created
+      selector: /created
     -
       name: changed
       label: Changed
-      selector: /attributes/changed
+      selector: /changed
     -
       name: promote
       label: Promoted
-      selector: /attributes/promote
+      selector: /promote
     -
       name: sticky
       label: Sticky
-      selector: /attributes/sticky
+      selector: /sticky
     -
       name: cover_image
       label: 'Cover Image'
-      selector: /relationships/field_cover_image
+      selector: /field_cover_image
     -
       name: report_content
       label: 'Body Content Alternative'
-      selector: /relationships/field_rp_content
+      selector: /field_rp_content
     -
       name: event_reference
       label: 'Event Reference'
-      selector: /relationships/field_event_reference
+      selector: /field_event_reference
     -
       name: hero_image
       label: 'Hero Image'
-      selector: /relationships/field_rp_hero_image
+      selector: /field_rp_hero_image
     -
       name: pdf_file
       label: 'PDF File'
-      selector: /relationships/field_rp_pdf_file
+      selector: /field_rp_pdf_file
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'
-      selector: /relationships/field_term_collection
+      selector: /field_term_collection
     -
       name: term_collection_tax_id
       label: 'Term Collection Taxonomy ID'
-      selector: /relationships/field_term_collection_id
+      selector: /field_term_collection_id
     -
       name: program_initiatives_tax
       label: 'Program Initiatives Taxonomy'
-      selector: /relationships/field_term_program_initiatives
+      selector: /field_term_program_initiatives
     -
       name: program_initiatives_tax_id
       label: 'Program Initiatives Taxonomy ID'
-      selector: /relationships/field_term_program_initiatives/id
+      selector: /field_term_program_initiatives/id
     -
       name: topics_tax
       label: 'Topics Taxonomy'
-      selector: /relationships/field_topics
+      selector: /field_topics
     -
       name: topics_tax_id
       label: 'Topics Taxonomy ID'
-      selector: /relationships/field_topics/id
+      selector: /field_topics/id
     -
       name: centers_tax
       label: 'Centers Taxonomy'
-      selector: /relationships/field_centers_general
+      selector: /field_centers_general
     -
       name: centers_tax_id
       label: 'Centers Taxonomy ID'
-      selector: /relationships/field_centers_general/id
+      selector: /field_centers_general/id
+    -
+      name: alt_content
+      label: 'Alt Content'
+      selector: /field_rp_content/0/field_content_alternative_area/value
+      relationship: field_ar_content
+    -
+      name: author
+      label: 'Report Author'
+      selector: /field_report_author
   ids:
     id:
       type: integer
     uuid:
       type: string
+  constants:
+    file_destination: 'public://report_covers/'
 process:
-  nid: nid
+  nid: id
   title: name
   uuid: uuid
   langcode: langcode
@@ -144,15 +159,31 @@ process:
   path/alias: path
   field_body/value:
     -
+      plugin: concat
+      source:
+        - body_value
+        - alt_content
+    -
+      plugin: dom_inline_image_handler
+    -
       plugin: 'milken_migrate:body_embed'
-      source: body_value
-  field_body/format: body_format
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
+  field_promo_slide:
+    plugin: 'milken_migrate:promo_slide'
+    title_source: name
+    title_source_backup: name
+    image: hero_image
+    link_id: uuid
+    link_entity_type_id: node
+    link_bundle: report
   field_centers_general:
     -
       plugin: skip_on_empty
@@ -188,8 +219,15 @@ process:
     migration: event
     source: event_reference
   field_rp_pdf_file:
-    plugin: file_import
+    plugin: 'milken_migrate:remote_file'
     source: pdf_file
+  field_cover_image:
+    plugin: 'milken_migrate:remote_image'
+    source: cover_image
+    media_type: report_cover
+    destination: constants/file_destination
+    title: name
+    alt: name
 destination:
   plugin: 'entity:node'
   default_bundle: report

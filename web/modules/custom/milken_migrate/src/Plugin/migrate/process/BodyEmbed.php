@@ -3,10 +3,13 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use GuzzleHttp\Client;
 
 /**
  * Filter to download image and return media reference.
@@ -44,15 +47,22 @@ class BodyEmbed extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = "";
     try {
-      if (!empty($value)) {
-        $toReturn = $this->stripWordHtml($value);
-        Drupal::logger('milken_migrate')->debug($toReturn);
+      if (is_array($value)) {
+        foreach ($value as $field) {
+          if (is_array($field)) {
+            $toReturn .= $this->parseParagraphFields($field);
+          }
+          if (is_string($field)) {
+            $toReturn .= $field;
+          }
+        }
       }
-      $altContent = $row->get('alt_content');
-      if (!empty($altContent)) {
-        $toReturn .= $this->fetchAltContent($altContent, $migrate_executable);
-        $row->setDestinationProperty('field_body/format', 'full_html');
+      if (is_string(($value))) {
+        $toReturn = $value;
       }
+      // Importing embedded entities should not alter the text.
+      // $this->importEmbeddedEntities($toReturn);
+      Drupal::logger('milken_migrate')->debug($toReturn);
     }
     catch (\Exception $e) {
       throw new MigrateException($e->getMessage());
@@ -61,6 +71,43 @@ class BodyEmbed extends ProcessPluginBase {
       throw new MigrateException($t->getMessage());
     }
     $row->setDestinationProperty($destination_property, $toReturn);
+    $row->setDestinationProperty('field_body/format', 'full_html');
+    return $toReturn;
+  }
+
+  /**
+   * Unfinished Embeded Entities function.
+   */
+  public function importEmbeddedEntities($source_text) {
+    $dom = new \DOMDocument();
+    $dom->loadHTML($source_text);
+    $embedded_entities = $dom->getElementsByTagName('drupal-entity');
+    foreach ($embedded_entities as $entity) {
+      $type = $entity->getAttribute('data-entity-type');
+      $uuid = $entity->getAttribute('data-entity-uuid');
+      if ($type && $uuid) {
+        $this->ensureExists($type, 'image', $uuid);
+      }
+      // TODO: Finish this function.
+      print_r($type);
+      exit();
+    }
+  }
+
+  /**
+   * Parse the paragraph fields and return the concatenated text.
+   */
+  protected function parseParagraphFields($paragraphFields) {
+    $paragraph_text_field = $this->configuration['paragraph_text_field'];
+    if (!$paragraph_text_field) {
+      throw new MigrateException("The text field in the paragraph objects should be set as property 'paragraph_text_field'");
+    }
+    $toReturn = "";
+    foreach ($paragraphFields as $field) {
+      if (isset($field[$this->configuration['paragraph_text_field']]['value'])) {
+        $toReturn .= $field[$this->configuration['paragraph_text_field']]['value'];
+      }
+    }
     return $toReturn;
   }
 
@@ -130,18 +177,75 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   * Renders content out of the embedded jsonapi data.
+   * Download data for embedded entity.
    */
-  public function fetchAltContent(array $relatedRecord, MigrateExecutableInterface $migrate_executable) {
-    // TODO: handle pull quotes.
-    $toReturn = "";
-    foreach ($relatedRecord as $record) {
-      if (isset($record['field_content_alternative_area']['value'])) {
-        $toReturn .= $record['field_content_alternative_area']['value'];
+  public function ensureEntityExists($entityTypeId, $bundle, $uuid) {
+    if (!$this->entityExists($entityTypeId, $uuid)) {
+      $response = $this->getRestClient()->get("/jsonapi/{$entityTypeId}/{$bundle}/{$uuid}");
+      if (in_array($response->getStatusCode(), [200, 201, 202])) {
+        $responseData = json_decode($response->getBody(), TRUE);
+        $attributes = $responseData['data']['attributes'];
+        switch ($responseData['data']['type']) {
+          case "media--video":
+            break;
+
+          case "media-image":
+            break;
+
+          default:
+        }
+        if (isset($attributes['uri']['url'])) {
+          $url = $this->configuration['jsonapi_host'] . $attributes['uri']['url'];
+          \Drupal::logger('milken_migrate')->debug($url);
+          $file = $this->getRemoteFile($attributes['filename'], $url);
+
+        }
+        return ['entity' => $file];
       }
     }
-    Drupal::logger('milken_migrate')->debug($toReturn);
-    return $toReturn;
+  }
+
+  /**
+   * Check to see whether an entity exists, by UUID.
+   */
+  public function entityExists($entityTypeId, $uuid) {
+    $loaded = \Drupal::entityTypeManager()
+      ->getStorage($entityTypeId)
+      ->loadByProperties(['uuid' => $uuid]);
+    return empty($loaded);
+  }
+
+  /**
+   * Turn remote URL into local FileInterface object.
+   *
+   * @param string $name
+   *   The filename.
+   * @param string $url
+   *   The file Url.
+   *
+   * @return \Drupal\file\FileInterface|null
+   *   return FileInterface or Null.
+   */
+  public function getRemoteFile($name, $url): ?FileInterface {
+    $response = $this->getRestClient()->get($url);
+    $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
+    if ($toReturn instanceof FileInterface) {
+      $realpath = \Drupal::service('file_system')
+        ->realpath($toReturn->getFileUri());
+      if (isset($_SERVER['USER'])) {
+        chown($realpath, $_SERVER['USER']);
+        chgrp($realpath, $_SERVER['USER']);
+      }
+      return $toReturn;
+    }
+    return NULL;
+  }
+
+  /**
+   * Create a rest client configured for the JSONAPI host.
+   */
+  public function getRestClient() {
+    return new Client(['base_uri' => $this->configuration['jsonapi_host']]);
   }
 
 }

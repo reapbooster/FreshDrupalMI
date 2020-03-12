@@ -15,10 +15,7 @@ dependencies:
     - field.field.node.report.field_meta_tags
     - field.field.node.report.field_publication_on
     - field.field.node.report.field_report_author
-    - field.field.node.report.field_rp_content
-    - field.field.node.report.field_rp_hero_image
     - field.field.node.report.field_rp_pdf_file
-    - field.field.node.report.field_rp_publication_on
     - field.field.node.report.field_term_collection
     - field.field.node.report.field_term_program_initiatives
     - field.field.node.report.field_topics
@@ -53,6 +50,7 @@ hidden:
   field_event_reference: true
   field_main_menu: true
   field_meta_tags: true
+  field_promo_slide: true
   field_publication_on: true
   field_report_author: true
   field_rp_content: true

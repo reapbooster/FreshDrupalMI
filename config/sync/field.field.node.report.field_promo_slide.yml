@@ -1,0 +1,30 @@
+uuid: 04e7ef81-c15e-4ba5-bc9f-b210e17976c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.slide.full_width_one_column
+    - eck.eck_type.slide.photo_left_text_right
+    - field.storage.node.field_promo_slide
+    - node.type.report
+id: node.report.field_promo_slide
+field_name: field_promo_slide
+entity_type: node
+bundle: report
+label: promo_slide
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:slide'
+  handler_settings:
+    target_bundles:
+      full_width_one_column: full_width_one_column
+      photo_left_text_right: photo_left_text_right
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: full_width_one_column
+field_type: entity_reference
