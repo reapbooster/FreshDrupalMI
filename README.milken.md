@@ -21,6 +21,8 @@ Then from inside the docker container do the following to install the drupal sit
 
 2. ```drupal site:milken:install```
 
+3. ```drupal site:milken:migrations```
+
 After installation completes, open a browser and navigate to http://localhost:8080/
 
 
@@ -32,7 +34,24 @@ If you happen to break something in the environment, it is often better to remov
 
 2. ```docker/bin/cleanDocker``` To prune the docker environment.
 
-3. After wiping the environment, follow the Installation steps starting from ```docker-compose up -d```
+3. After wiping the environment, follow the Installation steps starting with step 1.
+
+
+## Merge a tag into an existing branch ##
+
+Sometimes a branch might fall behind and you might need to bring it up to date to a certain stable tag.
+
+1. ```git checkout tag_name``` Will checkout the tag "tag_name" locally. 
+
+2. ```git checkout -b new_branch_for_tag_name``` Will make a new branch (must not currently exist) with the code from "tag_name".
+
+3. ```git merge -s ours existing_branch``` Will merge existing_branch into new_branch_for_tag_name and favor changes in new_branch_for_tag_name.
+
+4. ```git commit -am "Merged existing_branch into new_branch_for_tag_name"``` Commit the merge if it didn't already.
+
+5. ```git checkout existing_branch``` Switch from the new_branch_for_tag_name to the original existing_branch.
+
+6. ```git merge new_branch_for_tag_name``` Merge the result of all the above work into the original "existing_branch".
 
 
 ## Basic Development Practices ##
