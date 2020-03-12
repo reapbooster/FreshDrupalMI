@@ -11,7 +11,6 @@ use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use GuzzleHttp\Client;
-use ColorThief\ColorThief;
 
 /**
  * Filter to download image and return media reference.

@@ -46,15 +46,19 @@ class BodyEmbed extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = "";
-    $source = $row->getSource();
     try {
-      foreach ($value as $field) {
-        if (is_array($field)) {
-          $toReturn .= $this->parseParagraphFields($field);
+      if (is_array($value)) {
+        foreach ($value as $field) {
+          if (is_array($field)) {
+            $toReturn .= $this->parseParagraphFields($field);
+          }
+          if (is_string($field)) {
+            $toReturn .= $field;
+          }
         }
-        if (is_string($field)) {
-          $toReturn .= $field;
-        }
+      }
+      if (is_string(($value))) {
+        $toReturn = $value;
       }
       // Importing embedded entities should not alter the text.
       // $this->importEmbeddedEntities($toReturn);
@@ -72,7 +76,7 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   *
+   * Unfinished Embeded Entities function.
    */
   public function importEmbeddedEntities($source_text) {
     $dom = new \DOMDocument();
@@ -91,7 +95,7 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   *
+   * Parse the paragraph fields and return the concatenated text.
    */
   protected function parseParagraphFields($paragraphFields) {
     $paragraph_text_field = $this->configuration['paragraph_text_field'];
@@ -172,8 +176,6 @@ class BodyEmbed extends ProcessPluginBase {
     return $text;
   }
 
-
-
   /**
    * Download data for embedded entity.
    */
@@ -204,7 +206,7 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   *
+   * Check to see whether an entity exists, by UUID.
    */
   public function entityExists($entityTypeId, $uuid) {
     $loaded = \Drupal::entityTypeManager()
@@ -240,7 +242,7 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   *
+   * Create a rest client configured for the JSONAPI host.
    */
   public function getRestClient() {
     return new Client(['base_uri' => $this->configuration['jsonapi_host']]);

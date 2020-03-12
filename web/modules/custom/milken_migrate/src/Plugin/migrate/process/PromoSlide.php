@@ -54,8 +54,9 @@ use GuzzleHttp\Client;
 class PromoSlide extends ProcessPluginBase implements MigrateProcessInterface {
 
   /**
+   * Random number generator.
+   *
    * @var \Drupal\Component\Utility\Random
-   *   Random number generator.
    */
   protected $random;
 
@@ -288,12 +289,12 @@ class PromoSlide extends ProcessPluginBase implements MigrateProcessInterface {
       }
     }
     catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')->debug( "Color Generation Error: " .
+      \Drupal::logger('milken_migrate')->debug("Color Generation Error: " .
         $e->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
           );
     }
     catch (\Throwable $t) {
-      \Drupal::logger('milken_migrate')->debug( "Color Generation Error: " .
+      \Drupal::logger('milken_migrate')->debug("Color Generation Error: " .
         $t->getMessage() . print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
           );
     }

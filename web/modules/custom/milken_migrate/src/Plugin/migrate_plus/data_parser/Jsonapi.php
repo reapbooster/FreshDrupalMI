@@ -141,8 +141,8 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
    * @throws \GuzzleHttp\Exception\RequestException
    */
   protected function getSource($url) {
-    if (isset($this->configuration['jsonapi_include']) && $this->configuration['jsonapi_include'] === TRUE ) {
-      $conjunction = (strpos($url, "?") ===  false) ? "?" : "&";
+    if (isset($this->configuration['jsonapi_include']) && $this->configuration['jsonapi_include'] === TRUE) {
+      $conjunction = (strpos($url, "?") === FALSE) ? "?" : "&";
       $url .= $conjunction . "jsonapi_include=true";
     }
     $response = $this->getDataFetcherPlugin()->getResponseContent($url);
