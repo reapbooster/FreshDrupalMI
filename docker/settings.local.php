@@ -40,8 +40,8 @@ if (!defined('PANTHEON_ENVIRONMENT')) {
 
 
   $config['system.logging']['error_level'] = getenv('DRUPAL_SYSTEM_LOGGING_ERROR_LEVEL');
-  $config['system.performance']['css']['preprocess'] = getenv('PREPROCESS_CSS');
-  $config['system.performance']['js']['preprocess'] = getenv('PREPROCESS_JS');
+  //$config['system.performance']['css']['preprocess'] = getenv('PREPROCESS_CSS');
+  //$config['system.performance']['js']['preprocess'] = getenv('PREPROCESS_JS');
 
   $settings['extension_discovery_scan_tests'] = TRUE;
   $settings['rebuild_access'] = FALSE;
