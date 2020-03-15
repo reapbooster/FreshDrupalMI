@@ -58,8 +58,3 @@ commands:
       root: /var/www
 
 
-  - command: "exec"
-    arguments:
-      bin: "drush default-content-deploy:import --yes"
-    options:
-      working-directory: /var/www

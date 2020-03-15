@@ -1,0 +1,147 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/entity_subqueue\/homepage_videos"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_videos\/items": [
+            {
+                "href": "http:\/\/localhost:8080\/media\/7023\/edit?_format=hal_json"
+            },
+            {
+                "href": "http:\/\/localhost:8080\/media\/7346\/edit?_format=hal_json"
+            },
+            {
+                "href": "http:\/\/localhost:8080\/media\/8778\/edit?_format=hal_json"
+            },
+            {
+                "href": "http:\/\/localhost:8080\/media\/7067\/edit?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_videos\/uid": [
+            {
+                "href": "http:\/\/localhost:8080\/user\/0?_format=hal_json"
+            }
+        ]
+    },
+    "name": [
+        {
+            "value": "homepage_videos"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "715a42d4-b0cf-418b-9447-c43635462b0b"
+        }
+    ],
+    "queue": [
+        {
+            "target_id": "homepage_videos"
+        }
+    ],
+    "title": [
+        {
+            "value": "homepage_videos"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_videos\/items": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/media\/7023\/edit?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "e6380233-1e3e-43f5-948b-1ace392ee4a7"
+                    }
+                ]
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/media\/7346\/edit?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "07d73726-271c-483d-980b-1dca71b353d4"
+                    }
+                ]
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/media\/8778\/edit?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6be9766e-d124-4fdb-9bfe-5f26d6aa98e6"
+                    }
+                ]
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/media\/7067\/edit?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "0efe483a-d7ec-477b-b6b1-0ed1e629bf8a"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_videos\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/user\/0?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "cd0b1e41-ce1e-42ec-a538-84773a350d90"
+                    }
+                ]
+            }
+        ]
+    },
+    "langcode": [
+        {
+            "value": "en"
+        }
+    ],
+    "created": [
+        {
+            "value": "2020-03-15T00:00:28+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2020-03-15T03:42:13+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ]
+}

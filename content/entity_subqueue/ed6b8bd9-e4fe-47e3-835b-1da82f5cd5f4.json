@@ -1,0 +1,129 @@
+{
+    "_links": {
+        "self": {
+            "href": ""
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/entity_subqueue\/homepage_slides"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_slides\/items": [
+            {
+                "href": "http:\/\/localhost:8080\/slide\/459?_format=hal_json"
+            },
+            {
+                "href": "http:\/\/localhost:8080\/slide\/886?_format=hal_json"
+            },
+            {
+                "href": "http:\/\/localhost:8080\/slide\/463?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_slides\/uid": [
+            {
+                "href": "http:\/\/localhost:8080\/user\/0?_format=hal_json"
+            }
+        ]
+    },
+    "name": [
+        {
+            "value": "homepage_slides"
+        }
+    ],
+    "uuid": [
+        {
+            "value": "ed6b8bd9-e4fe-47e3-835b-1da82f5cd5f4"
+        }
+    ],
+    "queue": [
+        {
+            "target_id": "homepage_slides"
+        }
+    ],
+    "title": [
+        {
+            "value": "homepage_slides"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_slides\/items": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/slide\/459?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/slide\/full_width_one_column"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "9d92be30-4375-44da-bba1-7973e235c808"
+                    }
+                ]
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/slide\/886?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/slide\/full_width_one_column"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "8bda9a0d-f247-470f-a36a-1fe2cb0d3b09"
+                    }
+                ]
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/slide\/463?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/slide\/full_width_one_column"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7055977d-3cc2-4f90-9c3e-43d1416c6951"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/entity_subqueue\/homepage_slides\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost:8080\/user\/0?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "cd0b1e41-ce1e-42ec-a538-84773a350d90"
+                    }
+                ]
+            }
+        ]
+    },
+    "langcode": [
+        {
+            "value": "en"
+        }
+    ],
+    "created": [
+        {
+            "value": "2020-03-15T00:00:28+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2020-03-15T03:40:51+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ]
+}

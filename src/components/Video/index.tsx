@@ -2,6 +2,8 @@
 import React from 'react';
 import { graphql, Link } from "gatsby";
 import VideoFull from "./VideoFull";
+import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import VideoDataInterface from "../../DataTypes/VideoDataInterface";
 
 interface VideoProps {
   view: string,
@@ -9,25 +11,7 @@ interface VideoProps {
   uuid: string,
 }
 
-class Video extends React.Component<VideoProps, VideoInterface> {
-
-  constructor(props) {
-    super(props);
-    this.state = props;
-    // FETCH data if data wasn't in props
-  }
-
-  render() {
-    switch(this.state.view) {
-      case "small":
-
-        break;
-
-
-      default:
-        return <VideoFull {...this.state} />
-    }
-  }
+const Video: React.FunctionComponent = (props: VideoDataInterface) => {
 
 }
 

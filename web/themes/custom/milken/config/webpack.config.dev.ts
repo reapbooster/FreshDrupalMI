@@ -79,6 +79,11 @@ module.exports = () => {
         ]
       },
       plugins: [
+        new webpack.ProvidePlugin({
+          'Holder': 'holderjs',
+          'holder': 'holderjs',
+          'window.Holder': 'holderjs'
+        })
       ],
       stats: {
         warnings: true,

@@ -1,0 +1,26 @@
+uuid: 54e0e469-1a20-4922-8958-a67a641150e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: homepage_slides
+label: homepage_slides
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: slide
+  handler: 'default:slide'
+  handler_settings:
+    target_bundles:
+      full_width_one_column: full_width_one_column
+      photo_left_text_right: photo_left_text_right
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: full_width_one_column
+queue_settings:
+  min_size: 0
+  max_size: 0
+  act_as_queue: false
+  reverse_in_admin: false
