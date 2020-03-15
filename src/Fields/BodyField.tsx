@@ -21,4 +21,4 @@ const BodyField = (props: BodyFieldProps) => {
 
 }
 
-export default BodyField;
+export { BodyField, BodyFieldData, BodyFieldProps };

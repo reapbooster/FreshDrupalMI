@@ -1,0 +1,171 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost:8080\/media\/7346\/edit?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/media\/video"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
+            {
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/thumbnail": [
+            {
+                "href": "",
+                "lang": "en"
+            }
+        ]
+    },
+    "uuid": [
+        {
+            "value": "07d73726-271c-483d-980b-1dca71b353d4"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "en",
+            "lang": "en"
+        }
+    ],
+    "bundle": [
+        {
+            "target_id": "video"
+        }
+    ],
+    "revision_created": [
+        {
+            "value": "2020-03-15T00:23:21+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/uid": [
+            {
+                "lang": "en"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/media\/video\/thumbnail": [
+            {
+                "_links": {
+                    "self": {
+                        "href": ""
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3a1700bc-a4d9-4b32-baf6-3315da80545f"
+                    }
+                ],
+                "lang": "en",
+                "alt": "",
+                "title": null,
+                "width": "480",
+                "height": "360"
+            }
+        ]
+    },
+    "name": [
+        {
+            "value": "White Swans, Grey Swans and Black Swans for the Global Economy",
+            "lang": "en"
+        }
+    ],
+    "created": [
+        {
+            "value": "2017-07-12T13:29:11+00:00",
+            "lang": "en",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2019-04-10T16:30:04+00:00",
+            "lang": "en",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "en"
+        }
+    ],
+    "metatag": [
+        {
+            "value": []
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "en",
+            "lang": "en"
+        }
+    ],
+    "value": "<p>Global markets have been whipsawed over the last year as concerns about China, populist elections and uncertainty around future U.S. and EU policy have ebbed and flowed. This session will examine the white swans, grey swans, and black swans that could make waves in the global economy during the next year. Potential questions:<br><br>Will more election surprises push the European Union closer to breakup?\u00a0<br>Will energy prices climb or slide even lower?<br>What are the chances of a trade war?<br>Is there potential for subdued inflation to surge?<br>Is the Chinese economy back on solid footing?<br>What impact will low productivity have on debt levels?<\/p>",
+    "format": "full_html",
+    "processed": "<p>Global markets have been whipsawed over the last year as concerns about China, populist elections and uncertainty around future U.S. and EU policy have ebbed and flowed. This session will examine the white swans, grey swans, and black swans that could make waves in the global economy during the next year. Potential questions:<br \/><br \/>Will more election surprises push the European Union closer to breakup?\u00a0<br \/>Will energy prices climb or slide even lower?<br \/>What are the chances of a trade war?<br \/>Is there potential for subdued inflation to surge?<br \/>Is the Chinese economy back on solid footing?<br \/>What impact will low productivity have on debt levels?<\/p>",
+    "summary": null,
+    "summary_processed": "",
+    "field_embedded_id": [
+        {
+            "value": "cdMluj2rMgY"
+        }
+    ],
+    "field_embedded_service": [
+        {
+            "value": "youtube"
+        }
+    ],
+    "field_height": [
+        {
+            "value": 360,
+            "lang": "en"
+        }
+    ],
+    "field_media_oembed_video": [
+        {
+            "value": "https:\/\/youtu.be\/cdMluj2rMgY",
+            "lang": "en"
+        }
+    ],
+    "field_thumbnail_uri": [
+        {
+            "value": "public:\/\/oembed_thumbnails\/OcalC1cihLBXiXZsz7lwCzaWaM52AZCIbM1EfLS-85o.jpg"
+        }
+    ],
+    "field_video_height": [
+        {
+            "value": 270
+        }
+    ],
+    "field_video_width": [
+        {
+            "value": 480
+        }
+    ],
+    "field_width": [
+        {
+            "value": 480,
+            "lang": "en"
+        }
+    ]
+}

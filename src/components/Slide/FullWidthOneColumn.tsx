@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SlideDataInterface from '../../DataTypes/SlideDataInterface';
 import { Row, Jumbotron, Container } from 'react-bootstrap';
+import ImageEntityProps from "../../DataTypes/ImageEntityProps";
 
-const FullWidthOneColumn = (props: SlideDataInterface) => {
-  console.log("FullWidthOneColumn", props);
+const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface, string> = (props: SlideDataInterface) => {
   const rowStyle = {"backgroundColor":`${props.field_background_color.color}`};
-  var jumbotronStyle = {
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState("holder.js/100x100?text=thumbnail&auto=yes");
+  let jumbotronStyle = {
     "minHeight": "650px",
-    "width": "100%"
+    "width": "100%",
+    "backgroundPosition": "center",
+    "backgroundClip": "content-box",
+    "backgroundSize": "cover",
+    "backgroundImage": `url('${backgroundImageUrl}')`
   }
-  if (props.field_background_image?.uri) {
-    Object.assign(jumbotronStyle, {
-      "backgroundPosition": "center",
-      "backgroundClip": "content-box",
-      "backgroundSize": "cover",
-      "backgroundImage": `url(${props.field_background_image.uri.url})`
+  let backgroundImageProps: ImageEntityProps = new ImageEntityProps(props.field_background_image);
+  if (backgroundImageProps.getData !== undefined) {
+    backgroundImageProps.getData().then((incoming) => {
+      setBackgroundImageUrl(incoming.uri.url);
     });
   }
-  console.log("JumbotronStyle", jumbotronStyle);
   return (
     <>
     <Row className={"align-items-center"} style={rowStyle}>
