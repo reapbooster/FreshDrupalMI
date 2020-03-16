@@ -17,7 +17,7 @@ class Article extends React.Component<EntityComponentProps, EntityComponentProps
 
   fetchNodeData() {
     let me = this;
-    fetch(`/jsonapi/${this.props.entityTypeId}/${this.props.bundle}/${this.props.id}?jsonapi_include=1`)
+    fetch(`/jsonapi/${this.props.entityTypeId}/${this.props.bundle}/${this.props.id}?jsonapi_include=1&include=field_promo_slide`)
       .then(res => res.json())
       .then((ajaxData) => {
         console.log('data is back from drupal', ajaxData);

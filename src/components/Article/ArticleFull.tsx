@@ -6,12 +6,11 @@ import { BodyField } from "../../Fields/BodyField";
 
 const ArticleFull = (props: ArticleInterface) => {
   console.log("ArticleFull", props);
-
   return (
     <>
       <Row id={`promo-slide-${props.id}`}>
         <Container fluid={true}>
-          <Slideshow items={props.field_promo_slide} />
+          <Slideshow items={[ props.field_promo_slide ]} />
         </Container>
       </Row>
       <Row>
