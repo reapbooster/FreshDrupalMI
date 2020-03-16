@@ -134,6 +134,7 @@ RUN composer global require consolidation/cgr
 RUN cgr drupal/coder
 RUN cgr friendsofphp/php-cs-fixer
 RUN cgr fxp/composer-asset-plugin
+RUN cgr dealerdirect/phpcodesniffer-composer-installer
 
 RUN echo ${CODELINT} >> /root/.bashrc
 RUN echo ${CODELINT_FIX} >> /root/.bashrc
