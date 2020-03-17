@@ -36,7 +36,6 @@ services:
         target: /root/.ssh
         read_only: true
     links:
-      - grid
       - redis
     env_file:
       - .env
@@ -58,16 +57,16 @@ services:
     expose:
       - '6379'
 
-  grid:
-    image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=drupal^99^DRUPAL
-      - MSSQL_PID=developer
-    expose:
-      - '1433'
-    ports:
-      - "1433:1433"
+#  grid:
+#    image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+#    environment:
+#      - ACCEPT_EULA=Y
+#      - SA_PASSWORD=drupal^99^DRUPAL
+#      - MSSQL_PID=developer
+#    expose:
+#      - '1433'
+#    ports:
+#      - "1433:1433"
 
 volumes:
   web: {}
