@@ -6,12 +6,11 @@ RUN apt-get update -y --fix-missing && apt-get install -y \
 ARG ENV
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV LANG en_US.utf8
-
+ENV ACCEPT_EULA Y
 ENV CODELINT_COMMAND="~/.composer/vendor/bin/phpcs --colors --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,js,css,info,txt,md' -v "
 ENV CODELINT="\n\nalias drupalcs=\"${CODELINT_COMMAND}\"\n"
 ENV CODELINT_FIX_COMMAND="phpcbf --standard=Drupal --extensions='php,module,inc,install,test,profile,theme,css,info,txt,md' -v "
 ENV CODELINT_FIX="\nalias drupalcbf=\"${CODELINT_FIX_COMMAND}\"\n"
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 ARG PHP_VERSION=7.3
@@ -20,12 +19,16 @@ WORKDIR /tmp
 
 RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN echo "deb [arch=amd64]  http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
 RUN update-ca-certificates --verbose --fresh
 RUN mkdir -p /usr/share/man/man1
 
 RUN apt-get update -y --fix-missing && apt-get install -y \
       supervisor \
       curl \
+      apt-transport-https \
       cron \
       vim \
       procps \
@@ -49,6 +52,9 @@ RUN apt-get update -y --fix-missing && apt-get install -y \
       libgd-dev \
       libpng-dev \
       libcairo2-dev \
+      libgss3 \
+      g++ \
+      gcc \
       git \
       libpcre3-dev \
       wget \
@@ -62,13 +68,25 @@ RUN apt-get update -y --fix-missing && apt-get install -y \
       unzip \
       google-chrome-stable \
       gvfs \
-      pcscd
+      pcscd \
+      locales \
+      software-properties-common \
+      gnupg \
+      re2c \
+      lcov \
+      unixodbc \
+      unixodbc-dev \
+      odbcinst \
+      msodbcsql17 \
+      mssql-tools
 
 RUN apt-get update -y --fix-missing && apt-get -yf install   default-jre-headless default-jdk-headless default-jre default-jdk
-
-RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
-  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG en_US.utf8
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+RUN chmod +x ~/.*
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+RUN locale-gen en_US.UTF-8
+RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 # Libraries for Imagemagick
 RUN apt-get update && apt-get install -y libmagick++-dev libmagickcore-dev libmagickwand-6-headers libmagickwand-dev --no-install-recommends \
@@ -92,7 +110,6 @@ RUN npm install -g typescript
 RUN npm install -g eslint
 RUN npm install -g gatsby
 
-
 # Amazon RDS public certificate chain
 ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem  /etc/ssl/certs/rds-combined-ca-bundle.pem
 RUN chmod 755 /etc/ssl/certs/rds-combined-ca-bundle.pem
@@ -101,7 +118,6 @@ RUN printf "\n\nexport COMPOSER_ALLOW_SUPERUSER=1\n" >> $HOME/.bash_profile
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN export PATH="/var/www/vendor/bin:/root/.composer/global:./bin:$(composer config -g home)/vendor/bin:$PATH"
 ENV PATH /var/www/vendor/bin:$PATH:/root/.composer/vendor/bin
-
 
 # PHP ${PHP_VERSION}
 RUN docker-php-ext-install -j$(nproc) intl
@@ -122,6 +138,14 @@ RUN mkdir -p /usr/src/php/ext/uploadprogress; \
     wget -qO- "${up_url}" | tar xz --strip-components=1 -C /usr/src/php/ext/uploadprogress; \
     docker-php-ext-install uploadprogress;
 
+COPY php/overrides.ini /usr/local/etc/php-fpm.d
+COPY php/php.ini /usr/local/etc/php
+COPY php/overrides.ini /usr/local/etc/php/conf.d
+
+RUN pecl config-set php_ini /usr/local/etc/php/php.ini && \
+        pear config-set php_ini /usr/local/etc/php/php.ini && \
+        pecl channel-update pecl.php.net
+
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -129,6 +153,12 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 # as of 2019-AUG-06 drupal redis module didn't work with redis 5
 RUN pecl install redis-4.3.0 \
     && docker-php-ext-enable redis
+
+## Install MSSQL php extension
+RUN pecl install sqlsrv \
+    && printf "; priority=20\nextension=sqlsrv.so\n" > /usr/local/etc/php/conf.d/sqlsrv.ini
+RUN pecl install pdo_sqlsrv \
+    && printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /usr/local/etc/php/conf.d/pdo_sqlsrv.ini
 
 RUN composer global require consolidation/cgr
 RUN cgr drupal/coder
@@ -138,15 +168,6 @@ RUN cgr dealerdirect/phpcodesniffer-composer-installer
 
 RUN echo ${CODELINT} >> /root/.bashrc
 RUN echo ${CODELINT_FIX} >> /root/.bashrc
-
-
-COPY php/overrides.ini /usr/local/etc/php-fpm.d
-COPY php/php.ini /usr/local/etc/php
-COPY php/overrides.ini /usr/local/etc/php/conf.d
-
-RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
-  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-
 
 RUN echo "env[LC_ALL] = \$LC_ALL" >> /usr/local/etc/php-fpm.d/www.conf
 RUN echo "env[ENV] = \$ENV" >> /usr/local/etc/php-fpm.d/www.conf
