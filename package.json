@@ -8,7 +8,10 @@
     "url": "https://github.com/milken-institute/FreshDrupalMI.git"
   },
   "directories": {
-    "test": "tests"
+    "bin": "./bin",
+    "doc": "./doc",
+    "lib": "./lib",
+    "man": "./man"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

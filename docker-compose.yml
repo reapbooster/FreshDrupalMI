@@ -2,7 +2,6 @@
 version: '3.7'
 services:
   nginx:
-    build: docker/nginx-container
     image: milken/nginx-dev
     expose:
       - 80
@@ -22,7 +21,6 @@ services:
       - .env
 
   php:
-    build: docker/php-container
     image: milken/php-dev
     expose:
       - '9000'
@@ -41,7 +39,6 @@ services:
       - .env
 
   mysql:
-    build: docker/mysql-container
     image: milken/mysql-dev
     expose:
       - '3306'
