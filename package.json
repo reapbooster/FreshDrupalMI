@@ -68,7 +68,6 @@
     "dotenv": "^8.1.0",
     "dotenv-expand": "^5.1.0",
     "dredd": "^11.2.19",
-    "drupal-webpack": "file:./web/modules/contrib/webpack",
     "es5-ext": "^0.10.45",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^18.0.1",

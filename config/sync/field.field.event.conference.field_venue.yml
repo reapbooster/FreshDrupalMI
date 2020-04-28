@@ -1,0 +1,19 @@
+uuid: 53eec5a0-a908-4e75-a482-1b37a6dfa65d
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.event.conference
+    - field.storage.event.field_venue
+id: event.conference.field_venue
+field_name: field_venue
+entity_type: event
+bundle: conference
+label: Venue
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

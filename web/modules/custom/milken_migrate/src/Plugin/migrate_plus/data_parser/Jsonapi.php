@@ -214,7 +214,8 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   protected function openSourceUrl($url) {
-    $parts = UrlHelper::parse($url);
+
+    $parts = UrlHelper::parse($url, ['scheme' => 'https']);
     $options['query'] = $parts['query'];
     $options['fragment'] = $parts['fragment'];
 
@@ -277,10 +278,16 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
 
     // (Re)open the provided URL.
     $source = $this->getSource($url);
+
     $this->dataIterator = new \ArrayIterator($this->getSourceData($source));
     $this->includedIterator = new \ArrayIterator($this->getSourceIncluded($source));
     if (isset($source['links']['next'])) {
-      $this->urls[] = $source['links']['next']['href'];
+      if (is_string($source['links']['next'])) {
+        $this->urls[] = $source['links']['next'];
+      }
+      elseif (is_array($source['links']['next'])) {
+        $this->urls[] = $source['links']['next']['href'];
+      }
     }
     return TRUE;
   }
