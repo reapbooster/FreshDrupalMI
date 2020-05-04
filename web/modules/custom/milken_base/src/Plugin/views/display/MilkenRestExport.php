@@ -2,8 +2,10 @@
 
 namespace Drupal\milken_base\Plugin\views\display;
 
+use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Render\RenderContext;
 use Drupal\rest\Plugin\views\display\RestExport;
+use Drupal\views\Annotation\ViewsDisplay;
 use Drupal\views\Render\ViewsRenderPipelineMarkup;
 
 /**
@@ -14,8 +16,9 @@ use Drupal\views\Render\ViewsRenderPipelineMarkup;
  * @ViewsDisplay(
  *   id = "milken_rest_export",
  *   title = @Translation("MILKEN REST export"),
- *   help = @Translation("Create a REST export resource specific to Milken
- *   Website."), uses_route = TRUE, admin = @Translation("Milken REST export"),
+ *   help = @Translation("Create a REST export resource specific to Milken Website."),
+ *   uses_route = TRUE,
+ *   admin = @Translation("Milken REST export"),
  *   returns_response = TRUE
  * )
  */
