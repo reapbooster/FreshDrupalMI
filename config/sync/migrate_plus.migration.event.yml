@@ -25,6 +25,10 @@ source:
   item_selector: data
   fields:
     -
+      name: sequentialID
+      label: 'Sequential ID'
+      selector: /attributes/sequentialID
+    -
       name: id
       label: ID
       selector: /id
@@ -34,12 +38,12 @@ source:
       selector: /attributes/type
     -
       name: eventid
-      label: 'EventID'
+      label: EventID
       selector: /attributes/eventid
     -
       name: name
-      label: title/name
-      selector: /attributes/title
+      label: Title/Name
+      selector: /attributes/name
     -
       name: nameshort
       label: 'Name Short'
@@ -70,7 +74,7 @@ source:
       selector: /attributes/datemodified
     -
       name: eventdate
-      label: "Event Date"
+      label: 'Event Date'
       selector: /attributes/dateevent
     -
       name: campaignname
@@ -90,65 +94,73 @@ source:
       selector: /attributes/campaignowner
     -
       name: campaigntypepublic
-      label: "Event Date"
+      label: 'Event Date'
       selector: /attributes/campaigntypepublic
     -
       name: cventid
-      label: "Cvent ID"
+      label: 'Cvent ID'
       selector: /attributes/cventid
   ids:
-    id:
+    sequentialID:
       type: integer
-
 process:
+  field_sequential_id:
+    plugin: skip_on_empty
+    source: sequentialID
+    message: 'Field field_name is missing'
+    method: row
   type:
     -
       plugin: skip_on_value
       not_equals: true
+      method: row
       source: type
-      method: process
       value:
-        - 'GC'
+        - GC
+        - Summit
+  title:
     -
-      plugin: single_value
-
-  title: name
-
-  name: name
-
+      plugin: get
+      source:
+        - name
+        - nameshort
+        - description
+    -
+      plugin: callback
+      callable: array_filter
+    -
+      plugin: callback
+      callable: current
+  name:
+    -
+      plugin: get
+      source:
+        - name
+        - nameshort
+        - description
+    -
+      plugin: callback
+      callable: array_filter
+    -
+      plugin: callback
+      callable: current
   langcode:
     plugin: default_value
     default_value: en
-
-  field_grid_event_id: /attributes/eventid
-
+  field_grid_event_id: eventid
   field_published:
-    -
-      plugin: default_value
-      default_value: true
-
+    plugin: default_value
+    default_value: true
   status:
     plugin: default_value
     default_value: true
-
   uid:
     plugin: default_value
     default_value: 2
-
-  field_description/value: attributes/description
-
+  field_description/value: description
   field_description/format:
-    -
-      plugin: default_value
-      default_value: full_html
-
-  created:
-    plugin: 'milken_migrate:unix_date'
-    source: created
-  changed:
-    plugin: 'milken_migrate:unix_date'
-    source: changed
-
+    plugin: default_value
+    default_value: full_html
   field_blurb: blurb
   field_campaign_id: campaignid
   field_campaign_name: campaignname
@@ -158,9 +170,17 @@ process:
   field_cventid: cventid
   field_name_short: nameshort
   field_speakers: speakers
-  field_venu: venue
-
+  field_venue: venue
+  created:
+    plugin: 'milken_migrate:unix_date'
+    source: created
+  changed:
+    plugin: 'milken_migrate:unix_date'
+    source: changed
 destination:
   plugin: 'entity:event'
   default_bundle: conference
+  ids:
+    id:
+      type: integer
 migration_dependencies: {  }

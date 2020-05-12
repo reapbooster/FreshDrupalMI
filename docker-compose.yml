@@ -37,6 +37,9 @@ services:
       - redis
     env_file:
       - .env
+    environment:
+      - BACKUP_FILE_NAME=backup.sql.gz
+      - DATABASE_NAME=drupal8
 
   mysql:
     image: milken/mysql-dev

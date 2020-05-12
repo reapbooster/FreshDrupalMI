@@ -6,6 +6,9 @@
       "Layout builder exports": "patches/layout_builder-export-content-2942975-67.patch",
       "Theme Hook Suggestions in Views": "patches/core-hook_theme_suggestions-in-views-2923634-70.patch",
       "Deleted Table Cleanup Error": "patches/2836539-34.patch"
+    },
+    "drupal/migrate_plus": {
+      "support paging in migration api requests": "patches/migrate_plus-support_paging-2640516-72.patch"
     }
   }
 }
