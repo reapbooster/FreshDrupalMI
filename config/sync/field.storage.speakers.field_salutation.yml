@@ -1,0 +1,21 @@
+uuid: 6a11c693-b739-4e44-80a7-7a9af2978888
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: speakers.field_salutation
+field_name: field_salutation
+entity_type: speakers
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

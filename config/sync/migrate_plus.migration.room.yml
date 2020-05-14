@@ -1,0 +1,128 @@
+uuid: beb03da3-f976-40a5-a4cb-41c3d0f8764e
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - milken_migrate
+      - eck
+id: room
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - event
+  - grid
+migration_group: milken
+label: 'Room VIA JSON API'
+source:
+  plugin: url
+  urls: 'http://host.docker.internal/jsonapi/rooms'
+  data_fetcher_plugin: http
+  data_parser_plugin: jsonapi
+  jsonapi_host: 'http://host.docker.internal'
+  jsonapi_endpoint: /jsonapi/rooms
+  item_selector: data
+  fields:
+    -
+      name: id
+      label: ID
+      selector: /id
+    -
+      name: name
+      label: Title/Name
+      selector: /attributes/rname
+    -
+      name: schoolhousecap
+      label: 'Schoolhouse Cap'
+      selector: /attributes/schoolhousecap
+    -
+      name: roundscap
+      label: 'body array'
+      selector: /attributes/roundscap
+    -
+      name: theatercap
+      label: 'Title Logo'
+      selector: /attributes/theatercap
+    -
+      name: hollowsquare
+      label: hollowsquare
+      selector: /attributes/hollowsquare
+    -
+      name: conference
+      label: Conference
+      selector: /attributes/conference
+    -
+      name: created
+      label: Created
+      selector: /attributes/datecreated
+    -
+      name: changed
+      label: Changed
+      selector: /attributes/datemodified
+    -
+      name: notes
+      label: Notes
+      selector: /attributes/notes
+    -
+      name: sortorder
+      label: 'Sort Order'
+      selector: /attributes/sortorder
+    -
+      name: roomgroup
+      label: 'Room Group'
+      selector: /attributes/roomgroup
+    -
+      name: eventtype
+      label: Created
+      selector: /attributes/eventtype
+    -
+      name: lounge
+      label: Changed
+      selector: /attributes/lounge
+    -
+      name: reception
+      label: Reception
+      selector: /attributes/reception
+    -
+      name: tour
+      label: Tour
+      selector: /attributes/tour
+    -
+      name: hollowcircle
+      label: hollowcircle
+      selector: /attributes/hollowcircle
+    -
+      name: ushape
+      label: ushape
+      selector: /attributes/ushape
+  ids:
+    id:
+      type: integer
+process:
+  name: name
+  title: name
+  field_schoolhousecap: schoolhousecap
+  field_roundscap: roundscap
+  field_theatercap: theatercap
+  field_hollowsquare: hollowsquare
+  field_conference: conference
+  field_notes: notes
+  field_sortorder: sortorder
+  field_roomgroup: roomgroup
+  field_eventtype: eventtype
+  field_lounge: lounge
+  field_reception: reception
+  field_tour: tour
+  field_hollowcircle: hollowcircle
+  field_ushape: ushape
+  created:
+    plugin: 'milken_migrate:unix_date'
+    source: created
+  changed:
+    plugin: 'milken_migrate:unix_date'
+    source: changed
+destination:
+  plugin: 'entity:rooms'
+  default_bundle: rooms
+migration_dependencies: {  }

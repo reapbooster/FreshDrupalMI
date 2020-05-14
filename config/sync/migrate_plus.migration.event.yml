@@ -118,6 +118,9 @@ process:
       value:
         - GC
         - Summit
+        - finLabs
+        - mia
+        - P4C
   title:
     -
       plugin: get
@@ -178,7 +181,7 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
 destination:
-  plugin: 'entity:event'
+  plugin: 'milken_migrate:event'
   default_bundle: conference
   ids:
     id:

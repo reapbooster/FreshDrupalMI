@@ -1,6 +1,6 @@
 status: 1
 pattern: '[event:title]'
-escape: false
+escape: true
 dependencies:
   config:
     - eck.eck_type.event.conference

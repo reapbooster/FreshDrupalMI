@@ -1,4 +1,4 @@
-uuid: 3168bb8f-2f89-4a74-8170-9fd58622ab44
+uuid: 2741ffd0-e400-471f-bdaa-01ec6a81d6c5
 langcode: en
 status: true
 dependencies:
@@ -9,11 +9,11 @@ id: panel.panel.field_why
 field_name: field_why
 entity_type: panel
 bundle: panel
-label: why
+label: Why
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string
+field_type: string_long

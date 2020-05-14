@@ -1,0 +1,19 @@
+uuid: 5b66258b-38c3-4245-b08c-bbd1407ee2b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.speakers.speakers
+    - field.storage.speakers.field_suffix
+id: speakers.speakers.field_suffix
+field_name: field_suffix
+entity_type: speakers
+bundle: speakers
+label: suffix
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa2ad524fc08accd2032b1402080f709",
+    "content-hash": "f90d0a7e37ff876d2fc1d3d07ee8a671",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -9439,6 +9439,70 @@
             }
         },
         {
+            "name": "drupal/page_manager",
+            "version": "4.0.0-beta5",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/page_manager.git",
+                "reference": "8.x-4.0-beta5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/page_manager-8.x-4.0-beta5.zip",
+                "reference": "8.x-4.0-beta5",
+                "shasum": "729f45714c87bcf6aacfd1ddb748c51b4290d1a4"
+            },
+            "require": {
+                "drupal/core": "^8.5 || ^9",
+                "drupal/ctools": "~3.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.0-beta5",
+                    "datestamp": "1585603617",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Plunkett",
+                    "homepage": "https://www.drupal.org/u/tim.plunkett",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "dsnopek",
+                    "homepage": "https://www.drupal.org/user/266527"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "manuel.adan",
+                    "homepage": "https://www.drupal.org/user/516420"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                }
+            ],
+            "description": "Provides a way to place blocks on a custom page.",
+            "homepage": "https://www.drupal.org/project/page_manager",
+            "support": {
+                "source": "https://git.drupal.org/project/page_manager.git",
+                "issues": "https://www.drupal.org/project/issues/page_manager",
+                "irc": "irc://irc.freenode.org/drupal-contribute"
+            }
+        },
+        {
             "name": "drupal/paragraphs",
             "version": "1.11.0",
             "source": {
@@ -10509,6 +10573,61 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/slick",
                 "issues": "https://drupal.org/project/issues/slick"
+            }
+        },
+        {
+            "name": "drupal/social_media",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/social_media.git",
+                "reference": "8.x-1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/social_media-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "aaf92e087e5d3c4c6907b00b5dbb66b05eb5cda2"
+            },
+            "require": {
+                "drupal/core": "*",
+                "drupal/token": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.8",
+                    "datestamp": "1581591836",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Takim Islam",
+                    "homepage": "http://drupalsharing.com/",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jack Over",
+                    "homepage": "https://www.drupal.org/user/252386",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Share current page to social media",
+            "homepage": "https://drupal.org/project/social_media",
+            "support": {
+                "source": "http://cgit.drupalcode.org/social_media",
+                "issues": "https://www.drupal.org/project/issues/social_media"
             }
         },
         {
@@ -20121,6 +20240,7 @@
         "drupal/npm": 15,
         "drupal/openapi": 5,
         "drupal/openid_connect": 10,
+        "drupal/page_manager": 10,
         "drupal/purge": 10,
         "drupal/rest_export_nested": 15,
         "drupal/restui": 20,

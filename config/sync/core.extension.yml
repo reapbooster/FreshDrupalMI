@@ -91,6 +91,7 @@ module:
   npm: 0
   options: 0
   page_cache: 0
+  page_manager: 0
   paragraphs: 0
   path: 0
   path_alias: 0
@@ -105,6 +106,7 @@ module:
   search: 0
   serialization: 0
   settings_tray: 0
+  social_media: 0
   svg_image_field: 0
   syslog: 0
   system: 0

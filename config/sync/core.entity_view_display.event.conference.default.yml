@@ -16,6 +16,7 @@ dependencies:
     - field.field.event.conference.field_picture
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
+    - field.field.event.conference.field_sequential_id
     - field.field.event.conference.field_speakers
     - field.field.event.conference.field_venue
   module:
@@ -133,6 +134,15 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_sequential_id:
+    weight: 15
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_speakers:
     weight: 5

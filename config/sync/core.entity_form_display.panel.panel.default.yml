@@ -6,6 +6,7 @@ dependencies:
     - eck.eck_type.panel.panel
     - field.field.panel.panel.field_date
     - field.field.panel.panel.field_description
+    - field.field.panel.panel.field_event
     - field.field.panel.panel.field_grid_event_id
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
@@ -91,12 +92,12 @@ content:
     type: text_textarea
     region: content
   field_why:
-    weight: 18
+    weight: 20
     settings:
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: string_textarea
     region: content
   langcode:
     type: language_select
@@ -123,4 +124,5 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_event: true

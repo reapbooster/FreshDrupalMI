@@ -89,13 +89,93 @@ source:
       name: eventid
       label: 'Event ID'
       selector: /attributes/eventid
+    -
+      name: linktext1
+      label: 'Link Text 1'
+      selector: /attributes/lktxt1
+    -
+      name: link1
+      label: Link1
+      selector: /attributes/link1
+    -
+      name: linktext2
+      label: 'Link Text 2'
+      selector: /attributes/lktxt2
+    -
+      name: link2
+      label: Link2
+      selector: /attributes/link2
+    -
+      name: linktext3
+      label: 'Link Text 3'
+      selector: /attributes/lktxt3
+    -
+      name: link3
+      label: Link3
+      selector: /attributes/link3
+    -
+      name: linktext4
+      label: 'Link Text 4'
+      selector: /attributes/lktxt4
+    -
+      name: link4
+      label: Link4
+      selector: /attributes/link4
+    -
+      name: linktext5
+      label: 'Link Text 5'
+      selector: /attributes/lktxt5
+    -
+      name: link5
+      label: Link5
+      selector: /attributes/link5
+    -
+      name: linktext6
+      label: 'Link Text 6'
+      selector: /attributes/lktxt6
+    -
+      name: link6
+      label: Link6
+      selector: /attributes/link6
+    -
+      name: linktext7
+      label: 'Link Text 7'
+      selector: /attributes/lktxt7
+    -
+      name: link7
+      label: Link7
+      selector: /attributes/link7
+    -
+      name: linktext8
+      label: 'Link Text 8'
+      selector: /attributes/lktxt8
+    -
+      name: link8
+      label: Link8
+      selector: /attributes/link8
+    -
+      name: linktext9
+      label: 'Link Text 9'
+      selector: /attributes/lktxt9
+    -
+      name: link9
+      label: Link9
+      selector: /attributes/link9
+    -
+      name: linktext10
+      label: 'Link Text 10'
+      selector: /attributes/lktxt10
+    -
+      name: link10
+      label: Link10
+      selector: /attributes/link10
   ids:
-    sequentialID:
+    pid:
       type: integer
 process:
-  id: id
-  title: name
-  name: name
+  pid: pid
+  title: paneltext
+  name: paneltext
   langcode:
     plugin: default_value
     default_value: en
@@ -103,7 +183,7 @@ process:
   status:
     plugin: default_value
     default_value: true
-  field_description/value: description
+  field_description/value: name
   field_description/format:
     plugin: default_value
     default_value: full_html
@@ -111,10 +191,17 @@ process:
   field_sponsor: sponsor
   field_panel_alt_text: paneltext
   field_why: why
-  field_summary/value: summary
-  field_summary/format:
-    plugin: default_value
+  'field_summary/value': summary
+  field_summary:
+    plugin: entity_lookup
+    entity_type: event
     default_value: full_html
+  field_event:
+    plugin: entity_lookup
+    access_check: false
+    entity_type: event
+    value_key: field_grid_event_id
+    source: eventid
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -122,9 +209,6 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
 destination:
-  plugin: 'entity:event'
-  default_bundle: conference
-  ids:
-    id:
-      type: integer
+  plugin: 'entity:panel'
+  default_bundle: panel
 migration_dependencies: {  }

@@ -16,6 +16,7 @@ dependencies:
     - field.field.event.conference.field_picture
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
+    - field.field.event.conference.field_sequential_id
     - field.field.event.conference.field_speakers
     - field.field.event.conference.field_venue
     - image.style.thumbnail
@@ -126,6 +127,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_sequential_id:
+    weight: 25
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_speakers:
     weight: 15

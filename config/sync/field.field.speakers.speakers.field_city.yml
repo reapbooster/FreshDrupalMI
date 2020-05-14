@@ -1,0 +1,19 @@
+uuid: efe98519-fa09-49d0-941e-0d0ee90af847
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.speakers.speakers
+    - field.storage.speakers.field_city
+id: speakers.speakers.field_city
+field_name: field_city
+entity_type: speakers
+bundle: speakers
+label: City
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

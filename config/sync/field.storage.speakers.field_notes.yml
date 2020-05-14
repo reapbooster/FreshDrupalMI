@@ -1,0 +1,19 @@
+uuid: 7fc53c61-a39a-450a-8dd8-4f352720a096
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: speakers.field_notes
+field_name: field_notes
+entity_type: speakers
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

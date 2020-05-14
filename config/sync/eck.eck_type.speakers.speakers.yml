@@ -1,0 +1,9 @@
+uuid: c98a6e47-1847-4fcc-8c9a-e4b7cb91c31a
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.speakers
+type: speakers
+name: speakers
+description: ''

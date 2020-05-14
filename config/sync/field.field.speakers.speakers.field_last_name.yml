@@ -1,0 +1,19 @@
+uuid: 19d750e8-528d-4ba6-93a2-d98c2a804508
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.speakers.speakers
+    - field.storage.speakers.field_last_name
+id: speakers.speakers.field_last_name
+field_name: field_last_name
+entity_type: speakers
+bundle: speakers
+label: 'Last Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
