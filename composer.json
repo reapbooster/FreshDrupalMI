@@ -203,10 +203,12 @@
     "scripts": {
         "update-vendor-dir": [
             "php -d memory_limit=-1 `which composer` update --optimize-autoloader --prefer-dist",
+            "cp -R web/modules/contrib/coder/coder_sniffer/* vendor/squizlabs/php_codesniffer/src/Standards",
             "npm upgrade && npm audit fix"
         ],
         "install-vendor-dir": [
-            "php -d memory_limit=-1 `which composer` install --optimize-autoloader --prefer-dist"
+            "php -d memory_limit=-1 `which composer` install --optimize-autoloader --prefer-dist",
+            "cp -R web/modules/contrib/coder/coder_sniffer/* vendor/squizlabs/php_codesniffer/src/Standards"
         ],
         "install-codestandards": [
             "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
