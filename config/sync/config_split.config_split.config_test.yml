@@ -20,6 +20,11 @@ blacklist:
   - system.performance
   - views.view.search
   - devel.toolbar
+  - migrate_plus.migration.event
+  - migrate_plus.migration.panel
+  - migrate_plus.migration.room
+  - migrate_plus.migration.speaker
+  - migrate_plus.migration.track
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
