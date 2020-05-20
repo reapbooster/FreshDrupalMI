@@ -10,9 +10,11 @@ dependencies:
     - field.field.panel.panel.field_grid_event_id
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
+    - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
     - field.field.panel.panel.field_sponsor
     - field.field.panel.panel.field_summary
+    - field.field.panel.panel.field_tracks
     - field.field.panel.panel.field_why
   module:
     - datetime_range
@@ -67,6 +69,16 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_room:
+    weight: 21
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_sess:
     weight: 11
     settings:
@@ -90,6 +102,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_tracks:
+    weight: 22
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_why:
     weight: 20

@@ -11,6 +11,7 @@ dependencies:
     - field.field.rooms.rooms.field_lounge
     - field.field.rooms.rooms.field_notes
     - field.field.rooms.rooms.field_reception
+    - field.field.rooms.rooms.field_room_id
     - field.field.rooms.rooms.field_roomgroup
     - field.field.rooms.rooms.field_roundscap
     - field.field.rooms.rooms.field_schoolhousecap
@@ -84,6 +85,14 @@ content:
     region: content
   field_reception:
     weight: 11
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_room_id:
+    weight: 15
     label: above
     settings:
       link_to_entity: false

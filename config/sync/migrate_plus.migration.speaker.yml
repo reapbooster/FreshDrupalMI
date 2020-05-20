@@ -150,7 +150,7 @@ process:
     plugin: entity_lookup
     access_check: false
     entity_type: event
-    value_key: field_grid_event_id
+    value_key: field_grid_event_id.value
     source: eventid
   created:
     plugin: 'milken_migrate:unix_date'
@@ -159,6 +159,6 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
 destination:
-  plugin: 'entity:speaker'
+  plugin: 'milken_migrate:speakers'
   default_bundle: speaker
 migration_dependencies: {  }

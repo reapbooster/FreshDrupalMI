@@ -1,5 +1,5 @@
 status: 1
-pattern: '[event:title]'
+pattern: '🎟 [event:title]'
 escape: true
 dependencies:
   config:

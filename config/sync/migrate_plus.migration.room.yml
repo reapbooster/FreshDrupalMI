@@ -102,6 +102,7 @@ source:
 process:
   name: name
   title: name
+  field_room_id: id
   field_schoolhousecap: schoolhousecap
   field_roundscap: roundscap
   field_theatercap: theatercap

@@ -63,7 +63,7 @@
         "drupal/ds_bootstrap_layouts": "3.x-dev",
         "drupal/dynamic_entity_reference": "2.x-dev",
         "drupal/easy_install": "^10.1",
-        "drupal/eck": "1.x-dev",
+        "drupal/eck": "^1.0@alpha",
         "drupal/element_class_formatter": "^1.0",
         "drupal/embed": "^1.0",
         "drupal/entity_block": "^1.0@beta",

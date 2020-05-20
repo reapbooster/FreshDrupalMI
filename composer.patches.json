@@ -9,6 +9,9 @@
     },
     "drupal/migrate_plus": {
       "support paging in migration api requests": "patches/migrate_plus-support_paging-2640516-72.patch"
+    },
+    "drupal/eck": {
+      "Fix for error in content list": "patches/3106184-1-eck-entitylistbuilder-null-bundle.patch"
     }
   }
 }

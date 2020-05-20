@@ -16,7 +16,9 @@ dependencies:
     - field.field.event.summit.field_picture
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
+    - field.field.event.summit.field_sequential_id
     - field.field.event.summit.field_speakers
+    - field.field.event.summit.field_tracks
     - field.field.event.summit.field_venue
   module:
     - datetime
@@ -134,12 +136,29 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_sequential_id:
+    weight: 16
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
   field_speakers:
     weight: 13
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_tracks:
+    weight: 15
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_venue:
     weight: 14

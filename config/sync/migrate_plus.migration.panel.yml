@@ -191,7 +191,7 @@ process:
   field_sponsor: sponsor
   field_panel_alt_text: paneltext
   field_why: why
-  'field_summary/value': summary
+  field_summary/value: summary
   field_summary:
     plugin: entity_lookup
     entity_type: event
@@ -209,6 +209,6 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
 destination:
-  plugin: 'entity:panel'
+  plugin: 'milken_migrate:panel'
   default_bundle: panel
 migration_dependencies: {  }

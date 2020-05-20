@@ -2,54 +2,31 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\destination;
 
-use GuzzleHttp\Client;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\migrate\MigrateSkipRowException;
+use Drupal\migrate\Plugin\migrate\destination\EntityContentBase;
+use Drupal\migrate\Plugin\MigrateIdMapInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 
 /**
- * Panel destination plugin.
+ * Speaker destination plugin
  *
  * @MigrateDestination(
- *   id = "milken_migrate:panel",
+ *   id = "milken_migrate:speakers",
  * )
  */
-class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
+class Speakers extends MilkenMigrateDestinationBase {
 
   /**
    * @param \Drupal\migrate\Row $row
-   */
-  public function setRelatedFields(Row $row) {
-    $this->getEvent($row);
-    $this->getRoom($row);
-  }
-
-  /**
-   * @param \Drupal\migrate\Row|null $row
    *
    * @return string
    */
   public function getBundle(Row $row = NULL) {
-    return "panel";
-  }
-
-  /**
-   * @param \Drupal\migrate\Row $row
-   */
-  public function getRoom(Row $row) {
-    $filter = [
-      "filter" => [
-        "panel_id" => $row->get('pid'),
-      ],
-    ];
-    $response = json_decode(
-      $this->getClient($row)
-        ->get('/jsonapi/panel/rooms', ['query' => $filter])
-        ->getBody(),
-      TRUE
-    );
-    print_r($response);
-    exit();
-
+    return "speakers";
   }
 
   /**
@@ -58,6 +35,7 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
    * @return array|null
    */
   public function getEvent(Row $row) {
+    print_r($row);
     $entityStorage = \Drupal::getContainer()
       ->get('entity_type.manager')
       ->getStorage('event');
@@ -76,19 +54,8 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
     return NULL;
   }
 
-  /**
-   * Get http client for jsonapi call.
-   *
-   * @param \Drupal\migrate\Row $row
-   *   Standard migration row.
-   *
-   * @return \GuzzleHttp\Client
-   *   Guzzle http client.
-   */
-  protected function getClient(Row $row) {
-    return new Client([
-      "base_uri" => $row->get('jsonapi_host'),
-    ]);
+  function setRelatedFields(Row $row) {
+    $this->getEvent($row);
   }
 
 }
