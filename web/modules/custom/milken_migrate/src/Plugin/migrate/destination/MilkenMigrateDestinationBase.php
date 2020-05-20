@@ -19,14 +19,22 @@ use Drupal\migrate\Plugin\MigrationInterface;
 abstract class MilkenMigrateDestinationBase extends EntityContentBase {
 
   /**
+   * Supports Rollback?
+   *
    * @var bool
+   *    Yes or no.
    */
   protected $supportsRollback = TRUE;
   /**
+   * Type of Entity.
+   *
    * @var \Drupal\Core\Entity\EntityTypeInterface
+   *    EckEntityInterface is produced.
    */
   protected $entityType;
   /**
+   * Field Manager.
+   *
    * @var \Drupal\Core\Entity\EntityFieldManagerInterface
    */
   protected $entityFieldManager;
@@ -57,8 +65,10 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     return $ids;
   }
 
-
-  abstract function setRelatedFields(Row $row);
+  /**
+   * Must be implemented and add any related reference fields.
+   */
+  abstract public function setRelatedFields(Row $row);
 
   /**
    * Get a list of fields and their labels.
@@ -82,7 +92,6 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
   }
 
   /**
-   *
    * Get the entityFieldManager.
    *
    * @return \Drupal\Core\Entity\EntityFieldManager

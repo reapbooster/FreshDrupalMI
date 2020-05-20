@@ -2,11 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\destination;
 
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\migrate\Plugin\MigrateIdMapInterface;
-use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 
 /**
@@ -20,15 +16,15 @@ use Drupal\migrate\Row;
  */
 class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
 
-
-  function getRelatedFields(Row $row) {
+  /**
+   * {@inheritdoc}
+   */
+  public function getRelatedFields(Row $row) {
 
   }
 
   /**
-   * @param \Drupal\migrate\Row $row
-   *
-   * @return string
+   * {@inheritdoc}
    */
   public function getBundle(Row $row) {
     switch (strtolower($row->get('type'))) {
@@ -37,7 +33,6 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       case "p4c":
         return "meeting";
 
-
       case "summit":
         return "summit";
 
@@ -45,12 +40,15 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         return "conference";
 
       default:
-        return null;
+        return NULL;
     }
   }
 
-  function setRelatedFields(Row $row) {
-    return true;
+  /**
+   * {@inheritdoc}
+   */
+  public function setRelatedFields(Row $row) {
+    return TRUE;
   }
 
 }
