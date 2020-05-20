@@ -305,4 +305,6 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_embedded_id: true
+  field_embedded_service: true

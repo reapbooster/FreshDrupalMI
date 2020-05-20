@@ -1,0 +1,29 @@
+uuid: 8dd2e29d-663d-4cf8-93af-7f54486c31bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.panel.panel
+    - field.storage.panel.field_tracks
+    - taxonomy.vocabulary.tracks
+id: panel.panel.field_tracks
+field_name: field_tracks
+entity_type: panel
+bundle: panel
+label: tracks
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tracks: tracks
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

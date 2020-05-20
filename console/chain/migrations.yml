@@ -22,6 +22,30 @@ commands:
 
   - command: "exec"
     arguments:
+      bin: "drush migrate:import event"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import panel"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import room"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import speaker"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
       bin: "drush cr"
     options:
       working-directory: /var/www

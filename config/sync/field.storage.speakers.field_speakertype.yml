@@ -1,0 +1,21 @@
+uuid: 8b0d0db2-da84-43f8-a0af-f3eb665ec97e
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: speakers.field_speakertype
+field_name: field_speakertype
+entity_type: speakers
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

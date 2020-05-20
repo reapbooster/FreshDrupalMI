@@ -1,0 +1,20 @@
+uuid: 20ee679f-992e-453f-8a3c-1a34ba049286
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: speakers.field_pgid
+field_name: field_pgid
+entity_type: speakers
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

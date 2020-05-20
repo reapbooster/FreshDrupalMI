@@ -1,0 +1,30 @@
+uuid: d39d96ca-5356-4199-be53-781ac982d847
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - file
+    - image
+id: speakers.field_biopic
+field_name: field_biopic
+entity_type: speakers
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

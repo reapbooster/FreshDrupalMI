@@ -2,7 +2,6 @@
 version: '3.7'
 services:
   nginx:
-    build: docker/nginx-container
     image: milken/nginx-dev
     expose:
       - 80
@@ -22,7 +21,6 @@ services:
       - .env
 
   php:
-    build: docker/php-container
     image: milken/php-dev
     expose:
       - '9000'
@@ -35,11 +33,15 @@ services:
         source: $HOME/.ssh
         target: /root/.ssh
         read_only: true
+    links:
+      - redis
     env_file:
       - .env
+    environment:
+      - BACKUP_FILE_NAME=backup.sql.gz
+      - DATABASE_NAME=drupal8
 
   mysql:
-    build: docker/mysql-container
     image: milken/mysql-dev
     expose:
       - '3306'
@@ -54,6 +56,17 @@ services:
     image: redis
     expose:
       - '6379'
+
+#  grid:
+#    image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+#    environment:
+#      - ACCEPT_EULA=Y
+#      - SA_PASSWORD=drupal^99^DRUPAL
+#      - MSSQL_PID=developer
+#    expose:
+#      - '1433'
+#    ports:
+#      - "1433:1433"
 
 volumes:
   web: {}

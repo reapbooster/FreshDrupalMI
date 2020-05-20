@@ -50,7 +50,10 @@ gulp.task("themeBuild", () => {
           path.resolve(basePath, "web/themes/custom/milken/scss"),
           path.resolve(basePath, "web"),
         ]
-      }).on("error", sass.logError)
+      }).on("error", (err) => {
+        sass.logError(err);
+        process.exit(1);
+      })
     )
     .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
     .pipe(print())

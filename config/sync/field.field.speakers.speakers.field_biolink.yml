@@ -1,0 +1,23 @@
+uuid: ebf016d6-2df6-45b9-9d50-0ac3a132e3aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.speakers.speakers
+    - field.storage.speakers.field_biolink
+  module:
+    - link
+id: speakers.speakers.field_biolink
+field_name: field_biolink
+entity_type: speakers
+bundle: speakers
+label: BioLink
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

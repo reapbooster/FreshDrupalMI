@@ -20,9 +20,7 @@ defaults: &defaults
     # ADMIN_EMAIL:    The email address to give the admin when installing.
     #=========================================================================
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"
-
     # The variables below usually do not need to be modified.
-
     #======================================================================================================================================
     # Circle CI 2.0 does not yet expand environment variables so they have to be manually EXPORTed
     # Once environment variables can be expanded the variables below can be uncommented and the EXPORTs in set-up-globals.sh can be removed

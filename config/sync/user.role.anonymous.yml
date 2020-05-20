@@ -10,5 +10,13 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
+  - 'view any event entities'
+  - 'view any panel entities'
+  - 'view any rooms entities'
+  - 'view any slide entities'
+  - 'view any speakers entities'
   - 'view files'
   - 'view media'
+  - 'view own panel entities'
+  - 'view own rooms entities'
+  - 'view own speakers entities'

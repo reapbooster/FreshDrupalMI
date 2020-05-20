@@ -177,6 +177,8 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_embedded_id: true
+  field_embedded_service: true
   field_height: true
   field_thumbnail_uri: true
   field_video_height: true

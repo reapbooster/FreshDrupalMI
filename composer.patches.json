@@ -4,7 +4,14 @@
       "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch",
       "Media sources should handle empty source field values more gracefully": "patches/3059950-36.patch",
       "Layout builder exports": "patches/layout_builder-export-content-2942975-67.patch",
-      "Theme Hook Suggestions in Views": "patches/core-hook_theme_suggestions-in-views-2923634-70.patch"
+      "Theme Hook Suggestions in Views": "patches/core-hook_theme_suggestions-in-views-2923634-70.patch",
+      "Deleted Table Cleanup Error": "patches/2836539-34.patch"
+    },
+    "drupal/migrate_plus": {
+      "support paging in migration api requests": "patches/migrate_plus-support_paging-2640516-72.patch"
+    },
+    "drupal/eck": {
+      "Fix for error in content list": "patches/3106184-1-eck-entitylistbuilder-null-bundle.patch"
     }
   }
 }

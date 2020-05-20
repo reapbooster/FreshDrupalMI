@@ -198,6 +198,8 @@ hidden:
   created: true
   field_body: true
   field_centers: true
+  field_embedded_id: true
+  field_embedded_service: true
   field_event_reference: true
   field_meta_tags: true
   field_program_initiatives: true
