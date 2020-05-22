@@ -30,7 +30,6 @@ class Speakers extends MilkenMigrateDestinationBase {
    *   Returns array of dependent entities or null.
    */
   public function getEvent(Row $row) {
-    print_r($row);
     $entityStorage = \Drupal::getContainer()
       ->get('entity_type.manager')
       ->getStorage('event');
@@ -53,7 +52,7 @@ class Speakers extends MilkenMigrateDestinationBase {
    * {@inheritDoc}
    */
   public function setRelatedFields(Row $row) {
-    $this->getEvent($row);
+    //$this->getEvent($row);
   }
 
 }

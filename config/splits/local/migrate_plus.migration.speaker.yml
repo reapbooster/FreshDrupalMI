@@ -131,7 +131,6 @@ process:
   name: name
   title: name
   field_biolink: biolink
-  field_biopic: biopic
   field_biotext: biotext
   field_city: city
   field_description: description
@@ -146,6 +145,12 @@ process:
   field_speakertype: speakertype
   field_spkemail: spkemail
   field_status: status
+  field_event:
+    plugin: entity_lookup
+    access_check: false
+    entity_type: event
+    value_key: field_grid_event_id
+    source: eventid
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
