@@ -17,10 +17,10 @@ migration_group: milken
 label: 'Room VIA JSON API'
 source:
   plugin: url
-  urls: 'http://host.docker.internal/jsonapi/rooms'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/rooms'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'http://host.docker.internal'
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
   jsonapi_endpoint: /jsonapi/rooms
   item_selector: data
   fields:

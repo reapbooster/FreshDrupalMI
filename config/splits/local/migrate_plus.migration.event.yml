@@ -17,10 +17,10 @@ migration_group: milken
 label: 'Event VIA JSON API'
 source:
   plugin: url
-  urls: 'http://host.docker.internal/jsonapi/events'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/events'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'http://host.docker.internal'
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
   jsonapi_endpoint: /jsonapi/events
   item_selector: data
   fields:
@@ -100,15 +100,15 @@ source:
       name: cventid
       label: 'Cvent ID'
       selector: /attributes/cventid
+    -
+      name: blurb
+      label: Blurb
+      selector: /attributes/blurb
   ids:
-    sequentialID:
+    id:
       type: integer
 process:
-  field_sequential_id:
-    plugin: skip_on_empty
-    source: sequentialID
-    message: 'Field field_name is missing'
-    method: row
+  field_sequential_id: sequentialID
   type:
     -
       plugin: skip_on_value
@@ -180,6 +180,13 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
+  field_event_date/value:
+    plugin: format_date
+    source: eventdate
+    from_format: 'Y-m-d\TH:i:sO'
+    to_format: 'Y-m-d'
+    settings:
+      validate_format: false
 destination:
   plugin: 'milken_migrate:event'
   default_bundle: conference

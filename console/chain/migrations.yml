@@ -46,6 +46,12 @@ commands:
 
   - command: "exec"
     arguments:
+      bin: "drush migrate:import track"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
       bin: "drush cr"
     options:
       working-directory: /var/www

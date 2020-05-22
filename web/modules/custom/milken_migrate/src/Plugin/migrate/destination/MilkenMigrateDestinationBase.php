@@ -53,9 +53,10 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
-    $map = $row->getIDMap();
+
     $ids = $this->save($entity, $old_destination_id_values);
-    $map['destid1'] = $ids[array_keys($ids)[0]];
+
+    $map['destid1'] = $entity->id();
     $row->setIdMap($map);
     $this->setRollbackAction($map,
       $entity->isNew() ?

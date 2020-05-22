@@ -1,12 +1,12 @@
-uuid: b3e6c15d-cb26-4a9e-b3a2-c79c881bd3c1
+uuid: 8eb0d228-42cb-4c5b-bf9e-6fc10a93307f
 langcode: en
 status: true
 dependencies:
   module:
     - datetime
     - eck
-id: event.field_registration_deadline
-field_name: field_registration_deadline
+id: event.field_event_date
+field_name: field_event_date
 entity_type: event
 type: datetime
 settings:

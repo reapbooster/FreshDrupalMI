@@ -29,7 +29,6 @@ class Reference extends ProcessPluginBase {
    * The main function for the plugin, actually doing the data conversion.
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    $destination_values = [];
     $entityStorage = \Drupal::getContainer()
       ->get('entity_type.manager')
       ->getStorage($this->configuration['referenced_entity']);
