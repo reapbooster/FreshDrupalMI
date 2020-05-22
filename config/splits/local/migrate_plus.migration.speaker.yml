@@ -159,5 +159,5 @@ process:
     source: changed
 destination:
   plugin: 'milken_migrate:speakers'
-  default_bundle: speaker
+  default_bundle: speakers
 migration_dependencies: {  }
