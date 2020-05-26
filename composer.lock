@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83f27e33e221771dfe82694922f18097",
+    "content-hash": "63b2927b5146c9f6d37f973190d97551",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7367,6 +7367,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Add missing core_version_requirement in tests": "https://www.drupal.org/files/issues/2020-04-09/3126225-2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
