@@ -52,7 +52,7 @@ class Speakers extends MilkenMigrateDestinationBase {
    * {@inheritDoc}
    */
   public function setRelatedFields(Row $row) {
-    //$this->getEvent($row);
+    // $this->getEvent($row);
   }
 
 }
