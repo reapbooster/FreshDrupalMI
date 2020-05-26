@@ -17,7 +17,7 @@ dependencies:
     - field.storage.media.field_subheader
     - field.storage.slide.field_subtitle
     - field.storage.node.field_topics
-    - search_api.server.solr_dev
+    - search_api.server.solr_local
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -282,4 +282,4 @@ tracker_settings:
 options:
   index_directly: false
   cron_limit: 50
-server: solr_dev
+server: solr_local

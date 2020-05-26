@@ -221,7 +221,7 @@
         ],
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
         "code-sniff": [
-            "vendor/bin/phpcs --config-set installed_paths web/modules/contrib/coder/coder_sniffer",
+            "vendor/bin/phpcs --config-set installed_paths 'web/modules/contrib/coder/coder_sniffer,vendor/object-calisthenics/phpcs-calisthenics-rules/src,vendor/phpcompatibility/php-compatibility,vendor/slevomat/coding-standard,vendor/drupal/coder/codesniffer'",
             "vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
             "vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom",
             "vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",

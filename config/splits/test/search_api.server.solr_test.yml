@@ -4,8 +4,8 @@ status: true
 dependencies:
   module:
     - search_api_solr
-id: solr_dev
-name: solr_dev
+id: solr_test
+name: solr_test
 description: ''
 backend: search_api_solr
 backend_config:
