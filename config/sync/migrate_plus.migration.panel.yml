@@ -17,7 +17,7 @@ migration_group: milken
 label: 'Panels VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/panels'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/events'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
   jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
@@ -196,12 +196,6 @@ process:
     plugin: entity_lookup
     entity_type: event
     default_value: full_html
-  field_event:
-    plugin: entity_lookup
-    access_check: false
-    entity_type: event
-    value_key: field_grid_event_id
-    source: eventid
   created:
     plugin: 'milken_migrate:unix_date'
     source: created

@@ -17,7 +17,7 @@ migration_group: milken
 label: 'Room VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/speakers'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/events'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
   jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
@@ -131,6 +131,7 @@ process:
   name: name
   title: name
   field_biolink: biolink
+  field_biopic: biopic
   field_biotext: biotext
   field_city: city
   field_description: description
@@ -145,12 +146,6 @@ process:
   field_speakertype: speakertype
   field_spkemail: spkemail
   field_status: status
-  field_event:
-    plugin: entity_lookup
-    access_check: false
-    entity_type: event
-    value_key: field_grid_event_id
-    source: eventid
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -159,5 +154,5 @@ process:
     source: changed
 destination:
   plugin: 'milken_migrate:speakers'
-  default_bundle: speakers
+  default_bundle: speaker
 migration_dependencies: {  }
