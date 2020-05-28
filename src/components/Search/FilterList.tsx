@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form} from 'react-bootstrap';
-import {FacetType, FacetDisplay, FacetInterface, FacetTypeProps} from './Facet';
+import { FacetType, FacetDisplay, FacetInterface, FacetTypeProps } from './Facet';
 
 interface FilterListProps {
   filters: Array<FacetTypeProps>

@@ -16,8 +16,12 @@ const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface, string> =
   }
   let backgroundImageProps: ImageEntityProps = new ImageEntityProps(props.field_background_image);
   if (backgroundImageProps.getData !== undefined) {
-    backgroundImageProps.getData().then((incoming) => {
-      setBackgroundImageUrl(incoming.uri.url);
+    backgroundImageProps
+      .getData()
+      .then(res => res.json())
+      .then((incoming) => {
+      console.log("response", incoming);
+      setBackgroundImageUrl(incoming.data.uri.url);
     });
   }
   return (

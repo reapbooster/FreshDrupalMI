@@ -14,11 +14,11 @@ import SlideDataInterface from "../../DataTypes/SlideDataInterface";
 
 const SlideShow: React.FunctionComponent<EntityComponentProps> = (props: EntityComponentProps) => {
 
-  const getCarousel = (props: Array<SlideDataInterface> = []) => {
-    if (props.length) {
+  const getCarousel = (slideData: Array<SlideDataInterface> = []) => {
+    if (slideData.length) {
       return (
         <Carousel>
-          {props.map((slide: SlideDataInterface, key) => {
+          {slideData.map((slide: SlideDataInterface, key) => {
             return (
               <CarouselItem key={key} id={slide.id}>
                 <Slide {...slide} />
@@ -41,11 +41,7 @@ const SlideShow: React.FunctionComponent<EntityComponentProps> = (props: EntityC
 
   return (
     <>
-      <Row className="h-100">
-        <Col lg={12} className={"col-sm-12 my-auto"}>
-          {getCarousel(props.items)}
-        </Col>
-      </Row>
+      {getCarousel(props.items)}
     </>
   );
 }

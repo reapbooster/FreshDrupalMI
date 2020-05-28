@@ -1,23 +1,31 @@
 {
     "baseUrl": ".",
     "compilerOptions": {
-        "allowJs": false,
-        "target": "ES6",
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "module": "commonjs",
-        "sourceMap": false,
-        "listEmittedFiles": true,
-        "alwaysStrict": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "jsx": "react"
+      "allowJs": true,
+      "checkJs": true,
+      "target": "es2015",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "module": "commonjs",
+      "sourceMap": false,
+      "listEmittedFiles": true,
+      "alwaysStrict": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "jsx": "react",
+      "types": ["jquery","bootstrap", "node", "youtube"],
+      "noErrorTruncation": true,
+      "experimentalDecorators": true,
+      "typeRoots": [
+        "node_modules/@types"
+      ]
     },
     "include": [
         "./web/themes/custom/milken/js",
         "./web/themes/custom/milken/config",
         "./web/themes/custom/milken/gulp",
+        "./config/node",
         "./src"
     ],
     "lib": [

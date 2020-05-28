@@ -10,8 +10,10 @@ const VideoSmall: React.FunctionComponent = (props: VideoDataInterface) => {
   const [ thumbnailImageUrl, setThumbnailImageUrl ] = useState("holder.js/100x100?text=thumbnail&auto=yes");
   var thumbnail = new ImageEntityProps(props.thumbnail);
   if (thumbnail.getData !== undefined) {
-    thumbnail.getData().then((incoming) => {
-      setThumbnailImageUrl(incoming.uri.url);
+    thumbnail.getData()
+      .then(res => res.json())
+      .then((incoming) => {
+      setThumbnailImageUrl(incoming.data.uri.url);
     });
   }
   const created = moment(props.created, moment.ISO_8601);

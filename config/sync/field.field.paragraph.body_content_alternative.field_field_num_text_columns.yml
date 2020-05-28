@@ -1,0 +1,25 @@
+uuid: c7bf3cca-c877-45a3-aae5-ea13fe49e0c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_field_num_text_columns
+    - paragraphs.paragraphs_type.body_content_alternative
+id: paragraph.body_content_alternative.field_field_num_text_columns
+field_name: field_field_num_text_columns
+entity_type: paragraph
+bundle: body_content_alternative
+label: field_num_text_columns
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  min: 1
+  max: 5
+  prefix: ''
+  suffix: ''
+field_type: integer
