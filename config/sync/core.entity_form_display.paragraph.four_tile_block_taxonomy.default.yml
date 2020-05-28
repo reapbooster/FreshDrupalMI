@@ -1,0 +1,25 @@
+uuid: 6c1d5c31-5fcf-459d-9829-336435063447
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.four_tile_block_taxonomy.field_term
+    - paragraphs.paragraphs_type.four_tile_block_taxonomy
+id: paragraph.four_tile_block_taxonomy.default
+targetEntityType: paragraph
+bundle: four_tile_block_taxonomy
+mode: default
+content:
+  field_term:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,4 +1,5 @@
 layout_builder_kit:
   image_location: layout_builder_kit
+  image_extensions: '.jpg .png'
 _core:
   default_config_hash: 8ZEjrKegGMdRAutFsqRvMoiUh32r3xSRokwithyGDJU

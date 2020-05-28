@@ -1,0 +1,32 @@
+uuid: c540a5bd-a8c1-4934-8664-d0c78a2512ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - entityqueue.entity_queue.homepage_slides
+    - entityqueue.entity_queue.homepage_videos
+    - field.storage.paragraph.field_queue
+    - paragraphs.paragraphs_type.four_tile_block_queue
+  module:
+    - entity_reference_revisions
+id: paragraph.four_tile_block_queue.field_queue
+field_name: field_queue
+entity_type: paragraph
+bundle: four_tile_block_queue
+label: Queue
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:entity_subqueue'
+  handler_settings:
+    target_bundles:
+      homepage_slides: homepage_slides
+      homepage_videos: homepage_videos
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: homepage_slides
+field_type: entity_reference_revisions
