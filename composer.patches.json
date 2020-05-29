@@ -12,6 +12,9 @@
     },
     "drupal/eck": {
       "Fix for error in content list": "patches/3106184-1-eck-entitylistbuilder-null-bundle.patch"
+    },
+    "drupal/page_manager": {
+      "Fix issue with default language": "patches/no_language_interface_context-3100095-2.patch"
     }
   }
 }

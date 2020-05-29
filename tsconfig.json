@@ -25,8 +25,7 @@
         "./web/themes/custom/milken/js",
         "./web/themes/custom/milken/config",
         "./web/themes/custom/milken/gulp",
-        "./config/node",
-        "./src"
+        "./config/node"
     ],
     "lib": [
       "es2016"

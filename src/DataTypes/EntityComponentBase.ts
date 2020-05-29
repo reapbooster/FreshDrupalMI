@@ -15,7 +15,7 @@ abstract class EntityComponentBase extends React.Component<EntityComponentProps,
 
   include?: string;
 
-  protected constructor(props: EntityComponentProps) {
+  constructor(props: EntityComponentProps) {
     super(props);
     this.ecp = new EntityComponentProps(props);
     this.state = {

@@ -21,7 +21,7 @@ const SlideShow: React.FunctionComponent<EntityComponentProps> = (props: EntityC
           {slideData.map((slide: SlideDataInterface, key) => {
             return (
               <CarouselItem key={key} id={slide.id}>
-                <Slide {...slide} />
+                <Slide {...slide} view={"full"} />
               </CarouselItem>
             )
           })}

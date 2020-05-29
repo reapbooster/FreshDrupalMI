@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import { EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
-import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
+import EntityComponentBase, { EntityComponentState } from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
 import TextField from "../../DataTypes/TextField";
 
@@ -14,14 +14,22 @@ interface ParagraphTextProps extends EntityComponentPropsInterface {
 
 class ParagraphText extends EntityComponentBase<ParagraphTextProps, EntityComponentState> {
 
-  render(): React.ReactNode {
+  static defaultProps = {
+    view_mode: "full"
+  }
+
+  render() {
+    const textStyle={
+      columnCount: Number(this.props.field_field_num_text_columns || 1)
+    };
     console.log("Paragraph Text", this.props, this.state);
     if (this.state.loaded) {
       return (
         <Container>
           <Row>
             <Col>
-              <div dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.value}} />
+              <div style={textStyle}
+                   dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.value}} />
             </Col>
           </Row>
         </Container>
@@ -39,7 +47,6 @@ class ParagraphText extends EntityComponentBase<ParagraphTextProps, EntityCompon
         </>
       )
     }
-
   }
 
 }

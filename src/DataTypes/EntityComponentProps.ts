@@ -9,7 +9,7 @@ interface EntityComponentPropsInterface {
   items?: Array<any>;
   type?: string;
   error?: Error;
-  onSelectHandler: any;
+  onSelectHandler?: any;
   open?: boolean;
 }
 
@@ -87,6 +87,7 @@ class EntityComponentProps implements EntityComponentPropsInterface {
   get loaded() {
     return this.hasData();
   }
+
 
 }
 

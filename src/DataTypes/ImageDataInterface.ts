@@ -23,4 +23,4 @@ interface ImageUrlDataInterface {
 }
 
 
-export default ImageDataInterface;
+export { ImageDataInterface as default, ImageUrlDataInterface };

@@ -1,43 +1,40 @@
 import React from 'react';
 import ArticleFull from "./ArticleFull";
-import EntityComponentProps from "../../DataTypes/EntityComponentProps";
+import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 
-class Article extends React.Component<EntityComponentProps, EntityComponentProps> {
+import EntityComponentBase from '../../DataTypes/EntityComponentBase';
+import Slide from "../Slide";
+import Loading from "../Loading";
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: {}
-    };
-  }
+class Article extends EntityComponentBase {
+
+  include = "&"
 
   componentDidMount(): void {
-    this.fetchNodeData();
+    if (!this.state.loaded && !this.state.loading) {
+      this.getDataForComponent()
+    }
   }
 
-  fetchNodeData() {
-    let me = this;
-    fetch(`/jsonapi/${this.props.entityTypeId}/${this.props.bundle}/${this.props.id}?jsonapi_include=1&include=field_promo_slide`)
-      .then(res => res.json())
-      .then((ajaxData) => {
-        console.log('data is back from drupal', ajaxData);
-        me.setState({ data: ajaxData.data });
-      });
-  }
 
   render() {
-    if (this.state.data.id !== undefined) {
+    if (this.state.loaded) {
       switch(this.props.view_mode) {
-        case "small":
-
+        case "card":
+          return (
+            <Slide {...this.state.attributes.field_promo_slide} view_mode={"card"} />
+          );
           break;
 
 
         default:
-          return (<ArticleFull {...this.state.data} />);
+          return (<ArticleFull {...this.state.attributes} />);
       }
+    } else if (this.state.loading == true) {
+      return (<Loading />);
+    } else {
+      return (<h1>No data Available</h1>);
     }
-    return (<div>Content Loading</div>);
 
   }
 

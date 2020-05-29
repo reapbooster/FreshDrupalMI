@@ -14,11 +14,18 @@ interface ParagraphSlideProps extends EntityComponentPropsInterface {
 
 class ParagraphSlide extends EntityComponentBase<ParagraphSlideProps, EntityComponentState> {
 
+  static defaultProps = {
+    view_mode: "full"
+  }
+
   render(): React.ReactNode {
     console.log("Paragraph Slide", this.props, this.state);
     if (this.state.loaded) {
       return (
-        <SlideShow items={this.props.field_slides} />
+        <SlideShow
+          items={this.props.field_slides}
+          view_mode={this.props.view_mode}
+        />
       )
     } else if (this.state.loading) {
       return(
