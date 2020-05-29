@@ -25,11 +25,11 @@ class ParagraphFourPanel extends EntityComponentBase<ParagraphFourPanelProps, En
     if (this.state.loaded) {
       if (this.state.attributes?.field_queue) {
         return (
-          <div key={this.props.key}>
+          <Col key={this.props.key}>
             <EntityQueue
               view_mode={"card"}
               {...this.state.attributes?.field_queue} />
-          </div>
+          </Col>
         )
       }
       return (
@@ -37,9 +37,9 @@ class ParagraphFourPanel extends EntityComponentBase<ParagraphFourPanelProps, En
       )
     } else if (this.state.loading) {
       return(
-        <div key={this.props.key}>
+        <Col key={this.props.key}>
           <Loading />
-        </div>
+        </Col>
       );
     } else {
       return (

@@ -28,7 +28,7 @@ class Slide extends EntityComponentBase<SlideDataInterface, EntityComponentState
         return (
           <Card className="my-5">
             <Card.Img
-              id={"card-image-".concat()}
+              id={"card-image-".concat(this.props.id)}
               src={this.state.attributes?.field_background_image?.uri?.url} />
             <Card.Body style={{minHeight: "150px"}}>
               <Card.Title>{this.state.attributes.title}</Card.Title>

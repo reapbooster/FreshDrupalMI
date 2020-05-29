@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - eck.eck_type.slide.full_width_one_column
+    - eck.eck_type.slide.photo_left_text_right
     - field.storage.paragraph.field_slides
     - paragraphs.paragraphs_type.slide
 id: paragraph.slide.field_slides
@@ -16,10 +18,13 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: views
+  handler: 'default:slide'
   handler_settings:
-    view:
-      view_name: slides
-      display_name: entity_reference_1
-      arguments: {  }
+    target_bundles:
+      full_width_one_column: full_width_one_column
+      photo_left_text_right: photo_left_text_right
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: full_width_one_column
 field_type: entity_reference

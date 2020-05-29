@@ -11,15 +11,49 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
-    enabled: false
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          aeb7cb85-a8c6-4666-bbdc-63269b05d313:
+            uuid: aeb7cb85-a8c6-4666-bbdc-63269b05d313
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:taxonomy_term:centers:description'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 0
+          c8352233-6bd0-440f-9c30-011c67a55b49:
+            uuid: c8352233-6bd0-440f-9c30-011c67a55b49
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:taxonomy_term:centers:description'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+            additional: {  }
+            weight: 1
+        third_party_settings: {  }
   layout_builder_restrictions:
     entity_view_mode_restriction:
       allowed_blocks: {  }
       allowed_layouts: {  }
-      whitelisted_blocks: {  }
-      blacklisted_blocks: {  }
-    allowed_block_categories: {  }
 id: taxonomy_term.centers.default
 targetEntityType: taxonomy_term
 bundle: centers

@@ -1,24 +1,22 @@
-uuid: 6c1d5c31-5fcf-459d-9829-336435063447
+uuid: 9856d185-e3f6-403f-b9d3-f9a3a8359379
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.four_tile_block_taxonomy.field_term
-    - paragraphs.paragraphs_type.four_tile_block_taxonomy
-id: paragraph.four_tile_block_taxonomy.default
+    - field.field.paragraph.pull_quote.field_pull_quote
+    - paragraphs.paragraphs_type.pull_quote
+id: paragraph.pull_quote.default
 targetEntityType: paragraph
-bundle: four_tile_block_taxonomy
+bundle: pull_quote
 mode: default
 content:
-  field_term:
+  field_pull_quote:
     weight: 1
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: string_textarea
     region: content
   status:
     type: boolean_checkbox

@@ -20,31 +20,31 @@ class ParagraphText extends EntityComponentBase<ParagraphTextProps, EntityCompon
 
   render() {
     const textStyle={
-      columnCount: Number(this.props.field_field_num_text_columns || 1)
+      columnCount: Number(this.props.field_field_num_text_columns || 1),
+      paddingTop: "2rem",
+      paddingBottom: "2rem",
     };
     console.log("Paragraph Text", this.props, this.state);
     if (this.state.loaded) {
       return (
-        <Container>
-          <Row>
-            <Col>
-              <div style={textStyle}
-                   dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.value}} />
-            </Col>
-          </Row>
-        </Container>
+        <Col key={this.props.key} lg={12}>
+          <Container>
+            <p style={textStyle}
+               dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.value}} />
+          </Container>
+        </Col>
       );
     } else if (this.state.loading) {
       return (
-        <div key={this.props.key}>
+        <Col key={this.props.key} lg={12}>
           <Loading/>
-        </div>
+        </Col>
         );
     } else {
       return (
-        <>
-          <h1 key={this.props.key}>No Content Available</h1>
-        </>
+        <Col
+          key={this.props.key}
+          lg={12}><h1 key={this.props.key}>No Content Available</h1></Col>
       )
     }
   }

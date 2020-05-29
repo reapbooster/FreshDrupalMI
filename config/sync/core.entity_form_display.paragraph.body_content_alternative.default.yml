@@ -14,7 +14,7 @@ third_party_settings:
     group_text:
       children: {  }
       parent_name: ''
-      weight: 20
+      weight: 1
       format_type: fieldset
       format_settings:
         id: ''
@@ -28,7 +28,7 @@ bundle: body_content_alternative
 mode: default
 content:
   field_body:
-    weight: 21
+    weight: 2
     settings:
       rows: 9
       summary_rows: 3
@@ -44,6 +44,12 @@ content:
     third_party_settings: {  }
     type: number
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
 hidden:
   created: true
-  status: true
