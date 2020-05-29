@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.body_content_alternative.field_body
+    - field.field.paragraph.body_content_alternative.field_field_num_text_columns
     - paragraphs.paragraphs_type.body_content_alternative
   module:
     - field_group
@@ -35,6 +36,13 @@ content:
       show_summary: false
     third_party_settings: {  }
     type: text_textarea_with_summary
+    region: content
+  field_field_num_text_columns:
+    weight: 22
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
 hidden:
   created: true

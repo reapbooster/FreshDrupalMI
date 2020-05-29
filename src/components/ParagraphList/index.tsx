@@ -48,11 +48,11 @@ export const ParagraphList: React.FunctionComponent = (props: ParagraphProps) =>
 
       case "four_tile_block_taxonomy":
         return (
-          <Row key={key}><Col lg={12}>
+          <Row key={key}>
             <ParagraphFourPanel
               {...item}
               data={{loaded: true}} />
-          </Col></Row>
+          </Row>
 
         );
 

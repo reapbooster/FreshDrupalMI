@@ -5,6 +5,7 @@ import { EntityComponentPropsInterface } from "../../DataTypes/EntityComponentPr
 import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
 import EntityQueue from '../EntityQueue';
+import FourPanel from "../FourPanel";
 
 interface ParagraphFourPanelProps extends EntityComponentPropsInterface {
   key: number;
@@ -16,7 +17,7 @@ interface ParagraphFourPanelProps extends EntityComponentPropsInterface {
 class ParagraphFourPanel extends EntityComponentBase<ParagraphFourPanelProps, EntityComponentState> {
 
   static defaultProps = {
-    view: "card"
+    view_mode: "card"
   }
 
   render(): React.ReactNode {
@@ -26,13 +27,13 @@ class ParagraphFourPanel extends EntityComponentBase<ParagraphFourPanelProps, En
         return (
           <div key={this.props.key}>
             <EntityQueue
-              view={"card"}
+              view_mode={"card"}
               {...this.state.attributes?.field_queue} />
           </div>
         )
       }
       return (
-        <h1>ParagraphFourPanel</h1>
+          <FourPanel {...this.state.attributes?.field_term} view_mode={"card"} />
       )
     } else if (this.state.loading) {
       return(
