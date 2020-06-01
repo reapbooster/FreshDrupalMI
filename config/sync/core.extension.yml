@@ -60,6 +60,7 @@ module:
   image: 0
   imagick: 0
   inline_entity_form: 0
+  jdrupal: 0
   jsonapi: 0
   jsonapi_extras: 0
   jsonapi_image_styles: 0

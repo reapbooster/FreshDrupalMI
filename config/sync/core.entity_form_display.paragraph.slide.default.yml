@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.slide.field_background
     - field.field.paragraph.slide.field_slides
     - paragraphs.paragraphs_type.slide
   module:
@@ -13,8 +14,14 @@ targetEntityType: paragraph
 bundle: slide
 mode: default
 content:
-  field_slides:
+  field_background:
     weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_slides:
+    weight: 0
     settings:
       form_mode: default
       revision: true
@@ -32,12 +39,6 @@ content:
         entity_browser_id: browse_content
     type: inline_entity_form_complex
     region: content
-  status:
-    type: boolean_checkbox
-    weight: 0
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
 hidden:
   created: true
+  status: true

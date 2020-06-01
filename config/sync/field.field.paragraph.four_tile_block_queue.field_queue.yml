@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entityqueue.entity_queue.featured
+    - entityqueue.entity_queue.featured_videos
     - entityqueue.entity_queue.homepage_slides
     - entityqueue.entity_queue.homepage_videos
     - field.storage.paragraph.field_queue
@@ -23,10 +25,12 @@ settings:
   handler: 'default:entity_subqueue'
   handler_settings:
     target_bundles:
+      featured: featured
+      featured_videos: featured_videos
       homepage_slides: homepage_slides
       homepage_videos: homepage_videos
     sort:
       field: _none
-    auto_create: false
-    auto_create_bundle: homepage_slides
+    auto_create: true
+    auto_create_bundle: featured_videos
 field_type: entity_reference_revisions

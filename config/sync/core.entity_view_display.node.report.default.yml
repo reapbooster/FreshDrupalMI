@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.report.field_body
-    - field.field.node.report.field_centers_general
+    - field.field.node.report.field_centers
     - field.field.node.report.field_cover_image
     - field.field.node.report.field_custom_author_text
     - field.field.node.report.field_enable_custom_author_text
@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.report.field_event_reference
     - field.field.node.report.field_main_menu
     - field.field.node.report.field_meta_tags
+    - field.field.node.report.field_promo_slide
     - field.field.node.report.field_publication_on
     - field.field.node.report.field_report_author
     - field.field.node.report.field_rp_pdf_file
@@ -35,13 +36,20 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
+  field_centers:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
     region: content
 hidden:
-  field_centers_general: true
   field_cover_image: true
   field_custom_author_text: true
   field_enable_custom_author_text: true

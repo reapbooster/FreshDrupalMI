@@ -9,6 +9,7 @@ import {Col, Container} from "react-bootstrap";
 interface ParagraphSlideProps extends EntityComponentPropsInterface {
   key: number;
   field_slides: Array<SlideDataInterface>;
+  field_text_size: string;
 }
 
 
@@ -24,7 +25,7 @@ class ParagraphPullQuote extends EntityComponentBase<ParagraphSlideProps, Entity
       return (
         <Col lg={12}>
           <Container py={"2rem"}>
-            <h1 className={"display-2"}>{this.state.attributes.field_pull_quote}</h1>
+            <h1 className={"this.state.attributes.field_text_size"}>{this.state.attributes.field_pull_quote}</h1>
           </Container>
         </Col>
       )

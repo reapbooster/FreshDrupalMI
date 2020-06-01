@@ -1,29 +1,29 @@
-uuid: 6f71d6f8-03d1-4caf-95f7-53cbfbc83971
+uuid: f74dd508-657e-47eb-b078-bb064dea6c60
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_topics
+    - field.storage.node.field_centers
     - node.type.article
-    - taxonomy.vocabulary.topics
-id: node.article.field_topics
-field_name: field_topics
+    - taxonomy.vocabulary.centers
+id: node.article.field_centers
+field_name: field_centers
 entity_type: node
 bundle: article
-label: Topics
+label: Centers
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      topics: topics
+      centers: centers
     sort:
       field: name
       direction: asc
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

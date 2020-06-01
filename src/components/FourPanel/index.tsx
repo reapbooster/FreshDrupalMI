@@ -6,11 +6,13 @@ import {Card, Col} from 'react-bootstrap';
 import moment from "moment";
 
 interface FourPanelViewObjectInterface {
-  name: string;
+  title: string;
   uuid: string;
   bundle: string;
-  thumbnail__target_id: string;
+  field_topics: string;
   changed: string;
+  view_node: string;
+  field_background_image: string;
 }
 
 interface FourPanelProps extends EntityComponentPropsInterface {
@@ -24,7 +26,8 @@ class FourPanel extends EntityComponentBase<FourPanelProps, EntityComponentState
     var me = this;
     if (!this.state.loaded && !this.state.loading) {
       me.setState({ loading: true });
-      fetch('/api/v1.0/four-videos?_format=hal_json')
+      //GET http://localhost:8080/api/v1.0/four-from-topics-taxonomy?_format=json
+      fetch('/api/v1.0/four-from-topics-taxonomy?_format=json')
         .then((res) => res.json())
         .then((ajaxData: Array<FourPanelViewObjectInterface>) => {
           console.log("data is back from drupal. Setting state ", ajaxData);
@@ -48,9 +51,9 @@ class FourPanel extends EntityComponentBase<FourPanelProps, EntityComponentState
             <Card className="my-5">
               <Card.Img
                 id={"card-image-".concat()}
-                src={item.thumbnail__target_id}/>
+                src={item.field_background_image}/>
               <Card.Body style={{minHeight: "150px"}}>
-                <Card.Title><span dangerouslySetInnerHTML={{__html: item.name}}></span></Card.Title>
+                <Card.Title><a href={item.view_node}>{item.title}</a></Card.Title>
               </Card.Body>
               <Card.Footer>{created.format('MMMM D, YYYY')}</Card.Footer>
             </Card>

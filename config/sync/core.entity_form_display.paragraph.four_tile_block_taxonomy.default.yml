@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.four_tile_block_taxonomy.field_background
     - field.field.paragraph.four_tile_block_taxonomy.field_term
     - paragraphs.paragraphs_type.four_tile_block_taxonomy
 id: paragraph.four_tile_block_taxonomy.default
@@ -10,8 +11,14 @@ targetEntityType: paragraph
 bundle: four_tile_block_taxonomy
 mode: default
 content:
-  field_term:
+  field_background:
     weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_term:
+    weight: 0
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -20,12 +27,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  status:
-    type: boolean_checkbox
-    weight: 0
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
 hidden:
   created: true
+  status: true

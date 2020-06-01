@@ -1,5 +1,3 @@
-import EntityComponentBase, {EntityComponentState} from "../../DataTypes/EntityComponentBase";
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 import ParagraphSlide from "./ParagraphSlide";
 import ParagraphFourPanel from "./ParagraphFourPanel";
 import ParagraphText from "./ParagraphText";
@@ -14,7 +12,7 @@ const ParagraphBundleComponents = {
 }
 
 
-class Paragraphs extends EntityComponentBase<EntityComponentProps, EntityComponentState> {
+class Paragraphs {
 
   public static getComponentForBundle(bundleId) {
     return ( ParagraphBundleComponents[bundleId] || null );

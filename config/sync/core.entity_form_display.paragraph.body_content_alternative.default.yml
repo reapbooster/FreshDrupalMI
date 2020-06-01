@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.body_content_alternative.field_background
     - field.field.paragraph.body_content_alternative.field_body
     - field.field.paragraph.body_content_alternative.field_field_num_text_columns
     - paragraphs.paragraphs_type.body_content_alternative
@@ -14,7 +15,7 @@ third_party_settings:
     group_text:
       children: {  }
       parent_name: ''
-      weight: 1
+      weight: 20
       format_type: fieldset
       format_settings:
         id: ''
@@ -27,8 +28,14 @@ targetEntityType: paragraph
 bundle: body_content_alternative
 mode: default
 content:
+  field_background:
+    weight: 23
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_body:
-    weight: 2
+    weight: 21
     settings:
       rows: 9
       summary_rows: 3
@@ -44,12 +51,6 @@ content:
     third_party_settings: {  }
     type: number
     region: content
-  status:
-    type: boolean_checkbox
-    weight: 0
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
 hidden:
   created: true
+  status: true

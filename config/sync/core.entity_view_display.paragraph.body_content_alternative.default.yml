@@ -3,16 +3,25 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.body_content_alternative.field_background
     - field.field.paragraph.body_content_alternative.field_body
     - field.field.paragraph.body_content_alternative.field_field_num_text_columns
     - paragraphs.paragraphs_type.body_content_alternative
   module:
+    - options
     - text
 id: paragraph.body_content_alternative.default
 targetEntityType: paragraph
 bundle: body_content_alternative
 mode: default
 content:
+  field_background:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   field_body:
     weight: 0
     label: above

@@ -211,6 +211,13 @@ field_settings:
       module:
         - eck
 datasource_settings:
+  'entity:event':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: true
+      selected: {  }
   'entity:media':
     bundles:
       default: true

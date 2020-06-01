@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.medium_tile
     - field.field.node.article.field_authors
     - field.field.node.article.field_body
+    - field.field.node.article.field_centers
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
@@ -48,6 +49,7 @@ content:
 hidden:
   field_authors: true
   field_body: true
+  field_centers: true
   field_meta_tags: true
   field_promo_slide: true
   field_topics: true

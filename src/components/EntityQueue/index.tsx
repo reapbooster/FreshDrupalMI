@@ -1,10 +1,12 @@
-
 import React from 'react';
 import {Col, Grid, Navbar, Row, Nav, NavItem, PanelGroup, Panel, Alert, Container} from 'react-bootstrap';
 import {EntityComponentProps, EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
 import Slide from '../Slide';
+import Media from '../Media';
+import Article from "../Article";
+
 
 class EntityQueue extends EntityComponentBase<EntityComponentPropsInterface, EntityComponentState> {
 
@@ -39,6 +41,16 @@ class EntityQueue extends EntityComponentBase<EntityComponentPropsInterface, Ent
     switch (ecp.entityTypeId) {
       case "slide":
         content = (<Slide {...ecp.toObject()} view_mode={"card"} />);
+        break;
+
+      case "node":
+        content = (<Article {...ecp.toObject()} view_mode={"card"} />);
+        break;
+
+
+      case "media":
+        const Component = Media.getComponentForBundle(ecp.bundle);
+        content = (<Component  {...ecp.toObject()} view_mode={"card"} />);
         break;
 
       default:

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "884a5cab744a86085209de46f49bbcc8",
+    "content-hash": "cf4f4bf5e3ad4e55faec8cee0a8b77f4",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -7850,6 +7850,54 @@
             "homepage": "https://www.drupal.org/project/inline_entity_form",
             "support": {
                 "source": "https://git.drupalcode.org/project/inline_entity_form"
+            }
+        },
+        {
+            "name": "drupal/jdrupal",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/jdrupal.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/jdrupal-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "2cb5f98fa6f7b6ddf80b764d0bee4858edbe7795"
+            },
+            "require": {
+                "drupal/core": "*",
+                "drupal/restui": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1480950183",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "tyler.frankenstein",
+                    "homepage": "https://www.drupal.org/user/150680"
+                }
+            ],
+            "description": "The jDrupal 8 module.",
+            "homepage": "https://www.drupal.org/project/jdrupal",
+            "support": {
+                "source": "https://git.drupalcode.org/project/jdrupal"
             }
         },
         {
@@ -19836,7 +19884,6 @@
         "drupal/dynamic_entity_reference": 20,
         "drupal/eck": 15,
         "drupal/entity_block": 10,
-        "drupal/entity_browser_enhanced": 5,
         "drupal/entityqueue": 20,
         "drupal/external_entities": 15,
         "drupal/file_entity": 10,
