@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const Stream = require('stream');
-const path = require('path');
+const pathUtility = require('path');
 const webpack = require("webpack");
 const PluginError = require("plugin-error");
 const Logger = require('fancy-log');
 
 
 function parsePath(incoming) {
-  const basename = path.basename(incoming, path.extname(incoming));
+  const basename = pathUtility.basename(incoming, pathUtility.extname(incoming));
   return {
-    full: path.resolve(incoming),
-    dirname: path.dirname(incoming),
+    full: pathUtility.resolve(incoming),
+    dirname: pathUtility.dirname(incoming),
     basename: basename,
     libraryName: basename.replace('.entry', '')
   };
@@ -23,17 +23,22 @@ module.exports = () => {
     var babelLoader = {
       loader: 'babel-loader',
       options: {
-        cacheDirectory: true,
+        cacheDirectory: false,
         presets: [
-          '@babel/preset-env'
+          '@babel/preset-env',
+          '@babel/preset-typescript',
+          "@babel/preset-react"
         ],
         plugins: [
           "@babel/transform-runtime",
+          '@babel/plugin-transform-typescript',
           "@babel/plugin-proposal-export-default-from",
           "@babel/plugin-proposal-object-rest-spread",
           "@babel/plugin-proposal-optional-chaining",
           "@babel/plugin-proposal-class-properties",
-          "transform-custom-element-classes"
+          "transform-custom-element-classes",
+          "@babel/plugin-transform-react-jsx",
+          "babel-plugin-styled-components"
         ]
       }
     };
@@ -43,19 +48,22 @@ module.exports = () => {
       mode: "development",
       // Enable sourcemaps for debugging webpack's output.
       devtool: "source-map",
-      cache: true,
+      cache: false,
       output: {
         filename: parsedFileName.libraryName + ".entry.js",
         path: parsedFileName.dirname
       },
       resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
+        extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
         plugins: [
 
         ],
         alias: {
-          components: path.resolve('./src/components')
+          components: pathUtility.resolve('./src/components'),
+          DataTypes: pathUtility.resolve('./src/DataTypes'),
+          Fields: pathUtility.resolve('./src/Fields'),
+          Utility: pathUtility.resolve('./src/Utility'),
         }
       },
 
@@ -83,6 +91,9 @@ module.exports = () => {
           'Holder': 'holderjs',
           'holder': 'holderjs',
           'window.Holder': 'holderjs'
+        }),
+        new webpack.LoaderOptionsPlugin({
+          debug: true
         })
       ],
       stats: {
@@ -103,7 +114,7 @@ module.exports = () => {
   stream._transform = function(originalFile, unused, callback) {
     var file = originalFile.clone({ contents: false });
     var parsedPath = parsePath(file.path);
-    console.log(`tranforming ${parsedPath.libraryName}!`);
+    console.log(`tranforming ${parsedPath.full}!`);
     var webPackConfig = configurator(parsedPath.libraryName, parsedPath.full);
     webpack(webPackConfig, (err, stats) => {
       if (err) {

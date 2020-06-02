@@ -123,4 +123,4 @@ Thumbs.db
 /.env
 /html
 /.phpunit.result.cache
-
+/config/node/*.js
