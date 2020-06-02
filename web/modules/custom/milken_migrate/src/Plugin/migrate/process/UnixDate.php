@@ -29,10 +29,11 @@ class UnixDate extends ProcessPluginBase {
     if (!empty($value)) {
       $dt = \DateTime::createFromFormat(\DateTimeInterface::W3C, $value);
     }
+    $row->setDestinationProperty($destination_property, $dt);
     if ($dt instanceof \DateTime) {
       return $dt->getTimestamp();
     }
-    return NULL;
+    return $dt;
   }
 
 }

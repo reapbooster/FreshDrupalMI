@@ -1,0 +1,42 @@
+uuid: 815ca402-7bdc-45d6-8a0f-d5238e7cd097
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.body_content_alternative.field_background
+    - field.field.paragraph.body_content_alternative.field_body
+    - field.field.paragraph.body_content_alternative.field_field_num_text_columns
+    - paragraphs.paragraphs_type.body_content_alternative
+  module:
+    - options
+    - text
+id: paragraph.body_content_alternative.default
+targetEntityType: paragraph
+bundle: body_content_alternative
+mode: default
+content:
+  field_background:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_body:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_field_num_text_columns:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+hidden:
+  search_api_excerpt: true

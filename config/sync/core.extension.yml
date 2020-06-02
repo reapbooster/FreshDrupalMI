@@ -4,7 +4,6 @@ module:
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
   auto_entitylabel: 0
-  better_normalizers: 0
   bg_image_formatter: 0
   block: 0
   block_content: 0
@@ -61,7 +60,9 @@ module:
   image: 0
   imagick: 0
   inline_entity_form: 0
+  jdrupal: 0
   jsonapi: 0
+  jsonapi_extras: 0
   jsonapi_image_styles: 0
   jsonapi_include: 0
   language: 0
@@ -137,6 +138,7 @@ module:
   menu_link_content: 1
   pathauto: 1
   views: 10
+  gatsby: 100
   minimal: 1000
 theme:
   stark: 0

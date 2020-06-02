@@ -63,6 +63,9 @@ class BodyEmbed extends ProcessPluginBase {
       // Importing embedded entities should not alter the text.
       // $this->importEmbeddedEntities($toReturn);
       Drupal::logger('milken_migrate')->debug($toReturn);
+      if (!empty($toReturn)) {
+        $this->importEmbeddedEntities($toReturn, $row);
+      }
     }
     catch (\Exception $e) {
       throw new MigrateException($e->getMessage());
@@ -78,19 +81,25 @@ class BodyEmbed extends ProcessPluginBase {
   /**
    * Unfinished Embeded Entities function.
    */
-  public function importEmbeddedEntities($source_text) {
+  public function importEmbeddedEntities($source_text, Row $row) {
+    \Drupal::logger(__CLASS__)
+      ->debug("Source Text: :source", [":source" => print_r($source_text, TRUE)]);
     $dom = new \DOMDocument();
-    $dom->loadHTML($source_text);
+    @$dom->loadHTML($source_text);
     $embedded_entities = $dom->getElementsByTagName('drupal-entity');
     foreach ($embedded_entities as $entity) {
+      \Drupal::logger(__CLASS__)
+        ->debug("Found embedded entities: :entity ", [':entity' => $entity]);
       $type = $entity->getAttribute('data-entity-type');
       $uuid = $entity->getAttribute('data-entity-uuid');
       if ($type && $uuid) {
-        $this->ensureExists($type, 'image', $uuid);
+        \Drupal::logger(__CLASS__)
+          ->debug("Ensuring entity exists:  :type - :uuid", [":type" => $type, ":uuid" => $uuid]);
+        $this->ensureEntityExists($type, 'image', $uuid);
       }
+
       // TODO: Finish this function.
-      print_r($type);
-      exit();
+      // set these imported entities as dependencies for the parent.
     }
   }
 

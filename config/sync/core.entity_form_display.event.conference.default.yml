@@ -11,6 +11,7 @@ dependencies:
     - field.field.event.conference.field_campaign_type
     - field.field.event.conference.field_campaign_type_public
     - field.field.event.conference.field_description
+    - field.field.event.conference.field_event_date
     - field.field.event.conference.field_grid_event_id
     - field.field.event.conference.field_name_short
     - field.field.event.conference.field_picture
@@ -91,6 +92,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_event_date:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_grid_event_id:
     weight: 11

@@ -11,6 +11,7 @@ dependencies:
     - field.field.event.meeting.field_campaign_type
     - field.field.event.meeting.field_campaign_type_public
     - field.field.event.meeting.field_description
+    - field.field.event.meeting.field_event_date
     - field.field.event.meeting.field_grid_event_id
     - field.field.event.meeting.field_name_short
     - field.field.event.meeting.field_picture
@@ -92,6 +93,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_event_date:
+    weight: 17
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_grid_event_id:
     weight: 11

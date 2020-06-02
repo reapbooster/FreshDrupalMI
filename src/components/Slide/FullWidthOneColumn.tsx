@@ -1,10 +1,12 @@
+// @ts-nocheck
+
 import React, { useState } from 'react';
 import SlideDataInterface from '../../DataTypes/SlideDataInterface';
 import { Row, Jumbotron, Container } from 'react-bootstrap';
 import ImageEntityProps from "../../DataTypes/ImageEntityProps";
 
-const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface, string> = (props: SlideDataInterface) => {
-  const rowStyle = {"backgroundColor":`${props.field_background_color.color}`};
+const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface> = (props: SlideDataInterface) => {
+  const rowStyle = {"backgroundColor":`${props?.field_background_color?.color}`};
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("holder.js/100x100?text=thumbnail&auto=yes");
   let jumbotronStyle = {
     "minHeight": "650px",
@@ -14,10 +16,14 @@ const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface, string> =
     "backgroundSize": "cover",
     "backgroundImage": `url('${backgroundImageUrl}')`
   }
-  let backgroundImageProps: ImageEntityProps = new ImageEntityProps(props.field_background_image);
+  let backgroundImageProps = new ImageEntityProps(props.field_background_image);
   if (backgroundImageProps.getData !== undefined) {
-    backgroundImageProps.getData().then((incoming) => {
-      setBackgroundImageUrl(incoming.uri.url);
+    backgroundImageProps
+      .getData()
+      .then(res => res.json())
+      .then((incoming) => {
+      console.log("response", incoming);
+      setBackgroundImageUrl(incoming.data.uri.url);
     });
   }
   return (
@@ -29,15 +35,15 @@ const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface, string> =
           <Container>
             <h1
               className={"display-3"}
-              style={{'color': `${props.text_color?.color}`}}>{props.title}</h1>
+              style={{'color': `${props.field_text_color?.color}`}}>{props.title}</h1>
             <p
               className={"lead"}
-              style={{"color":`${props.text_color?.color}`}}>{props.field_subtitle}</p>
+              style={{"color":`${props.field_text_color?.color}`}}>{props.field_subtitle}</p>
             <hr className="my-4" />
-              <p><a href={`${props.field_link?.uri}`}
+              <p><a href={`${props.field_link?.uri || "#"}`}
                     className="btn btn-primary btn-lg"
-                    style={{'color': `${props.text_color?.color}`}}
-              >{props.field_link?.title}</a></p>
+                    style={{'color': `${props.field_text_color?.color} || #000000`}}
+              >{props.field_link?.title || "#"}</a></p>
           </Container>
       </Jumbotron>
     </Row>

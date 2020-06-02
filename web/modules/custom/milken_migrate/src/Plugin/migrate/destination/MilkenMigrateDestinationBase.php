@@ -19,14 +19,22 @@ use Drupal\migrate\Plugin\MigrationInterface;
 abstract class MilkenMigrateDestinationBase extends EntityContentBase {
 
   /**
+   * Supports Rollback?
+   *
    * @var bool
+   *    Yes or no.
    */
   protected $supportsRollback = TRUE;
   /**
+   * Type of Entity.
+   *
    * @var \Drupal\Core\Entity\EntityTypeInterface
+   *    EckEntityInterface is produced.
    */
   protected $entityType;
   /**
+   * Field Manager.
+   *
    * @var \Drupal\Core\Entity\EntityFieldManagerInterface
    */
   protected $entityFieldManager;
@@ -45,9 +53,10 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
-    $map = $row->getIDMap();
+
     $ids = $this->save($entity, $old_destination_id_values);
-    $map['destid1'] = $ids[array_keys($ids)[0]];
+
+    $map['destid1'] = $entity->id();
     $row->setIdMap($map);
     $this->setRollbackAction($map,
       $entity->isNew() ?
@@ -57,8 +66,10 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     return $ids;
   }
 
-
-  abstract function setRelatedFields(Row $row);
+  /**
+   * Must be implemented and add any related reference fields.
+   */
+  abstract public function setRelatedFields(Row $row);
 
   /**
    * Get a list of fields and their labels.
@@ -82,7 +93,6 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
   }
 
   /**
-   *
    * Get the entityFieldManager.
    *
    * @return \Drupal\Core\Entity\EntityFieldManager

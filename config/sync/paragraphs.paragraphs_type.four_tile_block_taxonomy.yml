@@ -1,0 +1,10 @@
+uuid: cf127c70-f3da-4af9-b6f8-5f2ba05bc259
+langcode: en
+status: true
+dependencies: {  }
+id: four_tile_block_taxonomy
+label: 'Four Tile Block from Taxonomy'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

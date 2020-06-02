@@ -4,8 +4,8 @@ status: true
 dependencies:
   module:
     - search_api_solr
-id: solr_dev
-name: solr_dev
+id: solr_local
+name: solr_local
 description: ''
 backend: search_api_solr
 backend_config:
@@ -15,7 +15,7 @@ backend_config:
     host: milken-dev.reapbooster.com
     port: 8443
     path: /
-    core: milken_test
+    core: stovak_dev
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10

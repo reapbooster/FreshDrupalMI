@@ -3,6 +3,7 @@ import ColorObject from './ColorObject';
 import { ImageObject } from './ImageObject';
 
 interface SlideDataInterface {
+  loaded: boolean;
   type: string;
   id: string;
   links: object;

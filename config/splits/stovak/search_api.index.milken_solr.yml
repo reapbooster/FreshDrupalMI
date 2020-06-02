@@ -17,7 +17,7 @@ dependencies:
     - field.storage.node.field_centers_general
     - field.storage.node.field_topics
     - field.storage.slide.field_subtitle
-    - search_api.server.solr_dev
+    - search_api.server.solr_stovak
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -236,6 +236,6 @@ tracker_settings:
   default:
     indexing_order: lifo
 options:
-  index_directly: true
+  index_directly: false
   cron_limit: 50
-server: solr_dev
+server: solr_stovak

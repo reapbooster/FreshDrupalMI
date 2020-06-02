@@ -5,9 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_topics
     - node.type.report
-    - taxonomy.vocabulary.collections
-    - taxonomy.vocabulary.milken_tags
-    - taxonomy.vocabulary.program_initiatives
+    - taxonomy.vocabulary.topics
 id: node.report.field_topics
 field_name: field_topics
 entity_type: node
@@ -22,12 +20,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      collections: collections
-      milken_tags: milken_tags
-      program_initiatives: program_initiatives
+      topics: topics
     sort:
       field: name
       direction: asc
-    auto_create: false
-    auto_create_bundle: collections
+    auto_create: true
+    auto_create_bundle: milken_tags
 field_type: entity_reference

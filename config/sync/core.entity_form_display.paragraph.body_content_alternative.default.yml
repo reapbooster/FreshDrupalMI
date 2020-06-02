@@ -1,0 +1,56 @@
+uuid: 12fa9a90-dfb9-42ff-b1d6-ece313741543
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.body_content_alternative.field_background
+    - field.field.paragraph.body_content_alternative.field_body
+    - field.field.paragraph.body_content_alternative.field_field_num_text_columns
+    - paragraphs.paragraphs_type.body_content_alternative
+  module:
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_text:
+      children: {  }
+      parent_name: ''
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Text
+id: paragraph.body_content_alternative.default
+targetEntityType: paragraph
+bundle: body_content_alternative
+mode: default
+content:
+  field_background:
+    weight: 23
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_body:
+    weight: 21
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_field_num_text_columns:
+    weight: 22
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+hidden:
+  created: true
+  status: true

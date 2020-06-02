@@ -2,17 +2,10 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\destination;
 
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\migrate\MigrateSkipRowException;
-use Drupal\migrate\Plugin\migrate\destination\EntityContentBase;
-use Drupal\migrate\Plugin\MigrateIdMapInterface;
-use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 
 /**
- * Speaker destination plugin
+ * Speaker destination plugin.
  *
  * @MigrateDestination(
  *   id = "milken_migrate:speakers",
@@ -21,21 +14,22 @@ use Drupal\migrate\Row;
 class Speakers extends MilkenMigrateDestinationBase {
 
   /**
-   * @param \Drupal\migrate\Row $row
-   *
-   * @return string
+   * {@inheritDoc}
    */
   public function getBundle(Row $row = NULL) {
     return "speakers";
   }
 
   /**
+   * Add reference link to Event entity.
+   *
    * @param \Drupal\migrate\Row $row
+   *   Standard Migration Row Object.
    *
    * @return array|null
+   *   Returns array of dependent entities or null.
    */
   public function getEvent(Row $row) {
-    print_r($row);
     $entityStorage = \Drupal::getContainer()
       ->get('entity_type.manager')
       ->getStorage('event');
@@ -54,8 +48,11 @@ class Speakers extends MilkenMigrateDestinationBase {
     return NULL;
   }
 
-  function setRelatedFields(Row $row) {
-    $this->getEvent($row);
+  /**
+   * {@inheritDoc}
+   */
+  public function setRelatedFields(Row $row) {
+    // $this->getEvent($row);
   }
 
 }

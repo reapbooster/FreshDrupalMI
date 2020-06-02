@@ -1,0 +1,23 @@
+uuid: 7577116f-9e3a-4312-b851-d4b3d5f56f18
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background
+    - paragraphs.paragraphs_type.four_tile_block_queue
+  module:
+    - options
+id: paragraph.four_tile_block_queue.field_background
+field_name: field_background
+entity_type: paragraph
+bundle: four_tile_block_queue
+label: 'Background Color'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: '#dfdfdf'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

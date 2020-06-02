@@ -36,3 +36,11 @@ homepage:
     node: null
   js:
     js/Homepage.entry.js: { preprocess: 0 }
+
+landing_page:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    node: null
+  js:
+    js/LandingPage.entry.js: { preprocess: 0 }

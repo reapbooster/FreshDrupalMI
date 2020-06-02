@@ -15,8 +15,10 @@ const path = require("path");
 const sourcemaps = require('gulp-sourcemaps');
 const gsgc = require('gulp-sass-generate-contents');
 const print = require('gulp-print').default;
-
 const basePath = path.resolve(".");
+const themePath = path.resolve(basePath, "web/themes/custom/milken");
+const modulesPath = path.resolve(basePath, "web/modules/custom");
+
 console.log(basePath);
 
 // eslint-disable-next-line no-unused-vars.
@@ -60,20 +62,23 @@ gulp.task("themeBuild", () => {
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
 
-gulp.task("buildComponents", done => {
-  try {
-    /* eslint-disable */
-    const webpackConfigurator = require(`./web/themes/custom/milken/config/webpack.config.${env}`);
-    gulp.src("./web/themes/custom/**/js/*.entry.tsx", { realpath: true })
-      .pipe(webpackConfigurator());
-  }
-  catch (err) {
-    console.log(err);
-    process.exit(1);
-  }
-  done();
-
-});
+gulp.task(
+  "buildComponents",
+  (done) => {
+    try {
+      /* eslint-disable */
+      const webpackConfigurator = require(`./config/node/webpack.config.${env}`);
+      gulp.src('**/js/*.entry.tsx', { sourcemaps: true, cwd: modulesPath })
+        .pipe(webpackConfigurator());
+      gulp.src('js/*.entry.tsx', { sourcemaps: true, cwd: themePath })
+        .pipe(webpackConfigurator());
+    }
+    catch (err) {
+      console.log(err);
+      process.exit(1);
+    }
+    done();
+  });
 
 gulp.task(
   "default",

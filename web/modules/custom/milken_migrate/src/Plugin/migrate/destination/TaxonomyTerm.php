@@ -17,13 +17,10 @@ use Drupal\migrate\Row;
 class TaxonomyTerm extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
 
   /**
-   * @param \Drupal\migrate\Row $row
-   * @param array $old_destination_id_values
-   *
-   * @return array|mixed|void
+   * {@inheritdoc}
    */
   public function import(Row $row, array $old_destination_id_values = []) {
-    $toReturn = null;
+    $toReturn = NULL;
     $termData = [];
     $terms = $this->storage->loadTree($this->getBundle($row));
     foreach ($terms as $term) {
@@ -46,18 +43,25 @@ class TaxonomyTerm extends MilkenMigrateDestinationBase implements ContainerFact
   }
 
   /**
-   * @param \Drupal\migrate\Row $row
-   *
-   * @return string
+   * {@inheritDoc}
    */
   public function getBundle(Row $row = NULL) {
     return "tracks";
   }
 
   /**
-   * @param \Drupal\migrate\Row $row
+   * Add "Track" taxonomy.
    *
-   * @return array|null
+   * @param string $eventID
+   *   Foreign key linking to events.
+   * @param string|int $tid
+   *   Foreigh Key for Taxonomy Term.
+   *
+   * @return \Drupal\eck\EckEntityInterface|mixed
+   *   Returns the ECK Entity.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *    If storage fails, will throw this exception.
    */
   public function addTrackToEvent($eventID, $tid) {
     $entityStorage = \Drupal::getContainer()
@@ -77,15 +81,17 @@ class TaxonomyTerm extends MilkenMigrateDestinationBase implements ContainerFact
   }
 
   /**
+   * No related fields for this entity.
+   *
    * @param \Drupal\migrate\Row $row
+   *   Standard Migration row.
    */
   public function setRelatedFields(Row $row) {
 
   }
 
-
   /**
-   * @return string|null
+   * {@inheritDoc}
    */
   public static function getEntityTypeId($plugin_id) {
     return 'taxonomy_term';

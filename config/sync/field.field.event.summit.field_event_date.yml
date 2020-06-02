@@ -1,0 +1,21 @@
+uuid: 594ddbdf-b95d-458e-af1f-37b6f072b149
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.event.summit
+    - field.storage.event.field_event_date
+  module:
+    - datetime
+id: event.summit.field_event_date
+field_name: field_event_date
+entity_type: event
+bundle: summit
+label: 'Event Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,15 +1,15 @@
-uuid: 9ec64b92-bf3a-40c3-a726-ff57be301228
+uuid: 9d93a514-c4f1-4d07-b802-a58e52552a3c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_centers_general
-    - node.type.report
+    - field.storage.node.field_centers
+    - node.type.event
     - taxonomy.vocabulary.centers
-id: node.report.field_centers_general
-field_name: field_centers_general
+id: node.event.field_centers
+field_name: field_centers
 entity_type: node
-bundle: report
+bundle: event
 label: Centers
 description: ''
 required: false
@@ -24,6 +24,6 @@ settings:
     sort:
       field: name
       direction: asc
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

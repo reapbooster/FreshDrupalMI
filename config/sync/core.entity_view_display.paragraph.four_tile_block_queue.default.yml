@@ -1,0 +1,34 @@
+uuid: 9ddadc63-1a22-4033-baa9-9f6dc94f1578
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.four_tile_block_queue.field_background
+    - field.field.paragraph.four_tile_block_queue.field_queue
+    - paragraphs.paragraphs_type.four_tile_block_queue
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.four_tile_block_queue.default
+targetEntityType: paragraph
+bundle: four_tile_block_queue
+mode: default
+content:
+  field_background:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_queue:
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+hidden:
+  search_api_excerpt: true

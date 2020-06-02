@@ -8,6 +8,9 @@ interface EntityComponentPropsInterface {
   data?: object;
   items?: Array<any>;
   type?: string;
+  error?: Error;
+  onSelectHandler?: any;
+  open?: boolean;
 }
 
 interface JSONAPIEntityReferenceData {
@@ -25,14 +28,21 @@ class EntityComponentProps implements EntityComponentPropsInterface {
   bundle: string;
   data?: object;
   items?: Array<any>;
+  key: number;
+  error: Error;
+  onSelectHandler: any;
+  open?: boolean;
 
   constructor(incoming?: EntityComponentPropsInterface) {
-    if (incoming?.type) {
-      const entityInfo = incoming.type.split("--");
-      incoming.entityTypeId = entityInfo[0];
-      incoming.bundle = entityInfo[1];
+    var propCopy = Object.assign({}, incoming);
+    if (propCopy?.type) {
+      const entityInfo = incoming.type?.split("--");
+      if (entityInfo !== null) {
+        propCopy.entityTypeId = entityInfo[0];
+        propCopy.bundle = entityInfo[1];
+      }
     }
-    this.setData(incoming);
+    this.setData(propCopy);
   }
 
   toObject() : EntityComponentPropsInterface {
@@ -42,23 +52,20 @@ class EntityComponentProps implements EntityComponentPropsInterface {
       entityTypeId: this.entityTypeId,
       bundle: this.bundle,
       data: this.data,
-      items: this.items
+      items: this.items,
+      error: this.error,
+      onSelectHandler: this.onSelectHandler,
+      open: this.open,
     };
   }
 
-  async getData(): Promise<any> {
+  async getData(include: string = ""): Promise<any> {
+    console.log("get Data called: ", this);
     if (this.entityTypeId && this.bundle && this.id) {
-      let me = this;
-      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id}?jsonapi_include=1`)
-        .then(res => res.json())
-        .then((ajaxData) => {
-          console.log('data is back from drupal', ajaxData);
-          me.setData({ 'data' : ajaxData.data });
-          return ajaxData.data;
-        })
-        .catch(err => console.error(err));
+      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id}?jsonapi_include=1${include}`)
+        .catch(this.handleError);
     } else {
-      throw Error("Not enough data to get image!");
+      this.handleError(new Error("Not Enough Data to make a getData call"));
     }
   }
 
@@ -71,6 +78,16 @@ class EntityComponentProps implements EntityComponentPropsInterface {
   hasData(): boolean {
     return ( this.data !== undefined && this.data !== null );
   }
+
+  handleError(err) {
+    this.error = err;
+    console.log("Entity Component Props has encountered an error with fetching the data:", err);
+  }
+
+  get loaded() {
+    return this.hasData();
+  }
+
 
 }
 

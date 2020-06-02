@@ -1,0 +1,32 @@
+uuid: 8fef8886-d3d7-4986-9993-a1080d30b7c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.four_tile_block_taxonomy.field_background
+    - field.field.paragraph.four_tile_block_taxonomy.field_term
+    - paragraphs.paragraphs_type.four_tile_block_taxonomy
+  module:
+    - options
+id: paragraph.four_tile_block_taxonomy.default
+targetEntityType: paragraph
+bundle: four_tile_block_taxonomy
+mode: default
+content:
+  field_background:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_term:
+    weight: 0
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -38,7 +38,8 @@ module.exports = () => {
           "@babel/plugin-proposal-class-properties",
           "transform-custom-element-classes",
           "@babel/plugin-transform-react-jsx",
-          "babel-plugin-styled-components"
+          "babel-plugin-styled-components",
+          "@babel/plugin-transform-react-jsx"
         ]
       }
     };

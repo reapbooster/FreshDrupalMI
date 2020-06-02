@@ -153,6 +153,12 @@
             "lang": "en"
         }
     ],
+    "name": [
+      {
+        "value": "homepage_slides",
+        "lang": "en"
+      }
+    ],
     "created": [
         {
             "value": "2020-04-27T20:53:22+00:00",

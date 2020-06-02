@@ -25,11 +25,12 @@ else
 fi
 
 # Update the Drupal database
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- updatedb -y
-
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- config:import --yes
-
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- config-split:import --yes
+# Rebuild from scratch:
+#terminus -n env:wipe "$TERMINUS_SITE.$TERMINUS_ENV"
+#terminus -n drupal "$TERMINUS_SITE.$TERMINUS_ENV" -- site:milken:install
+#terminus -n drupal "$TERMINUS_SITE.$TERMINUS_ENV" -- site:milken:migrations 2>&1
+#terminus -n drupal "$TERMINUS_SITE.$TERMINUS_ENV" -- site:milken:migrations 2>&1
+#terminus -n drupal "$TERMINUS_SITE.$TERMINUS_ENV" -- site:milken:migrations 2>&1
 
 # Clear Drupal cache
 terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- cr
@@ -43,3 +44,4 @@ terminus -n secrets:set "$TERMINUS_SITE.$TERMINUS_ENV" token "$GITHUB_TOKEN" --f
 # Delete old multidev environments associated
 # with a PR that has been merged or closed.
 terminus -n build:env:delete:pr $TERMINUS_SITE --yes
+

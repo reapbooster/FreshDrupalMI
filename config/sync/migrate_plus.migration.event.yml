@@ -17,10 +17,10 @@ migration_group: milken
 label: 'Event VIA JSON API'
 source:
   plugin: url
-  urls: 'http://host.docker.internal/jsonapi/events'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/events'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'http://host.docker.internal'
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
   jsonapi_endpoint: /jsonapi/events
   item_selector: data
   fields:

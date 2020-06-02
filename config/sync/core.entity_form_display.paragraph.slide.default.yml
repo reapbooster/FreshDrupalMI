@@ -1,0 +1,44 @@
+uuid: 284bb347-23f9-4554-8b2a-7fba2a047c74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.slide.field_background
+    - field.field.paragraph.slide.field_slides
+    - paragraphs.paragraphs_type.slide
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.slide.default
+targetEntityType: paragraph
+bundle: slide
+mode: default
+content:
+  field_background:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_slides:
+    weight: 0
+    settings:
+      form_mode: default
+      revision: true
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: true
+      override_labels: false
+      collapsible: false
+      collapsed: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: browse_content
+    type: inline_entity_form_complex
+    region: content
+hidden:
+  created: true
+  status: true

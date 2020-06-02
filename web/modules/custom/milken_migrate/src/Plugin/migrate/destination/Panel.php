@@ -16,24 +16,25 @@ use Drupal\migrate\Row;
 class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
 
   /**
-   * @param \Drupal\migrate\Row $row
+   * {@inheritDoc}
    */
   public function setRelatedFields(Row $row) {
-    $this->getEvent($row);
-    $this->getRoom($row);
+    // $this->getEvent($row);
+    // $this->getRoom($row);
   }
 
   /**
-   * @param \Drupal\migrate\Row|null $row
-   *
-   * @return string
+   * {@inheritDoc}
    */
   public function getBundle(Row $row = NULL) {
     return "panel";
   }
 
   /**
+   * Get related record for room.
+   *
    * @param \Drupal\migrate\Row $row
+   *   Standard Migration row object.
    */
   public function getRoom(Row $row) {
     $filter = [
@@ -53,9 +54,13 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   }
 
   /**
+   * Create reference to event entity.
+   *
    * @param \Drupal\migrate\Row $row
+   *   Standard migration row.
    *
    * @return array|null
+   *   Either return an array of dependent entities or null.
    */
   public function getEvent(Row $row) {
     $entityStorage = \Drupal::getContainer()
