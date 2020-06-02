@@ -55,10 +55,10 @@ class FourPanel extends EntityComponentBase<FourPanelProps, EntityComponentState
           <Col lg={3} sm={6} key={key}>
             <Card className="my-5">
               <Card.Img
-                id={"card-image-".concat()}
+                id={"card-image-".concat(item.uuid)}
                 src={item.field_background_image}/>
               <Card.Body style={{minHeight: "150px"}}>
-                <Card.Title><a href={item.view_node}>{item.title}</a></Card.Title>
+                <Card.Title><StyledLink href={item.view_node}>{item.title}</StyledLink></Card.Title>
               </Card.Body>
               <Card.Footer>{created.format('MMMM D, YYYY')}</Card.Footer>
             </Card>
