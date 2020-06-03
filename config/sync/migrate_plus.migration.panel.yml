@@ -192,9 +192,8 @@ process:
   field_panel_alt_text: paneltext
   field_why: why
   field_summary/value: summary
-  field_summary:
-    plugin: entity_lookup
-    entity_type: event
+  field_summary/format:
+    plugin: default_value
     default_value: full_html
   created:
     plugin: 'milken_migrate:unix_date'

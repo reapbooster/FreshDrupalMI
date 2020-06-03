@@ -28,12 +28,6 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import panel"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
       bin: "drush migrate:import room"
     options:
       working-directory: /var/www
@@ -47,6 +41,12 @@ commands:
   - command: "exec"
     arguments:
       bin: "drush migrate:import track"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import panel"
     options:
       working-directory: /var/www
 

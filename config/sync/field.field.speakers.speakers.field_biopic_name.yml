@@ -1,0 +1,19 @@
+uuid: a40a8946-91d4-453c-af89-ab8ce762e90b
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.speakers.speakers
+    - field.storage.speakers.field_biopic_name
+id: speakers.speakers.field_biopic_name
+field_name: field_biopic_name
+entity_type: speakers
+bundle: speakers
+label: 'Biopic Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

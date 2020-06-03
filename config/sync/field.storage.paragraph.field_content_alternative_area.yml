@@ -1,0 +1,19 @@
+uuid: 95a8f623-0dab-4f70-9c71-75160aeea366
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_content_alternative_area
+field_name: field_content_alternative_area
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

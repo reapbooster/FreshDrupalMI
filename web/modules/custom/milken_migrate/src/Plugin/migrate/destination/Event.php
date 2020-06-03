@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\destination;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\Row;
 
@@ -15,13 +16,6 @@ use Drupal\migrate\Row;
  * )
  */
 class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getRelatedFields(Row $row) {
-
-  }
 
   /**
    * {@inheritdoc}
@@ -47,8 +41,8 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   /**
    * {@inheritdoc}
    */
-  public function setRelatedFields(Row $row) {
-    return TRUE;
+  public function setRelatedFields(Row $row, EntityInterface $entity): EntityInterface {
+    return $entity;
   }
 
 }

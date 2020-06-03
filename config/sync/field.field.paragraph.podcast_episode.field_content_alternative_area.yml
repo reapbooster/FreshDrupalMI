@@ -1,0 +1,21 @@
+uuid: 19ae7499-77ae-4221-9206-22c21c213b03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content_alternative_area
+    - paragraphs.paragraphs_type.podcast_episode
+  module:
+    - text
+id: paragraph.podcast_episode.field_content_alternative_area
+field_name: field_content_alternative_area
+entity_type: paragraph
+bundle: podcast_episode
+label: 'Long Description/Body'
+description: 'Will show when accordion is "revealed"'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

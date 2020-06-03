@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\destination;
 
+use Drupal\Core\Entity\EntityInterface;
 use GuzzleHttp\Client;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\Row;
@@ -18,9 +19,14 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   /**
    * {@inheritDoc}
    */
-  public function setRelatedFields(Row $row) {
-    // $this->getEvent($row);
-    // $this->getRoom($row);
+  public function setRelatedFields(Row $row, $entity) : EntityInterface {
+    \Drupal::logger(__CLASS__)
+      ->debug('Getting Related Fields:' . print_r($row, TRUE));
+    $entity->set('field_event', $this->getEvent($row));
+    $entity->set('field_room', $this->getRoom($row));
+    \Drupal::logger(__CLASS__)
+      ->debug('Related Fields updated:' . print_r($row, TRUE));
+    return $entity;
   }
 
   /**
@@ -48,9 +54,25 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         ->getBody(),
       TRUE
     );
-    print_r($response);
-    exit();
-
+    if (is_array($response['data']) && count($response['data']) >= 1 && $panelRoom = array_shift($response['data'])) {
+      \Drupal::logger(__CLASS__)
+        ->debug('Getting Related Fields:' . print_r($response['data'], TRUE));
+      $entityStorage = \Drupal::getContainer()
+        ->get('entity_type.manager')
+        ->getStorage('rooms');
+      $results = $entityStorage->getQuery()
+        ->condition('field_room_id', $panelRoom['attributes']['room_id'])
+        ->execute();
+      if (is_array($results) && count($results) >= 1 && $resultID = array_shift($results)) {
+        $entity = $entityStorage->load($resultID);
+        if ($entity instanceof EntityInterface) {
+          $toReturn = ['target_id' => $entity->id()];
+          $row->setDestinationProperty('field_room', $toReturn);
+          return $toReturn;
+        }
+      }
+    }
+    return [];
   }
 
   /**
@@ -72,13 +94,16 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       ->execute();
     \Drupal::logger(__CLASS__)
       ->debug('Found the following values:' . print_r($results, TRUE));
-    if (is_array($results) && $resultID = array_shift($results)) {
+    if (is_array($results) && count($results) >= 1 && $resultID = array_shift($results)) {
+      $entity = $entityStorage->load($resultID);
       \Drupal::logger(__CLASS__)
         ->debug('Adding value to result set:' . print_r($resultID, TRUE));
-      $row->setDestinationProperty('field_event', ['target_id' => $resultID]);
-      return ['target_id' => $resultID];
+      if ($entity instanceof EntityInterface) {
+        $row->setDestinationProperty('field_event', ['target_id' => $entity->id()]);
+        return $entity;
+      }
     }
-    return NULL;
+    return [];
   }
 
   /**

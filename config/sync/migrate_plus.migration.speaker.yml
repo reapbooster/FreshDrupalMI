@@ -131,7 +131,7 @@ process:
   name: name
   title: name
   field_biolink: biolink
-  field_biopic: biopic
+  field_biopic_name: biopic
   field_biotext: biotext
   field_city: city
   field_description: description

@@ -1,5 +1,6 @@
 module:
   address: 0
+  audiofield: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
@@ -19,6 +20,7 @@ module:
   content_browser: 0
   content_sync: 0
   contextual: 0
+  crop: 0
   ctools: 0
   ctools_block: 0
   ctools_views: 0
@@ -55,6 +57,7 @@ module:
   filter: 0
   fontawesome: 0
   form_options_attributes: 0
+  graphql: 0
   hal: 0
   hook_event_dispatcher: 0
   image: 0
@@ -65,6 +68,8 @@ module:
   jsonapi_extras: 0
   jsonapi_image_styles: 0
   jsonapi_include: 0
+  js_entity: 0
+  key_value_field: 0
   language: 0
   layout_builder: 0
   layout_builder_kit: 0
@@ -119,6 +124,7 @@ module:
   token: 0
   toolbar: 0
   twig_tweak: 0
+  typed_data: 0
   user: 0
   uuid_url: 0
   views_aggregator: 0

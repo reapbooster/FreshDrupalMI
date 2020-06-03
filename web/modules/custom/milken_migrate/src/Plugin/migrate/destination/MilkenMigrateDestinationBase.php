@@ -5,6 +5,7 @@ namespace Drupal\milken_migrate\Plugin\migrate\destination;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\migrate\destination\EntityContentBase;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
@@ -43,17 +44,22 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
    * {@inheritdoc}
    */
   public function import(Row $row, array $old_destination_id_values = []) {
-    $this->setRelatedFields($row);
+    \Drupal::logger(__CLASS__)
+      ->debug('Importing:' . print_r($row, TRUE));
     $this->rollbackAction = MigrateIdMapInterface::ROLLBACK_DELETE;
     $entity = $this->getEntity($row, $old_destination_id_values);
     if (!$entity instanceof ContentEntityInterface) {
       throw new MigrateException('Unable to get entity');
     }
     assert($entity instanceof ContentEntityInterface, "Cannot get the entity object");
+    $this->setRelatedFields($row, $entity);
+    \Drupal::logger(__CLASS__)
+      ->debug('Related Fields set:' . print_r($row, TRUE));
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
-
+    \Drupal::logger(__CLASS__)
+      ->debug('saving these values:' . print_r($entity->toArray(), TRUE));
     $ids = $this->save($entity, $old_destination_id_values);
 
     $map['destid1'] = $entity->id();
@@ -69,7 +75,7 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
   /**
    * Must be implemented and add any related reference fields.
    */
-  abstract public function setRelatedFields(Row $row);
+  abstract public function setRelatedFields(Row $row, EntityInterface $entity) : EntityInterface;
 
   /**
    * Get a list of fields and their labels.

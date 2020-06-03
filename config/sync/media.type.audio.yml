@@ -1,0 +1,21 @@
+uuid: 28ff571b-e260-4f97-ac7f-aeda133ef3ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: image
+id: audio
+label: Audio
+description: 'For use with Podcast Episode content type'
+source: audio_file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_audio_file
+field_map:
+  name: name
+  mimetype: field_filemime
+  filesize: field_filesize

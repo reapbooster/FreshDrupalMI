@@ -1,0 +1,19 @@
+uuid: 29519cd4-cc67-42ce-8c8a-f36629af3ca7
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: speakers.field_biopic_name
+field_name: field_biopic_name
+entity_type: speakers
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

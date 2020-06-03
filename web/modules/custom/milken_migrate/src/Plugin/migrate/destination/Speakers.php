@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\destination;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\migrate\Row;
 
 /**
@@ -18,6 +19,16 @@ class Speakers extends MilkenMigrateDestinationBase {
    */
   public function getBundle(Row $row = NULL) {
     return "speakers";
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function setRelatedFields(Row $row, EntityInterface $entity) : EntityInterface {
+    \Drupal::logger(__CLASS__)
+      ->debug('Getting Related Fields:' . print_r($row, TRUE));
+    $entity->set('field_event', $this->getEvent($row));
+    return $entity;
   }
 
   /**
@@ -39,20 +50,19 @@ class Speakers extends MilkenMigrateDestinationBase {
       ->execute();
     \Drupal::logger(__CLASS__)
       ->debug('Found the following values:' . print_r($results, TRUE));
-    if (is_array($results) && $resultID = array_shift($results)) {
+    if (is_array($results) && count($results) >= 1 && $resultID = array_shift($results)) {
       \Drupal::logger(__CLASS__)
         ->debug('Adding value to result set:' . print_r($resultID, TRUE));
-      $row->setDestinationProperty('field_event', ['target_id' => $resultID]);
-      return ['target_id' => $resultID];
+      $entity = $entityStorage->load($resultID);
+      if ($entity instanceof EntityInterface) {
+        $toReturn = ['target_id' => $resultID];
+        $row->setDestinationProperty('field_event', $toReturn);
+        return $toReturn;
+      }
     }
-    return NULL;
+    return [];
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public function setRelatedFields(Row $row) {
-    // $this->getEvent($row);
-  }
+
 
 }
