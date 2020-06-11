@@ -2,7 +2,8 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
-use Drupal;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
@@ -45,36 +46,30 @@ class BodyEmbed extends ProcessPluginBase {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    print_r($row);
+    exit (__CLASS__ . "::" . __LINE__);
     $toReturn = "";
-    try {
-      if (is_array($value)) {
-        foreach ($value as $field) {
-          if (is_array($field)) {
-            $toReturn .= $this->parseParagraphFields($field);
-          }
-          if (is_string($field)) {
-            $toReturn .= $field;
-          }
+    if (is_array($value)) {
+      foreach ($value as $field) {
+        if (is_string($field)) {
+          $toReturn .= $field;
         }
       }
-      if (is_string(($value))) {
-        $toReturn = $value;
-      }
-      // Importing embedded entities should not alter the text.
-      // $this->importEmbeddedEntities($toReturn);
-      Drupal::logger('milken_migrate')->debug($toReturn);
-      if (!empty($toReturn)) {
-        $this->importEmbeddedEntities($toReturn, $row);
-      }
     }
-    catch (\Exception $e) {
-      throw new MigrateException($e->getMessage());
+    if (is_string(($value))) {
+      $toReturn = $value;
     }
-    catch (\Throwable $t) {
-      throw new MigrateException($t->getMessage());
+    $destination_value = $row->getDestinationProperty($this->configuration['destination']) ?? [];
+    $paragraph = $this->createBodyTextParagraph($toReturn);
+    if ($paragraph instanceof RevisionableInterface && is_array($destination_value)) {
+      $destination_value[] = [
+        'target_id' => $paragraph->id(),
+        'target_revision_id' => $paragraph->getRevisionId(),
+      ];
+      $row->setDestinationProperty($this->configuration['destination'], $destination_value);
     }
-    $row->setDestinationProperty($destination_property, $toReturn);
-    $row->setDestinationProperty('field_body/format', 'full_html');
+
+
     return $toReturn;
   }
 
@@ -95,29 +90,12 @@ class BodyEmbed extends ProcessPluginBase {
       if ($type && $uuid) {
         \Drupal::logger(__CLASS__)
           ->debug("Ensuring entity exists:  :type - :uuid", [":type" => $type, ":uuid" => $uuid]);
-        $this->ensureEntityExists($type, 'image', $uuid);
-      }
-
-      // TODO: Finish this function.
-      // set these imported entities as dependencies for the parent.
-    }
-  }
-
-  /**
-   * Parse the paragraph fields and return the concatenated text.
-   */
-  protected function parseParagraphFields($paragraphFields) {
-    $paragraph_text_field = $this->configuration['paragraph_text_field'];
-    if (!$paragraph_text_field) {
-      throw new MigrateException("The text field in the paragraph objects should be set as property 'paragraph_text_field'");
-    }
-    $toReturn = "";
-    foreach ($paragraphFields as $field) {
-      if (isset($field[$this->configuration['paragraph_text_field']]['value'])) {
-        $toReturn .= $field[$this->configuration['paragraph_text_field']]['value'];
+        $this->ensureEntityExists([
+          'type' => $type,
+          'id' => $uuid,
+        ]);
       }
     }
-    return $toReturn;
   }
 
   /**
@@ -188,30 +166,17 @@ class BodyEmbed extends ProcessPluginBase {
   /**
    * Download data for embedded entity.
    */
-  public function ensureEntityExists($entityTypeId, $bundle, $uuid) {
-    if (!$this->entityExists($entityTypeId, $uuid)) {
-      $response = $this->getRestClient()->get("/jsonapi/{$entityTypeId}/{$bundle}/{$uuid}");
-      if (in_array($response->getStatusCode(), [200, 201, 202])) {
-        $responseData = json_decode($response->getBody(), TRUE);
-        $attributes = $responseData['data']['attributes'];
-        switch ($responseData['data']['type']) {
-          case "media--video":
-            break;
-
-          case "media-image":
-            break;
-
-          default:
-        }
-        if (isset($attributes['uri']['url'])) {
-          $url = $this->configuration['jsonapi_host'] . $attributes['uri']['url'];
-          \Drupal::logger('milken_migrate')->debug($url);
-          $file = $this->getRemoteFile($attributes['filename'], $url);
-
-        }
-        return ['entity' => $file];
-      }
+  public function ensureEntityExists($jsonapi) : EntityInterface {
+    [$entityTypeId, $bundle] = explode('--', $jsonapi['type']);
+    $results = \Drupal::entityTypeManager()
+      ->getStorage($entityTypeId)
+      ->loadByProperties(['uuid' => $jsonapi['id']]);
+    if (count($results)) {
+      return \Drupal::entityTypeManager()
+        ->getStorage($entityTypeId)
+        ->load(array_shift($results));
     }
+    return $this->createMissingMigration($jsonapi['type'], $jsonapi['id']);
   }
 
   /**
@@ -255,6 +220,53 @@ class BodyEmbed extends ProcessPluginBase {
    */
   public function getRestClient() {
     return new Client(['base_uri' => $this->configuration['jsonapi_host']]);
+  }
+
+  /**
+   *
+   */
+  protected function createMissingMigration(string $type, string $id) : EntityInterface {
+    $mm_storage = \Drupal::entityTypeManager()->getStorage('missing_migration');
+    $exists = $mm_storage->getQuery('and')
+      ->condition('field_id', $id)
+      ->execute();
+    if (count($exists)) {
+      return $mm_storage->load(reset($exists));
+    }
+    else {
+      $toReturn = $mm_storage->create([
+        'type' => 'missing_migration',
+        'uuid' => $id,
+        'name' => $type,
+        'title' => $type,
+        'field_type' => $type,
+        'field_id' => $id,
+      ]);
+      $toReturn->save();
+      return $toReturn;
+    }
+  }
+
+  /**
+   *
+   */
+  protected function createBodyTextParagraph($text) : ?RevisionableInterface {
+    $paragraph = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->create([
+        'type' => 'body_content',
+        "field_body" => [
+          'value' => $text,
+          'format' => 'full_html',
+        ],
+        "field_num_text_columns" => 1,
+        "field_background" => "transparent",
+      ]);
+    if ($paragraph instanceof RevisionableInterface) {
+      $paragraph->save();
+    }
+    return $paragraph;
+
   }
 
 }

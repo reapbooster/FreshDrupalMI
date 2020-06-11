@@ -1,20 +1,20 @@
-uuid: 878af4f6-9030-4301-9f3c-e09d474d16e1
+uuid: 65c60931-f7f8-4b70-9f48-5f68c2990f1b
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_body
-    - node.type.article
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.four_tile_block_taxonomy
   module:
     - text
-id: node.article.field_body
+id: paragraph.four_tile_block_taxonomy.field_body
 field_name: field_body
-entity_type: node
-bundle: article
+entity_type: paragraph
+bundle: four_tile_block_taxonomy
 label: body
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

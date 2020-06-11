@@ -4,10 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.four_tile_block_queue.field_background
+    - field.field.paragraph.four_tile_block_queue.field_body
     - field.field.paragraph.four_tile_block_queue.field_queue
+    - field.field.paragraph.four_tile_block_queue.field_title
     - paragraphs.paragraphs_type.four_tile_block_queue
   module:
     - entity_reference_revisions
+    - text
 id: paragraph.four_tile_block_queue.default
 targetEntityType: paragraph
 bundle: four_tile_block_queue
@@ -19,6 +22,16 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_body:
+    weight: 3
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
   field_queue:
     weight: 0
     settings:
@@ -28,6 +41,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_revisions_autocomplete
+    region: content
+  field_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
 hidden:
   created: true

@@ -1,0 +1,111 @@
+uuid: ad077773-f816-4acf-94f2-9b5d6e17353f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - milken_migrate
+id: paragraph_automatic_upcoming_events
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - node
+migration_group: milken
+label: 'Paragraph--automatic upcoming events VIA JSON API'
+source:
+  plugin: url
+  urls: 'https://www.milkeninstitute.org/jsonapi/paragraph/author'
+  data_fetcher_plugin: http
+  data_parser_plugin: jsonapi
+  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_endpoint: /jsonapi/paragraph/author
+  item_selector: data
+  jsonapi_include: true
+  included:
+    - field_photo
+  fields:
+    -
+      name: paragraph_id
+      label: 'Node ID'
+      selector: /drupal_internal__id
+    -
+      name: uuid
+      label: 'Unique ID'
+      selector: id
+    -
+      name: name
+      label: name
+      selector: /field_name
+    -
+      name: langcode
+      label: 'Language Code'
+      selector: /langcode
+    -
+      name: created
+      label: Created
+      selector: /created
+    -
+      name: changed
+      label: Changed
+      selector: /changed
+    -
+      name: status
+      label: Status
+      selector: /status
+    -
+      name: field_show_all
+      label: 'Author Photo'
+      selector: /field_show_all
+    -
+      name: field_show_description
+      label: 'Author Photo'
+      selector: /field_show_description
+    -
+      name: field_upcoming_events_auto_cta_uri
+      label: 'Upcoming Events CTA URI'
+      selector: field_upcoming_events_auto_cta/uri
+    -
+      name: field_upcoming_events_auto_cta_title
+      label: 'Upcoming Events CTA Title'
+      selector: field_upcoming_events_auto_cta/title
+    -
+      name: field_upcoming_events_auto_descr
+      label: Description
+      selector: field_upcoming_events_auto_descr
+    -
+      name: field_upcoming_events_auto_title
+      label: Title
+      selector: field_upcoming_events_auto_title
+  ids:
+    paragraph_id:
+      type: integer
+    uuid:
+      type: string
+process:
+  id: paragraph_id
+  field_name: name
+  field_body/value: field_upcoming_events_auto_descr
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
+  uuid: uuid
+  langcode:
+    plugin: default_value
+    default_value: en
+  status:
+    plugin: default_value
+    default_value: true
+  uid:
+    plugin: default_value
+    default_value: 2
+  created:
+    plugin: 'milken_migrate:unix_date'
+    source: created
+  changed:
+    plugin: 'milken_migrate:unix_date'
+    source: changed
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: four_tile_block_queue
+migration_dependencies: {  }

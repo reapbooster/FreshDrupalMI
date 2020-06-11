@@ -5,8 +5,8 @@ dependencies:
   config:
     - entity_browser.browser.browse_content
     - field.field.node.article.field_authors
-    - field.field.node.article.field_body
     - field.field.node.article.field_centers
+    - field.field.node.article.field_content
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_topics
@@ -15,8 +15,8 @@ dependencies:
     - entity_browser
     - field_group
     - metatag
+    - paragraphs
     - path
-    - text
 third_party_settings:
   field_group:
     group_settings:
@@ -69,7 +69,7 @@ third_party_settings:
     group_text:
       children:
         - langcode
-        - field_body
+        - field_content
       parent_name: group_settings
       weight: 20
       format_type: tab
@@ -117,16 +117,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_body:
-    weight: 2
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-    type: text_textarea_with_summary
-    region: content
   field_centers:
     weight: 2
     settings:
@@ -136,6 +126,18 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_content:
+    weight: 125
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
     region: content
   field_meta_tags:
     type: metatag_firehose

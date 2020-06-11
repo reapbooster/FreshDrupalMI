@@ -1,10 +1,11 @@
 module:
   address: 0
-  audiofield: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_tools: 0
+  audiofield: 0
   auto_entitylabel: 0
+  better_normalizers: 0
   bg_image_formatter: 0
   block: 0
   block_content: 0
@@ -45,6 +46,7 @@ module:
   entity_embed: 0
   entity_reference: 0
   entity_reference_revisions: 0
+  entity_reference_uuid: 0
   entityqueue: 0
   facets: 0
   facets_pretty_paths: 0
@@ -64,11 +66,11 @@ module:
   imagick: 0
   inline_entity_form: 0
   jdrupal: 0
+  js_entity: 0
   jsonapi: 0
   jsonapi_extras: 0
   jsonapi_image_styles: 0
   jsonapi_include: 0
-  js_entity: 0
   key_value_field: 0
   language: 0
   layout_builder: 0

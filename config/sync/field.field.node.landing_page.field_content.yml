@@ -23,7 +23,7 @@ settings:
     negate: 0
     target_bundles: null
     target_bundles_drag_drop:
-      body_content_alternative:
+      body_content:
         weight: 3
         enabled: false
       pull_quote:

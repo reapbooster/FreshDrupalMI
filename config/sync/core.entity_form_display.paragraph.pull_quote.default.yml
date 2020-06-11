@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.pull_quote.field_background
-    - field.field.paragraph.pull_quote.field_pull_quote
     - field.field.paragraph.pull_quote.field_text_size
     - paragraphs.paragraphs_type.pull_quote
 id: paragraph.pull_quote.default
@@ -41,3 +40,5 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_alignment: true
+  field_body: true

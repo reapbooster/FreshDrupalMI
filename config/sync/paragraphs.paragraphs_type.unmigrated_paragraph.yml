@@ -1,9 +1,9 @@
-uuid: 41b30820-0d95-4d27-becc-8c84c21ad306
+uuid: bfa8de06-fc80-4ce5-839e-c1f2bcaba92a
 langcode: en
 status: true
 dependencies: {  }
-id: body_content_alternative
-label: 'Body Content'
+id: unmigrated_paragraph
+label: 'Unmigrated Paragraph'
 icon_uuid: null
 icon_default: null
 description: ''

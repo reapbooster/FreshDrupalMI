@@ -83,12 +83,10 @@ source:
       name: hero_image
       label: 'Hero Image'
       selector: /field_ar_hero_image
-      relationship: field_ar_hero_image
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'
       selector: /field_term_collection
-      include: field_term_collection
     -
       name: term_collection_tax_id
       label: 'Term Collection Taxonomy ID'
@@ -121,12 +119,10 @@ source:
       name: pdf_file
       label: 'Pdf File'
       selector: /field_ar_pdf_file
-      relationship: field_ar_pdf_file
     -
       name: alt_content
       label: 'Alt Content'
-      selector: /field_ar_content
-      relationship: field_ar_content
+      selector: /field_ar_content/data
   ids:
     id:
       type: integer
@@ -147,15 +143,31 @@ process:
   uid:
     plugin: default_value
     default_value: 2
-  field_body/value:
-    plugin: 'milken_migrate:body_embed'
-    source:
-      - body_value
-      - alt_content
-    paragraph_text_field: field_content_alternative_area
-  field_body/format:
-    plugin: default_value
-    default_value: full_html
+  field_content:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: alt_content
+    -
+      plugin: iterator
+      source: alt_content
+      process:
+        temporary_ids:
+          plugin: migration_lookup
+          migration: paragraph_body_content
+          source_ids:
+            - paragraph_id
+            - paragraph_revision_id
+        target_id:
+          plugin: extract
+          source: '@temporary_ids'
+          index:
+            - 0
+        target_revision_id:
+          plugin: extract
+          source: '@temporary_ids'
+          index:
+            - 1
   path/alias: path
   created:
     plugin: 'milken_migrate:unix_date'
@@ -163,14 +175,6 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
-  field_promo_slide:
-    plugin: 'milken_migrate:promo_slide'
-    title_source: hero_title
-    title_source_backup: name
-    image: hero_image
-    link_id: uuid
-    link_entity_type_id: node
-    link_bundle: article
   field_centers_general:
     -
       plugin: skip_on_empty
@@ -198,6 +202,15 @@ process:
       plugin: jsonapi_taxonomy
       vocabulary: program_initiatives
       source: program_initiatives_tax
+  import_body_field_to_paragraph:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: body
+    -
+      plugin: 'milken_migrate:body_embed'
+      source: body_value
+      append_to: field_content
 destination:
   plugin: 'entity:node'
   default_bundle: article

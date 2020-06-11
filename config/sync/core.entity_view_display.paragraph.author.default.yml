@@ -1,0 +1,30 @@
+uuid: aaf7b102-b162-4845-9b1b-018510a71ce5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.author.field_job_position
+    - field.field.paragraph.author.field_name
+    - paragraphs.paragraphs_type.author
+id: paragraph.author.default
+targetEntityType: paragraph
+bundle: author
+mode: default
+content:
+  field_job_position:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_name:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden:
+  field_photo: true
+  search_api_excerpt: true

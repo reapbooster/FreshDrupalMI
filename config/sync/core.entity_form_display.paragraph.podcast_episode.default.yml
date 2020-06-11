@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_form_mode.media.media_browser
     - field.field.paragraph.podcast_episode.field_audio_file
-    - field.field.paragraph.podcast_episode.field_content_alternative_area
     - field.field.paragraph.podcast_episode.field_episode
     - field.field.paragraph.podcast_episode.field_podcast_image
     - field.field.paragraph.podcast_episode.field_podcast_service_links
@@ -66,7 +65,6 @@ third_party_settings:
       label: Authoring
     group_content:
       children:
-        - field_content_alternative_area
         - field_transcript
         - field_podcast_image
       parent_name: group_podcast
@@ -194,4 +192,5 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_body: true

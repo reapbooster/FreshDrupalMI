@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.pull_quote.field_background
-    - field.field.paragraph.pull_quote.field_pull_quote
     - field.field.paragraph.pull_quote.field_text_size
     - paragraphs.paragraphs_type.pull_quote
   module:
@@ -29,5 +28,7 @@ content:
     type: list_default
     region: content
 hidden:
+  field_alignment: true
+  field_body: true
   field_pull_quote: true
   search_api_excerpt: true

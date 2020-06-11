@@ -1,0 +1,19 @@
+uuid: efde8bfb-6e2b-4c1d-ac25-46b2cadae933
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.four_tile_block_taxonomy
+id: paragraph.four_tile_block_taxonomy.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: four_tile_block_taxonomy
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

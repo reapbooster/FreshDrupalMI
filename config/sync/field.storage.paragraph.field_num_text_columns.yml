@@ -1,16 +1,17 @@
-uuid: 95a8f623-0dab-4f70-9c71-75160aeea366
+uuid: 232e91bf-2815-4be8-89f5-94f54e8b00f6
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-    - text
-id: paragraph.field_content_alternative_area
-field_name: field_content_alternative_area
+id: paragraph.field_num_text_columns
+field_name: field_num_text_columns
 entity_type: paragraph
-type: text_long
-settings: {  }
-module: text
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
 locked: false
 cardinality: 1
 translatable: true

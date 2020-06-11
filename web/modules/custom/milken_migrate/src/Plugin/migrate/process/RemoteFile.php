@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
@@ -68,6 +69,10 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
           $url = $source['jsonapi_host'] . $attributes['uri']['url'];
           \Drupal::logger('milken_migrate')->debug($url);
           $file = $this->getRemoteFile($attributes['filename'], $url);
+          if ($file instanceof EntityInterface && isset($this->configuration['title'])) {
+            $file->set('field_file_image_alt_text', $row->getSourceProperty($this->configuration['title']));
+            $file->set('field_file_image_title_text', $row->getSourceProperty($this->configuration['title']));
+          }
           $row->setDestinationProperty($destination_property, ['entity' => $file]);
         }
         return ['entity' => $file];

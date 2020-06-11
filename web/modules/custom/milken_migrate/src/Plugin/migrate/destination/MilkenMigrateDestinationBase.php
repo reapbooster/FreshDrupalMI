@@ -61,7 +61,6 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     \Drupal::logger(__CLASS__)
       ->debug('saving these values:' . print_r($entity->toArray(), TRUE));
     $ids = $this->save($entity, $old_destination_id_values);
-
     $map['destid1'] = $entity->id();
     $row->setIdMap($map);
     $this->setRollbackAction($map,

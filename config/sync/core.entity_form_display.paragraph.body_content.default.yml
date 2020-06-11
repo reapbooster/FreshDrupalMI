@@ -3,10 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.body_content_alternative.field_background
-    - field.field.paragraph.body_content_alternative.field_body
-    - field.field.paragraph.body_content_alternative.field_field_num_text_columns
-    - paragraphs.paragraphs_type.body_content_alternative
+    - field.field.paragraph.body_content.field_background
+    - field.field.paragraph.body_content.field_body
+    - paragraphs.paragraphs_type.body_content
   module:
     - field_group
     - text
@@ -23,9 +22,9 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Text
-id: paragraph.body_content_alternative.default
+id: paragraph.body_content.default
 targetEntityType: paragraph
-bundle: body_content_alternative
+bundle: body_content
 mode: default
 content:
   field_background:
@@ -44,7 +43,7 @@ content:
     third_party_settings: {  }
     type: text_textarea_with_summary
     region: content
-  field_field_num_text_columns:
+  field_num_text_columns:
     weight: 22
     settings:
       placeholder: ''

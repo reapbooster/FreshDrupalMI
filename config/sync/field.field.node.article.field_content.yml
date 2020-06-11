@@ -1,0 +1,47 @@
+uuid: 2704784b-47ae-47f5-8281-951d54b42566
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.article
+  module:
+    - entity_reference_revisions
+id: node.article.field_content
+field_name: field_content
+entity_type: node
+bundle: article
+label: Content
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles: null
+    target_bundles_drag_drop:
+      author:
+        weight: 9
+        enabled: false
+      body_content_alternative:
+        weight: 10
+        enabled: false
+      four_tile_block_queue:
+        weight: 8
+        enabled: false
+      four_tile_block_taxonomy:
+        weight: 11
+        enabled: false
+      podcast_episode:
+        weight: 12
+        enabled: false
+      pull_quote:
+        weight: 13
+        enabled: false
+      slide:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

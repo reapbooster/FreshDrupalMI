@@ -1,0 +1,33 @@
+uuid: 1ca7efcd-e330-4ff2-8058-55ea03c2db89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.author.field_job_position
+    - field.field.paragraph.author.field_name
+    - paragraphs.paragraphs_type.author
+id: paragraph.author.default
+targetEntityType: paragraph
+bundle: author
+mode: default
+content:
+  field_job_position:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_name:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+hidden:
+  created: true
+  field_photo: true
+  status: true

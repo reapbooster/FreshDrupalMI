@@ -11,6 +11,7 @@ use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use GuzzleHttp\Client;
+use PHPUnit\Util\Exception;
 
 /**
  * Filter to download image and return media reference.
@@ -47,11 +48,18 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $file = NULL;
 
+    if (!isset($this->configuration['source'])) {
+      throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, true));
+      exit();
+    }
+
     if ($row->isStub()) {
       return NULL;
     }
     $source = $row->getSource();
-    $value = $row->getSourceProperty('hero_image');
+    if (empty($value)) {
+      $value = $row->getSourceProperty($this->configuration['source']);
+    }
     if (!empty($value)) {
       if (!isset($value['uri']['url'])) {
         \Drupal::logger('milken_migrate')

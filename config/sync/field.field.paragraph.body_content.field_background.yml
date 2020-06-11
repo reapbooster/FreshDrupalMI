@@ -4,13 +4,13 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_background
-    - paragraphs.paragraphs_type.body_content_alternative
+    - paragraphs.paragraphs_type.body_content
   module:
     - options
-id: paragraph.body_content_alternative.field_background
+id: paragraph.body_content.field_background
 field_name: field_background
 entity_type: paragraph
-bundle: body_content_alternative
+bundle: body_content
 label: 'Background Color'
 description: ''
 required: false

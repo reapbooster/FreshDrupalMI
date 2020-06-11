@@ -216,5 +216,6 @@ content:
     third_party_settings: {  }
 hidden:
   changed: true
+  field_biopic_name: true
   langcode: true
   search_api_excerpt: true
