@@ -106,10 +106,19 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
   }
 
   /**
+   * Get the Entity or return missing migration entity.
    *
+   * @param array $jsonapi
+   *   Data from jsonapi response.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   The entity.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException|\Drupal\Core\Entity\EntityStorageException
    */
-  protected function getEntityForSubqueue($jsonapi) : EntityInterface {
-    [$entityTypeId, $bundle] = explode('--', $jsonapi['type']);
+  protected function getEntityForSubqueue(array $jsonapi): EntityInterface {
+    [$entityTypeId] = explode('--', $jsonapi['type']);
     $results = \Drupal::entityTypeManager()
       ->getStorage($entityTypeId)
       ->loadByProperties(['uuid' => $jsonapi['id']]);
@@ -122,9 +131,21 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
   }
 
   /**
+   * Create a missing migration Entity.
    *
+   * @param string $type
+   *   Missing migration entity type from jsonapi.
+   * @param string $id
+   *   Missing Migration entity uuid.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   Entity Interface.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function createMissingMigration(string $type, string $id) : EntityInterface {
+  protected function createMissingMigration(string $type, string $id): EntityInterface {
     $mm_storage = \Drupal::entityTypeManager()->getStorage('missing_migration');
     $exists = $mm_storage->getQuery('and')
       ->condition('field_id', $id)

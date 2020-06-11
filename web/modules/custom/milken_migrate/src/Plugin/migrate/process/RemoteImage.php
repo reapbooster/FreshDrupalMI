@@ -49,8 +49,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     $file = NULL;
 
     if (!isset($this->configuration['source'])) {
-      throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, true));
-      exit();
+      throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
     }
 
     if ($row->isStub()) {

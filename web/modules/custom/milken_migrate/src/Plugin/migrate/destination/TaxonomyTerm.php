@@ -67,10 +67,9 @@ class TaxonomyTerm extends MilkenMigrateDestinationBase implements ContainerFact
     $entityStorage = \Drupal::getContainer()
       ->get('entity_type.manager')
       ->getStorage('event');
-    $event = $entityStorage->
-      getQuery()
+    $event = $entityStorage
+      ->getQuery()
       ->condition('field_grid_event_id', $eventID);
-
 
     if ($event instanceof EckEntityInterface) {
       $event->get('field_tracks')
@@ -84,7 +83,12 @@ class TaxonomyTerm extends MilkenMigrateDestinationBase implements ContainerFact
    * No related fields for this entity.
    *
    * @param \Drupal\migrate\Row $row
-   *   Standard Migration row.
+   *   Row Object.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   Entity object.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   Updated entity object.
    */
   public function setRelatedFields(Row $row, EntityInterface $entity) : EntityInterface {
     return $entity;

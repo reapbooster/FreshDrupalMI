@@ -36,7 +36,7 @@ class Paragraphs extends ProcessPluginBase {
       $paragraph = \Drupal::entityTypeManager()
         ->getStorage('paragraph')
         ->loadByProperties(['uuid' => $paragraph_ref['id']]);
-      //exit (__CLASS__ . "::" . __LINE__);
+      // Exit (__CLASS__ . "::" . __LINE__);.
       if (is_array($paragraph) && count($paragraph)) {
         $paragraph = array_shift($paragraph);
       }
@@ -64,7 +64,7 @@ class Paragraphs extends ProcessPluginBase {
         throw new \Exception("could not migrate paragraph:" . print_r($value));
       }
     }
-    //$row->setDestinationProperty($destination_property, $destination_value);
+    // $row->setDestinationProperty($destination_property, $destination_value);
     return $destination_value;
 
   }

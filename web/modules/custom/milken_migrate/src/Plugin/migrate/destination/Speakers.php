@@ -63,6 +63,4 @@ class Speakers extends MilkenMigrateDestinationBase {
     return [];
   }
 
-
-
 }

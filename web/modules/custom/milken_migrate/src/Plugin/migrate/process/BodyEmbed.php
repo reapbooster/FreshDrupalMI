@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
-use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -46,8 +45,6 @@ class BodyEmbed extends ProcessPluginBase {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    print_r($row);
-    exit (__CLASS__ . "::" . __LINE__);
     $toReturn = "";
     if (is_array($value)) {
       foreach ($value as $field) {
@@ -68,8 +65,6 @@ class BodyEmbed extends ProcessPluginBase {
       ];
       $row->setDestinationProperty($this->configuration['destination'], $destination_value);
     }
-
-
     return $toReturn;
   }
 
@@ -89,7 +84,10 @@ class BodyEmbed extends ProcessPluginBase {
       $uuid = $entity->getAttribute('data-entity-uuid');
       if ($type && $uuid) {
         \Drupal::logger(__CLASS__)
-          ->debug("Ensuring entity exists:  :type - :uuid", [":type" => $type, ":uuid" => $uuid]);
+          ->debug("Ensuring entity exists:  :type - :uuid", [
+            ":type" => $type,
+            ":uuid" => $uuid,
+          ]);
         $this->ensureEntityExists([
           'type' => $type,
           'id' => $uuid,
@@ -166,8 +164,8 @@ class BodyEmbed extends ProcessPluginBase {
   /**
    * Download data for embedded entity.
    */
-  public function ensureEntityExists($jsonapi) : EntityInterface {
-    [$entityTypeId, $bundle] = explode('--', $jsonapi['type']);
+  public function ensureEntityExists($jsonapi): EntityInterface {
+    [$entityTypeId] = explode('--', $jsonapi['type']);
     $results = \Drupal::entityTypeManager()
       ->getStorage($entityTypeId)
       ->loadByProperties(['uuid' => $jsonapi['id']]);
@@ -223,9 +221,9 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   *
+   * Generate a missing migration entity.
    */
-  protected function createMissingMigration(string $type, string $id) : EntityInterface {
+  protected function createMissingMigration(string $type, string $id): EntityInterface {
     $mm_storage = \Drupal::entityTypeManager()->getStorage('missing_migration');
     $exists = $mm_storage->getQuery('and')
       ->condition('field_id', $id)
@@ -248,9 +246,9 @@ class BodyEmbed extends ProcessPluginBase {
   }
 
   /**
-   *
+   * Create body text paragraph entity from text blob.
    */
-  protected function createBodyTextParagraph($text) : ?RevisionableInterface {
+  protected function createBodyTextParagraph($text): ?RevisionableInterface {
     $paragraph = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
       ->create([
