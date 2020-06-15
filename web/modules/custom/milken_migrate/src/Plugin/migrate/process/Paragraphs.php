@@ -6,6 +6,7 @@ use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Filter to download image and return media reference.
@@ -28,6 +29,9 @@ class Paragraphs extends ProcessPluginBase {
    * {@inheritDoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    if (empty($value)) {
+      return [];
+    }
     if (is_array($value[0][0])) {
       $value = array_shift($value);
     }
@@ -41,32 +45,23 @@ class Paragraphs extends ProcessPluginBase {
         $paragraph = array_shift($paragraph);
       }
       else {
-        $paragraph = \Drupal::entityTypeManager()
-          ->getStorage('paragraph')
-          ->create([
-            'langcode' => 'en',
-            'type' => 'unmigrated_paragraph',
-            'field_type' => $paragraph_ref['type'],
-            'field_id' => $paragraph_ref['id'],
-            'field_revision_id' => $paragraph_ref['meta']['revision_id'],
-          ]);
+        $paragraph = Paragraph::create([
+          'type' => 'unmigrated_paragraph',
+          'uuid' => $paragraph_ref['id'],
+        ]);
+        $paragraph->set('langcode', 'en');
+        $paragraph->set('field_type', $paragraph_ref['type']);
+        $paragraph->set('field_id', $paragraph_ref['id']);
+        $paragraph->set('field_revision_id', $paragraph_ref['meta']['revision_id']);
+        $paragraph->isNew();
         $paragraph->save();
       }
-      if ($paragraph instanceof RevisionableInterface) {
-        $destination_value[] = [
-          'target_entityTypeId' => $paragraph->getEntityTypeId(),
-          'target_bundle' => $paragraph->bundle(),
-          'target_id' => $paragraph->id(),
-          'target_revision_id' => $paragraph->getRevisionId(),
-        ];
+      if (!$paragraph instanceof RevisionableInterface) {
+        throw new \Exception("could not migrate paragraph:" . print_r($paragraph_ref));
       }
-      else {
-        throw new \Exception("could not migrate paragraph:" . print_r($value));
-      }
+      $destination_value[] = ["entity" => $paragraph];
     }
-    // $row->setDestinationProperty($destination_property, $destination_value);
     return $destination_value;
-
   }
 
 }

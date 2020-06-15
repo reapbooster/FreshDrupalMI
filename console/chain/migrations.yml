@@ -2,6 +2,19 @@ command:
   name: site:milken:migrations
   description: 'Migrate d7 data from sources to this instance'
 commands:
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import file"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import --tag=media"
+    options:
+      working-directory: /var/www
+
   - command: "exec"
     arguments:
       bin: "drush migrate:import --tag=taxonomy"
@@ -10,25 +23,7 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import video"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import paragraph_body_content"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import paragraph_pull_quote"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import paragraph_podcast_episode"
+      bin: "drush migrate:import --tag=paragraphs"
     options:
       working-directory: /var/www
 
@@ -41,12 +36,6 @@ commands:
   - command: "exec"
     arguments:
       bin: "drush cr"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush search-api:server-clear solr_dev"
     options:
       working-directory: /var/www
 

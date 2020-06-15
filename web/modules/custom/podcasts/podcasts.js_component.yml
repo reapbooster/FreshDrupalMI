@@ -1,0 +1,17 @@
+podcasts:
+  label: Podcasts
+  description: For Milken-Institute
+  root_id: podcasts
+  template: templates/podcasts.html.twig
+  libraries:
+    js:
+      /js/podcasts.entry.js: {}
+  settings:
+    collect_user_input:
+      type: 'select'
+      title: 'User Input'
+      description: 'Any data you would like to provide to the react application.'
+      options:
+        option-1: Option 1
+        option-2: Option 2
+      empty_option: '- Select -'

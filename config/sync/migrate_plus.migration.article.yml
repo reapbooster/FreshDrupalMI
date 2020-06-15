@@ -26,6 +26,10 @@ source:
   included:
     - field_ar_content
     - field_ar_hero_image
+    - field_term_collection
+    - field_term_program_initiatives
+    - field_topics
+    - field_centers_general
   fields:
     -
       name: id
@@ -84,38 +88,6 @@ source:
       label: 'Hero Image'
       selector: /field_ar_hero_image
     -
-      name: term_collection_tax
-      label: 'Term Collection Taxonomy'
-      selector: /field_term_collection
-    -
-      name: term_collection_tax_id
-      label: 'Term Collection Taxonomy ID'
-      selector: /field_term_collection_id
-    -
-      name: program_initiatives_tax
-      label: 'Program Initiatives Taxonomy'
-      selector: /field_term_program_initiatives
-    -
-      name: program_initiatives_tax_id
-      label: 'Program Initiatives Taxonomy ID'
-      selector: /field_term_program_initiatives/id
-    -
-      name: topics_tax
-      label: 'Topics Taxonomy'
-      selector: /field_topics
-    -
-      name: topics_tax_id
-      label: 'Topics Taxonomy ID'
-      selector: /field_topics/id
-    -
-      name: centers_tax
-      label: 'Centers Taxonomy'
-      selector: /field_centers_general
-    -
-      name: centers_tax_id
-      label: 'Centers Taxonomy ID'
-      selector: /field_centers_general/id
-    -
       name: pdf_file
       label: 'Pdf File'
       selector: /field_ar_pdf_file
@@ -123,6 +95,22 @@ source:
       name: alt_content
       label: 'Alt Content'
       selector: /field_ar_content/data
+    -
+      name: term_collection_tax
+      label: 'Term Collection Taxonomy'
+      selector: /field_term_collection
+    -
+      name: program_initiatives_tax
+      label: 'Program Initiatives Taxonomy'
+      selector: /field_term_program_initiatives
+    -
+      name: topics_tax
+      label: 'Topics Taxonomy'
+      selector: /field_topics
+    -
+      name: centers_tax
+      label: 'Centers Taxonomy'
+      selector: /field_centers_general
   ids:
     id:
       type: integer
@@ -144,30 +132,8 @@ process:
     plugin: default_value
     default_value: 2
   field_content:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: alt_content
-    -
-      plugin: iterator
-      source: alt_content
-      process:
-        temporary_ids:
-          plugin: migration_lookup
-          migration: paragraph_body_content
-          source_ids:
-            - paragraph_id
-            - paragraph_revision_id
-        target_id:
-          plugin: extract
-          source: '@temporary_ids'
-          index:
-            - 0
-        target_revision_id:
-          plugin: extract
-          source: '@temporary_ids'
-          index:
-            - 1
+    plugin: 'milken_migrate:paragraphs'
+    source: alt_content
   path/alias: path
   created:
     plugin: 'milken_migrate:unix_date'
@@ -176,41 +142,25 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
   field_centers_general:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: centers_tax
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: centers
-      source: centers_tax
+    plugin: jsonapi_taxonomy
+    vocabulary: centers
+    source: centers_tax
   field_term_collection:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: term_collection_tax
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: collections
-      source: term_collection_tax
+    plugin: jsonapi_taxonomy
+    vocabulary: collections
+    source: term_collection_tax
   field_term_program_initiatives:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: program_initiatives_tax
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: program_initiatives
-      source: program_initiatives_tax
+    plugin: jsonapi_taxonomy
+    vocabulary: program_initiatives
+    source: program_initiatives_tax
+  field_topics:
+    plugin: jsonapi_taxonomy
+    vocabulary: topics
+    source: topics_tax
   import_body_field_to_paragraph:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: body
-    -
-      plugin: 'milken_migrate:body_embed'
-      source: body_value
-      append_to: field_content
+    plugin: 'milken_migrate:body_embed'
+    source: body_value
+    append_to: field_content
 destination:
   plugin: 'entity:node'
   default_bundle: article

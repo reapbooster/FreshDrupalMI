@@ -1,0 +1,8 @@
+name: 'Podcasts'
+type: module
+description: 'Milken Podcast Integration'
+core: 8.x
+package: 'Custom'
+
+dependencies:
+  - drupal:js_component

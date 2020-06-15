@@ -112,6 +112,7 @@
         "drupal/media_parent_entity_link": "^1.0@beta",
         "drupal/metatag": "^1.11",
         "drupal/migrate_d2d": "3.x-dev",
+        "drupal/migrate_devel": "^1.2",
         "drupal/migrate_file": "^1.1",
         "drupal/migrate_manifest": "^1.9",
         "drupal/migrate_media_handler": "1.x-dev",
@@ -232,7 +233,7 @@
             "vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom"
         ],
         "code-fix": [
-            "`which phpcbf` -vp --standard=Drupal,DrupalPractice web/modules/custom"
+            "`which phpcbf` -vp --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md web/modules/custom"
         ],
         "unit-test": "echo 'No unit test step defined.'",
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",

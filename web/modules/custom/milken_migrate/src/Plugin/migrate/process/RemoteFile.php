@@ -73,6 +73,9 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
             $file->set('field_file_image_alt_text', $row->getSourceProperty($this->configuration['title']));
             $file->set('field_file_image_title_text', $row->getSourceProperty($this->configuration['title']));
           }
+          else {
+            return $file;
+          }
           $row->setDestinationProperty($destination_property, ['entity' => $file]);
         }
         return ['entity' => $file];
@@ -90,16 +93,24 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function getRemoteFile($name, $url) : ? FileInterface {
     $client = new Client();
-    $response = $client->get($url);
-    $toReturn = file_save_data($response->getBody(), "public://" . $name, FILE_EXISTS_REPLACE);
-    if ($toReturn instanceof FileInterface) {
-      $realpath = \Drupal::service('file_system')->realpath($toReturn->getFileUri());
-      if (isset($_SERVER['USER'])) {
-        chown($realpath, $_SERVER['USER']);
-        chgrp($realpath, $_SERVER['USER']);
+    try {
+      $response = $client->get($url);
+      $toReturn = file_save_data($response->getBody(), "public://" . $name, FILE_EXISTS_REPLACE);
+      if ($toReturn instanceof FileInterface) {
+        $realpath = \Drupal::service('file_system')->realpath($toReturn->getFileUri());
+        if (isset($_SERVER['USER'])) {
+          chown($realpath, $_SERVER['USER']);
+          chgrp($realpath, $_SERVER['USER']);
+        }
+        return $toReturn;
       }
-      return $toReturn;
     }
+    catch (\Exception $e) {
+      \Drupal::logger('milken_migrate')
+        ->error("Error getting file: " . $url);
+
+    }
+
     return NULL;
   }
 

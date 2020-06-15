@@ -17,13 +17,12 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  urls:
-    - 'https://milkeninstitute.org/jsonapi/file/file'
+  urls: 'https://milkeninstitute.org/jsonapi/file/file'
   jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/file/file
   item_selector: data
   constants:
-    FILE_DESTINATION: 'public://'
+    FILE_SOURCE: 'https://milkeninstitute.org'
   fields:
     -
       name: id
@@ -64,22 +63,19 @@ source:
   ids:
     id:
       type: integer
+    uuid:
+      type: string
 process:
-  pseudo_destination_filename:
-    -
-      plugin: callback
-      callable: basename
-      source: url
+  pseudo_source_path:
     -
       plugin: skip_on_empty
       method: row
-      message: 'Cannot import empty image filename.'
-  pseudo_destination_path:
+      source: url
     -
       plugin: concat
       source:
-        - constants/DRUPAL_FILE_DIRECTORY
-        - '@pseudo_destination_filename'
+        - constants/FILE_SOURCE
+        - url
   uuid: uuid
   uid:
     plugin: default_value
@@ -97,14 +93,10 @@ process:
     default_value: true
   uri:
     -
-      plugin: skip_on_empty
-      method: process
-      source: url
-    -
       plugin: file_copy
       source:
-        - url
-        - '@pseudo_destination_path'
+        - '@pseudo_source_path'
+        - uri
       file_exists: rename
       move: false
 destination:
