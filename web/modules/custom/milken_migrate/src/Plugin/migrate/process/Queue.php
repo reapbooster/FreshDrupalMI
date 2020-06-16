@@ -70,6 +70,9 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
     $queue_items = [];
     $queue_title = $row->getSourceProperty($this->configuration['title_source']) . uniqid();
     try {
+      if (!$subqueue instanceof EntityInterface) {
+        return new MigrateSkipRowException('=>  new_subqueue has not been created.');
+      }
       $newSubqueue = $subqueue->createDuplicate();
       $newSubqueue->set('name', $queue_title);
       $newSubqueue->set('title', $queue_title);

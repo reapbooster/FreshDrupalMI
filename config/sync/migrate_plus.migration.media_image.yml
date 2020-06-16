@@ -72,31 +72,24 @@ source:
     -
       name: media_in_library
       label: 'Media in Library'
-      selector: field_media_in_library
+      selector: /field_media_in_library
     -
       name: photo_subject_name
       label: 'Photo Subject Name'
-      selector: field_photo_subject_name
+      selector: /field_photo_subject_name
     -
       name: photo_subject_org
       label: 'Photo Subject Org'
-      selector: field_photo_subject_org
+      selector: /field_photo_subject_org
     -
       name: photo_subject_title
       label: 'Photo Subject Title'
       selector: /field_photo_subject_title
     -
       name: image
-      label: "Image"
+      label: Image
       selector: /image
-    -
-      name: image_uuid
-      label: "Image UUID"
-      selector: image/uuid
-    -
-      name: image_type
-      label: "Image Type"
-      selector: image/type
+
   ids:
     mid:
       type: integer
@@ -119,15 +112,13 @@ process:
   field_filemime: filemime
   field_width: width
   field_height: height
-  field_media_image/target_id:
-    plugin: migration_lookup
-    migration: file
-    source: image
   field_photo_subject_name: photo_subject_name
   field_photo_subject_org: photo_subject_org
   field_photo_subject_title: photo_subject_title
-
+  field_media_image:
+    plugin: 'milken_migrate:remote_file'
+    source: image
 destination:
   plugin: 'entity:media'
-  default_bundle: hero_image
+  default_bundle: image
 migration_dependencies: {  }
