@@ -46,7 +46,6 @@ module:
   entity_embed: 0
   entity_reference: 0
   entity_reference_revisions: 0
-  entity_reference_uuid: 0
   entityqueue: 0
   facets: 0
   facets_pretty_paths: 0
@@ -127,6 +126,8 @@ module:
   toolbar: 0
   twig_tweak: 0
   typed_data: 0
+  update: 0
+  upgrade_status: 0
   user: 0
   uuid_url: 0
   views_aggregator: 0
@@ -149,12 +150,12 @@ module:
   gatsby: 100
   minimal: 1000
 theme:
+  adminimal_theme: 0
   stark: 0
   stable: 0
   classy: 0
   seven: 0
   bootstrap_barrio: 0
-  adminimal_theme: 0
   milken: 0
   bartik: 0
   claro: 0

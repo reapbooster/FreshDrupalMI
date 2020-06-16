@@ -152,9 +152,7 @@ process:
     plugin: default_value
     default_value: 2
   path/alias: path
-  field_body/value:
-    plugin: 'milken_migrate:body_embed'
-    source: body_value
+  field_body/value: body_value
   field_body/format:
     plugin: default_value
     default_value: full_html

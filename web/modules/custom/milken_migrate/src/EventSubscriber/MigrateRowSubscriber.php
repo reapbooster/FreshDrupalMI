@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\EventSubscriber;
 
+use Drupal\migrate\Event\MigrateEvents;
 use Drupal\migrate\Event\MigratePreRowSaveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -17,8 +18,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      // Disabled until you need debug.
-      // MigrateEvents::PRE_ROW_SAVE => 'preRowSave'.
+      MigrateEvents::PRE_ROW_SAVE => 'preRowSave',
     ];
   }
 
@@ -31,7 +31,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
   public function preRowSave(MigratePreRowSaveEvent $event) {
     $row = $event->getRow();
     if (function_exists('drush_print')) {
-      drush_print("Import " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid'));
+      // drush_print("Import " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid'));
     }
   }
 
