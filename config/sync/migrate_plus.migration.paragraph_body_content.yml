@@ -15,10 +15,10 @@ migration_group: milken
 label: 'Paragraph--body_content VIA JSON API'
 source:
   plugin: url
-  urls: 'https://www.milkeninstitute.org/jsonapi/paragraph/body_content_alternative'
+  urls: 'https://milkeninstitute.org/jsonapi/paragraph/body_content_alternative'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/paragraph/body_content_alternative
   item_selector: data
   jsonapi_include: true

@@ -18,7 +18,7 @@ source:
   urls: 'https://milkeninstitute.org/jsonapi/media/image'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/media/image
   item_selector: data
   jsonapi_include: true

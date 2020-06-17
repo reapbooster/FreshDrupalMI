@@ -15,10 +15,10 @@ migration_group: milken
 label: 'Paragraph--pull quote VIA JSON API'
 source:
   plugin: url
-  urls: 'https://www.milkeninstitute.org/jsonapi/paragraph/pull_quote'
+  urls: 'https://milkeninstitute.org/jsonapi/paragraph/pull_quote'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/paragraph/pull_quote
   item_selector: data
   jsonapi_include: true

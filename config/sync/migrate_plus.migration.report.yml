@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Report content type VIA JSON API'
 source:
   plugin: url
-  urls: 'https://www.milkeninstitute.org/jsonapi/node/report'
+  urls: 'https://milkeninstitute.org/jsonapi/node/report'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/node/report
   item_selector: data
   jsonapi_include: true

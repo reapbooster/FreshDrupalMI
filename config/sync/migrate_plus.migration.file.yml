@@ -101,4 +101,5 @@ process:
       move: false
 destination:
   plugin: 'entity:file'
+  default_bundle: file
 migration_dependencies: {  }
