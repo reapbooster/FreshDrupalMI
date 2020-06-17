@@ -59,7 +59,8 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       }
 
       [$entityTypeID, $bundleID] = explode('--', $source['type']);
-
+      \Drupal::logger('milken_migrate')
+        ->debug("{$entityTypeID}::{$bundleID}::{$source['id']}");
       $storage = \Drupal::entityTypeManager()
         ->getStorage($entityTypeID);
       $exists = $storage
@@ -72,19 +73,16 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       }
       // TODO: figure out a way to derive "node/article".
       $sourcePath = "/jsonapi/{$entityTypeID}/{$bundleID}/" . $source['id'];
-      \Drupal::logger('milken_migrate')->debug($sourcePath);
-      $client = new Client([
-        'base_uri' => $this->configuration['jsonapi_host'],
-        'http_errors' => FALSE,
-      ]);
-      $response = $client->get($sourcePath);
+      \Drupal::logger('milken_migrate')
+        ->debug("Source: " . $sourcePath);
+      $response = $this->getClient()->get($sourcePath);
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
         $responseData = json_decode($response->getBody(), TRUE);
         $attributes = $responseData['data']['attributes'];
         if (isset($attributes['uri']['url'])) {
           $url = $this->configuration['jsonapi_host'] . $attributes['uri']['url'];
           \Drupal::logger('milken_migrate')
-            ->debug($url);
+            ->debug("Source URL:" . $url);
           $file = $this->getRemoteFile($attributes['filename'], $url);
           if ($file instanceof EntityInterface) {
             if ($this->configuration['name']) {
@@ -106,8 +104,13 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
     }
     catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
-        ->error("IMPORT ERROR: " . $e->getMessage());
+        ->error("IMPORT Exception: " . $e->getMessage() . ($sourcePath ?? ""));
       return new MigrateSkipRowException($e->getMessage());
+    }
+    catch (\Throwable $t) {
+      \Drupal::logger('milken_migrate')
+        ->error("IMPORT Throwable: " . $t->getMessage() . ($sourcePath ?? ""));
+      return new MigrateSkipRowException($t->getMessage());
     }
     return NULL;
   }
@@ -116,10 +119,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
    * Turn remote URL into local FileInterface object.
    */
   public function getRemoteFile($name, $url) {
-    $client = new Client([
-      'base_uri' => $this->configuration['jsonapi_host'],
-      'http_errors' => FALSE,
-    ]);
+    $client = $this->getClient();
     try {
       $response = $client->get($url);
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
@@ -137,11 +137,30 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
           return $toReturn;
         }
       }
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
         ->error("Error getting file: " . $url);
     }
+    catch (\Throwable $t) {
+      \Drupal::logger('milken_migrate')
+        ->error("IMPORT Throwable: " . $t->getMessage() . $url);
+    }
     return new MigrateSkipRowException("File does not exist on the remote server");
+  }
+
+  /**
+   * Get a pre-configured Guzzle Client.
+   *
+   * @return \GuzzleHttp\Client
+   *   The Client.
+   */
+  public function getClient() : Client {
+    // TODO: move tis to a trait and the configs to $this->configuration.
+    return new Client([
+      'base_uri' => $this->configuration['jsonapi_host'],
+      'http_errors' => FALSE,
+    ]);
   }
 
 }

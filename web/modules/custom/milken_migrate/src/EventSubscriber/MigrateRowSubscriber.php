@@ -29,9 +29,10 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    *   Event object.
    */
   public function preRowSave(MigratePreRowSaveEvent $event) {
-    $row = $event->getRow();
+    // $row = $event->getRow();
     if (function_exists('drush_print')) {
-      // drush_print("Import " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid'));
+      // drush_print("Import " . $event->getMigration()->id() . " row: ".
+      // . $row->getDestinationProperty('uuid')).
     }
   }
 

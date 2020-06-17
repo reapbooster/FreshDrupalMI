@@ -89,7 +89,6 @@ source:
       name: image
       label: Image
       selector: /image
-
   ids:
     mid:
       type: integer

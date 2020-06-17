@@ -141,6 +141,15 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
+  import_hero_image_to_paragraph:
+    plugin: 'milken_migrate:hero_to_para'
+    title_source: hero_title
+    title_source_backup: title
+    image: hero_image
+    link_id: uuid
+    link_entity_type_id: node
+    link_bundle: article
+    prepend_to: field_content
   field_centers_general:
     plugin: jsonapi_taxonomy
     vocabulary: centers

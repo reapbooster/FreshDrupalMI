@@ -1,0 +1,6 @@
+status: 1
+pattern: '[media:name]'
+escape: false
+dependencies:
+  config:
+    - media.type.image
