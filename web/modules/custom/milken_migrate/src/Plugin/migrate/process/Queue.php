@@ -66,13 +66,14 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
     $subqueue = \Drupal::entityTypeManager()
       ->getStorage('entity_subqueue')
       ->load('new_subqueue');
-    $missing_migrations = [];
-    $queue_items = [];
-    $queue_title = $row->getSourceProperty($this->configuration['title_source']) . uniqid();
+    if (!$subqueue instanceof EntityInterface) {
+      throw new MigrateException('=>  new_subqueue has not been created in Queues=>Featured.');
+    }
+
     try {
-      if (!$subqueue instanceof EntityInterface) {
-        return new MigrateSkipRowException('=>  new_subqueue has not been created.');
-      }
+      $missing_migrations = [];
+      $queue_items = [];
+      $queue_title = $row->getSourceProperty($this->configuration['title_source']) . uniqid();
       $newSubqueue = $subqueue->createDuplicate();
       $newSubqueue->set('name', $queue_title);
       $newSubqueue->set('title', $queue_title);
@@ -96,14 +97,16 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
       return $newSubqueue;
     }
     catch (\Exception $e) {
+      print print_r($e->getTrace());
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::Exception: " . $e->getMessage());
-      return new MigrateException($e->getMessage() . print_r($row->getDestination(), TRUE));
+      throw new MigrateException($e->getMessage() . print_r($row->getDestination(), TRUE));
     }
     catch (\Throwable $t) {
+      print print_r($t->getTrace());
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::Throwable: " . $t->getMessage());
-      return new MigrateException($t->getMessage() . print_r($row->getDestination(), TRUE));
+      throw new MigrateException($t->getMessage() . print_r($row->getDestination(), TRUE));
     }
     return NULL;
   }

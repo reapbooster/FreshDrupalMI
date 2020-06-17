@@ -5,30 +5,54 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import event"
+      bin: "drush migrate:import event  --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import room"
+      bin: "drush migrate:import room  --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import speaker"
+      bin: "drush migrate:import speaker --limit=2000  --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import track"
+      bin: "drush migrate:import speaker --limit=2000  --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import panel"
+      bin: "drush migrate:import speaker --limit=2000  --continue-on-failure "
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import speaker --limit=2000  --continue-on-failure "
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import speaker  --continue-on-failure "
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import track  --continue-on-failure "
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import panel  --continue-on-failure "
     options:
       working-directory: /var/www

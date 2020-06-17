@@ -109,11 +109,8 @@ process:
       title_source: title
       queue_machine_name_source: queue_machine_name
   field_topics:
-    plugin: entity_generate
+    plugin: jsonapi_taxonomy
     source: field_topic_tag_sarasa
-    entity_type: taxonomy_term
-    bundle: topics
-    value_key: name
 destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: four_tile_block_queue

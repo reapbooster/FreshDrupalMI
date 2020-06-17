@@ -159,12 +159,12 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
     catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
-      return new MigrateException($e->getMessage() . print_r($destination, TRUE));
+      return new MigrateException($e->getMessage() . print_r($row->getDestination(), TRUE));
     }
     catch (\Throwable $t) {
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
-      return new MigrateException($t->getMessage() . print_r($destination, TRUE));
+      return new MigrateException($t->getMessage() . print_r($row->getDestination(), TRUE));
     }
 
     // If any part of the import fails, still do the node creation.
@@ -184,7 +184,7 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
         $paragraph->set('field_slides', ['entity' => $slide]);
         $paragraph->isNew();
         $paragraph->save();
-        array_push($destination_value, ['entity' => $paragraph])
+        array_push($destination_value, ['entity' => $paragraph]);
         $row->setDestinationProperty($destination_property, $destination_value);
         return $destination_value;
       }

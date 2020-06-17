@@ -161,17 +161,33 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
   field_centers:
-    plugin: jsonapi_taxonomy
-    vocabulary: centers
-    source: centers_tax
+    -
+      plugin: skip_on_value
+      source: centers_tax
+      value: "missing"
+      method: process
+    -
+      plugin: jsonapi_taxonomy
+      vocabulary: centers
+      source: centers_tax
   field_term_collection:
-    plugin: jsonapi_taxonomy
-    vocabulary: collections
-    source: term_collection_tax
+    - plugin: skip_on_value
+      source: centers_tax
+      value: "missing"
+      method: process
+    -
+      plugin: jsonapi_taxonomy
+      vocabulary: collections
+      source: term_collection_tax
   field_term_program_initiatives:
-    plugin: jsonapi_taxonomy
-    vocabulary: program_initiatives
-    source: program_initiatives_tax
+    - plugin: skip_on_value
+      source: centers_tax
+      value: "missing"
+      method: process
+    -
+      plugin: jsonapi_taxonomy
+      vocabulary: program_initiatives
+      source: program_initiatives_tax
   field_media_file:
     plugin: 'milken_migrate:remote_file'
     source: pdf_file

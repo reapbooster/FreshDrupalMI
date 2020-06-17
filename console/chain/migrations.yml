@@ -5,31 +5,31 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file"
+      bin: "drush migrate:import file --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import --tag=media"
+      bin: "drush migrate:import --tag=media --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import --tag=taxonomy"
+      bin: "drush migrate:import --tag=taxonomy --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import --tag=paragraphs"
+      bin: "drush migrate:import --tag=paragraphs --continue-on-failure "
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import article"
+      bin: "drush migrate:import article  --continue-on-failure "
     options:
       working-directory: /var/www
 
@@ -42,12 +42,6 @@ commands:
   - command: "exec"
     arguments:
       bin: "drush default-content-deploy:import --yes"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush search-api:index"
     options:
       working-directory: /var/www
 

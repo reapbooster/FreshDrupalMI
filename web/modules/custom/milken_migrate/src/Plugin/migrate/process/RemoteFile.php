@@ -10,7 +10,7 @@ use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use GuzzleHttp\Client;
+use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 
 /**
  * Filter to download image and return media reference.
@@ -26,6 +26,8 @@ use GuzzleHttp\Client;
  * );
  */
 class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
+
+  use JsonAPIDataFetcherTrait;
 
   /**
    * Transform remote image ref into local Media Object.
@@ -147,20 +149,6 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         ->error("IMPORT Throwable: " . $t->getMessage() . $url);
     }
     return new MigrateSkipRowException("File does not exist on the remote server");
-  }
-
-  /**
-   * Get a pre-configured Guzzle Client.
-   *
-   * @return \GuzzleHttp\Client
-   *   The Client.
-   */
-  public function getClient() : Client {
-    // TODO: move tis to a trait and the configs to $this->configuration.
-    return new Client([
-      'base_uri' => $this->configuration['jsonapi_host'],
-      'http_errors' => FALSE,
-    ]);
   }
 
 }

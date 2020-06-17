@@ -2,7 +2,6 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
-use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -40,12 +39,17 @@ class JsonAPITaxonomy extends ProcessPluginBase {
           if (count($term)) {
             $term = array_shift($term);
           }
-          if ($term instanceof Term) {
-            $destination_values[] = ['entity' => $term];
+          else {
+            $recordData = $this->getRelatedRecordData($relatedRecord, $row);
+            print_r($recordData);
+            exit();
           }
-          elseif ($relatedRecord['id'] != "missing") {
-            throw new MigrateException("Cannot find the correct taxonomy: " . print_r($value, TRUE));
-          }
+        }
+        if ($term instanceof Term) {
+          $destination_values[] = ['entity' => $term];
+        }
+        else {
+          return NULL;
         }
       }
     }

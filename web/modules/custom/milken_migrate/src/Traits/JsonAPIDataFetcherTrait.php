@@ -39,4 +39,17 @@ trait JsonAPIDataFetcherTrait {
     return NULL;
   }
 
+  /**
+   * Get a pre-configured client.
+   *
+   * @return \GuzzleHttp\Client
+   *   The client.
+   */
+  protected function getClient(): Client {
+    return new Client([
+      'base_uri' => $this->configuration['jsonapi_host'],
+      "http_errors" => FALSE,
+    ]);
+  }
+
 }
