@@ -83,7 +83,9 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
   field_body/value: field_content_alternative_area_value
-  field_body/format: field_content_alternative_area_format
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
   field_field_num_text_columns:
     plugin: default_value
     default_value: 1
