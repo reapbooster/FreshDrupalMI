@@ -164,25 +164,27 @@ process:
     -
       plugin: skip_on_value
       source: centers_tax
-      value: "missing"
+      value: missing
       method: process
     -
       plugin: jsonapi_taxonomy
       vocabulary: centers
       source: centers_tax
   field_term_collection:
-    - plugin: skip_on_value
+    -
+      plugin: skip_on_value
       source: centers_tax
-      value: "missing"
+      value: missing
       method: process
     -
       plugin: jsonapi_taxonomy
       vocabulary: collections
       source: term_collection_tax
   field_term_program_initiatives:
-    - plugin: skip_on_value
+    -
+      plugin: skip_on_value
       source: centers_tax
-      value: "missing"
+      value: missing
       method: process
     -
       plugin: jsonapi_taxonomy

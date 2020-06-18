@@ -114,4 +114,6 @@ process:
 destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: four_tile_block_queue
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - entityqueue

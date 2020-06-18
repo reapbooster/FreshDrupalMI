@@ -7,9 +7,11 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use GuzzleHttp\Client;
 use PHPUnit\Util\Exception;
 
@@ -27,6 +29,8 @@ use PHPUnit\Util\Exception;
  * );
  */
 class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
+
+  use JsonAPIDataFetcherTrait;
 
   /**
    * Transform remote image ref into local Media Object.
@@ -58,6 +62,9 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     $source = $row->getSource();
     if (empty($value)) {
       $value = $row->getSourceProperty($this->configuration['source']);
+    }
+    if (!isset($value['uri']['url']) && isset($value['type']) && isset($value['id'])) {
+      $value = $this->getRelatedRecordData($value, $row);
     }
     if (!empty($value)) {
       if (!isset($value['uri']['url'])) {
@@ -109,12 +116,12 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       catch (\Exception $e) {
         \Drupal::logger('milken_migrate')
           ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
-        throw new MigrateException($e->getMessage());
+        return new MigrateSkipRowException($e->getMessage());
       }
       catch (\Throwable $t) {
         \Drupal::logger('milken_migrate')
           ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
-        throw new MigrateException($t->getMessage());
+        return new MigrateSkipRowException($t->getMessage());
       }
     }
     return $value;
@@ -150,8 +157,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    *   return FileInterface or Null.
    */
   public function getRemoteFile($name, $url): ?FileInterface {
-    $client = new Client();
-    $response = $client->get($url);
+    $response = $this->getClient()->get($url);
     $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
     if ($toReturn instanceof FileInterface) {
       $realpath = \Drupal::service('file_system')

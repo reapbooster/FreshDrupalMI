@@ -2,9 +2,12 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\Plugin\migrate\destination\TaxonomyTerm;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use Drupal\taxonomy\Entity\Term;
 
@@ -32,7 +35,7 @@ class JsonAPITaxonomy extends ProcessPluginBase {
     $destination_values = [];
     if (is_array($value)) {
       foreach ($value as $relatedRecord) {
-        if (isset($relatedRecord['id'])) {
+        if (isset($relatedRecord['id']) && $relatedRecord['type'] != "missing") {
           $term = \Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
             ->loadByProperties(['uuid' => $relatedRecord['id']]);
@@ -40,9 +43,17 @@ class JsonAPITaxonomy extends ProcessPluginBase {
             $term = array_shift($term);
           }
           else {
-            $recordData = $this->getRelatedRecordData($relatedRecord, $row);
-            print_r($recordData);
-            exit();
+            $term = TaxonomyTerm::create($this->getRelatedRecordData($relatedRecord, $row));
+            if ($term instanceof EntityInterface) {
+              $term->isNew();
+              $term->save();
+            }
+            else {
+              $row->setDestinationProperty($destination_property, []);
+              return new MigrateSkipProcessException(
+                "Cannot create taxonomy Term:" . print_r($relatedRecord, TRUE)
+              );
+            }
           }
         }
         if ($term instanceof Term) {

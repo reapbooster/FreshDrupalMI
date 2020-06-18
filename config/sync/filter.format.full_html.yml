@@ -2,9 +2,17 @@ uuid: ef3ea290-7df2-43f2-8266-23a64e8ebcc9
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - core.entity_view_mode.media.large
+    - core.entity_view_mode.media.media_library
+    - core.entity_view_mode.media.medium
+    - core.entity_view_mode.media.small
+    - core.entity_view_mode.media.token
   module:
     - editor
     - entity_embed
+    - media
 _core:
   default_config_hash: Mc8Hl-Ya14lrbMXaUx7Ybmv-18vtqE4lw2DpgNHPj-s
 name: 'Full Html'
@@ -39,7 +47,7 @@ filters:
     id: entity_embed
     provider: entity_embed
     status: true
-    weight: -49
+    weight: 1
     settings: {  }
   filter_html:
     id: filter_html
@@ -75,3 +83,25 @@ filters:
     weight: -42
     settings:
       filter_url_length: 72
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_media_types:
+        audio: audio
+        document: document
+        hero_image: hero_image
+        image: image
+        report: report
+        video: video
+      allowed_view_modes:
+        default: default
+        full: full
+        large: large
+        media_library: media_library
+        medium: medium
+        small: small
+        token: token

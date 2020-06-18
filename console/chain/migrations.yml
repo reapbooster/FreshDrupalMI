@@ -2,6 +2,11 @@ command:
   name: site:milken:migrations
   description: 'Migrate d7 data from sources to this instance'
 commands:
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import entityqueue"
+    options:
+      working-directory: /var/www
 
   - command: "exec"
     arguments:
@@ -53,7 +58,7 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import --tag=paragraphs --continue-on-failure "
+      bin: "drush migrate:import --tag=paragraphs --continue-on-failure --execute-dependencies"
     options:
       working-directory: /var/www
 

@@ -90,4 +90,10 @@ process:
 destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: body_content
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - file
+    - media_image
+    - taxonomy_centers
+    - taxonomy_collections
+    - taxonomy_program_initiatives

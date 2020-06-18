@@ -61,6 +61,9 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       }
 
       [$entityTypeID, $bundleID] = explode('--', $source['type']);
+      if ($entityTypeID == "missing" || $bundleID == "missing") {
+        return new MigrateSkipRowException("The referenced Entity is missing on the remote server.");
+      }
       \Drupal::logger('milken_migrate')
         ->debug("{$entityTypeID}::{$bundleID}::{$source['id']}");
       $storage = \Drupal::entityTypeManager()

@@ -28,7 +28,7 @@ trait JsonAPIDataFetcherTrait {
     $rowSource = $row->getSource();
     $relatedSourcePath = '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
     Drupal::logger('milken_migrate')->debug($relatedSourcePath);
-    $client = new Client(['base_uri' => $rowSource['jsonapi_host']]);
+    $client = $this->getClient();
     $response = $client->get($relatedSourcePath);
     if (in_array($response->getStatusCode(), [200, 201, 202])) {
       $responseData = json_decode($response->getBody(), TRUE);
