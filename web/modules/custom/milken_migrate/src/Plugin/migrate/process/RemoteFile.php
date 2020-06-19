@@ -3,8 +3,6 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\File\FileSystemInterface;
-use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
@@ -53,9 +51,15 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
     }
     try {
       $source = $row->getSourceProperty($this->configuration['source']);
-      if (empty($source) || !isset($source['type']) || !isset($source['id'])) {
+      if (
+        empty($source) ||
+        !isset($source['type']) ||
+        !isset($source['id']) ||
+        $source['id'] == "missing" ||
+        $source['type'] == "missing"
+      ) {
         \Drupal::logger('milken_migrate')
-          ->debug("SKIP importing hero image. JSON data is empty: ");
+          ->debug("SKIP importing hero image. JSON data is empty: " . print_r($source));
         $row->setDestinationProperty($destination_property, []);
         return NULL;
       }
@@ -73,85 +77,44 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
 
       if (count($exists)) {
         $entity = array_shift($exists);
-        $row->setDestinationProperty($destination_property, ['target_id' => $entity->id()]);
-        return ['target_id' => $entity->id()];
+        \Drupal::logger('milken_migrate')
+          ->debug("Found image in database: " . $entity->label());
+        $row->setDestinationProperty($destination_property, ['entity' => $entity]);
+        return ['entity' => $entity];
       }
-      // TODO: figure out a way to derive "node/article".
-      $sourcePath = "/jsonapi/{$entityTypeID}/{$bundleID}/" . $source['id'];
-      \Drupal::logger('milken_migrate')
-        ->debug("Source: " . $sourcePath);
-      $response = $this->getClient()->get($sourcePath);
-      if (in_array($response->getStatusCode(), [200, 201, 202])) {
-        $responseData = json_decode($response->getBody(), TRUE);
-        $attributes = $responseData['data']['attributes'];
+      $responseData = $this->getRelatedRecordData($source, $row);
+      if ($responseData !== NULL) {
+        $attributes = $responseData['attributes'];
+        if (substr($attributes['filename'], 0, 6) === "sample") {
+          return new MigrateSkipRowException("Sample Image. Not imported.");
+        }
         if (isset($attributes['uri']['url'])) {
-          $url = $this->configuration['jsonapi_host'] . $attributes['uri']['url'];
+          $url = $row->getSource()['jsonapi_host'] . $attributes['uri']['url'];
           \Drupal::logger('milken_migrate')
             ->debug("Source URL:" . $url);
           $file = $this->getRemoteFile($attributes['filename'], $url);
           if ($file instanceof EntityInterface) {
-            if ($this->configuration['name']) {
+            if (isset($this->configuration['name'])) {
               $file->set('field_file_image_alt_text', $row->getSourceProperty($this->configuration['name']));
               $file->set('field_file_image_title_text', $row->getSourceProperty($this->configuration['name']));
             }
+            $file->isNew();
             $file->save();
-            $row->setDestinationProperty($destination_property, ['target_id' => $file->id()]);
-            return ['target_id' => $file->id()];
-          }
-          else {
-            return $file;
+            $row->setDestinationProperty($destination_property, ['entity' => $file]);
+            return ['entity' => $file];
           }
         }
       }
-      else {
-        return new MigrateSkipRowException("The media source record request returns an error: " . $sourcePath);
-      }
-    }
-    catch (\Exception $e) {
+    } catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
-        ->error("IMPORT Exception: " . $e->getMessage() . ($sourcePath ?? ""));
+        ->error("IMPORT Exception: " . $e->getMessage() . ($url ?? "Url is not set"));
       return new MigrateSkipRowException($e->getMessage());
-    }
-    catch (\Throwable $t) {
+    } catch (\Throwable $t) {
       \Drupal::logger('milken_migrate')
-        ->error("IMPORT Throwable: " . $t->getMessage() . ($sourcePath ?? ""));
+        ->error("IMPORT Throwable: " . $t->getMessage() . ($url ?? "Url is not set"));
       return new MigrateSkipRowException($t->getMessage());
     }
-    return NULL;
-  }
-
-  /**
-   * Turn remote URL into local FileInterface object.
-   */
-  public function getRemoteFile($name, $url) {
-    $client = $this->getClient();
-    try {
-      $response = $client->get($url);
-      if (in_array($response->getStatusCode(), [200, 201, 202])) {
-        $toReturn = file_save_data($response->getBody(),
-          "public://" . $name,
-          FileSystemInterface::EXISTS_REPLACE
-        );
-        if ($toReturn instanceof FileInterface) {
-          $realpath = \Drupal::service('file_system')
-            ->realpath($toReturn->getFileUri());
-          if (isset($_SERVER['USER'])) {
-            chown($realpath, $_SERVER['USER']);
-            chgrp($realpath, $_SERVER['USER']);
-          }
-          return $toReturn;
-        }
-      }
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')
-        ->error("Error getting file: " . $url);
-    }
-    catch (\Throwable $t) {
-      \Drupal::logger('milken_migrate')
-        ->error("IMPORT Throwable: " . $t->getMessage() . $url);
-    }
-    return new MigrateSkipRowException("File does not exist on the remote server");
+    return new MigrateSkipRowException("The image does not exist on the remote server");
   }
 
 }

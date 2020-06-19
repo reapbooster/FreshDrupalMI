@@ -3,16 +3,13 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
-use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
-use GuzzleHttp\Client;
 use PHPUnit\Util\Exception;
 
 /**
@@ -51,7 +48,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $file = NULL;
-
     if (!isset($this->configuration['source'])) {
       throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
     }
@@ -70,8 +66,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       if (!isset($value['uri']['url'])) {
         \Drupal::logger('milken_migrate')
           ->debug("SKIP importing hero image. JSON data is empty: ");
-        $row->setDestinationProperty($destination_property, []);
-        return NULL;
+        return new MigrateSkipRowException("JSON data is empty.");
       }
       try {
         if (isset($value['uri']['url'])) {
@@ -143,32 +138,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       return array_shift($matches[0]);
     }
     return "#000000";
-  }
-
-  /**
-   * Turn remote URL into local FileInterface object.
-   *
-   * @param string $name
-   *   The filename.
-   * @param string $url
-   *   The file Url.
-   *
-   * @return \Drupal\file\FileInterface|null
-   *   return FileInterface or Null.
-   */
-  public function getRemoteFile($name, $url): ?FileInterface {
-    $response = $this->getClient()->get($url);
-    $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
-    if ($toReturn instanceof FileInterface) {
-      $realpath = \Drupal::service('file_system')
-        ->realpath($toReturn->getFileUri());
-      if (isset($_SERVER['USER'])) {
-        chown($realpath, $_SERVER['USER']);
-        chgrp($realpath, $_SERVER['USER']);
-      }
-      return $toReturn;
-    }
-    return NULL;
   }
 
 }
