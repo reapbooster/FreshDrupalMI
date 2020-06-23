@@ -5,7 +5,7 @@ namespace Drupal\milken_migrate\Traits;
 use Drupal;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
-use Drupal\migrate\MigrateSkipRowException;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Row;
 use GuzzleHttp\Client;
 
@@ -45,6 +45,7 @@ trait JsonAPIDataFetcherTrait {
    * Get a pre-configured client.
    *
    * @param array $configuration
+   *   Optionally supply a configuration.
    *
    * @return \GuzzleHttp\Client
    *   The client.
@@ -54,6 +55,7 @@ trait JsonAPIDataFetcherTrait {
     return new Client([
       'base_uri' => $configuration['jsonapi_host'] ?? "https://milkeninstitute.org",
       "http_errors" => FALSE,
+      "allow_redirects" => FALSE,
     ]);
   }
 
@@ -65,7 +67,7 @@ trait JsonAPIDataFetcherTrait {
    * @param string $url
    *   The file Url.
    *
-   * @return \Drupal\file\FileInterface|null
+   * @return \Drupal\file\FileInterface|\Drupal\migrate\MigrateProcessRowException
    *   return FileInterface or Null.
    */
   public function getRemoteFile(string $name, string $url) {
@@ -101,7 +103,7 @@ trait JsonAPIDataFetcherTrait {
       \Drupal::logger('milken_migrate')
         ->error("IMPORT Throwable: " . $t->getMessage() . "::" . $url);
     }
-    return new MigrateSkipRowException("File does not exist on the remote server");
+    return new MigrateSkipProcessException("File does not exist on the remote server");
   }
 
 }

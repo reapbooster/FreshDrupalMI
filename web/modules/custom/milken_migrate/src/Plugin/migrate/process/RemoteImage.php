@@ -5,10 +5,11 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\MigrateSkipRowException;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\Traits\EntityExistsTrait;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use PHPUnit\Util\Exception;
 
@@ -23,11 +24,13 @@ use PHPUnit\Util\Exception;
  *
  * @MigrateProcessPlugin(
  *   id = "milken_migrate:remote_image",
+ *   handle_multiples = TRUE,
  * );
  */
 class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
 
   use JsonAPIDataFetcherTrait;
+  use EntityExistsTrait;
 
   /**
    * Transform remote image ref into local Media Object.
@@ -47,6 +50,8 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     $file = NULL;
     if (!isset($this->configuration['source'])) {
       throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
@@ -56,17 +61,34 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       return NULL;
     }
     $source = $row->getSource();
-    if (empty($value)) {
-      $value = $row->getSourceProperty($this->configuration['source']);
+
+    if (array_key_exists("data", $value) && $value['data'] === NULL) {
+      \Drupal::logger('milken_migrate')
+        ->debug("Array key 'data' exists but is null" . print_r($value, TRUE));
+      // If the array_key "data" exists but is null, it's a JSONAPI error.
+      return new MigrateSkipProcessException("No data for property: " . $destination_property);
     }
-    if (!isset($value['uri']['url']) && isset($value['type']) && isset($value['id'])) {
-      $value = $this->getRelatedRecordData($value, $row);
+
+    if (!isset($value['uri']['url'])) {
+      if (isset($value['type']) && isset($value['id'])) {
+        $value = $this->getRelatedRecordData($value, $row);
+      }
+      else {
+        return new MigrateSkipProcessException("No data for property: " . $destination_property);
+      }
     }
     if (!empty($value)) {
+      if (isset($value['id']) && isset($value['type'])) {
+        [$entityTypeID] = explode("--", $value['type']);
+        $exists = $this->entityExixsts($entityTypeID, $value['id']);
+        if ($exists instanceof EntityInterface) {
+          return $exists;
+        }
+      }
       if (!isset($value['uri']['url'])) {
         \Drupal::logger('milken_migrate')
           ->debug("SKIP importing hero image. JSON data is empty: ");
-        return new MigrateSkipRowException("JSON data is empty.");
+        return new MigrateSkipProcessException("JSON data is empty.");
       }
       try {
         if (isset($value['uri']['url'])) {
@@ -75,6 +97,9 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           $file = $this->getRemoteFile($value['filename'], $url);
         }
         if ($file instanceof FileInterface) {
+          $file->setPermanent();
+          $file->isNew();
+          $file->save();
           $image_title = (isset($this->configuration['title'])
             ? $this->configuration['title'] : $file->getFilename());
           $media_type = (isset($this->configuration['media_type'])
@@ -104,19 +129,19 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
           if ($image instanceof EntityInterface) {
             $image->save();
             $row->setDestinationProperty($destination_property, ['entity' => $image]);
-            return ['entity' => $image];
+            return $image;
           }
         }
       }
       catch (\Exception $e) {
         \Drupal::logger('milken_migrate')
           ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
-        return new MigrateSkipRowException($e->getMessage());
+        return new MigrateSkipProcessException($e->getMessage());
       }
       catch (\Throwable $t) {
         \Drupal::logger('milken_migrate')
           ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
-        return new MigrateSkipRowException($t->getMessage());
+        return new MigrateSkipProcessException($t->getMessage());
       }
     }
     return $value;

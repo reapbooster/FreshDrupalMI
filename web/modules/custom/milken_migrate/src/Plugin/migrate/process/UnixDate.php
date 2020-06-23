@@ -25,6 +25,8 @@ class UnixDate extends ProcessPluginBase {
    * {@inheritdoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     $dt = new \DateTime();
     if (!empty($value)) {
       $dt = \DateTime::createFromFormat(\DateTimeInterface::W3C, $value);

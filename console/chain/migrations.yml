@@ -46,7 +46,13 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import --tag=media --continue-on-failure "
+      bin: "drush migrate:import media_image  --continue-on-failure"
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import video  --continue-on-failure"
     options:
       working-directory: /var/www
 
@@ -64,7 +70,13 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import article  --continue-on-failure "
+      bin: "drush migrate:import report --continue-on-failure "
+    options:
+      working-directory: /var/www
+
+  - command: "exec"
+    arguments:
+      bin: "drush migrate:import article --continue-on-failure "
     options:
       working-directory: /var/www
 

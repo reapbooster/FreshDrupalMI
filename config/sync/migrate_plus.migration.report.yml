@@ -25,10 +25,6 @@ source:
   jsonapi_include: true
   included:
     - field_rp_content
-    - field_rp_hero_image
-    - field_cover_image
-    - field_event_reference
-    - field_report_author
   fields:
     -
       name: nid
@@ -83,7 +79,7 @@ source:
       label: 'Cover Image'
       selector: /field_cover_image
     -
-      name: report_content
+      name: field_rp_content
       label: 'Body Content Alternative'
       selector: /field_rp_content
     -
@@ -138,61 +134,15 @@ process:
     plugin: default_value
     default_value: 2
   path/alias: path
-  field_content:
-    plugin: 'milken_migrate:paragraphs'
-    source: field_ar_content
-  import_body_field_to_paragraph:
-    plugin: 'milken_migrate:body_embed'
-    source: body_value
-    append_to: field_content
-  import_hero_image_to_paragraph:
-    plugin: 'milken_migrate:hero_to_para'
-    title_source: title
-    title_source_backup: title
-    image: hero_image
-    link_id: uuid
-    link_entity_type_id: media
-    link_bundle: report
-    prepend_to: field_content
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
-  field_centers:
-    -
-      plugin: skip_on_value
-      source: centers_tax
-      value: missing
-      method: process
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: centers
-      source: centers_tax
-  field_term_collection:
-    -
-      plugin: skip_on_value
-      source: centers_tax
-      value: missing
-      method: process
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: collections
-      source: term_collection_tax
-  field_term_program_initiatives:
-    -
-      plugin: skip_on_value
-      source: centers_tax
-      value: missing
-      method: process
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: program_initiatives
-      source: program_initiatives_tax
-  field_media_file:
-    plugin: 'milken_migrate:remote_file'
-    source: pdf_file
+  field_content:
+    plugin: 'milken_migrate:paragraphs'
+    source: field_rp_content
   field_cover:
     plugin: 'milken_migrate:remote_image'
     source: cover_image
@@ -200,7 +150,15 @@ process:
     destination: constants/file_destination
     title: name
     alt: name
+  field_media_file:
+    plugin: 'milken_migrate:remote_file'
+    source: pdf_file
+
 destination:
   plugin: 'entity:media'
   default_bundle: report
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - paragraph_body_content
+    - paragraph_podcast_episode
+    - paragraph_pull_quote

@@ -9,11 +9,12 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use Drupal\paragraphs\Entity\Paragraph;
-use GuzzleHttp\Client;
 
 /**
  * Filter to download image and return media reference.
@@ -54,6 +55,8 @@ use GuzzleHttp\Client;
  */
 class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessInterface {
 
+  use JsonAPIDataFetcherTrait;
+
   /**
    * Random number generator.
    *
@@ -79,6 +82,8 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     if ($row->isStub()) {
       return NULL;
     }
@@ -132,22 +137,20 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
 
       if ($file instanceof FileInterface) {
         $file->setPermanent();
-        $destination['field_background_image'] = [
-          'target_id' => $file->id(),
-          'target_type' => 'file',
-          'alt' => $file->getFilename(),
-          'title' => $file->getFilename(),
-        ];
+        $file->isNew();
+        $file->save();
+        $destination['field_background_image'] = $file;
         $destination['field_text_color'] = ['color' => "#000000"];
 
         $realpath = \Drupal::service('file_system')
           ->realpath($file->getFileUri());
         if (file_exists($realpath)) {
-          $complimentary = @$this->generateComplimentaryColorFromImageHistorgram($realpath) ?? 'transparent';
-          $destination['field_text_color'] = ['color' => $complimentary];
+          // $complimentary =
+          // @$this->generateComplimentaryColorFromImageHistorgram($realpath)
+          // ?? 'transparent';
+          $destination['field_text_color'] = ['color' => "#dfdfdf"];
         }
       }
-
       // ** LINK content object to which this slide is linked.
       if (isset($this->configuration['should_be_link_id_but_im_temporarily_disabling'])) {
         $destination['field_link'] = [
@@ -159,14 +162,15 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
     catch (\Exception $e) {
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
-      return new MigrateException($e->getMessage() . print_r($row->getDestination(), TRUE));
+      return new MigrateSkipProcessException($e->getMessage());
     }
     catch (\Throwable $t) {
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
-      return new MigrateException($t->getMessage() . print_r($row->getDestination(), TRUE));
+      return new MigrateSkipProcessException($t->getMessage());
     }
-
+    \Drupal::logger('milken_migrate')
+      ->debug("File has been acquired and saved.");
     // If any part of the import fails, still do the node creation.
     try {
       $entity_type_mgr = \Drupal::getContainer()
@@ -200,7 +204,7 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
         ->error($message);
     }
 
-    return new MigrateException($message ?? ("Error Occurred!: " . print_r($destination_value, TRUE)));
+    return new MigrateSkipProcessException($message ?? ("Error Occurred!: " . print_r($destination_value, TRUE)));
   }
 
   /**
@@ -327,19 +331,6 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
       $this->random = new Random();
     }
     return $this->random;
-  }
-
-  /**
-   * Get a pre-configured client.
-   *
-   * @return \GuzzleHttp\Client
-   *   The client.
-   */
-  protected function getClient(): Client {
-    return new Client([
-      'base_uri' => $this->configuration['jsonapi_host'],
-      "http_errors" => FALSE,
-    ]);
   }
 
 }

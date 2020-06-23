@@ -1,3 +1,4 @@
+uuid: 139b1df9-f27b-4ee0-be32-793d24279694
 langcode: en
 status: true
 dependencies:
@@ -18,7 +19,7 @@ source:
     -
       name: new_subqueue
       queue: featured
-      title: "New Subqueue"
+      title: 'New Subqueue'
   ids:
     name:
       type: string
@@ -28,3 +29,5 @@ process:
   title: title
 destination:
   plugin: 'entity:entity_subqueue'
+  default_bundle: featured
+migration_dependencies: {}

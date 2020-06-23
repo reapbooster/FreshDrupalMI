@@ -27,6 +27,8 @@ class JsonAPITaxonomy extends ProcessPluginBase {
    * The main function for the plugin, actually doing the data conversion.
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     if ((isset($value['data']) && empty($value['data'])) ||
       empty($value)
     ) {
@@ -35,7 +37,7 @@ class JsonAPITaxonomy extends ProcessPluginBase {
     $destination_values = [];
     if (is_array($value)) {
       foreach ($value as $relatedRecord) {
-        if (isset($relatedRecord['id']) && $relatedRecord['type'] != "missing") {
+        if (isset($relatedRecord['id']) && $relatedRecord['id'] != "missing") {
           $term = \Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
             ->loadByProperties(['uuid' => $relatedRecord['id']]);
@@ -57,10 +59,10 @@ class JsonAPITaxonomy extends ProcessPluginBase {
           }
         }
         if ($term instanceof Term) {
-          $destination_values[] = ['entity' => $term];
+          $destination_values[] = $term;
         }
         else {
-          return NULL;
+          return new MigrateSkipProcessException("No value can be determined for: {$destination_property}");
         }
       }
     }

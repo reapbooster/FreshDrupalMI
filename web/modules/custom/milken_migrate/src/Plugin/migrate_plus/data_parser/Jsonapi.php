@@ -18,32 +18,32 @@ use Drupal\migrate_plus\DataParserPluginBase;
  * @example
  * ```yml
  *  source:
- *  plugin: url
- *  jsonapi_host: http://host.com
- *  jsonapi_endpoint: /jsonapi/nameode/article
- *  jsonapi_filters:
- *  conditions:
- *  -
- *  key: tags_filter
- *  path: field_tags.name
- *  operator: =
- *  value: t1
- *  data_parser_plugin: jsonapi
- *  data_fetcher_plugin: http
- *  ids:
- *  nid:
- *  type: integer
- *  fields:
- *  -
- *  name: nid
- *  selector: /attributes/drupal_internal__nid
- *  -
- *  name: title
- *  selector: /attributes/title
- *  -
- *  name: tags
- *  selector: /attributes/drupal_internal__tid
- *  relationship: field_tags
+ *    plugin: url
+ *    jsonapi_host: http://host.com
+ *    jsonapi_endpoint: /jsonapi/node/article
+ *    jsonapi_filters:
+ *      conditions:
+ *        -
+ *          key: tags_filter
+ *          path: field_tags.name
+ *          operator: =
+ *          value: t1
+ *    data_parser_plugin: jsonapi
+ *    data_fetcher_plugin: http
+ *    ids:
+ *      nid:
+ *        type: integer
+ *    fields:
+ *      -
+ *        name: nid
+ *        selector: /attributes/drupal_internal__nid
+ *      -
+ *        name: title
+ *        selector: /attributes/title
+ *      -
+ *        name: tags
+ *        selector: /attributes/drupal_internal__tid
+ *        relationship: field_tags
  *  ```
  *
  * @DataParser(
@@ -198,7 +198,6 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
       return [];
     }
     $included = [];
-
     // Todo.
     $selectors = explode('/', trim('included/', '/'));
     foreach ($selectors as $selector) {
@@ -214,7 +213,6 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   protected function openSourceUrl($url) {
-
     $parts = UrlHelper::parse($url, ['scheme' => 'https']);
     $options['query'] = $parts['query'];
     $options['fragment'] = $parts['fragment'];

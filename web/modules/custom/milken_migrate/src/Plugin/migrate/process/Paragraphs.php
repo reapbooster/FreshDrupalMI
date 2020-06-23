@@ -3,9 +3,13 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\RevisionableInterface;
+use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\Traits\EntityExistsTrait;
+use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use Drupal\paragraphs\Entity\Paragraph;
 
 /**
@@ -25,10 +29,15 @@ use Drupal\paragraphs\Entity\Paragraph;
  */
 class Paragraphs extends ProcessPluginBase {
 
+  use JsonAPIDataFetcherTrait;
+  use EntityExistsTrait;
+
   /**
    * {@inheritDoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     if (empty($value)) {
       return [];
     }
@@ -37,12 +46,12 @@ class Paragraphs extends ProcessPluginBase {
     }
     $destination_value = $row->getDestinationProperty($destination_property) ?? [];
     foreach ($value as $paragraph_ref) {
-      $paragraph = \Drupal::entityTypeManager()
-        ->getStorage('paragraph')
-        ->loadByProperties(['uuid' => $paragraph_ref['id']]);
-      // Exit (__CLASS__ . "::" . __LINE__);.
-      if (is_array($paragraph) && count($paragraph)) {
-        $paragraph = array_shift($paragraph);
+      if (isset($paragraph_ref['data']) && empty($paragraph_ref['data'])) {
+        return new MigrateSkipProcessException("No value for: {$destination_property}");
+      }
+      $paragraph = $this->entityExixsts('paragraph', $paragraph_ref['id']);
+      if ($paragraph instanceof RevisionableInterface) {
+        $destination_value[] = $paragraph;
       }
       else {
         $paragraph = Paragraph::create([
@@ -57,10 +66,11 @@ class Paragraphs extends ProcessPluginBase {
         $paragraph->save();
       }
       if (!$paragraph instanceof RevisionableInterface) {
-        throw new \Exception("could not migrate paragraph:" . print_r($paragraph_ref));
+        throw new MigrateException("could not migrate paragraph:" . print_r($paragraph_ref, TRUE));
       }
-      $destination_value[] = ["entity" => $paragraph];
+      $destination_value[] = $paragraph;
     }
+    $row->setDestinationProperty($destination_property, $destination_value);
     return $destination_value;
   }
 

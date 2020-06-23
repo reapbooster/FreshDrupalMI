@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.media.report.field_author
     - field.field.media.report.field_centers
+    - field.field.media.report.field_content
     - field.field.media.report.field_cover
     - field.field.media.report.field_custom_author
     - field.field.media.report.field_essay
@@ -19,12 +20,83 @@ dependencies:
     - image.style.thumbnail
     - media.type.report
   module:
+    - field_group
     - file
     - image
     - link
     - metatag
+    - paragraphs
     - path
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+        - group_authoring
+        - group_taxonomy
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_content:
+      children:
+        - field_content
+        - field_media_file
+        - field_cover
+        - field_essay
+        - field_filemime
+        - field_filesize
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Content
+    group_authoring:
+      children:
+        - langcode
+        - uid
+        - created
+        - path
+        - status
+        - field_custom_author
+        - field_meta_tags
+        - field_author
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Authoring
+    group_taxonomy:
+      children:
+        - field_centers
+        - field_term_collection
+        - field_topics
+        - field_program_initiatives
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Taxonomy
 id: media.report.default
 targetEntityType: media
 bundle: report
@@ -66,6 +138,24 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_content:
+    type: paragraphs
+    weight: 0
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
   field_cover:
     weight: 104
     settings:
@@ -131,7 +221,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_related_event:
-    weight: 105
+    weight: 0
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -198,5 +288,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  field_content: true
+hidden: {  }
