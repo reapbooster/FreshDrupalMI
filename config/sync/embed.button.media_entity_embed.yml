@@ -15,8 +15,7 @@ type_id: entity
 type_settings:
   entity_type: media
   bundles: {  }
-  display_plugins:
-    - 'entity_reference:entity_reference_entity_view'
+  display_plugins: {  }
   entity_browser: media_entity_browser
   entity_browser_settings:
     display_review: false

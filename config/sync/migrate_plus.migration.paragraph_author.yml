@@ -47,7 +47,7 @@ source:
       selector: /field_photo
     -
       name: field_job_position
-      label: 'Author Photo'
+      label: 'Author position'
       selector: /field_job_position
     -
       name: created
@@ -87,7 +87,7 @@ process:
     source: changed
   field_job_position: field_job_position
   field_photo:
-    plugin: 'milken_migrate:remote_file'
+    plugin: 'milken_migrate:remote_image'
     source: field_photo
     title: name
 destination:

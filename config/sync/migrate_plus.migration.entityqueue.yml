@@ -30,4 +30,4 @@ process:
 destination:
   plugin: 'entity:entity_subqueue'
   default_bundle: featured
-migration_dependencies: {}
+migration_dependencies: {  }

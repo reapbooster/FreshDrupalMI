@@ -110,7 +110,7 @@ process:
   name: name
   langcode:
     plugin: default_value
-    default_value: "en"
+    default_value: en
   created:
     plugin: 'milken_migrate:unix_date'
     source: created

@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -53,6 +54,9 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = [];
+    if (isset($values['data']) && empty($values['data'])) {
+      throw new MigrateSkipProcessException("The referenced Entity has no data.");
+    }
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
     $file = NULL;
@@ -64,72 +68,74 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       return NULL;
     }
     $source = $row->getSource();
-    if (is_array($value)) {
-      foreach ($value as $reference) {
-        $ref = new JsonAPIReference($reference);
-        if (!$ref instanceof JsonAPIReference || $ref->valid() === FALSE) {
-          return $ref;
-        }
-        $ref->getRemoteData();
-        $exists = $this->entityExixsts($ref->getEntityTypeId(), $ref->getId());
-        if ($exists instanceof EntityInterface) {
-          $toReturn[] = ['entity' => $exists];
-        }
-        else {
-          try {
-            if ($ref->getUrl() === NULL) {
-              \Drupal::logger('milken_migrate')
-                ->debug("SKIP importing hero image. JSON data is empty: ");
-              throw new MigrateSkipRowException("JSON data is empty.");
-            }
-            $url = $source['jsonapi_host'] . $ref->getUrl();
-            \Drupal::logger('milken_migrate')->debug($url);
-            $file = $this->getRemoteFile($ref->getFilename(), $url);
-            if ($file instanceof FileInterface) {
-              $file->setPermanent();
-              $file->isNew();
-              $file->save();
-              $image_title = (isset($this->configuration['title'])
-                ? $this->configuration['title'] : $file->getFilename());
-              $media_type = (isset($this->configuration['media_type'])
-                ? $this->configuration['media_type'] : "hero_image");
-              $entity_type_mgr = \Drupal::getContainer()
-                ->get('entity_type.manager');
-              $image = $entity_type_mgr->getStorage('media')->create([
-                'type' => $media_type,
-                'uid' => 2,
-                'langcode' => \Drupal::languageManager()
-                  ->getDefaultLanguage()
-                  ->getId(),
-                'field_media_image' => [
-                  'target_id' => $file->id(),
-                  'target_type' => 'file',
-                  'alt' => $file->getFilename(),
-                  'title' => $file->getFilename(),
-                ],
-                'title' => $image_title,
-                // 'field_link' => Url::fromUri('/node/'
-                // . $row->getSourceProperty('uuid')),
-                // TODO: figure out how to link it back to the node
-                'field_published' => TRUE,
-              ]);
-              $toReturn[] = ['entity' => $image];
-            }
-          }
-          catch (\Exception $e) {
+    if (isset($value['id'])) {
+      $value = [$value];
+    }
+    foreach ($value as $reference) {
+      $ref = new JsonAPIReference($reference);
+      if (!$ref instanceof JsonAPIReference || $ref->valid() === FALSE) {
+        return $ref;
+      }
+      $ref->getRemoteData();
+      $exists = $this->entityExixsts($ref->getEntityTypeId(), $ref->getId());
+      if ($exists instanceof EntityInterface) {
+        $row->setDestinationProperty($destination_property, ['target_id' => $exists->id()]);
+        $toReturn[] = $exists->id();
+      }
+      else {
+        try {
+          if ($ref->getUrl() === NULL) {
             \Drupal::logger('milken_migrate')
-              ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
-            throw new MigrateException($e->getMessage());
+              ->debug("SKIP importing hero image. JSON data is empty: ");
+            throw new MigrateSkipRowException("JSON data is empty.");
           }
-          catch (\Throwable $t) {
-            \Drupal::logger('milken_migrate')
-              ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
-            throw new MigrateException($t->getMessage());
+          $url = $source['jsonapi_host'] . $ref->getUrl();
+          \Drupal::logger('milken_migrate')->debug($url);
+          $file = $this->getRemoteFile($ref->getFilename(), $url);
+          if ($file instanceof FileInterface) {
+            $file->setPermanent();
+            $file->isNew();
+            $file->save();
+            $image_title = (isset($this->configuration['title'])
+              ? $this->configuration['title'] : $file->getFilename());
+            $media_type = (isset($this->configuration['media_type'])
+              ? $this->configuration['media_type'] : "image");
+            $entity_type_mgr = \Drupal::getContainer()
+              ->get('entity_type.manager');
+            $image = $entity_type_mgr->getStorage('media')->create([
+              'type' => $media_type,
+              'uid' => 2,
+              'langcode' => \Drupal::languageManager()
+                ->getDefaultLanguage()
+                ->getId(),
+              'field_media_image' => [
+                'target_id' => $file->id(),
+                'target_type' => 'file',
+                'alt' => $file->getFilename(),
+                'title' => $file->getFilename(),
+              ],
+              'title' => $image_title,
+              // 'field_link' => Url::fromUri('/node/'
+              // . $row->getSourceProperty('uuid')),
+              // TODO: figure out how to link it back to the node
+              'field_published' => TRUE,
+            ]);
+            $toReturn[] = $image->id();
           }
+        }
+        catch (\Exception $e) {
+          \Drupal::logger('milken_migrate')
+            ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
+          throw new MigrateException($e->getMessage());
+        }
+        catch (\Throwable $t) {
+          \Drupal::logger('milken_migrate')
+            ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
+          throw new MigrateException($t->getMessage());
         }
       }
-      return $toReturn;
     }
+    return $toReturn;
   }
 
   /**

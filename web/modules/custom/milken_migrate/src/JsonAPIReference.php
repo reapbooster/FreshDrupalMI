@@ -69,6 +69,9 @@ class JsonAPIReference {
    * @throws Drupal\migrate\MigrateSkipProcessException
    */
   public function __construct(array $values = []) {
+    if (isset($values['data']) && empty($values['data'])) {
+      throw new MigrateSkipProcessException("The referenced Entity has no data.");
+    }
     $this->setValues($values);
     if ($this->getEntityTypeId() == "missing" || $this->getBundle() == "missing" || $this->getId() == "missing") {
       throw new MigrateSkipProcessException("The referenced Entity is missing on the remote server.");
