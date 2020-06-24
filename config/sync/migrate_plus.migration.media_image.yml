@@ -89,6 +89,16 @@ source:
       name: image
       label: Image
       selector: /image
+    -
+      name: image_uri
+      label: ImageURI
+      selector: /image/uri/value
+    -
+      name: image_url
+      label: 'Image Url'
+      selector: /image/uri/url
+  constants:
+    source_url_base: 'https://milkeninstitute.org'
   ids:
     mid:
       type: integer
@@ -98,25 +108,28 @@ process:
   id: mid
   uuid: uuid
   name: name
+  langcode:
+    plugin: default_value
+    default_value: "en"
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
-  changed:
-    plugin: 'milken_migrate:unix_date'
-    source: changed
   status:
     plugin: default_value
     default_value: true
   field_filesize: filesize
   field_filemime: filemime
-  field_width: width
-  field_height: height
   field_photo_subject_name: photo_subject_name
   field_photo_subject_org: photo_subject_org
   field_photo_subject_title: photo_subject_title
   field_media_image:
     plugin: 'milken_migrate:remote_file'
     source: image
+  field_width: width
+  field_height: height
+  changed:
+    plugin: 'milken_migrate:unix_date'
+    source: changed
 destination:
   plugin: 'entity:media'
   default_bundle: image

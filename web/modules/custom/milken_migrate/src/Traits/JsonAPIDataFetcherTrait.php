@@ -5,7 +5,6 @@ namespace Drupal\milken_migrate\Traits;
 use Drupal;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
-use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Row;
 use GuzzleHttp\Client;
 
@@ -31,14 +30,7 @@ trait JsonAPIDataFetcherTrait {
     $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org") . '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
     Drupal::logger('milken_migrate')
       ->debug("Getting related record: {$relatedSourcePath}");
-    $response = $this->getClient($row->getSource())->get($relatedSourcePath);
-    if (in_array($response->getStatusCode(), [200, 201, 202])) {
-      $responseData = json_decode($response->getBody(), TRUE);
-      if (!empty($responseData['data'])) {
-        return $responseData['data'];
-      }
-    }
-    return NULL;
+
   }
 
   /**
@@ -56,6 +48,7 @@ trait JsonAPIDataFetcherTrait {
       'base_uri' => $configuration['jsonapi_host'] ?? "https://milkeninstitute.org",
       "http_errors" => FALSE,
       "allow_redirects" => FALSE,
+      'synchronous' => TRUE,
     ]);
   }
 
@@ -67,7 +60,7 @@ trait JsonAPIDataFetcherTrait {
    * @param string $url
    *   The file Url.
    *
-   * @return \Drupal\file\FileInterface|\Drupal\migrate\MigrateProcessRowException
+   * @return \Drupal\file\FileInterface|null
    *   return FileInterface or Null.
    */
   public function getRemoteFile(string $name, string $url) {
@@ -103,7 +96,7 @@ trait JsonAPIDataFetcherTrait {
       \Drupal::logger('milken_migrate')
         ->error("IMPORT Throwable: " . $t->getMessage() . "::" . $url);
     }
-    return new MigrateSkipProcessException("File does not exist on the remote server");
+    return NULL;
   }
 
 }
