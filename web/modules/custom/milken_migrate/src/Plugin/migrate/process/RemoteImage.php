@@ -54,7 +54,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = [];
-    if (isset($values['data']) && empty($values['data'])) {
+    if (isset($value['data']) && empty($value['data'])) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }
     \Drupal::logger('milken_migrate')

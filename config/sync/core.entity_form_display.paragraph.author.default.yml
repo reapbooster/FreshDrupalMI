@@ -9,7 +9,48 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.author
   module:
+    - field_group
     - image
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_content:
+      children:
+        - field_photo
+        - field_job_position
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Content
+    group_authoring:
+      children:
+        - created
+      parent_name: ''
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Authoring
 id: paragraph.author.default
 targetEntityType: paragraph
 bundle: author
