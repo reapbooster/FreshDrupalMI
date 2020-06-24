@@ -54,6 +54,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = [];
+    $destination_values = [];
     if (isset($value['data']) && empty($value['data'])) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }
@@ -67,11 +68,11 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     if ($row->isStub()) {
       return NULL;
     }
-    $source = $row->getSource();
-    if (isset($value['id'])) {
-      $value = [$value];
+    $source = $row->getSourceProperty($this->configuration['source']);
+    if (isset($source['id'])) {
+      $source = [$source];
     }
-    foreach ($value as $reference) {
+    foreach ($source as $reference) {
       $ref = new JsonAPIReference($reference);
       if (!$ref instanceof JsonAPIReference || $ref->valid() === FALSE) {
         return $ref;
@@ -79,7 +80,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       $ref->getRemoteData();
       $exists = $this->entityExixsts($ref->getEntityTypeId(), $ref->getId());
       if ($exists instanceof EntityInterface) {
-        $row->setDestinationProperty($destination_property, ['target_id' => $exists->id()]);
+        $destination_values[] = ['target_id' => $exists->id()];
         $toReturn[] = $exists->id();
       }
       else {
@@ -120,6 +121,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
               // TODO: figure out how to link it back to the node
               'field_published' => TRUE,
             ]);
+            $destination_values = ['target_id' => $image->id()];
             $toReturn[] = $image->id();
           }
         }
@@ -135,6 +137,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
         }
       }
     }
+    $row->setDestinationProperty($destination_property, $destination_values);
     return $toReturn;
   }
 

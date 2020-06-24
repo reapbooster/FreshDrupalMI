@@ -57,11 +57,14 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
     if ($row->isStub()) {
       return NULL;
     }
-    $source = $row->getSource();
+    $source = $row->getSourceProperty($this->configuration['source']);
     if (isset($source['data']) && empty($source['data'])) {
       throw new MigrateSkipRowException("Skip importing remote file: no data");
     }
-    $ref = new JsonAPIReference($value);
+    if (empty($source)) {
+      return NULL;
+    }
+    $ref = new JsonAPIReference($source);
     $ref->getRemoteData();
     \Drupal::logger('milken_migrate')
       ->debug("REF: " . print_r($ref, TRUE));

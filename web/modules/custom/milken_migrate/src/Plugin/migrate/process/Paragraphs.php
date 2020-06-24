@@ -44,6 +44,7 @@ class Paragraphs extends ProcessPluginBase {
     if (is_array($value[0][0])) {
       $value = array_shift($value);
     }
+    $toReturn = [];
     $destination_value = $row->getDestinationProperty($destination_property) ?? [];
     foreach ($value as $paragraph_ref) {
       if (isset($paragraph_ref['data']) && empty($paragraph_ref['data'])) {
@@ -68,10 +69,11 @@ class Paragraphs extends ProcessPluginBase {
       if (!$paragraph instanceof RevisionableInterface) {
         throw new MigrateException("could not migrate paragraph:" . print_r($paragraph_ref, TRUE));
       }
-      $destination_value[] = $paragraph;
+      $destination_value[] = ["target_id" => $paragraph->id()];
+      $toReturn[] = $paragraph->id();
     }
     $row->setDestinationProperty($destination_property, $destination_value);
-    return $destination_value;
+    return $toReturn;
   }
 
 }

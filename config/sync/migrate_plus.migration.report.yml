@@ -156,8 +156,4 @@ process:
 destination:
   plugin: 'entity:media'
   default_bundle: report
-migration_dependencies:
-  required:
-    - paragraph_body_content
-    - paragraph_podcast_episode
-    - paragraph_pull_quote
+migration_dependencies: {  }
