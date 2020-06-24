@@ -30,7 +30,14 @@ trait JsonAPIDataFetcherTrait {
     $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org") . '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
     Drupal::logger('milken_migrate')
       ->debug("Getting related record: {$relatedSourcePath}");
-
+    $response = $this->getClient()->get($relatedSourcePath);
+    $responseData = json_decode($response->getBody(), TRUE);
+    if (isset($responseData['data']) && !empty($responseData['data'])) {
+      $responseData['data'];
+    }
+    else {
+      return NULL;
+    }
   }
 
   /**

@@ -2,12 +2,10 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
@@ -76,9 +74,10 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
         $exists = $this->entityExixsts($ref->getEntityTypeId(), $ref->getId());
         if ($exists instanceof EntityInterface) {
           $toReturn[] = ['entity' => $exists];
-        } else {
+        }
+        else {
           try {
-            if ($ref->getUrl() ===  NULL) {
+            if ($ref->getUrl() === NULL) {
               \Drupal::logger('milken_migrate')
                 ->debug("SKIP importing hero image. JSON data is empty: ");
               throw new MigrateSkipRowException("JSON data is empty.");

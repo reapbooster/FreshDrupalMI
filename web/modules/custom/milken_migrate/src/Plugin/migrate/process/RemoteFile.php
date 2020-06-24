@@ -57,14 +57,14 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
     if ($row->isStub()) {
       return NULL;
     }
-
+    $source = $row->getSource();
     if (isset($source['data']) && empty($source['data'])) {
       throw new MigrateSkipRowException("Skip importing remote file: no data");
     }
     $ref = new JsonAPIReference($value);
     $ref->getRemoteData();
     \Drupal::logger('milken_migrate')
-      ->debug("REF: ".print_r($ref, true));
+      ->debug("REF: " . print_r($ref, TRUE));
     // Validate ref.
     if (!$ref instanceof JsonAPIReference) {
       return NULL;
@@ -114,7 +114,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         ->error("IMPORT Throwable: " . $t->getMessage());
       throw new MigrateException($t->getMessage());
     }
-    return null;
+    return NULL;
   }
 
 }

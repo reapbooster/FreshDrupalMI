@@ -2,7 +2,6 @@
 
 namespace Drupal\milken_migrate\EventSubscriber;
 
-use Drupal\migrate\Event\MigrateEvents;
 use Drupal\migrate\Event\MigratePostRowSaveEvent;
 use Drupal\migrate\Event\MigratePreRowSaveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,7 +19,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     return [
       // MigrateEvents::PRE_ROW_SAVE => 'preRowSave',
-      // MigrateEvents::POST_ROW_SAVE => 'postRowSave',
+      // MigrateEvents::POST_ROW_SAVE => 'postRowSave',.
     ];
   }
 
@@ -33,15 +32,23 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
   public function preRowSave(MigratePreRowSaveEvent $event) {
     // $row = $event->getRow();
     // if (function_exists('drush_print')) {
-    //   drush_print("PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid'));
-    //   \Kint::dump($row->getDestination());
+    // drush_print("PreSave: " . $event->getMigration()->id() . " row: "
+    // $row->getDestinationProperty('uuid'));
+    // \Kint::dump($row->getDestination());
     // }
   }
 
+  /**
+   * Triggered before each row saves its data.
+   *
+   * @param \Drupal\migrate\Event\MigratePostRowSaveEvent $event
+   *   Event object.
+   */
   public function postRowSave(MigratePostRowSaveEvent $event) {
     // $dest = $event->getDestinationIdValues();
     // if (function_exists('drush_print')) {
-    //  drush_print("PostSave " . $event->getMigration()->id() . " destination: " . $dest);
+    // drush_print("PostSave " . $event->getMigration()->id() .
+    // " destination: " . $dest);
     // }
   }
 
