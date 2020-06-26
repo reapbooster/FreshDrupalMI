@@ -1,19 +1,19 @@
-uuid: 084a89ae-9c14-45d5-b994-d2c2e646c2c6
+uuid: 924e49f9-3759-4aa2-9cc1-3b28162bba7a
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.media.field_filesize
-    - media.type.audio
-id: media.audio.field_filesize
+    - media.type.podcast_episode
+id: media.podcast_episode.field_filesize
 field_name: field_filesize
 entity_type: media
-bundle: audio
+bundle: podcast_episode
 label: filesize
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: integer
+field_type: string

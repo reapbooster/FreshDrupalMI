@@ -1,0 +1,22 @@
+uuid: 40ba3a20-79ed-48bc-a953-751688b17d7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_service_links
+    - media.type.podcast_episode
+  module:
+    - key_value_field
+id: media.podcast_episode.field_service_links
+field_name: field_service_links
+entity_type: media
+bundle: podcast_episode
+label: 'Service Links'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  default_format: full_html
+field_type: key_value_long

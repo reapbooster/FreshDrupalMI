@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_audio_file
-    - media.type.audio
     - paragraphs.paragraphs_type.podcast_episode
 id: paragraph.podcast_episode.field_audio_file
 field_name: field_audio_file

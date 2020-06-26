@@ -1,4 +1,4 @@
-uuid: 28ff571b-e260-4f97-ac7f-aeda133ef3ac
+uuid: d9115160-32ae-406a-89a8-8ba2f303aeac
 langcode: en
 status: true
 dependencies:
@@ -6,10 +6,10 @@ dependencies:
     - crop
 third_party_settings:
   crop:
-    image_field: image
-id: audio
-label: Audio
-description: 'For use with Podcast Episode content type'
+    image_field: field_media_image
+id: podcast_episode
+label: 'Podcast Episode'
+description: 'All of the data relating to and to be viewed with a podcast episode.'
 source: audio_file
 queue_thumbnail_downloads: false
 new_revision: false
@@ -17,5 +17,3 @@ source_configuration:
   source_field: field_media_audio_file
 field_map:
   name: name
-  mimetype: field_filemime
-  filesize: field_filesize
