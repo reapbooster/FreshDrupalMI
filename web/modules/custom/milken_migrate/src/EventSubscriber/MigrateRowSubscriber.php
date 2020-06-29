@@ -20,7 +20,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     return [
       MigrateEvents::PRE_ROW_SAVE => 'preRowSave',
-      //MigrateEvents::POST_ROW_SAVE => 'postRowSave',.
+      // MigrateEvents::POST_ROW_SAVE => 'postRowSave',.
     ];
   }
 

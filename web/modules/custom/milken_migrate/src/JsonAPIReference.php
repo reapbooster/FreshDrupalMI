@@ -146,7 +146,13 @@ class JsonAPIReference {
     }
   }
 
-  function setBundleTypeId(string $bundleTypeId) {
+  /**
+   * Setter.
+   *
+   * @param string $bundleTypeId
+   *   The Bundle Type ID.
+   */
+  public function setBundleTypeId(string $bundleTypeId) {
     $this->bundleTypeId = $bundleTypeId;
   }
 
@@ -165,7 +171,8 @@ class JsonAPIReference {
         if (!empty($responseData['data'])) {
           $this->setValues($responseData['data']);
         }
-      } else {
+      }
+      else {
         $this->errors[$response->getStatusCode()] = $response->getReasonPhrase();
       }
     }
@@ -262,8 +269,6 @@ class JsonAPIReference {
     }
   }
 
-
-
   /**
    * Getter.
    *
@@ -288,6 +293,7 @@ class JsonAPIReference {
    * Get misc property from object.
    *
    * @param string $name
+   *   Name.
    */
   public function getProperty(string $name) {
     return $this->{$name} ?? NULL;

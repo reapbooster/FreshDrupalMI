@@ -119,11 +119,13 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
             $destination_values = ['target_id' => $audio->id()];
             $toReturn[] = $audio->id();
           }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
           \Drupal::logger('milken_migrate')
             ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
           throw new MigrateException($e->getMessage());
-        } catch (\Throwable $t) {
+        }
+        catch (\Throwable $t) {
           \Drupal::logger('milken_migrate')
             ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
           throw new MigrateException($t->getMessage());

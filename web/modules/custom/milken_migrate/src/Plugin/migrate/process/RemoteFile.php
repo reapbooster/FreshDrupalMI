@@ -75,11 +75,8 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       $ref = new JsonAPIReference($source);
       $ref->getRemoteData();
       if ($ref->getEntityTypeId() == "media") {
-        $bundle = $ref->getBundle();
-        print_r($ref);
-        exit();
-        $mediaSourceValues = $ref->getProperty($mediaSource);
-
+        // $bundle = $ref->getBundle();
+        // $mediaSourceValues = $ref->getProperty($mediaSource);
       }
       \Drupal::logger('milken_migrate')
         ->debug("REF: " . print_r($ref, TRUE));
