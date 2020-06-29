@@ -53,71 +53,94 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    $file = NULL;
+    $destination_values = [];
+    $toReturn = [];
+    $altTextProperty = $this->configuration['alt_text'] ?? $this->configuration['name'];
+    $titleTextProperty = $this->configuration['title_text'] ?? $this->configuration['name'];
+
     if ($row->isStub()) {
       return NULL;
     }
-    $source = $row->getSourceProperty($this->configuration['source']);
-    if (isset($source['data']) && empty($source['data'])) {
+    $sources = $row->getSourceProperty($this->configuration['source']);
+    if (isset($sources['data']) && empty($sources['data'])) {
       throw new MigrateSkipRowException("Skip importing remote file: no data");
     }
-    if (empty($source)) {
+    if (empty($sources) || !is_array($sources)) {
       return NULL;
     }
-    $ref = new JsonAPIReference($source);
-    $ref->getRemoteData();
-    \Drupal::logger('milken_migrate')
-      ->debug("REF: " . print_r($ref, TRUE));
-    // Validate ref.
-    if (!$ref instanceof JsonAPIReference) {
-      return NULL;
+    if (isset($sources['id'])) {
+      $sources = [$sources];
     }
-    if ($ref->valid() === FALSE || $ref->getFilename() === NULL || $ref->getUrl() === NULL) {
-      \Drupal::logger('milken_migrate')
-        ->debug("Skip Row: invalid" . print_r($source, TRUE));
-      return NULL;
-    }
-    if (substr($ref->getFilename(), 0, 6) === "sample") {
-      \Drupal::logger('milken_migrate')
-        ->debug("Skip Row Sample:" . print_r($ref, TRUE));
-      return NULL;
-    }
-    // Do the work of getting data.
-    \Drupal::logger('milken_migrate')
-      ->debug("Importing... {$ref->getEntityTypeId()}::{$ref->getBundle()}::{$ref->getId()}");
+    foreach ($sources as $source) {
+      $ref = new JsonAPIReference($source);
+      $ref->getRemoteData();
+      if ($ref->getEntityTypeId() == "media") {
+        $bundle = $ref->getBundle();
+        print_r($ref);
+        exit();
+        $mediaSourceValues = $ref->getProperty($mediaSource);
 
-    try {
-      $file = $ref->exists();
-      if ($file instanceof EntityInterface) {
+      }
+      \Drupal::logger('milken_migrate')
+        ->debug("REF: " . print_r($ref, TRUE));
+      // Validate ref.
+      if (!$ref instanceof JsonAPIReference) {
+        return NULL;
+      }
+      if ($ref->valid() === FALSE || $ref->getFilename() === NULL || $ref->getUrl() === NULL) {
         \Drupal::logger('milken_migrate')
-          ->debug("Found image in database: " . $file->label());
-        $row->setDestinationProperty($destination_property, [$file->id()]);
-        return [$file->id()];
+          ->debug("Skip Row: invalid" . print_r($ref, TRUE));
+        return NULL;
       }
-      $file = $ref->getRemote();
-      if ($file instanceof FileInterface) {
-        if (isset($this->configuration['name'])) {
-          $file->set('field_file_image_alt_text', $row->getSourceProperty($this->configuration['name']));
-          $file->set('field_file_image_title_text', $row->getSourceProperty($this->configuration['name']));
+      if (substr($ref->getFilename(), 0, 6) === "sample") {
+        \Drupal::logger('milken_migrate')
+          ->debug("Skip Row Sample:" . print_r($ref, TRUE));
+        return NULL;
+      }
+      // Do the work of getting data.
+      \Drupal::logger('milken_migrate')
+        ->debug("Importing... {$ref->getEntityTypeId()}::{$ref->getBundle()}::{$ref->getId()}");
+
+      try {
+        $file = $ref->exists();
+        if ($file instanceof EntityInterface) {
+          \Drupal::logger('milken_migrate')
+            ->debug("Found image in database: " . $file->label());
+          $destination_values[] = ['target_id' => $file->id()];
+          $toReturn[] = $file->id();
+          continue;
         }
-        $file->setPermanent();
-        $file->isNew();
-        $file->save();
-        $row->setDestinationProperty($destination_property, [$file->id()]);
-        return [$file->id()];
+        $file = $ref->getRemote();
+        if ($file instanceof FileInterface) {
+          $file->set('field_file_image_alt_text', $row->getSourceProperty($altTextProperty));
+          $file->set('field_file_image_title_text', $row->getSourceProperty($titleTextProperty));
+          $file->setPermanent();
+          $file->isNew();
+          $file->save();
+          $destination_values[] = ["target_id" => $file->id()];
+          $toReturn[] = $file->id();
+        }
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('milken_migrate')
+          ->error("IMPORT Exception: " . $e->getMessage());
+        throw new MigrateException($e->getMessage());
+      }
+      catch (\Throwable $t) {
+        \Drupal::logger('milken_migrate')
+          ->error("IMPORT Throwable: " . $t->getMessage());
+        throw new MigrateException($t->getMessage());
       }
     }
-    catch (\Exception $e) {
-      \Drupal::logger('milken_migrate')
-        ->error("IMPORT Exception: " . $e->getMessage());
-      throw new MigrateException($e->getMessage());
+
+    if (count($destination_values) == 1) {
+      $destination_values = array_shift($destination_values);
     }
-    catch (\Throwable $t) {
-      \Drupal::logger('milken_migrate')
-        ->error("IMPORT Throwable: " . $t->getMessage());
-      throw new MigrateException($t->getMessage());
+    if (count($toReturn) == 1) {
+      $toReturn = array_shift($toReturn);
     }
-    return NULL;
+    $row->setDestinationProperty($destination_property, $destination_values);
+    return $toReturn;
   }
 
 }

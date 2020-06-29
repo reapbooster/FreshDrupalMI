@@ -31,6 +31,12 @@ class JsonAPIReference {
    * @var string
    */
   protected $entityTypeId;
+  /**
+   * Drupal's Bundle type ID.
+   *
+   * @var string
+   */
+  protected $bundleTypeId;
 
   /**
    * Combination of type and bundle separated by "--".
@@ -42,7 +48,7 @@ class JsonAPIReference {
   /**
    * Drupal's bundle type.
    *
-   * @var string
+   * @var \Drupal\milken_migrate\JsonAPIReference|string
    */
   protected $bundle;
 
@@ -59,6 +65,13 @@ class JsonAPIReference {
    * @var null|string
    */
   protected $filename = NULL;
+
+  /**
+   * Any errors generated during processing.
+   *
+   * @var array
+   */
+  protected $errors = [];
 
   /**
    * JsonAPIReference constructor.
@@ -120,12 +133,21 @@ class JsonAPIReference {
   public function setValues(array $values) {
     foreach ($values as $key => $value) {
       if ($key == "type") {
-        [$entityTypeId, $bundle] = explode("--", $value);
-        $this->setEntityTypeID($entityTypeId);
-        $this->setBundle($bundle);
+        [$entityTypeId, $bundleTypeId] = explode("--", $value);
+        $this->setEntityTypeId($entityTypeId);
+        $this->setBundleTypeId($bundleTypeId);
+        continue;
+      }
+      if ($key == "bundle" && is_array($value)) {
+        $this->setBundle($value);
+        continue;
       }
       $this->{$key} = $value;
     }
+  }
+
+  function setBundleTypeId(string $bundleTypeId) {
+    $this->bundleTypeId = $bundleTypeId;
   }
 
   /**
@@ -137,13 +159,14 @@ class JsonAPIReference {
   public function getRemoteData() : JsonAPIReference {
     if ($this->valid()) {
       $response = $this->getClient()
-        ->get("/jsonapi/{$this->entityTypeId}/{$this->bundle}/{$this->id}",
-          ['query' => ['jsonapi_include' => TRUE]]);
+        ->get("/jsonapi/{$this->entityTypeId}/{$this->bundleTypeId}/{$this->id}");
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
         $responseData = json_decode($response->getBody(), TRUE);
         if (!empty($responseData['data'])) {
           $this->setValues($responseData['data']);
         }
+      } else {
+        $this->errors[$response->getStatusCode()] = $response->getReasonPhrase();
       }
     }
     return $this;
@@ -185,7 +208,7 @@ class JsonAPIReference {
    * @param string $entityTypeId
    *   String value of EntityTypeId.
    */
-  public function setEntityTypeId(string $entityTypeId): void {
+  public function setEntityTypeId(string $entityTypeId = ""): void {
     $this->entityTypeId = $entityTypeId;
   }
 
@@ -215,7 +238,11 @@ class JsonAPIReference {
    * @return string
    *   String value of the Bundle ID.
    */
-  public function getBundle(): ?string {
+  public function getBundle(): ?BundleTypeDataFetcher {
+    if (is_array($this->bundle)) {
+      $this->bundle = new BundleTypeDataFetcher($this->bundle);
+      $this->bundle->getRemoteData();
+    }
     return $this->bundle;
   }
 
@@ -225,9 +252,17 @@ class JsonAPIReference {
    * @param string $bundle
    *   String value of the Bundle ID.
    */
-  public function setBundle(string $bundle): void {
-    $this->bundle = $bundle;
+  public function setBundle($bundle): void {
+    if (is_array($this->bundle)) {
+      $this->bundle = new BundleTypeDataFetcher($this->bundle);
+      $this->bundle->getRemoteData();
+    }
+    else {
+      $this->bundle = $bundle;
+    }
   }
+
+
 
   /**
    * Getter.
@@ -247,6 +282,15 @@ class JsonAPIReference {
    */
   public function getFilename(): ?string {
     return $this->filename ?? NULL;
+  }
+
+  /**
+   * Get misc property from object.
+   *
+   * @param string $name
+   */
+  public function getProperty(string $name) {
+    return $this->{$name} ?? NULL;
   }
 
 }

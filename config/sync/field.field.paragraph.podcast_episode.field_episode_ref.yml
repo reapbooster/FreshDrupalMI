@@ -1,16 +1,16 @@
-uuid: df20d16b-aaab-455c-8b30-628989ad1bbb
+uuid: 9359ba8e-6841-4a8b-b854-ea58aef43f86
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_podcast_image
-    - media.type.image
+    - field.storage.paragraph.field_episode_ref
+    - media.type.podcast_episode
     - paragraphs.paragraphs_type.podcast_episode
-id: paragraph.podcast_episode.field_podcast_image
-field_name: field_podcast_image
+id: paragraph.podcast_episode.field_episode_ref
+field_name: field_episode_ref
 entity_type: paragraph
 bundle: podcast_episode
-label: 'Podcast Image'
+label: 'Episode Ref'
 description: ''
 required: false
 translatable: false
@@ -20,10 +20,9 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      image: image
+      podcast_episode: podcast_episode
     sort:
-      field: name
-      direction: ASC
+      field: _none
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

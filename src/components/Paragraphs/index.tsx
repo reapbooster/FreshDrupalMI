@@ -7,7 +7,7 @@ const ParagraphBundleComponents = {
   slide: ParagraphSlide,
   four_tile_block_queue: ParagraphFourPanel,
   four_tile_block_taxonomy: ParagraphFourPanel,
-  body_content_alternative: ParagraphText,
+  body_content: ParagraphText,
   pull_quote: ParagraphPullQuote,
 }
 
@@ -15,6 +15,10 @@ const ParagraphBundleComponents = {
 class Paragraphs {
 
   public static getComponentForBundle(bundleId) {
+    if (ParagraphBundleComponents[bundleId] == null) {
+      console.log(`missing config for ${bundleId}`);
+      throw new Error(`Missing config for ${bundleId}`);
+    }
     return ( ParagraphBundleComponents[bundleId] || null );
   }
 

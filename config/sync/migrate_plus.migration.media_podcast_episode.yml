@@ -1,3 +1,4 @@
+uuid: 68c7b304-f4f0-41ae-88af-b7be24bd6a64
 langcode: en
 status: true
 dependencies:
@@ -24,7 +25,7 @@ source:
   included:
     - field_podcast_image
     - field_transcript
-    - field_audio_file
+    - field_audio_file.field_media_audio_file
   fields:
     -
       name: paragraph_id
@@ -71,17 +72,17 @@ source:
       label: Episode
       selector: field_episode
     -
-      name: podcast_image
-      label: 'Podcast Image'
-      selector: field_podcast_image
-    -
       name: transcript
       label: Transscript
-      selector: field_transscript
+      selector: field_transcript
     -
       name: audio_file
       label: 'Audio File'
-      selector: field_audio_file/field_media_audio_file
+      selector: field_audio_file
+    -
+      name: podcast_image
+      label: 'Podcast Image'
+      selector: field_podcast_image
   ids:
     paragraph_id:
       type: integer
@@ -123,13 +124,15 @@ process:
   field_media_image:
     plugin: 'milken_migrate:remote_file'
     source: podcast_image
-  field_transscript:
+    alt_text: podcast_image_alt_text
+    title_text: podcast_image_title_text
+  field_transcript:
     plugin: 'milken_migrate:remote_file'
     source: transcript
   field_media_audio_file:
     plugin: 'milken_migrate:remote_file'
     source: audio_file
 destination:
-  plugin: 'entity_reference_revisions:paragraph'
+  plugin: 'entity:media'
   default_bundle: podcast_episode
 migration_dependencies: {  }

@@ -1,17 +1,17 @@
-uuid: 4608237a-ce9c-46b0-b463-27a5c8f6fa11
+uuid: b169f816-922d-49f6-8596-e59bc2b2fde8
 langcode: en
 status: true
 dependencies:
   module:
+    - media
     - paragraphs
-    - text
-id: paragraph.field_summary
-field_name: field_summary
+id: paragraph.field_episode_ref
+field_name: field_episode_ref
 entity_type: paragraph
-type: text
+type: entity_reference
 settings:
-  max_length: 255
-module: text
+  target_type: media
+module: core
 locked: false
 cardinality: 1
 translatable: true

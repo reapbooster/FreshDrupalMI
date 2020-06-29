@@ -3,20 +3,90 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.pull_quote.field_alignment
     - field.field.paragraph.pull_quote.field_background
+    - field.field.paragraph.pull_quote.field_body
     - field.field.paragraph.pull_quote.field_text_size
     - paragraphs.paragraphs_type.pull_quote
+  module:
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+        - group_authoring
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_content:
+      children:
+        - field_alignment
+        - field_background
+        - field_text_size
+        - field_body
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: content
+    group_authoring:
+      children:
+        - created
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Authoring
 id: paragraph.pull_quote.default
 targetEntityType: paragraph
 bundle: pull_quote
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_alignment:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_background:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_body:
+    type: text_textarea_with_summary
+    weight: 15
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
   field_pull_quote:
     weight: 1
     settings:
@@ -38,7 +108,4 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-hidden:
-  created: true
-  field_alignment: true
-  field_body: true
+hidden: {  }

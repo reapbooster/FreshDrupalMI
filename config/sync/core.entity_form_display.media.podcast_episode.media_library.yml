@@ -39,6 +39,7 @@ hidden:
   field_meta_tags: true
   field_service_links: true
   field_summary: true
+  field_transcript: true
   langcode: true
   path: true
   status: true

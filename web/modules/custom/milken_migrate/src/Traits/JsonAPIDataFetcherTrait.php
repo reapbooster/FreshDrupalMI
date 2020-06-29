@@ -56,6 +56,9 @@ trait JsonAPIDataFetcherTrait {
       "http_errors" => FALSE,
       "allow_redirects" => FALSE,
       'synchronous' => TRUE,
+      'query' => [
+        'jsonapi_include' => TRUE,
+      ],
     ]);
   }
 
