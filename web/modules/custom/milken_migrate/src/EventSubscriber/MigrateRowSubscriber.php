@@ -31,12 +31,14 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    *   Event object.
    */
   public function preRowSave(MigratePreRowSaveEvent $event) {
+    // phpcs:disable
     $row = $event->getRow();
-    \Kint::enabled(true);
+    \Kint::enabled(TRUE);
     $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
     $message .= \Kint::dump($row->getDestination());
     \Drupal::logger('milken_migrate')
       ->debug($message);
+    // phpcs:enable
   }
 
   /**

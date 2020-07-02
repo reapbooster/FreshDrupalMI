@@ -56,9 +56,10 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       ->debug(__CLASS__);
     $destination_values = [];
     $toReturn = [];
+    // phpcs:disable
     $altTextProperty = $this->configuration['alt_text'] ?? $this->configuration['name'];
     $titleTextProperty = $this->configuration['title_text'] ?? $this->configuration['name'];
-
+    // phpcs:enable
     if ($row->isStub()) {
       return NULL;
     }
@@ -122,18 +123,20 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         if ($file instanceof FileInterface) {
           $file->set('uuid', $ref->getId());
           // TODO: Set File Meta Information.
-          //$file->set('meta', $ref->getProperty('meta'));
+          // $file->set('meta', $ref->getProperty('meta'));.
           $file->setPermanent();
           $file->isNew();
           $file->save();
           $destination_values[] = ["target_id" => $file->id()];
           $toReturn[] = $file->id();
         }
-      } catch (\Exception $e) {
+      }
+      catch (\Exception $e) {
         \Drupal::logger('milken_migrate')
           ->error("IMPORT Exception: " . $e->getMessage());
         throw new MigrateException($e->getMessage());
-      } catch (\Throwable $t) {
+      }
+      catch (\Throwable $t) {
         \Drupal::logger('milken_migrate')
           ->error("IMPORT Throwable: " . $t->getMessage());
         throw new MigrateException($t->getMessage());

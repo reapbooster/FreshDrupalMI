@@ -3,7 +3,6 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\RevisionableInterface;
-use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\ProcessPluginBase;
@@ -65,22 +64,21 @@ class Paragraphs extends ProcessPluginBase {
         $toReturn[] = $paragraph->id();
       }
       else {
-        switch($ref->getBundleTypeId()) {
+        switch ($ref->getBundleTypeId()) {
 
           case "podcast_episode":
             $episode = \Drupal::entityTypeManager()
               ->getStorage('media')
               ->loadByProperties(['field_episode' => $ref->getProperty('field_episode')]);
-            if (count($episode))
+            if (count($episode)) {
               $paragraph = Paragraph::create([
                 'type' => 'podcast_episode',
                 'uuid' => $ref->getId(),
                 'field_episode_ref' => $episode,
                 'langcode' => 'en',
               ]);
-          break;
-
-
+            }
+            break;
 
           default:
             $paragraph = Paragraph::create([
@@ -99,7 +97,8 @@ class Paragraphs extends ProcessPluginBase {
         $paragraph->save();
         $destination_value[] = ["target_id" => $paragraph->id()];
         $toReturn[] = $paragraph->id();
-      } else {
+      }
+      else {
         throw new MigrateSkipProcessException("cannot create paragraph: " . print_r($ref, TRUE));
       }
 
