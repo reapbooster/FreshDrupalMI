@@ -1,4 +1,4 @@
-uuid: 9a9cf1ef-ffc7-4c58-92f2-a14889f4c171
+uuid: 65eea489-c50f-4c5a-b389-5831ba8be9dc
 langcode: en
 status: true
 dependencies:
@@ -8,10 +8,13 @@ dependencies:
 id: media.field_service_links
 field_name: field_service_links
 entity_type: media
-type: key_value_long
+type: key_value
 settings:
   key_max_length: 255
+  max_length: 255
   key_is_ascii: false
+  is_ascii: false
+  case_sensitive: false
 module: key_value_field
 locked: false
 cardinality: -1

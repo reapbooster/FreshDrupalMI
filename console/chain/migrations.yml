@@ -10,31 +10,25 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --verbose --debug --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --verbose --debug  --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --verbose --debug  --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import file --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --verbose --debug  --continue-on-failure"
     options:
       working-directory: /var/www
 
@@ -46,13 +40,7 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import media_image  --continue-on-failure"
-    options:
-      working-directory: /var/www
-
-  - command: "exec"
-    arguments:
-      bin: "drush migrate:import video  --continue-on-failure"
+      bin: "drush migrate:import --tag=media --continue-on-failure"
     options:
       working-directory: /var/www
 

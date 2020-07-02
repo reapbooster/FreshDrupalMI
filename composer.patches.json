@@ -3,8 +3,7 @@
     "drupal/core": {
       "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch",
       "Deleted Table Cleanup Error": "patches/2836539-34.patch",
-      "Call to a member function getLabel()": "patches/2985882-field-85.patch",
-      "JsonAPI Media Entities permission fix": "patches/3040465-permission-2.patch"
+      "Call to a member function getLabel()": "patches/2985882-field-85.patch"
     },
     "drupal/migrate_plus": {
       "support paging in migration api requests": "patches/migrate_plus-support_paging-2640516-72.patch"

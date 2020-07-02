@@ -81,8 +81,8 @@ class JsonAPIReference {
    *
    * @throws Drupal\migrate\MigrateSkipProcessException
    */
-  public function __construct(array $values = []) {
-    if (isset($values['data']) && empty($values['data'])) {
+  public function __construct(array $values = null) {
+    if ($values == null || ( isset($values['data']) && empty($values['data']))) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }
     $this->setValues($values);
@@ -155,6 +155,16 @@ class JsonAPIReference {
   public function setBundleTypeId(string $bundleTypeId) {
     $this->bundleTypeId = $bundleTypeId;
   }
+  /**
+   * Getter.
+   *
+   * @return string $bundleTypeId
+   *   The Bundle Type ID.
+   */
+  public function getBundleTypeId() : ?string {
+    return $this->bundleTypeId;
+  }
+
 
   /**
    * Make api call and get data for current ID/Type.

@@ -56,8 +56,11 @@ trait JsonAPIDataFetcherTrait {
       "http_errors" => FALSE,
       "allow_redirects" => FALSE,
       'synchronous' => TRUE,
+      'connect_timeout' => 2.5,
+      'timeout' => 5,
       'query' => [
         'jsonapi_include' => TRUE,
+        'uniq_id' => uniqid(),
       ],
     ]);
   }

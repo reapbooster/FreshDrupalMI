@@ -13,6 +13,7 @@ dependencies:
     - field.field.media.podcast_episode.field_meta_tags
     - field.field.media.podcast_episode.field_service_links
     - field.field.media.podcast_episode.field_summary
+    - field.field.media.podcast_episode.field_transcript
     - image.style.medium
     - media.type.podcast_episode
   module:

@@ -32,10 +32,11 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    */
   public function preRowSave(MigratePreRowSaveEvent $event) {
     $row = $event->getRow();
-    if (function_exists('drush_print')) {
-      drush_print("PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid'));
-      \Kint::dump($row->getDestination());
-    }
+    \Kint::enabled(true);
+    $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
+    $message .= \Kint::dump($row->getDestination());
+    \Drupal::logger('milken_migrate')
+      ->debug($message);
   }
 
   /**

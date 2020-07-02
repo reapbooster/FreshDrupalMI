@@ -17,3 +17,5 @@ source_configuration:
   source_field: field_media_audio_file
 field_map:
   name: name
+  mimetype: field_filemime
+  filesize: field_filesize

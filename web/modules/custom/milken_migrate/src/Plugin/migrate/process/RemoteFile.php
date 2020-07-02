@@ -10,6 +10,7 @@ use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\BundleTypeDataFetcher;
 use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
@@ -72,11 +73,20 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       $sources = [$sources];
     }
     foreach ($sources as $source) {
+      if ($source == NULL) {
+        continue;
+      }
       $ref = new JsonAPIReference($source);
-      $ref->getRemoteData();
       if ($ref->getEntityTypeId() == "media") {
-        // $bundle = $ref->getBundle();
-        // $mediaSourceValues = $ref->getProperty($mediaSource);
+        $ref->getRemoteData();
+        $bundle = $ref->getBundle();
+        if ($bundle instanceof BundleTypeDataFetcher) {
+          $mediaSource = $bundle->getProperty('source_configuration')['source_field'] ?? NULL;
+          $ref = new JsonAPIReference($ref->getProperty($mediaSource));
+        }
+        else {
+          $ref = NULL;
+        }
       }
       \Drupal::logger('milken_migrate')
         ->debug("REF: " . print_r($ref, TRUE));
@@ -84,6 +94,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       if (!$ref instanceof JsonAPIReference) {
         return NULL;
       }
+      $ref->getRemoteData();
       if ($ref->valid() === FALSE || $ref->getFilename() === NULL || $ref->getUrl() === NULL) {
         \Drupal::logger('milken_migrate')
           ->debug("Skip Row: invalid" . print_r($ref, TRUE));
@@ -109,21 +120,20 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         }
         $file = $ref->getRemote();
         if ($file instanceof FileInterface) {
-          $file->set('field_file_image_alt_text', $row->getSourceProperty($altTextProperty));
-          $file->set('field_file_image_title_text', $row->getSourceProperty($titleTextProperty));
+          $file->set('uuid', $ref->getId());
+          // TODO: Set File Meta Information.
+          //$file->set('meta', $ref->getProperty('meta'));
           $file->setPermanent();
           $file->isNew();
           $file->save();
           $destination_values[] = ["target_id" => $file->id()];
           $toReturn[] = $file->id();
         }
-      }
-      catch (\Exception $e) {
+      } catch (\Exception $e) {
         \Drupal::logger('milken_migrate')
           ->error("IMPORT Exception: " . $e->getMessage());
         throw new MigrateException($e->getMessage());
-      }
-      catch (\Throwable $t) {
+      } catch (\Throwable $t) {
         \Drupal::logger('milken_migrate')
           ->error("IMPORT Throwable: " . $t->getMessage());
         throw new MigrateException($t->getMessage());

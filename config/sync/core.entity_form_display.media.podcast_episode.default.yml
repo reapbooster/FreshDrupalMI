@@ -12,6 +12,7 @@ dependencies:
     - field.field.media.podcast_episode.field_meta_tags
     - field.field.media.podcast_episode.field_service_links
     - field.field.media.podcast_episode.field_summary
+    - field.field.media.podcast_episode.field_transcript
     - image.style.thumbnail
     - media.type.podcast_episode
   module:
@@ -95,7 +96,7 @@ content:
     type: metatag_firehose
     region: content
   field_service_links:
-    weight: 102
+    weight: 110
     settings:
       key_size: 60
       key_label: Key
@@ -105,10 +106,10 @@ content:
       description_label: Description
       description_rows: 5
       description_placeholder: ''
-      rows: 5
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: key_value_textarea
+    type: key_value_textfield
     region: content
   field_summary:
     weight: 109
