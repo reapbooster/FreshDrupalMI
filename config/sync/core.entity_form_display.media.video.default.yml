@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.field.media.video.field_body
     - field.field.media.video.field_centers
+    - field.field.media.video.field_embedded_id
+    - field.field.media.video.field_embedded_service
     - field.field.media.video.field_event_reference
     - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
@@ -43,6 +45,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Details
+      region: content
     group_authoring:
       children:
         - field_speakers
@@ -59,6 +62,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
     group_taxonomy:
       children:
         - field_program_initiatives
@@ -75,6 +79,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Taxonomy
+      region: content
     group_event:
       children:
         - field_event_reference
@@ -89,6 +94,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Event
+      region: content
     group_images:
       children: {  }
       parent_name: group_details
@@ -101,6 +107,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Images
+      region: content
     group_video_details:
       children:
         - field_thumbnail_uri
@@ -118,6 +125,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Video Details'
+      region: content
 id: media.video.default
 targetEntityType: media
 bundle: video

@@ -16,6 +16,7 @@ third_party_settings:
     group_tabs:
       children:
         - group_content
+        - group_authoring
       parent_name: ''
       weight: 20
       format_type: tabs
@@ -24,6 +25,7 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Tabs
+      region: content
     group_content:
       children:
         - field_photo
@@ -38,10 +40,11 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Content
+      region: content
     group_authoring:
       children:
         - created
-      parent_name: ''
+      parent_name: group_tabs
       weight: 20
       format_type: tab
       format_settings:
@@ -51,6 +54,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
 id: paragraph.author.default
 targetEntityType: paragraph
 bundle: author

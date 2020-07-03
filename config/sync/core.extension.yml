@@ -65,6 +65,7 @@ module:
   image: 0
   imagick: 0
   inline_entity_form: 0
+  inline_form_errors: 0
   jdrupal: 0
   js_entity: 0
   jsonapi: 0
@@ -92,6 +93,7 @@ module:
   migrate_media_handler: 0
   migrate_plus: 0
   migrate_process_skip: 0
+  migrate_queue_importer: 0
   migrate_tools: 0
   milken_base: 0
   milken_migrate: 0

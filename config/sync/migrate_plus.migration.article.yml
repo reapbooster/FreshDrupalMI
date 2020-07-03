@@ -173,4 +173,8 @@ process:
 destination:
   plugin: 'entity:node'
   default_bundle: article
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - paragraph_body_content
+    - paragraph_pull_quote
+    - paragraph_author

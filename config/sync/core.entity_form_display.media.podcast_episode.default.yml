@@ -119,6 +119,13 @@ content:
     third_party_settings: {  }
     type: text_textfield
     region: content
+  field_transcript:
+    type: file_generic
+    weight: 0
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -157,5 +164,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  field_transcript: true
+hidden: {  }

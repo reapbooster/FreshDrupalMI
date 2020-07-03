@@ -126,4 +126,6 @@ process:
 destination:
   plugin: 'entity:rooms'
   default_bundle: rooms
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - event

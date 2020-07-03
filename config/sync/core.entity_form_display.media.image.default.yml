@@ -27,11 +27,11 @@ third_party_settings:
       weight: 20
       format_type: tabs
       format_settings:
-        label: Tabs
         direction: horizontal
         id: ''
         classes: ''
       label: Tabs
+      region: content
     group_content:
       children:
         - field_filemime
@@ -52,6 +52,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Content
+      region: content
     group_authoring:
       children:
         - langcode
@@ -68,6 +69,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
 id: media.image.default
 targetEntityType: media
 bundle: image

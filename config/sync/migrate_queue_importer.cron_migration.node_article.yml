@@ -1,0 +1,10 @@
+uuid: 870599c8-55a3-4ce5-b7c5-7c26f4617944
+langcode: en
+status: true
+dependencies: {  }
+id: node_article
+label: 'Node::Article'
+migration: article
+time: '120'
+update: 0
+ignore_dependencies: 0

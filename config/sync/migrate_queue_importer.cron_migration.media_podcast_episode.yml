@@ -1,0 +1,10 @@
+uuid: d3e6fcea-b0e1-4b91-a117-227cbe69196d
+langcode: en
+status: true
+dependencies: {  }
+id: media_podcast_episode
+label: 'Media Podcast Episode'
+migration: media_podcast_episode
+time: '120'
+update: 0
+ignore_dependencies: 0

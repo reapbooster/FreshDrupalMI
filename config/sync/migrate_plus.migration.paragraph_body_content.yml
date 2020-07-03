@@ -92,4 +92,9 @@ process:
 destination:
   plugin: 'entity_reference_revisions:paragraph'
   default_bundle: body_content
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - file
+    - media_image
+    - media_audio
+    - media_podcast

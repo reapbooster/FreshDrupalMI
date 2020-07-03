@@ -33,6 +33,7 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Details
+      region: content
     group_taxonomy:
       children:
         - field_topics
@@ -48,6 +49,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Taxonomy
+      region: content
     group_text:
       children:
         - langcode
@@ -62,6 +64,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Text
+      region: content
     group_authoring:
       children:
         - uid
@@ -82,6 +85,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
 id: node.event.default
 targetEntityType: node
 bundle: event

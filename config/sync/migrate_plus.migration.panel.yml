@@ -204,4 +204,6 @@ process:
 destination:
   plugin: 'milken_migrate:panel'
   default_bundle: panel
-migration_dependencies: {  }
+migration_dependencies:
+  required:
+    - event

@@ -25,6 +25,7 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Tabs
+      region: content
     group_content:
       children:
         - field_alignment
@@ -41,6 +42,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: content
+      region: content
     group_authoring:
       children:
         - created
@@ -54,6 +56,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
 id: paragraph.pull_quote.default
 targetEntityType: paragraph
 bundle: pull_quote

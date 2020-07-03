@@ -1,0 +1,10 @@
+uuid: 7f7e9ee3-14d7-4a60-81cf-54ab69fb78d7
+langcode: en
+status: true
+dependencies: {  }
+id: node_report
+label: 'Node::Report'
+migration: node_report
+time: '120'
+update: 0
+ignore_dependencies: 0

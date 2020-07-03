@@ -1,0 +1,10 @@
+uuid: 03b37b9f-851c-4000-aec1-551d9f3b0715
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph_author
+label: 'Paragraph Author'
+migration: paragraph_author
+time: '120'
+update: 0
+ignore_dependencies: 0

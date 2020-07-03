@@ -27,6 +27,7 @@ third_party_settings:
         id: ''
         required_fields: true
       label: Text
+      region: content
     group_tabs:
       children:
         - group_text
@@ -39,6 +40,7 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Tabs
+      region: content
     group_authoring:
       children:
         - created
@@ -52,6 +54,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
 id: paragraph.body_content.default
 targetEntityType: paragraph
 bundle: body_content

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4139a7df2389398b84788f07be543641",
+    "content-hash": "58aae25f40004f6d250af401322c09c7",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -124,16 +124,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.144.1",
+            "version": "3.145.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3c6cc59be6a01f228fb53b2b5f43c1fd7d44a88c"
+                "reference": "df5406b49f4f5774045e51e8fecc75717c4d6454"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3c6cc59be6a01f228fb53b2b5f43c1fd7d44a88c",
-                "reference": "3c6cc59be6a01f228fb53b2b5f43c1fd7d44a88c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/df5406b49f4f5774045e51e8fecc75717c4d6454",
+                "reference": "df5406b49f4f5774045e51e8fecc75717c4d6454",
                 "shasum": ""
             },
             "require": {
@@ -205,7 +205,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-06-30T18:14:11+00:00"
+            "time": "2020-07-02T18:12:35+00:00"
         },
         {
             "name": "behat/behat",
@@ -4927,7 +4927,8 @@
                 "patches_applied": {
                     "Drupal\\language\\LanguageNegotiator::updateConfiguration() is passed a NULL": "patches/language-2718657-3.patch",
                     "Deleted Table Cleanup Error": "patches/2836539-34.patch",
-                    "Call to a member function getLabel()": "patches/2985882-field-85.patch"
+                    "Call to a member function getLabel()": "patches/2985882-field-85.patch",
+                    "Media Requirements Errors": "patches/media-install-requirements-3106659.patch"
                 }
             },
             "autoload": {
@@ -7082,26 +7083,29 @@
         },
         {
             "name": "drupal/field_group",
-            "version": "1.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/field_group.git",
-                "reference": "8.x-1.0"
+                "reference": "8.x-3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/field_group-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "e8aa3fae5c3c5dec84644bb577996938d638a611"
+                "url": "https://ftp.drupal.org/files/projects/field_group-8.x-3.1.zip",
+                "reference": "8.x-3.1",
+                "shasum": "8a719eaea594f0ba874172831cb28da93c66b77a"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8.8 || ^9"
+            },
+            "require-dev": {
+                "drupal/jquery_ui_accordion": "^1.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1510352885",
+                    "version": "8.x-3.1",
+                    "datestamp": "1591772567",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7110,7 +7114,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -7137,7 +7141,8 @@
             "description": "Provides the field_group module.",
             "homepage": "https://www.drupal.org/project/field_group",
             "support": {
-                "source": "https://git.drupalcode.org/project/field_group"
+                "source": "https://git.drupalcode.org/project/field_group",
+                "issues": "https://www.drupal.org/project/issues/field_group"
             }
         },
         {
@@ -7321,7 +7326,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/fontawesome.git",
-                "reference": "4307b7489de9e7deae34b346974684f6f4e70a8f"
+                "reference": "6a0e955917bfb366071278c9820eb55b56be812b"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -7332,8 +7337,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.16+6-dev",
-                    "datestamp": "1590162486",
+                    "version": "8.x-2.16+8-dev",
+                    "datestamp": "1593707007",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7372,7 +7377,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/fontawesome"
             },
-            "time": "2020-05-26T16:14:04+00:00"
+            "time": "2020-07-02T16:24:27+00:00"
         },
         {
             "name": "drupal/form_options_attributes",
@@ -7482,7 +7487,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/graphql.git",
-                "reference": "ffb06852a697db2bdc5467d4f0a1b2eb9d404b4f"
+                "reference": "767e167b05e5240aee8979c6bbc62661d3e386a2"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -7499,8 +7504,8 @@
                     "dev-4.x": "4.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-4.0-alpha4+9-dev",
-                    "datestamp": "1590586780",
+                    "version": "8.x-4.0-alpha4+10-dev",
+                    "datestamp": "1593005414",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7534,7 +7539,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/graphql"
             },
-            "time": "2020-06-24T13:28:47+00:00"
+            "time": "2020-07-03T11:00:16+00:00"
         },
         {
             "name": "drupal/hax",
@@ -8753,20 +8758,20 @@
         },
         {
             "name": "drupal/media_entity_browser",
-            "version": "2.0.0-alpha2",
+            "version": "2.0.0-alpha3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/media_entity_browser.git",
-                "reference": "8.x-2.0-alpha2"
+                "reference": "8.x-2.0-alpha3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_entity_browser-8.x-2.0-alpha2.zip",
-                "reference": "8.x-2.0-alpha2",
-                "shasum": "41fea535c0770caa2fc4eca7216bbafb796b4d17"
+                "url": "https://ftp.drupal.org/files/projects/media_entity_browser-8.x-2.0-alpha3.zip",
+                "reference": "8.x-2.0-alpha3",
+                "shasum": "d24510f705d676ad84af35b9c0597dcdf9b7cd25"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8 || ^9",
                 "drupal/entity_browser": "*",
                 "drupal/entity_browser_entity_form": "*",
                 "drupal/inline_entity_form": "*"
@@ -8780,12 +8785,9 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-2.0-alpha2",
-                    "datestamp": "1558337585",
+                    "version": "8.x-2.0-alpha3",
+                    "datestamp": "1593747594",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -8800,6 +8802,10 @@
                 {
                     "name": "Sam152",
                     "homepage": "https://www.drupal.org/user/1485048"
+                },
+                {
+                    "name": "acbramley",
+                    "homepage": "https://www.drupal.org/user/1036766"
                 },
                 {
                     "name": "benjy",
@@ -9369,6 +9375,54 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/migrate_process_skip",
                 "issues": "https://www.drupal.org/project/issues/migrate_process_skip"
+            }
+        },
+        {
+            "name": "drupal/migrate_queue_importer",
+            "version": "1.0.0-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_queue_importer.git",
+                "reference": "8.x-1.0-alpha2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/migrate_queue_importer-8.x-1.0-alpha2.zip",
+                "reference": "8.x-1.0-alpha2",
+                "shasum": "0fad41b7ebb7c9bcb8632aa5ee14ea5b602ea793"
+            },
+            "require": {
+                "drupal/core": "^8"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha2",
+                    "datestamp": "1576225088",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Postovan Dumitru",
+                    "homepage": "https://www.drupal.org/user/3456423"
+                },
+                {
+                    "name": "maksyml",
+                    "homepage": "https://www.drupal.org/user/3564782"
+                }
+            ],
+            "description": "Provides Queue API base functionality to import migrations.",
+            "homepage": "https://www.drupal.org/project/migrate_queue_importer",
+            "support": {
+                "source": "https://git.drupalcode.org/project/migrate_queue_importer"
             }
         },
         {
@@ -10549,29 +10603,35 @@
         },
         {
             "name": "drupal/search_api_solr",
-            "version": "dev-3.x",
+            "version": "4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api_solr.git",
-                "reference": "4ef4efcf661cc26b3763db76a15c558b4c033225"
+                "reference": "4.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/search_api_solr-4.1.3.zip",
+                "reference": "4.1.3",
+                "shasum": "5b1cf02a523c11deb69bf52698bc241877390b9d"
             },
             "require": {
-                "consolidation/annotated-command": "^2.12",
+                "consolidation/annotated-command": "^2.12|^4.1",
                 "drupal/core": "^8.8 || ^9",
-                "drupal/search_api": "~1.15",
+                "drupal/search_api": "~1.17",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-simplexml": "*",
-                "maennchen/zipstream-php": "^1.2.0",
-                "php": "^7.1.3",
-                "solarium/solarium": "~5.0.3|~5.1.5|~5.2.0|~6.0.0",
-                "zendframework/zend-stdlib": "^3.0.1"
+                "laminas/laminas-stdlib": "^3.2",
+                "maennchen/zipstream-php": "^1.2|^2.0",
+                "php": "^7.2",
+                "solarium/solarium": "^6.0"
             },
             "conflict": {
                 "drupal/search_api_solr_multilingual": "<3.0.0"
             },
             "require-dev": {
-                "drupal/devel": "3.x-dev",
+                "drupal/devel": "^4.0",
                 "drupal/facets": "1.x-dev",
                 "drupal/geofield": "1.x-dev",
                 "drupal/search_api_autocomplete": "1.x-dev",
@@ -10588,16 +10648,12 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev",
-                    "dev-8.x-3.x": "3.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-3.x-dev",
-                    "datestamp": "1586966997",
+                    "version": "4.1.3",
+                    "datestamp": "1593780996",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -10608,7 +10664,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -10641,9 +10697,8 @@
             "support": {
                 "source": "http://git.drupal.org/project/search_api_solr.git",
                 "issues": "https://www.drupal.org/project/issues/search_api_solr",
-                "irc": "https://drupalchat.me/channel/search"
-            },
-            "time": "2020-04-15T13:49:52+00:00"
+                "chat": "https://drupalchat.me/channel/search"
+            }
         },
         {
             "name": "drupal/shield",
@@ -12128,17 +12183,17 @@
         },
         {
             "name": "drupal/webform",
-            "version": "5.18.0",
+            "version": "5.19.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "8.x-5.18"
+                "reference": "8.x-5.19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.18.zip",
-                "reference": "8.x-5.18",
-                "shasum": "539d0ba5bacc402cf6ea2a3419ae164703a09aa0"
+                "url": "https://ftp.drupal.org/files/projects/webform-8.x-5.19.zip",
+                "reference": "8.x-5.19",
+                "shasum": "90a2084c2647bca791cc8b18a7e2a3b49f3da7ea"
             },
             "require": {
                 "drupal/core": "^8.8"
@@ -12177,8 +12232,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-5.18",
-                    "datestamp": "1593034084",
+                    "version": "8.x-5.19",
+                    "datestamp": "1593681136",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -14409,23 +14464,23 @@
         },
         {
             "name": "maennchen/zipstream-php",
-            "version": "1.2.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maennchen/ZipStream-PHP.git",
-                "reference": "6373eefe0b3274d7b702d81f2c99aa977ff97dc2"
+                "reference": "c4c5803cc1f93df3d2448478ef79394a5981cc58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/6373eefe0b3274d7b702d81f2c99aa977ff97dc2",
-                "reference": "6373eefe0b3274d7b702d81f2c99aa977ff97dc2",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/c4c5803cc1f93df3d2448478ef79394a5981cc58",
+                "reference": "c4c5803cc1f93df3d2448478ef79394a5981cc58",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
                 "myclabs/php-enum": "^1.5",
                 "php": ">= 7.1",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0",
+                "symfony/polyfill-mbstring": "^1.0"
             },
             "require-dev": {
                 "ext-zip": "*",
@@ -14449,12 +14504,12 @@
                     "email": "pabs@pablotron.org"
                 },
                 {
-                    "name": "Jesse Donat",
-                    "email": "donatj@gmail.com"
-                },
-                {
                     "name": "Jonatan Männchen",
                     "email": "jonatan@maennchen.ch"
+                },
+                {
+                    "name": "Jesse Donat",
+                    "email": "donatj@gmail.com"
                 },
                 {
                     "name": "András Kolesár",
@@ -14466,7 +14521,13 @@
                 "stream",
                 "zip"
             ],
-            "time": "2019-07-17T11:01:58+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/zipstream",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-05-30T13:11:16+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -14634,16 +14695,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "a3edfe52f9e7380e498d33157e1330e85386645d"
+                "reference": "6c5dea561d99641f66caed6a6d3b8827a8052205"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/a3edfe52f9e7380e498d33157e1330e85386645d",
-                "reference": "a3edfe52f9e7380e498d33157e1330e85386645d",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/6c5dea561d99641f66caed6a6d3b8827a8052205",
+                "reference": "6c5dea561d99641f66caed6a6d3b8827a8052205",
                 "shasum": ""
             },
             "require": {
@@ -14697,7 +14758,7 @@
                 "serializer",
                 "xml"
             ],
-            "time": "2020-02-06T11:39:04+00:00"
+            "time": "2020-07-01T09:47:09+00:00"
         },
         {
             "name": "mathieuviossat/arraytotexttable",
@@ -15167,16 +15228,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.5.0",
+            "version": "v4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463"
+                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/53c2753d756f5adb586dca79c2ec0e2654dd9463",
-                "reference": "53c2753d756f5adb586dca79c2ec0e2654dd9463",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
+                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
                 "shasum": ""
             },
             "require": {
@@ -15215,7 +15276,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-06-03T07:24:19+00:00"
+            "time": "2020-07-02T17:12:47+00:00"
         },
         {
             "name": "npm-asset/ace-builds",
@@ -15821,16 +15882,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "f79611d6dc1f6b7e8e30b738fc371b392001dbfd"
+                "reference": "21bfb5b3243b8ceb9eda499a4d699fc42c11a9d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/f79611d6dc1f6b7e8e30b738fc371b392001dbfd",
-                "reference": "f79611d6dc1f6b7e8e30b738fc371b392001dbfd",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/21bfb5b3243b8ceb9eda499a4d699fc42c11a9d1",
+                "reference": "21bfb5b3243b8ceb9eda499a4d699fc42c11a9d1",
                 "shasum": ""
             },
             "require": {
@@ -15847,18 +15908,19 @@
                 "ext-xmlwriter": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
+                "maennchen/zipstream-php": "^2.0",
                 "markbaker/complex": "^1.4",
                 "markbaker/matrix": "^1.2",
-                "php": "^7.1",
+                "php": "^7.2",
                 "psr/simple-cache": "^1.0"
             },
             "require-dev": {
-                "dompdf/dompdf": "^0.8.3",
+                "dompdf/dompdf": "^0.8.5",
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "jpgraph/jpgraph": "^4.0",
                 "mpdf/mpdf": "^8.0",
                 "phpcompatibility/php-compatibility": "^9.3",
-                "phpunit/phpunit": "^7.5",
+                "phpunit/phpunit": "^8.5",
                 "squizlabs/php_codesniffer": "^3.5",
                 "tecnickcom/tcpdf": "^6.3"
             },
@@ -15910,7 +15972,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2020-04-27T08:12:48+00:00"
+            "time": "2020-05-31T13:49:28+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -15963,16 +16025,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.31",
+            "version": "0.12.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d"
+                "reference": "d03863f504c8432b3de4d1881f73f6acb8c0e67c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/776c8056b401e1b67f277b9e9fb334d1a274671d",
-                "reference": "776c8056b401e1b67f277b9e9fb334d1a274671d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d03863f504c8432b3de4d1881f73f6acb8c0e67c",
+                "reference": "d03863f504c8432b3de4d1881f73f6acb8c0e67c",
                 "shasum": ""
             },
             "require": {
@@ -16015,7 +16077,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-24T20:55:29+00:00"
+            "time": "2020-07-01T11:57:52+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -16725,16 +16787,16 @@
         },
         {
             "name": "solarium/solarium",
-            "version": "6.0.0",
+            "version": "6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/solariumphp/solarium.git",
-                "reference": "862fd56fd4ab1645e4f5cd976cfe94c2ce089c94"
+                "reference": "5b5cee59f3f722d2a380e8f6ee384ccc05ac2a30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/solariumphp/solarium/zipball/862fd56fd4ab1645e4f5cd976cfe94c2ce089c94",
-                "reference": "862fd56fd4ab1645e4f5cd976cfe94c2ce089c94",
+                "url": "https://api.github.com/repos/solariumphp/solarium/zipball/5b5cee59f3f722d2a380e8f6ee384ccc05ac2a30",
+                "reference": "5b5cee59f3f722d2a380e8f6ee384ccc05ac2a30",
                 "shasum": ""
             },
             "require": {
@@ -16779,7 +16841,7 @@
                 "search",
                 "solr"
             ],
-            "time": "2020-06-22T09:07:55+00:00"
+            "time": "2020-07-03T12:46:41+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -19679,16 +19741,16 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v0.13.8",
+            "version": "v0.13.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "6829ae58f4c59121df1f86915fb9917a2ec595e8"
+                "reference": "d9a94fddcad0a35d4bced212b8a44ad1bc59bdf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/6829ae58f4c59121df1f86915fb9917a2ec595e8",
-                "reference": "6829ae58f4c59121df1f86915fb9917a2ec595e8",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/d9a94fddcad0a35d4bced212b8a44ad1bc59bdf3",
+                "reference": "d9a94fddcad0a35d4bced212b8a44ad1bc59bdf3",
                 "shasum": ""
             },
             "require": {
@@ -19727,7 +19789,13 @@
                 "api",
                 "graphql"
             ],
-            "time": "2019-08-25T10:32:47+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/webonyx-graphql-php",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-07-02T05:49:25+00:00"
         },
         {
             "name": "zaporylie/composer-drupal-optimizations",
@@ -21616,6 +21684,7 @@
         "drupal/media_parent_entity_link": 10,
         "drupal/migrate_d2d": 20,
         "drupal/migrate_media_handler": 20,
+        "drupal/migrate_queue_importer": 15,
         "drupal/npm": 15,
         "drupal/openapi": 5,
         "drupal/openid_connect": 10,
@@ -21628,7 +21697,6 @@
         "drupal/schemata": 10,
         "drupal/search_api": 20,
         "drupal/search_api_attachments": 10,
-        "drupal/search_api_solr": 20,
         "drupal/sophron": 10,
         "drupal/taxonomy_machine_name": 10,
         "drupal/term_reference_tree": 20,
