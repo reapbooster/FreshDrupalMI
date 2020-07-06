@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58aae25f40004f6d250af401322c09c7",
+    "content-hash": "75fc365d4c8d36cb6e469bafd00698ce",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -689,7 +689,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -9375,54 +9375,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/migrate_process_skip",
                 "issues": "https://www.drupal.org/project/issues/migrate_process_skip"
-            }
-        },
-        {
-            "name": "drupal/migrate_queue_importer",
-            "version": "1.0.0-alpha2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/migrate_queue_importer.git",
-                "reference": "8.x-1.0-alpha2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_queue_importer-8.x-1.0-alpha2.zip",
-                "reference": "8.x-1.0-alpha2",
-                "shasum": "0fad41b7ebb7c9bcb8632aa5ee14ea5b602ea793"
-            },
-            "require": {
-                "drupal/core": "^8"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0-alpha2",
-                    "datestamp": "1576225088",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Postovan Dumitru",
-                    "homepage": "https://www.drupal.org/user/3456423"
-                },
-                {
-                    "name": "maksyml",
-                    "homepage": "https://www.drupal.org/user/3564782"
-                }
-            ],
-            "description": "Provides Queue API base functionality to import migrations.",
-            "homepage": "https://www.drupal.org/project/migrate_queue_importer",
-            "support": {
-                "source": "https://git.drupalcode.org/project/migrate_queue_importer"
             }
         },
         {
@@ -21684,7 +21636,6 @@
         "drupal/media_parent_entity_link": 10,
         "drupal/migrate_d2d": 20,
         "drupal/migrate_media_handler": 20,
-        "drupal/migrate_queue_importer": 15,
         "drupal/npm": 15,
         "drupal/openapi": 5,
         "drupal/openid_connect": 10,

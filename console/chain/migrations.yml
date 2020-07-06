@@ -10,25 +10,25 @@ commands:
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --verbose --debug --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --verbose --debug  --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --verbose --debug  --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
     options:
       working-directory: /var/www
 
   - command: "exec"
     arguments:
-      bin: "drush migrate:import file --limit=2000 --verbose --debug  --continue-on-failure"
+      bin: "drush migrate:import file --limit=2000 --continue-on-failure"
     options:
       working-directory: /var/www
 
