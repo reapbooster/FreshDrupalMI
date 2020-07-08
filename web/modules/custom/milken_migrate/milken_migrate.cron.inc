@@ -10,14 +10,30 @@ use Drupal\migrate\Plugin\Migration;
 define('MILKEN_MIGRATION_ORDER', [
   'entityqueue',
   'file',
+  'taxonomy_centers',
+  'taxonomy_milken_tags',
+  'taxonomy_collections',
+  'taxonomy_program_initiatives',
   'media_image',
   'media_audio',
-  'video',
+  'media_video',
   'media_podcast_episode',
+  "media_report",
+  "paragraph_body_content",
+  "paragraph_pull_quote",
+  "paragraph_author",
+  "event",
+  "panel",
+  "room",
+  "panel",
+  "speaker",
+  "track",
+  "node_article",
 ]);
 
 /**
- * Add the migrations to a batch job.
+ * Add one migrations from the list to a batch job.
+ * There's a hardcoded limit of 250 items per cron run.
  */
 function milken_migrate_cron_run_migrations() {
   $logger = \Drupal::logger('milken_migrate');
