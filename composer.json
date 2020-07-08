@@ -26,6 +26,7 @@
         "drupal/address": "^1.7",
         "drupal/admin_toolbar": "^2.0",
         "drupal/adminimal_theme": "^1.5",
+        "drupal/adminimal_admin_toolbar": "^1.0",
         "drupal/audiofield": "^1.9",
         "drupal/authorization": "^1.0",
         "drupal/auto_entitylabel": "3.x-dev",
