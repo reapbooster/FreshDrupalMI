@@ -238,6 +238,10 @@ jobs:
     <<: *defaults
     steps:
       - run:
+          name: Authenticate with Terminus
+          command: terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
+          
+      - run:
           name: drush-cron-run
           command: terminus drush freshdrupalmi.live -- core:cron
 
