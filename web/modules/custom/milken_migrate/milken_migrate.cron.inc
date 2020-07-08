@@ -32,8 +32,8 @@ define('MILKEN_MIGRATION_ORDER', [
 ]);
 
 /**
- * Add one migrations from the list to a batch job.
- * There's a hardcoded limit of 250 items per cron run.
+ * Add one migrations from the list to a batch job. There's a hardcoded limit
+ * of 250 items per cron run.
  */
 function milken_migrate_cron_run_migrations() {
   $logger = \Drupal::logger('milken_migrate');
