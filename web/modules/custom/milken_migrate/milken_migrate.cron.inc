@@ -19,6 +19,7 @@ define('MILKEN_MIGRATION_ORDER', [
   'media_video',
   'media_podcast_episode',
   "media_report",
+  "media_sponsor_logo",
   "paragraph_body_content",
   "paragraph_pull_quote",
   "paragraph_author",
@@ -45,18 +46,34 @@ function milken_migrate_cron_run_migrations() {
       $migrations = $manager->createInstances($migrationID);
       if ($migrations[$migrationID] instanceof Migration) {
         $migration = $migrations[$migrationID];
-        if (!$migration->allRowsProcessed()) {
+        $allRowsProcessed = $migration->allRowsProcessed();
+        $logger->notice('%label all rows processed? %answer',
+          [
+            '%label' => $migrationID,
+            '%answer' => ($allRowsProcessed)? "TRUE":"FALSE",
+          ]
+        );
+        if (!$allRowsProcessed) {
+          $logger->debug('Scheduling %label',
+            [
+              '%label' => $migrationID,
+            ]
+          );
           $success = $queue->createItem([
             'migration_id' => $migrationID,
           ]);
           if ($success) {
-            $logger->notice('%label has been scheduled for import',
-              [
-                '%label' => $migrationID,
-              ]
-            );
-            break;
+            $message = "has been scheduled";
+          } else {
+            $message = "HAS NOT BEEN SCHEDULED";
           }
+          $logger->notice('%label %message for import',
+            [
+              '%label' => $migrationID,
+              '%message' => $message,
+            ]
+          );
+          break;
         }
       }
     }
