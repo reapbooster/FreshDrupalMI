@@ -76,6 +76,10 @@ process:
       source:
         - constants/FILE_SOURCE
         - url
+  pseudo_uuid_check:
+    plugin: 'milken_migrate:uuid_exists'
+    source: uuid
+    entity_type: file
   uuid: uuid
   uid:
     plugin: default_value

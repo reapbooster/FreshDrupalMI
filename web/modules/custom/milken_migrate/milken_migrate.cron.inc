@@ -30,6 +30,8 @@ define('MILKEN_MIGRATION_ORDER', [
   "speaker",
   "track",
   "node_article",
+  "slide",
+  "landing_pages",
 ]);
 
 /**

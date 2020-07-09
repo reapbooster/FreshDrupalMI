@@ -20,6 +20,10 @@ source:
       name: new_subqueue
       queue: featured
       title: 'New Subqueue'
+    -
+      name: homepage_landing
+      queue: landing_pages
+      title: 'Landing Pages'
   ids:
     name:
       type: string

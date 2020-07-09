@@ -73,7 +73,6 @@ source:
       name: filemime
       label: 'File Mime'
       selector: /field_sponsor_image/filemime
-
   constants:
     source_url_base: 'https://milkeninstitute.org'
   ids:
@@ -107,4 +106,4 @@ process:
 destination:
   plugin: 'entity:media'
   default_bundle: sponsor_logo
-migration_dependencies: {}
+migration_dependencies: {  }
