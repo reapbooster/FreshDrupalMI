@@ -50,7 +50,7 @@ function milken_migrate_cron_run_migrations() {
         $logger->notice('%label all rows processed? %answer',
           [
             '%label' => $migrationID,
-            '%answer' => ($allRowsProcessed)? "TRUE":"FALSE",
+            '%answer' => ($allRowsProcessed) ? "TRUE" : "FALSE",
           ]
         );
         if (!$allRowsProcessed) {
@@ -64,7 +64,8 @@ function milken_migrate_cron_run_migrations() {
           ]);
           if ($success) {
             $message = "has been scheduled";
-          } else {
+          }
+          else {
             $message = "HAS NOT BEEN SCHEDULED";
           }
           $logger->notice('%label %message for import',
