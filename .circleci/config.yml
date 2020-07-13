@@ -282,13 +282,13 @@ workflows:
     jobs:
       - composer_lock_updater
 
-  scheduled_cron_run:
-    triggers:
-      - schedule:
-          cron: "0,5,10,15,20,25,30,35,40,45,50,55 * * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - cron
+  #scheduled_cron_run:
+  #  triggers:
+  #    - schedule:
+  #        cron: "0,5,10,15,20,25,30,35,40,45,50,55 * * * *"
+  #        filters:
+  #          branches:
+  #            only:
+  #              - master
+  #  jobs:
+  #    - cron
