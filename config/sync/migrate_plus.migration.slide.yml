@@ -23,6 +23,8 @@ source:
   jsonapi_endpoint: /jsonapi/paragraph/center_header
   item_selector: data
   jsonapi_include: true
+  included:
+    - field_ch_image_carrousel
   fields:
     -
       name: uuid
@@ -33,7 +35,7 @@ source:
       label: 'Paragraph ID'
       selector: /drupal_internal__id
     -
-      type: type
+      name: type
       label: Type
       selector: /type
     -
@@ -41,7 +43,7 @@ source:
       label: Name
       selector: /field_center_header_center_name
     -
-      type: image
+      name: image
       label: Image
       selector: /field_ch_image_carrousel
     -
@@ -68,7 +70,7 @@ process:
       - field_ch_supporting_text_above
       - field_ch_supporting_text_below
       - field_supertitle_cta
-    delimiter: \n
+    delimiter: "\n"
   langcode:
     plugin: default_value
     default_value: en
