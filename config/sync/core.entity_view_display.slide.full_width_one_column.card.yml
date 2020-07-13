@@ -12,202 +12,62 @@ dependencies:
     - field.field.slide.full_width_one_column.field_published
     - field.field.slide.full_width_one_column.field_subtitle
     - field.field.slide.full_width_one_column.field_text_color
+    - image.style.thumbnail
   module:
-    - color_field
+    - ds
     - image
     - layout_builder
-    - link
-  theme:
-    - milken
+    - layout_builder_restrictions
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: bb_cardtopimage
-        layout_settings:
-          label: ''
-          wrappers:
-            first: div
-            second: div
-          outer_wrapper: div
-          attributes: ''
-          link_attribute: ''
-          link_custom: ''
-          classes:
-            layout_class: {  }
-        components:
-          6879d253-b330-4188-a334-579202d6f3b8:
-            uuid: 6879d253-b330-4188-a334-579202d6f3b8
-            region: first
-            configuration:
-              id: 'field_block:slide:full_width_one_column:field_background_image'
-              label: 'Background Image'
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: responsive_image
-                settings:
-                  responsive_image_style: small
-                  image_link: ''
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 0
-          a93255f7-e6e7-4be5-b2e8-4e525333a45c:
-            uuid: a93255f7-e6e7-4be5-b2e8-4e525333a45c
-            region: second
-            configuration:
-              id: 'field_block:slide:full_width_one_column:title'
-              label: Title
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: wrapper_class
-                settings:
-                  link: false
-                  link_class: ''
-                  tag: h1
-                  class: ''
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 0
-          2dbda361-72bf-48e9-961b-9d46c577a25c:
-            uuid: 2dbda361-72bf-48e9-961b-9d46c577a25c
-            region: second
-            configuration:
-              id: 'field_block:slide:full_width_one_column:field_subtitle'
-              label: Subtitle
-              provider: layout_builder
-              label_display: '0'
-              formatter:
-                label: hidden
-                type: wrapper_class
-                settings:
-                  link: false
-                  link_class: ''
-                  tag: p
-                  class: lead
-                third_party_settings: {  }
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-            additional: {  }
-            weight: 1
-        third_party_settings: {  }
+    enabled: false
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
+  ds:
+    layout:
+      id: barrio_cardimageoverlay
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+    regions:
+      first:
+        - field_background_image
+      second:
+        - title
+        - field_subtitle
 id: slide.full_width_one_column.card
 targetEntityType: slide
 bundle: full_width_one_column
 mode: card
 content:
-  changed:
-    type: timestamp
-    weight: 8
-    region: content
-    label: hidden
-    settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-    third_party_settings: {  }
-  created:
-    label: hidden
-    type: timestamp
-    weight: 2
-    region: content
-    settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-    third_party_settings: {  }
-  field_background_color:
-    weight: 3
-    label: hidden
-    settings:
-      format: hex
-      opacity: '1'
-    third_party_settings: {  }
-    type: color_field_formatter_text
-    region: content
   field_background_image:
-    weight: 4
+    weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
     type: image
-    region: content
-  field_link:
-    weight: 5
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
-  field_promoted:
-    weight: 11
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_published:
-    weight: 10
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
+    region: first
   field_subtitle:
-    weight: 7
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
-    region: content
-  field_text_color:
-    weight: 6
-    label: hidden
-    settings:
-      format: hex
-      opacity: '1'
-    third_party_settings: {  }
-    type: color_field_formatter_text
-    region: content
-  langcode:
-    type: language
-    weight: 9
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-      native_language: false
-    third_party_settings: {  }
+    region: second
   title:
     label: hidden
     type: string
-    weight: 0
-    region: content
+    weight: 1
+    region: second
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -219,4 +79,12 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  changed: true
+  created: true
+  field_background_color: true
+  field_link: true
+  field_promoted: true
+  field_published: true
+  field_text_color: true
+  langcode: true
   search_api_excerpt: true

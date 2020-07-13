@@ -1,0 +1,31 @@
+uuid: 02d0e2ca-c034-4e8e-9f2e-bc5354674914
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.slides
+  module:
+    - views
+name: slides
+label: Slides
+display: iframe
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select entities'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: single
+widget_selector_configuration: {  }
+widgets:
+  cf912e8c-05ed-4a91-a00a-0659b5482f4b:
+    settings:
+      view: slides
+      view_display: entity_browser_1
+      submit_text: 'Select entities'
+      auto_select: false
+    uuid: cf912e8c-05ed-4a91-a00a-0659b5482f4b
+    weight: 1
+    label: view
+    id: view

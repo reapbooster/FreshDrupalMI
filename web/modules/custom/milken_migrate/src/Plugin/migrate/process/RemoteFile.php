@@ -96,6 +96,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         return NULL;
       }
       $ref->getRemoteData();
+
       if ($ref->valid() === FALSE || $ref->getFilename() === NULL || $ref->getUrl() === NULL) {
         \Drupal::logger('milken_migrate')
           ->debug("Skip Row: invalid" . print_r($ref, TRUE));
@@ -116,7 +117,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
           \Drupal::logger('milken_migrate')
             ->debug("Found image in database: " . $file->label());
           $destination_values[] = ['target_id' => $file->id()];
-          $toReturn[] = $file->id();
+          $toReturn[] = $file;
           continue;
         }
         $file = $ref->getRemote();
@@ -128,7 +129,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
           $file->isNew();
           $file->save();
           $destination_values[] = ["target_id" => $file->id()];
-          $toReturn[] = $file->id();
+          $toReturn[] = $file;
         }
       }
       catch (\Exception $e) {
@@ -142,6 +143,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         throw new MigrateException($t->getMessage());
       }
     }
+
 
     if (count($destination_values) == 1) {
       $destination_values = array_shift($destination_values);

@@ -61,7 +61,10 @@ class Paragraphs extends ProcessPluginBase {
       $paragraph = $ref->exists();
       if ($paragraph instanceof RevisionableInterface) {
         $destination_value[] = $paragraph;
-        $toReturn[] = $paragraph->id();
+        $toReturn[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId()
+        ];
       }
       else {
         switch ($ref->getBundleTypeId()) {
@@ -95,8 +98,11 @@ class Paragraphs extends ProcessPluginBase {
       if ($paragraph instanceof Paragraph) {
         $paragraph->isNew();
         $paragraph->save();
-        $destination_value[] = ["target_id" => $paragraph->id()];
-        $toReturn[] = $paragraph->id();
+        $destination_value[] = $paragraph;
+        $toReturn[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId()
+        ];
       }
       else {
         throw new MigrateSkipProcessException("cannot create paragraph: " . print_r($ref, TRUE));
