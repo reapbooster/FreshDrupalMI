@@ -63,7 +63,7 @@ class Paragraphs extends ProcessPluginBase {
         $destination_value[] = $paragraph;
         $toReturn[] = [
           "target_id" => $paragraph->id(),
-          "target_revision_id" => $paragraph->getRevisionId()
+          "target_revision_id" => $paragraph->getRevisionId(),
         ];
       }
       else {
@@ -101,7 +101,7 @@ class Paragraphs extends ProcessPluginBase {
         $destination_value[] = $paragraph;
         $toReturn[] = [
           "target_id" => $paragraph->id(),
-          "target_revision_id" => $paragraph->getRevisionId()
+          "target_revision_id" => $paragraph->getRevisionId(),
         ];
       }
       else {

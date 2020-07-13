@@ -144,7 +144,6 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
       }
     }
 
-
     if (count($destination_values) == 1) {
       $destination_values = array_shift($destination_values);
     }
