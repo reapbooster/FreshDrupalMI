@@ -22,7 +22,7 @@ class EntityQueue extends EntityComponentBase<EntityComponentPropsInterface, Ent
       if (this.state?.loaded) {
         return (
           <Container key={this.props.key}>
-            <Row>
+            <Row className={"d-flex justify-content-center"}>
               {this.state?.attributes?.items.map((item : EntityComponentPropsInterface, key: number) => {
                 item.view_mode = this.props.view_mode;
                 const ecp = new EntityComponentProps(item);

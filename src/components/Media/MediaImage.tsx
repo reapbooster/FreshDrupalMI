@@ -7,10 +7,11 @@ import Loading from "../Loading";
 
 
 const MediaImage: React.FunctionComponent = (props) => {
-  console.log(props);
+  const style = new ImageStyleObject(props.field_media_image?.image_style_uri);
+  const url = style.getStyleByMachineName(props.view_mode) || props.thumbnail.uri.url;
   return (
     <>
-      <img src={props.thumbnail.uri.url} />
+      <img src={url} className={'card-img'}/>
     </>
   );
 }

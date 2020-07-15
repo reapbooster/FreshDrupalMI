@@ -133,6 +133,4 @@ process:
 destination:
   plugin: 'entity:media'
   default_bundle: image
-migration_dependencies:
-  required:
-    - file
+migration_dependencies: {}

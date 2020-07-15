@@ -30,12 +30,12 @@ class NodeDisplay extends EntityComponentBase {
     var image = ( <Card.Img dataSrc={"holder.js/220x150"} /> );
     console.log("HOLDER IMAGE", this);
     if (this.state?.attributes?.field_hero_image?.field_media_image) {
-     image = ( <MediaImage {...this.state.attributes.field_hero_image} /> );
+     image = ( <MediaImage {...this.state.attributes.field_hero_image} view_mode={"medium"} /> );
     }
     return (
-      <Card key={this.state.key}>
+      <Card key={this.state.key} className={"col-sm-6 col-sm-4 col-md-3 col-lg-3 m-10 p-10"}>
         <Card.Body>
-          <Card.Title>{this.state?.attributes?.title}</Card.Title>
+          <Card.Title className={"text-center"}>{this.state?.attributes?.title}</Card.Title>
         </Card.Body>
         {image}
       </Card>
