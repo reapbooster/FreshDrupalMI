@@ -5,66 +5,73 @@ import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityC
 import Loading from "../Loading";
 import Slide from '../Slide';
 import Media from '../Media';
-import Article from "../Article";
-
+import { Card } from 'react-bootstrap';
+import NodeDisplay from '../NodeDisplay';
 
 class EntityQueue extends EntityComponentBase<EntityComponentPropsInterface, EntityComponentState> {
 
-  include = '&field_queue';
+  include = '&include=items,items.field_hero_image';
 
   componentDidMount() {
-    this.renderQueueItem = this.renderQueueItem.bind(this);
-    if (!this.loaded && !this.loading) {
+    if (!this.state.loaded && !this.state.loading) {
       this.getDataForComponent(this.include);
     }
   }
 
   render() {
-      if (this.state?.attributes?.items?.length) {
+      if (this.state?.loaded) {
         return (
           <Container key={this.props.key}>
             <Row>
-              {this.state?.attributes?.items.map(this.renderQueueItem)}
+              {this.state?.attributes?.items.map((item : EntityComponentPropsInterface, key: number) => {
+                item.view_mode = this.props.view_mode;
+                const ecp = new EntityComponentProps(item);
+                console.log("entityQueue Item Render", ecp);
+                var content = ( <h1>Entity Queue Item Render</h1> );
+                var colspan = Math.floor(12 / this.state?.attributes?.items?.length);
+                switch (ecp.entityTypeId) {
+
+                  case "slide":
+                    console.log("EntityQueue => Slide!", ecp);
+                    return (
+                      <Slide {...ecp.toObject()} key={key}/>
+                    );
+                    break;
+
+                  case "node":
+                    console.log("EntityQueue => NODE!", ecp);
+                    return ( <NodeDisplay {...ecp.toObject()} key={key} /> );
+                    break;
+
+                  case "media":
+                    console.log("EntityQueue => Media!", ecp);
+                    const MediaComponent = Media.getComponentForBundle(ecp.bundle);
+                    return (
+                      <Col lg={colspan} sm={12} key={key}>
+                        <MediaComponent  {...ecp.toObject()} />
+                      </Col>
+                    );
+                    break;
+
+                  default:
+                    return (
+                      <Col lg={colspan} sm={12} key={key}>
+                        <h1>Unimplemented subqueue type</h1>
+                      </Col>
+                    );
+                }
+              })}
             </Row>
           </Container>
         );
       }
+      else if (this.state?.loading) {
+        return ( <Loading /> )
+      } else
       return (
-        <h1>Entity Queue Render</h1>
+        <h1>No Data Available</h1>
       );
   }
-
-  renderQueueItem(item: EntityComponentPropsInterface , key: number) {
-    console.log("entityQueue Item Render", item);
-    const ecp = new EntityComponentProps(item);
-    var content = ( <h1>Entity Queue Item Render</h1> );
-    switch (ecp.entityTypeId) {
-      case "slide":
-        content = (<Slide {...ecp.toObject()} view_mode={"card"} />);
-        break;
-
-      case "node":
-        content = (<Article {...ecp.toObject()} view_mode={"card"} />);
-        break;
-
-
-      case "media":
-        const Component = Media.getComponentForBundle(ecp.bundle);
-        content = (<Component  {...ecp.toObject()} view_mode={"card"} />);
-        break;
-
-      default:
-        console.log("I don't know what to do with this: ".concat(ecp.entityTypeId), ecp);
-    }
-
-    const colspan = Math.floor(12 / this.state?.attributes?.items?.length);
-    return (
-      <Col lg={colspan} sm={12} key={key}>
-        {content}
-      </Col>
-    )
-  }
-
 
 }
 

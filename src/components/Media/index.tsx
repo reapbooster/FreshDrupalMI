@@ -1,15 +1,15 @@
 import EntityComponentBase, { EntityComponentState } from "../../DataTypes/EntityComponentBase";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
-import { ImageObject } from "../../DataTypes/ImageObject";
 import Video from "../Video";
+import MediaImage from './MediaImage';
 
 const MediaBundleComponents = {
   video: Video,
-  image: ImageObject,
+  image: MediaImage,
 }
 
 
-class Media  {
+class Media {
 
   public static getComponentForBundle(bundleId) {
     return ( MediaBundleComponents[bundleId] || null );

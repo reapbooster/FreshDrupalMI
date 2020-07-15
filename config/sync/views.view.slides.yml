@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.slide.field_background_image
     - field.storage.slide.field_subtitle
+    - image.style.media_library
     - image.style.thumbnail
   module:
     - eck
@@ -197,7 +198,7 @@ display:
           click_sort_column: title
           type: image
           settings:
-            image_style: thumbnail
+            image_style: media_library
             image_link: ''
           group_column: ''
           group_columns: {  }

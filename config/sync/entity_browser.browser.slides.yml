@@ -10,10 +10,10 @@ name: slides
 label: Slides
 display: iframe
 display_configuration:
-  width: '650'
-  height: '500'
+  width: 80%
+  height: '640'
   link_text: 'Select entities'
-  auto_open: true
+  auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
 widget_selector: single

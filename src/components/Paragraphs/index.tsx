@@ -2,6 +2,7 @@ import ParagraphSlide from "./ParagraphSlide";
 import ParagraphFourPanel from "./ParagraphFourPanel";
 import ParagraphText from "./ParagraphText";
 import ParagraphPullQuote from "./ParagraphPullQuote";
+import ParagraphTiles from "./ParagraphTiles";
 
 const ParagraphBundleComponents = {
   slide: ParagraphSlide,
@@ -9,6 +10,7 @@ const ParagraphBundleComponents = {
   four_tile_block_taxonomy: ParagraphFourPanel,
   body_content: ParagraphText,
   pull_quote: ParagraphPullQuote,
+  tiles: ParagraphTiles,
 }
 
 

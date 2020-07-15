@@ -88,6 +88,12 @@ class EntityComponentProps implements EntityComponentPropsInterface {
     return this.hasData();
   }
 
+  get label() {
+    return this.title || this.name || null;
+  }
+
+
+
 
 }
 
