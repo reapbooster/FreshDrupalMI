@@ -11,7 +11,10 @@ const MediaImage: React.FunctionComponent = (props) => {
   const url = style.getStyleByMachineName(props.view_mode) || props.thumbnail.uri.url;
   return (
     <>
-      <img src={url} className={'card-img'}/>
+      <img
+        {...style.getImgAttributes()}
+        height={props.height}
+        />
     </>
   );
 }

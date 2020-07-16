@@ -6,6 +6,8 @@ import {Card} from "react-bootstrap";
 import MediaImage from '../Media/MediaImage';
 import Holder from 'holderjs';
 import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase'
+import 'lazysizes';
+import 'lazysizes/plugins/aspectratio/ls.aspectratio';
 
 const NodeBundleComponents = {
   article: Article,
@@ -30,12 +32,15 @@ class NodeDisplay extends EntityComponentBase {
     var image = ( <Card.Img dataSrc={"holder.js/220x150"} /> );
     console.log("HOLDER IMAGE", this);
     if (this.state?.attributes?.field_hero_image?.field_media_image) {
-     image = ( <MediaImage {...this.state.attributes.field_hero_image} view_mode={"medium"} /> );
+     image = ( <MediaImage
+       {...this.state.attributes.field_hero_image}
+       height={"150px"}
+     /> );
     }
     return (
-      <Card key={this.state.key} className={"col-sm-6 col-sm-4 col-md-3 col-lg-3 m-10 p-10"}>
+      <Card key={this.state.key} className={"col-sm-6 col-sm-4 col-md-3 col-lg-3 m-10 p-10 text-center"}>
         <Card.Body>
-          <Card.Title className={"text-center"}>{this.state?.attributes?.title}</Card.Title>
+          <Card.Title>{this.state?.attributes?.title}</Card.Title>
         </Card.Body>
         {image}
       </Card>

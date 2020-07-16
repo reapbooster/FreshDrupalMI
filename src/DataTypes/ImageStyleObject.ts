@@ -28,6 +28,20 @@ class ImageStyleObject {
     return (this[styleName] !== undefined)? this[styleName] : null;
   }
 
+  getSrcSet() {
+    return `${this['thumbnail']} 100w, ${this['medium']} 220w, ${this['large']} 480w, ${this['fullscreen']} 1920w`;
+  }
+
+  getImgAttributes() {
+    return {
+      srcSet: this.getSrcSet(),
+      dataSizes: "auto",
+      className: "lazyload",
+      "data-aspectratio": "220/150",
+      objectFit: "cover",
+    }
+  }
+
 }
 
 export default ImageStyleObject;

@@ -130,6 +130,7 @@
     "jquery": "^3.5.1",
     "js-base64": "^2.6.3",
     "jsonwebtoken": "^8.5.1",
+    "lazysizes": "^5.2.2",
     "lodash": "^4.17.19",
     "logger": "0.0.1",
     "memoizee": "^0.4.14",
