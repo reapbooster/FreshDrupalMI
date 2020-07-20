@@ -1,16 +1,16 @@
-uuid: 65c60931-f7f8-4b70-9f48-5f68c2990f1b
+uuid: 94da3ec9-3074-4933-a25a-8c1357047433
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_body
-    - paragraphs.paragraphs_type.four_tile_block_taxonomy
+    - paragraphs.paragraphs_type.media_tiles_from_view
   module:
     - text
-id: paragraph.four_tile_block_taxonomy.field_body
+id: paragraph.media_tiles_from_view.field_body
 field_name: field_body
 entity_type: paragraph
-bundle: four_tile_block_taxonomy
+bundle: media_tiles_from_view
 label: body
 description: ''
 required: false

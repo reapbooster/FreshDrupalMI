@@ -156,4 +156,4 @@ process:
 destination:
   plugin: 'entity:media'
   default_bundle: report
-migration_dependencies: {}
+migration_dependencies: {  }
