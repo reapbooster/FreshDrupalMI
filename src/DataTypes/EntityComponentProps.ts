@@ -61,8 +61,8 @@ class EntityComponentProps implements EntityComponentPropsInterface {
 
   async getData(include: string = ""): Promise<any> {
     console.log("get Data called: ", this);
-    if (this.entityTypeId && this.bundle && this.id) {
-      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id}?jsonapi_include=1${include}`)
+    if (this.entityTypeId && this.bundle) {
+      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id || ""}?jsonapi_include=1${include}`)
         .catch(this.handleError);
     } else {
       this.handleError(new Error("Not Enough Data to make a getData call"));

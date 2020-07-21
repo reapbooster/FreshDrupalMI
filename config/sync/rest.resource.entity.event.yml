@@ -1,4 +1,4 @@
-uuid: 5fa0579b-f010-416f-aee6-35df9b6e706c
+uuid: 6c276181-c3d8-4180-a6f0-7a2475e588a9
 langcode: en
 status: false
 dependencies:
@@ -8,9 +8,10 @@ dependencies:
     - hal
     - schemata_json_schema
     - serialization
+    - simple_oauth
     - user
-id: entity.slide
-plugin_id: 'entity:slide'
+id: entity.event
+plugin_id: 'entity:event'
 granularity: method
 configuration:
   GET:
@@ -22,4 +23,5 @@ configuration:
       - xml
       - schema_json
     supported_auth:
+      - oauth2
       - cookie

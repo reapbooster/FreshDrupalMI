@@ -133,7 +133,6 @@ source:
     uuid:
       type: string
 process:
-  mid: id
   uuid: uuid
   name: name
   title: name
@@ -166,36 +165,6 @@ process:
     -
       plugin: 'milken_migrate:remote_video'
       source: video_url
-  field_centers:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: centers_tax
-      message: 'Empty Reference.'
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: centers
-      source: centers_tax
-  field_term_collection:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: term_collection_tax
-      message: 'Empty Reference.'
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: collections
-      source: term_collection_tax
-  field_term_program_initiatives:
-    -
-      plugin: skip_on_empty
-      method: process
-      source: program_initiatives_tax
-      message: 'Empty Reference.'
-    -
-      plugin: jsonapi_taxonomy
-      vocabulary: program_initiatives
-      source: program_initiatives_tax
 destination:
   plugin: 'entity:media'
   default_bundle: video

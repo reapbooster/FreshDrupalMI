@@ -80,7 +80,8 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
       $exists = $ref->exists();
       if ($exists instanceof EntityInterface) {
         $destination_values[] = ['target_id' => $exists->id()];
-        $toReturn[] = $exists->id();
+        $toReturn[] = $exists;
+        continue;
       }
       else {
         try {
@@ -117,7 +118,8 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
                 'field_published' => TRUE,
               ]);
             $destination_values = ['target_id' => $audio->id()];
-            $toReturn[] = $audio->id();
+            $toReturn[] = $audio;
+            continue;
           }
         }
         catch (\Exception $e) {

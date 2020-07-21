@@ -6,6 +6,7 @@ import MediaImage from './MediaImage';
 const MediaBundleComponents = {
   video: Video,
   image: MediaImage,
+
 }
 
 

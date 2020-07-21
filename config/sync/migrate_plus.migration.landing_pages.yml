@@ -20,33 +20,55 @@ source:
       title: Home
       path: /home
     -
+      uuid: 5d32e32c-04a3-41d7-bcc3-d76a79247406
       title: Research
       path: /research
       image:
         -
-          id: asdfasdf
+          id: 88d60ecb-b845-4e3e-adec-90a26e79e3c9
           type: media__image
     -
+      uuid: cf4424af-b3c9-4e5f-8a8f-bcaeb6a9f238
       title: Events
       path: /events
+      image:
+        -
+          id: f4342ea7-bb76-480f-b5d6-39be2ff1a91d
+          type: media__image
     -
+      uuid: 69b50630-bcb7-4698-968e-fb8be8bc8adb
       title: Programs
       path: /programs
+      image:
+        -
+          id: 1d77a790-8f3d-4e13-b19b-8611596786e7
+          type: media__image
     -
-      title: Events
-      path: /events
-    -
+      uuid: cf82182e-d0ea-4554-8cf7-b63524b37895
       title: 'Our Work on Covid 19'
       path: /covid
+      image:
+        -
+          id: 539f7f26-82c8-4b96-b027-2ee738c70ee2
+          type: media__image
     -
+      uuid: bec0619a-701e-4b19-8e67-0a129a08d6c2
       title: Podcasts
       path: /podcasts
+      image:
+        -
+          id: f7095a0a-fe54-472c-a1ba-150fb6983f7e
+          type: media__image
   ids:
-    title:
+    uuid:
       type: string
 process:
+  uuid: uuid
   title: title
   path/alias: path
+  field_hero_image:
+    plugin: 'milken_migrate:remote_media'
+    source: image
 destination:
   plugin: 'entity:node'
   default_bundle: landing_page

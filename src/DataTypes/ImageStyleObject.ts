@@ -6,9 +6,8 @@ class ImageStyleObject {
   constructor(values = null) {
     if (values !== null) {
       const reduced = values.reduce(this.reducer);
-      console.log("reducer", reduced);
       Object.assign(this, reduced);
-      console.log("Image Style Object", this);
+      console.debug("Image Style Object", this);
     }
   }
 

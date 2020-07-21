@@ -1,6 +1,6 @@
 sync:
   defaults:
-    mode: "two-way-resolved"
+    mode: "two-way-safe"
     flushOnCreate: true
     ignore:
       vcs: true

@@ -45,3 +45,10 @@ landing_page:
   js:
     js/LandingPage.entry.js: { preprocess: 0 }
 
+list:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    view: null
+  js:
+    js/List.entry.js: { preprocess: 0 }

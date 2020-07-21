@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d6ee7da8e8f9b799ff16279a30068f67",
+    "content-hash": "27a8ba8e14de628bd700a802d603b380",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -124,16 +124,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.146.0",
+            "version": "3.147.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3975a494888375b5bdabf21285f86b47d6e9d531"
+                "reference": "c58688f53c730b74cec1b6cfee8d9ed5bb40d946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3975a494888375b5bdabf21285f86b47d6e9d531",
-                "reference": "3975a494888375b5bdabf21285f86b47d6e9d531",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c58688f53c730b74cec1b6cfee8d9ed5bb40d946",
+                "reference": "c58688f53c730b74cec1b6cfee8d9ed5bb40d946",
                 "shasum": ""
             },
             "require": {
@@ -205,7 +205,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-07-15T18:18:08+00:00"
+            "time": "2020-07-21T18:11:40+00:00"
         },
         {
             "name": "behat/behat",
@@ -3253,9 +3253,6 @@
             },
             "type": "drupal-theme",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.5",
                     "datestamp": "1558584484",
@@ -3423,8 +3420,8 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0-beta2+4-dev",
-                    "datestamp": "1587802004",
+                    "version": "8.x-3.0-beta2+5-dev",
+                    "datestamp": "1589149547",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -3488,9 +3485,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-beta4",
                     "datestamp": "1576069085",
@@ -3682,7 +3676,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-3.23",
-                    "datestamp": "1592175696",
+                    "datestamp": "1592175762",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3830,7 +3824,7 @@
                 "shasum": "ae24c14a87186f2b9e9ef12822ac40cb7ad68b15"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "drupal/entity_reference_revisions": "*",
                 "drupal/paragraphs": "*",
                 "drupal/viewsreference": "*"
@@ -3841,9 +3835,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-2.0-beta6",
                     "datestamp": "1541261280",
@@ -3892,12 +3883,9 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-3.5",
-                    "datestamp": "1585778366",
+                    "datestamp": "1585778744",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4083,9 +4071,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.5",
                     "datestamp": "1572542288",
@@ -4207,9 +4192,6 @@
             },
             "type": "drupal-profile",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.8",
                     "datestamp": "1524572284",
@@ -4718,7 +4700,7 @@
                 "shasum": "6eab25cdeed48efdd608db40191243f0bd61db47"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
@@ -5019,9 +5001,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-2.1",
                     "datestamp": "1585251827",
@@ -5078,8 +5057,8 @@
                     "dev-8.x-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.4+2-dev",
-                    "datestamp": "1587065527",
+                    "version": "8.x-3.4+3-dev",
+                    "datestamp": "1588096172",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -5500,9 +5479,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0",
                     "datestamp": "1578322688",
@@ -5595,9 +5571,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-2.1",
                     "datestamp": "1585662324",
@@ -5631,6 +5604,10 @@
                     "name": "See other contributors",
                     "homepage": "https://www.drupal.org/node/1998478/committers",
                     "role": "contributor"
+                },
+                {
+                    "name": "jungle",
+                    "homepage": "https://www.drupal.org/user/2919723"
                 },
                 {
                     "name": "slashrsm",
@@ -5667,9 +5644,6 @@
             },
             "type": "metapackage",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-2.1",
                     "datestamp": "1585662324",
@@ -5699,6 +5673,10 @@
                 {
                     "name": "chr.fritsch",
                     "homepage": "https://www.drupal.org/user/2103716"
+                },
+                {
+                    "name": "jungle",
+                    "homepage": "https://www.drupal.org/user/2919723"
                 },
                 {
                     "name": "slashrsm",
@@ -5971,7 +5949,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dynamic_entity_reference.git",
-                "reference": "712f1b5f3691e63666e7d7cffda0c7d1050e256b"
+                "reference": "72f50a9064e98ed5adde5bbeffac30c2b254126f"
             },
             "require": {
                 "drupal/core": "^8.7.7 || ^9"
@@ -5985,8 +5963,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.0-alpha13+1-dev",
-                    "datestamp": "1590106477",
+                    "version": "8.x-2.0-alpha13+2-dev",
+                    "datestamp": "1594469445",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -6020,7 +5998,7 @@
                 "issues": "http://drupal.org/project/dynamic_entity_reference",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2020-07-11T12:08:14+00:00"
+            "time": "2020-07-21T01:10:09+00:00"
         },
         {
             "name": "drupal/easy_install",
@@ -6267,6 +6245,70 @@
             }
         },
         {
+            "name": "drupal/entity",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/entity.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "ac359ada43416ca3a8d0e44f2985b0a9fae07625"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1582735747",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Berdir",
+                    "homepage": "https://www.drupal.org/user/214652"
+                },
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "dawehner",
+                    "homepage": "https://www.drupal.org/user/99340"
+                },
+                {
+                    "name": "dixon_",
+                    "homepage": "https://www.drupal.org/user/239911"
+                },
+                {
+                    "name": "fago",
+                    "homepage": "https://www.drupal.org/user/16747"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                }
+            ],
+            "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
+            "homepage": "http://drupal.org/project/entity",
+            "support": {
+                "source": "https://git.drupalcode.org/project/entity"
+            }
+        },
+        {
             "name": "drupal/entity_block",
             "version": "1.0.0-beta3",
             "source": {
@@ -6352,7 +6394,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-2.5",
-                    "datestamp": "1588015347",
+                    "datestamp": "1588015429",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6432,17 +6474,16 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev",
-                    "dev-8.x-1.x": "8.1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0",
-                    "datestamp": "1581940806",
+                    "datestamp": "1581940931",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "branch-alias": {
+                    "dev-8.x-1.x": "8.1.x-dev"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -6479,7 +6520,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-2.5",
-                    "datestamp": "1588015347",
+                    "datestamp": "1588015429",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6627,7 +6668,7 @@
                 "shasum": "84c3cfc3c895783660dcf71f88d5be274a4f9b3e"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "league/csv": "^9.2"
             },
             "require-dev": {
@@ -6635,9 +6676,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-alpha4",
                     "datestamp": "1574264584",
@@ -6686,9 +6724,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.8",
                     "datestamp": "1583961846",
@@ -6745,9 +6780,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.1",
                     "datestamp": "1513106885",
@@ -6802,8 +6834,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0+3-dev",
-                    "datestamp": "1591102032",
+                    "version": "8.x-1.0+4-dev",
+                    "datestamp": "1592318780",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -6961,20 +6993,20 @@
         },
         {
             "name": "drupal/facets",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/facets.git",
-                "reference": "8.x-1.4"
+                "reference": "8.x-1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/facets-8.x-1.4.zip",
-                "reference": "8.x-1.4",
-                "shasum": "ee2d584b8a225ab981e313f6050e13bc9c98e40b"
+                "url": "https://ftp.drupal.org/files/projects/facets-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "35b6cd9f0b8bda41581452a2da45a3f2da9d016b"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "^8.8 || ^9"
             },
             "require-dev": {
                 "drupal/search_api": "~1.5"
@@ -6982,12 +7014,15 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.4",
-                    "datestamp": "1556645881",
+                    "version": "8.x-1.5",
+                    "datestamp": "1595015391",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "branch-alias": {
+                    "dev-8.x-1.x": "1.x-dev"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -7051,9 +7086,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0",
                     "datestamp": "1568102885",
@@ -7258,7 +7290,7 @@
                 "shasum": "8b683d06c7cbe9a57130edaf875a058a2f1bfc70"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "drupal/token": "*"
             },
             "require-dev": {
@@ -7266,9 +7298,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-2.0-beta7",
                     "datestamp": "1562796485",
@@ -7367,12 +7396,58 @@
             }
         },
         {
+            "name": "drupal/file_management",
+            "version": "1.0.0-alpha3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/file_management.git",
+                "reference": "8.x-1.0-alpha3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/file_management-8.x-1.0-alpha3.zip",
+                "reference": "8.x-1.0-alpha3",
+                "shasum": "90c0ae85f06ecddff5adfbd4ca7fcdd9ad50bdb6"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-alpha3",
+                    "datestamp": "1553253780",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "David Pacassi Torrico (dpacassi)",
+                    "homepage": "https://www.drupal.org/u/dpacassi",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Allows you to edit existing files or images.",
+            "homepage": "https://www.drupal.org/project/file_management",
+            "support": {
+                "source": "https://cgit.drupalcode.org/file_management",
+                "issues": "https://www.drupal.org/project/issues/file_management"
+            }
+        },
+        {
             "name": "drupal/fontawesome",
             "version": "dev-2.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/fontawesome.git",
-                "reference": "82dc716fb8e95a77a59ff37b1029225eb4c40b7e"
+                "reference": "5cac6dbb09d1120c79dd48c65ef9576abd169cc1"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -7383,8 +7458,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.16+8-dev",
-                    "datestamp": "1593707007",
+                    "version": "8.x-2.17+1-dev",
+                    "datestamp": "1594655500",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7423,7 +7498,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/fontawesome"
             },
-            "time": "2020-07-13T15:52:39+00:00"
+            "time": "2020-07-16T20:29:24+00:00"
         },
         {
             "name": "drupal/form_options_attributes",
@@ -7550,8 +7625,8 @@
                     "dev-4.x": "4.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-4.0-alpha4+10-dev",
-                    "datestamp": "1593005414",
+                    "version": "8.x-4.0-alpha4+11-dev",
+                    "datestamp": "1593774048",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7753,13 +7828,10 @@
                 "shasum": "e83e8d0fc53b18774d298ef1b3c95e6a16576dd9"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-beta2",
                     "datestamp": "1552142584",
@@ -7996,14 +8068,11 @@
                 "shasum": "2cb5f98fa6f7b6ddf80b764d0bee4858edbe7795"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "drupal/restui": "*"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.3",
                     "datestamp": "1480950183",
@@ -8078,10 +8147,10 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/jsonapi_extras.git",
-                "reference": "6b9dbaa4dcd0b648bb7e372d904619b6838a8178"
+                "reference": "1662373a6efecb844a0618f5c6fc3c8fabc5d581"
             },
             "require": {
-                "drupal/core": "~8.0",
+                "drupal/core": "^8 || ^9",
                 "drupal/jsonapi": "*",
                 "e0ipso/shaper": "^1"
             },
@@ -8094,8 +8163,8 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.13+1-dev",
-                    "datestamp": "1585435787",
+                    "version": "8.x-3.15+1-dev",
+                    "datestamp": "1595014236",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -8104,12 +8173,12 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
                     "name": "Mateu Aguiló Bosch",
-                    "homepage": "https://www.drupal.org/user/550110",
+                    "homepage": "https://www.drupal.org/user/3366066",
                     "email": "mateu.aguilo.bosch@gmail.com"
                 },
                 {
@@ -8119,6 +8188,10 @@
                 {
                     "name": "Karel Majzlik",
                     "homepage": "https://www.drupal.org/u/karlos007"
+                },
+                {
+                    "name": "Björn Brala",
+                    "homepage": "https://www.drupal.org/u/bbrala"
                 }
             ],
             "description": "JSON:API Extras provides a means to override and provide limited configurations to the default zero-configuration implementation provided by the JSON:API module.",
@@ -8126,7 +8199,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/jsonapi_extras"
             },
-            "time": "2020-03-28T22:51:30+00:00"
+            "time": "2020-07-20T14:25:25+00:00"
         },
         {
             "name": "drupal/jsonapi_image_styles",
@@ -8143,13 +8216,10 @@
                 "shasum": "4be2b938296dc8a55146e413fb046279c51791a4"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-beta1",
                     "datestamp": "1568319488",
@@ -8222,6 +8292,62 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/jsonapi_include",
                 "issues": "https://www.drupal.org/project/issues/jsonapi_include"
+            }
+        },
+        {
+            "name": "drupal/jsonapi_resources",
+            "version": "1.0.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/jsonapi_resources.git",
+                "reference": "8.x-1.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_resources-8.x-1.0-beta3.zip",
+                "reference": "8.x-1.0-beta3",
+                "shasum": "8102e802ecb8dac96a8d4130c77c6c5399ba7fd2"
+            },
+            "require": {
+                "drupal/core": "^8.8@alpha"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta3",
+                    "datestamp": "1578690483",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "API-First Initiative",
+                    "homepage": "https://www.drupal.org/user/3616626"
+                },
+                {
+                    "name": "gabesullice",
+                    "homepage": "https://www.drupal.org/user/2287430"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                }
+            ],
+            "description": "This module let's you define custom resources at routes of your choice that use existing resource types.",
+            "homepage": "https://www.drupal.org/project/jsonapi_resources",
+            "keywords": [
+                "Drupal",
+                "JSON API"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/jsonapi_resources"
             }
         },
         {
@@ -8627,13 +8753,10 @@
                 "shasum": "5df90cb06e7e62037c8523924d0719319ecd8a63"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-beta2",
                     "datestamp": "1580884959",
@@ -8747,7 +8870,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-2.0-beta4",
-                    "datestamp": "1591126506",
+                    "datestamp": "1591126607",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -8869,17 +8992,17 @@
         },
         {
             "name": "drupal/media_migration",
-            "version": "1.0.0-alpha3",
+            "version": "1.0.0-alpha4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/media_migration.git",
-                "reference": "8.x-1.0-alpha3"
+                "reference": "8.x-1.0-alpha4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_migration-8.x-1.0-alpha3.zip",
-                "reference": "8.x-1.0-alpha3",
-                "shasum": "38504e1f28f92e740a54979269e2c49d4407868b"
+                "url": "https://ftp.drupal.org/files/projects/media_migration-8.x-1.0-alpha4.zip",
+                "reference": "8.x-1.0-alpha4",
+                "shasum": "dd09f9c74a471c2dba5201ac21ef6f2a40bc1748"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -8896,8 +9019,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-alpha3",
-                    "datestamp": "1589970301",
+                    "version": "8.x-1.0-alpha4",
+                    "datestamp": "1595337686",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -9004,7 +9127,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-1.13",
-                    "datestamp": "1587478404",
+                    "datestamp": "1587550202",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -9108,7 +9231,7 @@
                 "shasum": "383b0372343334f5efaaa653b5d69bc96d01d1db"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "drupal/devel": "*",
                 "drupal/kint": "*"
             },
@@ -9162,13 +9285,10 @@
                 "shasum": "4a24edc577541b5aa67682a4f89c8dfd7c0788d5"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.1",
                     "datestamp": "1539064380",
@@ -9213,13 +9333,10 @@
                 "shasum": "75a68d7b513ca0ed00943cb791a9e0c28fe03dc2"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.9",
                     "datestamp": "1562733187",
@@ -9386,9 +9503,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0",
                     "datestamp": "1540915380",
@@ -9874,18 +9988,62 @@
             }
         },
         {
-            "name": "drupal/paragraphs",
-            "version": "1.12.0",
+            "name": "drupal/paragraph_blocks",
+            "version": "2.1.0-beta5",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/paragraphs.git",
-                "reference": "8.x-1.12"
+                "url": "https://git.drupalcode.org/project/paragraph_blocks.git",
+                "reference": "8.x-2.1-beta5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.12.zip",
-                "reference": "8.x-1.12",
-                "shasum": "3b67d8af1160af42d93a4610be1e02869e428965"
+                "url": "https://ftp.drupal.org/files/projects/paragraph_blocks-8.x-2.1-beta5.zip",
+                "reference": "8.x-2.1-beta5",
+                "shasum": "66899fe22af357234637b1f7b66ed286ef1f7f44"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/ctools": "^3.0",
+                "drupal/paragraphs": "^1.8"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.1-beta5",
+                    "datestamp": "1572523386",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "douggreen",
+                    "homepage": "https://www.drupal.org/user/29191"
+                }
+            ],
+            "description": "Drupal Paragraph Blocks module",
+            "homepage": "https://www.drupal.org/project/paragraph_blocks",
+            "keywords": [
+                "Drupal",
+                "Paragraphs"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraph_blocks"
+            }
+        },
+        {
+            "name": "drupal/paragraphs",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs.git",
+                "reference": "2eb93aa0b8e12a07fc75e6cb7e82702e03f88fcb"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9",
@@ -9909,12 +10067,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
                 "drupal": {
-                    "version": "8.x-1.12",
-                    "datestamp": "1590140081",
+                    "version": "8.x-1.12+2-dev",
+                    "datestamp": "1591219499",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -9952,6 +10113,380 @@
             "homepage": "https://www.drupal.org/project/paragraphs",
             "support": {
                 "source": "https://git.drupalcode.org/project/paragraphs"
+            },
+            "time": "2020-06-28T10:39:42+00:00"
+        },
+        {
+            "name": "drupal/paragraphs_browser",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_browser.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_browser-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "4bc0f948d07f3b5c77209794449acd708c493107"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/paragraphs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1558728785",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Deciphered",
+                    "homepage": "https://www.drupal.org/user/103796"
+                },
+                {
+                    "name": "Mojiferous",
+                    "homepage": "https://www.drupal.org/user/1678298"
+                },
+                {
+                    "name": "michaellander",
+                    "homepage": "https://www.drupal.org/user/636494"
+                },
+                {
+                    "name": "tandroid",
+                    "homepage": "https://www.drupal.org/user/2879591"
+                }
+            ],
+            "description": "Provides browser for adding additional paragraphs.",
+            "homepage": "https://www.drupal.org/project/paragraphs_browser",
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraphs_browser"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_button",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_button.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_button-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "45da8f3f66260fafed4fc77278179255e0cc7576"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/paragraphs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1591675837",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "livido",
+                    "homepage": "https://www.drupal.org/user/181270"
+                }
+            ],
+            "description": "Control Paragraphs \"Add more\" button on Top or Bottom",
+            "homepage": "https://www.drupal.org/project/paragraphs_button",
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraphs_button"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_edit",
+            "version": "2.0.0-alpha8",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_edit.git",
+                "reference": "8.x-2.0-alpha8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_edit-8.x-2.0-alpha8.zip",
+                "reference": "8.x-2.0-alpha8",
+                "shasum": "7447a72afc3ef528afa51996bbf7c8dbf3d822b8"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/paragraphs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0-alpha8",
+                    "datestamp": "1592930672",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "casey",
+                    "homepage": "https://www.drupal.org/user/32403"
+                }
+            ],
+            "description": "Allows users to edit/clone and delete paragraphs.",
+            "homepage": "https://www.drupal.org/project/paragraphs_edit",
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraphs_edit"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_ee",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_ee.git",
+                "reference": "8.x-1.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_ee-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "4b375f19ae1d9aa9c10a08940d5b529c35f7a6f9"
+            },
+            "require": {
+                "drupal/core": "^8.6 || ^9",
+                "drupal/paragraphs_features": "^1.4"
+            },
+            "require-dev": {
+                "drupal/paragraphs_sets": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.6",
+                    "datestamp": "1592568636",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Stefan Borchert",
+                    "homepage": "https://www.drupal.org/user/36942",
+                    "email": "stefan.borchert@undpaul.de"
+                }
+            ],
+            "description": "Paragraphs Editor Enhancements for better usability.",
+            "homepage": "https://www.drupal.org/project/paragraphs_ee",
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraphs_ee"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_features",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_features.git",
+                "reference": "8.x-1.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_features-8.x-1.9.zip",
+                "reference": "8.x-1.9",
+                "shasum": "7768608d792d7c89a3168df21d9b99f9ad826f8c"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9",
+                "drupal/paragraphs": "^1.12"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.9",
+                    "datestamp": "1591176630",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Mladen Todorovic",
+                    "homepage": "https://www.drupal.org/user/2103716",
+                    "email": "mladen.todorovic@burda.com"
+                },
+                {
+                    "name": "Daniel Bosen",
+                    "homepage": "https://www.drupal.org/user/404865",
+                    "email": "daniel.bosen@burda.com"
+                },
+                {
+                    "name": "Christian Fritsch",
+                    "homepage": "https://www.drupal.org/user/3453049",
+                    "email": "christian.fritsch@burda.com"
+                },
+                {
+                    "name": "Volker Killesreiter",
+                    "homepage": "https://www.drupal.org/user/3511180",
+                    "email": "volker.killesreiter@burda.com"
+                },
+                {
+                    "name": "Alex Pott",
+                    "homepage": "https://www.drupal.org/user/57527",
+                    "email": "alex.a.pott@gmail.com"
+                }
+            ],
+            "description": "Paragraphs features for extending paragraphs widget functionality.",
+            "homepage": "https://www.drupal.org/project/paragraphs_features",
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraphs_features"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_grid",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_grid.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_grid-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "a204ee2937bc4027e47f7e431b8017bead099535"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/paragraphs": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1594044626",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "JFeltkamp",
+                    "homepage": "https://www.drupal.org/user/2471686"
+                }
+            ],
+            "description": "Provides possibillity to render paragraphs components in a grid with bootstrap grid classes.",
+            "homepage": "https://www.drupal.org/project/paragraphs_grid",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/paragraphs_grid",
+                "issues": "https://www.drupal.org/project/issues/paragraphs_grid"
+            }
+        },
+        {
+            "name": "drupal/paragraphs_inline_entity_form",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/paragraphs_inline_entity_form.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/paragraphs_inline_entity_form-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "aeacab509819d205acdff9ea266f0c43dbbf1e07"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/entity": "~1.0",
+                "drupal/entity_browser": "~1.0|~2.0",
+                "drupal/entity_browser_entity_form": "*",
+                "drupal/entity_embed": "~1.0",
+                "drupal/inline_entity_form": "~1.0",
+                "drupal/paragraphs": "~1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1560941288",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Peacock",
+                    "homepage": "https://www.drupal.org/user/2209422"
+                },
+                {
+                    "name": "marcelovani",
+                    "homepage": "https://www.drupal.org/user/854220"
+                },
+                {
+                    "name": "tashaharrison80",
+                    "homepage": "https://www.drupal.org/user/2746877"
+                },
+                {
+                    "name": "theapi",
+                    "homepage": "https://www.drupal.org/user/883708"
+                }
+            ],
+            "description": "Extends Inline Entity Form to add support for Paragraphs",
+            "homepage": "https://www.drupal.org/project/paragraphs_inline_entity_form",
+            "support": {
+                "source": "https://git.drupalcode.org/project/paragraphs_inline_entity_form"
             }
         },
         {
@@ -10175,9 +10710,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.4",
                     "datestamp": "1581504947",
@@ -10227,7 +10759,7 @@
                 "shasum": "5998a6b41682aa97d2475372764c00c34298d42d"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
@@ -10328,8 +10860,8 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0-alpha15+2-dev",
-                    "datestamp": "1591507587",
+                    "version": "8.x-3.0-alpha15+3-dev",
+                    "datestamp": "1591898618",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -10451,9 +10983,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-beta2",
                     "datestamp": "1585777919",
@@ -10953,7 +11482,7 @@
                 "shasum": "aaf92e087e5d3c4c6907b00b5dbb66b05eb5cda2"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "drupal/token": "*"
             },
             "type": "drupal-module",
@@ -11055,13 +11584,10 @@
                 "shasum": "966c50eb6292bf502dfd114948389df2f8f802a7"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.2",
                     "datestamp": "1552491485",
@@ -11114,13 +11640,10 @@
                 "shasum": "85a62aaa0f1bb64a33e1ba41a63d86e98c173fa1"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-beta4",
                     "datestamp": "1559851385",
@@ -11240,9 +11763,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.1",
                     "datestamp": "1568829484",
@@ -11354,13 +11874,10 @@
                 "shasum": "fc913c213dc5c8a44b17e366ad21a61806a71252"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.2",
                     "datestamp": "1440572939",
@@ -11504,7 +12021,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-1.0-alpha5",
-                    "datestamp": "1590294402",
+                    "datestamp": "1591397037",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -11625,9 +12142,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.1",
                     "datestamp": "1561483986",
@@ -11678,9 +12192,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-3.1",
                     "datestamp": "1582576993",
@@ -11731,7 +12242,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-2.4",
-                    "datestamp": "1587686284",
+                    "datestamp": "1587686337",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -12369,9 +12880,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.0-alpha14",
                     "datestamp": "1575974284",
@@ -12400,6 +12908,14 @@
                     "name": "Błażej Owczarczyk",
                     "homepage": "https://www.drupal.org/user/353861",
                     "email": "blazeyy@gmail.com"
+                },
+                {
+                    "name": "colorfield",
+                    "homepage": "https://www.drupal.org/user/2295486"
+                },
+                {
+                    "name": "dan2k3k4",
+                    "homepage": "https://www.drupal.org/user/2437398"
                 }
             ],
             "description": "Provides webpack for Drupal.",
@@ -12427,7 +12943,7 @@
                 "shasum": "8582edd5fa82e0d9b41340c7c4c63be6367edbf8"
             },
             "require": {
-                "drupal/core": "*",
+                "drupal/core": "^8",
                 "drupal/inline_entity_form": "*"
             },
             "require-dev": {
@@ -12441,9 +12957,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.2",
                     "datestamp": "1534434781",
@@ -15926,16 +16439,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "1.13.0",
+            "version": "1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "21bfb5b3243b8ceb9eda499a4d699fc42c11a9d1"
+                "reference": "2383aad5689778470491581442aab38cec41bf1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/21bfb5b3243b8ceb9eda499a4d699fc42c11a9d1",
-                "reference": "21bfb5b3243b8ceb9eda499a4d699fc42c11a9d1",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/2383aad5689778470491581442aab38cec41bf1d",
+                "reference": "2383aad5689778470491581442aab38cec41bf1d",
                 "shasum": ""
             },
             "require": {
@@ -15952,10 +16465,12 @@
                 "ext-xmlwriter": "*",
                 "ext-zip": "*",
                 "ext-zlib": "*",
-                "maennchen/zipstream-php": "^2.0",
+                "maennchen/zipstream-php": "^2.1",
                 "markbaker/complex": "^1.4",
                 "markbaker/matrix": "^1.2",
                 "php": "^7.2",
+                "psr/http-client": "^1.0",
+                "psr/http-factory": "^1.0",
                 "psr/simple-cache": "^1.0"
             },
             "require-dev": {
@@ -16016,7 +16531,7 @@
                 "xls",
                 "xlsx"
             ],
-            "time": "2020-05-31T13:49:28+00:00"
+            "time": "2020-07-19T09:51:35+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -16069,20 +16584,20 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.32",
+            "version": "0.12.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "d03863f504c8432b3de4d1881f73f6acb8c0e67c"
+                "reference": "46e698a0452526a05c4a351d7c47c4b8c37a548d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d03863f504c8432b3de4d1881f73f6acb8c0e67c",
-                "reference": "d03863f504c8432b3de4d1881f73f6acb8c0e67c",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/46e698a0452526a05c4a351d7c47c4b8c37a548d",
+                "reference": "46e698a0452526a05c4a351d7c47c4b8c37a548d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": "^7.1|^8.0"
             },
             "conflict": {
                 "phpstan/phpstan-shim": "*"
@@ -16121,29 +16636,29 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-01T11:57:52+00:00"
+            "time": "2020-07-19T22:10:11+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
-            "version": "0.12.4",
+            "version": "0.12.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
-                "reference": "9b4b8851fb5d59fd0eed00fbe9c22cfc328e0187"
+                "reference": "bfabc6a1b4617fbcbff43f03a4c04eae9bafae21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/9b4b8851fb5d59fd0eed00fbe9c22cfc328e0187",
-                "reference": "9b4b8851fb5d59fd0eed00fbe9c22cfc328e0187",
+                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/bfabc6a1b4617fbcbff43f03a4c04eae9bafae21",
+                "reference": "bfabc6a1b4617fbcbff43f03a4c04eae9bafae21",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.1",
-                "phpstan/phpstan": "^0.12"
+                "php": "^7.1 || ^8.0",
+                "phpstan/phpstan": "^0.12.26"
             },
             "require-dev": {
                 "consistence/coding-standard": "^3.0.1",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "ergebnis/composer-normalize": "^2.0.2",
                 "jakub-onderka/php-parallel-lint": "^1.0",
                 "phing/phing": "^2.16.0",
@@ -16172,7 +16687,7 @@
                 "MIT"
             ],
             "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
-            "time": "2020-05-30T18:02:31+00:00"
+            "time": "2020-07-21T14:52:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -20590,28 +21105,27 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.1.0",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e"
+                "reference": "3170448f5769fe19f456173d833734e0ff1b84df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
-                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/3170448f5769fe19f456173d833734e0ff1b84df",
+                "reference": "3170448f5769fe19f456173d833734e0ff1b84df",
                 "shasum": ""
             },
             "require": {
-                "ext-filter": "^7.1",
-                "php": "^7.2",
-                "phpdocumentor/reflection-common": "^2.0",
-                "phpdocumentor/type-resolver": "^1.0",
-                "webmozart/assert": "^1"
+                "ext-filter": "*",
+                "php": "^7.2 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.2",
+                "phpdocumentor/type-resolver": "^1.3",
+                "webmozart/assert": "^1.9.1"
             },
             "require-dev": {
-                "doctrine/instantiator": "^1",
-                "mockery/mockery": "^1"
+                "mockery/mockery": "~1.3.2"
             },
             "type": "library",
             "extra": {
@@ -20639,7 +21153,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2020-02-22T12:28:44+00:00"
+            "time": "2020-07-20T20:05:34+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -21828,6 +22342,7 @@
         "drupal/entityqueue": 20,
         "drupal/external_entities": 15,
         "drupal/file_entity": 10,
+        "drupal/file_management": 15,
         "drupal/fontawesome": 20,
         "drupal/gatsby": 20,
         "drupal/graphql": 20,
@@ -21836,6 +22351,7 @@
         "drupal/inline_entity_form": 5,
         "drupal/js_entity": 20,
         "drupal/jsonapi_extras": 20,
+        "drupal/jsonapi_resources": 10,
         "drupal/layout_builder_kit": 10,
         "drupal/layout_builder_styles": 10,
         "drupal/layout_library": 10,
@@ -21852,6 +22368,11 @@
         "drupal/openapi": 5,
         "drupal/openid_connect": 10,
         "drupal/page_manager": 10,
+        "drupal/paragraph_blocks": 10,
+        "drupal/paragraphs": 20,
+        "drupal/paragraphs_browser": 10,
+        "drupal/paragraphs_edit": 15,
+        "drupal/paragraphs_inline_entity_form": 10,
         "drupal/purge": 10,
         "drupal/rest_export_nested": 15,
         "drupal/restui": 20,

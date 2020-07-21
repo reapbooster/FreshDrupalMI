@@ -73,6 +73,7 @@ module:
   jsonapi_extras: 0
   jsonapi_image_styles: 0
   jsonapi_include: 0
+  jsonapi_resources: 0
   key_value_field: 0
   language: 0
   layout_builder: 0
@@ -103,7 +104,11 @@ module:
   options: 0
   page_cache: 0
   page_manager: 0
+  paragraph_blocks: 0
   paragraphs: 0
+  paragraphs_browser: 0
+  paragraphs_button: 0
+  paragraphs_grid: 0
   path: 0
   path_alias: 0
   rdf: 0
