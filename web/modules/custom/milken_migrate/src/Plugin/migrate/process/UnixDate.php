@@ -29,13 +29,20 @@ class UnixDate extends ProcessPluginBase {
       ->debug(__CLASS__);
     $dt = new \DateTime();
     if (!empty($value)) {
-      $dt = \DateTime::createFromFormat(\DateTimeInterface::W3C, $value);
+      if (strpos($value, "+")) {
+        $format = \DateTimeInterface::ATOM;
+      } elseif (strpos($value, "T")) {
+        $format = \DateTimeInterface::ISO8601;
+      } else {
+        $format = \DateTimeInterface::W3C;
+      }
+      $dt = \DateTime::createFromFormat($format, $value);
     }
-    $row->setDestinationProperty($destination_property, $dt);
     if ($dt instanceof \DateTime) {
-      return $dt->getTimestamp();
+      $row->setDestinationProperty($destination_property, $dt->format('Y-m-d\TH:i:s'));
+      return $dt->format('Y-m-d\TH:i:s');
     }
-    return $dt;
+    return NULL;
   }
 
 }
