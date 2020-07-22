@@ -31,9 +31,11 @@ class UnixDate extends ProcessPluginBase {
     if (!empty($value)) {
       if (strpos($value, "+")) {
         $format = \DateTimeInterface::ATOM;
-      } elseif (strpos($value, "T")) {
+      }
+      elseif (strpos($value, "T")) {
         $format = \DateTimeInterface::ISO8601;
-      } else {
+      }
+      else {
         $format = \DateTimeInterface::W3C;
       }
       $dt = \DateTime::createFromFormat($format, $value);
