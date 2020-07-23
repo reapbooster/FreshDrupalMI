@@ -126,7 +126,8 @@ class Paragraphs extends ProcessPluginBase {
       if ($paragraph instanceof Paragraph) {
         try {
           $paragraph->save();
-        } catch (EntityNotFoundException $e) {
+        }
+        catch (EntityNotFoundException $e) {
           \Kint::dump($e);
           exit();
         }

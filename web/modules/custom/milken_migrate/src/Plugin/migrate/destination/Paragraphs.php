@@ -6,12 +6,12 @@ use Drupal\Component\Plugin\ConfigurableInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\entity_embed\Exception\EntityNotFoundException;
-use \Drupal\entity_reference_revisions\Plugin\migrate\destination\EntityReferenceRevisions;
+use Drupal\entity_reference_revisions\Plugin\migrate\destination\EntityReferenceRevisions;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
 
 /**
- * Class Paragraphs
+ * Class Paragraphs.
  *
  * @package Drupal\milken_migrate\Plugin\migrate\destination
  *
@@ -30,11 +30,12 @@ class Paragraphs extends EntityReferenceRevisions implements ConfigurableInterfa
   protected function save(ContentEntityInterface $entity, array $oldDestinationIdValues = []) {
     $exists = $this->entityExixsts('paragraphs', $entity->uuid());
     if ($exists instanceof EntityInterface) {
-     throw new MigrateSkipRowException("Paragraph exists");
+      throw new MigrateSkipRowException("Paragraph exists");
     }
     try {
       $entity->save();
-    } catch (EntityNotFoundException $e) {
+    }
+    catch (EntityNotFoundException $e) {
       \Kint::dump($entity->toArray());
       exit();
     }
