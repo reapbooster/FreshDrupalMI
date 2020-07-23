@@ -26,7 +26,6 @@ define('MILKEN_MIGRATION_ORDER', [
   "event",
   "panel",
   "room",
-  "panel",
   "speaker",
   "track",
   "node_article",

@@ -65,7 +65,14 @@ source:
     paragraph_revision_id:
       type: integer
 process:
-  uuid: uuid
+  uuid:
+    -
+      plugin: milken_migrate:uuid_exists
+      source: uuid
+      entity_type: paragraph
+    -
+      plugin: get
+      source: uuid
   langcode:
     plugin: default_value
     default_value: en
@@ -89,6 +96,6 @@ process:
     plugin: default_value
     default_value: 1
 destination:
-  plugin: 'entity_reference_revisions:paragraph'
+  plugin: 'milken_reference_revisions:paragraph'
   default_bundle: body_content
 migration_dependencies: null

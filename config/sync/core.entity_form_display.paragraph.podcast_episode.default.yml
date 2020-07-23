@@ -75,6 +75,14 @@ targetEntityType: paragraph
 bundle: podcast_episode
 mode: default
 content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 6

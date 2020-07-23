@@ -11,6 +11,7 @@ use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\entity_embed\Exception\EntityNotFoundException;
 
 /**
  * Filter to download image and return media reference.
@@ -60,11 +61,15 @@ class Paragraphs extends ProcessPluginBase {
       $ref->getRemoteData();
       $paragraph = $ref->exists();
       if ($paragraph instanceof RevisionableInterface) {
-        $destination_value[] = $paragraph;
+        $destination_value[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId(),
+        ];
         $toReturn[] = [
           "target_id" => $paragraph->id(),
           "target_revision_id" => $paragraph->getRevisionId(),
         ];
+        continue;
       }
       else {
         switch ($ref->getBundleTypeId()) {
@@ -80,25 +85,55 @@ class Paragraphs extends ProcessPluginBase {
                 'field_episode_ref' => $episode,
                 'langcode' => 'en',
               ]);
+              $paragraph->isNew();
             }
             break;
 
-          default:
+          case "body_content_alternative":
             $paragraph = Paragraph::create([
-              'type' => 'unmigrated_paragraph',
-              'uuid' => $paragraph_ref['id'],
+              'type' => 'body_content',
+              'uuid' => $ref->getId(),
+              'field_background' => "transparent",
+              'langcode' => 'en',
+              'field_body' => [
+                'value' => $ref->field_content_alternative_area['value'],
+                'format' => 'full_html',
+              ],
+              'field_num_text_columns' => 1,
             ]);
-            $paragraph->set('langcode', 'en');
-            $paragraph->set('field_type', $paragraph_ref['type']);
-            $paragraph->set('field_id', $paragraph_ref['id']);
-            $paragraph->set('field_revision_id', $paragraph_ref['meta']['revision_id']);
+            $paragraph->isNew();
+            break;
+
+          case "pull_quote":
+            $paragraph = Paragraph::create([
+              'type' => 'body_content',
+              'uuid' => $ref->getId(),
+              'field_background' => "transparent",
+              'langcode' => 'en',
+              'field_body' => [
+                'value' => $ref->field_body_quote,
+                'format' => 'full_html',
+              ],
+            ]);
+            $paragraph->isNew();
+            break;
+
+          default:
+            \Drupal::logger('milken_migrate')
+              ->alert("Cannot migrate paragraph: " . print_r($ref, TRUE));
         }
       }
-
       if ($paragraph instanceof Paragraph) {
-        $paragraph->isNew();
-        $paragraph->save();
-        $destination_value[] = $paragraph;
+        try {
+          $paragraph->save();
+        } catch (EntityNotFoundException $e) {
+          \Kint::dump($e);
+          exit();
+        }
+        $destination_value[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId(),
+        ];
         $toReturn[] = [
           "target_id" => $paragraph->id(),
           "target_revision_id" => $paragraph->getRevisionId(),
@@ -107,7 +142,6 @@ class Paragraphs extends ProcessPluginBase {
       else {
         throw new MigrateSkipProcessException("cannot create paragraph: " . print_r($ref, TRUE));
       }
-
     }
     $row->setDestinationProperty($destination_property, $destination_value);
     return $toReturn;

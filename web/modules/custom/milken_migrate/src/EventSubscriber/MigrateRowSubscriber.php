@@ -20,7 +20,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     return [
       MigrateEvents::PRE_ROW_SAVE => 'preRowSave',
-      // MigrateEvents::POST_ROW_SAVE => 'postRowSave',.
+      MigrateEvents::POST_ROW_SAVE => 'postRowSave',
     ];
   }
 
@@ -48,11 +48,14 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    *   Event object.
    */
   public function postRowSave(MigratePostRowSaveEvent $event) {
-    // $dest = $event->getDestinationIdValues();
-    // if (function_exists('drush_print')) {
-    // drush_print("PostSave " . $event->getMigration()->id() .
-    // " destination: " . $dest);
-    // }
+    // phpcs:disable
+    \Kint::enabled(TRUE);
+    $row = $event->getRow();
+    $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
+    $message .= \Kint::dump($event->getDestinationIdValues());
+    \Drupal::logger('milken_migrate')
+      ->debug($message);
+    // phpcs:enable
   }
 
 }

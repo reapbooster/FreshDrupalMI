@@ -94,7 +94,7 @@ source:
     -
       name: alt_content
       label: 'Alt Content'
-      selector: /field_ar_content/data
+      selector: /field_ar_content
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'

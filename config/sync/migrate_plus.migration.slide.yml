@@ -60,8 +60,14 @@ source:
     uuid:
       type: string
 process:
-  id: id
-  uuid: uuid
+  uuid:
+    -
+      plugin: milken_migrate:uuid_exists
+      source: uuid
+      entity_type: paragraph
+    -
+      plugin: get
+      source: uuid
   name: name
   title: name
   field_subtitle:

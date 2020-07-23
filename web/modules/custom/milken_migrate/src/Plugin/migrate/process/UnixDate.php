@@ -29,7 +29,7 @@ class UnixDate extends ProcessPluginBase {
       ->debug(__CLASS__);
     $dt = new \DateTime();
     if (!empty($value)) {
-      if (strpos($value, "+")) {
+      if (substr($value, -3, 1) == ":") {
         $format = \DateTimeInterface::ATOM;
       }
       elseif (strpos($value, "T")) {
@@ -41,8 +41,14 @@ class UnixDate extends ProcessPluginBase {
       $dt = \DateTime::createFromFormat($format, $value);
     }
     if ($dt instanceof \DateTime) {
-      $row->setDestinationProperty($destination_property, $dt->format('Y-m-d\TH:i:s'));
-      return $dt->format('Y-m-d\TH:i:s');
+      if ($destination_property == "created" || $destination_property == "changed") {
+        $row->setDestinationProperty($destination_property, $dt->getTimestamp());
+        return $dt->getTimestamp();
+      }
+      else {
+        $row->setDestinationProperty($destination_property, $dt->format('Y-m-d\TH:i:s'));
+        return $dt->format('Y-m-d\TH:i:s');
+      }
     }
     return NULL;
   }
