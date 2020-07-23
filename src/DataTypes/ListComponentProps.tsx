@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import JSONApiUrl from "./JSONApiUrl";
 import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
 import Loading from "../components/Loading";
 import EventConference from '../components/Events/EventConference';
 
+
 interface ListComponentPropsInterface {
   id: string;
-  url: string;
+  url: JSONApiUrl;
   error?: Error;
   onSelectHandler?: any;
   view_mode?: string;
   items?: Array<any>;
+  entityTypeId: string;
 }
 
 interface ListComponentState {
@@ -27,13 +29,10 @@ enum ListItemComponents {
   event_conference = EventConference,
 }
 
-
-
-
 class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {
 
   id: string;
-  url: string;
+  _url: JSONApiUrl;
   key: number;
   error?: Error;
   onSelectHandler: any;
@@ -48,11 +47,11 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
   toObject() : ListComponentPropsInterface {
     return {
+      entityTypeId: this.props.entityTypeId,
       id: this.id,
-      url: this.url,
+      url: this.url.toString(),
       error: this.error,
       onSelectHandler: this.onSelectHandler,
-      open: this.open,
       view_mode: this.view_mode,
     };
   }
@@ -60,7 +59,8 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   async getData(query: string = ""): Promise<any> {
     console.log("get Data called: ", this);
     if (this.url) {
-      return fetch(`${this.url}?jsonapi_include=1${query}`)
+      console.log("listComponenet calling url: ", this.url.toString());
+      return fetch(this.url.toString())
         .catch(this.handleError);
     } else {
       this.handleError(new Error("No URL to make a refresh call"));
@@ -112,6 +112,19 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
         {this.items}
       </>
     );
+  }
+
+  get url() : JSONApiUrl {
+    return this._url;
+  }
+
+  set url(url) {
+    if (typeof url == "string") {
+      this._url = new JSONApiUrl(url);
+    }
+    if (url instanceof JSONApiUrl) {
+      this._url = url;
+    }
   }
 
 }
