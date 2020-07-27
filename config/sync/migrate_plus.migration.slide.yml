@@ -62,7 +62,7 @@ source:
 process:
   uuid:
     -
-      plugin: milken_migrate:uuid_exists
+      plugin: 'milken_migrate:uuid_exists'
       source: uuid
       entity_type: paragraph
     -

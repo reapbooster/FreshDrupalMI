@@ -1,12 +1,15 @@
 import EntityComponentBase, { EntityComponentState } from "../../DataTypes/EntityComponentBase";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
-import Video from "../Video";
 import MediaImage from './MediaImage';
+import MediaVideo from "./MediaVideo";
+import MediaReport from "./MediaReport";
+import MediaPodcast from "./MediaPodcast";
 
 const MediaBundleComponents = {
-  video: Video,
+  video: MediaVideo,
   image: MediaImage,
-
+  report: MediaReport,
+  podcast: MediaPodcast,
 }
 
 

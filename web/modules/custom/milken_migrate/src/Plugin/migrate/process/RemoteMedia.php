@@ -21,7 +21,7 @@ use PHPUnit\Util\Exception;
  * @code
  * field_image:
  *   plugin: milken_migrate:remote_media
- *   source: {name where row data appears}
+ *   source: field
  * @endcode
  *
  * @MigrateProcessPlugin(

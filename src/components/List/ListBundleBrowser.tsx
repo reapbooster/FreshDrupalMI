@@ -59,7 +59,7 @@ class ListBundleBrowser extends React.Component<ListBundleBrowserProps, ListBund
       self.setState({
         loading: true
       });
-      fetch(`/jsonapi/${this.state.entityTypeId}_type/${this.state.entityTypeId}_type/?jsonapi_include=true`)
+      fetch(`/jsonapi/${this.props.entityTypeId}_type/${this.props.entityTypeId}_type/?jsonapi_include=true`)
         .then(res => res.json())
         .then(ajaxData => {
           self.setState({

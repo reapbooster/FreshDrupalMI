@@ -10,16 +10,22 @@ class EntityQueue extends EntityComponentBase<EntityComponentPropsInterface, Ent
   include = '&include=items,items.field_hero_image';
 
   componentDidMount() {
-    if (!this.state.loaded && !this.state.loading) {
+    if (this.state.loading == false && this.state.loaded == false) {
+      console.debug("now, get data for component");
       this.getDataForComponent(this.include);
     }
   }
 
   render() {
-      if (this.state?.loaded) {
+    console.debug("EntityQueue render: ", this.props, this.state);
+      if (this.state?.loaded && this.state.attributes?.items?.length) {
         return (
-          <List id={this.state.id}
-                items={this.state.attributes.items} />
+          <List id={this.props.id}
+                items={this.state.attributes.items}
+                view_mode={this.props.view_mode}
+                entityTypeId={this.props.entityTypeId}
+                browser={false}
+          />
         );
 
       }

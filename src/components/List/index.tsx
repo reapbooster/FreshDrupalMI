@@ -7,12 +7,18 @@ import JSONApiUrl from '../../DataTypes/JSONApiUrl';
 
 const List = function(props: ListComponentPropsInterface) {
   var url = new JSONApiUrl(props.url);
-  console.debug(url);
-  return (
-    <Container id={"list-".concat(props.id)}>
+  var browser = [];
+  if (props.browser == true) {
+    browser = (
       <Row>
         <ListBundleBrowser entityTypeId={props.entityTypeId} url={url} />
       </Row>
+    );
+  }
+  console.debug(url);
+  return (
+    <Container id={"list-".concat(props.id)}>
+      {browser}
       <Row>
         <ListComponentProps {...props} url={url} />
       </Row>

@@ -5,6 +5,7 @@ import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
 import Loading from "../components/Loading";
 import EventConference from '../components/Events/EventConference';
+import TileView from "../components/NodeDisplay/TileView";
 
 
 interface ListComponentPropsInterface {
@@ -15,10 +16,13 @@ interface ListComponentPropsInterface {
   view_mode?: string;
   items?: Array<any>;
   entityTypeId: string;
+  browser: boolean;
+  key: number;
 }
 
 interface ListComponentState {
   items: Array<any>;
+  loaded: boolean;
 }
 
 
@@ -27,6 +31,7 @@ enum ListItemComponents {
   media_report = MediaReport,
   media_podcast = MediaPodcast,
   event_conference = EventConference,
+  node_landing_page = TileView
 }
 
 class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {
@@ -36,13 +41,16 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   key: number;
   error?: Error;
   onSelectHandler: any;
+  view_mode: string;
 
   constructor(props: ListComponentPropsInterface) {
     super(props);
     this.state = {
-      items: (props.items || []),
+      items: (props.items || [])
     };
-    Object.assign(this, props);
+    var remaining = Object.assign({}, props);
+    delete remaining.items;
+    Object.assign(this, remaining);
   }
 
   toObject() : ListComponentPropsInterface {
@@ -53,13 +61,14 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       error: this.error,
       onSelectHandler: this.onSelectHandler,
       view_mode: this.view_mode,
+      key: this.key,
     };
   }
 
   async getData(query: string = ""): Promise<any> {
-    console.log("get Data called: ", this);
+    console.debug("get Data called: ", this);
     if (this.url) {
-      console.log("listComponenet calling url: ", this.url.toString());
+      console.debug("listComponenet calling url: ", this.url.toString());
       return fetch(this.url.toString())
         .catch(this.handleError);
     } else {
@@ -78,7 +87,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   }
 
   get loaded() {
-    return this.hasItems();
+    return (this.state.loaded || this.hasItems() );
   }
 
   get label() {
@@ -96,8 +105,12 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
   get items() {
     if (this.hasItems()) {
+      console.log("rendering list component items: ", this.state.items);
       return this.state.items.map((item, key: number) => {
         const Component = ListItemComponents[item.type.replace("--", "_")];
+        if (Component == undefined) {
+          throw new Error("List Component Type not defined: ".concat(item.type.replace("--", "_")));
+        }
         return <Component {...item} key={key} />
       });
     } else {
