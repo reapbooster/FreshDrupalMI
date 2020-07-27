@@ -21,10 +21,37 @@ Then from inside the docker container do the following to install the drupal sit
 
 2. ```drupal site:milken:install```
 
-3. ```drupal site:milken:migrations```
-
 After installation completes, open a browser and navigate to http://localhost:8080/
 
+## MIGRATIONS ##
+
+**NOTE**: Migrations should be run in order. The order is listed in the file
+```web/modules/custom/milken_migrate/milken_migrate.cron.inc``` Because of Patheon's limits on container activity
+they often fail with a **CURL** error so they need to be constnatly restarted and reset if you do them by hand.
+
+To get a list of migrations and they're current status:
+
+```drush migrate:status```
+
+** doing this will take a few minutes as drupal gathers total/active/unprocessed imports for every migration. It CANNOT
+BE RUN ON A PANTHEON INSTANCE BECAUSE OF PANTHEON'S RESOURCE LIMITS.
+
+Migrations can be run different of ways. You can run them individually from the container using drush:
+
+```drush migrate:import {migration_id}```
+
+if they fail, reset then rerun:
+
+```drush migrate:reset {migration_id} && drush migrate:import {migration_id}```
+
+A cron-run will import 250 items from the internal list of migrations and automatically restart any migration that fails.
+You can install a cron tab in your container that will run every 10 minutes:
+
+```*/10 * * * * cd /var/www && /var/www/vendor/bin/drush core:cron  2>&1```
+
+or you can run the cron by hand a bunch of times:
+
+```drush core:cron && drush core:cron && drush core:cron && drush core:cron```
 
 ## Wipe and Re-create the docker environment ##
 
@@ -41,7 +68,7 @@ If you happen to break something in the environment, it is often better to remov
 
 Sometimes a branch might fall behind and you might need to bring it up to date to a certain stable tag.
 
-1. ```git checkout tag_name``` Will checkout the tag "tag_name" locally. 
+1. ```git checkout tag_name``` Will checkout the tag "tag_name" locally.
 
 2. ```git checkout -b new_branch_for_tag_name``` Will make a new branch (must not currently exist) with the code from "tag_name".
 
@@ -104,6 +131,6 @@ To export content in order to have it import automatically on site build, follow
 
 2. Then place the exported files into web/modules/custom/milken_migrate/content/taxonomy_term
 
-3. When the module Milken_Migrate is enabled, it will load the content into the site automatically. 
+3. When the module Milken_Migrate is enabled, it will load the content into the site automatically.
 
-4. The content will also be loaded automatically on every site build. 
+4. The content will also be loaded automatically on every site build.
