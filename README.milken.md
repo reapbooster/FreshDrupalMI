@@ -3,13 +3,21 @@
 
 ## Installation ##
 
-This is a repo for the new MI site. To initialize a local development environment, run the following commands from the project root on the container host:
+1. Login to Pantheon.
 
-1. ```cp .env.dist .env```
+2. Click your name in the top right corner.
 
-2. ```cp docker/settings.local.php web/sites/default```
+3. Choose "Account" Tab, then "Machine Tokens".
 
-3. ```docker-compose up -d```
+4. Generate a machine token and copy it somewhere safe.
+
+5. Clone this github repo and make sure master is up-to-date. Open a terminus and cd to the directory you just cloned.
+
+6. ```cp .env.dist .env```
+
+7. ```cp docker/settings.local.php web/sites/default```
+
+8. ```docker-compose up -d```
 
 If the ```docker-compose``` command complete successfully, you can now launch a shell on the PHP container:
 
@@ -19,13 +27,18 @@ Then from inside the docker container do the following to install the drupal sit
 
 1. ```composer install && gulp```
 
-2. ```drupal site:milken:install```
+2. ```terminus login --email={PANTHEON EMAIL} ----machine-token={TOKEN FROM PANTHEON}```
 
-After installation completes, open a browser and navigate to http://localhost:8080/
+3. ```bin/loadDatabaseBackup```
+
+4. ```bin/rsyncFiles``` (will take forever)
+
+5. Point your browser to https://localhost:8080/
 
 ## MIGRATIONS ##
 
-**NOTE**: Migrations should be run in order. The order is listed in the file
+**NOTE**: Migrations should already be run but if you alter them, you will have to rollback and re-import.
+
 ```web/modules/custom/milken_migrate/milken_migrate.cron.inc``` Because of Patheon's limits on container activity
 they often fail with a **CURL** error so they need to be constnatly restarted and reset if you do them by hand.
 
