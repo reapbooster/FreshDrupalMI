@@ -168,6 +168,4 @@ process:
 destination:
   plugin: 'entity:media'
   default_bundle: video
-migration_dependencies:
-  required:
-    - file
+migration_dependencies: {}

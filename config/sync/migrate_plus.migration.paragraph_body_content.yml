@@ -98,4 +98,4 @@ process:
 destination:
   plugin: 'milken_reference_revisions:paragraph'
   default_bundle: body_content
-migration_dependencies: null
+migration_dependencies: {}

@@ -155,6 +155,4 @@ process:
 destination:
   plugin: 'milken_migrate:speakers'
   default_bundle: speaker
-migration_dependencies:
-  required:
-    - event
+migration_dependencies: {}
