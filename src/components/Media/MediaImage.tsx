@@ -6,6 +6,7 @@ import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProp
 import Loading from "../Loading";
 import ImageEntityProps from "../../DataTypes/ImageEntityProps";
 import moment from "moment";
+import {Col} from "react-bootstrap";
 
 interface MediaImageProps extends EntityComponentPropsInterface {
   field_media_image: ImageDataInterface;
@@ -26,6 +27,9 @@ const MediaImage: React.FunctionComponent = (props: MediaImageProps) => {
   return (
     <>
       <img
+        data-drupal-id={props.drupal_internal__mid}
+        data-drupal-type={props.type}
+        data-uuid={props.id}
         {...imageStyleObject.getImgAttributes()}
         height={props.height}
         />

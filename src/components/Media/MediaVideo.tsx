@@ -21,7 +21,11 @@ const MediaVideo: React.FunctionComponent = (props) => {
       return (
         <>
           <Col lg={3} sm={4}>
-            <Card className="my-5">
+            <a href={"/video/".concat(props.drupal_internal__mid)}
+              className="card my-5"
+              data-drupal-id={props.drupal_internal__mid}
+              data-drupal-type={props.type}
+              data-uuid={props.id}>
               <Card.Img
                 id={"card-image-".concat()}
                 src={thumbnailImageUrl} />
@@ -29,7 +33,7 @@ const MediaVideo: React.FunctionComponent = (props) => {
                 <Card.Title>{props.name}</Card.Title>
               </Card.Body>
               <Card.Footer>{created.format('MMMM D, YYYY')}</Card.Footer>
-            </Card>
+            </a>
           </Col>
         </>
       )

@@ -21,8 +21,14 @@ const EventConference: React.FunctionComponent = (props: EventObject) => {
   const getEvent = (props: EventObject) => {
     return (
       <>
-        <Col lg={3} sm={4}>
-          <Card className="my-5">
+        <Col lg={3} sm={4} >
+          <a
+            href={"event/".concat(props.drupal_internal__id)}
+            className="card my-5"
+            data-drupal-id={props.drupal_internal__id}
+            data-drupal-type={props.type}
+            data-uuid={props.id}
+          >
             <Card.Img
               id={"card-image-".concat()}
               src={thumbnailImageUrl} />
@@ -30,7 +36,7 @@ const EventConference: React.FunctionComponent = (props: EventObject) => {
               <Card.Title>{props.title}</Card.Title>
             </Card.Body>
             <Card.Footer>{eventDate.format('MMMM D, YYYY')}</Card.Footer>
-          </Card>
+          </a>
         </Col>
       </>
     )

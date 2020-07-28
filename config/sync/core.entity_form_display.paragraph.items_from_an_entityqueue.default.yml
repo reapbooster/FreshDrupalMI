@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.items_from_an_entityqueue.field_subqueue
+    - field.field.paragraph.items_from_an_entityqueue.field_view_mode
     - paragraphs.paragraphs_type.items_from_an_entityqueue
   module:
     - entity_browser_entity_form
@@ -39,6 +40,12 @@ content:
       entity_browser_entity_form:
         entity_browser_id: _none
     type: inline_entity_form_complex
+    region: content
+  field_view_mode:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   status:
     type: boolean_checkbox

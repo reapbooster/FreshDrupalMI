@@ -1,0 +1,58 @@
+uuid: 0fcc7496-b6ba-48e4-932e-80cc86f44a12
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.event_view
+  module:
+    - ctools_block
+id: event_view-block_display-0
+label: 'Block page'
+variant: block_display
+variant_settings:
+  blocks:
+    8149381d-d4ff-483f-89f0-661eb7570b2c:
+      id: 'entity_field:event:title'
+      label: Title
+      provider: ctools_block
+      label_display: visible
+      formatter:
+        label: hidden
+        type: string
+        settings:
+          link_to_entity: false
+        third_party_settings: {  }
+        weight: 0
+      region: top
+      weight: 0
+      uuid: 8149381d-d4ff-483f-89f0-661eb7570b2c
+      context_mapping:
+        entity: args
+    092f70bf-428d-44c5-8cc5-b1908e568ad2:
+      id: 'entity_field:event:field_event_date'
+      label: 'Event Date'
+      provider: ctools_block
+      label_display: visible
+      formatter:
+        label: above
+        type: datetime_default
+        settings:
+          timezone_override: ''
+          format_type: medium
+        third_party_settings: {  }
+        weight: 0
+      region: top
+      weight: 0
+      uuid: 092f70bf-428d-44c5-8cc5-b1908e568ad2
+      context_mapping:
+        entity: args
+  id: block_display
+  uuid: e7bd4760-0e39-4e77-9cbe-a2b7993c3d61
+  label: null
+  weight: 0
+  page_title: 'Event Detail'
+page: event_view
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

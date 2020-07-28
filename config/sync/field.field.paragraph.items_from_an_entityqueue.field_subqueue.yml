@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entityqueue.entity_queue.events
     - entityqueue.entity_queue.featured
     - entityqueue.entity_queue.featured_videos
     - entityqueue.entity_queue.homepage_slides
@@ -24,6 +25,7 @@ settings:
   handler: 'default:entity_subqueue'
   handler_settings:
     target_bundles:
+      events: events
       featured: featured
       featured_videos: featured_videos
       landing_pages: landing_pages

@@ -19,8 +19,12 @@ const MediaReport: React.FunctionComponent = (props: ReportDataInterface) => {
   const getReport = (props: ReportDataInterface) => {
     return (
       <>
-        <Col lg={3} sm={4}>
-          <Card className="my-5">
+        <Col lg={3} sm={4} key={props.key}>
+          <a className="card my-5"
+                href={"report/".concat(props.drupal_internal__mid)}
+                data-drupal-id={props.drupal_internal__mid}
+                data-drupal-type={props.type}
+                data-uuid={props.id}>
             <Card.Img
               id={"card-image-".concat()}
               src={thumbnailImageUrl} />
@@ -28,7 +32,7 @@ const MediaReport: React.FunctionComponent = (props: ReportDataInterface) => {
               <Card.Title>{props.name}</Card.Title>
             </Card.Body>
             <Card.Footer>{created.format('MMMM D, YYYY')}</Card.Footer>
-          </Card>
+          </a>
         </Col>
       </>
     );
