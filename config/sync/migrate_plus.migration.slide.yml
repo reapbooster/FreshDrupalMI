@@ -54,6 +54,18 @@ source:
       name: changed
       label: Changed
       selector: /changed
+    -
+      name: field_ch_supporting_text_above
+      label: 'Text Above'
+      selector: /field_ch_supporting_text_above
+    -
+      name: field_ch_supporting_text_below
+      label: 'Text Below'
+      selector: /field_ch_supporting_text_below
+    -
+      name: field_supertitle_cta
+      label: Supertitle
+      selctor: /field_supertitle_cta
   ids:
     pid:
       type: integer
@@ -70,13 +82,13 @@ process:
       source: uuid
   name: name
   title: name
-  field_subtitle:
-    plugin: concat
+  field_slide_text:
+    plugin: 'milken_migrate:key_value_field'
     source:
       - field_ch_supporting_text_above
+      - name
       - field_ch_supporting_text_below
       - field_supertitle_cta
-    delimiter: "\n"
   langcode:
     plugin: default_value
     default_value: en

@@ -1,3 +1,4 @@
+import PathObject from "./PathObject";
 
 
 interface EntityComponentPropsInterface {
@@ -11,6 +12,8 @@ interface EntityComponentPropsInterface {
   error?: Error;
   onSelectHandler?: any;
   open?: boolean;
+  path?: PathObject;
+
 }
 
 interface JSONAPIEntityReferenceData {

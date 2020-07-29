@@ -86,4 +86,4 @@ process:
 destination:
   plugin: 'entity:taxonomy_term'
   default_bundle: collections
-migration_dependencies: null
+migration_dependencies: {  }

@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:e4ce2149-82ea-4fe4-9417-df85e1e90d68'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/podcast_episode-default-icon.svg
 id: podcast_episode
 label: 'Podcast Episode'
 icon_uuid: e4ce2149-82ea-4fe4-9417-df85e1e90d68

@@ -9,8 +9,8 @@ dependencies:
     - image.style.thumbnail
   module:
     - eck
+    - element_class_formatter
     - entity_browser
-    - image
     - views_bootstrap
 id: slides
 label: Slides
@@ -30,7 +30,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -196,10 +196,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: title
-          type: image
+          type: image_class
           settings:
             image_style: media_library
             image_link: ''
+            class: card-img-top
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -535,10 +536,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: title
-          type: image
+          type: image_class
           settings:
             image_style: thumbnail
             image_link: content
+            class: card-img-top
           group_column: ''
           group_columns: {  }
           group_rows: true

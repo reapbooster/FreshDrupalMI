@@ -32,6 +32,7 @@
         "drupal/auto_entitylabel": "3.x-dev",
         "drupal/better_normalizers": "^1.0",
         "drupal/bg_image_formatter": "^1.12",
+        "drupal/block_field": "^1.0@RC",
         "drupal/bootstrap": "^3.21",
         "drupal/bootstrap_barrio": "^4.0@dev",
         "drupal/bootstrap_library": "^1.11",

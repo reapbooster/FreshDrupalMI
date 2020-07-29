@@ -135,6 +135,4 @@ process:
 destination:
   plugin: 'entity:media'
   default_bundle: podcast_episode
-migration_dependencies:
-  required:
-    - file
+migration_dependencies: {  }

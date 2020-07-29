@@ -4,6 +4,11 @@ status: true
 dependencies:
   content:
     - 'file:file:ae970786-2d60-45ec-b938-c8066034df4a'
+  module:
+    - paragraphs_browser
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/author-default-icon.svg
 id: author
 label: Author
 icon_uuid: ae970786-2d60-45ec-b938-c8066034df4a

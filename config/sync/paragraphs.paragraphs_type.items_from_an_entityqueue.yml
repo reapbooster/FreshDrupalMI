@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:abb628f3-939c-49a3-99a7-695e3fc91efd'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/items_from_an_entityqueue-default-icon.svg
 id: items_from_an_entityqueue
 label: 'Items from an EntityQueue'
 icon_uuid: abb628f3-939c-49a3-99a7-695e3fc91efd

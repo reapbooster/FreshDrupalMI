@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:24a9d2b7-114f-4e47-b938-14f753c3275b'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/four_tile_media_taxonomy-default-icon.svg
 id: four_tile_media_taxonomy
 label: 'Four media tiles from Taxonomy'
 icon_uuid: 24a9d2b7-114f-4e47-b938-14f753c3275b

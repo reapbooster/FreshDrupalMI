@@ -88,4 +88,4 @@ process:
 destination:
   plugin: 'entity:taxonomy_term'
   default_bundle: centers
-migration_dependencies: {}
+migration_dependencies: {  }

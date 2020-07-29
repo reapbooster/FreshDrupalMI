@@ -6,7 +6,8 @@ import MediaPodcast from "../components/Media/MediaPodcast";
 import Loading from "../components/Loading";
 import EventConference from '../components/Events/EventConference';
 import TileView from "../components/NodeDisplay/TileView";
-
+import EventSummit from "../components/Events/EventSummit";
+import EventMeeting from "../components/Events/EventMeeting";
 
 interface ListComponentPropsInterface {
   id: string;
@@ -31,7 +32,9 @@ enum ListItemComponents {
   media_report = MediaReport,
   media_podcast = MediaPodcast,
   event_conference = EventConference,
-  node_landing_page = TileView
+  event_summit = EventSummit,
+  event_meeting = EventMeeting,
+  node_landing_page = TileView,
 }
 
 class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {

@@ -3,8 +3,10 @@ import React from 'react';
 import {Card} from 'react-bootstrap';
 import MediaImage, { MediaImageProps } from "../Media/MediaImage";
 import ImageDataInterface from '../../DataTypes/ImageDataInterface'
+import PathObject from "../../DataTypes/PathObject";
+import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 
-interface TileViewProps {
+interface TileViewProps extends EntityComponentPropsInterface {
   key: number;
   field_hero_image: MediaImageProps,
 }
@@ -18,8 +20,15 @@ const TileView: React.FunctionComponent = (props: TileViewProps) => {
       height={"150px"}
     /> );
   }
+  const onClickHandler = (target) => {
+    document.location.href = props.path?.alias;
+  }
   return (
-    <Card key={props.key} className={"col-sm-6 col-sm-4 col-md-3 col-lg-3 m-10 p-10 text-center"}>
+    <Card
+      key={props.key}
+      className={"col-sm-6 col-sm-4 col-md-3 col-lg-3 m-10 p-10 text-center"}
+      onClick={onClickHandler}
+    >
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
       </Card.Body>

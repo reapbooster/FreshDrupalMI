@@ -10,7 +10,7 @@ dependencies:
     - field.field.slide.full_width_one_column.field_link
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
-    - field.field.slide.full_width_one_column.field_subtitle
+    - field.field.slide.full_width_one_column.field_slide_text
     - field.field.slide.full_width_one_column.field_text_color
     - image.style.thumbnail
   module:
@@ -77,7 +77,7 @@ hidden:
   field_link: true
   field_promoted: true
   field_published: true
-  field_subtitle: true
+  field_slide_text: true
   field_text_color: true
   langcode: true
   search_api_excerpt: true

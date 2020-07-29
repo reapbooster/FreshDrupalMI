@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:a293bc13-2bff-45a3-ba04-565eb88692e3'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/unmigrated_paragraph-default-icon.svg
 id: unmigrated_paragraph
 label: 'Unmigrated Paragraph'
 icon_uuid: a293bc13-2bff-45a3-ba04-565eb88692e3

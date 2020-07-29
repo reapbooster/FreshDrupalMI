@@ -13,18 +13,16 @@ dependencies:
     - field.field.event.meeting.field_description
     - field.field.event.meeting.field_event_date
     - field.field.event.meeting.field_grid_event_id
+    - field.field.event.meeting.field_hero_image
     - field.field.event.meeting.field_name_short
-    - field.field.event.meeting.field_picture
     - field.field.event.meeting.field_published
     - field.field.event.meeting.field_registration_deadline
     - field.field.event.meeting.field_sequential_id
     - field.field.event.meeting.field_speakers
     - field.field.event.meeting.field_tracks
     - field.field.event.meeting.field_venue
-    - image.style.thumbnail
   module:
     - datetime
-    - image
     - text
 id: event.meeting.default
 targetEntityType: event
@@ -107,6 +105,16 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_hero_image:
+    weight: 28
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_name_short:
     weight: 23
     settings:
@@ -114,14 +122,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_picture:
-    weight: 13
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_published:
     weight: 11

@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:0e4568ee-ac38-4f1c-9ea1-8b485b3c6025'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/tiles-default-icon.svg
 id: tiles
 label: Tiles
 icon_uuid: 0e4568ee-ac38-4f1c-9ea1-8b485b3c6025

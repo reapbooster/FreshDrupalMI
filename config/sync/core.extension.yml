@@ -10,6 +10,7 @@ module:
   bg_image_formatter: 0
   block: 0
   block_content: 0
+  block_field: 0
   book: 0
   bootstrap_library: 0
   breakpoint: 0
@@ -109,6 +110,7 @@ module:
   paragraphs: 0
   paragraphs_browser: 0
   paragraphs_button: 0
+  paragraphs_edit: 0
   paragraphs_grid: 0
   path: 0
   path_alias: 0

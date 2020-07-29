@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:36c9c006-a1ab-44a7-9b4b-889b80ab60f6'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/four_tile_media-default-icon.svg
 id: four_tile_media
 label: 'Four Media Tiles'
 icon_uuid: 36c9c006-a1ab-44a7-9b4b-889b80ab60f6
