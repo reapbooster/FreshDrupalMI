@@ -29,7 +29,9 @@ function milken_base_theme_registry_alter(&$theme_registry) {
   $theme_registry['paragraphs_actions']['preprocess functions'][] = 'milken_base_paragraph_action';
 }
 
+/**
+ * Theme Hook function.
+ */
 function milken_base_paragraph_action($values) {
-  print_r(array_keys($values));
-  exit();
+
 }

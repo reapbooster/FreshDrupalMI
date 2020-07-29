@@ -20,11 +20,16 @@ class KeyValueField extends ProcessPluginBase {
    * {@inheritDoc}
    *
    * @param mixed $value
+   *   Value.
    * @param \Drupal\migrate\MigrateExecutableInterface $migrate_executable
+   *   The migration.
    * @param \Drupal\migrate\Row $row
+   *   Row data.
    * @param string $destination_property
+   *   Destination Property name.
    *
    * @return array|string
+   *   The return value.
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = [];

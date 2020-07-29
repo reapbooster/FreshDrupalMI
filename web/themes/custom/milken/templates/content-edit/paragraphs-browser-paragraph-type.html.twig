@@ -7,7 +7,7 @@
  */
 #}
 
-<fieldset class="paragraphs-browser-paragraph-type card py-3 px-3" style="width: 18rem; margin-bottom: 30px;">
+<fieldset class="paragraphs-browser-paragraph-type card py-3 px-3" style="width: 14rem; margin-bottom: 2rem;">
   {% if form.icon %}
     <div class="card-img-top">
       {{ form.icon }}
@@ -16,7 +16,7 @@
   <div class="card-body">
     <legend class="card-title">{{ form.label }}</legend>
     {% if form.description %}
-      <div class="card-text">
+      <div class="card-text text-muted">
         <span>{{ form.description }}</span>
       </div>
     {% endif %}
