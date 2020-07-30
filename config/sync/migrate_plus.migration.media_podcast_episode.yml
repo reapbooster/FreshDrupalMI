@@ -132,6 +132,10 @@ process:
   field_media_audio_file:
     plugin: 'milken_migrate:remote_file'
     source: audio_file
+  field_body/value: body
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
 destination:
   plugin: 'entity:media'
   default_bundle: podcast_episode

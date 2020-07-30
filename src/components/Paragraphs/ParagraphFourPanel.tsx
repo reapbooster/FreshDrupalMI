@@ -21,7 +21,7 @@ class ParagraphFourPanel extends EntityComponentBase<ParagraphFourPanelProps, En
   }
 
   render(): React.ReactNode {
-    console.log("Paragraph FourPanel", this.props, this.state);
+    console.debug("Paragraph FourPanel", this.props, this.state);
     if (this.state.loaded) {
       if (this.state.attributes?.field_queue) {
         return (

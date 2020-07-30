@@ -5,6 +5,7 @@ import ParagraphPullQuote from "./ParagraphPullQuote";
 import ParagraphTiles from "./ParagraphTiles";
 import ParagraphItemsFromAnEntityQueue from "./ParagraphItemsFromAnEntityQueue";
 import ParagraphBlock from "./ParagraphBlock";
+import ParagraphMediaTilesFromAView from "./ParagraphMediaTilesFromAView";
 
 const ParagraphBundleComponents = {
   slide: ParagraphSlide,
@@ -13,8 +14,9 @@ const ParagraphBundleComponents = {
   body_content: ParagraphText,
   pull_quote: ParagraphPullQuote,
   tiles: ParagraphTiles,
-  items_from_an_entityqueue: ParagraphItemsFromAnEntityQueue,
   block: ParagraphBlock,
+  items_from_an_entityqueue: ParagraphItemsFromAnEntityQueue,
+  media_tiles_from_view: ParagraphMediaTilesFromAView
 }
 
 

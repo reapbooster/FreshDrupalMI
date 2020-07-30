@@ -31,14 +31,14 @@
  */
 #}
 
-<div id="list-data">
-  <script type="application/json" data-drupal-selector="drupal-list-json">{
+<div id="podcasts-data">
+  <script type="application/json" data-drupal-selector="drupal-podcasts-json">{
     "id": "{{ view.id }}",
     "url": "/jsonapi/media/podcast_episode?jsonapi_include=true",
     "entityTypeId": "paragraphs"
     }</script>
 </div>
 
-<div id="list-component">&nbsp;</div>
+<div id="podcasts-component">&nbsp;</div>
 
-{{ attach_library('milken/list') }}
+{{ attach_library('milken/podcasts') }}

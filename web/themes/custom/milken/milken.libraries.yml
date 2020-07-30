@@ -29,13 +29,13 @@ article:
   js:
     js/Article.entry.js: { preprocess: 0 }
 
-homepage:
+podcasts:
   version: 1.0.0
   footer: true
   drupalSettings:
     node: null
   js:
-    js/Homepage.entry.js: { preprocess: 0 }
+    js/Podcasts.entry.js: { preprocess: 0 }
 
 landing_page:
   version: 1.0.0

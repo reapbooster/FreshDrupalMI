@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Col, Grid, Navbar, Row, Nav, NavItem, PanelGroup, Panel, Alert} from 'react-bootstrap';
+import {Col, Container, Navbar, Row, Nav, NavItem, Accordion, Panel, Alert} from 'react-bootstrap';
 import httpBuildQuery from 'http-build-query';
 import PodcastEpisode, { PodcastEpisodeProps } from "../PodcastEpisode";
 import Loading from "../Loading";
@@ -21,7 +21,8 @@ class PodcastSortFilter {
           direction: this.direction ? "ASC":"DESC",
           path: "field_episode"
         }
-      }
+      },
+      include: "field_media_image,field_media_audio_file"
     }
   }
 
@@ -80,7 +81,7 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
     const queryString = httpBuildQuery(this.state.sortFilter.toObject());
     const me = this;
     this.setState({loading: true});
-    fetch('/jsonapi/paragraph/podcast_episode'.concat("?", queryString ))
+    fetch('/jsonapi/media/podcast_episode'.concat("?", queryString ))
       .then(res => res.json())
       .then((ajaxData) => {
         if (ajaxData.data !== undefined && ajaxData.data[0] !== undefined) {
@@ -104,7 +105,7 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
     const icon = (this.state.sortFilter.direction == true) ? faSortDown : faSortUp;
     const sortPhrase = (this.state.sortFilter.direction == true) ? "Sort Descending" : "Sort Ascending";
     return (
-      <Grid>
+      <Container>
         <Row>
           <Col xs={12} lg={12} style={{position: "relative", textAlign: "right", }}>
             <span
@@ -138,17 +139,16 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
         </Row>
         <Row>
           <Col xs={12} lg={12} style={{position: "relative"}}>
-            <PanelGroup
-              accordion
+            <Accordion
               id="PodcastAccordion"
               activeKey={this.state.activeKey}
               onSelect={this.setActiveKeyHandler}
             >
               {this.getPodcastList()}
-            </PanelGroup>
+            </Accordion>
           </Col>
         </Row>
-      </Grid>
+      </Container>
     );
   }
 
@@ -183,12 +183,11 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
           ecp.key = key;
           return (
             <PodcastEpisode
+              {...item}
               key={key}
               view_mode={"panel"}
               open={open}
               entityComponentProps={ecp}
-              field_episode={item.field_episode}
-              field_summary={item.field_summary}
               onSelectHandler={this.setActiveKeyHandler}
             />
           );

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.podcast_episode.field_body
     - field.field.media.podcast_episode.field_episode
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
@@ -34,7 +35,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_body:
-    weight: 107
+    weight: 111
     settings:
       rows: 9
       summary_rows: 3

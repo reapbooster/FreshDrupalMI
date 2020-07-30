@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.podcast_episode.field_body
     - field.field.media.podcast_episode.field_episode
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
@@ -26,7 +27,7 @@ bundle: podcast_episode
 mode: default
 content:
   field_body:
-    weight: 7
+    weight: 11
     label: above
     settings: {  }
     third_party_settings: {  }

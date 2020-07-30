@@ -14,7 +14,7 @@ module: views
 description: ''
 tag: ''
 base_table: media_field_data
-base_field: nid
+base_field: mid
 display:
   default:
     display_plugin: default
@@ -165,6 +165,23 @@ display:
       empty: {  }
       relationships: {  }
       arguments: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - user.permissions
+      tags: {  }
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: Block
+    position: 2
+    display_options:
+      display_extenders: {  }
+      block_description: 'Podcast Browser'
     cache_metadata:
       max-age: -1
       contexts:
@@ -180,7 +197,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: podcasts
+      path: explore/podcasts
     cache_metadata:
       max-age: -1
       contexts:
