@@ -15,11 +15,11 @@
 
 6. ```cp .env.dist .env```
 
-7. ```cp docker/settings.local.php web/sites/default```
+7. ```cp config/settings.local.php web/sites/default```
 
 8. ```docker-compose up -d```
 
-If the ```docker-compose``` command complete successfully, you can now launch a shell on the PHP container:
+If the ```docker-compose``` command completed successfully, you can now launch a shell on the PHP container:
 
 1. ```docker exec -it freshdrupalmi_php_1 bash```
 
@@ -33,7 +33,16 @@ Then from inside the docker container do the following to install the drupal sit
 
 4. ```bin/rsyncFiles``` (will take forever)
 
-5. Point your browser to https://localhost:8080/
+5. ```rm -rf web/sites/default/files/```
+
+6. ```ln -s /var/www/db/files /var/www/web/sites/default```
+
+7. ```chown -R www-data:www-data /var/www/db/files```
+
+8. ```drush cr```
+
+9. Point your browser to https://localhost:8080/
+
 
 ## MIGRATIONS ##
 
