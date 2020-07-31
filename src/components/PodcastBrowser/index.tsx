@@ -1,43 +1,23 @@
 
 import React from 'react';
 import {Col, Container, Navbar, Row, Nav, NavItem, Accordion, Panel, Alert} from 'react-bootstrap';
-import httpBuildQuery from 'http-build-query';
 import PodcastEpisode, { PodcastEpisodeProps } from "../PodcastEpisode";
 import Loading from "../Loading";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortNumericDownAlt, faSortNumericDown } from '@fortawesome/free-solid-svg-icons'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
-
-class PodcastSortFilter {
-  direction: true;
-  path: "created";
-
-  toObject() {
-    return {
-      jsonapi_include: true,
-      sort: {
-        "sort-name-episode": {
-          direction: this.direction ? "ASC":"DESC",
-          path: "field_episode"
-        }
-      },
-      include: "field_media_image,field_media_audio_file"
-    }
-  }
-
-  invert() {
-    this.direction = !this.direction
-  }
-
-}
+import Paginator from './Paginator';
+import JSONApiUrl from "../../DataTypes/JSONApiUrl";
+import LinkList from '../../DataTypes/LinkList';
+import PodcastBrowserNavbar from "./PodcastBrowserNavbar";
 
 interface PodcastBrowserState {
+  currentURL: JSONApiUrl;
   loading: boolean;
   activeKey: number;
-  data: Array<any>;
-  links: Array<any>;
-  sortFilter: PodcastSortFilter;
+  data: object;
+  links: LinkList;
   error?: Error;
 }
 
@@ -46,53 +26,64 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
   constructor(props) {
     super(props);
     this.setActiveKeyHandler = this.setActiveKeyHandler.bind(this);
-    this.resortHandler = this.resortHandler.bind(this);
     this.refresh = this.refresh.bind(this);
     this.getPodcastList = this.getPodcastList.bind(this);
+    this.replaceUrl = this.replaceUrl.bind(this);
+    this.queryPropertyChange = this.queryPropertyChange.bind(this);
     this.state = {
-      loading: false,
-      activeKey: 0,
-      data: [],
-      links: [],
-      sortFilter: new PodcastSortFilter(),
-      error: null,
-    };
+    currentURL: new JSONApiUrl('/jsonapi/media/podcast_episode?jsonapi_include=1&sort[sort-name-episode][direction]=DESC&sort[sort-name-episode][path]=field_episode&include=field_media_image,field_media_audio_file'),
+    loading: false,
+    activeKey: 0,
+    data: [],
+    links: [],
+    error: null,
+  };
   }
 
   setActiveKeyHandler(eventKey) {
-    console.log("Setting Active Key: ", eventKey);
+    console.debug("Setting Active Key: ", eventKey);
     this.setState({ activeKey: eventKey })
-  }
-
-  resortHandler(){
-    this.state.sortFilter.invert();
-    console.log("sort filter", this.state.sortFilter);
-    this.refresh();
   }
 
   componentDidMount() {
     const me = this;
-    // sort by CREATED DESC (newest first)
     this.refresh();
   }
 
+  replaceUrl(evt: Event) {
+    console.debug("Replace Url current target:", evt.currentTarget);
+    const refreshUrl = new JSONApiUrl(evt.currentTarget?.dataset?.jsonapiHref);
+    console.debug("refresh trigger", refreshUrl);
+    this.refresh(refreshUrl);
+  }
 
-  refresh() {
-    const queryString = httpBuildQuery(this.state.sortFilter.toObject());
+  queryPropertyChange(evt: Event) {
+    var newUrl = this.state.currentURL.clone();
+    console.debug("queryPropertyChange", evt.currentTarget?.dataset);
+    if (evt.currentTarget?.dataset?.jsonapiQueryProperty) {
+      newUrl.query.set(evt.currentTarget.dataset.jsonapiQueryProperty, evt.currentTarget.dataset.jsonapiQueryValue)
+    }
+    this.refresh(newUrl);
+  }
+
+  refresh(url?: JSONApiUrl) {
+    if (!url) {
+      url = this.state.currentURL;
+    }
     const me = this;
-    this.setState({loading: true});
-    fetch('/jsonapi/media/podcast_episode'.concat("?", queryString ))
+    this.setState({loading: true, currentURL: url});
+    fetch(url.toString())
       .then(res => res.json())
       .then((ajaxData) => {
         if (ajaxData.data !== undefined && ajaxData.data[0] !== undefined) {
           var newState = {
             loading: false,
             data: ajaxData.data,
-            links: ajaxData.links,
+            links: new LinkList(ajaxData.links),
             activeKey: ajaxData.data[0].field_episode,
             error: null,
           };
-          console.log("NEW PODCAST BROWSER STATE", newState);
+          console.debug("NEW PODCAST BROWSER STATE", newState);
           me.setState(newState);
         }
       }).catch((err) => {
@@ -101,58 +92,6 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
         })
     });
   }
-  render() {
-    const icon = (this.state.sortFilter.direction == true) ? faSortDown : faSortUp;
-    const sortPhrase = (this.state.sortFilter.direction == true) ? "Sort Descending" : "Sort Ascending";
-    return (
-      <Container>
-        <Row>
-          <Col xs={12} lg={12} style={{position: "relative", textAlign: "right", }}>
-            <span
-              onClick={this.resortHandler}
-              style={{
-                position: "relative",
-                display: "inline-block",
-                fontSize: "1em",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                backgroundColor: "#FF6633",
-                color: "#FFF",
-                cursor: "pointer",
-                margin: "1em 0",
-                padding: "0.5em 0.75em 0.25em 0.75em",
-              }}
-            >
-              <span>{sortPhrase} </span>
-              <FontAwesomeIcon
-                icon={icon}
-                size={"2x"}
-                style={{
-                  fontSize: "1em",
-                  fontWeight: "lighter",
-                }}
-              >
-                <h5>RE-SORT</h5>
-              </FontAwesomeIcon>
-            </span>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} lg={12} style={{position: "relative"}}>
-            <Accordion
-              id="PodcastAccordion"
-              activeKey={this.state.activeKey}
-              onSelect={this.setActiveKeyHandler}
-            >
-              {this.getPodcastList()}
-            </Accordion>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-
-
 
   getPodcastList() {
     // => Condition : loading
@@ -194,6 +133,40 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
         });
     }
   }
+
+  render() {
+    return (
+      <Container>
+        <Row>
+          <Col xs={12} lg={12} style={{position: "relative", textAlign: "right", }}>
+            <PodcastBrowserNavbar
+              links={this.state.links}
+              currentURL={this.state.currentURL}
+              replaceURLClickHandler={this.replaceUrl}
+              changeUrlClickHandler={this.queryPropertyChange}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} lg={12} style={{position: "relative"}}>
+            <Accordion
+              id="PodcastAccordion"
+              activeKey={this.state.activeKey}
+              onSelect={this.setActiveKeyHandler}
+            >
+              {this.getPodcastList()}
+            </Accordion>
+          </Col>
+        </Row>
+        <Row>
+          <Paginator
+            links={this.state.links}
+            clickHandler={this.replaceUrl} />
+        </Row>
+      </Container>
+    );
+  }
+
 
 }
 

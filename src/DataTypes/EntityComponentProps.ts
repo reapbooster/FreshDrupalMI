@@ -63,7 +63,7 @@ class EntityComponentProps implements EntityComponentPropsInterface {
   }
 
   async getData(include: string = ""): Promise<any> {
-    console.log("get Data called: ", this);
+    console.debug("get Data called: ", this);
     if (this.entityTypeId && this.bundle) {
       return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id || ""}?jsonapi_include=1${include}`)
         .catch(this.handleError);
@@ -84,7 +84,7 @@ class EntityComponentProps implements EntityComponentPropsInterface {
 
   handleError(err) {
     this.error = err;
-    console.log("Entity Component Props has encountered an error with fetching the data:", err);
+    console.error("Entity Component Props has encountered an error with fetching the data:", err);
   }
 
   get loaded() {

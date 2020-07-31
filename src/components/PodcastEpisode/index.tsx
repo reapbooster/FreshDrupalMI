@@ -8,6 +8,7 @@ import EntityComponentBase, { EntityComponentState } from "../../DataTypes/Entit
 interface PodcastEpisodeProps extends EntityComponentPropsInterface {
   onSelectHandler: any;
   open: boolean;
+  key: number;
 }
 
 
@@ -24,12 +25,25 @@ class PodcastEpisode extends EntityComponentBase<PodcastEpisodeProps, EntityComp
       body = ( <PodcastEpisodeBody {...episodeBodyProps} open={this.props.open} /> );
     }
       return (
-        <Card key={this.props.field_episode}
-               id={this.ecp.id}
-               >
-          <Card.Header style={{borderBottom: "1px solid #dfdfdf", background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(223,223,223,1) 100%)"}}>
-            <Accordion.Toggle eventKey={this.props.field_episode} style={{border: "0px none", background: "transparent"}}>
-              <Card.Title  style={{fontWeight: "bold", padding: "1em 1em", border: "0px none"}}>
+        <Card key={this.props.key}
+              data-episode={this.props.field_episode}
+              id={this.ecp.id}
+        >
+          <Card.Header style={{
+            borderBottom: "1px solid #dfdfdf",
+            background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(223,223,223,1) 100%)"
+          }}>
+            <Accordion.Toggle
+              eventKey={this.props.field_episode}
+              style={{
+                border: "0px none",
+                background: "transparent"
+              }}>
+              <Card.Title  style={{
+                fontWeight: "bold",
+                padding: "1em 1em",
+                border: "0px none"
+              }}>
                   <strong>Episode {this.state?.attributes?.field_episode}</strong>&nbsp;&#58;&nbsp;{this.state?.attributes?.field_summary?.value}
               </Card.Title>
             </Accordion.Toggle>
