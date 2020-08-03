@@ -1,0 +1,34 @@
+uuid: 90f0a779-a66a-4a32-8439-19bfd8152afa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ph_terms.field_visibility
+    - taxonomy.vocabulary.ph_terms
+  module:
+    - text
+id: taxonomy_term.ph_terms.default
+targetEntityType: taxonomy_term
+bundle: ph_terms
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_visibility:
+    weight: 1
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

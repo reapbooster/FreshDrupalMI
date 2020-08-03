@@ -1,11 +1,11 @@
-uuid: debac6e5-473b-49df-9a4f-da4df0bc0fb8
+uuid: ffc78836-2012-41f6-917b-32c0eb3ef7c1
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-id: taxonomy_term.field_visible
-field_name: field_visible
+id: taxonomy_term.field_visibility
+field_name: field_visibility
 entity_type: taxonomy_term
 type: boolean
 settings: {  }
