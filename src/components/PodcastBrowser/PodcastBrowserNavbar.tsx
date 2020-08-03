@@ -4,7 +4,7 @@ import Paginator from "./Paginator";
 import LinkList from '../../DataTypes/LinkList';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import JSONApiUrl from "../../DataTypes/JSONApiUrl";
-import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {faSortDown, faSortUp, faBars} from "@fortawesome/free-solid-svg-icons";
 
 interface PodcastBrowserNavbarProps {
   links: LinkList;
@@ -32,7 +32,7 @@ const PodcastBrowserNavbar: React.FunctionComponent = (props: PodcastBrowserNavb
         aria-expanded="false"
         aria-label="Toggle navigation">
         <FontAwesomeIcon
-          icon={"bars"}
+          icon={faBars}
           size={"2x"}
           style={{
             fontSize: "1em",

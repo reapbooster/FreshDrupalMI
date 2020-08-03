@@ -1,0 +1,18 @@
+uuid: debac6e5-473b-49df-9a4f-da4df0bc0fb8
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_visible
+field_name: field_visible
+entity_type: taxonomy_term
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

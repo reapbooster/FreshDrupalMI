@@ -3,8 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.centers.field_content
+    - field.field.taxonomy_term.centers.field_visible
+    - field.field.taxonomy_term.centers.layout_builder__layout
     - taxonomy.vocabulary.centers
   module:
+    - entity_reference_revisions
     - layout_builder
     - layout_builder_restrictions
     - layout_discovery
@@ -49,6 +53,41 @@ third_party_settings:
                 third_party_settings: {  }
             additional: {  }
             weight: 1
+          3bb6c2ac-816c-4325-bed3-26706aead7cd:
+            uuid: 3bb6c2ac-816c-4325-bed3-26706aead7cd
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:taxonomy_term:centers:field_visible'
+              formatter:
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+                type: boolean
+            additional: {  }
+            weight: 2
+          4095b74d-20db-4bfd-ae8b-ce620159a3a8:
+            uuid: 4095b74d-20db-4bfd-ae8b-ce620159a3a8
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:taxonomy_term:centers:field_content'
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: above
+                settings:
+                  view_mode: default
+                  link: ''
+                third_party_settings: {  }
+            additional: {  }
+            weight: 3
         third_party_settings: {  }
   layout_builder_restrictions:
     entity_view_mode_restriction:
@@ -66,6 +105,25 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_content:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_visible:
+    weight: 1
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
 hidden:
   langcode: true
   layout_builder__layout: true
