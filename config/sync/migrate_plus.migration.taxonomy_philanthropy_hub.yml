@@ -112,7 +112,14 @@ source:
     id:
       type: string
 process:
-  uuid: id
+  uuid:
+    -
+      plugin: 'milken_migrate:uuid_exists'
+      source: id
+      entity_type: taxonomy
+    -
+      plugin: get
+      source: id
   name: name
   title: name
   machine_name: machine_name
