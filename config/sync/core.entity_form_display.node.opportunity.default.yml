@@ -68,8 +68,8 @@ third_party_settings:
       label: Publishing
     group_taxonomy:
       children:
-        - field_actions
         - field_region
+        - field_actions
         - field_focus
         - field_terms
       parent_name: group_tabs
@@ -95,14 +95,10 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_actions:
-    weight: 122
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    weight: 124
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_body:
     weight: 121
@@ -115,34 +111,22 @@ content:
     type: text_textarea_with_summary
     region: content
   field_focus:
-    weight: 124
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    weight: 125
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_region:
     weight: 123
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_terms:
-    weight: 125
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    weight: 126
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_url:
     weight: 126
