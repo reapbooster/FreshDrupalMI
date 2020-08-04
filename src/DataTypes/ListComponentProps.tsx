@@ -1,5 +1,6 @@
 import React from 'react';
 import JSONApiUrl from "./JSONApiUrl";
+import { CardColumns } from 'react-bootstrap';
 import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
@@ -8,6 +9,7 @@ import EventConference from '../components/Events/EventConference';
 import TileView from "../components/NodeDisplay/TileView";
 import EventSummit from "../components/Events/EventSummit";
 import EventMeeting from "../components/Events/EventMeeting";
+import NodeOpportunityCard from "../components/NodeDisplay/NodeOpportunityCard";
 
 interface ListComponentPropsInterface {
   id: string;
@@ -35,6 +37,7 @@ enum ListItemComponents {
   event_summit = EventSummit,
   event_meeting = EventMeeting,
   node_landing_page = TileView,
+  node_opportunity = NodeOpportunityCard,
 }
 
 class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {
@@ -125,7 +128,9 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   render() {
     return (
       <>
-        {this.items}
+        <CardColumns>
+          {this.items}
+        </CardColumns>
       </>
     );
   }

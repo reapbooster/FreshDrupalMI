@@ -1,0 +1,21 @@
+uuid: 1cfeb72f-9dd3-4ba3-9a51-5a5e454b9b0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_tag_icon
+    - taxonomy.vocabulary.ph_terms
+  module:
+    - fontawesome
+id: taxonomy_term.ph_terms.field_tag_icon
+field_name: field_tag_icon
+entity_type: taxonomy_term
+bundle: ph_terms
+label: Icon
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: fontawesome_icon

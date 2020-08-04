@@ -3,9 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.ph_region.field_icon
+    - field.field.taxonomy_term.ph_region.field_tag_color
     - field.field.taxonomy_term.ph_region.field_visibility
     - taxonomy.vocabulary.ph_region
   module:
+    - color_field
     - path
     - text
 id: taxonomy_term.ph_region.default
@@ -21,6 +24,24 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_icon:
+    weight: 103
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tag_color:
+    weight: 102
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
   field_visibility:
     weight: 101
     settings:
