@@ -48,7 +48,10 @@ class TaxonomyByMachineName extends ProcessPluginBase {
     foreach ($value as $relatedRecord) {
       $term = \Drupal::entityTypeManager()
         ->getStorage('taxonomy_term')
-        ->loadByProperties(['machine_name' => $relatedRecord]);
+        ->loadByProperties([
+          'machine_name' => str_replace("-", "_", $relatedRecord),
+          'vid' => $this->configuration['vocabulary'],
+        ]);
       if (count($term)) {
         $term = array_shift($term);
       }

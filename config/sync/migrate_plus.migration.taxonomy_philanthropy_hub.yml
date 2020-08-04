@@ -18,17 +18,17 @@ source:
   data_rows:
     -
       id: 6935fc97-0179-4959-ae84-230f91703846
-      name: "Donation"
+      name: Donation
       machine_name: donation
       vocabulary: ph_actions
     -
       id: 9fb24a01-8ed9-477f-a6af-d582267dff41
-      name: "Information"
+      name: Information
       machine_name: information
       vocabulary: ph_actions
     -
       id: b4237b56-6b24-4db6-8bdb-c28b35cdb81b
-      name: "Volunteering"
+      name: Volunteering
       machine_name: volunteering
       vocabulary: ph_actions
     -
@@ -38,27 +38,27 @@ source:
       vocabulary: ph_actions
     -
       id: d88535a3-41f6-4008-8a85-9a7b2311be23
-      name: "Economic"
+      name: Economic
       machine_name: economic
       vocabulary: ph_focus
     -
       id: 07ce3df1-660b-41d2-94b2-f676a490165a
-      name: "General"
+      name: General
       machine_name: general
       vocabulary: ph_focus
     -
       id: 3c979052-1d33-4302-9fb0-d69a670412a5
-      name: "Health"
+      name: Health
       machine_name: health
       vocabulary: ph_focus
     -
       id: 6f9ef8b5-3963-4d09-a210-8fd380b40fcd
-      name: "Social"
+      name: Social
       machine_name: social
       vocabulary: ph_focus
     -
       id: 0a171e45-e3d4-4442-84cb-1a672f7aaf99
-      name: "Africa"
+      name: Africa
       machine_name: africa
       vocabulary: ph_region
     -
@@ -88,12 +88,12 @@ source:
       vocabulary: ph_region
     -
       id: 4e90c7b2-4f5c-44dc-8017-8045e7a3b4a7
-      name: "Relief/Short"
+      name: Relief/Short
       machine_name: short
       vocabulary: ph_terms
     -
       id: fe3f9e01-ca24-4740-b0e9-a001419d9346
-      name: "Recovery/Intermediate"
+      name: Recovery/Intermediate
       machine_name: intermediate
       vocabulary: ph_terms
     -
