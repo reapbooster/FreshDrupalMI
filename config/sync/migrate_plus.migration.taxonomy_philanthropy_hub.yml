@@ -47,11 +47,6 @@ source:
       machine_name: general
       vocabulary: ph_focus
     -
-      id: d88535a3-41f6-4008-8a85-9a7b2311be23
-      name: Economic
-      machine_name: economic
-      vocabulary: ph_focus
-    -
       id: 3c979052-1d33-4302-9fb0-d69a670412a5
       name: Health
       machine_name: health
