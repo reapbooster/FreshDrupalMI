@@ -34,7 +34,7 @@ source:
     -
       id: 5cde6637-20d7-4092-b66d-d6d89626266a
       name: 'Nonprofit Lending'
-      machine_name: nonprofit_lending
+      machine_name: nonprofit-lending
       vocabulary: ph_actions
     -
       id: d88535a3-41f6-4008-8a85-9a7b2311be23
@@ -64,7 +64,7 @@ source:
     -
       id: 9b983880-015a-48c7-ba15-08f6d51ffaef
       name: Americas
-      machine_name: americas
+      machine_name: america
       vocabulary: ph_region
     -
       id: bd824d7f-c269-4d47-bae3-8bfc74f0258e
@@ -79,7 +79,7 @@ source:
     -
       id: 62a07dac-090b-4bd3-8380-a5e5e7708fee
       name: 'Middle East'
-      machine_name: middle_east
+      machine_name: middle-east
       vocabulary: ph_region
     -
       id: fb7ef3fe-f605-4c6e-bdcb-1b5349226bb2
@@ -88,18 +88,18 @@ source:
       vocabulary: ph_region
     -
       id: 4e90c7b2-4f5c-44dc-8017-8045e7a3b4a7
-      name: Relief
-      machine_name: relief
+      name: "Relief/Short"
+      machine_name: short
       vocabulary: ph_terms
     -
       id: fe3f9e01-ca24-4740-b0e9-a001419d9346
-      name: Recovery
-      machine_name: recovery
+      name: "Recovery/Intermediate"
+      machine_name: intermediate
       vocabulary: ph_terms
     -
       id: e582a584-279e-427d-8057-856bbae2d8c1
       name: 'Long Term'
-      machine_name: long_term
+      machine_name: long
       vocabulary: ph_terms
   ids:
     id:
@@ -117,6 +117,7 @@ process:
   title: name
   vid: vocabulary
   bundle: vocabulary
+  machine_name: machine_name
   vocabulary: vocabulary
   field_visible:
     plugin: default_value
