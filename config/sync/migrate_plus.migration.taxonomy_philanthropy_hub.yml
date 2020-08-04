@@ -116,7 +116,7 @@ process:
     -
       plugin: 'milken_migrate:uuid_exists'
       source: id
-      entity_type: taxonomy
+      entity_type: taxonomy_term
     -
       plugin: get
       source: id
