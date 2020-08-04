@@ -3,12 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.ph_actions.field_icon
     - field.field.taxonomy_term.ph_actions.field_tag_color
+    - field.field.taxonomy_term.ph_actions.field_tag_icon
     - field.field.taxonomy_term.ph_actions.field_visibility
     - taxonomy.vocabulary.ph_actions
   module:
     - color_field
+    - fontawesome
     - text
 id: taxonomy_term.ph_actions.default
 targetEntityType: taxonomy_term
@@ -22,15 +23,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_icon:
-    type: entity_reference_entity_view
-    weight: 3
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    region: content
   field_tag_color:
     weight: 2
     label: above
@@ -39,6 +31,14 @@ content:
       opacity: true
     third_party_settings: {  }
     type: color_field_formatter_text
+    region: content
+  field_tag_icon:
+    weight: 4
+    label: above
+    settings:
+      layers: false
+    third_party_settings: {  }
+    type: fontawesome_icon_formatter
     region: content
   field_visibility:
     weight: 1
