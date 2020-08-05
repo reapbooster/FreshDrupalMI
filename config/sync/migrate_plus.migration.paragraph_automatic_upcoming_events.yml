@@ -9,16 +9,15 @@ id: paragraph_automatic_upcoming_events
 class: null
 field_plugin_method: null
 cck_plugin_method: null
-migration_tags:
-  - paragraphs
+migration_tags: null
 migration_group: milken
 label: 'Paragraph--automatic upcoming events VIA JSON API'
 source:
   plugin: url
-  urls: 'https://www.milkeninstitute.org/jsonapi/paragraph/author'
+  urls: 'https://milkeninstitute.org/jsonapi/paragraph/author'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/paragraph/author
   item_selector: data
   jsonapi_include: true

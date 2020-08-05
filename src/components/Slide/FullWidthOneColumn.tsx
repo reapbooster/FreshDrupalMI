@@ -26,6 +26,28 @@ const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface> = (props:
       setBackgroundImageUrl(incoming.data.uri.url);
     });
   }
+  var textLines = [];
+  if (props.field_slide_text?.length) {
+    for (var key in props.field_slide_text) {
+      textLines.push((
+        <p
+          key={textLines.length + 1}
+          className={props.field_slide_text[key]['key']}
+          style={{'color': `${props.field_text_color?.color}`}}>{props.field_slide_text[key]['value']}</p>
+      ));
+    }
+  }
+  if (props.field_link?.title && props.field_link?.uri) {
+    textLines.push((
+      <p
+        key={textLines.length + 1}
+      ><a href={`${props.field_link?.uri || "#"}`}
+            className="btn btn-primary btn-lg"
+            style={{'color': `${props.field_text_color?.color} || #000000`}}
+      >{props.field_link?.title || "#"}</a></p>
+    ))
+  }
+  console.debug(textLines);
   return (
     <>
     <Row className={"align-items-center"} style={rowStyle}>
@@ -33,17 +55,7 @@ const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface> = (props:
         className={"d-block align-items-center"}
         style={jumbotronStyle}>
           <Container>
-            <h1
-              className={"display-3"}
-              style={{'color': `${props.field_text_color?.color}`}}>{props.title}</h1>
-            <p
-              className={"lead"}
-              style={{"color":`${props.field_text_color?.color}`}}>{props.field_subtitle}</p>
-            <hr className="my-4" />
-              <p><a href={`${props.field_link?.uri || "#"}`}
-                    className="btn btn-primary btn-lg"
-                    style={{'color': `${props.field_text_color?.color} || #000000`}}
-              >{props.field_link?.title || "#"}</a></p>
+            {textLines}
           </Container>
       </Jumbotron>
     </Row>

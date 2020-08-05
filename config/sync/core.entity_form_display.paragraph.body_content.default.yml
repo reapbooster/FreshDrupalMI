@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.body_content.field_background
     - field.field.paragraph.body_content.field_body
+    - field.field.paragraph.body_content.field_num_text_columns
     - paragraphs.paragraphs_type.body_content
   module:
     - field_group
@@ -12,21 +13,67 @@ dependencies:
 third_party_settings:
   field_group:
     group_text:
-      children: {  }
+      children:
+        - field_body
+        - field_num_text_columns
+        - field_background
+      parent_name: group_tabs
+      weight: 15
+      format_type: tab
+      format_settings:
+        formatter: closed
+        description: ''
+        classes: ''
+        id: ''
+        required_fields: true
+      label: Text
+      region: content
+    group_tabs:
+      children:
+        - group_text
+        - group_authoring
       parent_name: ''
       weight: 20
-      format_type: fieldset
+      format_type: tabs
       format_settings:
         id: ''
         classes: ''
+        direction: horizontal
+      label: Tabs
+      region: content
+    group_authoring:
+      children:
+        - created
+      parent_name: group_tabs
+      weight: 25
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
         description: ''
         required_fields: true
-      label: Text
+      label: Authoring
+      region: content
 id: paragraph.body_content.default
 targetEntityType: paragraph
 bundle: body_content
 mode: default
 content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_background:
     weight: 23
     settings: {  }
@@ -50,6 +97,11 @@ content:
     third_party_settings: {  }
     type: number
     region: content
-hidden:
-  created: true
-  status: true
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }

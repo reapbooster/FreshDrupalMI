@@ -3,15 +3,23 @@
 
 ## Installation ##
 
-This is a repo for the new MI site. To initialize a local development environment, run the following commands from the project root on the container host:
+1. Login to Pantheon.
 
-1. ```cp .env.dist .env```
+2. Click your name in the top right corner.
 
-2. ```cp docker/settings.local.php web/sites/default```
+3. Choose "Account" Tab, then "Machine Tokens".
 
-3. ```docker-compose up -d```
+4. Generate a machine token and copy it somewhere safe.
 
-If the ```docker-compose``` command complete successfully, you can now launch a shell on the PHP container:
+5. Clone this github repo and make sure master is up-to-date. Open a terminus and cd to the directory you just cloned.
+
+6. ```cp .env.dist .env```
+
+7. ```cp config/settings.local.php web/sites/default```
+
+8. ```docker-compose up -d```
+
+If the ```docker-compose``` command completed successfully, you can now launch a shell on the PHP container:
 
 1. ```docker exec -it freshdrupalmi_php_1 bash```
 
@@ -19,12 +27,53 @@ Then from inside the docker container do the following to install the drupal sit
 
 1. ```composer install && gulp```
 
-2. ```drupal site:milken:install```
+2. ```terminus login --email={PANTHEON EMAIL} ----machine-token={TOKEN FROM PANTHEON}```
 
-3. ```drupal site:milken:migrations```
+3. ```bin/loadDatabaseBackup```
 
-After installation completes, open a browser and navigate to http://localhost:8080/
+4. ```bin/rsyncFiles``` (will take forever)
 
+5. ```rm -rf web/sites/default/files/```
+
+6. ```ln -s /var/www/db/files /var/www/web/sites/default```
+
+7. ```chown -R www-data:www-data /var/www/db/files```
+
+8. ```drush cr```
+
+9. Point your browser to https://localhost:8080/
+
+
+## MIGRATIONS ##
+
+**NOTE**: Migrations should already be run but if you alter them, you will have to rollback and re-import.
+
+```web/modules/custom/milken_migrate/milken_migrate.cron.inc``` Because of Patheon's limits on container activity
+they often fail with a **CURL** error so they need to be constnatly restarted and reset if you do them by hand.
+
+To get a list of migrations and they're current status:
+
+```drush migrate:status```
+
+** doing this will take a few minutes as drupal gathers total/active/unprocessed imports for every migration. It CANNOT
+BE RUN ON A PANTHEON INSTANCE BECAUSE OF PANTHEON'S RESOURCE LIMITS.
+
+Migrations can be run different of ways. You can run them individually from the container using drush:
+
+```drush migrate:import {migration_id}```
+
+if they fail, reset then rerun:
+
+```drush migrate:reset {migration_id} && drush migrate:import {migration_id}```
+
+A cron-run will import 250 items from the internal list of migrations and automatically restart any migration that fails.
+You can install a cron tab in your container that will run every 10 minutes:
+
+```*/10 * * * * cd /var/www && /var/www/vendor/bin/drush core:cron  2>&1```
+
+or you can run the cron by hand a bunch of times:
+
+```drush core:cron && drush core:cron && drush core:cron && drush core:cron```
 
 ## Wipe and Re-create the docker environment ##
 
@@ -41,7 +90,7 @@ If you happen to break something in the environment, it is often better to remov
 
 Sometimes a branch might fall behind and you might need to bring it up to date to a certain stable tag.
 
-1. ```git checkout tag_name``` Will checkout the tag "tag_name" locally. 
+1. ```git checkout tag_name``` Will checkout the tag "tag_name" locally.
 
 2. ```git checkout -b new_branch_for_tag_name``` Will make a new branch (must not currently exist) with the code from "tag_name".
 
@@ -104,6 +153,6 @@ To export content in order to have it import automatically on site build, follow
 
 2. Then place the exported files into web/modules/custom/milken_migrate/content/taxonomy_term
 
-3. When the module Milken_Migrate is enabled, it will load the content into the site automatically. 
+3. When the module Milken_Migrate is enabled, it will load the content into the site automatically.
 
-4. The content will also be loaded automatically on every site build. 
+4. The content will also be loaded automatically on every site build.

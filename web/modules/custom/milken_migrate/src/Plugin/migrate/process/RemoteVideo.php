@@ -42,6 +42,8 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     if ($row->isStub()) {
       return NULL;
     }

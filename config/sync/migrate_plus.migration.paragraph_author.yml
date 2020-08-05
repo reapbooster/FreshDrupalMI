@@ -15,10 +15,10 @@ migration_group: milken
 label: 'Paragraph--author VIA JSON API'
 source:
   plugin: url
-  urls: 'https://www.milkeninstitute.org/jsonapi/paragraph/author'
+  urls: 'https://milkeninstitute.org/jsonapi/paragraph/author'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://www.milkeninstitute.org'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/paragraph/author
   item_selector: data
   jsonapi_include: true
@@ -47,7 +47,7 @@ source:
       selector: /field_photo
     -
       name: field_job_position
-      label: 'Author Photo'
+      label: 'Author position'
       selector: /field_job_position
     -
       name: created
@@ -67,9 +67,15 @@ source:
     uuid:
       type: string
 process:
-  id: paragraph_id
+  uuid:
+    -
+      plugin: 'milken_migrate:uuid_exists'
+      source: uuid
+      entity_type: paragraph
+    -
+      plugin: get
+      source: uuid
   field_name: name
-  uuid: uuid
   langcode:
     plugin: default_value
     default_value: en
@@ -87,7 +93,7 @@ process:
     source: changed
   field_job_position: field_job_position
   field_photo:
-    plugin: 'milken_migrate:remote_file'
+    plugin: 'milken_migrate:remote_image'
     source: field_photo
     title: name
 destination:

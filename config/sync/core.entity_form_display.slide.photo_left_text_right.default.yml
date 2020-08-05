@@ -33,6 +33,7 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Tabs
+      region: content
     group_text:
       children:
         - field_subtitle
@@ -48,6 +49,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Text
+      region: content
     group_background:
       children:
         - field_photo_position
@@ -63,6 +65,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Background
+      region: content
     group_publishing:
       children:
         - langcode
@@ -79,6 +82,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publishing
+      region: content
 id: slide.photo_left_text_right.default
 targetEntityType: slide
 bundle: photo_left_text_right

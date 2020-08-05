@@ -5,12 +5,13 @@ dependencies:
   config:
     - field.field.media.video.field_body
     - field.field.media.video.field_centers
+    - field.field.media.video.field_embedded_id
+    - field.field.media.video.field_embedded_service
     - field.field.media.video.field_event_reference
     - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
     - field.field.media.video.field_program_initiatives
-    - field.field.media.video.field_related_event
     - field.field.media.video.field_speakers
     - field.field.media.video.field_subheader
     - field.field.media.video.field_term_collection
@@ -22,6 +23,7 @@ dependencies:
     - media.type.video
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
     - media
 third_party_settings:
@@ -136,6 +138,12 @@ third_party_settings:
             additional: {  }
             weight: 5
         third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
 id: media.video.default
 targetEntityType: media
 bundle: video
@@ -203,7 +211,6 @@ hidden:
   field_event_reference: true
   field_meta_tags: true
   field_program_initiatives: true
-  field_related_event: true
   field_speakers: true
   field_subheader: true
   field_term_collection: true

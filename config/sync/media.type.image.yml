@@ -6,7 +6,7 @@ dependencies:
     - crop
 third_party_settings:
   crop:
-    image_field: image
+    image_field: field_media_image
 _core:
   default_config_hash: UbLy1_yBV5jSxil0-k8gV9GiVUg3Oik3hlAJzqeT8YQ
 id: image

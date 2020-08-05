@@ -1,0 +1,19 @@
+uuid: b398fdfa-ff2f-4e4d-869b-b3e87ab9e171
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.media_tiles_from_view
+id: paragraph.media_tiles_from_view.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: media_tiles_from_view
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

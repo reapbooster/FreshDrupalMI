@@ -13,18 +13,17 @@ dependencies:
     - field.field.event.conference.field_description
     - field.field.event.conference.field_event_date
     - field.field.event.conference.field_grid_event_id
+    - field.field.event.conference.field_hero_image
     - field.field.event.conference.field_name_short
-    - field.field.event.conference.field_picture
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
     - field.field.event.conference.field_sequential_id
     - field.field.event.conference.field_speakers
     - field.field.event.conference.field_tracks
     - field.field.event.conference.field_venue
-    - image.style.thumbnail
   module:
     - datetime
-    - image
+    - media_library
     - text
 id: event.conference.default
 targetEntityType: event
@@ -107,6 +106,13 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_hero_image:
+    type: media_library_widget
+    weight: 28
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
   field_name_short:
     weight: 12
     settings:
@@ -114,14 +120,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_picture:
-    weight: 22
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_published:
     weight: 23

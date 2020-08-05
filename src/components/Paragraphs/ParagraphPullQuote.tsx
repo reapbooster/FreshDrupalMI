@@ -25,7 +25,8 @@ class ParagraphPullQuote extends EntityComponentBase<ParagraphSlideProps, Entity
       return (
         <Col lg={12}>
           <Container py={"2rem"}>
-            <h1 className={"this.state.attributes.field_text_size"}>{this.state.attributes.field_pull_quote}</h1>
+            <h1 className={"this.state.attributes.field_text_size"}
+                dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.processed}}></h1>
           </Container>
         </Col>
       )

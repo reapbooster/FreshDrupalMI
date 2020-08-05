@@ -50,9 +50,9 @@ class MilkenImageAttributes {
       this.image_style_uri = new ImageStyleObject(values?.image?.image_style_uri);
       this.uri = new ImageURIObject(values?.image?.uri);
       this.links = new LinkList(values?.image?.links);
-      this.field_photo_subject_name = values.field_photo_subject_name;
-      this.field_photo_subject_title = values.field_photo_subject_title;
-      this.field_photo_subject_org = values.field_photo_subject_org;
+      this.field_photo_subject_name = values?.field_photo_subject_name;
+      this.field_photo_subject_title = values?.field_photo_subject_title;
+      this.field_photo_subject_org = values?.field_photo_subject_org;
     }
   }
 

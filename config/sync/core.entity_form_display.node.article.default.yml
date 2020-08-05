@@ -29,11 +29,11 @@ third_party_settings:
       weight: 10
       format_type: tabs
       format_settings:
-        label: Settings
         direction: horizontal
         id: ''
         classes: ''
       label: Settings
+      region: content
     group_hero:
       children:
         - promote
@@ -43,13 +43,13 @@ third_party_settings:
       weight: 123
       format_type: tab
       format_settings:
-        label: Promotion
         formatter: closed
         description: ''
         required_fields: true
         id: ''
         classes: ''
       label: Promotion
+      region: content
     group_tags:
       children:
         - field_authors
@@ -66,6 +66,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Tags
+      region: content
     group_text:
       children:
         - langcode
@@ -80,6 +81,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Text
+      region: content
     group_authoring:
       children:
         - uid
@@ -96,6 +98,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Authoring
+      region: content
 id: node.article.default
 targetEntityType: node
 bundle: article

@@ -1,3 +1,4 @@
+import PathObject from "./PathObject";
 
 
 interface EntityComponentPropsInterface {
@@ -11,6 +12,8 @@ interface EntityComponentPropsInterface {
   error?: Error;
   onSelectHandler?: any;
   open?: boolean;
+  path?: PathObject;
+
 }
 
 interface JSONAPIEntityReferenceData {
@@ -60,9 +63,9 @@ class EntityComponentProps implements EntityComponentPropsInterface {
   }
 
   async getData(include: string = ""): Promise<any> {
-    console.log("get Data called: ", this);
-    if (this.entityTypeId && this.bundle && this.id) {
-      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id}?jsonapi_include=1${include}`)
+    console.debug("get Data called: ", this);
+    if (this.entityTypeId && this.bundle) {
+      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id || ""}?jsonapi_include=1${include}`)
         .catch(this.handleError);
     } else {
       this.handleError(new Error("Not Enough Data to make a getData call"));
@@ -81,12 +84,18 @@ class EntityComponentProps implements EntityComponentPropsInterface {
 
   handleError(err) {
     this.error = err;
-    console.log("Entity Component Props has encountered an error with fetching the data:", err);
+    console.error("Entity Component Props has encountered an error with fetching the data:", err);
   }
 
   get loaded() {
     return this.hasData();
   }
+
+  get label() {
+    return this.title || this.name || null;
+  }
+
+
 
 
 }

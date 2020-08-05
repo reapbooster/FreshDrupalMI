@@ -1,0 +1,15 @@
+uuid: cf127c70-f3da-4af9-b6f8-5f2ba05bc259
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'file:file:24a9d2b7-114f-4e47-b938-14f753c3275b'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/four_tile_media_taxonomy-default-icon.svg
+id: four_tile_media_taxonomy
+label: 'Four media tiles from Taxonomy'
+icon_uuid: 24a9d2b7-114f-4e47-b938-14f753c3275b
+icon_default: 'data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJ0YWJsZSIgY2xhc3M9InN2Zy1pbmxpbmUtLWZhIGZhLXRhYmxlIGZhLXctMTYiIHJvbGU9ImltZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNNDY0IDMySDQ4QzIxLjQ5IDMyIDAgNTMuNDkgMCA4MHYzNTJjMCAyNi41MSAyMS40OSA0OCA0OCA0OGg0MTZjMjYuNTEgMCA0OC0yMS40OSA0OC00OFY4MGMwLTI2LjUxLTIxLjQ5LTQ4LTQ4LTQ4ek0yMjQgNDE2SDY0di05NmgxNjB2OTZ6bTAtMTYwSDY0di05NmgxNjB2OTZ6bTIyNCAxNjBIMjg4di05NmgxNjB2OTZ6bTAtMTYwSDI4OHYtOTZoMTYwdjk2eiI+PC9wYXRoPjwvc3ZnPg=='
+description: 'Create 4-tile block from Taxonomy'
+behavior_plugins: {  }

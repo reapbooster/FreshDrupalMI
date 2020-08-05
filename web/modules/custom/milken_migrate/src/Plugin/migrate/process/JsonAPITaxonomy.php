@@ -2,10 +2,12 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
-use Drupal\migrate\MigrateException;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\Plugin\migrate\destination\TaxonomyTerm;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use Drupal\taxonomy\Entity\Term;
 
@@ -25,6 +27,8 @@ class JsonAPITaxonomy extends ProcessPluginBase {
    * The main function for the plugin, actually doing the data conversion.
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     if ((isset($value['data']) && empty($value['data'])) ||
       empty($value)
     ) {
@@ -33,19 +37,32 @@ class JsonAPITaxonomy extends ProcessPluginBase {
     $destination_values = [];
     if (is_array($value)) {
       foreach ($value as $relatedRecord) {
-        if (isset($relatedRecord['id'])) {
+        if (isset($relatedRecord['id']) && $relatedRecord['id'] != "missing") {
           $term = \Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
             ->loadByProperties(['uuid' => $relatedRecord['id']]);
           if (count($term)) {
             $term = array_shift($term);
           }
-          if ($term instanceof Term) {
-            $destination_values[] = ['entity' => $term];
+          else {
+            $term = TaxonomyTerm::create($this->getRelatedRecordData($relatedRecord, $row, $this->configuration));
+            if ($term instanceof EntityInterface) {
+              $term->isNew();
+              $term->save();
+            }
+            else {
+              $row->setDestinationProperty($destination_property, []);
+              return new MigrateSkipProcessException(
+                "Cannot create taxonomy Term:" . print_r($relatedRecord, TRUE)
+              );
+            }
           }
-          elseif ($relatedRecord['id'] != "missing") {
-            throw new MigrateException("Cannot find the correct taxonomy: " . print_r($value, TRUE));
-          }
+        }
+        if ($term instanceof Term) {
+          $destination_values[] = $term;
+        }
+        else {
+          return new MigrateSkipProcessException("No value can be determined for: {$destination_property}");
         }
       }
     }

@@ -1,6 +1,6 @@
 uuid: 5fa0579b-f010-416f-aee6-35df9b6e706c
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - content_sync

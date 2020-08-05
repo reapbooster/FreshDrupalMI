@@ -1,0 +1,55 @@
+uuid: 103e8b1c-07c8-4f0f-9ff6-27c2a4e92b8b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.four_tile_media.field_background_color
+    - field.field.paragraph.four_tile_media.field_media_tiles
+    - paragraphs.paragraphs_type.four_tile_media
+  module:
+    - color_field
+    - media_library
+id: paragraph.four_tile_media.default
+targetEntityType: paragraph
+bundle: four_tile_media
+mode: default
+content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_background_color:
+    weight: 1
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  field_media_tiles:
+    type: media_library_widget
+    weight: 2
+    settings:
+      media_types:
+        - image
+        - video
+        - document
+        - hero_image
+        - podcast_episode
+        - report
+        - sponsor_logo
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true

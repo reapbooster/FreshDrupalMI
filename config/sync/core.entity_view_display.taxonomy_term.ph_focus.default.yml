@@ -1,0 +1,55 @@
+uuid: 1a2b124d-0a14-4d13-b418-cabf845226d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ph_focus.field_tag_color
+    - field.field.taxonomy_term.ph_focus.field_tag_icon
+    - field.field.taxonomy_term.ph_focus.field_visibility
+    - taxonomy.vocabulary.ph_focus
+  module:
+    - color_field
+    - fontawesome
+    - text
+id: taxonomy_term.ph_focus.default
+targetEntityType: taxonomy_term
+bundle: ph_focus
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tag_color:
+    weight: 2
+    label: above
+    settings:
+      format: hex
+      opacity: true
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+  field_tag_icon:
+    weight: 3
+    label: above
+    settings:
+      layers: false
+    third_party_settings: {  }
+    type: fontawesome_icon_formatter
+    region: content
+  field_visibility:
+    weight: 1
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

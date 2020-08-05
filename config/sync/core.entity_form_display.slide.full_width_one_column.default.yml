@@ -9,13 +9,14 @@ dependencies:
     - field.field.slide.full_width_one_column.field_link
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
-    - field.field.slide.full_width_one_column.field_subtitle
+    - field.field.slide.full_width_one_column.field_slide_text
     - field.field.slide.full_width_one_column.field_text_color
     - image.style.thumbnail
   module:
     - color_field
     - field_group
     - image
+    - key_value_field
     - link
 third_party_settings:
   field_group:
@@ -32,9 +33,10 @@ third_party_settings:
         classes: ''
         direction: horizontal
       label: Tabs
+      region: content
     group_text:
       children:
-        - field_subtitle
+        - field_slide_text
         - field_link
         - field_text_color
       parent_name: group_tabs
@@ -47,6 +49,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Text
+      region: content
     group_background:
       children:
         - field_background_image
@@ -61,12 +64,13 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Background
+      region: content
     group_publishing:
       children:
+        - field_promoted
+        - field_published
         - langcode
         - created
-        - field_published
-        - field_promoted
       parent_name: group_tabs
       weight: 23
       format_type: tab
@@ -77,6 +81,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publishing
+      region: content
 id: slide.full_width_one_column.default
 targetEntityType: slide
 bundle: full_width_one_column
@@ -84,7 +89,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 15
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -103,7 +108,7 @@ content:
     type: image_image
     region: content
   field_link:
-    weight: -3
+    weight: 25
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -111,36 +116,44 @@ content:
     type: link_default
     region: content
   field_promoted:
-    weight: 18
+    weight: 20
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_published:
-    weight: 17
+    weight: 21
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_subtitle:
-    weight: -4
+  field_slide_text:
+    weight: 27
     settings:
+      key_size: 60
+      key_label: Key
+      key_placeholder: ''
+      value_label: Value
+      description_enabled: true
+      description_label: Description
+      description_rows: 5
+      description_placeholder: ''
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
+    type: key_value_textarea
     region: content
   field_text_color:
-    weight: 10
+    weight: 26
     settings: {  }
     third_party_settings: {  }
     type: color_field_widget_html5
     region: content
   langcode:
     type: language_select
-    weight: 14
+    weight: 22
     region: content
     settings:
       include_locked: true

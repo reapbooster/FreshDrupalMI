@@ -3,17 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.podcast_episode.field_audio_file
-    - field.field.paragraph.podcast_episode.field_episode
-    - field.field.paragraph.podcast_episode.field_podcast_image
-    - field.field.paragraph.podcast_episode.field_podcast_service_links
-    - field.field.paragraph.podcast_episode.field_summary
-    - field.field.paragraph.podcast_episode.field_transcript
+    - field.field.paragraph.podcast_episode.field_episode_ref
     - paragraphs.paragraphs_type.podcast_episode
   module:
     - js_entity
-    - key_value_field
-    - text
 third_party_settings:
   js_entity:
     render_profile: paragraph.podcast_episode.podcast_episode_default
@@ -38,6 +31,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_episode_ref:
+    type: entity_reference_entity_view
+    weight: 5
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
     region: content
   field_podcast_image:
     type: entity_reference_entity_view

@@ -86,4 +86,4 @@ process:
 destination:
   plugin: 'entity:taxonomy_term'
   default_bundle: milken_tags
-migration_dependencies: null
+migration_dependencies: {  }

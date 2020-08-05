@@ -4,20 +4,20 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - node
     - media
+    - node
     - eck
     - search_api
   config:
     - field.storage.media.field_body
+    - field.storage.media.field_subheader
     - field.storage.node.field_body
-    - field.storage.node.field_centers_general
     - field.storage.node.field_department
     - field.storage.node.field_location
-    - field.storage.media.field_subheader
-    - field.storage.slide.field_subtitle
+    - field.storage.node.field_centers_general
     - field.storage.node.field_topics
-    - search_api.server.solr_local
+    - field.storage.slide.field_subtitle
+    - search_api.server.solr_live
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -211,13 +211,6 @@ field_settings:
       module:
         - eck
 datasource_settings:
-  'entity:event':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
   'entity:media':
     bundles:
       default: true
@@ -289,4 +282,4 @@ tracker_settings:
 options:
   index_directly: false
   cron_limit: 50
-server: solr_local
+server: solr_live

@@ -25,15 +25,32 @@ class UnixDate extends ProcessPluginBase {
    * {@inheritdoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     $dt = new \DateTime();
     if (!empty($value)) {
-      $dt = \DateTime::createFromFormat(\DateTimeInterface::W3C, $value);
+      if (substr($value, -3, 1) == ":") {
+        $format = \DateTimeInterface::ATOM;
+      }
+      elseif (strpos($value, "T")) {
+        $format = \DateTimeInterface::ISO8601;
+      }
+      else {
+        $format = \DateTimeInterface::W3C;
+      }
+      $dt = \DateTime::createFromFormat($format, $value);
     }
-    $row->setDestinationProperty($destination_property, $dt);
     if ($dt instanceof \DateTime) {
-      return $dt->getTimestamp();
+      if ($destination_property == "created" || $destination_property == "changed") {
+        $row->setDestinationProperty($destination_property, $dt->getTimestamp());
+        return $dt->getTimestamp();
+      }
+      else {
+        $row->setDestinationProperty($destination_property, $dt->format('Y-m-d\TH:i:s'));
+        return $dt->format('Y-m-d\TH:i:s');
+      }
     }
-    return $dt;
+    return NULL;
   }
 
 }

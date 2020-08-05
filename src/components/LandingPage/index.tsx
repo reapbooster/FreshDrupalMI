@@ -2,10 +2,7 @@
 //
 
 import React from 'react'
-import ReactDOM from 'react-dom';
-import SlideShow from "../Slideshow";
-import ExploreVideos from "../ExploreVideos";
-import { Container } from "react-bootstrap";
+
 import {
   EntityComponentProps,
   EntityComponentPropsInterface
@@ -22,27 +19,43 @@ interface LandingPageState extends EntityComponentState {
   attributes: LandingPageContentInterface;
 }
 
-// @ts-ignore
-class LandingPage extends EntityComponentBase <LandingPageComponentProps, LandingPageState> {
 
-  include = "&include=field_content";
+class LandingPage extends EntityComponentBase<LandingPageComponentProps, LandingPageState> {
+
+  include = "&include=field_content,field_hero_image";
 
   componentDidMount() {
-    this.getDataForComponent(this.include);
+    console.log("Landing Page Mount", this);
+    if (!this.props.loaded && !this.props.loading) {
+      this.getDataForComponent(this.include);
+    }
   }
 
   render() {
+    console.log("Landing Page Render", this.props, this.state);
     var content = ( <Loading /> );
-    if (this.state?.attributes?.field_content?.length) {
-      const list = this.state?.attributes?.field_content?.map((item) => {
-        return new EntityComponentProps(item);
-      })
-      content = ( <ParagraphList items={list} /> );
+    if (this.state?.loaded == true) {
+      switch (this.props.view_mode) {
+        case "tiles":
+          content = (
+            <div>
+              <h1>Tiles View</h1>
+            </div>
+          );
+          break;
+
+        default:
+          const list = this.state?.attributes?.field_content?.map((item) => {
+            return new EntityComponentProps(item);
+          })
+            content = ( <ParagraphList items={list} /> );
+      }
+
     }
    return (
-      <>
+      <div>
         {content}
-      </>
+      </div>
    );
   }
 

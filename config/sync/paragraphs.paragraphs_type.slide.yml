@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:b898ce03-5d19-4a0f-936d-9fe5a815358a'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/slide-default-icon.svg
 id: slide
 label: Slide(s)
 icon_uuid: b898ce03-5d19-4a0f-936d-9fe5a815358a

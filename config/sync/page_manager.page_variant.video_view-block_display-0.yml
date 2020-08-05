@@ -1,0 +1,58 @@
+uuid: 4f1cb11e-e9b8-480b-8602-1495a5314fbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.video_view
+  module:
+    - ctools_block
+id: video_view-block_display-0
+label: 'Block page'
+variant: block_display
+variant_settings:
+  blocks:
+    94e8fda7-3b50-4163-98ad-9770541c9d9c:
+      id: 'entity_field:media:name'
+      label: Name
+      provider: ctools_block
+      label_display: visible
+      formatter:
+        label: visually_hidden
+        type: string
+        settings:
+          link_to_entity: false
+        third_party_settings: {  }
+        weight: 0
+      region: top
+      weight: 0
+      uuid: 94e8fda7-3b50-4163-98ad-9770541c9d9c
+      context_mapping:
+        entity: args
+    7ed3108d-2bc0-47e8-9fbc-bcde2d23f8bb:
+      id: 'entity_field:media:field_media_oembed_video'
+      label: 'Remote video URL'
+      provider: ctools_block
+      label_display: visible
+      formatter:
+        label: visually_hidden
+        type: oembed
+        settings:
+          max_width: 0
+          max_height: 0
+        third_party_settings: {  }
+        weight: 0
+      region: bottom
+      weight: 0
+      uuid: 7ed3108d-2bc0-47e8-9fbc-bcde2d23f8bb
+      context_mapping:
+        entity: args
+  id: block_display
+  uuid: 9ff98159-05fd-443b-9b85-025aa79314d2
+  label: null
+  weight: 0
+  page_title: 'Video Detail'
+page: video_view
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

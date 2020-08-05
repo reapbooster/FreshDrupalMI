@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a paragraphs browser wrapper.
+ *
+ * @ingroup themeable
+ */
+#}
+
+<fieldset class="paragraphs-browser-paragraph-type card py-3 px-3" style="width: 14rem; margin-bottom: 2rem;">
+  {% if form.icon %}
+    <div class="card-img-top">
+      {{ form.icon }}
+    </div>
+  {% endif %}
+  <div class="card-body">
+    <legend class="card-title">{{ form.label }}</legend>
+    {% if form.description %}
+      <div class="card-text text-muted">
+        <span>{{ form.description }}</span>
+      </div>
+    {% endif %}
+    {{ form.add_more }}
+  </div>
+</fieldset>

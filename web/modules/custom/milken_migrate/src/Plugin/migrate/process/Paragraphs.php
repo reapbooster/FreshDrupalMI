@@ -4,9 +4,14 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\JsonAPIReference;
+use Drupal\milken_migrate\Traits\EntityExistsTrait;
+use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\entity_embed\Exception\EntityNotFoundException;
 
 /**
  * Filter to download image and return media reference.
@@ -25,43 +30,122 @@ use Drupal\paragraphs\Entity\Paragraph;
  */
 class Paragraphs extends ProcessPluginBase {
 
+  use JsonAPIDataFetcherTrait;
+  use EntityExistsTrait;
+
   /**
    * {@inheritDoc}
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    if (isset($value['data']) && empty($value['data'])) {
+      return new MigrateSkipProcessException("No value for: {$destination_property}");
+    }
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     if (empty($value)) {
       return [];
     }
     if (is_array($value[0][0])) {
       $value = array_shift($value);
     }
+    if (isset($value['id'])) {
+      $value = [$value];
+    }
+    $toReturn = [];
     $destination_value = $row->getDestinationProperty($destination_property) ?? [];
     foreach ($value as $paragraph_ref) {
-      $paragraph = \Drupal::entityTypeManager()
-        ->getStorage('paragraph')
-        ->loadByProperties(['uuid' => $paragraph_ref['id']]);
-      // Exit (__CLASS__ . "::" . __LINE__);.
-      if (is_array($paragraph) && count($paragraph)) {
-        $paragraph = array_shift($paragraph);
+      $ref = new JsonAPIReference($paragraph_ref);
+      if (!$ref instanceof JsonAPIReference) {
+        continue;
+      }
+      $ref->getRemoteData();
+      $paragraph = $ref->exists();
+      if ($paragraph instanceof RevisionableInterface) {
+        $destination_value[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId(),
+        ];
+        $toReturn[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId(),
+        ];
+        continue;
       }
       else {
-        $paragraph = Paragraph::create([
-          'type' => 'unmigrated_paragraph',
-          'uuid' => $paragraph_ref['id'],
-        ]);
-        $paragraph->set('langcode', 'en');
-        $paragraph->set('field_type', $paragraph_ref['type']);
-        $paragraph->set('field_id', $paragraph_ref['id']);
-        $paragraph->set('field_revision_id', $paragraph_ref['meta']['revision_id']);
-        $paragraph->isNew();
-        $paragraph->save();
+        switch ($ref->getBundleTypeId()) {
+
+          case "podcast_episode":
+            $episode = \Drupal::entityTypeManager()
+              ->getStorage('media')
+              ->loadByProperties(['field_episode' => $ref->getProperty('field_episode')]);
+            if (count($episode)) {
+              $paragraph = Paragraph::create([
+                'type' => 'podcast_episode',
+                'uuid' => $ref->getId(),
+                'field_episode_ref' => $episode,
+                'langcode' => 'en',
+              ]);
+              $paragraph->isNew();
+            }
+            break;
+
+          case "body_content_alternative":
+            $paragraph = Paragraph::create([
+              'type' => 'body_content',
+              'uuid' => $ref->getId(),
+              'field_background' => "transparent",
+              'langcode' => 'en',
+              'field_body' => [
+                'value' => $ref->field_content_alternative_area['value'],
+                'format' => 'full_html',
+              ],
+              'field_num_text_columns' => 1,
+            ]);
+            $paragraph->isNew();
+            break;
+
+          case "pull_quote":
+            $paragraph = Paragraph::create([
+              'type' => 'body_content',
+              'uuid' => $ref->getId(),
+              'field_background' => "transparent",
+              'langcode' => 'en',
+              'field_body' => [
+                'value' => $ref->field_body_quote,
+                'format' => 'full_html',
+              ],
+            ]);
+            $paragraph->isNew();
+            break;
+
+          default:
+            \Drupal::logger('milken_migrate')
+              ->alert("Cannot migrate paragraph: " . print_r($ref, TRUE));
+        }
       }
-      if (!$paragraph instanceof RevisionableInterface) {
-        throw new \Exception("could not migrate paragraph:" . print_r($paragraph_ref));
+      if ($paragraph instanceof Paragraph) {
+        try {
+          $paragraph->save();
+        }
+        catch (EntityNotFoundException $e) {
+          \Kint::dump($e);
+          exit();
+        }
+        $destination_value[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId(),
+        ];
+        $toReturn[] = [
+          "target_id" => $paragraph->id(),
+          "target_revision_id" => $paragraph->getRevisionId(),
+        ];
       }
-      $destination_value[] = ["entity" => $paragraph];
+      else {
+        throw new MigrateSkipProcessException("cannot create paragraph: " . print_r($ref, TRUE));
+      }
     }
-    return $destination_value;
+    $row->setDestinationProperty($destination_property, $destination_value);
+    return $toReturn;
   }
 
 }

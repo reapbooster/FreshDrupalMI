@@ -2,6 +2,14 @@
 import ColorObject from './ColorObject';
 import { ImageObject } from './ImageObject';
 
+interface SlideKeyValueText {
+  key: string;
+  description: string;
+  value: string;
+  format: string;
+  processed: string;
+}
+
 interface SlideDataInterface {
   loaded: boolean;
   type: string;
@@ -18,10 +26,10 @@ interface SlideDataInterface {
   field_link: null,
   field_promoted: false,
   field_published: true,
-  field_subtitle: string,
   field_text_color: ColorObject,
   slide_type: object,
   field_background_image: ImageObject,
+  field_slide_text: Array<SlideKeyValueText>
 }
 
 

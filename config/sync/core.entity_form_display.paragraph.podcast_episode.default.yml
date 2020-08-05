@@ -3,20 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.media.media_browser
-    - field.field.paragraph.podcast_episode.field_audio_file
-    - field.field.paragraph.podcast_episode.field_episode
-    - field.field.paragraph.podcast_episode.field_podcast_image
-    - field.field.paragraph.podcast_episode.field_podcast_service_links
-    - field.field.paragraph.podcast_episode.field_summary
-    - field.field.paragraph.podcast_episode.field_transcript
+    - field.field.paragraph.podcast_episode.field_episode_ref
     - paragraphs.paragraphs_type.podcast_episode
   module:
-    - entity_browser_entity_form
     - field_group
-    - inline_entity_form
-    - key_value_field
-    - text
+    - media_library
 third_party_settings:
   field_group:
     group_podcast:
@@ -65,6 +56,7 @@ third_party_settings:
       label: Authoring
     group_content:
       children:
+        - field_body
         - field_transcript
         - field_podcast_image
       parent_name: group_podcast
@@ -83,6 +75,14 @@ targetEntityType: paragraph
 bundle: podcast_episode
 mode: default
 content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 6
@@ -108,6 +108,16 @@ content:
       entity_browser_entity_form:
         entity_browser_id: media_entity_browser
     region: content
+  field_body:
+    type: text_textarea_with_summary
+    weight: 0
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
   field_content_alternative_area:
     weight: 1
     settings:
@@ -122,6 +132,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_episode_ref:
+    type: media_library_widget
+    weight: 42
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
     region: content
   field_podcast_image:
     type: inline_entity_form_complex
@@ -192,5 +209,4 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-hidden:
-  field_body: true
+hidden: {  }

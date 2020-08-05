@@ -124,3 +124,5 @@ Thumbs.db
 /html
 /.phpunit.result.cache
 /config/node/*.js
+/web/modules/custom/**/js/*.entry.js
+old

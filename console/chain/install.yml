@@ -51,8 +51,6 @@ commands:
       working-directory: /var/www
 
   - command: "cache:rebuild"
-    arguments:
-      cache: all
     options:
       uri: "http://default"
       root: /var/www

@@ -1,0 +1,23 @@
+uuid: 94da3ec9-3074-4933-a25a-8c1357047433
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.media_tiles_from_view
+  module:
+    - text
+id: paragraph.media_tiles_from_view.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: media_tiles_from_view
+label: body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

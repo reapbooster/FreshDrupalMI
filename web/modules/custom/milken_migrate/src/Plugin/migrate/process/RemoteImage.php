@@ -3,14 +3,17 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipProcessException;
+use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use GuzzleHttp\Client;
+use Drupal\milken_migrate\JsonAPIReference;
+use Drupal\milken_migrate\Traits\EntityExistsTrait;
+use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 use PHPUnit\Util\Exception;
 
 /**
@@ -24,9 +27,13 @@ use PHPUnit\Util\Exception;
  *
  * @MigrateProcessPlugin(
  *   id = "milken_migrate:remote_image",
+ *   handle_multiples = TRUE,
  * );
  */
 class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
+
+  use JsonAPIDataFetcherTrait;
+  use EntityExistsTrait;
 
   /**
    * Transform remote image ref into local Media Object.
@@ -46,8 +53,14 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    $toReturn = [];
+    $destination_values = [];
+    if (isset($value['data']) && empty($value['data'])) {
+      throw new MigrateSkipProcessException("The referenced Entity has no data.");
+    }
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
     $file = NULL;
-
     if (!isset($this->configuration['source'])) {
       throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
     }
@@ -55,69 +68,77 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     if ($row->isStub()) {
       return NULL;
     }
-    $source = $row->getSource();
-    if (empty($value)) {
-      $value = $row->getSourceProperty($this->configuration['source']);
+    $source = $row->getSourceProperty($this->configuration['source']);
+    if (isset($source['id'])) {
+      $source = [$source];
     }
-    if (!empty($value)) {
-      if (!isset($value['uri']['url'])) {
-        \Drupal::logger('milken_migrate')
-          ->debug("SKIP importing hero image. JSON data is empty: ");
-        $row->setDestinationProperty($destination_property, []);
-        return NULL;
+    foreach ($source as $reference) {
+      $ref = new JsonAPIReference($reference);
+      if (!$ref instanceof JsonAPIReference || $ref->valid() === FALSE) {
+        return $ref;
       }
-      try {
-        if (isset($value['uri']['url'])) {
-          $url = $source['jsonapi_host'] . $value['uri']['url'];
+      $ref->getRemoteData();
+      $exists = $this->entityExixsts($ref->getEntityTypeId(), $ref->getId());
+      if ($exists instanceof EntityInterface) {
+        $destination_values[] = ['target_id' => $exists->id()];
+        $toReturn[] = $exists->id();
+      }
+      else {
+        try {
+          if ($ref->getUrl() === NULL) {
+            \Drupal::logger('milken_migrate')
+              ->debug("SKIP importing hero image. JSON data is empty: ");
+            throw new MigrateSkipRowException("JSON data is empty.");
+          }
+          $url = $source['jsonapi_host'] . $ref->getUrl();
           \Drupal::logger('milken_migrate')->debug($url);
-          $file = $this->getRemoteFile($value['filename'], $url);
-        }
-        if ($file instanceof FileInterface) {
-          $image_title = (isset($this->configuration['title'])
-            ? $this->configuration['title'] : $file->getFilename());
-          $media_type = (isset($this->configuration['media_type'])
-            ? $this->configuration['media_type'] : "hero_image");
-
-          $entity_type_mgr = \Drupal::getContainer()
-            ->get('entity_type.manager');
-          $image = $entity_type_mgr->getStorage('media')->create([
-            'type' => $media_type,
-            'uid' => 2,
-            'langcode' => \Drupal::languageManager()
-              ->getDefaultLanguage()
-              ->getId(),
-            'field_media_image' => [
-              'target_id' => $file->id(),
-              'target_type' => 'file',
-              'alt' => $file->getFilename(),
-              'title' => $file->getFilename(),
-            ],
-            'title' => $image_title,
-            // 'field_link' => Url::fromUri('/node/'
-            // . $row->getSourceProperty('uuid')),
-            // TODO: figure out how to link it back to the node
-            'field_published' => TRUE,
-          ]);
-
-          if ($image instanceof EntityInterface) {
-            $image->save();
-            $row->setDestinationProperty($destination_property, ['entity' => $image]);
-            return ['entity' => $image];
+          $file = $this->getRemoteFile($ref->getFilename(), $url);
+          if ($file instanceof FileInterface) {
+            $file->setPermanent();
+            $file->isNew();
+            $file->save();
+            $image_title = (isset($this->configuration['title'])
+              ? $this->configuration['title'] : $file->getFilename());
+            $media_type = (isset($this->configuration['media_type'])
+              ? $this->configuration['media_type'] : "image");
+            $entity_type_mgr = \Drupal::getContainer()
+              ->get('entity_type.manager');
+            $image = $entity_type_mgr->getStorage('media')->create([
+              'type' => $media_type,
+              'uid' => 2,
+              'langcode' => \Drupal::languageManager()
+                ->getDefaultLanguage()
+                ->getId(),
+              'field_media_image' => [
+                'target_id' => $file->id(),
+                'target_type' => 'file',
+                'alt' => $file->getFilename(),
+                'title' => $file->getFilename(),
+              ],
+              'title' => $image_title,
+              // 'field_link' => Url::fromUri('/node/'
+              // . $row->getSourceProperty('uuid')),
+              // TODO: figure out how to link it back to the node
+              'field_published' => TRUE,
+            ]);
+            $destination_values = ['target_id' => $image->id()];
+            $toReturn[] = $image->id();
           }
         }
-      }
-      catch (\Exception $e) {
-        \Drupal::logger('milken_migrate')
-          ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
-        throw new MigrateException($e->getMessage());
-      }
-      catch (\Throwable $t) {
-        \Drupal::logger('milken_migrate')
-          ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
-        throw new MigrateException($t->getMessage());
+        catch (\Exception $e) {
+          \Drupal::logger('milken_migrate')
+            ->error(__CLASS__ . "::IMPORT ERROR: " . $e->getMessage());
+          throw new MigrateException($e->getMessage());
+        }
+        catch (\Throwable $t) {
+          \Drupal::logger('milken_migrate')
+            ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
+          throw new MigrateException($t->getMessage());
+        }
       }
     }
-    return $value;
+    $row->setDestinationProperty($destination_property, $destination_values);
+    return $toReturn;
   }
 
   /**
@@ -136,33 +157,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       return array_shift($matches[0]);
     }
     return "#000000";
-  }
-
-  /**
-   * Turn remote URL into local FileInterface object.
-   *
-   * @param string $name
-   *   The filename.
-   * @param string $url
-   *   The file Url.
-   *
-   * @return \Drupal\file\FileInterface|null
-   *   return FileInterface or Null.
-   */
-  public function getRemoteFile($name, $url): ?FileInterface {
-    $client = new Client();
-    $response = $client->get($url);
-    $toReturn = file_save_data($response->getBody(), "public://" . $name, FileSystemInterface::EXISTS_REPLACE);
-    if ($toReturn instanceof FileInterface) {
-      $realpath = \Drupal::service('file_system')
-        ->realpath($toReturn->getFileUri());
-      if (isset($_SERVER['USER'])) {
-        chown($realpath, $_SERVER['USER']);
-        chgrp($realpath, $_SERVER['USER']);
-      }
-      return $toReturn;
-    }
-    return NULL;
   }
 
 }

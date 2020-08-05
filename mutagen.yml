@@ -1,0 +1,29 @@
+sync:
+  defaults:
+    mode: "two-way-safe"
+    flushOnCreate: true
+    ignore:
+      vcs: true
+  freshdrupalmi-www:
+    alpha: "."
+    beta: "docker://freshdrupalmi_php_1/var/www"
+
+
+# Set up the service and any volumes before creating sessions.
+beforeCreate:
+  - docker-compose -f docker-compose-mutagen.yml up -d
+
+# Set up the main services after creating sessions. At this point, sessions will
+# have been established and code pushed to the shared volume.
+# After this is done, we can start up the deployment scripts.
+afterCreate:
+  - docker-compose -f docker-compose-mutagen.yml up -d
+
+# Tear down all services and remove the code volume after terminating sessions.
+afterTerminate:
+  - docker-compose -f docker-compose-mutagen.yml down --remove-orphans || true
+
+
+# Define common utility commands.
+commands:
+  logs: docker-compose -f docker-compose-mutagen.yml logs --follow

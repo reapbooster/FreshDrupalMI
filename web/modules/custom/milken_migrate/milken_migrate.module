@@ -46,3 +46,11 @@ function _log_migrate_debug_info($message) {
     \Drupal::logger('migrate_jsonapi')->info($message);
   }
 }
+
+/**
+ * Implements hook_cron().
+ */
+function milken_migrate_cron() {
+  module_load_include('inc', 'milken_migrate', "milken_migrate.cron");
+  return milken_migrate_cron_run_migrations();
+}

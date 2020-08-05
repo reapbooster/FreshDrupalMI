@@ -9,13 +9,13 @@ dependencies:
     - field.field.slide.full_width_one_column.field_link
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
-    - field.field.slide.full_width_one_column.field_subtitle
+    - field.field.slide.full_width_one_column.field_slide_text
     - field.field.slide.full_width_one_column.field_text_color
   module:
     - color_field
     - image
+    - key_value_field
     - link
-    - user
 id: slide.full_width_one_column.default
 targetEntityType: slide
 bundle: full_width_one_column
@@ -91,12 +91,13 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_subtitle:
-    weight: 7
-    label: hidden
-    settings: {  }
+  field_slide_text:
+    weight: 13
+    label: above
+    settings:
+      value_only: false
     third_party_settings: {  }
-    type: basic_string
+    type: key_value
     region: content
   field_text_color:
     weight: 6

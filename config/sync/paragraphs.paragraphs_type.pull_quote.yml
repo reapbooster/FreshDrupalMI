@@ -4,6 +4,9 @@ status: true
 dependencies:
   content:
     - 'file:file:9856b1d4-5efa-4bad-94b3-5429a0a9c6fb'
+third_party_settings:
+  paragraphs_browser:
+    image_path: sites/default/files/paragraphs_type_icon/pull_quote-default-icon.svg
 id: pull_quote
 label: 'Pull Quote'
 icon_uuid: 9856b1d4-5efa-4bad-94b3-5429a0a9c6fb
