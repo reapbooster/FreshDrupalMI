@@ -10,10 +10,10 @@ interface NodeOpportunityCardProps {
   created: string;
   drupal_internal__nid: number;
   drupal_internal__vid: number;
-  field_actions: Array<TaxonomyTerm>;
-  field_body: TextField;
-  field_focus: Array<TaxonomyTerm>;
   field_region: TaxonomyTerm;
+  field_body: TextField;
+  field_actions: Array<TaxonomyTerm>;
+  field_focus: Array<TaxonomyTerm>;
   field_terms: Array<TaxonomyTerm>;
   links: LinkList;
   title: string;
@@ -41,9 +41,9 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
         <Card.Text dangerouslySetInnerHTML={{__html: props.field_body?.value}} />
       </Card.Body>
       <Card.Footer>
-        {props.field_actions.map(getBadge)}
-        {props.field_focus?.map(getBadge)}
-        {props.field_terms?.map(getBadge)}
+        {props.field_actions?.map(getBadge) ?? []}
+        {props.field_focus?.map(getBadge) ?? []}
+        {props.field_terms?.map(getBadge) ?? []}
       </Card.Footer>
     </Card>
   );

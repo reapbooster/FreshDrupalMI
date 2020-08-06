@@ -52,3 +52,11 @@ list:
     view: null
   js:
     js/List.entry.js: { preprocess: 0 }
+
+philanthropy_hub:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    view: null
+  js:
+    js/PhilanthropyHub.entry.js: { preprocess: 0 }
