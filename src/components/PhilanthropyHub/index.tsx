@@ -12,7 +12,7 @@ const PhilanthropyHub: React.FunctionComponent = (props) => {
 
   var url = new JSONApiUrl(props.url);
   return (
-    <Container fluid id={"hub-".concat(props.id)}>
+    <Container fluid id={"hub-".concat(props.id)} className={"hub"}>
       <DropdownFacet
         type={"taxonomy_term--ph_region"}
         id={props.id}
