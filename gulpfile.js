@@ -6,6 +6,7 @@
  * @file
  */
 
+const browserSync = require('browser-sync').create();
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
 const shell = require("gulp-shell");
@@ -59,19 +60,24 @@ gulp.task("themeBuild", () => {
     )
     .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
     .pipe(print())
-    .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
+    .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")))
+    .pipe(browserSync.stream());
 });
 
 gulp.task(
   "buildComponents",
   (done) => {
+
+    console.log("Building components.");
     try {
       /* eslint-disable */
       const webpackConfigurator = require(`./config/node/webpack.config.${env}`);
       gulp.src('**/js/*.entry.tsx', { sourcemaps: true, cwd: modulesPath })
-        .pipe(webpackConfigurator());
+        .pipe(webpackConfigurator())
+        .pipe(browserSync.stream());
       gulp.src('js/*.entry.tsx', { sourcemaps: true, cwd: themePath })
-        .pipe(webpackConfigurator());
+        .pipe(webpackConfigurator())
+        .pipe(browserSync.stream());
     }
     catch (err) {
       console.log(err);
@@ -82,9 +88,33 @@ gulp.task(
 
 gulp.task(
   "default",
-  gulp.series(["tsCompile-milken", "themeBuild", "buildComponents"])
+  gulp.parallel(["tsCompile-milken", "themeBuild", "buildComponents"])
 );
 
+gulp.task('browsersync-reload', function (done) {
+    browserSync.reload({ stream: true });
+    done();
+});
+
 gulp.task('watch', () => {
-  return gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
+
+  var tsxPattern = '/**/*.tsx';
+  var files = [ themePath + tsxPattern, modulesPath + '/**/js' + tsxPattern, './src/components' + tsxPattern ];
+
+  gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
+  gulp.watch(files, gulp.series('buildComponents'));
+
+  // TODO: When using proxy nothing renders (?!)
+  // var jsPattern = '/**/*.tsx';
+  // var bsfiles = [ themePath + jsPattern, modulesPath + '/**/js' + jsPattern, './src/components' + jsPattern ];
+  // browserSync.init(
+  //   bsfiles,
+  //   {
+  //     proxy: "mi:80",
+  //     notify: false,
+  //     port: 3000,
+  //     reloadDelay: 3000
+  //   }
+  // );
+
 });

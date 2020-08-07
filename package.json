@@ -111,7 +111,6 @@
     "gatsby-source-filesystem": "^2.3.23",
     "gatsby-transformer-sharp": "^2.5.12",
     "glob": "^7.1.4",
-    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
@@ -193,5 +192,8 @@
     "yaml-import": "^2.0.0",
     "youtube": "^0.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2"
+  }
 }
