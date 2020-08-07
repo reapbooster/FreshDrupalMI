@@ -44,10 +44,11 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
     <Card className={"my-2 mx-2"}>
      <OverlayTrigger
         placement="top"
-        overlay={<Tooltip id="button-tooltip">{props.field_body?.value}</Tooltip>}
+        overlay={<Tooltip id="button-tooltip"><div dangerouslySetInnerHTML={{__html: props.field_body?.value}}></div></Tooltip>}
       >
         <Card.Body>
           <Card.Title>{props.title}</Card.Title>
+
           {/*  <Card.Text dangerouslySetInnerHTML={{__html: props.field_body?.value}} /> */}
 
           {props.field_actions?.map(getBadge) ?? []}
