@@ -31,14 +31,14 @@
  */
 #}
 
-<div id="hub-data">
-  <script type="application/json" data-drupal-selector="drupal-hub-json">{
+<div id="list-data">
+  <script type="application/json" data-drupal-selector="drupal-list-json">{
     "id": "{{ view.id }}",
     "url": "/jsonapi/node/opportunity?jsonapi_include=true&include=field_region,field_focus,field_terms,field_actions",
     "entityTypeId": "node"
     }</script>
 </div>
 
-<div id="hub-component">&nbsp;</div>
+<div id="list-component">&nbsp;</div>
 
-{{ attach_library('milken/philanthropy_hub') }}
+{{ attach_library('milken/list') }}

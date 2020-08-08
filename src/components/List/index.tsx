@@ -5,13 +5,23 @@ import {Container, Row} from 'react-bootstrap';
 import ListBundleBrowser from '../List/ListBundleBrowser';
 import JSONApiUrl from '../../DataTypes/JSONApiUrl';
 
-
 const List = function(props: ListComponentPropsInterface) {
   var url = new JSONApiUrl(props.url);
+  var browser = [];
+  if (props.browser == true) {
+    browser = (
+      <Row>
+        <ListBundleBrowser entityTypeId={props.entityTypeId} url={url} />
+      </Row>
+    );
+  }
+  console.debug(url);
   return (
-    <Container fluid id={"list-".concat(props.id)}>
-      {props.browser || []}
-      <ListComponentProps {...props} url={url} />
+    <Container id={"list-".concat(props.id)}>
+      {browser}
+      <Row>
+        <ListComponentProps {...props} url={url} />
+      </Row>
     </Container>
   );
 }

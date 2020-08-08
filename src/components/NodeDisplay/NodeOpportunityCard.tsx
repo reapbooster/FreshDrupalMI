@@ -10,10 +10,10 @@ interface NodeOpportunityCardProps {
   created: string;
   drupal_internal__nid: number;
   drupal_internal__vid: number;
-  field_region: TaxonomyTerm;
-  field_body: TextField;
   field_actions: Array<TaxonomyTerm>;
+  field_body: TextField;
   field_focus: Array<TaxonomyTerm>;
+  field_region: TaxonomyTerm;
   field_terms: Array<TaxonomyTerm>;
   links: LinkList;
   title: string;
@@ -72,6 +72,7 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
 
 
 export default NodeOpportunityCard;
+<<<<<<< HEAD
 
 
 
@@ -80,3 +81,5 @@ export default NodeOpportunityCard;
   // data-jsonapi-query-property={"sort[sort-name-episode][direction]"}
   // data-jsonapi-query-value={newSortDirection}
 */
+=======
+>>>>>>> d670a8077a3f6e758cdd526429edb2c2f63c0ecb

@@ -1,7 +1,6 @@
 import React from 'react';
 import JSONApiUrl from "./JSONApiUrl";
-import { CardColumns, Row } from 'react-bootstrap';
-import Masonry from 'react-masonry-component';
+import { CardColumns } from 'react-bootstrap';
 import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
@@ -41,9 +40,6 @@ enum ListItemComponents {
   node_opportunity = NodeOpportunityCard,
 }
 
-
-
-
 class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {
 
   id: string;
@@ -58,11 +54,6 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     this.state = {
       items: (props.items || [])
     };
-    this.refresh = this.refresh.bind(this);
-    this.getData = this.getData.bind(this);
-    this.toObject = this.toObject.bind(this);
-    this.hasItems = this.hasItems.bind(this);
-    this.handleError = this.handleError.bind(this);
     var remaining = Object.assign({}, props);
     delete remaining.items;
     Object.assign(this, remaining);
@@ -80,11 +71,8 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     };
   }
 
-  async getData(url: JSONApiUrl = null): Promise<any> {
+  async getData(query: string = ""): Promise<any> {
     console.debug("get Data called: ", this);
-    if (url !== null) {
-      this.url = url;
-    }
     if (this.url) {
       console.debug("listComponenet calling url: ", this.url.toString());
       return fetch(this.url.toString())
@@ -96,7 +84,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
 
   hasItems(): boolean {
-    return (!!this.state?.items?.length || 0);
+    return (!!this.state.items.length || 0);
   }
 
   handleError(err) {
@@ -112,26 +100,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     return this.id;
   }
 
-  refresh(evt: CustomEvent = null) : Promise<any> {
-    var toMutate = this.url.clone();
-    if (evt) {
-      evt.stopImmediatePropagation();
-    }
-    if (evt?.detail) {
-      console.log("EVENT", evt);
-      for (var f in evt.detail.filter) {
-        const key = `filter[${f}]`;
-        if (toMutate.query.has(key)) {
-          console.debug("changing value of query param: ", toMutate.query)
-          toMutate.query.set(key, evt.detail.filter[f])
-        } else {
-          console.debug("Appending query param: ", toMutate.query)
-          toMutate.query.append(key, evt.detail.filter[f]);
-        }
-      }
-      this._url = toMutate;
-      console.debug("REFRESH", toMutate.toString());
-    }
+  refresh() : Promise<any> {
     var self = this;
     return this.getData()
       .then(res => res.json())
@@ -156,18 +125,12 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     }
   }
 
-  componentDidMount() {
-    document.getElementsByClassName('philanthropy-hub-root').item(0).addEventListener("refresh", this.refresh);
-  }
-
   render() {
     return (
       <>
-        <Row>
-          <CardColumns className={"philanthropy-hub-root"}>
-              {this.items}
-          </CardColumns>
-        </Row>
+        <CardColumns>
+          {this.items}
+        </CardColumns>
       </>
     );
   }
@@ -177,10 +140,12 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   }
 
   set url(url) {
-    if (!url instanceof JSONApiUrl) {
-      url = new JSONApiUrl(url);
+    if (typeof url == "string") {
+      this._url = new JSONApiUrl(url);
     }
-    this._url = url;
+    if (url instanceof JSONApiUrl) {
+      this._url = url;
+    }
   }
 
 }
