@@ -72,14 +72,3 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
 
 
 export default NodeOpportunityCard;
-<<<<<<< HEAD
-
-
-
-/*
-  // onClick={props.changeUrlClickHandler}
-  // data-jsonapi-query-property={"sort[sort-name-episode][direction]"}
-  // data-jsonapi-query-value={newSortDirection}
-*/
-=======
->>>>>>> d670a8077a3f6e758cdd526429edb2c2f63c0ecb
