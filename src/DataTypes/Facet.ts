@@ -45,6 +45,7 @@ interface FacetProps {
   id: string;
   type: string;
   label: string;
+  field: string;
   defaultSelected: boolean;
   values?: Array<FacetValue>;
   onChangeHandler?: Function;
@@ -111,8 +112,11 @@ class Facet {
   get values() {
     return this._values;
   }
+
   clone() : Facet {
-    return new Facet(this);
+    var toReturn = new Facet();
+    Object.assign(toReturn, this);
+    return toReturn;
   }
 
   set values(values: Array<FacetValueInterface>) {
@@ -145,7 +149,7 @@ class Facet {
   setActiveItem(machine_name = null) {
     var self = this;
     this._values.map((value: FacetValue, key) => {
-      if (machine_name === null || value.machine_name == machine_name) {
+      if (value.machine_name == machine_name) {
         self.values[key].selected = true;
       }
     });

@@ -113,22 +113,29 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   }
 
   refresh(evt: CustomEvent = null) : Promise<any> {
-    var toMutate = this.url.clone();
     if (evt) {
       evt.stopImmediatePropagation();
+      evt.preventDefault();
     }
+    var toMutate = this.url.clone();
     if (evt?.detail) {
       console.log("EVENT", evt);
-      for (var f in evt.detail.filter) {
-        const key = `filter[${f}]`;
-        if (toMutate.query.has(key)) {
-          console.debug("changing value of query param: ", toMutate.query)
-          toMutate.query.set(key, evt.detail.filter[f])
-        } else {
-          console.debug("Appending query param: ", toMutate.query)
-          toMutate.query.append(key, evt.detail.filter[f]);
+      if (evt?.detail?.filter) {
+        for (var f in evt.detail.filter) {
+          const key = `filter[${f}]`;
+          if (toMutate.query.has(key)) {
+            console.debug("changing value of query param: ", toMutate.query)
+            toMutate.query.set(key, evt.detail.filter[f])
+          } else {
+            console.debug("Appending query param: ", toMutate.query)
+            toMutate.query.append(key, evt.detail.filter[f]);
+          }
         }
       }
+      if (evt?.detail?.url) {
+        toMutate = evt.detail.url;
+      }
+
       this._url = toMutate;
       console.debug("REFRESH", toMutate.toString());
     }
@@ -151,13 +158,17 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
         return <Component {...item} key={key} />
       });
     } else {
-      this.refresh();
-      return <Loading />;
+      return (
+        <div>
+          <h1>No results for this combination of filters.</h1>
+        </div>
+      );
     }
   }
 
   componentDidMount() {
     document.getElementsByClassName('philanthropy-hub-root').item(0).addEventListener("refresh", this.refresh);
+    this.refresh();
   }
 
   render() {

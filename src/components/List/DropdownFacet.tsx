@@ -6,16 +6,22 @@ import {Nav, NavDropdown, NavItem} from 'react-bootstrap';
 const DropdownFacet = (props: FacetProps) => {
   const [ facetValues, setFacetValues ] = useState(new Facet(props));
 
+  if (!facetValues.hasValues()) {
+    facetValues.refresh(setFacetValues);
+    return (<Loading />);
+  }
+
   const dropdownSelectHandler = (machine_name) => {
-    var values = facetValues.getValuesForJsonAPIFilters();
-    setFacetValues(facetValues.setActive(machine_name));
+    var filter = {};
+    filter[props.field.concat('.machine_name')] = machine_name
+    facetValues.setActive(machine_name);
+    console.debug("changing facet values:", facetValues, filter);
+    setFacetValues(facetValues);
     var evt = new CustomEvent("refresh", {
       bubbles: false,
       cancelable: false,
       detail: {
-        filter: {
-          "field_region.machine_name": machine_name
-        }
+        filter: filter
       }
     });
     document.getElementsByClassName('philanthropy-hub-root')
@@ -23,13 +29,10 @@ const DropdownFacet = (props: FacetProps) => {
       .dispatchEvent(evt);
   }
 
-  if (!facetValues.hasValues()) {
-    facetValues.refresh(setFacetValues);
-    return (<Loading />);
-  }
   var renderedFacetValues = facetValues.values.map((value: FacetValue, key: number) => {
     return (
       <NavDropdown.Item
+        key={key}
         eventKey={value.machine_name}
         value={value.machine_name}
         id={value.id}
@@ -38,12 +41,14 @@ const DropdownFacet = (props: FacetProps) => {
       </NavDropdown.Item>
     );
   });
+
   console.debug("Dropdown Facet:", facetValues);
   const activeKey: FacetValue = facetValues.getActive().shift() || { label: "Global" };
   console.debug("Active Keys:", activeKey);
+
   return (
     <>
-      <Nav>
+      <Nav className={"col col-lg-12 col-sm-12"}>
         <NavItem
           id={"facet-".concat(facetValues.id)}
         >Choose a region: <NavDropdown
