@@ -44,7 +44,7 @@ gulp.task(
 gulp.task("themeBuild", () => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(
       sass({
         allowEmpty: true,
@@ -58,10 +58,9 @@ gulp.task("themeBuild", () => {
         process.exit(1);
       })
     )
-    .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
+    // .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
     .pipe(print())
-    .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
 
 gulp.task(
@@ -72,12 +71,10 @@ gulp.task(
     try {
       /* eslint-disable */
       const webpackConfigurator = require(`./config/node/webpack.config.${env}`);
-      gulp.src('**/js/*.entry.tsx', { sourcemaps: true, cwd: modulesPath })
+      gulp.src('**/js/*.entry.tsx', { sourcemaps: false, cwd: modulesPath })
         .pipe(webpackConfigurator())
-        .pipe(browserSync.stream());
-      gulp.src('js/*.entry.tsx', { sourcemaps: true, cwd: themePath })
-        .pipe(webpackConfigurator())
-        .pipe(browserSync.stream());
+      gulp.src('js/*.entry.tsx', { sourcemaps: false, cwd: themePath })
+        .pipe(webpackConfigurator());
     }
     catch (err) {
       console.log(err);
@@ -98,23 +95,31 @@ gulp.task('browsersync-reload', function (done) {
 
 gulp.task('watch', () => {
 
-  var tsxPattern = '/**/*.tsx';
-  var files = [ themePath + tsxPattern, modulesPath + '/**/js' + tsxPattern, './src/components' + tsxPattern ];
+  var tsxPattern = '/*.tsx';
+  var files = [
+      './' + themePath + '/js/**' + tsxPattern,
+      './' + modulesPath + '/**' + tsxPattern,
+      './src/components/**' + tsxPattern
+    ];
 
   gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
   gulp.watch(files, gulp.series('buildComponents'));
 
   // TODO: When using proxy nothing renders (?!)
-  // var jsPattern = '/**/*.tsx';
-  // var bsfiles = [ themePath + jsPattern, modulesPath + '/**/js' + jsPattern, './src/components' + jsPattern ];
-  // browserSync.init(
-  //   bsfiles,
-  //   {
-  //     proxy: "mi:80",
-  //     notify: false,
-  //     port: 3000,
-  //     reloadDelay: 3000
-  //   }
-  // );
+  var jsPattern = '/**/*.tsx';
+  var bsfiles = [
+    './' + themePath + jsPattern,
+    modulesPath + '/**/js' + jsPattern,
+    './src/components' + jsPattern
+  ];
+  browserSync.init(
+    bsfiles,
+    {
+      proxy: "localhost:8080",
+      notify: false,
+      port: 3000,
+      reloadDelay: 3000
+    }
+  );
 
 });

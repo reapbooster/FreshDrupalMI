@@ -21,21 +21,6 @@ services:
     env_file:
       - .env
 
-  frontend:
-    build: ./frontend
-    container_name: mi-frontend
-    depends_on:
-      - nginx
-      - php
-    expose:
-      - '3000'
-      - '3001'
-    ports:
-      - "3000:3000"
-      - "3001:3001"
-    volumes:
-      - ".:/var/www"
-
   php:
     container_name: mi-php
     image: milken/php-dev
