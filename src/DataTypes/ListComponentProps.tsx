@@ -6,10 +6,10 @@ import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
 import Loading from "../components/Loading";
-import EventConference from '../components/Events/EventConference';
+import EventConference from '../components/Event/EventConference';
 import TileView from "../components/NodeDisplay/TileView";
-import EventSummit from "../components/Events/EventSummit";
-import EventMeeting from "../components/Events/EventMeeting";
+import EventSummit from "../components/Event/EventSummit";
+import EventMeeting from "../components/Event/EventMeeting";
 import NodeOpportunityCard from "../components/NodeDisplay/NodeOpportunityCard";
 
 interface ListComponentPropsInterface {

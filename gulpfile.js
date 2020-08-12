@@ -15,11 +15,20 @@ const path = require("path");
 const sourcemaps = require('gulp-sourcemaps');
 const gsgc = require('gulp-sass-generate-contents');
 const print = require('gulp-print').default;
+const fs = require('fs').promises;
 const basePath = path.resolve(".");
 const themePath = path.resolve(basePath, "web/themes/custom/milken");
 const modulesPath = path.resolve(basePath, "web/modules/custom");
 
-console.log(basePath);
+const oldPath = path.resolve('web/themes/custom/milken/js/drupalTranslations.js');
+// Delete this file if exists.
+(async () => {
+  try {
+    await fs.unlink(oldPath);
+  } catch (e) {
+    // File does not exist... carry on.
+  }
+})();
 
 // eslint-disable-next-line no-unused-vars.
 function typescriptCompileCallback(error, stdout, stderr) {
@@ -66,8 +75,8 @@ gulp.task(
   "buildComponents",
   (done) => {
     try {
+      const webpackConfigurator = require(`./config/node/webpack.config`);
       /* eslint-disable */
-      const webpackConfigurator = require(`./config/node/webpack.config.${env}`);
       gulp.src('**/js/*.entry.tsx', { sourcemaps: true, cwd: modulesPath })
         .pipe(webpackConfigurator());
       gulp.src('js/*.entry.tsx', { sourcemaps: true, cwd: themePath })

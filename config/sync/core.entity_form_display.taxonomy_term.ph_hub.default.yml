@@ -1,35 +1,35 @@
-uuid: 596a8b5e-2baa-4562-b0b4-fe710e4ab468
+uuid: c3e2fcd3-9a1a-4415-a033-e84b8ee8bfa3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.ph_region.field_content
-    - field.field.taxonomy_term.ph_region.field_icon
-    - field.field.taxonomy_term.ph_region.field_tag_color
-    - field.field.taxonomy_term.ph_region.field_visibility
+    - field.field.taxonomy_term.ph_hub.field_content
+    - field.field.taxonomy_term.ph_hub.field_icon
+    - field.field.taxonomy_term.ph_hub.field_tag_color
+    - field.field.taxonomy_term.ph_hub.field_visibility
     - image.style.thumbnail
-    - taxonomy.vocabulary.ph_region
+    - taxonomy.vocabulary.ph_hub
   module:
     - color_field
     - entity_reference_revisions
     - image
     - path
     - text
-id: taxonomy_term.ph_region.default
+id: taxonomy_term.ph_hub.default
 targetEntityType: taxonomy_term
-bundle: ph_region
+bundle: ph_hub
 mode: default
 content:
   description:
-    type: text_textarea
-    weight: 1
+    type: text_textfield
+    weight: 0
     region: content
     settings:
+      size: 60
       placeholder: ''
-      rows: 5
     third_party_settings: {  }
   field_content:
-    weight: 9
+    weight: 104
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -39,7 +39,7 @@ content:
     type: entity_reference_revisions_autocomplete
     region: content
   field_icon:
-    weight: 8
+    weight: 102
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -47,7 +47,7 @@ content:
     type: image_image
     region: content
   field_tag_color:
-    weight: 2
+    weight: 103
     settings:
       placeholder_color: ''
       placeholder_opacity: ''
@@ -55,7 +55,7 @@ content:
     type: color_field_widget_default
     region: content
   field_visibility:
-    weight: 6
+    weight: 101
     settings:
       display_label: true
     third_party_settings: {  }
@@ -63,14 +63,14 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 5
+    weight: 2
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: 0
+    weight: -5
     region: content
     settings:
       size: 60
@@ -78,7 +78,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 4
+    weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -86,7 +86,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 7
+    weight: 100
     region: content
     third_party_settings: {  }
 hidden: {  }

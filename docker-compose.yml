@@ -29,10 +29,12 @@ services:
       - solr-ssl_solr-network:milkensolr-nginx
     volumes:
       - ".:/var/www"
+      - "$HOME/.terminus:/root/.terminus:cached"
       - type: bind
         source: $HOME/.ssh
         target: /root/.ssh
         read_only: true
+
     links:
       - redis
     env_file:

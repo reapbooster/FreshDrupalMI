@@ -87,6 +87,9 @@ source:
       type: integer
     uuid:
       type: string
+  defaults:
+    hub: philanthropy
+
 process:
   id: id
   title: name
@@ -128,6 +131,10 @@ process:
     plugin: 'milken_migrate:toxonomy_by_name'
     vocabulary: ph_terms
     source: terms
+  field_hub:
+    plugin: 'milken_migrate:toxonomy_by_name'
+    vocabulary: ph_hub
+    source: defaults/hub
   field_url/uri: url/0/uri
   field_url/title: url/0/title
 destination:

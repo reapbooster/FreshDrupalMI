@@ -1,21 +1,21 @@
-uuid: dbec7d96-7ec4-42cd-a79c-ead3ac447bfb
+uuid: be0467cb-a53a-453a-a697-eed59672a5ca
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.ph_actions.field_content
-    - field.field.taxonomy_term.ph_actions.field_icon
-    - field.field.taxonomy_term.ph_actions.field_tag_color
-    - field.field.taxonomy_term.ph_actions.field_visibility
-    - taxonomy.vocabulary.ph_actions
+    - field.field.taxonomy_term.ph_hub.field_content
+    - field.field.taxonomy_term.ph_hub.field_icon
+    - field.field.taxonomy_term.ph_hub.field_tag_color
+    - field.field.taxonomy_term.ph_hub.field_visibility
+    - taxonomy.vocabulary.ph_hub
   module:
     - color_field
     - entity_reference_revisions
     - image
     - text
-id: taxonomy_term.ph_actions.default
+id: taxonomy_term.ph_hub.default
 targetEntityType: taxonomy_term
-bundle: ph_actions
+bundle: ph_hub
 mode: default
 content:
   description:
@@ -26,7 +26,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
-    weight: 5
+    weight: 4
     label: above
     settings:
       view_mode: default
@@ -35,7 +35,7 @@ content:
     type: entity_reference_revisions_entity_view
     region: content
   field_icon:
-    weight: 6
+    weight: 2
     label: above
     settings:
       image_style: ''
@@ -44,7 +44,7 @@ content:
     type: image
     region: content
   field_tag_color:
-    weight: 2
+    weight: 3
     label: above
     settings:
       format: hex

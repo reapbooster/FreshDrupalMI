@@ -216,7 +216,7 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
     $parts = UrlHelper::parse($url, ['scheme' => 'https']);
     $options['query'] = $parts['query'];
     $options['fragment'] = $parts['fragment'];
-
+    $options['verify'] = false;
     // Extract all relationship definition and add to URL as included.
     $relationships = [];
     foreach ($this->configuration['fields'] as $field) {

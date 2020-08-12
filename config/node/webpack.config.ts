@@ -4,7 +4,10 @@ const pathUtility = require('path');
 const webpack = require("webpack");
 const PluginError = require("plugin-error");
 const Logger = require('fancy-log');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DrupalLibrariesWebpackPlugin = require('drupal-libraries-webpack-plugin');
+const BrowserSyncWebpackPlugin = require('browser-sync-webpack-plugin');
 
 function parsePath(incoming) {
   const basename = pathUtility.basename(incoming, pathUtility.extname(incoming));
@@ -73,7 +76,6 @@ module.exports = () => {
 
       module: {
         rules: [
-          // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
           {
             test: /\.ts(x?)$/,
             exclude: /node_modules/,
@@ -81,9 +83,11 @@ module.exports = () => {
               babelLoader
             ]
           },
-
-          // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-          {enforce: "pre", test: /\.js$/, loader: "source-map-loader"},
+          {
+            enforce: "pre",
+            test: /\.js$/,
+            loader: "source-map-loader"
+          },
           {
             test: /\.css$/i,
             use: ['style-loader', 'css-loader'],
@@ -91,14 +95,13 @@ module.exports = () => {
         ]
       },
       plugins: [
-        new webpack.ProvidePlugin({
-          'Holder': 'holderjs',
-          'holder': 'holderjs',
-          'window.Holder': 'holderjs'
-        }),
         new webpack.LoaderOptionsPlugin({
           debug: true
-        })
+        }),
+        new MiniCssExtractPlugin({ filename: "css/[name].css", chunkFilename: "css/[id].css"}),
+        new DrupalLibrariesWebpackPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new BrowserSyncWebpackPlugin(),
       ],
       stats: {
         warnings: true,

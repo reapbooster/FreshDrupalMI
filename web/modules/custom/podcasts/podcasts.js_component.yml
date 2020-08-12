@@ -3,9 +3,10 @@ podcasts:
   description: For Milken-Institute
   root_id: podcasts
   template: templates/podcasts.html.twig
+  webpack: true
   libraries:
     js:
-      /js/podcasts.entry.js: {}
+      js/podcasts.entry.js: { preprocess: false, source: 'js/src/podcasts.entry.tsx' }
   settings:
     collect_user_input:
       type: 'select'
