@@ -26,9 +26,32 @@ interface NodeOpportunityCardProps {
 
 const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
 
+  const clickHandler = (term) => {
+
+    var filter = {};
+
+    const filter_param = term.type.split('_').slice(-1)[0]
+    console.log(filter_param);
+    filter['field_'.concat(filter_param, '.machine_name')] = term.machine_name;
+    // let newFacetValues = facetValues.setActive(machine_name);
+    // setFacetValues(newFacetValues);
+    //
+    var evt = new CustomEvent("refresh", {
+      bubbles: false,
+      cancelable: false,
+      detail: {
+        filter: filter
+      }
+    });
+    document.getElementsByClassName('philanthropy-hub-root')
+      .item(0)
+      .dispatchEvent(evt);
+  }
+
   const getBadge = (props: TaxonomyTermProps, key: number) => {
+    console.log(props);
     return (
-      <Badge pill id={props.id} variant={"primary"}>
+      <Badge pill id={props.id} variant={"primary"} onClick={ () => { clickHandler(props); }} pointer="" style={{ background: props.field_tag_color && props.field_tag_color.color ? props.field_tag_color.color : false }}>
         {props.name}
       </Badge>
     );
