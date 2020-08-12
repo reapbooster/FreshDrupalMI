@@ -44,7 +44,7 @@ gulp.task(
 gulp.task("themeBuild", () => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
-    // .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(
       sass({
         allowEmpty: true,
@@ -58,7 +58,7 @@ gulp.task("themeBuild", () => {
         process.exit(1);
       })
     )
-    // .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
+    .pipe(sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css")))
     .pipe(print())
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
