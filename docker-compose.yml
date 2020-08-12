@@ -2,6 +2,7 @@
 version: '3.7'
 services:
   nginx:
+    container_name: mi
     image: milken/nginx-dev
     expose:
       - 80
@@ -21,10 +22,10 @@ services:
       - .env
 
   php:
+    container_name: mi-php
     image: milken/php-dev
     expose:
-      - '9000'
-      - '4444'
+      - "9000"
     external_links:
       - solr-ssl_solr-network:milkensolr-nginx
     volumes:
@@ -44,6 +45,7 @@ services:
       - DATABASE_NAME=drupal8
 
   mysql:
+    container_name: mi-mysql
     image: milken/mysql-dev
     expose:
       - '3306'
@@ -55,6 +57,7 @@ services:
       - .env
 
   redis:
+    container_name: mi-redis
     image: redis
     expose:
       - '6379'
