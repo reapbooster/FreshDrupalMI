@@ -1,0 +1,57 @@
+command:
+  name: site:milken:fixpermissions
+  description: 'Fix permissions issues with the sites/default/* folders'
+commands:
+  - command: exec
+    arguments:
+      bin: chmod -R 777 /var/www/html/sites/default/files/*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chmod -R 777 /var/www/html/sites/default/files/.*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chown -R www-data.www-data /var/www/html/sites/default/files/*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chmod -R 777 /var/www/html/sites/default/private/*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chmod -R 777 /var/www/html/sites/default/private/.*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chown -R www-data.www-data /var/www/html/sites/default/private/*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chmod -R 777 /var/www/html/sites/default/temp/*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chmod -R 777 /var/www/html/sites/default/temp/.*
+    options:
+      working-directory: "/var/www/html"
+
+  - command: exec
+    arguments:
+      bin: chown -R www-data.www-data /var/www/html/sites/default/temp/*
+    options:
+      working-directory: "/var/www/html"

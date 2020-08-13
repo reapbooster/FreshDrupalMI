@@ -233,5 +233,88 @@ this gives you extended information from the field:
 
 ```
 
-    What this portion of the file does is give you the UUID, entityTypeId and bundleID for any given piece of content, which can then be turned into a URL:
+1.  What this portion of the file does is give you the UUID, entityTypeId and bundleID for any given piece of content, which can then be turned into a URL:
     ```/jsonapi/paragraph/tiles/b672ea1a-ec10-442e-bc4d-4d49eeb6f1b1?jsonapi_include=true```
+
+
+    Paragraph rendering components are in the /src/components/Paragraphs folder. Here's a basic paragraph renderer that renders just text:
+
+```jsx
+
+import React from 'react';
+import {Container, Row, Col} from 'react-bootstrap';
+import { EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
+import EntityComponentBase, { EntityComponentState } from '../../DataTypes/EntityComponentBase';
+import Loading from "../Loading";
+import TextField from "../../DataTypes/TextField";
+
+interface ParagraphTextProps extends EntityComponentPropsInterface {
+  key: number;
+  field_body: TextField;
+  field_num_text_columns: number;
+}
+
+
+class ParagraphText extends EntityComponentBase<ParagraphTextProps, EntityComponentState> {
+
+  static defaultProps = {
+    view_mode: "full"
+  }
+
+  render() {
+    const textStyle={
+      columnCount: Number(this.props.field_field_num_text_columns || 1),
+      paddingTop: "2rem",
+      paddingBottom: "2rem",
+    };
+    console.log("Paragraph Text", this.props, this.state);
+    if (this.state.loaded) {
+      return (
+        <Col key={this.props.key} lg={12}>
+          <Container>
+            <p style={textStyle}
+               dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.value}} />
+          </Container>
+        </Col>
+      );
+    } else if (this.state.loading) {
+      return (
+        <Col key={this.props.key} lg={12}>
+          <Loading/>
+        </Col>
+        );
+    } else {
+      return (
+        <Col
+          key={this.props.key}
+          lg={12}><h1 key={this.props.key}>No Content Available</h1></Col>
+      )
+    }
+  }
+
+}
+
+export default ParagraphText;
+
+```
+
+1.  React components that are based on EntityComponentBase can be given a JSONAPI ID and TYPE value and get the rest of
+    the information that it needs from an AJAX call. EntityComponentBase serves as a base class for most of the JSONAPI
+    react classes at the site.
+
+    Most of the heavy lifting is done by EntityComponentProps class which makes data calls based on the ID/TYPE pair of
+    a piece of content.
+
+```javascript 1.8
+
+  async getData(include: string = ""): Promise<any> {
+    console.debug("get Data called: ", this);
+    if (this.entityTypeId && this.bundle) {
+      return fetch(`/jsonapi/${this.entityTypeId}/${this.bundle}/${this.id || ""}?jsonapi_include=1${include}`)
+        .catch(this.handleError);
+    } else {
+      this.handleError(new Error("Not Enough Data to make a getData call"));
+    }
+  }
+
+```

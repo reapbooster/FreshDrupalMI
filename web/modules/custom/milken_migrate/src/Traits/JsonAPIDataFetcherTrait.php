@@ -27,13 +27,15 @@ trait JsonAPIDataFetcherTrait {
    *   Returns either data or null.
    */
   public function getRelatedRecordData(array $recordValue, Row $row) :? array {
-    $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org") . '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
+    $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org");
+    $relatedSourcePath .= '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
+    $relatedSourcePath .= "?jsonapi_include=true";
     Drupal::logger('milken_migrate')
       ->debug("Getting related record: {$relatedSourcePath}");
     $response = $this->getClient()->get($relatedSourcePath);
     $responseData = json_decode($response->getBody(), TRUE);
-    if (isset($responseData['data']) && !empty($responseData['data'])) {
-      $responseData['data'];
+    if (isset($responseData['data']) && !empty($responseData['data']) && isset($responseData['data']['id'])) {
+      return $responseData['data'];
     }
     else {
       return NULL;
