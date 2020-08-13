@@ -174,6 +174,7 @@
     "react-holder-component": "^1.0.5",
     "react-masonry-component": "^6.2.1",
     "react-refresh": "^0.8.3",
+    "react-select": "^3.1.0",
     "react-youtube": "^7.11.3",
     "redis": "^2.8.0",
     "redisstore": "0.0.1",

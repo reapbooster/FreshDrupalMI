@@ -26,6 +26,8 @@ services:
     image: milken/php-dev
     expose:
       - "9000"
+    ports:
+      - "9000:9000"
     external_links:
       - solr-ssl_solr-network:milkensolr-nginx
     volumes:
