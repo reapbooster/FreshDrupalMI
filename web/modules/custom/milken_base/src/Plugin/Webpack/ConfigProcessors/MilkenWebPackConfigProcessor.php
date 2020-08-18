@@ -27,7 +27,7 @@ class MilkenWebPackConfigProcessor extends ConfigProcessorBase implements Config
    * @param array $context
    *   Context vars.
    */
-  public function processConfig( &$config,  $context) {
+  public function processConfig(array &$config, array $context) {
     $config['#lines_before'][] = "const webpack = require('webpack');";
     $config['#lines_before'][] = "const DrupalTranslationsWebpackPlugin = require('drupal-translations-webpack-plugin');";
     $config['#lines_before'][] = "const MiniCssExtractPlugin = require('mini-css-extract-plugin');";

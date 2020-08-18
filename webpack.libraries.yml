@@ -1,0 +1,4 @@
+LandingPage:
+  version: 1.x
+  js:
+    web/themes/custom/milken/js/LandingPage.entry.js: {}

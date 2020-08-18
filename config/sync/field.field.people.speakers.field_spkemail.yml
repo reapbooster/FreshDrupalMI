@@ -1,0 +1,19 @@
+uuid: e950decd-7d38-4040-a785-ede2917b5ed0
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_spkemail
+id: people.speakers.field_spkemail
+field_name: field_spkemail
+entity_type: people
+bundle: speakers
+label: spkemail
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

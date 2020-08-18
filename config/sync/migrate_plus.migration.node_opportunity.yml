@@ -89,7 +89,6 @@ source:
       type: string
   defaults:
     hub: philanthropy
-
 process:
   id: id
   title: name

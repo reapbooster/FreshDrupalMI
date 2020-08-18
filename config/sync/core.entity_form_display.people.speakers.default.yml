@@ -1,0 +1,197 @@
+uuid: bab70253-337a-4ac3-be78-47c5330b815a
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.field.people.speakers.field_biolink
+    - field.field.people.speakers.field_biopic
+    - field.field.people.speakers.field_biotext
+    - field.field.people.speakers.field_city
+    - field.field.people.speakers.field_description
+    - field.field.people.speakers.field_event
+    - field.field.people.speakers.field_first_name
+    - field.field.people.speakers.field_last_name
+    - field.field.people.speakers.field_middle_name
+    - field.field.people.speakers.field_notes
+    - field.field.people.speakers.field_pgid
+    - field.field.people.speakers.field_pgtitle
+    - field.field.people.speakers.field_salutation
+    - field.field.people.speakers.field_social_media
+    - field.field.people.speakers.field_sort_order
+    - field.field.people.speakers.field_speakertype
+    - field.field.people.speakers.field_spkemail
+    - field.field.people.speakers.field_status
+    - field.field.people.speakers.field_suffix
+    - image.style.thumbnail
+  module:
+    - image
+    - link
+    - social_media
+id: people.speakers.default
+targetEntityType: people
+bundle: speakers
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_biolink:
+    weight: 11
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_biopic:
+    weight: 12
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_biotext:
+    weight: 13
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_city:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_description:
+    weight: 15
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_event:
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_first_name:
+    weight: 17
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_last_name:
+    weight: 18
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_middle_name:
+    weight: 19
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_notes:
+    weight: 20
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_pgid:
+    weight: 21
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_pgtitle:
+    weight: 22
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_salutation:
+    weight: 23
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_social_media:
+    weight: 24
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: social_media_default
+    region: content
+  field_sort_order:
+    weight: 25
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_speakertype:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_spkemail:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_status:
+    weight: 28
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_suffix:
+    weight: 29
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

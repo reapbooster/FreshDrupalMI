@@ -1,0 +1,19 @@
+uuid: 03340d1a-2b7e-4074-bc9a-1a40a56d27e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_first_name
+id: people.speakers.field_first_name
+field_name: field_first_name
+entity_type: people
+bundle: speakers
+label: 'First Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

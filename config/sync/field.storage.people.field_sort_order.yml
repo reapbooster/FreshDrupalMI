@@ -1,0 +1,20 @@
+uuid: 3a2792de-5fa4-4940-beeb-deea03bb5fb6
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_sort_order
+field_name: field_sort_order
+entity_type: people
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

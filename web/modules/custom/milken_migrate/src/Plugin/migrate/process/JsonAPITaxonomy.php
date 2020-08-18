@@ -46,7 +46,7 @@ class JsonAPITaxonomy extends ProcessPluginBase {
           }
           else {
             $related = $this->getRelatedRecordData($relatedRecord, $row, $this->configuration);
-            if (isset($related['uuid'])){
+            if (isset($related['uuid'])) {
               $term = TaxonomyTerm::create($related);
               if ($term instanceof EntityInterface) {
                 $term->isNew();

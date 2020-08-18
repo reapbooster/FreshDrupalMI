@@ -1,0 +1,19 @@
+uuid: f9e2229e-0085-4a62-a848-2178052cbd93
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_city
+id: people.speakers.field_city
+field_name: field_city
+entity_type: people
+bundle: speakers
+label: City
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

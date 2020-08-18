@@ -1,0 +1,19 @@
+uuid: 2a570d8e-28ea-431c-93fe-8f9fa478c6b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_notes
+id: people.speakers.field_notes
+field_name: field_notes
+entity_type: people
+bundle: speakers
+label: Notes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

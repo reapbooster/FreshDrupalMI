@@ -1,0 +1,19 @@
+uuid: ba9bb18f-e8ad-4d20-bd27-51e475b82589
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_biotext
+id: people.speakers.field_biotext
+field_name: field_biotext
+entity_type: people
+bundle: speakers
+label: Biotext
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

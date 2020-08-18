@@ -109,9 +109,14 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
     if (empty($jsonapi_host)) {
       throw new MigrateException('JsonAPI host not set.');
     }
-
-    $configuration['urls'] = [$jsonapi_host . $configuration['jsonapi_endpoint']];
-
+    if (is_array($configuration['jsonapi_endpoint'])) {
+      $configuration['urls'] = array_map(function ($item) use ($jsonapi_host) {
+        return $jsonapi_host . $item;
+      }, $configuration['jsonapi_endpoint']);
+    }
+    else {
+      $configuration['urls'] = [$jsonapi_host . $configuration['jsonapi_endpoint']];
+    }
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
   }
@@ -145,6 +150,10 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
       $conjunction = (strpos($url, "?") === FALSE) ? "?" : "&";
       $url .= $conjunction . "jsonapi_include=true";
     }
+    if (isset($this->configuration['jsonapi_sort'])) {
+      $url .= "&sort=" . $this->configuration['jsonapi_sort'];
+    }
+
     $response = $this->getDataFetcherPlugin()->getResponseContent($url);
     // Convert objects to associative arrays.
     $source = json_decode($response, TRUE);
@@ -216,7 +225,7 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
     $parts = UrlHelper::parse($url, ['scheme' => 'https']);
     $options['query'] = $parts['query'];
     $options['fragment'] = $parts['fragment'];
-    $options['verify'] = false;
+    $options['verify'] = FALSE;
     // Extract all relationship definition and add to URL as included.
     $relationships = [];
     foreach ($this->configuration['fields'] as $field) {

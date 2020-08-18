@@ -1,0 +1,9 @@
+uuid: f74ce450-7341-4863-86f4-50af4a921f4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.people
+type: speakers
+name: Speakers
+description: ''

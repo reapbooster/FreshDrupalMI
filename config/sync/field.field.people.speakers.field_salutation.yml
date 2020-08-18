@@ -1,0 +1,21 @@
+uuid: bc279c88-0cc1-4f75-b6ac-ea4d3e9f3f46
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_salutation
+  module:
+    - options
+id: people.speakers.field_salutation
+field_name: field_salutation
+entity_type: people
+bundle: speakers
+label: Salutation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
