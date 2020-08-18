@@ -94,7 +94,7 @@ gulp.task(
 
 gulp.task(
   "default",
-  gulp.parallel(["tsCompile-milken", "themeBuild", "buildComponents"])
+  gulp.series(["tsCompile-milken", gulp.parallel(["themeBuild", "buildComponents"])])
 );
 
 gulp.task('browsersync-reload', function (done) {
