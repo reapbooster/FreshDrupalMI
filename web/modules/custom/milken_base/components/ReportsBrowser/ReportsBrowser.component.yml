@@ -1,0 +1,7 @@
+name: 'ReportsBrowser'
+description: 'Reports Browser react component'
+js:
+  ReportsBrowser.entry.js: { }
+cache:
+  max-age: 0
+

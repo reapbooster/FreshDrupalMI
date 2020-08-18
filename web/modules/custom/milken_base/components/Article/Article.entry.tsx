@@ -7,5 +7,5 @@ const parsedData = JSON.parse(document.querySelector('#node-data > script[type="
 parsedData.data = {};
 ReactDOM.render(
   <Article {...parsedData} />,
-  document.getElementById('node-component')
+  document.getElementById('main-wrapper')
 );

@@ -1,0 +1,7 @@
+name: 'List'
+description: 'List react component'
+js:
+  List.entry.js: { }
+cache:
+  max-age: 0
+

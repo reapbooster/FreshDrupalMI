@@ -7,5 +7,5 @@ const parsedData = JSON.parse(document.querySelector('#event-data > script[type=
 parsedData.data = {};
 ReactDOM.render(
   <Event {...parsedData} />,
-  document.getElementById('event-component')
+  document.getElementById('main-wrapper')
 );

@@ -1,0 +1,7 @@
+name: 'Events Browser'
+description: 'Events Browser entry'
+js:
+  EventsBrowser.entry.js: { }
+cache:
+  max-age: 0
+

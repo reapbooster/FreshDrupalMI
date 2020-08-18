@@ -1,0 +1,39 @@
+uuid: a376631b-3646-4c4d-9194-1bfb1d96ac03
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.explore
+  module:
+    - component
+    - system
+id: explore-block_display-2
+label: Podcasts
+variant: block_display
+variant_settings:
+  blocks:
+    7bd5d37d-bcb8-480e-9656-bcb8e0306282:
+      id: 'component:Podcasts'
+      label: 'Podcasts Browser'
+      provider: component
+      label_display: visible
+      region: top
+      weight: 0
+      uuid: 7bd5d37d-bcb8-480e-9656-bcb8e0306282
+      form_configuration: null
+      context_mapping: {  }
+  id: block_display
+  uuid: cea9acf4-f53f-4dd3-8174-11074f0cc065
+  label: null
+  weight: 0
+  page_title: 'Explore Podcasts'
+page: explore
+weight: 0
+selection_criteria:
+  -
+    id: request_path
+    pages: /explore/podcasts
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }

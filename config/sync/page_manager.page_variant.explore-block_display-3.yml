@@ -1,0 +1,35 @@
+uuid: cdb9cda3-282c-4848-93e9-195158b87949
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.explore
+    - views.view.reports
+  module:
+    - views
+id: explore-block_display-3
+label: Reports
+variant: block_display
+variant_settings:
+  blocks:
+    50fd0314-7512-4f31-bfed-1d5ad75c9ad7:
+      id: 'views_block:reports-block_1'
+      label: ''
+      provider: views
+      label_display: visible
+      views_label: ''
+      items_per_page: none
+      region: top
+      weight: 0
+      uuid: 50fd0314-7512-4f31-bfed-1d5ad75c9ad7
+      context_mapping: {  }
+  id: block_display
+  uuid: 7edd40b0-789c-4a40-9b55-e7ff6b47c90a
+  label: null
+  weight: 0
+  page_title: Reports
+page: explore
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

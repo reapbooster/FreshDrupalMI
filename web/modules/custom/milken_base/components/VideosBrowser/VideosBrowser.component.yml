@@ -1,0 +1,7 @@
+name: 'Videos Browser'
+description: 'Videos Browser entry'
+js:
+  VideosBrowser.entry.js: { }
+cache:
+  max-age: 0
+

@@ -1,0 +1,7 @@
+name: 'Search'
+description: 'Search react component'
+js:
+  Search.entry.js: { }
+cache:
+  max-age: 0
+

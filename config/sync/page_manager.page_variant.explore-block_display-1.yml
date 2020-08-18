@@ -1,0 +1,41 @@
+uuid: 69de718d-323e-4679-a7b3-2da0ce1f2395
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.explore
+    - views.view.videos
+  module:
+    - system
+    - views
+id: explore-block_display-1
+label: Videos
+variant: block_display
+variant_settings:
+  blocks:
+    2312cf9d-c657-4597-8084-5e3f6bc248b7:
+      id: 'views_block:videos-block_1'
+      label: ''
+      provider: views
+      label_display: visible
+      views_label: ''
+      items_per_page: none
+      region: top
+      weight: 0
+      uuid: 2312cf9d-c657-4597-8084-5e3f6bc248b7
+      context_mapping: {  }
+  id: block_display
+  uuid: edf6d5e1-0100-4cc2-854d-3c0fa35b6e29
+  label: null
+  weight: 0
+  page_title: 'Explore Videos'
+page: explore
+weight: 0
+selection_criteria:
+  -
+    id: request_path
+    pages: /explore/videos
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }

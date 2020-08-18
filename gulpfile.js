@@ -80,7 +80,7 @@ gulp.task(
     try {
       const webpackConfigurator = require(`./config/node/webpack.config`);
       /* eslint-disable */
-      gulp.src('**/js/*.entry.tsx', { sourcemaps: false, cwd: modulesPath })
+      gulp.src('**/components/**/*.entry.tsx', { sourcemaps: false, cwd: modulesPath })
         .pipe(webpackConfigurator())
       gulp.src('js/*.entry.tsx', { sourcemaps: false, cwd: themePath })
         .pipe(webpackConfigurator());

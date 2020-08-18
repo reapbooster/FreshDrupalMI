@@ -1,0 +1,7 @@
+name: 'Philanthropy Hub'
+description: 'Philanthropy Hub react component'
+js:
+  PhilanthropyHub.entry.js: { }
+cache:
+  max-age: 0
+

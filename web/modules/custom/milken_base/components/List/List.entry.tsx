@@ -7,6 +7,6 @@ const parsedData = JSON.parse(document.querySelector('#list-data > script[type="
 parsedData.data = {};
 ReactDOM.render(
   <List {...parsedData} />,
-  document.getElementById('list-component')
+  document.getElementById('main-wrapper')
 
 );

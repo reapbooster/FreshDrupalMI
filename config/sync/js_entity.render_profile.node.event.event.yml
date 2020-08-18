@@ -1,0 +1,35 @@
+uuid: f7b703aa-990b-4620-8708-946d7e8f45c5
+langcode: en
+status: true
+dependencies: {  }
+id: node.event.event
+label: Event
+name: event
+target_entity_type: node
+target_entity_bundle: event
+configuration:
+  view_mode: default
+  components:
+    field_authors:
+      property_name: field_authors
+    field_body:
+      property_name: field_body
+    field_centers:
+      property_name: field_centers
+    field_event_location:
+      property_name: field_event_location
+    field_publication_date:
+      property_name: field_publication_date
+    field_topics:
+      property_name: field_topics
+    links:
+      property_name: links
+    uid:
+      property_name: uid
+    title:
+      property_name: title
+    created:
+      property_name: created
+caching:
+  cache_tag:
+    excluded_entities: {  }
