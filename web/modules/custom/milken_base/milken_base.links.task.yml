@@ -10,9 +10,9 @@ entity.slides.list:
   base_route: system.admin_content
   weight: 30
 
-entity.speakers.list:
+entity.people.list:
   title: Speakers
-  route_name: eck.entity.speakers.list
+  route_name: eck.entity.people.list
   base_route: system.admin_content
   weight: 40
 
