@@ -16,7 +16,7 @@ use Drupal\taxonomy\Entity\Term;
  *
  * @MigrateProcessPlugin(
  *   id = "jsonapi_taxonomy",
- *   handle_multiples=true,
+ *   handle_multiples = true,
  * )
  */
 class JsonAPITaxonomy extends ProcessPluginBase {
@@ -45,16 +45,19 @@ class JsonAPITaxonomy extends ProcessPluginBase {
             $term = array_shift($term);
           }
           else {
-            $term = TaxonomyTerm::create($this->getRelatedRecordData($relatedRecord, $row, $this->configuration));
-            if ($term instanceof EntityInterface) {
-              $term->isNew();
-              $term->save();
-            }
-            else {
-              $row->setDestinationProperty($destination_property, []);
-              return new MigrateSkipProcessException(
-                "Cannot create taxonomy Term:" . print_r($relatedRecord, TRUE)
-              );
+            $related = $this->getRelatedRecordData($relatedRecord, $row, $this->configuration);
+            if (isset($related['uuid'])) {
+              $term = TaxonomyTerm::create($related);
+              if ($term instanceof EntityInterface) {
+                $term->isNew();
+                $term->save();
+              }
+              else {
+                $row->setDestinationProperty($destination_property, []);
+                return new MigrateSkipProcessException(
+                  "Cannot create taxonomy Term:" . print_r($relatedRecord, TRUE)
+                );
+              }
             }
           }
         }

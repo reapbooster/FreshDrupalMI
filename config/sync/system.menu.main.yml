@@ -1,8 +1,8 @@
-uuid: 827b2c36-f815-4552-9c5c-3fd4fea704aa
+uuid: c6aa5e0e-7442-4a58-9189-64e0b822ee21
 langcode: en
 status: true
 dependencies: {  }
 id: main
 label: 'Main navigation'
 description: 'Site section links'
-locked: true
+locked: false

@@ -1,0 +1,23 @@
+uuid: 75f6302b-1c2f-4386-896a-ba55a0113843
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_pgid
+id: people.speakers.field_pgid
+field_name: field_pgid
+entity_type: people
+bundle: speakers
+label: PGID
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

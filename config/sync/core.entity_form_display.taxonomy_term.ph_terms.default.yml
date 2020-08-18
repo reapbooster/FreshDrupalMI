@@ -3,13 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.ph_terms.field_content
+    - field.field.taxonomy_term.ph_terms.field_icon
     - field.field.taxonomy_term.ph_terms.field_tag_color
-    - field.field.taxonomy_term.ph_terms.field_tag_icon
     - field.field.taxonomy_term.ph_terms.field_visibility
+    - image.style.thumbnail
     - taxonomy.vocabulary.ph_terms
   module:
     - color_field
-    - fontawesome
+    - entity_reference_revisions
+    - image
     - path
     - text
 id: taxonomy_term.ph_terms.default
@@ -25,6 +28,24 @@ content:
       placeholder: ''
       rows: 5
     third_party_settings: {  }
+  field_content:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_autocomplete
+    region: content
+  field_icon:
+    weight: 8
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_tag_color:
     weight: 4
     settings:
@@ -32,12 +53,6 @@ content:
       placeholder_opacity: ''
     third_party_settings: {  }
     type: color_field_widget_default
-    region: content
-  field_tag_icon:
-    weight: 5
-    settings: {  }
-    third_party_settings: {  }
-    type: fontawesome_icon_widget
     region: content
   field_visibility:
     weight: 2

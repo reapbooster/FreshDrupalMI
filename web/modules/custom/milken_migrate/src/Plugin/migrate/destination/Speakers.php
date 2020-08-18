@@ -9,7 +9,7 @@ use Drupal\migrate\Row;
  * Speaker destination plugin.
  *
  * @MigrateDestination(
- *   id = "milken_migrate:speakers",
+ *   id = "milken_migrate:people",
  * )
  */
 class Speakers extends MilkenMigrateDestinationBase {

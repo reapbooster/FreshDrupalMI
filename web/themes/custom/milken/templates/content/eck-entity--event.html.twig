@@ -1,0 +1,12 @@
+<div id="event-data">
+  <script type="application/json" data-drupal-selector="drupal-event-json">{
+    "id": "{{ eck_entity.uuid.value }}",
+    "entityTypeId": "{{ eck_entity.getEntityTypeId }}",
+    "bundle": "{{ eck_entity.bundle }}",
+    "view_mode": "{{ view_mode }}"
+    }</script>
+</div>
+
+<div id="event-component">&nbsp;</div>
+
+{{ attach_library('milken/Event') }}

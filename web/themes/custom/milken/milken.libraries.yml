@@ -18,37 +18,58 @@ bootstrap_cdn:
 search:
   version: 1.0.0
   footer: true
+  webpack: true
   js:
-    js/Search.entry.js: { preprocess: 0 }
+    js/Search.entry.js: { preprocess: 0, source: 'js/Search.entry.tsx' }
 
 article:
   version: 1.0.0
   footer: true
+  webpack: true
   drupalSettings:
     node: null
   js:
-    js/Article.entry.js: { preprocess: 0 }
+    js/Article.entry.js: { preprocess: 0, source: 'js/Article.entry.tsx' }
 
 podcasts:
   version: 1.0.0
   footer: true
   drupalSettings:
     node: null
+  webpack: true
   js:
-    js/Podcasts.entry.js: { preprocess: 0 }
+    js/Podcasts.entry.js: { preprocess: 0, source: 'js/Podcasts.entry.tsx' }
 
 landing_page:
   version: 1.0.0
   footer: true
+  webpack: true
   drupalSettings:
     node: null
   js:
-    js/LandingPage.entry.js: { preprocess: 0 }
+    js/LandingPage.entry.js: { preprocess: 0, source: 'js/LandingPage.entry.tsx' }
 
 list:
+  version: 1.0.0
+  footer: true
+  webpack: true
+  drupalSettings:
+    view: null
+  js:
+    js/List.entry.js: { preprocess: 0, source: 'js/List.entry.tsx' }
+
+philanthropy_hub:
   version: 1.0.0
   footer: true
   drupalSettings:
     view: null
   js:
-    js/List.entry.js: { preprocess: 0 }
+    js/PhilanthropyHub.entry.js: { preprocess: 0, source: 'js/PhilanthropyHub.entry.tsx' }
+
+event:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    view: null
+  js:
+    js/Event.entry.js: { preprocess: 0, source: 'js/Event.entry.tsx' }

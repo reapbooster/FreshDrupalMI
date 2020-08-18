@@ -38,7 +38,7 @@ class Paragraphs extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     if (isset($value['data']) && empty($value['data'])) {
-      return new MigrateSkipProcessException("No value for: {$destination_property}");
+      throw new MigrateSkipProcessException("No value for: {$destination_property}");
     }
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);

@@ -1,0 +1,25 @@
+uuid: 05fae994-74d1-4418-93b0-73d993f69cf0
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.speakers
+    - field.storage.people.field_social_media
+  module:
+    - social_media
+id: people.speakers.field_social_media
+field_name: field_social_media
+entity_type: people
+bundle: speakers
+label: 'Social Media'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: social_media

@@ -1,14 +1,15 @@
 import React from 'react';
 import JSONApiUrl from "./JSONApiUrl";
-import { CardColumns } from 'react-bootstrap';
+import { CardColumns, Row } from 'react-bootstrap';
+import Masonry from 'react-masonry-component';
 import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
 import Loading from "../components/Loading";
-import EventConference from '../components/Events/EventConference';
+import EventConference from '../components/Event/EventConference';
 import TileView from "../components/NodeDisplay/TileView";
-import EventSummit from "../components/Events/EventSummit";
-import EventMeeting from "../components/Events/EventMeeting";
+import EventSummit from "../components/Event/EventSummit";
+import EventMeeting from "../components/Event/EventMeeting";
 import NodeOpportunityCard from "../components/NodeDisplay/NodeOpportunityCard";
 
 interface ListComponentPropsInterface {
@@ -40,6 +41,9 @@ enum ListItemComponents {
   node_opportunity = NodeOpportunityCard,
 }
 
+
+
+
 class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {
 
   id: string;
@@ -54,6 +58,11 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     this.state = {
       items: (props.items || [])
     };
+    this.refresh = this.refresh.bind(this);
+    this.getData = this.getData.bind(this);
+    this.toObject = this.toObject.bind(this);
+    this.hasItems = this.hasItems.bind(this);
+    this.handleError = this.handleError.bind(this);
     var remaining = Object.assign({}, props);
     delete remaining.items;
     Object.assign(this, remaining);
@@ -71,8 +80,11 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     };
   }
 
-  async getData(query: string = ""): Promise<any> {
+  async getData(url: JSONApiUrl = null): Promise<any> {
     console.debug("get Data called: ", this);
+    if (url !== null) {
+      this.url = url;
+    }
     if (this.url) {
       console.debug("listComponenet calling url: ", this.url.toString());
       return fetch(this.url.toString())
@@ -84,7 +96,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
 
   hasItems(): boolean {
-    return (!!this.state.items.length || 0);
+    return (!!this.state?.items?.length || 0);
   }
 
   handleError(err) {
@@ -100,7 +112,33 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     return this.id;
   }
 
-  refresh() : Promise<any> {
+  refresh(evt: CustomEvent = null) : Promise<any> {
+    if (evt) {
+      evt.stopImmediatePropagation();
+      evt.preventDefault();
+    }
+    var toMutate = this.url.clone();
+    if (evt?.detail) {
+      console.log("EVENT", evt);
+      if (evt?.detail?.filter) {
+        for (var f in evt.detail.filter) {
+          const key = `filter[${f}]`;
+          if (toMutate.query.has(key)) {
+            console.debug("changing value of query param: ", toMutate.query)
+            toMutate.query.set(key, evt.detail.filter[f])
+          } else {
+            console.debug("Appending query param: ", toMutate.query)
+            toMutate.query.append(key, evt.detail.filter[f]);
+          }
+        }
+      }
+      if (evt?.detail?.url) {
+        toMutate = evt.detail.url;
+      }
+
+      this._url = toMutate;
+      console.debug("REFRESH", toMutate.toString());
+    }
     var self = this;
     return this.getData()
       .then(res => res.json())
@@ -120,17 +158,27 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
         return <Component {...item} key={key} />
       });
     } else {
-      this.refresh();
-      return <Loading />;
+      return (
+        <div>
+          <h1>No results for this combination of filters.</h1>
+        </div>
+      );
     }
+  }
+
+  componentDidMount() {
+    document.getElementsByClassName('philanthropy-hub-root').item(0).addEventListener("refresh", this.refresh);
+    this.refresh();
   }
 
   render() {
     return (
       <>
-        <CardColumns>
-          {this.items}
-        </CardColumns>
+        <Row>
+          <CardColumns className={"philanthropy-hub-root"}>
+              {this.items}
+          </CardColumns>
+        </Row>
       </>
     );
   }
@@ -140,12 +188,10 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   }
 
   set url(url) {
-    if (typeof url == "string") {
-      this._url = new JSONApiUrl(url);
+    if (!url instanceof JSONApiUrl) {
+      url = new JSONApiUrl(url);
     }
-    if (url instanceof JSONApiUrl) {
-      this._url = url;
-    }
+    this._url = url;
   }
 
 }

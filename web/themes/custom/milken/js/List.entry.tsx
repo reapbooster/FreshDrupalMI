@@ -8,4 +8,5 @@ parsedData.data = {};
 ReactDOM.render(
   <List {...parsedData} />,
   document.getElementById('list-component')
+
 );
