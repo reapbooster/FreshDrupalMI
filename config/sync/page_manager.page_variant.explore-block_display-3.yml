@@ -4,24 +4,22 @@ status: true
 dependencies:
   config:
     - page_manager.page.explore
-    - views.view.reports
   module:
-    - views
+    - component
 id: explore-block_display-3
 label: Reports
 variant: block_display
 variant_settings:
   blocks:
-    50fd0314-7512-4f31-bfed-1d5ad75c9ad7:
-      id: 'views_block:reports-block_1'
-      label: ''
-      provider: views
+    81768255-7065-4a94-be0a-327952949946:
+      id: 'component:ReportsBrowser'
+      label: ReportsBrowser
+      provider: component
       label_display: visible
-      views_label: ''
-      items_per_page: none
       region: top
       weight: 0
-      uuid: 50fd0314-7512-4f31-bfed-1d5ad75c9ad7
+      uuid: 81768255-7065-4a94-be0a-327952949946
+      form_configuration: null
       context_mapping: {  }
   id: block_display
   uuid: 7edd40b0-789c-4a40-9b55-e7ff6b47c90a

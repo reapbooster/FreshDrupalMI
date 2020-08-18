@@ -4,25 +4,23 @@ status: true
 dependencies:
   config:
     - page_manager.page.explore
-    - views.view.videos
   module:
+    - component
     - system
-    - views
 id: explore-block_display-1
 label: Videos
 variant: block_display
 variant_settings:
   blocks:
-    2312cf9d-c657-4597-8084-5e3f6bc248b7:
-      id: 'views_block:videos-block_1'
-      label: ''
-      provider: views
+    ec295741-b7da-405f-a08f-90a680ab818e:
+      id: 'component:VideosBrowser'
+      label: 'Videos Browser'
+      provider: component
       label_display: visible
-      views_label: ''
-      items_per_page: none
       region: top
       weight: 0
-      uuid: 2312cf9d-c657-4597-8084-5e3f6bc248b7
+      uuid: ec295741-b7da-405f-a08f-90a680ab818e
+      form_configuration: null
       context_mapping: {  }
   id: block_display
   uuid: edf6d5e1-0100-4cc2-854d-3c0fa35b6e29
