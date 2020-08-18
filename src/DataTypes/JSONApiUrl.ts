@@ -14,11 +14,13 @@ class JSONApiUrl {
       // the query from the supplied URL
       this.query = searchParams ?? new URLSearchParams(split[1]);
     }
+
+    console.log('Instantiated', { incoming: incoming, query: this.query, parsed: this.parsed });
     console.debug("JsonapiURL: constructor", this);
   }
 
   toString(): string {
-    return this.parsed.toString().concat("?", this.query.toString());
+    return this?.parsed?.toString().concat("?", this?.query?.toString());
   }
 
   clone() {

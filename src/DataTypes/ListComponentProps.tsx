@@ -171,10 +171,9 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       }
 
       this._url = toMutate;
-      console.debug("REFRESH", toMutate.toString());
     }
 
-    if(this.url.toString() !== toMutate.toString()) {
+    if( this?.url && ( this.url.toString() !== toMutate.toString() ) ) {
       console.log('Fetch URL changed, abort current request');
       this.abortController.abort();
     }
@@ -186,8 +185,6 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     console.log("Loading an API page");
 
     var self = this;
-
-    console.log(self._url.toString());
 
     return fetch(this._url.toString(), { signal: this.abortController.signal })
       .then(res => res.json())
@@ -218,7 +215,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
           // console.log('All request pages', pages);
 
 
-          Promise.all( pages.map( url => fetch(url) ) )
+          Promise.all( pages.map( url => fetch(url, { signal: this.abortController.signal }) ) )
             .then( results => {
               return Promise.all(results.map( response => {
             		return response.json();
