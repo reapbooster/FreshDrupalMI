@@ -36,12 +36,14 @@
       text-transform: uppercase;
     }
 
-    @media (min-width: 1400px) {
-        column-count: 4;
-    }
+    .list-component {
+      @media (min-width: 1400px) {
+          column-count: 4;
+      }
 
-    @media (min-width: 576px) and (max-width: 1024px) {
-        column-count: 2;
+      @media (min-width: 576px) and (max-width: 1024px) {
+          column-count: 2;
+      }
     }
   }
 
