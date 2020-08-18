@@ -12,7 +12,7 @@ entity.slides.list:
 
 entity.speakers.list:
   title: Speakers
-  route_name: eck.entity.speakers.list
+  route_name: eck.entity.people.list
   base_route: system.admin_content
   weight: 40
 
