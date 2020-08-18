@@ -214,7 +214,6 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
           // console.log('All request pages', pages);
 
-
           Promise.all( pages.map( url => fetch(url, { signal: this.abortController.signal }) ) )
             .then( results => {
               return Promise.all(results.map( response => {

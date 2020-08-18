@@ -29,23 +29,21 @@ const HorizontalMenuFacet = (props: FacetProps) => {
 
   let colors = [];
 
-  const options = !facetValues.values ? [] : facetValues.values.map((value, key) => {
+  const options = !facetValues.values ? [] : facetValues.values.filter( value => !!value.field_visibility ).map((value, key) => {
     colors.push(value.field_tag_color ?? '');
+
     return {
       'value': value.machine_name,
       'label': value.name
     }
   })
 
-  const readFieldTerms = !facetValues.values ? [] : facetValues.values.map((value, key) => {
+  const readFieldTerms = !options ? [] : options.map((value, key) => {
     const activeValues = fieldTerms.split(',');
-    if(activeValues.includes(value.machine_name)) {
-      return {
-        'value': value.machine_name,
-        'label': value.name
-      }
+    if(activeValues.includes(value.value)) {
+      return value;
     }
-  });
+  }).filter(Boolean);
 
   return (
     <div>
