@@ -63,6 +63,8 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     this.toObject = this.toObject.bind(this);
     this.hasItems = this.hasItems.bind(this);
     this.handleError = this.handleError.bind(this);
+    this.abortController = new AbortController();
+
     var remaining = Object.assign({}, props);
     delete remaining.items;
     Object.assign(this, remaining);
@@ -87,10 +89,11 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     }
     if (this.url) {
       console.debug("listComponenet calling url: ", this.url.toString());
-      return fetch(this.url.toString())
+      return fetch(this.url.toString(), { signal: this.abortController.signal })
         .catch(this.handleError);
     } else {
       this.handleError(new Error("No URL to make a refresh call"));
+      resolve([]);
     }
   }
 
@@ -101,6 +104,10 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
   handleError(err) {
     this.error = err;
+
+    if(err.name === 'AbortError') {
+      console.log(this.url);
+    }
     console.log("Entity Component Props has encountered an error with fetching the items:", err);
   }
 
@@ -117,12 +124,31 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       evt.stopImmediatePropagation();
       evt.preventDefault();
     }
+
     var toMutate = this.url.clone();
     if (evt?.detail) {
-      console.log("EVENT", evt);
+
+      // Flag keys for deletion
+      let clearKeys = [];
+
+      // Do not touch these URL params
+      const blacklist = ['jsonapi_include', 'include'];
+
+      for(const key of toMutate.query.keys()) {
+        if( blacklist.includes(key) ) { continue; }
+        if( !evt.detail.filter.hasOwnProperty(key) || !evt.detail.filter[key] ) {
+            clearKeys.push(key);
+        }
+      };
+
+      // If filter passed, update URL parameters
       if (evt?.detail?.filter) {
+
         for (var f in evt.detail.filter) {
-          const key = `filter[${f}]`;
+
+          // Sensible default filter if not a complex filter key
+          const key = f.includes('filter') ? f : `filter[${f}]`;
+
           if (toMutate.query.has(key)) {
             console.debug("changing value of query param: ", toMutate.query)
             toMutate.query.set(key, evt.detail.filter[f])
@@ -132,24 +158,97 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
           }
         }
       }
+
+      // Clear flagged keys
+      clearKeys?.map( key => {
+        console.debug('Clear URL key', key);
+        toMutate.query.delete(key);
+      });
+
+      // Set URL if passed
       if (evt?.detail?.url) {
         toMutate = evt.detail.url;
       }
 
       this._url = toMutate;
-      console.debug("REFRESH", toMutate.toString());
     }
+
+    if( this?.url && ( this.url.toString() !== toMutate.toString() ) ) {
+      console.log('Fetch URL changed, abort current request');
+      this.abortController.abort();
+    }
+
+    return this.loadChain();
+  }
+
+  loadChain() : Promise<any> {
+    console.log("Loading an API page");
+
     var self = this;
-    return this.getData()
+
+    return fetch(this._url.toString(), { signal: this.abortController.signal })
       .then(res => res.json())
       .then(ajaxData => {
-        self.setState({ items: ajaxData.data });
+
+        // Result is empty
+        if(!ajaxData?.data) { return; }
+
+        // Check for additional pages on the API
+        const pageCount = 50;
+        let newItems = ajaxData.data;
+
+        if(ajaxData?.links?.next?.href && ajaxData?.meta?.count > pageCount) {
+
+          // Prepare URLs for concurrent requests
+
+          const total = ajaxData.meta.count;
+          let pageUrl = new JSONApiUrl(ajaxData.links.next.href);
+          let pages = [ ajaxData.links.next.href ];
+          let offset = pageCount;
+
+          while( offset + pageCount < total ) {
+            offset += pageCount;
+            pageUrl.query.set('page[offset]', offset);
+            pages.push( pageUrl.toString());
+          }
+
+          // console.log('All request pages', pages);
+
+          Promise.all( pages.map( url => fetch(url, { signal: this.abortController.signal }) ) )
+            .then( results => {
+              return Promise.all(results.map( response => {
+            		return response.json();
+            	}));
+            }).then( allData => {
+
+              allData.map( data => {
+                if(data?.data?.length) {
+                    newItems = newItems.concat(data.data);
+                }
+              });
+
+              self.setState({ items: newItems });
+
+            }).catch(function (error) {
+            	console.debug('Error reading API pages', error);
+            });
+
+
+        }
+        else {
+          self.setState({ items: newItems });
+        }
+
+      })
+      .catch(e => {
+          console.warn(`Fetch 1 error: ${e.message}`);
       });
   }
 
+
   get items() {
     if (this.hasItems()) {
-      console.log("rendering list component items: ", this.state.items);
+      // console.log("rendering list component items: ", this.state.items);
       return this.state.items.map((item, key: number) => {
         const Component = ListItemComponents[item.type.replace("--", "_")];
         if (Component == undefined) {
@@ -167,19 +266,17 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   }
 
   componentDidMount() {
-    document.getElementsByClassName('philanthropy-hub-root').item(0).addEventListener("refresh", this.refresh);
+    document.getElementsByClassName('list-component').item(0).addEventListener("refresh", this.refresh);
     this.refresh();
   }
 
   render() {
     return (
-      <>
-        <Row>
-          <CardColumns className={"philanthropy-hub-root"}>
-              {this.items}
-          </CardColumns>
-        </Row>
-      </>
+      <Row>
+        <CardColumns className={"list-component"}>
+            {this.items}
+        </CardColumns>
+      </Row>
     );
   }
 

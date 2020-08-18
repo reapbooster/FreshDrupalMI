@@ -149,7 +149,6 @@ class Facet {
   setActiveItem(machine_name = null) {
     var self = this;
     this._values.map((value: FacetValue, key) => {
-      console.log(value);
       if (value.machine_name == machine_name) {
         self.values[key].selected = true;
       }

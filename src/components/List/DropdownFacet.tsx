@@ -1,47 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Facet, { FacetProps, FacetValue } from "../../DataTypes/Facet";
 import Loading from "../Loading";
 import {Dropdown, Nav, NavDropdown, NavItem} from 'react-bootstrap';
+import FontAwesomeIcon from "react-fontawesome";
+import { useQueryState } from 'use-location-state';
 
 const DropdownFacet = (props: FacetProps) => {
 
   const [ facetValues, setFacetValues ] = useState(new Facet(props));
+  const [ activeTerm, setActiveTerm ] = useQueryState(props.field.replace("field_", ""), "");
 
   // TODO: Make these props
-  const titleSubject = 'Opportunities';
-  const titleValueToEnablePost = 'Global';
-  const titleConjunction = 'in';
+  const titleSubject = props.titleSubject || 'Entries';
+  const titleValuesToEnablePostfix = props.titleValuesToEnablePostfix || [];
+  const titleConjunction = props.titleConjunction || '';
 
   if (!facetValues.hasValues()) {
     facetValues.refresh(setFacetValues);
-    return (<Loading />);
+    return (
+      <h1 className="title-dropdown text-center">
+        <FontAwesomeIcon name="spinner" />
+      </h1>
+    );
   }
 
-  const dropdownSelectHandler = (machine_name) => {
-    console.log(machine_name);
-    var filter = {};
-    filter[props.field.concat('.machine_name')] = machine_name
-    let newFacetValues = facetValues.setActive(machine_name);
-    setFacetValues(newFacetValues);
+  let dropdownSelectHandler = (machine_name) => {
 
-    var evt = new CustomEvent("refresh", {
-      bubbles: false,
-      cancelable: false,
-      detail: {
-        filter: filter
-      }
-    });
-    document.getElementsByClassName('philanthropy-hub-root')
-      .item(0)
-      .dispatchEvent(evt);
+    // let newFacetValues = facetValues.setActive(machine_name);
+    // setFacetValues(newFacetValues);
+
+    setActiveTerm(machine_name);
+
   }
 
-  var renderedFacetValues = facetValues.values.map((value: FacetValue, key: number) => {
+  let renderedFacetValues = facetValues?.values.map((value: FacetValue, key: number) => {
+
+    if(!value.field_visibility) { return; }
     return (
       <Dropdown.Item
         key={key}
         eventKey={value.machine_name}
-        value={value.machine_name}
         value={value.machine_name}
       >
         {value.name}
@@ -49,16 +47,37 @@ const DropdownFacet = (props: FacetProps) => {
     );
   });
 
-  console.debug("Dropdown Facet:", facetValues);
-  const activeKey: FacetValue = facetValues.getActive().shift() || { label: "Global" };
-  console.debug("Active Keys:", activeKey);
+  let allOptionFacetValue = !props.allOptionTitle ? [] : (
+    <>
+      <Dropdown.Divider />
+      <Dropdown.Item
+        key={-1}
+        eventKey={false}
+        value={false}
+      >
+        {props.allOptionTitle}
+      </Dropdown.Item>
+    </>
+  );
+
+  const activeKey = facetValues?.values.find( (value: FacetValue) => {
+
+    return value.machine_name === activeTerm;
+
+  }) ?? { label: "All" };
+
+  // console.debug("Dropdown Facet:", facetValues);
+  // const activeKey: FacetValue = facetValues.getActive().shift() || { label: "All" };
+
+  // console.log(fieldTerms, facetValues);
 
   let prefix, postfix;
 
-  if(titleSubject && titleValueToEnablePost) {
-    prefix = <span className="d-none d-md-inline-block">{activeKey.label != titleValueToEnablePost ? `${titleSubject} ${titleConjunction} `: ''}</span>;
-    postfix = (activeKey.label == titleValueToEnablePost ? ' ' + titleSubject : '')
+  if(titleSubject && titleValuesToEnablePostfix) {
+    prefix = <span className="d-none d-md-inline-block">{!titleValuesToEnablePostfix.includes(activeKey.label) ? `${titleSubject} ${titleConjunction} `: ''}</span>;
+    postfix = (titleValuesToEnablePostfix.includes(activeKey.label) ? ' ' + titleSubject : '')
   }
+
   return (
     <>
       <h1 className="title-dropdown text-center">
@@ -71,20 +90,10 @@ const DropdownFacet = (props: FacetProps) => {
 
           <Dropdown.Menu>
             {renderedFacetValues}
+            {allOptionFacetValue}
           </Dropdown.Menu>
         </Dropdown>
       </h1>
-      {/* <Nav className={"col col-lg-12 col-sm-12"}>
-        <NavItem
-
-        >Choose a region: <NavDropdown
-            title={ activeKey.label }
-            onSelect={dropdownSelectHandler}
-          >
-
-          </NavDropdown>
-        </NavItem>
-      </Nav >*/}
     </>
   );
 }
