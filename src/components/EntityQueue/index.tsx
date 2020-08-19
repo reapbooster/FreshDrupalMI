@@ -7,7 +7,7 @@ import List from '../List';
 
 class EntityQueue extends EntityComponentBase<EntityComponentPropsInterface, EntityComponentState> {
 
-  include = '&include=items,items.field_hero_image';
+  include = '&include=items';
 
   componentDidMount() {
     if (this.state.loading == false && this.state.loaded == false) {
