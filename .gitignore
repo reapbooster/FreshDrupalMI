@@ -126,3 +126,4 @@ Thumbs.db
 /config/node/*.js
 /web/modules/custom/**/js/*.entry.js
 old
+web/modules/custom/**/components/**/*.entry.js
