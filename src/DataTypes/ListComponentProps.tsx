@@ -280,9 +280,9 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
   render() {
     return (
-      <CardColumns className={"list-component"}>
-          {this.items}
-      </CardColumns>
+      <Row className="list-component">
+        {this.items}
+      </Row>
     );
   }
 
