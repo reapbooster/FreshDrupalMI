@@ -166,7 +166,7 @@ const PhilanthropyHub: React.FunctionComponent = props => {
       </Container>
 
       <div className={"philanthropy-hub-root"}>
-        <ListComponentProps {...props} url={url} />
+        <ListComponentProps {...props} loadAll={true} url={url} />
       </div>
     </Container>
   );
