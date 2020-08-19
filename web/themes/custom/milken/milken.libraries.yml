@@ -40,15 +40,15 @@ bootstrap_cdn:
 ##  js:
 ##    js/Podcasts.entry.js: { preprocess: 0, source: 'js/Podcasts.entry.tsx' }
 ##
-##landing_page:
-##  version: 1.0.0
-##  footer: true
-##  webpack: true
-##  drupalSettings:
-##    node: null
-##  js:
-##    js/LandingPage.entry.js: { preprocess: 0, source: 'js/LandingPage.entry.tsx' }
-##
+landing_page:
+  version: 1.0.0
+  footer: true
+  webpack: true
+  drupalSettings:
+    node: null
+  js:
+    js/LandingPage.entry.js: { preprocess: 0, source: 'js/LandingPage.entry.tsx' }
+
 ##list:
 ##  version: 1.0.0
 ##  footer: true
@@ -58,11 +58,18 @@ bootstrap_cdn:
 ##  js:
 ##    js/List.entry.js: { preprocess: 0, source: 'js/List.entry.tsx' }
 ##
-##event:
-##  version: 1.0.0
-##  footer: true
-##  drupalSettings:
-##    view: null
-##  js:
-##    js/Event.entry.js: { preprocess: 0, source: 'js/Event.entry.tsx' }
-##
+event:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    view: null
+  js:
+    js/Event.entry.js: { preprocess: 0, source: 'js/Event.entry.tsx' }
+
+philanthropy_hub:
+  version: 1.0.0
+  footer: true
+  drupalSettings:
+    view: null
+  js:
+    js/PhilanthropyHub.entry.js: { preprocess: 0, source: 'js/PhilanthropyHub.entry.tsx' }
