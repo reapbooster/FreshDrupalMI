@@ -5,8 +5,19 @@ dependencies:
   config:
     - field.storage.node.field_content
     - node.type.landing_page
+    - paragraphs.paragraphs_type.author
+    - paragraphs.paragraphs_type.block
+    - paragraphs.paragraphs_type.body_content
+    - paragraphs.paragraphs_type.podcast_episode
+    - paragraphs.paragraphs_type.pull_quote
+    - paragraphs.paragraphs_type.slide
+    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
+    - paragraph_blocks
+third_party_settings:
+  paragraph_blocks:
+    status: 1
 id: node.landing_page.field_content
 field_name: field_content
 entity_type: node
@@ -21,12 +32,49 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     negate: 0
-    target_bundles: null
+    target_bundles:
+      body_content: body_content
+      pull_quote: pull_quote
+      author: author
+      block: block
+      podcast_episode: podcast_episode
+      slide: slide
+      tiles: tiles
     target_bundles_drag_drop:
+      author:
+        enabled: true
+        weight: 13
+      block:
+        enabled: true
+        weight: 14
       body_content:
+        enabled: true
         weight: 3
+      four_tile_media:
+        weight: 16
         enabled: false
+      four_tile_media_taxonomy:
+        weight: 17
+        enabled: false
+      items_from_an_entityqueue:
+        weight: 18
+        enabled: false
+      media_tiles_from_view:
+        weight: 19
+        enabled: false
+      podcast_episode:
+        enabled: true
+        weight: 20
       pull_quote:
+        enabled: true
         weight: 4
+      slide:
+        enabled: true
+        weight: 22
+      tiles:
+        enabled: true
+        weight: 23
+      unmigrated_paragraph:
+        weight: 24
         enabled: false
 field_type: entity_reference_revisions

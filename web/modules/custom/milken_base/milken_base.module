@@ -5,6 +5,9 @@
  * Contains milken_base.module.
  */
 
+use Drupal\Core\Entity\ContentEntityTypeInterface;
+use Drupal\Core\Config\Entity\ConfigEntityType;
+
 /**
  * Implements hook_element_plugin_alter().
  */
@@ -30,8 +33,16 @@ function milken_base_theme_registry_alter(&$theme_registry) {
 }
 
 /**
- * Theme Hook function.
+ * Implements hook_entity_type_alter().
  */
-function milken_base_paragraph_action($values) {
-
+function milken_migrations_entity_type_alter(array &$entity_types) {
+  if ($entity_types['media_type'] instanceof ConfigEntityType) {
+    $entity_types['media_type']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMediaTypeAccessControlHandler');
+  }
+  if ($entity_types['menu'] instanceof ConfigEntityType) {
+    $entity_types['menu']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMenuAccessControlHandler');
+  }
+  if ($entity_types['menu_link_content'] instanceof ContentEntityTypeInterface) {
+    $entity_types['menu_link_content']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMenuLinkContentControlHandler');
+  }
 }

@@ -10,8 +10,8 @@ dependencies:
     - milken
 id: mainnavigation
 theme: milken
-region: header
-weight: 0
+region: primary_menu
+weight: -2
 provider: null
 plugin: 'system_menu_block:main'
 settings:

@@ -44,7 +44,7 @@ gulp.task(
 );
 gulp.task("clearDrupalCache", shell.task("drush cr"));
 gulp.task(
-  "tsCompile-milken",
+  "tsCompile",
   shell.task("tsc --esModuleInterop --resolveJsonModule", {
     cwd: path.resolve(basePath, "web/themes/custom/milken")
   })
@@ -94,7 +94,7 @@ gulp.task(
 
 gulp.task(
   "default",
-  gulp.series(["tsCompile-milken", gulp.parallel(["themeBuild", "buildComponents"])])
+  gulp.series(["tsCompile", gulp.parallel(["themeBuild", "buildComponents"])])
 );
 
 gulp.task('browsersync-reload', function (done) {

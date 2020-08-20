@@ -71,6 +71,16 @@
   <div id="page">
     <!-- Page.header -->
     {{ page.header }}
+    {% if page.primary_menu %}
+      <navbar>
+        {{ page.primary_menu }}
+      </navbar>
+    {% endif %}
+    {% if page.secondary_menu %}
+      <navbar>
+        {{ page.secondary_menu }}
+      </navbar>
+    {% endif %}
     <!-- /Page.header -->
     {% if page.highlighted %}
       <div class="highlighted">

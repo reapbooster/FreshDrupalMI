@@ -15,6 +15,12 @@ bootstrap_cdn:
     //cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js: {}
     //stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js: {}
 
+main_navigation:
+  version: 1.0.0
+  header: true
+  js:
+    js/main-navigation.js: { preprocess: 0, source: 'js/main-navigation.ts' }
+
 ##search:
 ##  version: 1.0.0
 ##  footer: true
