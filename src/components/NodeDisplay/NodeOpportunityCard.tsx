@@ -59,7 +59,7 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
   );
 
   return (
-    <Card className={"my-2 mx-2"} key={props.machine_name}>
+    <Card key={props.machine_name}>
      <OverlayTrigger
         placement="top"
         overlay={<Tooltip id="button-tooltip"><div dangerouslySetInnerHTML={{__html: props.field_body?.value}}></div></Tooltip>}

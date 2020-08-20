@@ -22,6 +22,7 @@ interface ListComponentPropsInterface {
   entityTypeId: string;
   browser: boolean;
   key: number;
+  loadAll?: boolean;
 }
 
 interface ListComponentState {
@@ -60,6 +61,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     };
     this.refresh = this.refresh.bind(this);
     this.getData = this.getData.bind(this);
+    this.loadChain = this.loadChain.bind(this);
     this.toObject = this.toObject.bind(this);
     this.hasItems = this.hasItems.bind(this);
     this.handleError = this.handleError.bind(this);
@@ -79,6 +81,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       onSelectHandler: this.onSelectHandler,
       view_mode: this.view_mode,
       key: this.key,
+      loadAll: this.props.loadAll
     };
   }
 
@@ -182,9 +185,12 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
   }
 
   loadChain() : Promise<any> {
+
     console.log("Loading an API page");
 
     var self = this;
+
+    console.log('self', self);
 
     return fetch(this._url.toString(), { signal: this.abortController.signal })
       .then(res => res.json())
@@ -197,7 +203,9 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
         const pageCount = 50;
         let newItems = ajaxData.data;
 
-        if(ajaxData?.links?.next?.href && ajaxData?.meta?.count > pageCount) {
+        if(self.loadAll && ajaxData?.links?.next?.href && ajaxData?.meta?.count > pageCount) {
+
+          console.log('Loading more');
 
           // Prepare URLs for concurrent requests
 
@@ -272,10 +280,8 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
 
   render() {
     return (
-      <Row>
-        <CardColumns className={"list-component"}>
-            {this.items}
-        </CardColumns>
+      <Row className="list-component">
+        {this.items}
       </Row>
     );
   }
