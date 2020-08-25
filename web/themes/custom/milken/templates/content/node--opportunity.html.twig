@@ -1,0 +1,34 @@
+{{ attach_library('milken/opportunity_detail') }}
+
+<opportunity-detail
+  id="opportunity-detail-{{ node.uuid.value }}"
+  data-uuid="{{ node.uuid.value }}"
+  data-entity-type-id="node"
+  data-bundle="{{ node.bundle }}"
+  data-view-mode="{{ view_mode }}"
+>
+  {% if node.field_actions %}
+    {{ node.field_actions | view }}
+  {% endif %}
+  {% if node.field_body %}
+    {{ node.field_body | view }}
+  {% endif %}
+  {% if node.field_focus %}
+    {{ node.field_focus | view }}
+  {% endif %}
+  {% if node.field_hub %}
+    {{ node.field_hub | view }}
+  {% endif %}
+  {% if node.field_region %}
+    {{ node.field_region | view }}
+  {% endif %}
+  {% if node.field_terms %}
+    {{ node.field_terms | view }}
+  {% endif %}
+  {% if node.field_url %}
+    {{ node.field_url | view }}
+  {% endif %}
+</opportunity-detail>
+
+
+

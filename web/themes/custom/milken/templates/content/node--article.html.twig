@@ -1,14 +1,14 @@
-<div id="node-data">
-  <script type="application/json" data-drupal-selector="drupal-node-json">{
-    "id": "{{ node.uuid.value }}",
-    "entityTypeId": "{{ node.getEntityTypeId }}",
-    "bundle": "{{ node.bundle }}",
-    "view_mode": "{{ view_mode }}"
-    }</script>
-</div>
+{{ attach_library('milken/article_detail') }}
 
-<div id="node-component">&nbsp;</div>
+<article-detail
+    id="milken-article-detail"
+    data-uuid="{{ node.uuid.value }}"
+    data-entity-type-id="node"
+    data-bundle="{{ node.bundle }}"
+    data-view-mode="{{ view_mode }}"
+>
+  {{ content.field_content }}
+</article-detail>
 
-{{ attach_library('milken/article') }}
 
 

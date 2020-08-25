@@ -21,6 +21,24 @@ main_navigation:
   js:
     js/main-navigation.js: { preprocess: 0, source: 'js/main-navigation.ts' }
 
+article_detail:
+  version: 1.0.0
+  footer: true
+  webpack: true
+  drupalSettings:
+    node: null
+  js:
+    js/article-detail.js: { preprocess: 0, source: 'js/article-detail.ts' }
+
+opportunity_detail:
+  version: 1.0.0
+  footer: true
+  webpack: true
+  drupalSettings:
+    node: null
+  js:
+    js/opportunity-detail.js: { preprocess: 0, source: 'js/opportunity-detail.ts' }
+
 ##search:
 ##  version: 1.0.0
 ##  footer: true
