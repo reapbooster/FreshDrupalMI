@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - eck.eck_type.slide.full_width_one_column
-    - eck.eck_type.slide.photo_left_text_right
     - field.storage.paragraph.field_slides
     - paragraphs.paragraphs_type.slide
 id: paragraph.slide.field_slides
@@ -22,7 +21,6 @@ settings:
   handler_settings:
     target_bundles:
       full_width_one_column: full_width_one_column
-      photo_left_text_right: photo_left_text_right
     sort:
       field: _none
     auto_create: true

@@ -12,9 +12,11 @@ dependencies:
     - field.field.slide.full_width_one_column.field_published
     - field.field.slide.full_width_one_column.field_slide_text
     - field.field.slide.full_width_one_column.field_text_color
+    - image.style.fullscreen
   module:
     - ds
     - image
+    - key_value_field
     - layout_builder
     - milken_base
 third_party_settings:
@@ -33,8 +35,8 @@ third_party_settings:
       first:
         - field_background_image
       second:
+        - field_slide_text
         - title
-        - field_subtitle
 id: slide.full_width_one_column.full
 targetEntityType: slide
 bundle: full_width_one_column
@@ -44,11 +46,19 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: fullscreen
       image_link: ''
     third_party_settings: {  }
     type: image
     region: first
+  field_slide_text:
+    type: key_value
+    weight: 0
+    region: second
+    label: above
+    settings:
+      value_only: false
+    third_party_settings: {  }
   title:
     type: oembed_thumbnail_uri
     weight: 1
@@ -70,7 +80,6 @@ hidden:
   field_link: true
   field_promoted: true
   field_published: true
-  field_slide_text: true
   field_text_color: true
   langcode: true
   search_api_excerpt: true

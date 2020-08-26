@@ -1,14 +1,14 @@
-uuid: d2886079-f3bf-4093-9c82-c090fdb21de6
+uuid: f31dbcec-126b-4f31-b6e7-8dc0c83dfe93
 langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.slide.photo_left_text_right
+    - eck.eck_type.slide.hero_half_height
     - field.storage.slide.field_published
-id: slide.photo_left_text_right.field_published
+id: slide.hero_half_height.field_published
 field_name: field_published
 entity_type: slide
-bundle: photo_left_text_right
+bundle: hero_half_height
 label: Published
 description: ''
 required: false

@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useState } from 'react';
 import SlideDataInterface from '../../DataTypes/SlideDataInterface';
 import { Row, Jumbotron, Container } from 'react-bootstrap';

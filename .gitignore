@@ -127,8 +127,4 @@ Thumbs.db
 /web/modules/custom/**/js/*.entry.js
 old
 web/modules/custom/**/components/**/*.entry.js
-/web/modules/custom/milken_base/components/EventsBrowser/EventsBrowser.entry.js
-/web/modules/custom/milken_base/components/PhilanthropyHub/PhilanthropyHub.entry.js
-/web/modules/custom/milken_base/components/ReportsBrowser/ReportsBrowser.entry.js
-/web/modules/custom/milken_base/components/VideosBrowser/VideosBrowser.entry.js
-/web/modules/custom/milken_base/components/List/List.entry.js
+/web/modules/custom/milken_base/components/*/*.js

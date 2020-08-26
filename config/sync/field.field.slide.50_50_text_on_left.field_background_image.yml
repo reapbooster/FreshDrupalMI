@@ -1,16 +1,16 @@
-uuid: 75c36d53-fbff-4b68-aef7-ea2de9030489
+uuid: 9898131d-f098-43bd-8133-649020499347
 langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.slide.photo_left_text_right
+    - eck.eck_type.slide.50_50_text_on_left
     - field.storage.slide.field_background_image
   module:
     - image
-id: slide.photo_left_text_right.field_background_image
+id: slide.50_50_text_on_left.field_background_image
 field_name: field_background_image
 entity_type: slide
-bundle: photo_left_text_right
+bundle: 50_50_text_on_left
 label: 'Background Image'
 description: ''
 required: false

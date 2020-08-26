@@ -46,7 +46,7 @@ gulp.task("clearDrupalCache", shell.task("drush cr"));
 gulp.task(
   "tsCompile",
   shell.task("tsc --esModuleInterop --resolveJsonModule", {
-    cwd: path.resolve(basePath, "web/themes/custom/milken")
+    cwd: path.resolve(basePath, "web")
   })
 );
 

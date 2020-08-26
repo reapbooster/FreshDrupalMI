@@ -1,16 +1,16 @@
-uuid: aaa23f2f-8467-498c-a898-66855aeacb07
+uuid: 684a0fc9-0e42-49b6-a407-b542ad2b992d
 langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.slide.photo_left_text_right
+    - eck.eck_type.slide.hero_half_height
     - field.storage.slide.field_link
   module:
     - link
-id: slide.photo_left_text_right.field_link
+id: slide.hero_half_height.field_link
 field_name: field_link
 entity_type: slide
-bundle: photo_left_text_right
+bundle: hero_half_height
 label: Link
 description: ''
 required: false

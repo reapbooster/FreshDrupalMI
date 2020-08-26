@@ -1,14 +1,14 @@
-uuid: b0e24f23-6382-44dd-9c9f-6edb67f4579e
+uuid: d5c13f6e-016e-4a42-be8b-28fb7755a9b4
 langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.slide.photo_left_text_right
+    - eck.eck_type.slide.50_50_text_on_left
     - field.storage.slide.field_promoted
-id: slide.photo_left_text_right.field_promoted
+id: slide.50_50_text_on_left.field_promoted
 field_name: field_promoted
 entity_type: slide
-bundle: photo_left_text_right
+bundle: 50_50_text_on_left
 label: Promoted
 description: ''
 required: false
