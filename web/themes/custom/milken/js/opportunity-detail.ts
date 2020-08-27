@@ -1,9 +1,11 @@
+
+
 const MilkenOpportunityDetailTemplate = document.createElement('template');
 MilkenOpportunityDetailTemplate.innerHTML = `
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <h6>Field_actions</h6>
+        <!-- <h6>Field_actions</h6>
         <slot name="field_actions"></slot>
         <h6>Field Body</h6>
         <slot name="field_body"></slot>
@@ -16,7 +18,7 @@ MilkenOpportunityDetailTemplate.innerHTML = `
         <h6>Field terms</h6>
         <slot name="field_terms"></slot>
         <h6>Field url</h6>
-        <slot name="field_url"></slot>
+        <slot name="field_url"></slot> -->
       </div>
     </div>
   </div>

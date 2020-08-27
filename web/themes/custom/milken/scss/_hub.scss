@@ -8,6 +8,7 @@
       box-shadow: 0 5px 15px rgba(0,0,0,.08);
       border: 1px solid #EFEFEF;
       margin-bottom: 1rem;
+      break-inside: avoid;
 
       &-body {
         padding: 2rem;

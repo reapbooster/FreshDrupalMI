@@ -87,3 +87,8 @@ $settings['twig_sandbox_whitelisted_methods'] = [
   'referencedEntities',
   'view',
 ];
+
+$settings['cache']['bins']['bootstrap'] = 'cache.backend.null';
+$settings['cache']['bins']['config'] = 'cache.backend.null';
+$settings['cache']['bins']['render'] = 'cache.backend.null';
+$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';

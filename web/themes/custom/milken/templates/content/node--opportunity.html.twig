@@ -1,34 +1,18 @@
 {{ attach_library('milken/opportunity_detail') }}
 
-<opportunity-detail
-  id="opportunity-detail-{{ node.uuid.value }}"
-  data-uuid="{{ node.uuid.value }}"
-  data-entity-type-id="node"
-  data-bundle="{{ node.bundle }}"
-  data-view-mode="{{ view_mode }}"
->
-  {% if node.field_actions %}
-    {{ node.field_actions | view }}
-  {% endif %}
-  {% if node.field_body %}
-    {{ node.field_body | view }}
-  {% endif %}
-  {% if node.field_focus %}
-    {{ node.field_focus | view }}
-  {% endif %}
-  {% if node.field_hub %}
-    {{ node.field_hub | view }}
-  {% endif %}
-  {% if node.field_region %}
-    {{ node.field_region | view }}
-  {% endif %}
-  {% if node.field_terms %}
-    {{ node.field_terms | view }}
-  {% endif %}
-  {% if node.field_url %}
-    {{ node.field_url | view }}
-  {% endif %}
-</opportunity-detail>
+{% set hubUrl = content.field_hub.0['#url'] %}
 
+<div class="jumbotron mb-3" style="padding: 3rem;">
+  <p><a href="{{ hubUrl }}"> {{ content.field_hub.0['#title'] }}</a></p>
+  <h1 class="display-4" style="max-width: 800px;">{{ node.label }}</h1>
+  <p class="lead">{{ node.field_body.0.value | raw }}</p>
+  <hr class="my-4">
+  <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p> -->
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{{node.field_url.0.url}}" role="button">{{ node.field_url.0.title }}</a>
+  </p>
+</div>
 
-
+{#  <div class="container">
+  {{ content|without('body') }}
+</div> #}
