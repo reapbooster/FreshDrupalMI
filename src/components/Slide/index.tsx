@@ -8,8 +8,8 @@ import Loading from "../Loading";
 import {Card} from "react-bootstrap";
 import moment from "moment";
 
-const SlideBundle {
-  "slide--full_width_one_column": FiftyFifty,
+const SlideBundle = {
+  "slide--50_50_text_on_left": FiftyFifty,
   "slide--50_50_text_on_right": FiftyFifty,
   "slide--full_width_one_column": FullWidthOneColumn,
   "slide--hero_half_height": HeroHalfHeight,
@@ -35,7 +35,7 @@ class Slide extends EntityComponentBase<SlideDataInterface, EntityComponentState
       const created = moment(this.state.attributes.created, moment.ISO_8601);
       const Component = SlideBundle[this.props.type];
       return ( <Component {...this.state.attributes} view_mode={this.props.view_mode} />)
-    } 
+    }
      else if (this.state.loading) {
       return (<Loading />);
     }

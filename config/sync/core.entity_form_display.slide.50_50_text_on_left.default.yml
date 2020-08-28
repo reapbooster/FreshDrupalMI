@@ -14,9 +14,74 @@ dependencies:
     - image.style.thumbnail
   module:
     - color_field
+    - field_group
     - image
     - key_value_field
     - link
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_text
+        - group_background
+        - group_publishing
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: slide_tabs
+        classes: ''
+        direction: horizontal
+      label: Tabs
+      region: content
+    group_text:
+      children:
+        - field_text_color
+        - field_slide_text
+        - field_link
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Text
+      region: content
+    group_background:
+      children:
+        - field_background_color
+        - field_background_image
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Background
+      region: content
+    group_publishing:
+      children:
+        - langcode
+        - created
+        - field_promoted
+        - field_published
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publishing
+      region: content
 id: slide.50_50_text_on_left.default
 targetEntityType: slide
 bundle: 50_50_text_on_left
@@ -30,11 +95,9 @@ content:
     third_party_settings: {  }
   field_background_color:
     weight: 13
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   field_background_image:
     weight: 15
@@ -84,11 +147,9 @@ content:
     region: content
   field_text_color:
     weight: 14
-    settings:
-      placeholder_color: ''
-      placeholder_opacity: ''
+    settings: {  }
     third_party_settings: {  }
-    type: color_field_widget_default
+    type: color_field_widget_html5
     region: content
   langcode:
     type: language_select

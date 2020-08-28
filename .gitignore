@@ -128,3 +128,9 @@ Thumbs.db
 old
 web/modules/custom/**/components/**/*.entry.js
 /web/modules/custom/milken_base/components/*/*.js
+web/modules/custom/milken_base/components/*/Article.entry.js
+/web/modules/custom/milken_base/components/Article/Article.entry.js
+/web/modules/custom/milken_base/components/Event/Event.entry.js
+/web/modules/custom/milken_base/components/Podcasts/Podcasts.entry.js
+/web/modules/custom/milken_base/components/Search/Search.entry.js
+/web/modules/custom/milken_base/js/SlideDisplay.js

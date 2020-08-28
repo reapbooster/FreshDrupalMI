@@ -1,7 +1,0 @@
-name: 'slide-display'
-description: 'Slide display custom element'
-js:
-  slide-display.js: { }
-cache:
-  max-age: 0
-
