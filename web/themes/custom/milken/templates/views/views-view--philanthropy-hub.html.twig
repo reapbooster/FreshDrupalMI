@@ -31,6 +31,13 @@
  */
 #}
 
+
+{% if header %}
+  <div class="view-header">
+    {{ header }}
+  </div>
+{% endif %}
+
 <div id="hub-data">
   <script type="application/json" data-drupal-selector="drupal-hub-json">{
     "id": "{{ view.id }}",
