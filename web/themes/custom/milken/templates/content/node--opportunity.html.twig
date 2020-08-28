@@ -3,27 +3,29 @@
 {% set hubUrl = content.field_hub.0['#url'] %}
 
 <div class="jumbotron mb-3" style="padding: 3rem;">
+  <div class="container">
 
-  {% if hubUrl %}
-  <p><a href="{{ hubUrl }}"> {{ content.field_hub.0['#title'] }}</a></p>
-  {% endif %}
+    <div class="header-inner" style="max-width: 900px;">
 
-  <div class="header-inner" style="max-width: 900px;">
-    <h1 class="display-4" >{{ node.label }}</h1>
-    <p class="lead">{{ node.field_body.0.value | raw }}</p>
+      {% if hubUrl %}
+      <p><a href="{{ hubUrl }}"> {{ content.field_hub.0['#title'] }}</a></p>
+      {% endif %}
 
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="{{node.field_url.0.url}}" role="button">{{ node.field_url.0.title }}</a>
-    </p>
+      <h1 class="display-4" >{{ node.label }}</h1>
+      <p class="lead">{{ node.field_body.0.value | raw }}</p>
+
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{{node.field_url.0.url}}" role="button">{{ node.field_url.0.title }}</a>
+      </p>
+    </div>
+
+    <hr class="my-4">
+
+    <a href="{{hubUrl}}?focus=health" class="btn btn-primary tag-badge" style="background-color: #FF0000">Health</a>
+    <a href="{{hubUrl}}?focus=social" class="btn btn-primary tag-badge" style="background-color: #00FF00">Social</a>
+    <a href="{{hubUrl}}?action=donation" class="btn btn-primary tag-badge">Donation</a>
+    <a href="{{hubUrl}}?action=information_gathering" class="btn btn-primary tag-badge">Information Gathering</a>
   </div>
-
-  <hr class="my-4">
-
-  <a href="{{hubUrl}}?focus=health" class="btn btn-primary tag-badge" style="background-color: #FF0000">Health</a>
-  <a href="{{hubUrl}}?focus=social" class="btn btn-primary tag-badge" style="background-color: #00FF00">Social</a>
-  <a href="{{hubUrl}}?action=donation" class="btn btn-primary tag-badge">Donation</a>
-  <a href="{{hubUrl}}?action=information_gathering" class="btn btn-primary tag-badge">Information Gathering</a>
-
 </div>
 
 {# NOTE: All the long content except summary #}
