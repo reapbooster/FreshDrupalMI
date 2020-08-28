@@ -132,3 +132,4 @@ web/modules/custom/**/components/**/*.entry.js
 /web/modules/custom/milken_base/components/ReportsBrowser/ReportsBrowser.entry.js
 /web/modules/custom/milken_base/components/VideosBrowser/VideosBrowser.entry.js
 /web/modules/custom/milken_base/components/List/List.entry.js
+/web/modules/custom/milken_base/js/SlideDisplay.js
