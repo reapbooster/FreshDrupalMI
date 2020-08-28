@@ -3,7 +3,10 @@
 {% set hubUrl = content.field_hub.0['#url'] %}
 
 <div class="jumbotron mb-3" style="padding: 3rem;">
+
+  {% if hubUrl %}
   <p><a href="{{ hubUrl }}"> {{ content.field_hub.0['#title'] }}</a></p>
+  {% endif %}
 
   <div class="header-inner" style="max-width: 900px;">
     <h1 class="display-4" >{{ node.label }}</h1>
@@ -16,10 +19,10 @@
 
   <hr class="my-4">
 
-  <a href="#" class="btn btn-primary tag-badge" style="background-color: #FF0000">Health</a>
-  <a href="#" class="btn btn-primary tag-badge" style="background-color: #00FF00">Social</a>
-  <a href="#" class="btn btn-primary tag-badge">Donation</a>
-  <a href="#" class="btn btn-primary tag-badge">Information Gathering</a>
+  <a href="{{hubUrl}}?focus=health" class="btn btn-primary tag-badge" style="background-color: #FF0000">Health</a>
+  <a href="{{hubUrl}}?focus=social" class="btn btn-primary tag-badge" style="background-color: #00FF00">Social</a>
+  <a href="{{hubUrl}}?action=donation" class="btn btn-primary tag-badge">Donation</a>
+  <a href="{{hubUrl}}?action=information_gathering" class="btn btn-primary tag-badge">Information Gathering</a>
 
 </div>
 
