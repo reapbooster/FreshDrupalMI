@@ -5,5 +5,5 @@ dependencies:
   config:
     - eck.eck_entity_type.slide
 type: full_width_one_column
-name: 'Full Width One Column'
+name: 'HERO/Full Width One Column'
 description: 'Slide with a layout of full-width background photo and type/text across the middle.'

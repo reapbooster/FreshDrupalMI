@@ -224,7 +224,11 @@ templateObject[3].innerHTML = `
             </div>
         </div>
   `;
-
+templateObject[3].innerHTML = `
+      <div class="text-right" style="z-index: 9999;position:absolute;top:20px;right:20px;">
+        <a id="menu-close" href="#" class="fas fa-window-close fa-lg">&nbsp;</a>
+      </div>
+  `;
 const containerStyle = {
   backgroundColor: "#E2E7EA",
   padding: "20px",
@@ -246,31 +250,46 @@ customElements.define('milken-main-navigation',
 
     container: HTMLElement;
     menuReveal: HTMLElement;
+    menuClose: HTMLElement;
 
-    showHide(evt = null) {
-      console.log(this.container);
-      this.container.style.display =  (this.container.style.display == "none") ? "block" : "none";
+    hide(evt = null) {
+      console.debug("hide", this.container);
+      this.container.style.display = "none";
+    }
+
+    show() {
+      console.debug("show", this.container);
+      this.container.style.display = "block";
+      this.menuClose = document.getElementById('menu-close');
+      this.menuClose.addEventListener("click", this.hide);
+    }
+
+    connectedCallback() {
+      console.debug("CONNECTED CALLBACK");
+      this.hide();
     }
 
     constructor() {
       super();
+      this.show = this.show.bind(this);
+      this.hide = this.hide.bind(this);
       const shadowRoot = this.attachShadow({mode: 'open'});
       this.container = document.createElement('div');
       this.container.className = "container-fluid";
+      this.container.id = 'menu-root';
       Object.assign(this.container.style, containerStyle);
       var row = document.createElement('div')
       row.className = "row";
       row.style.display = "flex";
-      //shadowRoot.innerHTML = "<h1>Now is the time</h1>";
       templateObject.map((item) => {
         row.appendChild(item.content);
       });
       this.container.appendChild(row);
       shadowRoot.appendChild(this.container);
+      this.menuClose = document.createElement('div');
       this.menuReveal = document.getElementById('menu-reveal');
-      this.menuReveal.addEventListener('click', this.showHide.bind(this));
+      this.menuReveal.addEventListener('click', this.show);
       Object.assign(this.menuReveal.style, menuRevealStyle);
-      this.showHide();
     }
   }
 );

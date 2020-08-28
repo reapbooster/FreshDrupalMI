@@ -1,9 +1,0 @@
-uuid: 07b2a1a8-7d6f-40c3-88c5-2de8a935f140
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.slide
-type: photo_left_text_right
-name: 'Photo Left, Text Right'
-description: ''

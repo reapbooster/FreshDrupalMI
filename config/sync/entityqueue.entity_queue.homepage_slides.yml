@@ -13,8 +13,9 @@ entity_settings:
   handler: 'default:slide'
   handler_settings:
     target_bundles:
+      50_50_text_on_left: 50_50_text_on_left
+      50_50_text_on_right: 50_50_text_on_right
       full_width_one_column: full_width_one_column
-      photo_left_text_right: photo_left_text_right
     sort:
       field: _none
     auto_create: false
@@ -23,4 +24,4 @@ queue_settings:
   min_size: 0
   max_size: 0
   act_as_queue: false
-  reverse_in_admin: false
+  reverse: false

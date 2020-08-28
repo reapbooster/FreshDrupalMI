@@ -1,2 +1,2 @@
 default: milken
-admin: gin
+admin: milken_admin

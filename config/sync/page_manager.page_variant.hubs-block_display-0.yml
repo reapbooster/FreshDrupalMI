@@ -1,0 +1,70 @@
+uuid: df4056e5-27d9-4ea1-98df-25cea84de1bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.hubs
+  module:
+    - system
+id: hubs-block_display-0
+label: 'Hub View'
+variant: layout_builder
+variant_settings:
+  id: layout_builder
+  blocks: {  }
+  uuid: dc30bc69-823d-4344-9b03-3b18db923ca8
+  label: null
+  weight: 0
+  page_title: ''
+  sections:
+    -
+      layout_id: layout_onecol
+      layout_settings:
+        label: Header
+      components:
+        9621b57b-89d7-4ec9-88ce-e95f59697954:
+          uuid: 9621b57b-89d7-4ec9-88ce-e95f59697954
+          region: content
+          configuration:
+            id: 'block_content:4db4fb05-4ee9-426c-b5d7-6b7ba5faf895'
+            label: 'Hub Header Philanthropy'
+            provider: block_content
+            label_display: visible
+            status: true
+            info: ''
+            view_mode: full
+            context_mapping: {  }
+          additional:
+            layout_builder_styles_style: ''
+          weight: 0
+      third_party_settings: {  }
+    -
+      layout_id: layout_onecol
+      layout_settings:
+        label: Content
+      components:
+        233f1f2b-2309-4cce-a215-f18348b315c6:
+          uuid: 233f1f2b-2309-4cce-a215-f18348b315c6
+          region: content
+          configuration:
+            id: 'views_block:philanthropy_hub-block_1'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+          additional:
+            layout_builder_styles_style: ''
+          weight: 0
+      third_party_settings: {  }
+page: hubs
+weight: 0
+selection_criteria:
+  -
+    id: request_path
+    pages: /hub/philanthropy
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }
