@@ -7,5 +7,5 @@ const parsedData = JSON.parse(document.querySelector('#hub-data > script[type="a
 parsedData.data = {};
 ReactDOM.render(
   <PhilanthropyHub {...parsedData} />,
-  document.getElementById('main-wrapper')
+  document.getElementById('hub-component')
 );
