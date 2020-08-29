@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.ph_hub.field_background_image
     - field.field.taxonomy_term.ph_hub.field_content
     - field.field.taxonomy_term.ph_hub.field_icon
     - field.field.taxonomy_term.ph_hub.field_tag_color
@@ -25,6 +26,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_background_image:
+    weight: 5
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
   field_content:
     weight: 4
     label: above
