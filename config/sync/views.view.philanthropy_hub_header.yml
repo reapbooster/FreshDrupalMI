@@ -404,7 +404,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"jumbotron mb-3\" id=\"philanthropy-header-jumbotron\" data-bg-image=\"{{ field_background_image }}\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"header-inner col-md-12 col-lg-6\" style=\"max-width: 900px;\">\r\n      <p><a id=\"opportunity-hub-link\" href=\"/explore/hubs\"> Opportunity Hub Hub</a></p>\r\n      <h1 class=\"display-4\" >{{ name }}</h1>\r\n      <p class=\"lead\">{{ description__value }}</p>\r\n    </div>\r\n  </div>"
+            text: "<div class=\"jumbotron mb-3\" id=\"philanthropy-header-jumbotron\" data-bg-image=\"{{ field_background_image }}\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"header-inner col-md-12 col-lg-6\">\r\n      <p><a id=\"opportunity-hub-link\" href=\"/explore/hubs\">Opportunity Hub</a></p>\r\n      <h1 class=\"display-4\" >{{ name }}</h1>\r\n      <p class=\"lead\">{{ description__value }}</p>\r\n    </div>\r\n  </div>\r\n</div>"
             make_link: false
             path: ''
             absolute: false
