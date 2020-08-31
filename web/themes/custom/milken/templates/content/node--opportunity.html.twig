@@ -1,3 +1,35 @@
+<div class="jumbotron mb-3" id="hub-opportunity-jumbotron" style="background-color: #0066CB; color: white; padding: 3em 0;">
+  <div class="container-fluid">
+    <div class="header-inner col-md-12 col-xl-7">
+      <p><a id="opportunity-hub-link" href="/explore/hubs" style="font-size: 1.5em; line-height: 24px; font-family: 'Lato'; font-weight: 900; font-style: italic; color: #fff;">OPPORTUNITY</a></p>
+      <h1>{{ node.getTitle() }}</h1>
+      <div{{ content_attributes }}>
+
+        <div class="badge badge-pill badge-primary hub-field-actions" style="background-color: {{ node.field_actions.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#actions={{ node.field_actions.entity.label | lower }}" style="color: white;">{{ node.field_actions.entity.label | upper }}</a></div>
+
+        <div class="badge badge-pill badge-primary hub-field-focus" style="background-color: {{ node.field_focus.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#focus={{ node.field_focus.entity.label | lower }}" style="color: white;">{{ node.field_focus.entity.label | upper }}</a></div>
+
+        <div class="badge badge-pill badge-primary hub-field-region" style="background-color: {{ node.field_region.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#region={{ node.field_region.entity.label | lower }}" style="color: white;">{{ node.field_region.entity.label | upper }}</a></div>
+
+        <div class="badge badge-pill badge-primary hub-field-terms" style="background-color: {{ node.field_terms.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#terms={{ node.field_terms.entity.label | lower }}" style="color: white;">{{ node.field_terms.entity.label | upper }}</a></div>
+
+        <div style="margin-top: 2em; margin-bottom: 3em;">
+          {{ content.field_body }}
+        </div>
+
+        <a href="{{ content.field_url.0['#url'] | render }}" style="margin-right: 15px; color: #fff; font-size: 14px; font-family: 'LatoWebBlack'; background-color: #FF6237; padding: 18px; vertical-align: middle; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;">{{ content.field_url.0['#title'] | render }}</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{#
+
 {{ attach_library('milken/opportunity_detail') }}
 
 <opportunity-detail
@@ -30,5 +62,4 @@
   {% endif %}
 </opportunity-detail>
 
-
-
+#}
