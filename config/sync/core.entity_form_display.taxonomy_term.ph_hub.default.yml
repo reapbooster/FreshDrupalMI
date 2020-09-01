@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.ph_hub.field_background_image
     - field.field.taxonomy_term.ph_hub.field_content
     - field.field.taxonomy_term.ph_hub.field_icon
     - field.field.taxonomy_term.ph_hub.field_tag_color
@@ -28,6 +29,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_background_image:
+    weight: 105
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_content:
     weight: 104
     settings:

@@ -1,6 +1,7 @@
 import React from 'react';
 import JSONApiUrl from "./JSONApiUrl";
 import { CardColumns, Row } from 'react-bootstrap';
+/*
 import Masonry from 'react-masonry-component';
 import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
@@ -10,6 +11,7 @@ import EventConference from '../components/Event/EventConference';
 import TileView from "../components/NodeDisplay/TileView";
 import EventSummit from "../components/Event/EventSummit";
 import EventMeeting from "../components/Event/EventMeeting";
+*/
 import NodeOpportunityCard from "../components/NodeDisplay/NodeOpportunityCard";
 
 interface ListComponentPropsInterface {
@@ -31,7 +33,8 @@ interface ListComponentState {
 }
 
 
-enum ListItemComponents {
+const ListItemComponents {
+ /* 
   media_video = MediaVideo,
   media_report = MediaReport,
   media_podcast = MediaPodcast,
@@ -39,6 +42,7 @@ enum ListItemComponents {
   event_summit = EventSummit,
   event_meeting = EventMeeting,
   node_landing_page = TileView,
+  */
   node_opportunity = NodeOpportunityCard,
 }
 

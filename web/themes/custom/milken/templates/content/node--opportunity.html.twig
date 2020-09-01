@@ -1,42 +1,65 @@
-{{ attach_library('milken/opportunity_detail') }}
+<div class="jumbotron mb-3" id="hub-opportunity-jumbotron" style="background-color: #0066CB; color: white; padding: 3em 0;">
+  <div class="container-fluid">
+    <div class="header-inner col-md-12 col-xl-7">
+      <p><a id="opportunity-hub-link" href="/explore/hubs" style="font-size: 1.5em; line-height: 24px; font-family: 'Lato'; font-weight: 900; font-style: italic; color: #fff;">OPPORTUNITY</a></p>
+      <h1>{{ node.getTitle() }}</h1>
+      <div{{ content_attributes }}>
 
-{% set hubUrl = content.field_hub.0['#url'] %}
+        <div class="badge badge-pill badge-primary hub-field-actions" style="background-color: {{ node.field_actions.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#actions={{ node.field_actions.entity.label | lower }}" style="color: white;">{{ node.field_actions.entity.label | upper }}</a></div>
 
-<div class="jumbotron mb-3" style="padding: 3rem;">
-  <div class="container">
+        <div class="badge badge-pill badge-primary hub-field-focus" style="background-color: {{ node.field_focus.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#focus={{ node.field_focus.entity.label | lower }}" style="color: white;">{{ node.field_focus.entity.label | upper }}</a></div>
 
-    <div class="header-inner" style="max-width: 900px;">
+        <div class="badge badge-pill badge-primary hub-field-region" style="background-color: {{ node.field_region.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#region={{ node.field_region.entity.label | lower }}" style="color: white;">{{ node.field_region.entity.label | upper }}</a></div>
 
-      {% if hubUrl %}
-      <p><a href="{{ hubUrl }}"> {{ content.field_hub.0['#title'] }}</a></p>
-      {% endif %}
+        <div class="badge badge-pill badge-primary hub-field-terms" style="background-color: {{ node.field_terms.entity.field_tag_color.value.0.color }}; line-height: 1.8em; padding-left: 1em; padding-right: 1em; margin-right: 0.33em; margin-bottom: 0.33em; letter-spacing: 0.05em; text-transform: uppercase;">
+          <a href="/hub/philanthropy#terms={{ node.field_terms.entity.label | lower }}" style="color: white;">{{ node.field_terms.entity.label | upper }}</a></div>
 
-      <h1 class="display-4" >{{ node.label }}</h1>
-      <p class="lead">{{ node.field_body.0.value | raw }}</p>
+        <div style="margin-top: 2em; margin-bottom: 3em;">
+          {{ content.field_body }}
+        </div>
 
-      <p class="lead">
-        <a class="btn btn-primary btn-lg" href="{{node.field_url.0.url}}" role="button">{{ node.field_url.0.title }}</a>
-      </p>
+        <a href="{{ content.field_url.0['#url'] | render }}" style="margin-right: 15px; color: #fff; font-size: 14px; font-family: 'LatoWebBlack'; background-color: #FF6237; padding: 18px; vertical-align: middle; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;">{{ content.field_url.0['#title'] | render }}</a>
+
+      </div>
     </div>
-
-    <hr class="my-4">
-
-    <a href="{{hubUrl}}?focus=health" class="btn btn-primary tag-badge" style="background-color: #FF0000">Health</a>
-    <a href="{{hubUrl}}?focus=social" class="btn btn-primary tag-badge" style="background-color: #00FF00">Social</a>
-    <a href="{{hubUrl}}?action=donation" class="btn btn-primary tag-badge">Donation</a>
-    <a href="{{hubUrl}}?action=information_gathering" class="btn btn-primary tag-badge">Information Gathering</a>
   </div>
 </div>
 
-{# NOTE: All the long content except summary #}
-{# {{ content|without('body') }} #}
+{#
 
-<div class="container pt-4 pb-4">
-  <h3>Some title</h3>
-  <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel consectetur odio. Etiam mollis auctor pretium. Duis metus arcu, molestie eget semper vitae, fermentum in nisl. Mauris aliquet posuere neque, vitae pharetra elit faucibus sed. Quisque tincidunt ac odio quis aliquet. Quisque sit amet dui ut augue tincidunt dignissim. Donec gravida interdum aliquam. Morbi mauris magna, fringilla a varius et, fringilla sed ante. Phasellus ipsum velit, pretium at accumsan ut, varius et arcu. Nam egestas lacus at leo fermentum, eu blandit felis rhoncus. Etiam a accumsan ante. Donec at ullamcorper elit, eu efficitur ligula. Phasellus elit turpis, ultrices at tellus quis, iaculis pulvinar arcu. Fusce non arcu eu sapien maximus semper et sagittis nulla. Praesent sodales finibus maximus.
-  </p>
-  <p>
-  Duis sit amet tincidunt odio. Sed eget ultrices risus. Aliquam tempor purus non nibh fringilla, sed aliquet diam tristique. Integer pharetra tempor mi ut gravida. Quisque quis ultricies sapien, et ullamcorper metus. Suspendisse ac eleifend ex. Ut suscipit luctus tellus ac consectetur. Etiam vitae diam pretium, cursus nisi a, eleifend neque. Aenean molestie imperdiet mauris vel tempor. In cursus lacus tellus, eget tempus ipsum mattis non. Aenean scelerisque, tortor sed porttitor molestie, nisl nisl cursus mauris, egestas lacinia sem sem in ligula. Duis dapibus justo vitae vehicula euismod. Ut non elit eu sapien posuere condimentum tristique id tortor. Sed nec arcu in purus lobortis pharetra vel quis orci. Quisque tempus ipsum diam, quis mattis justo vestibulum consequat.
-  </p>
-</div>
+{{ attach_library('milken/opportunity_detail') }}
+
+<opportunity-detail
+  id="opportunity-detail-{{ node.uuid.value }}"
+  data-uuid="{{ node.uuid.value }}"
+  data-entity-type-id="node"
+  data-bundle="{{ node.bundle }}"
+  data-view-mode="{{ view_mode }}"
+>
+  {% if node.field_actions %}
+    {{ node.field_actions | view }}
+  {% endif %}
+  {% if node.field_body %}
+    {{ node.field_body | view }}
+  {% endif %}
+  {% if node.field_focus %}
+    {{ node.field_focus | view }}
+  {% endif %}
+  {% if node.field_hub %}
+    {{ node.field_hub | view }}
+  {% endif %}
+  {% if node.field_region %}
+    {{ node.field_region | view }}
+  {% endif %}
+  {% if node.field_terms %}
+    {{ node.field_terms | view }}
+  {% endif %}
+  {% if node.field_url %}
+    {{ node.field_url | view }}
+  {% endif %}
+</opportunity-detail>
+
+#}
