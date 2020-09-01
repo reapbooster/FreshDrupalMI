@@ -108,7 +108,8 @@ gulp.task('watch', () => {
   var files = [
       './' + themePath + '/js/**' + tsxPattern,
       './' + modulesPath + '/**' + tsxPattern,
-      './src/**/**' + tsxPattern
+      './src/**' + tsxPattern,
+      './src/**/*.scss'
     ];
 
   gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));

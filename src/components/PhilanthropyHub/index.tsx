@@ -1,86 +1,80 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
+import { useQueryState } from "use-location-state";
+import history from "history/browser";
 import JSONApiUrl from "../../DataTypes/JSONApiUrl";
 import ListComponentProps from "../../DataTypes/ListComponentProps";
 import DropdownFacet from "../List/DropdownFacet";
 import HorizontalMenuFacet from "../List/HorizontalMenuFacet";
-import { useQueryState } from 'use-location-state';
-import history from 'history/browser';
+
+import "./PhilantropyHub.scss";
 
 const PhilanthropyHub: React.FunctionComponent = props => {
-
   const filters = [
-    'field_terms',
-    'field_actions',
-    'field_region',
-    'field_focus'
+    "field_terms",
+    "field_actions",
+    "field_region",
+    "field_focus"
   ];
 
   const url = new JSONApiUrl(props.url);
 
-  let notifyListComponent = (newFilter: Object) => {
-
-    var evt = new CustomEvent("refresh", {
+  const notifyListComponent = (newFilter: Object) => {
+    const evt = new CustomEvent("refresh", {
       bubbles: false,
       cancelable: false,
       detail: {
         filter: newFilter
       }
     });
-    document.getElementsByClassName('list-component')
+    document
+      .getElementsByClassName("list-component")
       .item(0)
       .dispatchEvent(evt);
-
-  }
+  };
 
   const onHashChanged = () => {
+    console.debug("Hash change trigger");
 
-    console.debug('Hash change trigger');
-
-    const params = new URLSearchParams(window.location.hash.replace('#', ''));
+    const params = new URLSearchParams(window.location.hash.replace("#", ""));
 
     let newFilter = {};
     for (let [field, values] of params) {
+      field = `field_${field}`;
+      values = values.split(",");
 
-      field = 'field_' + field;
-      values = values.split(',');
-
-      for(const fieldValue of values) {
-
-        const conjunction = 'AND';
+      for (const fieldValue of values) {
+        const conjunction = "AND";
         const filterKey = `${field}-${fieldValue}`;
         const groupKey = `${filterKey}-group-${conjunction}`;
 
-        let newValue = {};
+        const newValue = {};
 
         // NOTE: Workaround as per https://www.drupal.org/project/drupal/issues/3066202#comment-13181270
         newValue[`filter[${groupKey}][group][conjunction]`] = conjunction;
         newValue[`filter[${filterKey}][condition][value]`] = fieldValue;
-        newValue[`filter[${filterKey}][condition][path]`] = `${field}.machine_name`;
+        newValue[
+          `filter[${filterKey}][condition][path]`
+        ] = `${field}.machine_name`;
         newValue[`filter[${filterKey}][condition][memberOf]`] = groupKey;
 
         newFilter = {
           ...newFilter,
           ...newValue
-        }
-
+        };
       }
-
     }
 
-    console.debug('New params', newFilter);
+    console.debug("New params", newFilter);
 
     notifyListComponent(newFilter);
-
-  }
+  };
 
   useEffect(() => {
     onHashChanged();
-    window.addEventListener('hashchange', onHashChanged)
-    return () => window.removeEventListener('hashchange', onHashChanged)
-  }, [window.location.hash])
-
-
+    window.addEventListener("hashchange", onHashChanged);
+    return () => window.removeEventListener("hashchange", onHashChanged);
+  }, [window.location.hash]);
 
   // TODO: Add All / None toggle
 
@@ -117,10 +111,9 @@ const PhilanthropyHub: React.FunctionComponent = props => {
   // }
 
   // useEffect(() => {
-    // console.log("Current filter state", filterState);
+  // console.log("Current filter state", filterState);
 
-    // console.log(fieldActions);
-
+  // console.log(fieldActions);
 
   //
   // });
@@ -135,9 +128,9 @@ const PhilanthropyHub: React.FunctionComponent = props => {
         field="field_region"
         url="/jsonapi/taxonomy_term/ph_region?jsonapi_include=true"
         titleSubject="Opportunities"
-        titleValuesToEnablePostfix={[ "All", "Global" ]}
+        titleValuesToEnablePostfix={["All", "Global"]}
         titleConjunction="in"
-        allOptionTitle={"All"}
+        allOptionTitle="All"
       />
 
       <Container className="filter-horizontal py-3 py-5@m">
@@ -165,8 +158,13 @@ const PhilanthropyHub: React.FunctionComponent = props => {
         </Row>
       </Container>
 
-      <div className={"philanthropy-hub-root"}>
-        <ListComponentProps {...props} loadAll={true} className={"card-columns"} url={url} />
+      <div className="philanthropy-hub-root">
+        <ListComponentProps
+          {...props}
+          loadAll
+          className="card-columns"
+          url={url}
+        />
       </div>
     </Container>
   );
