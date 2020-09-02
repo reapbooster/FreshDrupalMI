@@ -17,4 +17,6 @@ if [ -f "db/${BACKUP_FILE_NAME}" ]; then rm "db/${BACKUP_FILE_NAME}"; fi
 
 /usr/local/bin/terminus backup:get freshdrupalmi.live --element=database --yes --to=db/${BACKUP_FILE_NAME}
 
+/usr/bin/redis-cli -h $CACHE_HOST flushall
+
 pv db/${BACKUP_FILE_NAME} | gunzip | mysql -u root --password=${MYSQL_ROOT_PASSWORD} -h $DB_HOST --port ${DB_PORT} ${DATABASE_NAME}

@@ -4,10 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.opportunity.field_actions
-    - field.field.node.opportunity.field_body
     - field.field.node.opportunity.field_focus
     - field.field.node.opportunity.field_hub
+    - field.field.node.opportunity.field_long_description
     - field.field.node.opportunity.field_region
+    - field.field.node.opportunity.field_short_summary
     - field.field.node.opportunity.field_terms
     - field.field.node.opportunity.field_url
     - node.type.opportunity
@@ -28,13 +29,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_body:
-    weight: 101
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: content
   field_focus:
     weight: 104
     label: above
@@ -51,6 +45,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_long_description:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
   field_region:
     weight: 103
     label: above
@@ -58,6 +59,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_short_summary:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
   field_terms:
     weight: 105

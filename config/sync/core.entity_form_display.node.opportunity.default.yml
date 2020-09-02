@@ -4,10 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.opportunity.field_actions
-    - field.field.node.opportunity.field_body
     - field.field.node.opportunity.field_focus
     - field.field.node.opportunity.field_hub
+    - field.field.node.opportunity.field_long_description
     - field.field.node.opportunity.field_region
+    - field.field.node.opportunity.field_short_summary
     - field.field.node.opportunity.field_terms
     - field.field.node.opportunity.field_url
     - node.type.opportunity
@@ -34,8 +35,8 @@ third_party_settings:
       label: Tabs
     group_content:
       children:
-        - field_body
-        - field_url
+        - field_long_description
+        - field_short_summary
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -49,6 +50,7 @@ third_party_settings:
       label: Content
     group_publishing:
       children:
+        - field_url
         - langcode
         - uid
         - created
@@ -101,16 +103,6 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
-  field_body:
-    weight: 121
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
-    third_party_settings: {  }
-    type: text_textarea_with_summary
-    region: content
   field_focus:
     weight: 125
     settings: {  }
@@ -127,11 +119,27 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content
+  field_long_description:
+    weight: 127
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   field_region:
     weight: 123
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_short_summary:
+    weight: 128
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
     region: content
   field_terms:
     weight: 126

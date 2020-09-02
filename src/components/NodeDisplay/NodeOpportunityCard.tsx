@@ -58,6 +58,8 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
     </Tooltip>
   );
 
+  console.log('props', props);
+
   return (
     <Card key={props.machine_name}>
      <OverlayTrigger
@@ -77,6 +79,7 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
         <Button
           className="mr-sm-2"
           variant="outline"
+          href={props?.path?.alias ?? false}
         >
           <span>View more</span>
         </Button>

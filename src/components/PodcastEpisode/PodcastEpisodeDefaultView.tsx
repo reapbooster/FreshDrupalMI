@@ -7,7 +7,7 @@ import {AudioProps} from "../Audio";
 import {PodcastServiceLink} from "./index";
 import Loading from "../Loading";
 import MilkenImage, {MilkenImageAttributes} from '../MilkenImage';
-import {Row, Col, Grid, Panel} from "react-bootstrap";
+import {Row, Col, Container, Panel} from "react-bootstrap";
 
 class PodcastEpisodeData {
   id: string;
@@ -61,7 +61,7 @@ const PodcastEpisodeDefaultView: React.FunctionComponent = (props: EntityCompone
   console.log("Paragraph Data", paragraphData);
   return (
     <>
-      <Grid>
+      <Container>
         <Row>
           <Col lg={12} sm={12}>
             <h1><span>Episode {paragraphData.field_episode}:</span>&nbsp;&#58;&nbsp;{paragraphData.field_summary.value}</h1>
@@ -74,7 +74,7 @@ const PodcastEpisodeDefaultView: React.FunctionComponent = (props: EntityCompone
             })}
           </Col>
         </Row>
-      </Grid>
+      </Container>
     </>
   );
 
