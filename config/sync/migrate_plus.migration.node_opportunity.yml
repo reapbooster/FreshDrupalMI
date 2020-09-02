@@ -104,10 +104,7 @@ process:
     plugin: default_value
     default_value: 2
   path/alias: path
-  field_body/value: body_value
-  field_body/format:
-    plugin: default_value
-    default_value: full_html
+  field_short_summary: body_value
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
