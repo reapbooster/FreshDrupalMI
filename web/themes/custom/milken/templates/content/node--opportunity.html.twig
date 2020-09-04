@@ -86,7 +86,7 @@
 
       <div id="opportunity-header-wrapper">
         <div style="margin-top: 2em; margin-bottom: 3em;">
-          {{ node.field_body.0.summary | render }}
+          {{ content.field_short_summary }}
         </div>
 
         <a href="{{ content.field_url.0['#url'] | render }}" style="margin-right: 15px; color: #fff; font-size: 14px; font-family: 'LatoWebBlack'; background-color: #FF6237; padding: 18px; vertical-align: middle; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;">{{ content.field_url.0['#title'] | render }}</a>
@@ -97,7 +97,7 @@
 </div>
 
 <div class="container-fluid" id="hub-opportunity-body-wrapper">
-  {{ content.field_body }}
+  {{ content.field_long_description }}
 </div>
 
 
