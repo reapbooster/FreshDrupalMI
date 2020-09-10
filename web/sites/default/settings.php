@@ -57,6 +57,10 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $settings['redis.connection']['password'] = $_ENV['CACHE_PASSWORD'];
 
     $settings['cache']['default'] = 'cache.backend.redis';
+    $settings['cache']['bins']['bootstrap'] = 'cache.backend.redis';
+    $settings['cache']['bins']['config'] = 'cache.backend.redis';
+    $settings['cache']['bins']['render'] = 'cache.backend.redis';
+    $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.redis';
     // Use Redis as the default cache.
     $settings['cache_prefix']['default'] = 'pantheon-redis';
 
@@ -88,7 +92,4 @@ $settings['twig_sandbox_whitelisted_methods'] = [
   'view',
 ];
 
-$settings['cache']['bins']['bootstrap'] = 'cache.backend.null';
-$settings['cache']['bins']['config'] = 'cache.backend.null';
-$settings['cache']['bins']['render'] = 'cache.backend.null';
-$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+
