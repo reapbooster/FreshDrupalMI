@@ -1,0 +1,10 @@
+name: Article
+machine_name: article
+description: 'React Article Component.'
+type: component
+core_version_requirement:  ^8 || ^9
+js:
+  Article.entry.js: { defer: true }
+cache:
+  max-age: 0
+

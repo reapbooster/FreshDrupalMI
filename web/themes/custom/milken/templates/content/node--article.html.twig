@@ -1,14 +1,14 @@
-{{ attach_library('milken/article_detail') }}
+{{ attach_library('milken_base/article') }}
 
 <article-detail
     id="milken-article-detail"
+    data-id="{{ node.uuid.value }}"
     data-uuid="{{ node.uuid.value }}"
+    data-drupal-internal-nid="{{ node.id }}"
     data-entity-type-id="node"
     data-bundle="{{ node.bundle }}"
     data-view-mode="{{ view_mode }}"
->
-  {{ content.field_content }}
-</article-detail>
+></article-detail>
 
 
 

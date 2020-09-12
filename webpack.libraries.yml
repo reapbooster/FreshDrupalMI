@@ -1,4 +1,4 @@
-LandingPage:
+Article:
   version: 1.x
   js:
-    web/modules/custom/milken_base/components/LandingPage/LandingPage.entry.js: {}
+    web/modules/custom/milken_base/components/Article/Article.entry.js: {}

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import ImageEntityProps from "../../DataTypes/ImageEntityProps";
-import EventObject from "../../DataTypes/EventObject";
+import Event from "../../DataTypes/EventObject";
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
 import Holder from 'react-holder-component'
 
-const EventConference: React.FunctionComponent = (props: EventObject) => {
+const EventConference: React.FunctionComponent = (props: Event) => {
   const [ thumbnailImageUrl, setThumbnailImageUrl ] = useState("?holderjs/100x100&text=thumbnail&auto=yes");
   if (props.field_picture?.id) {
     var thumbnail = new ImageEntityProps(props.field_picture);

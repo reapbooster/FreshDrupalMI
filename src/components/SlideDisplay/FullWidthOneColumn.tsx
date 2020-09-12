@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import SlideDataInterface from '../../DataTypes/SlideDataInterface';
+import * as SlideDataType from '../../DataTypes/Slide';
 import { Row, Jumbotron, Container } from 'react-bootstrap';
 import ImageEntityProps from "../../DataTypes/ImageEntityProps";
 
-const FullWidthOneColumn : React.FunctionComponent<SlideDataInterface> = (props: SlideDataInterface) => {
+const FullWidthOneColumn : React.FunctionComponent = (props: SlideDataType.default) => {
+  console.debug("Full Width One Column", props);
   const rowStyle = {"backgroundColor":`${props?.field_background_color?.color}`};
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("holder.js/100x100?text=thumbnail&auto=yes");
   let jumbotronStyle = {

@@ -13,7 +13,9 @@ interface BodyFieldData {
 
 const BodyField = (props: BodyFieldProps) => {
   console.log("BodyField", props);
-  const articleData = props.data.map((fieldData: BodyFieldData, key: number) => { return fieldData.processed });
+  if (props.data?.processed !== undefined) {
+    const articleData = props.data?.map((fieldData: BodyFieldData, key: number) => { return fieldData.processed });
+  }
   return (
     <article dangerouslySetInnerHTML={{__html: articleData.join()}}>
     </article>

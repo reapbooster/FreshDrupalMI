@@ -50,10 +50,18 @@ gulp.task(
   })
 );
 
-gulp.task("themeBuild", () => {
+gulp.task("themeBuild", (done) => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
     .pipe(sourcemaps.init())
+    .on('end', () => { 
+      console.debug("ending");  
+      done();
+    })
+    .on('error', (err) => {
+      console.error(err);
+      process.exit(1);
+    })
     .pipe(
       sass({
         allowEmpty: true,
@@ -75,21 +83,25 @@ gulp.task("themeBuild", () => {
 gulp.task(
   "buildComponents",
   (done) => {
-
     console.log("Building components.");
     try {
       const webpackConfigurator = require(`./config/node/webpack.config`);
       /* eslint-disable */
-      gulp.src('**/components/**/*.entry.tsx', { sourcemaps: false, cwd: modulesPath })
+      gulp.src('**/*.entry.tsx', { sourcemaps: false, cwd: path.join(basePath, 'web') })
+        .on('end', () => { 
+          console.debug("ending");  
+          done();
+        })
+        .on('error', (err) => {
+          console.error(err);
+          process.exit(1);
+        })
         .pipe(webpackConfigurator())
-      gulp.src('js/*.entry.tsx', { sourcemaps: false, cwd: themePath })
-        .pipe(webpackConfigurator());
     }
     catch (err) {
       console.log(err);
       process.exit(1);
     }
-    done();
   });
 
 gulp.task(

@@ -1,0 +1,20 @@
+uuid: 03bffef9-d042-42fe-a661-78b38cc672b5
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph.pull_quote.paragraph_
+label: 'Paragraph Pull Quote'
+name: paragraph_
+target_entity_type: paragraph
+target_entity_bundle: pull_quote
+configuration:
+  view_mode: default
+  components:
+    field_background:
+      property_name: field_background
+    field_text_size:
+      property_name: field_text_size
+caching:
+  cache_tag:
+    excluded_entities:
+      node: node

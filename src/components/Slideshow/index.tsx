@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Slide from "../Slide";
+import SlideDisplay from "../SlideDisplay";
 import {
   Carousel,
   CarouselItem, Col,
@@ -9,19 +9,19 @@ import {
   EntityComponentProps,
   JSONAPIEntityReferenceData
 } from "../../DataTypes/EntityComponentProps";
-import SlideDataInterface from "../../DataTypes/SlideDataInterface";
+import * as SlideDatatype from "../../DataTypes/SlideDataInterface";
 
 
 const SlideShow: React.FunctionComponent<EntityComponentProps> = (props: EntityComponentProps) => {
 
-  const getCarousel = (slideData: Array<SlideDataInterface> = []) => {
+  const getCarousel = (slideData: Array<Slide> = []) => {
     if (slideData.length) {
       return (
         <Carousel>
-          {slideData.map((slide: SlideDataInterface, key) => {
+          {slideData.map((slide: Slide, key) => {
             return (
               <CarouselItem key={key} id={slide.id}>
-                <Slide {...slide} view={"full"} />
+                <SlideDisplay {...slide} view={"full"} />
               </CarouselItem>
             )
           })}

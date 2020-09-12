@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { EntityComponentProps, EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
-import SlideDataInterface from "../../DataTypes/SlideDataInterface";
+import Slide from "../../DataTypes/SlideDataInterface";
 import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
 import {Col, Container} from "react-bootstrap";
 
 interface ParagraphSlideProps extends EntityComponentPropsInterface {
   key: number;
-  field_slides: Array<SlideDataInterface>;
+  field_slides: Array<Slide>;
   field_text_size: string;
 }
 

@@ -10,6 +10,7 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
+  - 'access media overview'
   - 'search content'
   - 'use advanced search'
   - 'view any event entities'

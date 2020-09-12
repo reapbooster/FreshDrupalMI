@@ -4,22 +4,22 @@ import {FontAwesomeIconProps} from "@fortawesome/react-fontawesome";
 import PathObject from "./PathObject";
 import LinkList from './LinkList';
 
-interface TaxonomyTermProps {
+interface TaxonomyTermInterface {
   type: string;
   id: string;
   name: string;
   description: string;
   changed: string;
   created: string;
-  path: PathObject;
+  path: PathObjectInterface;
   links: LinkList;
-  field_tag_color: ColorObject,
+  field_tag_color: ColorObjectInterface,
   field_tag_icon: FontAwesomeIconProps;
   field_visibility: boolean;
   vid: string;
 }
 
-class TaxonomyTerm {
+class TaxonomyTerm implements TaxonomyTermInterface {
   type: string;
   id: string;
   name: string;
@@ -33,10 +33,10 @@ class TaxonomyTerm {
   field_visibility: boolean;
   vid: string;
 
-  constructor(incoming: TaxonomyTermProps) {
+  constructor(incoming: TaxonomyTermInterface) {
     Object.assign(this, incoming);
   }
 
 }
 
-export { TaxonomyTerm as default, TaxonomyTermProps };
+export { TaxonomyTerm as default, TaxonomyTermInterface };

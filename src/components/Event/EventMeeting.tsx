@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ImageEntityProps from "../../DataTypes/ImageEntityProps";
-import EventObject from "../../DataTypes/EventObject";
+import Event from "../../DataTypes/EventObject";
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
 import Holder from 'react-holder-component';

@@ -13,6 +13,7 @@ module:
   book: 0
   bootstrap_library: 0
   breakpoint: 0
+  business_rules: 0
   ckeditor: 0
   color_field: 0
   component: 0
@@ -31,6 +32,7 @@ module:
   datetime: 0
   datetime_range: 0
   dblog: 0
+  dbug: 0
   default_content: 0
   default_content_deploy: 0
   delete_all: 0

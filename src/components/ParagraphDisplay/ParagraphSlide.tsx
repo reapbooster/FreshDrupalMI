@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {EntityComponentProps, EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
-import SlideDataInterface from "../../DataTypes/SlideDataInterface";
+import Slide from "../../DataTypes/SlideDataInterface";
 import SlideShow from "../Slideshow";
 import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
@@ -9,7 +9,7 @@ import {Col} from "react-bootstrap";
 
 interface ParagraphSlideProps extends EntityComponentPropsInterface {
   key: number;
-  field_slides: Array<SlideDataInterface>;
+  field_slides: Array<Slide>;
 }
 
 

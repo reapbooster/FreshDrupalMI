@@ -1,33 +1,30 @@
 
 import JSONApiUrl from "./JSONApiUrl";
 
-interface Link {
+interface LinkInterface {
   href: JSONApiUrl;
 }
 
-interface ListListProps {
-  self?: Link;
-  previous?: Link;
-  next?: Link;
-  first?: Link;
-  last?: Link;
+interface LinkListInterface {
+  self?: LinkInterface;
+  previous?: LinkInterface;
+  next?: LinkInterface;
+  first?: LinkInterface;
+  last?: LinkInterface;
 }
 
 
-class LinkList {
-  self?:      JSONApiUrl;
-  previous?:  JSONApiUrl;
-  next?:      JSONApiUrl;
-  first?:     JSONApiUrl;
-  last?:      JSONApiUrl;
+class LinkList implements LinkListInterface{
+  self?:      LinkInterface;
+  previous?:  LinkInterface;
+  next?:      LinkInterface;
+  first?:     LinkInterface;
+  last?:      LinkInterface;
 
-  constructor(incoming) {
-    for (var i in incoming) {
-      if (incoming[i].href) {
-        this[i] = new JSONApiUrl(incoming[i].href);
-      }
-    }
+  constructor(incoming: LinkListInterface) {
+    Object.assign(this, incoming);
   }
+
 }
 
-export { LinkList as default, Link }
+export { LinkList as default, LinkListInterface, LinkInterface }
