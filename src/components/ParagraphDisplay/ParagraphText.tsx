@@ -1,10 +1,8 @@
 import React from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
-import { EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
-import EntityComponentBase, { EntityComponentState } from '../../DataTypes/EntityComponentBase';
-import Loading from "../Loading";
 import TextField from "../../DataTypes/TextField";
 import {ParagraphInterface} from "../../DataTypes/Paragraph";
+import styled from 'styled-components';
 
 interface ParagraphTextProps extends ParagraphInterface {
   key: number;
@@ -14,16 +12,19 @@ interface ParagraphTextProps extends ParagraphInterface {
 
 
 const ParagraphText: React.FunctionComponent = (props) => {
-  const textStyle={
-    columnCount: Number(props.field_field_num_text_columns || 1),
+  const Paragraph = styled.p`
+    columnCount: ${Number(props.field_field_num_text_columns || 1)},
     paddingTop: "2rem",
     paddingBottom: "2rem",
+  `;
+  const textStyle={
+
   };
   console.log("Paragraph Text", props);
   return (
     <Col lg={12}>
       <Container>
-        <p style={textStyle}
+        <Paragraph style={textStyle}
            dangerouslySetInnerHTML={{__html: props.field_body.value}} />
       </Container>
     </Col>

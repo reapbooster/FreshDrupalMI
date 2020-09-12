@@ -1,47 +1,26 @@
 
 import React from 'react';
-import {EntityComponentProps, EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 import Slide from "../../DataTypes/SlideDataInterface";
 import SlideShow from "../Slideshow";
-import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
 import {Col} from "react-bootstrap";
+import {ParagraphInterface} from "../../DataTypes/Paragraph";
 
-interface ParagraphSlideProps extends EntityComponentPropsInterface {
-  key: number;
+interface ParagraphSlideProps extends ParagraphInterface {
   field_slides: Array<Slide>;
 }
 
 
-class ParagraphSlide extends EntityComponentBase<ParagraphSlideProps, EntityComponentState> {
+const ParagraphSlide: React.FunctionComponent = ( props: ParagraphSlideProps ) => {
 
-  static defaultProps = {
-    view_mode: "full"
-  }
-
-  render(): React.ReactNode {
-    console.log("Paragraph Slide", this.props, this.state);
-    if (this.state.loaded) {
-      return (
-        <Col lg={12}>
-          <SlideShow
-            items={this.props.field_slides}
-            view_mode={this.props.view_mode}
-          />
-        </Col>
-      )
-    } else if (this.state.loading) {
-      return(
-        <Col key={this.props.key}>
-          <Loading />
-        </Col>
-        );
-    } else {
-      return (
-        <Col key={this.props.key}><h1>No Content Available</h1></Col>
-      )
-    }
-  }
+  return (
+    <Col lg={12}>
+      <SlideShow
+        items={props.field_slides}
+        view_mode="full"
+      />
+    </Col>
+  );
 
 }
 
