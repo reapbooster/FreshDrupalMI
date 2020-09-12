@@ -30,10 +30,10 @@ const ParagraphDisplay: React.FunctionComponent = (props: EntityComponentPropsIn
   }
   const Component = ParagraphBundleComponents[props.type];
   return (
-    <ErrorBoundary>
+    <ErrorBoundary key={props.key}>
       <Component {...props} />
     </ErrorBoundary>
-  )
+  );
 
 }
 

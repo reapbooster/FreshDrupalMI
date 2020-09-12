@@ -4,51 +4,30 @@ import { EntityComponentPropsInterface } from "../../DataTypes/EntityComponentPr
 import EntityComponentBase, { EntityComponentState } from '../../DataTypes/EntityComponentBase';
 import Loading from "../Loading";
 import TextField from "../../DataTypes/TextField";
+import {ParagraphInterface} from "../../DataTypes/Paragraph";
 
-interface ParagraphTextProps extends EntityComponentPropsInterface {
+interface ParagraphTextProps extends ParagraphInterface {
   key: number;
   field_body: TextField;
   field_num_text_columns: number;
 }
 
 
-class ParagraphText extends EntityComponentBase<ParagraphTextProps, EntityComponentState> {
-
-  static defaultProps = {
-    view_mode: "full"
-  }
-
-  render() {
-    const textStyle={
-      columnCount: Number(this.props.field_field_num_text_columns || 1),
-      paddingTop: "2rem",
-      paddingBottom: "2rem",
-    };
-    console.log("Paragraph Text", this.props, this.state);
-    if (this.state.loaded) {
-      return (
-        <Col key={this.props.key} lg={12}>
-          <Container>
-            <p style={textStyle}
-               dangerouslySetInnerHTML={{__html: this.state.attributes.field_body.value}} />
-          </Container>
-        </Col>
-      );
-    } else if (this.state.loading) {
-      return (
-        <Col key={this.props.key} lg={12}>
-          <Loading/>
-        </Col>
-        );
-    } else {
-      return (
-        <Col
-          key={this.props.key}
-          lg={12}><h1 key={this.props.key}>No Content Available</h1></Col>
-      )
-    }
-  }
-
+const ParagraphText: React.FunctionComponent = (props) => {
+  const textStyle={
+    columnCount: Number(props.field_field_num_text_columns || 1),
+    paddingTop: "2rem",
+    paddingBottom: "2rem",
+  };
+  console.log("Paragraph Text", props);
+  return (
+    <Col lg={12}>
+      <Container>
+        <p style={textStyle}
+           dangerouslySetInnerHTML={{__html: props.field_body.value}} />
+      </Container>
+    </Col>
+  );
 }
 
 export default ParagraphText;

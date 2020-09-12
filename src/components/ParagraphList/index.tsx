@@ -12,7 +12,7 @@ export const ParagraphList: React.FunctionComponent = (props: ParagraphListProps
     return props.items.map((item: EntityComponentPropsInterface, key: number) => {
       return (
         <ErrorBoundary>
-          <ParagraphDisplay {...item} />
+          <ParagraphDisplay {...item} key={key}/>
         </ErrorBoundary>
       )
     });

@@ -10,7 +10,7 @@ import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 class Article extends EntityComponentBase {
 
-  include = "&include=field_promo_slide,field_promo_slide.field_background_image"
+  include = "&include=field_promo_slide,field_promo_slide.field_background_image,field_content"
 
 
   componentDidMount(): void {
