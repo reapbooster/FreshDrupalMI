@@ -1,21 +1,25 @@
 import React from 'react';
-
-import { EntityComponentPropsInterface } from '../../DataTypes/EntityComponentProps';
-
-import NodeArticle from "./NodeArticle";
-import NodeEvent from './NodeEvent';
-import NodeOpportunityCard from './NodeOpportunityCard';
-import LandingPage from "../LandingPage";
+import Entity, { EntityInterface } from '../../DataTypes/Entity';
+import Node from '../../DataTypes/Node';
+import NodeArticleDisplay from "./NodeArticleDisplay";
+import NodeEventDisplay from './NodeEventDisplay';
+import NodeOpportunityCardDisplay from './NodeOpportunityCardDisplay';
+import NodeLandingPageDisplay from "./NodeLandingPageDisplay";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 const NodeBundleComponents = {
-  "node--article": NodeArticle,
-  "node--landing_page": LandingPage,
-  "node--event": NodeEvent,
-  "node--opportunity": NodeOpportunityCard,
+  "node--article": NodeArticleDisplay,
+  "node--landing_page": NodeLandingPageDisplay,
+  "node--event": NodeEventDisplay,
+  "node--opportunity": NodeOpportunityCardDisplay,
 }
 
-const NodeDisplay: React.FunctionComponent = (props: EntityComponentPropsInterface) {
+const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
+  if (!props instanceof Entity) {
+    const dataWrapper = Node.factory(props);
+  } else {
+    const dataWrapper = props;
+  }
   if (NodeBundleComponents[props.type] === undefined) {
     console.log('cannot find component', props);
     throw new Error("Cannot find component for props.type ".concat(props.type));

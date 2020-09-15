@@ -1,11 +1,10 @@
-import Entity, {EntityInterface} from './Entity';
+import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
 import TextField, {TextFieldInterface} from "../Fields/TextField";
 
 
-interface EventInterface extends EntityInterface {
-
-  title: string;
+interface EventInterface extends RevisionableEntityInterface {
   drupal_internal__id: number;
+  title: string;
   langcode: string;
   field_blurb?: string;
   field_campaign_id?: string;
@@ -27,9 +26,9 @@ interface EventInterface extends EntityInterface {
   field_tracks: object;
 }
 
-abstract class Event extends Entity {
-  title: string;
+abstract class Event extends RevisionableEntity {
   drupal_internal__id: number;
+  title: string;
   langcode: string;
   field_blurb?: string;
   field_campaign_id?: string;
@@ -50,7 +49,25 @@ abstract class Event extends Entity {
   field_picture: object;
   field_tracks: object;
 
+  public static factory(incoming: EventInterface) : EventInterface {
+    switch(incoming.type) {
+      case "event--conference":
+        return new ConferenceEvent(incoming);
+      case "event--meeting":
+        return new MeetingEvent(incoming);
+      case "event--summit":
+        return new SummitEvent(incoming);
+      default:
+        throw new Error("No class to handle this type of event");
+    }
+  }
+
 }
 
+class ConferenceEvent extends Event { }
 
-export { Event as default, EventInterface };
+class MeetingEvent extends Event { }
+
+class SummitEvent extends Event { }
+
+export { Event as default, EventInterface, ConferenceEvent, MeetingEvent, SummitEvent };

@@ -5,50 +5,50 @@ import {
   CarouselItem, Col,
   Container, Spinner, Row
 } from "react-bootstrap";
-import {
-  EntityComponentProps,
-  JSONAPIEntityReferenceData
-} from "../../DataTypes/EntityComponentProps";
-import * as SlideDatatype from "../../DataTypes/SlideDataInterface";
+import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
+import * as SlideDatatype from "../../DataTypes/Slide";
+
+interface SlideShowProps {
+  items: Array<SlideDatatype.SlideInterface>
+}
+
+class SlideShow extends EntityComponentBase<SlideShowProps, EntityComponentState> {
 
 
-const SlideShow: React.FunctionComponent<EntityComponentProps> = (props: EntityComponentProps) => {
 
-  const getCarousel = (slideData: Array<Slide> = []) => {
-    if (slideData.length) {
+  render() {
+    if (this.state.loaded) {
       return (
         <Carousel>
-          {slideData.map((slide: Slide, key) => {
+          {this.props.items.map((slide: SlideDatatype.SlideInterface, key: number ) => {
             return (
               <CarouselItem key={key} id={slide.id}>
-                <SlideDisplay {...slide} view={"full"} />
+                <SlideDisplay {...slide} view_mode={"full"} />
               </CarouselItem>
             )
           })}
         </Carousel>
       );
+    } else if (this.state.loading) {
+      return (
+        <div className={"w-25 text-align-center border-0"}>
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h1>No component Data</h1>
+        </div>
+      );
     }
-    return (
-      <div className={"w-25 text-align-center border-0"}>
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      </div>
-    );
+
   }
 
-  console.log("Rendering Slideshow:", props);
-
-  return (
-    <>
-      {getCarousel(props.items)}
-    </>
-  );
 }
 
-SlideShow.defaultProps = {
-  items: [],
-  data: {}
-}
+
 
 export default SlideShow;

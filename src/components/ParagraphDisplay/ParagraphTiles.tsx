@@ -1,12 +1,11 @@
 
 import React from 'react';
 import {EntityComponentProps, EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
-import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
-import Loading from "../Loading";
 import {Col} from "react-bootstrap";
 import EntityQueue from '../EntityQueue';
+import {ParagraphInterface} from "../../DataTypes/Paragraph";
 
-interface ParagraphTileProps extends EntityComponentPropsInterface {
+interface ParagraphTileProps extends ParagraphInterface {
   key: number;
   field_title: string;
   field_tile_queue: EntityComponentProps;
@@ -14,37 +13,17 @@ interface ParagraphTileProps extends EntityComponentPropsInterface {
 
 
 // @ts-ignore
-class ParagraphTiles extends EntityComponentBase<ParagraphTileProps, EntityComponentState> {
+const ParagraphTiles: React.FunctionComponent = (props) => {
 
-  static defaultProps = {
-    view_mode: "full"
-  }
-
-  render(): React.ReactNode {
-    console.log("Paragraph Tile", this.props, this.state);
-    if (this.state.loaded) {
-      console.log("Paragraph Tiles", this.props, this.state);
-      return (
-        <Col lg={12} key={this.props.key}>
-          <h3>{this.state.attributes.field_title}</h3>
-          <EntityQueue
-            {...this.state.attributes.field_tile_queue}
-            view_mode={"tiles"}
-            />
-        </Col>
-      )
-    } else if (this.state.loading) {
-      return(
-        <Col key={this.props.key}>
-          <Loading />
-        </Col>
-      );
-    } else {
-      return (
-        <Col key={this.props.key}><h1>No Content Available</h1></Col>
-      )
-    }
-  }
+  return (
+    <Col lg={12} key={this.props.key}>
+      <h3>{props.field_title}</h3>
+      <EntityQueue
+        {...props.field_tile_queue}
+        view_mode={"tiles"}
+      />
+    </Col>
+  )
 
 }
 

@@ -7,6 +7,7 @@
  */
 
 const browserSync = require('browser-sync').create();
+const changed = require('gulp-changed');
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
 const shell = require("gulp-shell");
@@ -54,8 +55,8 @@ gulp.task("themeBuild", (done) => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
     .pipe(sourcemaps.init())
-    .on('end', () => { 
-      console.debug("ending");  
+    .on('end', (complete) => {
+      console.debug("ending", complete);
       done();
     })
     .on('error', (err) => {
@@ -88,8 +89,8 @@ gulp.task(
       const webpackConfigurator = require(`./config/node/webpack.config`);
       /* eslint-disable */
       gulp.src('**/*.entry.tsx', { sourcemaps: false, cwd: path.join(basePath, 'web') })
-        .on('end', () => { 
-          console.debug("ending");  
+        .on('end', (complete) => {
+          console.debug("ending", complete);
           done();
         })
         .on('error', (err) => {
@@ -103,6 +104,32 @@ gulp.task(
       process.exit(1);
     }
   });
+
+gulp.task(
+  "buildChangedComponents",
+  (done) => {
+    console.log("Building changed components.");
+    try {
+      const webpackConfigurator = require(`./config/node/webpack.config`);
+      /* eslint-disable */
+      gulp.src('**/*.entry.tsx', { sourcemaps: false, cwd: path.join(basePath, 'web') })
+        .on('end', (complete) => {
+          console.debug("ending", complete);
+          done();
+        })
+        .on('error', (err) => {
+          console.error(err);
+          process.exit(1);
+        })
+        .pipe(changed('./web'))
+        .pipe(webpackConfigurator())
+    }
+    catch (err) {
+      console.log(err);
+      process.exit(1);
+    }
+  });
+
 
 gulp.task(
   "default",
@@ -125,7 +152,7 @@ gulp.task('watch', () => {
     ];
 
   gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
-  gulp.watch(files, gulp.series('buildComponents'));
+  gulp.watch(files, gulp.series('buildChangedComponents'));
 
   // TODO: When using proxy nothing renders (?!)
   var jsPattern = '/**/*.tsx';

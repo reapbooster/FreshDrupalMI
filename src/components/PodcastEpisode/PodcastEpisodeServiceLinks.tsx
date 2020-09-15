@@ -4,15 +4,11 @@ import ApplePodcastLogo from "../../Logos/ApplePodcastLogo";
 import IHeartLogo from "../../Logos/IHeartLogo";
 import SpotifyLogo from "../../Logos/SpotifyLogo";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import { PodcastServiceLinkInterface } from '../../DataTypes/PodcastEpisode';
 
-interface PodcastServiceLink {
-  key: string;
-  description: string;
-  value: string;
-}
 
 interface PodcastEpisodeServiceLinksProps {
-  links: Array<PodcastServiceLink>;
+  links: Array<PodcastServiceLinkInterface>;
 }
 
 const PodcastEpisodeServiceLinks: React.FunctionComponent = ( props: PodcastEpisodeServiceLinksProps ) => {
@@ -82,4 +78,4 @@ const PodcastEpisodeServiceLinks: React.FunctionComponent = ( props: PodcastEpis
   return (<div></div>);
 }
 
-export { PodcastEpisodeServiceLinks as default, PodcastServiceLink, PodcastEpisodeServiceLinksProps }
+export { PodcastEpisodeServiceLinks as default, PodcastEpisodeServiceLinksProps }

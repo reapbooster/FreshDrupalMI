@@ -17,14 +17,11 @@ const ParagraphText: React.FunctionComponent = (props) => {
     paddingTop: "2rem",
     paddingBottom: "2rem",
   `;
-  const textStyle={
-
-  };
   console.log("Paragraph Text", props);
   return (
     <Col lg={12}>
       <Container>
-        <Paragraph style={textStyle}
+        <Paragraph
            dangerouslySetInnerHTML={{__html: props.field_body.value}} />
       </Container>
     </Col>

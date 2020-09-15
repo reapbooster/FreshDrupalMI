@@ -1,7 +1,0 @@
-name: 'Landing Page'
-description: 'Landing Page react component'
-js:
-  LandingPage.entry.js: { }
-cache:
-  max-age: 0
-
