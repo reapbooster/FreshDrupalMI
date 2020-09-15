@@ -14,7 +14,6 @@ interface ArticleInterface extends ContentDatatypeInterface {
 
 class Article extends ContentDatatype {
 
-  field_meta_tags?: object;
   _field_authors: TaxonomyTerm;
   _field_centers: TaxonomyTerm;
   _field_topics: TaxonomyTerm;
@@ -61,6 +60,14 @@ class Article extends ContentDatatype {
     this._field_content = incoming.map(( item:ParagraphInterface ) => {
       return new Paragraph(item);
     })
+  }
+
+  hasData() : boolean {
+    return (this.field_content?.length > 0) ?? false;
+  }
+
+  getIncluded() {
+    return "&include=field_promo_slide,field_promo_slide.field_background_image,field_content";
   }
 
 }

@@ -13,6 +13,8 @@ interface NodeInterface extends RevisionableEntityInterface {
   promoted: boolean;
   status: boolean;
   sticky: boolean;
+  hasData: boolean;
+  getIncluded: string;
 
  }
 
@@ -33,6 +35,8 @@ abstract class Node extends RevisionableEntity implements NodeInterface {
   }
 
   abstract hasData(): boolean;
+  
+  abstract getIncluded(); string;
 
   public static factory(incoming) {
     console.debug("node.factory", incoming);

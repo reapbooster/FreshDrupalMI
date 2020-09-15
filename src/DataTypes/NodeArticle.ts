@@ -15,6 +15,10 @@ class NodeArticle extends Node {
   hasData(): boolean {
 
   }
+
+  getIncluded(): string {
+    
+  }
 }
 
 export {NodeArticle as default, NodeArticleInterface}
