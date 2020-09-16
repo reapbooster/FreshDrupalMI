@@ -1,52 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SlideDisplay from "../SlideDisplay";
 import {
   Carousel,
-  CarouselItem, Col,
-  Container, Spinner, Row
+  CarouselItem
 } from "react-bootstrap";
-import EntityComponentBase, {EntityComponentState} from '../../DataTypes/EntityComponentBase';
 import * as SlideDatatype from "../../DataTypes/Slide";
+import ErrorBoundary from '../../Utility/ErrorBoundary';
 
 interface SlideShowProps {
-  items: Array<SlideDatatype.SlideInterface>
+  items: Array<SlideDatatype.SlideInterface>;
+  view_mode: string;
 }
 
-class SlideShow extends EntityComponentBase<SlideShowProps, EntityComponentState> {
-
-
-
-  render() {
-    if (this.state.loaded) {
-      return (
-        <Carousel>
-          {this.props.items.map((slide: SlideDatatype.SlideInterface, key: number ) => {
-            return (
-              <CarouselItem key={key} id={slide.id}>
-                <SlideDisplay {...slide} view_mode={"full"} />
-              </CarouselItem>
-            )
-          })}
-        </Carousel>
-      );
-    } else if (this.state.loading) {
-      return (
-        <div className={"w-25 text-align-center border-0"}>
-          <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <h1>No component Data</h1>
-        </div>
-      );
-    }
-
-  }
-
+const SlideShow: React.FunctionComponent = (props: SlideShowProps) => {
+  return (
+    <Carousel>
+      {props.items.map((slide: SlideDatatype.SlideInterface, key: number ) => {
+        const slideData = new SlideDatatype.default(slide);
+        return (
+          <CarouselItem key={key} id={slide.id}>
+            <SlideDisplay data={slideData} view_mode={props.view_mode ?? "full"} />
+          </CarouselItem>
+        )
+      })}
+    </Carousel>
+  );
 }
 
 

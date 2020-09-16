@@ -1,6 +1,5 @@
 import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
 import PathObject, {PathObjectInterface} from './PathObject';
-import NodeOpportunityCard from '../components/NodeDisplay/NodeOpportunityCardDisplay';
 import NodeEvent from './NodeEvent';
 import NodeArticle from './NodeArticle';
 import NodeOpportunity from './NodeOpportunity';
@@ -13,8 +12,6 @@ interface NodeInterface extends RevisionableEntityInterface {
   promoted: boolean;
   status: boolean;
   sticky: boolean;
-  hasData: boolean;
-  getIncluded: string;
   hasData(): boolean;
   getIncluded(): string;
 

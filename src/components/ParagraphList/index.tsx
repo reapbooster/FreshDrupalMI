@@ -1,18 +1,19 @@
 import React from 'react';
 import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 import ParagraphDisplay from '../ParagraphDisplay';
+import * as DataObject from '../../DataTypes/Paragraph';
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 interface ParagraphListProps extends EntityComponentPropsInterface {
-  items: Array<EntityComponentPropsInterface>;
+  items: Array<DataObject.ParagraphInterface>;
 }
 
 export const ParagraphList: React.FunctionComponent = (props: ParagraphListProps) => {
   if (props.items?.length) {
-    return props.items.map((item: EntityComponentPropsInterface, key: number) => {
+    return props.items.map((item: EntityInterface, key: number) => {
       return (
-        <ErrorBoundary>
-          <ParagraphDisplay {...item} key={key}/>
+        <ErrorBoundary key={key}>
+          <ParagraphDisplay data={item} view_mode="full" />
         </ErrorBoundary>
       )
     });

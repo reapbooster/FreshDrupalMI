@@ -1,32 +1,30 @@
 import React from 'react';
 import * as ParagraphDataObject from '../../DataTypes/Paragraph';
 import ParagraphSlide from "./ParagraphSlide";
-import ParagraphFourPanel from "./ParagraphFourPanel";
-import ParagraphBodyContent from "./ParagraphBodyContent";
+import ParagraphDisplayFourPanel from "./ParagraphDisplayFourPanel";
+import ParagraphBodyContent from "./ParagraphDisplayBodyContent";
 import ParagraphPullQuote from "./ParagraphPullQuote";
 import ParagraphTiles from "./ParagraphTiles";
 import ParagraphItemsFromAnEntityQueue from "./ParagraphItemsFromAnEntityQueue";
-import ParagraphBlock from "./ParagraphBlock";
-import ParagraphMediaTilesFromAView from "./ParagraphMediaTilesFromAView";
-import {EntityComponentProps, EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
+import ParagraphBlock from "./ParagraphDisplayBlock";
+import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import Loading from '../Loading';
 
 const ParagraphBundleComponents = {
-  "paragraph--slide": ParagraphSlide,
-  "paragraph--four_tile_block_queue": ParagraphFourPanel,
-  "paragraph--four_tile_block_taxonomy": ParagraphFourPanel,
-  "paragraph--body_content": ParagraphBodyContent,
-  "paragraph--pull_quote": ParagraphPullQuote,
-  "paragraph--tiles": ParagraphTiles,
-  "paragraph--block": ParagraphBlock,
-  "paragraph--items_from_an_entityqueue": ParagraphItemsFromAnEntityQueue,
-  "paragraph--media_tiles_from_view": ParagraphMediaTilesFromAView
+  "paragraph--slide": ParagraphDisplaySlide,
+  "paragraph--body_content": ParagraphDisplayBodyContent,
+  "paragraph--pull_quote": ParagraphDisplayPullQuote,
+  "paragraph--block": ParagraphDisplayBlock,
 }
 
+interface ParagraphDisplayProps {
+  data: ParagraphDataObject.ParagraphInterface;
+  view_mode: string;
+}
 
-const ParagraphDisplay: React.FunctionComponent = (props: EntityComponentPropsInterface) => {
-  const {paragraphData, setParagraphData} = useState(ParagraphDataObject.default.factory(props));
+const ParagraphDisplay: React.FunctionComponent = (props: ParagraphDisplayProps) => {
+  const {paragraphData, setParagraphData} = useState(ParagraphDataObject.default.factory(props.data));
   console.debug("Paragraph Display", paragraphData);
   if (!paragraphData.hasData()) {
     const ecp = new EntityComponentProps(paragraphData);

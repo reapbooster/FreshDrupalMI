@@ -21,7 +21,7 @@ const ArticleFull = (props: ArticleDatatype.default) => {
           Social Media Links
         </Col>
         <Col md={6} sm={12} lg={6}>
-          <ParagraphList items={props.field_content} />
+          <ParagraphList items={props.field_content} view_mode="full" />
         </Col>
         <Col md={3} sm={12} lg={3}>
           <p>Tags Go here</p>

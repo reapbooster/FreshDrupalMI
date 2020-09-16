@@ -13,10 +13,13 @@ const MediaBundleDisplayComponents = {
   "media--podcast": MediaDisplayPodcast,
 }
 
-interface MediaProps extends MediaInterface {}
+interface MediaDisplayProps {
+  data: MediaInterface;
+  view_mode: string;
+}
 
-const MediaDisplay: React.FunctionComponent = (props: MediaProps) => {
-  const {mediaData, setMediaData} = useState(MediaDatatype.default.factory(props));
+const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
+  const {mediaData, setMediaData} = useState(MediaDatatype.default.factory(props.data));
 
   if (!mediaData.hasData()) {
     const ecp = new EntityComponentProps(mediaData);
@@ -45,4 +48,4 @@ const MediaDisplay: React.FunctionComponent = (props: MediaProps) => {
 }
 
 
-export { MediaDisplay as default, MediaBundleDisplayComponents };
+export { MediaDisplay as default, MediaDisplayProps, MediaBundleDisplayComponents };

@@ -1,6 +1,7 @@
 import Entity, {EntityInterface} from './Entity';
 import { UserInterface } from './User';
-
+import ImageFile, {ImageFileInterface} from './ImageFile';
+import DocumentFile from './DocumentFile';
 interface FileURIInterface {
   value: string;
   url: string;
@@ -12,6 +13,9 @@ interface FileInterface extends EntityInterface {
   drupal_internal__fid: number;
   uid: UserInterface;
   uri: FileURIInterface;
+
+  hasData(): boolean;
+  getIncluded(): string;
   
 }
 
@@ -21,6 +25,19 @@ abstract class File extends Entity implements FileInterface {
   drupal_internal__fid: number;
   uid: UserInterface;
   uri: FileURIInterface;
+
+  factory(incoming: FileInterface) {
+    switch (incoming.type) {
+      case "file--image":
+        return new ImageFile(incoming);
+      case "file--document":
+        return new DocumentFile(incoming);
+      default:
+        console.error("Cannot determine Data Class", incoming);
+        throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
+
+    }
+  }
 
 }
 

@@ -1,8 +1,10 @@
 import React from 'react';
 
-import EntityComponentBase from '../../DataTypes/EntityComponentBase';
+const EventDisplayBundles = {
+  
+}
 
-class Event extends EntityComponentBase {
+class EventDisplay extends EntityComponentBase {
 
   render(): React.ReactNode {
     return (

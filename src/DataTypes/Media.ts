@@ -1,6 +1,10 @@
 import MediaType, {MediaTypeInterface} from './MediaType';
 import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
 import ImageFile, { ImageFileInterface } from './ImageFile';
+import MediaVideo from './MediaVideo'
+import MediaImage from './MediaImage'
+import MediaPodcastEpisode from './MediaPodcastEpisode';
+import MediaReport from './MediaReport';
 
 interface MediaInterface extends RevisionableEntityInterface {
   
@@ -9,12 +13,12 @@ interface MediaInterface extends RevisionableEntityInterface {
   bundle: MediaTypeInterface;
   field_filemime: string;
   field_filesize: number;
-  field_height: string;
+  field_height: string|number;
   field_media_image: ImageFileInterface;
   field_photo_subject_name: string;
   field_photo_subject_title: string;
   field_media_in_library: boolean;
-  field_width: string;
+  field_width: string|number;
   hasData(): boolean;
   getIncluded(): string;
 
@@ -51,11 +55,27 @@ abstract class Media extends RevisionableEntity implements MediaInterface {
   }
 
   hasData(): boolean {
-    return this.field_media_image
+    return false
   }
 
   getIncluded(): string {
     return "";
+  }
+
+  factory(incoming: MediaInterface) {
+    switch(incoming.type) {
+      case "media--video":
+        return new MediaVideo(incoming);
+      case "media--image":
+        return new MediaImage(incoming);
+      case "media--report":
+        return new MediaReport(incoming);
+      case "media--podcast_episode":
+        return new MediaPodcastEpisode(incoming);
+      default:
+        console.error("Cannot determine Data Class", incoming);
+        throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
+    }
   }
 
 }

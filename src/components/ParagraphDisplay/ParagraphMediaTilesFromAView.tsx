@@ -1,12 +1,12 @@
 import React from 'react';
-import ParagraphFourTileBlockQueue, { ParagraphFourTileBlockQueueInterface } from '../../DataTypes/ParagraphFourTileBlockQueue';
+import * as DataObject from '../../DataTypes/ParagraphFourTileBlockQueue';
 
-interface ParagraphMediaTilesFromAViewProps {
-  data: ParagraphFourTileBlockQueue;
+interface ParagraphDisplayMediaTilesFromAViewProps {
+  data: DataObject.ParagraphFourTileBlockQueueInterface;
   view_mode: string;
 }
 
-const ParagraphMediaTilesFromAView: React.FunctionComponent = (props: ParagraphMediaTilesFromAViewProps) => {
+const ParagraphDisplayMediaTilesFromAView: React.FunctionComponent = (props: ParagraphDisplayMediaTilesFromAViewProps) => {
   console.debug("ParagraphMediaTilesFromAView", props);
   return (
     <div>
@@ -14,3 +14,5 @@ const ParagraphMediaTilesFromAView: React.FunctionComponent = (props: ParagraphM
     </div>
   );
 }
+
+export {ParagraphDisplayMediaTilesFromAView as default, ParagraphDisplayMediaTilesFromAViewProps}

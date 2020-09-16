@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import MediaImage, {MediaImageInterface} from '../../DataTypes/MediaImage';
 import ImageStyleObject, {HolderImageStyleObject} from "../../DataTypes/ImageStyleObject";
-import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 
 
 interface MediaDisplaymageProps {
   data: MediaImage;
+  view_mode: string;
  }
 
 const MediaDisplayImage: React.FunctionComponent = (props: MediaImageProps) => {

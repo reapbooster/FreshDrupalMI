@@ -1,25 +1,17 @@
 import React from 'react';
-import EntityComponentBase from '../../DataTypes/EntityComponentBase';
+import ErrorBoundary from '../../Utility/ErrorBoundary';
+import ArticleDisplay from '../ArticleDisplay';
+import * as DataObject from '../../DataTypes/NodeArticle'
 
-
-
-class NodeArticle extends EntityComponentBase {
-
-
-
-    render() {
-
-        // switch(this.props.view_mode) {
-        //
-        // }
-
-        return (
-            <div>
-                <h1>Node Article</h1>
-            </div>
-        );
-    }
-
+interface NodeArticleDisplayProps {
+    data: DataObject.NodeArticleInterface;
+    view_mode: string;
 }
 
-export default NodeArticle;
+const NodeArticleDisplay = (props: NodeArticleDisplayProps) => {
+    <ErrorBoundary>
+        <ArticleDisplay data={props.data} view_mode={props.view_mode} />
+    </ErrorBoundary>
+}
+
+export  {NodeArticleDisplay as default, NodeArticleDisplayProps};

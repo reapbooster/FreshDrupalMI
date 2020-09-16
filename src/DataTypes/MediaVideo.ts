@@ -9,11 +9,11 @@ interface MediaVideoInterface extends MediaInterface {
 
   field_body: BodyFieldData;
   field_centers: Array<TaxonomyTermInterface>;
-  field_embedded_id: string,
-  field_embedded_service: string,
+  field_embedded_id: string;
+  field_embedded_service: string;
   field_event_reference: EventInterface;
-  field_height: number,
-  field_media_oembed_video: string,
+  field_height: number;
+  field_media_oembed_video: string;
   field_program_initiatives: Array<TaxonomyTermInterface>;
   field_speakers: object;
   field_subheader: string;
@@ -23,6 +23,9 @@ interface MediaVideoInterface extends MediaInterface {
   field_video_height: number;
   field_video_width: number;
   field_width: number;
+
+  hasData(): boolean;
+  getIncluded(): string;
 
 }
 
@@ -34,10 +37,10 @@ class MediaVideo extends Media {
   _field_term_collection: Array<TaxonomyTermInterface>;
   _field_topics: Array<TaxonomyTermInterface>;
   field_body: BodyFieldData;
-  field_embedded_id: string,
-  field_embedded_service: string,
-  field_height: number,
-  field_media_oembed_video: string,
+  field_embedded_id: string;
+  field_embedded_service: string;
+  field_height: number;
+  field_media_oembed_video: string;
   field_speakers: object;
   field_subheader: string;
   field_thumbnail_uri: string;
@@ -45,6 +48,14 @@ class MediaVideo extends Media {
   field_video_width: number;
   field_width: number;
 
+
+  hasData(): boolean {
+    return (this.field_media_oembed_video || this.field_thumbnail_uri)
+  }
+
+  getIncluded() {
+    return "&included=field_media-oembed_video,field_speakers";
+  }
 
   get field_term_collection(): Array<TaxonomyTermInterface> {
    return this._field_term_collection; 

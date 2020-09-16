@@ -1,40 +1,45 @@
-import {EntityComponentProps} from "./EntityComponentProps";
-import ColorObject from "./ColorObject";
+import ColorObject, {ColorObjectInterface} from "./ColorObject";
 import {FontAwesomeIconProps} from "@fortawesome/react-fontawesome";
-import PathObject from "./PathObject";
-import LinkList from './LinkList';
+import PathObject, {PathObjectInterface} from "./PathObject";
+import LinkList, {LinkListInterface} from './LinkList';
+import Entity, {EntityInterface} from './Entity';
 
-interface TaxonomyTermInterface {
-  type: string;
-  id: string;
-  name: string;
+interface TaxonomyTermInterface extends EntityInterface {
+
   description: string;
-  changed: string;
-  created: string;
-  path: PathObjectInterface;
-  links: LinkList;
+  drupal_internal__tid: number;
   field_tag_color: ColorObjectInterface,
   field_tag_icon: FontAwesomeIconProps;
   field_visibility: boolean;
+  path: PathObjectInterface;
   vid: string;
+
 }
 
-class TaxonomyTerm implements TaxonomyTermInterface {
-  type: string;
-  id: string;
-  name: string;
+class TaxonomyTerm extends Entity implements TaxonomyTermInterface {
+  
+  _field_tag_color: ColorObject;
+  _path: PathObject;
   description: string;
-  changed: string;
-  created: string;
-  path: PathObject;
-  links: LinkList;
-  field_tag_color: ColorObject,
+  drupal_internal__tid: number;
   field_tag_icon: FontAwesomeIconProps;
   field_visibility: boolean;
   vid: string;
 
-  constructor(incoming: TaxonomyTermInterface) {
-    Object.assign(this, incoming);
+  get field_tag_color(): ColorObjectInterface {
+    return this._field_tag_color;
+  }
+
+  set field_tag_color(incoming: ColorObjectInterface) {
+    this._field_tag_color = new ColorObject(incoming);
+  }
+
+  get path(): PathObjectInterface {
+    return this._path;
+  }
+
+  set path(incoming: PathObjectInterface) {
+    this._path = new PathObject(incoming);
   }
 
 }

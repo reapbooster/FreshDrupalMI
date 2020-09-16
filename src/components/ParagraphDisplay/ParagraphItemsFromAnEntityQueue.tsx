@@ -1,17 +1,15 @@
 import React from 'react';
-import { EntityComponentProps, EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
-import * as ParagraphDataObject from '../../DataTypes/ParagraphFourTileBlockQueue';
-import Loading from "../Loading";
-import {Col, Container} from "react-bootstrap";
+import {Col, Container} from 'react-bootstrap';
+import * as DataObject from '../../DataTypes/ParagraphFourTileBlockQueue';
 import EntityQueue from '../EntityQueue'
 
-interface ParagraphItemsFromAnEntityQueueProps {
-  data: ParagraphDataObject.ParagraphFourTileBlockQueueInterface;
+interface ParagraphDisplayItemsFromAnEntityQueueProps {
+  data: DataObject.ParagraphFourTileBlockQueueInterface;
   view_mode: string;
 }
 
 
-const ParagraphItemsFromAnEntityQueue: React.FunctionComponent = (props: ParagraphItemsFromAnEntityQueueProps) {
+const ParagraphDisplayItemsFromAnEntityQueue: React.FunctionComponent = (props: ParagraphDisplayItemsFromAnEntityQueueProps) => {
 
   console.debug("ParagraphItemsFromAnEntityQueue", props);
   return (
@@ -24,4 +22,4 @@ const ParagraphItemsFromAnEntityQueue: React.FunctionComponent = (props: Paragra
 
 }
 
-export  { ParagraphItemsFromAnEntityQueue as default, ParagraphItemsFromAnEntityQueueProps };
+export  { ParagraphDisplayItemsFromAnEntityQueue as default, ParagraphDisplayItemsFromAnEntityQueueProps };

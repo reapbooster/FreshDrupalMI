@@ -1,4 +1,4 @@
-import Entity, {EntityInterface} from "./Entity";
+import RevisionableEntity, {RevisionableEntityInterface} from '../DataTypes/RevisionableEntity';
 import ColorObject, {ColorObjectInterface} from './ColorObject';
 import { ImageObject } from './ImageObject';
 import ImageFile, {ImageFileInterface} from './ImageFile';
@@ -27,7 +27,7 @@ class SlideKeyValueText {
 }
 
 
-interface SlideInterface {
+interface SlideInterface extends RevisionableEntityInterface {
   field_background_color: ColorObjectInterface;
   field_background_image: ImageFileInterface,
   slide_type: SlideTypeInterface,
@@ -40,8 +40,8 @@ interface SlideInterface {
 
 }
 
-class Slide extends Entity implements SlideInterface{
-
+class Slide extends RevisionableEntity implements SlideInterface{
+  _field_slide_text: SlideKeyValueTextInterface[];
   _field_background_color: ColorObject;
   _field_background_image: ImageObject;
   _field_link: LinkField;
@@ -90,6 +90,14 @@ class Slide extends Entity implements SlideInterface{
 
   set field_link(incoming: LinkFieldInterface) {
     this._field_link = new LinkField(incoming);
+  }
+
+  get field_slide_text(): SlideKeyValueTextInterface[] {
+    return this._field_slide_text;
+  }
+
+  set field_slide_text(incoming: SlideKeyValueTextInterface[]) {
+    this._field_slide_text = incoming.map((item: SlideKeyValueTextInterface) => new SlideKeyValueText(item));
   }
  
 }

@@ -1,4 +1,3 @@
-import {EntityTypeInterface} from "./EntityType";
 import Dependencies , {DependenciesInterface} from "./Dependencies";
 import EntityType, {EntityTypeInterface} from './EntityType';
 

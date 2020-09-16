@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import VideoDataInterface from "../../DataTypes/VideoDataInterface";
 import { Col, Card } from 'react-bootstrap';
-import ImageEntityProps from "../../DataTypes/ImageEntityProps";
+import MediaImage, {MediaImageInterface} from '../../DataTypes/MediaImage';
 import moment from 'moment';
+import * as DataObject from '../../DataTypes/MediaVideo';
 
-const MediaVideo: React.FunctionComponent = (props) => {
+interface MediaDisplayVideoProps {
+  data: DataObject.default;
+  view_mode: string;
+}
+
+const MediaDisplayVideo: React.FunctionComponent = (props: MediaDisplayVideoProps) => {
 
   const [ thumbnailImageUrl, setThumbnailImageUrl ] = useState("holder.js/100x100?text=thumbnail&auto=yes");
   var thumbnail = new ImageEntityProps(props.thumbnail);
@@ -52,4 +58,4 @@ const MediaVideo: React.FunctionComponent = (props) => {
 }
 
 
-export default MediaVideo;
+export default MediaDisplayVideo;

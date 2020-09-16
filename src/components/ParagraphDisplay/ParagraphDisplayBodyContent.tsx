@@ -1,12 +1,12 @@
 import React from 'react';
 import * as DataObject from '../../DataTypes/ParagraphBodyContent';
 
-interface ParagraphBodyContentProps {
+interface ParagraphDisplayBodyContentProps {
   data: DataObject.default;
   view_mode: string;
 }
 
-const ParagraphBodyContent = (props: ParagraphBodyContentProps) => {
+const ParagraphDisplayBodyContent = (props: ParagraphDisplayBodyContentProps) => {
   console.debug("Paragraph BodyContent", props);
   return (
     <div>
@@ -15,4 +15,4 @@ const ParagraphBodyContent = (props: ParagraphBodyContentProps) => {
   )
 }
 
-export default ParagraphBodyContent;
+export  { ParagraphDisplayBodyContent as default, ParagraphDisplayBodyContentProps };

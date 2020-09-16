@@ -5,13 +5,13 @@ import SlideShow from "../Slideshow";
 import {Col} from "react-bootstrap";
 import * as DataObject from '../../DataTypes/ParagraphSlide'
 
-interface ParagraphSlideProps extends ParagraphInterface {
+interface ParagraphDisplaySlideProps {
   data: DataObject.default;
   view_mode: string;
 }
 
 
-const ParagraphSlide: React.FunctionComponent = ( props: ParagraphSlideProps ) => {
+const ParagraphDisplaySlide: React.FunctionComponent = ( props: ParagraphDisplaySlideProps ) => {
   console.log("ParagraphSlide", props);
   return (
     <Col lg={12}>
@@ -24,4 +24,4 @@ const ParagraphSlide: React.FunctionComponent = ( props: ParagraphSlideProps ) =
 
 }
 
-export default ParagraphSlide;
+export {ParagraphDisplaySlide as default, ParagraphDisplaySlideProps};
