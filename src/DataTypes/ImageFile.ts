@@ -3,10 +3,10 @@ import ImageStyleObject, { ImageStyleObjectInterface } from './ImageStyleObject'
 import File, {FileInterface} from './File';
 
 interface ImageFileMetaDataInterface {
-  alt: string;
-  title: string;
-  width: number;
-  height: number;
+  alt?: string;
+  title?: string;
+  width?: number;
+  height?: number;
 }
 
 
@@ -20,11 +20,11 @@ interface ImageFileInterface extends FileInterface {
 
 }
 
-class ImageFile extends File implements FileInterface {
+class ImageFile extends File implements ImageFileInterface {
   filemime: string;
   filename: string;
   filesize: number;
-  _image_style_uri: ImageStyleObjectInterface;
+  _image_style_uri: ImageStyleObject;
   meta: ImageFileMetaDataInterface;
   status: boolean;
 
@@ -43,10 +43,6 @@ class ImageFile extends File implements FileInterface {
 
   get imageStyleObject(): ImageStyleObjectInterface | null {
     return this._image_style_uri ?? null;
-  }
-
-  set image_style_uri(incoming: ImageStyleObjectInterface) {
-    this._image_style_uri = incoming;
   }
 
   setImageStyles(incoming: Array<object>) {

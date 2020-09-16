@@ -1,18 +1,16 @@
 
 import React from 'react';
-import Slide from "../../DataTypes/SlideDataInterface";
 import {Col, Container} from "react-bootstrap";
-import {ParagraphInterface} from "../../DataTypes/Paragraph";
+import * as DataObject from '../../DataTypes/ParagraphPullQuote';
 import styled from 'styled-components';
 
-interface ParagraphSlideProps extends ParagraphInterface {
-  key: number;
-  field_slides: Array<Slide>;
-  field_text_size: string;
+interface ParagraphPullQuoteProps  {
+  data: DataObject.default;
+  view_mode: string;
 }
 
 
-const ParagraphPullQuote: React.FunctionComponent = (props: ParagraphSlideProps) => {
+const ParagraphPullQuote: React.FunctionComponent = (props: ParagraphPullQuoteProps) => {
   // Example styled component
   const Blockquote = styled.blockquote`
     border: 1px solid orange;

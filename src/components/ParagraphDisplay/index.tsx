@@ -2,7 +2,7 @@ import React from 'react';
 import * as ParagraphDataObject from '../../DataTypes/Paragraph';
 import ParagraphSlide from "./ParagraphSlide";
 import ParagraphFourPanel from "./ParagraphFourPanel";
-import ParagraphText from "./ParagraphText";
+import ParagraphBodyContent from "./ParagraphBodyContent";
 import ParagraphPullQuote from "./ParagraphPullQuote";
 import ParagraphTiles from "./ParagraphTiles";
 import ParagraphItemsFromAnEntityQueue from "./ParagraphItemsFromAnEntityQueue";
@@ -16,7 +16,7 @@ const ParagraphBundleComponents = {
   "paragraph--slide": ParagraphSlide,
   "paragraph--four_tile_block_queue": ParagraphFourPanel,
   "paragraph--four_tile_block_taxonomy": ParagraphFourPanel,
-  "paragraph--body_content": ParagraphText,
+  "paragraph--body_content": ParagraphBodyContent,
   "paragraph--pull_quote": ParagraphPullQuote,
   "paragraph--tiles": ParagraphTiles,
   "paragraph--block": ParagraphBlock,

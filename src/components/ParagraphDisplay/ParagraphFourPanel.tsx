@@ -14,25 +14,13 @@ interface ParagraphFourPanelProps extends EntityComponentPropsInterface {
 
 
 const ParagraphFourPanel: React.FunctionComponent = (props: ParagraphFourPanelProps) => {
-
-
-
-    console.debug("Paragraph FourPanel", this.props, this.state);
-    if (this.state.loaded) {
-      
-    } else if (this.state.loading) {
-      return(
-        <Col key={this.props.key}>
-          <Loading />
-        </Col>
-      );
-    } else {
-      return (
-        <h1 key={this.props.key}>No Content Available</h1>
-      )
-    }
-
+  console.debug("ParagraphFourPanel", props);
+  return (
+    <div>
+      <h1>Paragraph Four Panel</h1>
+    </div>
+  )
 
 }
 
-export default ParagraphFourPanel;
+export  {ParagraphFourPanel as default, ParagraphFourPanelProps};

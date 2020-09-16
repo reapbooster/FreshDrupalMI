@@ -2,17 +2,17 @@
 import React from 'react';
 import Slide from "../../DataTypes/SlideDataInterface";
 import SlideShow from "../Slideshow";
-import Loading from "../Loading";
 import {Col} from "react-bootstrap";
-import {ParagraphInterface} from "../../DataTypes/Paragraph";
+import * as DataObject from '../../DataTypes/ParagraphSlide'
 
 interface ParagraphSlideProps extends ParagraphInterface {
-  field_slides: Array<Slide>;
+  data: DataObject.default;
+  view_mode: string;
 }
 
 
 const ParagraphSlide: React.FunctionComponent = ( props: ParagraphSlideProps ) => {
-
+  console.log("ParagraphSlide", props);
   return (
     <Col lg={12}>
       <SlideShow

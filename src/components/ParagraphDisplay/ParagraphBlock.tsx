@@ -5,7 +5,8 @@ interface ParagraphBlockProps {
   data: ParagraphBlock,
 }
 
-const ParagraphBlock = (props) => {
+const ParagraphBlock = (props: ParagraphBlockProps) => {
+  console.debug("Paragraph Block", props);
   return (
     <div>
       <h1>Paragraph Block</h1>

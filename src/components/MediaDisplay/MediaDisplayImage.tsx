@@ -4,10 +4,12 @@ import ImageStyleObject, {HolderImageStyleObject} from "../../DataTypes/ImageSty
 import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 
 
-interface MediaImageProps extends MediaImageInterface { }
+interface MediaDisplaymageProps {
+  data: MediaImage;
+ }
 
 const MediaDisplayImage: React.FunctionComponent = (props: MediaImageProps) => {
-  var imageStylesObject = new MediaImage(props).getStyleObject();
+  var imageStylesObject = new MediaImage(props.data).getStyleObject();
   const [ imageStyleObject, setImageStyleObject ] = useState(imageStyleObject);
 
   if (imageStyleObject.getData !== undefined) {
@@ -15,7 +17,7 @@ const MediaDisplayImage: React.FunctionComponent = (props: MediaImageProps) => {
       .then(res => res.json())
       .then((incoming) => {
         console.debug("Image Style Object:", incoming);
-        setImageStyleObject(new ImageStyleObject(incoming.data?));
+        setImageStyleObject(new ImageStyleObject(incoming.data));
       });
   }
   return (
@@ -31,4 +33,4 @@ const MediaDisplayImage: React.FunctionComponent = (props: MediaImageProps) => {
   );
 }
 
-export { MediaDisplayImage as default, MediaImageProps };
+export { MediaDisplayImage as default, MediaDisplaymageProps };

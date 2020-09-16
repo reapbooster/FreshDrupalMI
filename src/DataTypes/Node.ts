@@ -15,6 +15,8 @@ interface NodeInterface extends RevisionableEntityInterface {
   sticky: boolean;
   hasData: boolean;
   getIncluded: string;
+  hasData(): boolean;
+  getIncluded(): string;
 
  }
 

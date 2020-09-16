@@ -1,21 +1,16 @@
 import React from 'react';
-import EntityComponentBase from '../../DataTypes/EntityComponentBase';
+import ParagraphFourTileBlockQueue, { ParagraphFourTileBlockQueueInterface } from '../../DataTypes/ParagraphFourTileBlockQueue';
 
-class ParagraphMediaTilesFromAView extends EntityComponentBase {
-
-  include = '&include=field_view';
-
-  static defaultProps = {
-    view_mode: "card"
-  }
-
-  render(): React.ReactNode {
-    return (
-      <div>
-        <h1>Paragraph media Tiles From A View</h1>
-      </div>
-    )
-  }
+interface ParagraphMediaTilesFromAViewProps {
+  data: ParagraphFourTileBlockQueue;
+  view_mode: string;
 }
 
-export default ParagraphMediaTilesFromAView;
+const ParagraphMediaTilesFromAView: React.FunctionComponent = (props: ParagraphMediaTilesFromAViewProps) => {
+  console.debug("ParagraphMediaTilesFromAView", props);
+  return (
+    <div>
+      <h1>ParagraphMediaTilesFromAView</h1>
+    </div>
+  );
+}
