@@ -2,7 +2,7 @@ import React from 'react';
 import * as DataObject from '../../DataTypes/ParagraphBodyContent';
 
 interface ParagraphDisplayBodyContentProps {
-  data: DataObject.default;
+  data: DataObject.ParagraphBodyContentInterface;
   view_mode: string;
 }
 

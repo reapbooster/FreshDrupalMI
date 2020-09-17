@@ -1,26 +1,34 @@
 import React from 'react';
 
 interface BodyFieldProps {
-  data: Array<BodyFieldData>
+  data: Array<BodyFieldInterface>
 }
 
-interface BodyFieldData {
+interface BodyFieldInterface {
   value: string;
   format: string;
   processed: string;
   summary: string;
 }
 
-const BodyField = (props: BodyFieldProps) => {
-  console.log("BodyField", props);
-  if (props.data?.processed !== undefined) {
-    const articleData = props.data?.map((fieldData: BodyFieldData, key: number) => { return fieldData.processed });
+class BodyField implements BodyFieldInterface {
+  value: string;
+  format: string;
+  processed: string;
+  summary: string;
+
+  constructor(incoming: BodyFieldInterface) {
+    Object.assign(this, incoming);
   }
+}
+
+const BodyFieldDisplay = (props: BodyFieldProps) => {
+  console.debug("BodyFieldDisplay", props);
+  const articleData = props.data?.map((fieldData: BodyFieldInterface) => fieldData.processed);
   return (
-    <article dangerouslySetInnerHTML={{__html: articleData.join()}}>
-    </article>
+    <article dangerouslySetInnerHTML={{__html: articleData.join()}} />
   );
 
 }
 
-export { BodyField, BodyFieldData, BodyFieldProps };
+export { BodyField as default, BodyFieldDisplay, BodyFieldInterface, BodyFieldProps };

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import * as DataObject from '../../DataTypes/ParagraphFourPanel';
 
@@ -8,7 +7,7 @@ interface ParagraphDisplayFourPanelProps  {
 }
 
 
-const ParagraphDisplayFourPanel: React.FunctionComponent = (props: ParagraphFourPanelProps) => {
+const ParagraphDisplayFourPanel: React.FunctionComponent = (props: ParagraphDisplayFourPanelProps) => {
   console.debug("ParagraphFourPanel", props);
   return (
     <div>

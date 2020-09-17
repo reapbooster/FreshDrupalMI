@@ -7,7 +7,7 @@ import MediaPodcastEpisode from './MediaPodcastEpisode';
 import MediaReport from './MediaReport';
 
 interface MediaInterface extends RevisionableEntityInterface {
-  
+
   drupal_internal__mid: string;
   path: object;
   bundle: MediaTypeInterface;
@@ -60,22 +60,6 @@ abstract class Media extends RevisionableEntity implements MediaInterface {
 
   getIncluded(): string {
     return "";
-  }
-
-  factory(incoming: MediaInterface) {
-    switch(incoming.type) {
-      case "media--video":
-        return new MediaVideo(incoming);
-      case "media--image":
-        return new MediaImage(incoming);
-      case "media--report":
-        return new MediaReport(incoming);
-      case "media--podcast_episode":
-        return new MediaPodcastEpisode(incoming);
-      default:
-        console.error("Cannot determine Data Class", incoming);
-        throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
-    }
   }
 
 }

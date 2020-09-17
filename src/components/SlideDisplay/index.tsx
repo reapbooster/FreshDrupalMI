@@ -5,6 +5,10 @@ import HeroHalfHeight from './HeroHalfHeight';
 import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import { SlideInterface } from '../../DataTypes/Slide';
+import NodeLandingPage from "../../DataTypes/NodeLandingPage";
+import NodeOpportunity from "../../DataTypes/NodeOpportunity";
+import NodeArticle from "../../DataTypes/NodeArticle";
+import NodeEvent, {NodeEventInterface} from "../../DataTypes/NodeEvent";
 
 const SlideBundleComponents = {
   "slide--50_50_text_on_left": FiftyFifty,
@@ -13,10 +17,18 @@ const SlideBundleComponents = {
   "slide--hero_half_height": HeroHalfHeight,
 }
 
+function SlideDataFactory(incoming: SlideInterface) {
+  switch(incoming.type) {
+    case "slide--full_width_one_column":
+  }
+}
+
 interface SlideDisplayProps {
   data: SlideInterface;
   view_mode?: string;
 }
+
+
 
 const SlideDisplay: React.FunctionComponent = (props: SlideDisplayProps) => {
   console.debug("Slide Display", props);

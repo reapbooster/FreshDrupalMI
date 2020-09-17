@@ -4,13 +4,13 @@ import {Col, Container} from "react-bootstrap";
 import * as DataObject from '../../DataTypes/ParagraphPullQuote';
 import styled from 'styled-components';
 
-interface ParagraphPullQuoteProps  {
+interface ParagraphDisplayPullQuoteProps  {
   data: DataObject.default;
   view_mode: string;
 }
 
 
-const ParagraphPullQuote: React.FunctionComponent = (props: ParagraphPullQuoteProps) => {
+const ParagraphDisplayPullQuote: React.FunctionComponent = (props: ParagraphDisplayPullQuoteProps) => {
   // Example styled component
   const Blockquote = styled.blockquote`
     border: 1px solid orange;
@@ -18,8 +18,8 @@ const ParagraphPullQuote: React.FunctionComponent = (props: ParagraphPullQuotePr
   return (
     <Col lg={12}>
       <Container py={"2rem"}>
-        <Blockquote className={props.field_text_size}
-            dangerouslySetInnerHTML={{__html: props.field_body.processed}}>
+        <Blockquote className={props.data.field_text_size}
+            dangerouslySetInnerHTML={{__html: props.data.field_body.processed}}>
         </Blockquote>
       </Container>
     </Col>
@@ -27,4 +27,4 @@ const ParagraphPullQuote: React.FunctionComponent = (props: ParagraphPullQuotePr
 
 }
 
-export default ParagraphPullQuote;
+export { ParagraphDisplayPullQuote as default, ParagraphDisplayPullQuoteProps };

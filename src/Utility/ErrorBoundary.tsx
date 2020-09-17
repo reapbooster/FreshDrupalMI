@@ -1,16 +1,32 @@
 import React from 'react';
 
-class ErrorBoundary extends React.Component {
+interface ErrorBoundaryProps {
+  key?: number;
+}
 
-    constructor(props) {
+interface ErrorBoundaryState {
+  error?: Error;
+  hasError: boolean;
+}
+
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+
+
+    constructor(props: ErrorBoundaryProps) {
       super(props);
-      this.state = { hasError: false };
+      this.state = {
+        error: null,
+        hasError: false
+      };
     }
 
     static getDerivedStateFromError(error) {
       // Update state so the next render will show the fallback UI.
       console.debug("getDerivedStateFromError", error);
-      return { hasError: true };
+      return {
+        error: error,
+        hasError: true
+      };
     }
 
     componentDidCatch(error, errorInfo) {
@@ -19,17 +35,17 @@ class ErrorBoundary extends React.Component {
     }
 
     render() {
-      if (this.state.hasError) {
-        // You can render any custom fallback UI
-        return (
-          <h1>Something went wrong.</h1>
-        );
-      }
-
+      const content = this.state.hasError ? (
+        <>
+          <h1 className={"error"}>{this.state.error?.message ?? "Something Went Wrong"}</h1>
+        </>
+      ) : this.props.children;
       return (
-        <error-boundary key={this.props.key || 0}>
-          {this.props.children}
-        </error-boundary>
+        <>
+          <error-boundary key={this.props.key || 0}>
+            {content}
+          </error-boundary>
+        </>
       );
     }
   }

@@ -4,13 +4,13 @@ import {Col} from "react-bootstrap";
 import EntityQueue from '../EntityQueue';
 import * as DataObject from '../../DataTypes/ParagraphTiles'
 
-interface ParagraphTileProps extends ParagraphInterface {
+interface ParagraphDisplayTilesProps  {
   data: DataObject.default;
   view_mode: string;
 }
 
 
-const ParagraphTiles: React.FunctionComponent = (props) => {
+const ParagraphDisplayTiles: React.FunctionComponent = (props : ParagraphTilesProps) => {
   const paragraphData = props.data;
   return (
     <Col lg={12}>
@@ -24,4 +24,4 @@ const ParagraphTiles: React.FunctionComponent = (props) => {
 
 }
 
-export default ParagraphTiles;
+export { ParagraphDisplayTiles as default, ParagraphDisplayTilesProps };

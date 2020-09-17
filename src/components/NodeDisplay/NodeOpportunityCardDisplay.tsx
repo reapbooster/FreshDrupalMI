@@ -1,14 +1,14 @@
 import React from 'react';
 import {Button, Card, Badge, Overlay, OverlayTrigger, Tooltip} from 'react-bootstrap';
 import {NodeOpportunityInterface} from "../../DataTypes/NodeOpportunity";
-
+import {TaxonomyTermInterface} from "../../DataTypes/TaxonomyTerm";
 
 interface NodeOpportunityCardProps {
   data: NodeOpportunityInterface;
   view_mode: string;
 }
 
-const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
+const NodeOpportunityCard: React.FunctionComponent = (props: NodeOpportunityCardProps) => {
 
   const clickHandler = (term) => {
 
@@ -20,16 +20,14 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
     let currentValue = params?.get(filter_param)?.split(',') || [];
     if(!currentValue.includes(newValue)) {
       currentValue.push(newValue);
-
       params.set(filter_param, currentValue);
-
       window.location.hash = params;
       window.dispatchEvent(new HashChangeEvent("hashchange"))
     }
 
   }
 
-  const getBadge = (props: TaxonomyTermProps, key: number) => {
+  const getBadge = (props: TaxonomyTermInterface, key: number) => {
     if(!props.field_visibility) { return; }
     return (
       <Badge pill id={props.id} variant={"primary"} onClick={ () => { clickHandler(props); }} pointer="" style={{ background: props.field_tag_color && props.field_tag_color.color ? props.field_tag_color.color : false }}>

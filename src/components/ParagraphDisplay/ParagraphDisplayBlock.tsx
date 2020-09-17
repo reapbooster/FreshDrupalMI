@@ -1,8 +1,8 @@
 import React from 'react';
-import ParagraphBlock from '../../DataTypes/ParagraphBlock';
+import * as DataObject from '../../DataTypes/ParagraphBlock';
 
 interface ParagraphDisplayBlockProps {
-  data: ParagraphBlock;
+  data: DataObject.ParagraphBlockInterface;
   view_mode: string;
 }
 
