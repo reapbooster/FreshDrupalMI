@@ -7,7 +7,8 @@ interface NodeArticleInterface extends NodeInterface {
 
 }
 
-class NodeArticle extends Node {
+class NodeArticle extends Node implements NodeArticleInterface {
+
   field_authors: object;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;

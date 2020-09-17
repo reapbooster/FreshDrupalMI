@@ -1,14 +1,12 @@
 import React from 'react';
-import List from '../List';
+import ListComponentSource from '../../DataTypes/ListComponentSource';
+import EntityList, {EntityListProps} from '../EntityList';
 
-const VideoBrowser = (props) => {
+const VideoBrowser = (props: EntityListProps) => {
   return (
     <>
-      <List
-        id="ExploreVideos"
-        url="/jsonapi/media/video?jsonapi_include=true"
-        entityTypeId="media"
-        bundle="video"
+      <EntityList
+        {...props}
       />
     </>
   )

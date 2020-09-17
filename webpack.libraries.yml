@@ -1,4 +1,0 @@
-VideosBrowser:
-  version: 1.x
-  js:
-    web/modules/custom/milken_base/components/VideosBrowser/VideosBrowser.entry.js: {}

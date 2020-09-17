@@ -21,6 +21,13 @@ const fs = require('fs').promises;
 const basePath = path.resolve(".");
 const themePath = path.resolve(basePath, "web/themes/custom/milken");
 const modulesPath = path.resolve(basePath, "web/modules/custom");
+const tsxPattern = '/*.tsx';
+const _FILEPATTERN_ = [
+  './' + themePath + '/js/**' + tsxPattern,
+  './' + modulesPath + '/**' + tsxPattern,
+  './src/**' + tsxPattern,
+  './src/**/*.scss'
+];
 
 const oldPath = path.resolve('web/themes/custom/milken/js/drupalTranslations.js');
 // Delete this file if exists.
@@ -121,7 +128,7 @@ gulp.task(
           console.error(err);
           process.exit(1);
         })
-        .pipe(changed('./web'))
+        .pipe(changed())
         .pipe(webpackConfigurator())
     }
     catch (err) {
@@ -143,16 +150,12 @@ gulp.task('browsersync-reload', function (done) {
 
 gulp.task('watch', () => {
 
-  var tsxPattern = '/*.tsx';
-  var files = [
-      './' + themePath + '/js/**' + tsxPattern,
-      './' + modulesPath + '/**' + tsxPattern,
-      './src/**' + tsxPattern,
-      './src/**/*.scss'
-    ];
+
+
 
   gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
-  gulp.watch(files, gulp.series('buildChangedComponents'));
+
+  gulp.watch(_FILEPATTERN_, gulp.series('buildChangedComponents'));
 
   // TODO: When using proxy nothing renders (?!)
   var jsPattern = '/**/*.tsx';
