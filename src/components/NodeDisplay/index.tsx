@@ -3,7 +3,7 @@ import Loading from '../Loading';
 import Entity, { EntityInterface } from '../../DataTypes/Entity';
 import Node from '../../DataTypes/Node';
 import NodeArticleDisplay from "./NodeArticleDisplay";
-import NodeEventDisplay from './NodeEventDisplay';
+//import NodeEventDisplay from './NodeEventDisplay';
 import NodeOpportunityCardDisplay from './NodeOpportunityCardDisplay';
 import NodeLandingPageDisplay from "./NodeLandingPageDisplay";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
@@ -12,7 +12,7 @@ import { EntityComponentProps } from '../../DataTypes/EntityComponentProps';
 const NodeBundleComponents = {
   "node--article": NodeArticleDisplay,
   "node--landing_page": NodeLandingPageDisplay,
-  "node--event": NodeEventDisplay,
+ // "node--event": NodeEventDisplay,
   "node--opportunity": NodeOpportunityCardDisplay,
 }
 

@@ -3,8 +3,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import PodcastBrowser from "components/PodcastBrowser";
 
+const source = document.querySelector('podcast-browser-source');
 
 ReactDOM.render(
-  <PodcastBrowser />,
+  <PodcastBrowser source={source.dataSet} />,
   document.getElementById('main-wrapper')
 );

@@ -1,25 +1,21 @@
 import React from 'react';
-import EntityComponentBase from '../../DataTypes/EntityComponentBase';
+import {NodeEventInterface} from "../../DataTypes/NodeEvent";
 
+interface NodeEventDisplayProps {
+  data: NodeEventInterface;
+  view_mode: string;
+}
 
+const NodeEventDisplay: React.FunctionComponent = (props : NodeEventDisplayProps) =>  {
 
-class NodeEvent extends EntityComponentBase {
+  console.debug("Node Event Display", props);
 
-
-
-    render() {
-
-        // switch(this.props.view_mode) {
-        //
-        // }
-
-        return (
-            <div>
-                <h1>Node Article</h1>
-            </div>
-        );
-    }
+  return (
+    <div>
+      <h1>Node Event</h1>
+    </div>
+  );
 
 }
 
-export default NodeEvent;
+export default NodeEventDisplay;

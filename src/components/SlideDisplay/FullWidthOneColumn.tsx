@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import * as SlideDataType from '../../DataTypes/Slide';
+import * as DataObject from '../../DataTypes/Slide';
 import { Row, Jumbotron, Container } from 'react-bootstrap';
 import ImageFile, { ImageFileInterface } from '../../DataTypes/ImageFile'
-import ImageEntityProps from "../../DataTypes/ImageEntityProps";
 import { SlideDisplayProps } from '.';
 import {HolderImageStyleObject} from '../../DataTypes/ImageStyleObject';
 
@@ -11,16 +10,14 @@ const FullWidthOneColumn : React.FunctionComponent = (props: SlideDisplayProps) 
 
   console.debug("Full Width One Column", props);
 
-
-
   // ========== BACKGROUND IMAGE STUFF ==========
-  const backgroundImageStyleObject = new HolderImageStyleObject();
   const image = new ImageFile(props.data.field_background_image);
+  var backgroundImageStyleObject = image.imageStyleObject;
 
 
   if (image.imageStyleObject) {
     console("I have the data I need:", image);
-    var backgroundImageStyleObject = image.imageStyleObject;
+    backgroundImageStyleObject = image.imageStyleObject;
   } else {
     console.debug('using state to get background image style object', image);
     const [backgroundImageStyleObject, setBackgroundImageStyleObject] = useState(backgroundImageStyleObject);

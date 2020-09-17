@@ -1,5 +1,7 @@
 import Node, { NodeInterface } from './Node';
 import {TaxonomyTermInterface} from './TaxonomyTerm';
+import {ParagraphInterface} from "./Paragraph";
+import {SlideInterface} from "./Slide";
 
 interface NodeArticleInterface extends NodeInterface {
 
@@ -13,11 +15,11 @@ class NodeArticle extends Node {
   field_topics: TaxonomyTermInterface;
 
   hasData(): boolean {
-
+    return false;
   }
 
   getIncluded(): string {
-    
+    return "";
   }
 }
 

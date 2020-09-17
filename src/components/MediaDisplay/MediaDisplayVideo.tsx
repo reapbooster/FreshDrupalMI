@@ -4,6 +4,7 @@ import { Col, Card } from 'react-bootstrap';
 import MediaImage, {MediaImageInterface} from '../../DataTypes/MediaImage';
 import moment from 'moment';
 import * as DataObject from '../../DataTypes/MediaVideo';
+import { HolderImageStyleObject } from '../../DataTypes/ImageStyleObject';
 
 interface MediaDisplayVideoProps {
   data: DataObject.default;
@@ -12,13 +13,15 @@ interface MediaDisplayVideoProps {
 
 const MediaDisplayVideo: React.FunctionComponent = (props: MediaDisplayVideoProps) => {
 
-  const [ thumbnailImageUrl, setThumbnailImageUrl ] = useState("holder.js/100x100?text=thumbnail&auto=yes");
-  var thumbnail = new ImageEntityProps(props.thumbnail);
+  const thumbnailFileObject = File.factory(props.data.field_media_image);
+  
   if (thumbnail.getData !== undefined) {
+    const [ thumbnailImageStyleObject, setThumbnailImageStyleObject ] = useState(thumbnail);
     thumbnail.getData()
       .then(res => res.json())
       .then((incoming) => {
-        setThumbnailImageUrl(incoming.data.uri.url);
+        const image = new MediaImage(incoming.data);
+        setThumbnailImageUrl(image.getStyleObject());
       });
   }
   const created = moment(props.created, moment.ISO_8601);

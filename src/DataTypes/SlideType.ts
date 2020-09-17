@@ -7,9 +7,9 @@ class SlideTypeDependencies extends Dependencies {}
 
 interface SlideTypeInterface extends EntityTypeInterface {
 
-  langcode: string,
-  status: boolean,
-  dependencies: SlideTypeDependencies,
+  langcode: string;
+  status: boolean;
+  dependencies: SlideTypeDependencies;
   drupal_internal__type: string;
   name: string;
   description: string;
@@ -18,9 +18,9 @@ interface SlideTypeInterface extends EntityTypeInterface {
 
 class SlideType extends EntityType {
 
-  langcode: string,
-  status: boolean,
-  dependencies: SlideTypeDependencies,
+  langcode: string;
+  status: boolean;
+  dependencies: SlideTypeDependencies;
   drupal_internal__type: string;
   name: string;
   description: string;

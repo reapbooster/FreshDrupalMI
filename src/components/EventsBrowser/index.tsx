@@ -1,17 +1,15 @@
 import React from 'react';
-import List from '../List';
+import ListComponentSource from '../../DataTypes/ListComponentSource';
+import EntityList, {EntityListProps} from '../EntityList';
 
-const EventsBrowser = (props) => {
+const EventsBrowser = (props: EntityListProps) => {
   return (
     <>
-      <List
-        id="ExploreEvents"
-        url="/jsonapi/event/conference?jsonapi_include=true"
-        entityTypeId="event"
-        bundle="conference"
+      <EntityList 
+        {...props}
       />
     </>
   )
 }
 
-export default EventsBrowser;
+export {EventsBrowser as default};

@@ -1,17 +1,14 @@
 import React from 'react';
-import List from '../List';
+import EntityList, { EntityListProps } from '../EntityList';
 
-const ReportsBrowser = (props) => {
+const ReportsBrowser = (props: EntityListProps) => {
   return (
     <>
-      <List
-        id="ExploreReports"
-        url="/jsonapi/media/report?jsonapi_include=true"
-        entityTypeId="media"
-        bundle="report"
+      <EntityList 
+        {...props}
       />
     </>
   )
 }
 
-export default ReportsBrowser;
+export { ReportsBrowser as default } ;

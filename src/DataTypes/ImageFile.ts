@@ -13,7 +13,7 @@ interface ImageFileMetaDataInterface {
 interface ImageFileInterface extends FileInterface {
   filemime: string;
   filename: string;
-  filesize: number;
+  filesize: number | string;
   image_style_uri: Array<object>;
   meta: ImageFileMetaDataInterface;
   status: boolean;
@@ -23,7 +23,7 @@ interface ImageFileInterface extends FileInterface {
 class ImageFile extends File implements ImageFileInterface {
   filemime: string;
   filename: string;
-  filesize: number;
+  filesize: number | string;
   _image_style_uri: ImageStyleObject;
   meta: ImageFileMetaDataInterface;
   status: boolean;
@@ -35,6 +35,22 @@ class ImageFile extends File implements ImageFileInterface {
     if (incomingImageStyles) {
       this.setImageStyles(incomingImageStyles);
     }
+  }
+  
+  get image_style_uri() : ImageStyleObjectInterface {
+    return this._image_style_uri;
+  }
+
+  set image_style_uri(incoming) {
+    this._image_style_uri = new ImageStyleObject(incoming);
+  }
+
+  hasData(): boolean {
+    return (intval(this.filesize) > 0);
+  }
+  
+  getIncluded(): string {
+    return "";
   }
 
   get imageMultiUrl(): string {

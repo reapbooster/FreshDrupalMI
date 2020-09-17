@@ -1,12 +1,12 @@
 import React from 'react';
 import * as ParagraphDataObject from '../../DataTypes/Paragraph';
-import ParagraphSlide from "./ParagraphSlide";
+import ParagraphDisplaySlide from "./ParagraphSlide";
 import ParagraphDisplayFourPanel from "./ParagraphDisplayFourPanel";
-import ParagraphBodyContent from "./ParagraphDisplayBodyContent";
-import ParagraphPullQuote from "./ParagraphPullQuote";
+import ParagraphDisplayBodyContent from "./ParagraphDisplayBodyContent";
+import ParagraphDisplayPullQuote from "./ParagraphPullQuote";
 import ParagraphTiles from "./ParagraphTiles";
 import ParagraphItemsFromAnEntityQueue from "./ParagraphItemsFromAnEntityQueue";
-import ParagraphBlock from "./ParagraphDisplayBlock";
+import ParagraphDisplayBlock from "./ParagraphDisplayBlock";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import Loading from '../Loading';

@@ -1,6 +1,6 @@
 import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
 import PathObject, {PathObjectInterface} from './PathObject';
-import NodeEvent from './NodeEvent';
+// import NodeEvent from './NodeEvent';
 import NodeArticle from './NodeArticle';
 import NodeOpportunity from './NodeOpportunity';
 import NodeLandingPage from './NodeLandingPage';
@@ -34,7 +34,7 @@ abstract class Node extends RevisionableEntity implements NodeInterface {
   }
 
   abstract hasData(): boolean;
-  
+
   abstract getIncluded(); string;
 
   public static factory(incoming) {
@@ -44,8 +44,8 @@ abstract class Node extends RevisionableEntity implements NodeInterface {
         return new NodeLandingPage(incoming);
       case "node--opportunity":
         return new NodeOpportunity(incoming);
-      case "node--event":
-        return new NodeEvent(incoming);
+     // case "node--event":
+     //   return new NodeEvent(incoming);
       case "node--article":
         return new NodeArticle(incoming);
       default:

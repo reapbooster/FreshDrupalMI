@@ -1,5 +1,5 @@
 import React from 'react';
-import DataObject from '../../DataTypes/Slide';
+import * as DataObject from '../../DataTypes/Slide';
 
 interface FiftyFiftyProps {
   data: DataObject.default;
@@ -17,10 +17,10 @@ const FiftyFifty : React.FunctionComponent = (props: FiftyFiftyProps) => {
 
   if (image.imageStyleObject) {
     console("I have the data I need:", image);
-    var backgroundImageStyleObject = image.imageStyleObject;
+    backgroundImageStyleObject = image.imageStyleObject;
   } else {
     console.debug('using state to get background image style object', image);
-    const [backgroundImageStyleObject, setBackgroundImageStyleObject] = useState(backgroundImageStyleObject);
+    const [ backgroundImageStyleObject, setBackgroundImageStyleObject ] = useState(backgroundImageStyleObject);
   }
   if (backgroundImageStyleObject.getData !== undefined) {
     backgroundImageStyleObject
@@ -33,9 +33,7 @@ const FiftyFifty : React.FunctionComponent = (props: FiftyFiftyProps) => {
     });
   }
 
-
-
-
+  console.log("backgroundImageStyleObject", backgroundImageStyleObject);
 
   return (
       <div><h3>Slide--Fifty-Fifty</h3></div>

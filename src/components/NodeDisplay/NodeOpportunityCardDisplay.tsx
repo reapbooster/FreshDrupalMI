@@ -1,25 +1,11 @@
 import React from 'react';
 import {Button, Card, Badge, Overlay, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {NodeOpportunityInterface} from "../../DataTypes/NodeOpportunity";
 
-import TaxonomyTerm, { TaxonomyTermProps } from "../../DataTypes/TaxonomyTerm";
-import TextField from "../../DataTypes/TextField";
-import LinkList from '../../DataTypes/LinkList';
-
-import { useQueryState } from 'use-location-state';
 
 interface NodeOpportunityCardProps {
-  changed: string;
-  created: string;
-  drupal_internal__nid: number;
-  drupal_internal__vid: number;
-  field_actions: Array<TaxonomyTerm>;
-  field_body: TextField;
-  field_focus: Array<TaxonomyTerm>;
-  field_region: TaxonomyTerm;
-  field_terms: Array<TaxonomyTerm>;
-  links: LinkList;
-  title: string;
-  type: string;
+  data: NodeOpportunityInterface;
+  view_mode: string;
 }
 
 const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
@@ -58,20 +44,20 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
     </Tooltip>
   );
 
-  console.log('props', props);
-
+  console.log('NodeOpportunityCard', props);
+  const data = props.data;
   return (
-    <Card key={props.machine_name}>
+    <Card key={data.machine_name}>
      <OverlayTrigger
         placement="top"
-        overlay={<Tooltip id="button-tooltip"><div dangerouslySetInnerHTML={{__html: props.field_body?.value}}></div></Tooltip>}
+        overlay={<Tooltip id="button-tooltip"><div dangerouslySetInnerHTML={{__html: data.field_body?.value}}></div></Tooltip>}
       >
         <Card.Body>
-          <Card.Title>{props.title}</Card.Title>
+          <Card.Title>{data.title}</Card.Title>
 
-          { props?.field_actions?.map && props?.field_actions?.map(getBadge) }
-          { props?.field_focus?.map && props?.field_focus?.map(getBadge) }
-          { props?.field_terms?.map && props?.field_terms?.map(getBadge) }
+          { data?.field_actions?.map && data?.field_actions?.map(getBadge) }
+          { data?.field_focus?.map && data?.field_focus?.map(getBadge) }
+          { data?.field_terms?.map && data?.field_terms?.map(getBadge) }
 
         </Card.Body>
       </OverlayTrigger>
@@ -79,7 +65,7 @@ const NodeOpportunityCard = (props: NodeOpportunityCardProps) => {
         <Button
           className="mr-sm-2"
           variant="outline"
-          href={props?.path?.alias ?? false}
+          href={data?.path?.alias ?? false}
         >
           <span>View more</span>
         </Button>
