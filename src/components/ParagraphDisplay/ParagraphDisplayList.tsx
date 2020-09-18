@@ -3,12 +3,12 @@ import ParagraphDisplay from '../ParagraphDisplay';
 import {EntityInterface} from "../../DataTypes/Entity";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 
-interface ParagraphListProps {
+interface ParagraphDisplayListProps {
   items: Array<DataObject.ParagraphInterface>;
   view_mode: string;
 }
 
-export const ParagraphList: React.FunctionComponent = (props: ParagraphListProps) => {
+export const ParagraphDisplayList: React.FunctionComponent = (props: ParagraphDisplayListProps) => {
   if (props.items?.length) {
     return props.items.map((item: EntityInterface, key: number) => {
       return (
@@ -31,4 +31,4 @@ export const ParagraphList: React.FunctionComponent = (props: ParagraphListProps
 }
 
 
-export { ParagraphList as default, ParagraphListProps };
+export { ParagraphDisplayList as default, ParagraphDisplayListProps };

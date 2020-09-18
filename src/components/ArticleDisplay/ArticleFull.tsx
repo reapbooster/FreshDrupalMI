@@ -4,7 +4,7 @@ import { Row, Container, Col } from 'react-bootstrap';
 import { BodyField } from "../../Fields/BodyField";
 import * as ArticleDatatype from '../../DataTypes/Article'
 import Paragraphs from "../Paragraphs";
-import ParagraphList from "../ParagraphList";
+import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
 
 const ArticleFull = (props: ArticleDatatype.default) => {
   console.log("ArticleFull", props);
@@ -21,7 +21,7 @@ const ArticleFull = (props: ArticleDatatype.default) => {
           Social Media Links
         </Col>
         <Col md={6} sm={12} lg={6}>
-          <ParagraphList items={props.field_content} view_mode="full" />
+          <ParagraphDisplayList items={props.field_content} view_mode="full" />
         </Col>
         <Col md={3} sm={12} lg={3}>
           <p>Tags Go here</p>

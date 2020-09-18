@@ -9,10 +9,10 @@ interface MediaImageInterface extends MediaInterface {
   field_photo_subject_name: string;
   field_photo_subject_title: string;
   field_photo_subject_org: string;
-  
+
 }
 
-class MediaImage extends Media {
+class MediaImage extends Media implements MediaImageInterface {
 
   _field_media_image: ImageFile;
 

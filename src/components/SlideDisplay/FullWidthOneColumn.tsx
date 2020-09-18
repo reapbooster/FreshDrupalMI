@@ -3,7 +3,12 @@ import * as DataObject from '../../DataTypes/Slide';
 import { Row, Jumbotron, Container } from 'react-bootstrap';
 import ImageFile, { ImageFileInterface } from '../../DataTypes/ImageFile'
 import { SlideDisplayProps } from '.';
-import {HolderImageStyleObject} from '../../DataTypes/ImageStyleObject';
+import { SlideFullWidthOneColumnInterface } from '../../DataTypes/SlideFullWidthOneColumn';
+
+interface FullWidthOneColumnProps {
+  data: SlideFullWidthOneColumnInterface;
+  view_mode: string;
+}
 
 
 const FullWidthOneColumn : React.FunctionComponent = (props: SlideDisplayProps) => {

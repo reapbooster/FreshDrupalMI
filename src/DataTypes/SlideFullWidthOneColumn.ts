@@ -5,7 +5,7 @@ import SlideType, {SlideTypeInterface} from "./SlideType";
 import Link, {LinkInterface} from './LinkList';
 
 
-interface FullWidhtOneColumnInterface extends SlideInterface {
+interface SlideFullWidhtOneColumnInterface extends SlideInterface {
 
   field_background_color: ColorObjectInterface;
   field_link: boolean;
@@ -18,7 +18,7 @@ interface FullWidhtOneColumnInterface extends SlideInterface {
 
 }
 
-class FullWidthOneColumn extends Slide implements FullWidhtOneColumnInterface {
+class SlideFullWidthOneColumn extends Slide implements FullWidhtOneColumnInterface {
 
   private _field_background_color: ColorObjectInterface;
   private _field_background_image: ImageFile;
@@ -79,4 +79,4 @@ class FullWidthOneColumn extends Slide implements FullWidhtOneColumnInterface {
   }
 }
 
-export {FullWidthOneColumn as default, FullWidhtOneColumnInterface};
+export {SlideFullWidthOneColumn as default, SlideFullWidhtOneColumnInterface};

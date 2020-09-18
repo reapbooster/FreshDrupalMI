@@ -7,6 +7,7 @@ import { EntityComponentProps, EntityComponentPropsInterface } from "../../DataT
 import EntityComponentBase, { EntityComponentState } from "../../DataTypes/EntityComponentBase";
 
 interface PodcastEpisodeProps extends MediaPodcastEpisodeInterface {
+  data: MediaPodcastEpisodeInterface;
   onSelectHandler: any;
   open: boolean;
   key: number;
@@ -32,7 +33,7 @@ const accordionToggleStyle = {
 
 class PodcastEpisode extends EntityComponentBase<PodcastEpisodeProps, EntityComponentState> {
 
-  include = "&include=field_media_image,field_media_audio_file";
+  include = "";
 
   render() {
     console.debug("Podcast Episode Render", this);
@@ -65,4 +66,4 @@ class PodcastEpisode extends EntityComponentBase<PodcastEpisodeProps, EntityComp
 
 }
 
-export { PodcastEpisode as default };
+export { PodcastEpisode as default, PodcastEpisodeProps };

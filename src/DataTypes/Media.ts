@@ -32,10 +32,6 @@ abstract class Media extends RevisionableEntity implements MediaInterface {
   field_filemime: string;
   field_filesize: number;
   field_height: string;
-  _field_media_image: ImageFile;
-  field_photo_subject_name: string;
-  field_photo_subject_title: string;
-  field_media_in_library: boolean;
   field_width: string;
 
   get bundle(): MediaTypeInterface {
@@ -46,21 +42,8 @@ abstract class Media extends RevisionableEntity implements MediaInterface {
     this._bundle = new MediaType(incoming);
   }
 
-  get field_media_image(): ImageFileInterface {
-    return this._field_media_image;
-  }
-
-  set field_media_image(incoming: ImageFileInterface) {
-    this._field_media_image = new ImageFile(incoming);
-  }
-
-  hasData(): boolean {
-    return false
-  }
-
-  getIncluded(): string {
-    return "";
-  }
+  abstract hasData(): boolean;
+  abstract getIncluded(): string;
 
 }
 

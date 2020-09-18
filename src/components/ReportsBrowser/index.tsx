@@ -1,10 +1,16 @@
 import React from 'react';
-import EntityList, { EntityListProps } from '../EntityList';
+import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
+import {MediaReportInterface} from "../../DataTypes/MediaReport";
 
-const ReportsBrowser = (props: EntityListProps) => {
+interface ResportsBrowserProps {
+  items: Array<MediaReportInterface>;
+  view_mode: string;
+}
+
+const ReportsBrowser = (props: ResportsBrowserProps) => {
   return (
     <>
-      <EntityList 
+      <MediaDisplayList
         {...props}
       />
     </>

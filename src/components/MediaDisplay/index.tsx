@@ -6,7 +6,7 @@ import Media, { MediaInterface } from '../../DataTypes/Media';
 import MediaDisplayImage from './MediaDisplayImage';
 import MediaDisplayVideo from "./MediaDisplayVideo";
 import MediaDisplayReport from "./MediaDisplayReport";
-import MediaDisplayPodcast from "./MediaDisplayPodcast";
+import MediaDisplayPodcastEpisode from "./MediaDisplayPodcastEpisode";
 import MediaVideo from "../../DataTypes/MediaVideo";
 import MediaImage from "../../DataTypes/MediaImage";
 import MediaReport from "../../DataTypes/MediaReport";
@@ -47,7 +47,7 @@ function MediaComponentFactory(incoming: MediaInterface) : React.FunctionCompone
     case "media--report":
       return MediaDisplayReport;
     case "media--podcast":
-      return MediaDisplayPodcast;
+      return MediaDisplayPodcastEpisode;
     default:
       console.error('cannot find component', incoming);
       throw new Error("Cannot find component for props.type ".concat(incoming.type));
@@ -94,6 +94,8 @@ const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
     </ErrorBoundary>
   )
 }
+
+
 
 
 export { MediaDisplay as default, MediaDisplayProps, MediaComponentFactory, MediaDataFactory };

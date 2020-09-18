@@ -17,7 +17,7 @@ interface ImageFileInterface extends FileInterface {
   image_style_uri: Array<object>;
   meta: ImageFileMetaDataInterface;
   status: boolean;
-
+  imageStyleObject: ImageStyleObjectInterface;
 }
 
 class ImageFile extends File implements ImageFileInterface {
@@ -36,7 +36,7 @@ class ImageFile extends File implements ImageFileInterface {
       this.setImageStyles(incomingImageStyles);
     }
   }
-  
+
   get image_style_uri() : ImageStyleObjectInterface {
     return this._image_style_uri;
   }
@@ -48,7 +48,7 @@ class ImageFile extends File implements ImageFileInterface {
   hasData(): boolean {
     return (intval(this.filesize) > 0);
   }
-  
+
   getIncluded(): string {
     return "";
   }
@@ -62,7 +62,7 @@ class ImageFile extends File implements ImageFileInterface {
   }
 
   setImageStyles(incoming: Array<object>) {
-    this._image_style_uri = ImageStyleObject.factory(incoming);
+    this._image_style_uri = new ImageStyleObject(incoming);
   }
 
 }

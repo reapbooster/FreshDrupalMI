@@ -1,11 +1,16 @@
 import React from 'react';
-import ListComponentSource from '../../DataTypes/ListComponentSource';
-import EntityList, {EntityListProps} from '../EntityList';
+import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
+import {MediaVideoInterface} from "../../DataTypes/MediaVideo";
 
-const VideoBrowser = (props: EntityListProps) => {
+interface VideoBrowserProps {
+  items: Array<MediaVideoInterface>;
+  view_mode: string;
+}
+
+const VideoBrowser = (props: VideoBrowserProps) => {
   return (
     <>
-      <EntityList
+      <MediaDisplayList
         {...props}
       />
     </>

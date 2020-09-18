@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as DataObject from '../../DataTypes/MediaReport';
 import { Col, Card } from 'react-bootstrap';
-import moment from 'moment';
+import MediaDisplayImage from './MediaDisplayImage'
 
 interface MediaReportProps {
   data: DataObject.MediaReportInterface;
@@ -10,8 +10,8 @@ interface MediaReportProps {
 
 
 const MediaReport: React.FunctionComponent = (props: ReportDataInterface) => {
-  
-  
+
+
 
   return (
     <>
@@ -21,7 +21,7 @@ const MediaReport: React.FunctionComponent = (props: ReportDataInterface) => {
                 data-drupal-id={props.drupal_internal__mid}
                 data-drupal-type={props.type}
                 data-uuid={props.id}>
-            <MediaImageDisplay data={props.data} view_mode="thumbnail" />
+            <MediaDisplayImage data={props.data.field_cover} view_mode="thumbnail" />
             <Card.Body style={{minHeight: "150px"}}>
               <Card.Title>{props.name}</Card.Title>
             </Card.Body>

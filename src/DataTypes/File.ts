@@ -16,7 +16,7 @@ interface FileInterface extends EntityInterface {
 
   hasData(): boolean;
   getIncluded(): string;
-  
+
 }
 
 
@@ -25,19 +25,6 @@ abstract class File extends Entity implements FileInterface {
   drupal_internal__fid: number;
   uid: UserInterface;
   uri: FileURIInterface;
-
-  factory(incoming: FileInterface) {
-    switch (incoming.type) {
-      case "file--image":
-        return new ImageFile(incoming);
-      case "file--document":
-        return new DocumentFile(incoming);
-      default:
-        console.error("Cannot determine Data Class", incoming);
-        throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
-
-    }
-  }
 
 }
 
