@@ -7,6 +7,8 @@
  */
 
 const browserSync = require('browser-sync').create();
+const changed = require('gulp-changed');
+const wp = require('webpack');
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
 const shell = require("gulp-shell");
@@ -20,6 +22,13 @@ const fs = require('fs').promises;
 const basePath = path.resolve(".");
 const themePath = path.resolve(basePath, "web/themes/custom/milken");
 const modulesPath = path.resolve(basePath, "web/modules/custom");
+const tsxPattern = '/*.tsx';
+const _FILEPATTERN_ = [
+  './' + themePath + '/js/**' + tsxPattern,
+  './' + modulesPath + '/**' + tsxPattern,
+  './src/**' + tsxPattern,
+  './src/**/*.scss'
+];
 
 const oldPath = path.resolve('web/themes/custom/milken/js/drupalTranslations.js');
 // Delete this file if exists.
@@ -49,11 +58,18 @@ gulp.task(
     cwd: path.resolve(basePath, "web")
   })
 );
-
-gulp.task("themeBuild", () => {
+gulp.task('milkenThemeBuild', (done) => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
     .pipe(sourcemaps.init())
+    .on('end', (complete) => {
+      console.debug("ending", complete);
+      done();
+    })
+    .on('error', (err) => {
+      console.error(err);
+      process.exit(1);
+    })
     .pipe(
       sass({
         allowEmpty: true,
@@ -72,25 +88,63 @@ gulp.task("themeBuild", () => {
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
 
+gulp.task('ginThemeBuild', shell.task('yarn install && yarn build', {
+  cwd: path.resolve(basePath, "web/themes/contrib/gin")
+}));
+
+gulp.task("themeBuild", gulp.parallel(['milkenThemeBuild', 'ginThemeBuild']));
+
+
+
 gulp.task(
   "buildComponents",
   (done) => {
-
     console.log("Building components.");
     try {
       const webpackConfigurator = require(`./config/node/webpack.config`);
       /* eslint-disable */
-      gulp.src('**/components/**/*.entry.tsx', { sourcemaps: false, cwd: modulesPath })
+      gulp.src('**/*.entry.tsx', { sourcemaps: false, cwd: path.join(basePath, 'web') })
+        .on('end', (complete) => {
+          console.debug("ending", complete);
+          done();
+        })
+        .on('error', (err) => {
+          console.error(err);
+          process.exit(1);
+        })
         .pipe(webpackConfigurator())
-      gulp.src('js/*.entry.tsx', { sourcemaps: false, cwd: themePath })
-        .pipe(webpackConfigurator());
     }
     catch (err) {
       console.log(err);
       process.exit(1);
     }
-    done();
   });
+
+gulp.task(
+  "buildChangedComponents",
+  (done) => {
+    console.log("Building changed components.");
+    try {
+      const webpackConfigurator = require(`./config/node/webpack.config`);
+      /* eslint-disable */
+      gulp.src('**/*.entry.tsx', { sourcemaps: false, cwd: path.join(basePath, 'web') })
+        .on('end', (complete) => {
+          console.debug("ending", complete);
+          done();
+        })
+        .on('error', (err) => {
+          console.error(err);
+          process.exit(1);
+        })
+        .pipe(changed())
+        .pipe(webpackConfigurator())
+    }
+    catch (err) {
+      console.log(err);
+      process.exit(1);
+    }
+  });
+
 
 gulp.task(
   "default",
@@ -104,16 +158,12 @@ gulp.task('browsersync-reload', function (done) {
 
 gulp.task('watch', () => {
 
-  var tsxPattern = '/*.tsx';
-  var files = [
-      './' + themePath + '/js/**' + tsxPattern,
-      './' + modulesPath + '/**' + tsxPattern,
-      './src/**' + tsxPattern,
-      './src/**/*.scss'
-    ];
+
+
 
   gulp.watch('./web/themes/custom/milken/scss/*.scss', {}, gulp.series('themeBuild'));
-  gulp.watch(files, gulp.series('buildComponents'));
+
+  gulp.watch(_FILEPATTERN_, gulp.series('buildChangedComponents'));
 
   // TODO: When using proxy nothing renders (?!)
   var jsPattern = '/**/*.tsx';

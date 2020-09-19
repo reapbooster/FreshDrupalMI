@@ -1,14 +1,17 @@
 import React from 'react';
-import List from '../List';
+import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
+import {MediaVideoInterface} from "../../DataTypes/MediaVideo";
 
-const VideoBrowser = (props) => {
+interface VideoBrowserProps {
+  items: Array<MediaVideoInterface>;
+  view_mode: string;
+}
+
+const VideoBrowser = (props: VideoBrowserProps) => {
   return (
     <>
-      <List
-        id="ExploreVideos"
-        url="/jsonapi/media/video?jsonapi_include=true"
-        entityTypeId="media"
-        bundle="video"
+      <MediaDisplayList
+        {...props}
       />
     </>
   )

@@ -12,111 +12,31 @@ dependencies:
     - node.type.article
   module:
     - entity_reference_revisions
+    - js_entity
     - layout_builder
-    - layout_discovery
+    - layout_builder_restrictions
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
-    enabled: true
-    sections:
-      -
-        layout_id: layout_onecol
-        layout_settings:
-          label: ''
-        components:
-          05ac2434-d0b8-43ac-a1f2-8e5fe68f6517:
-            uuid: 05ac2434-d0b8-43ac-a1f2-8e5fe68f6517
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'extra_field_block:node:article:links'
-            additional: {  }
-            weight: 0
-          796e4ffe-e994-4f1b-9842-f61723fe277c:
-            uuid: 796e4ffe-e994-4f1b-9842-f61723fe277c
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:field_promotional_slide'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 2
-          2a1598d3-efdf-4596-b23b-f30d0baa227c:
-            uuid: 2a1598d3-efdf-4596-b23b-f30d0baa227c
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:field_promo_slide'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 3
-          75b9d1eb-3eec-4bb3-b457-53eefa2b4973:
-            uuid: 75b9d1eb-3eec-4bb3-b457-53eefa2b4973
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:field_centers'
-              formatter:
-                label: above
-                settings:
-                  link: true
-                third_party_settings: {  }
-                type: entity_reference_label
-            additional: {  }
-            weight: 5
-          2750a91f-2de6-494d-8245-ed74eeac3ea1:
-            uuid: 2750a91f-2de6-494d-8245-ed74eeac3ea1
-            region: content
-            configuration:
-              label_display: '0'
-              context_mapping:
-                entity: layout_builder.entity
-              id: 'field_block:node:article:field_content'
-              formatter:
-                label: above
-                settings:
-                  view_mode: default
-                  link: ''
-                third_party_settings: {  }
-                type: entity_reference_revisions_entity_view
-            additional: {  }
-            weight: 6
-        third_party_settings: {  }
+    enabled: false
+  js_entity:
+    render_profile: node.article.article_full
+    unique_key: node_article
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
 id: node.article.default
 targetEntityType: node
 bundle: article
 mode: default
 content:
-  field_centers:
-    weight: 105
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_content:
-    weight: 106
-    label: above
+    weight: 25
+    label: hidden
     settings:
       view_mode: default
       link: ''
@@ -124,12 +44,13 @@ content:
     type: entity_reference_revisions_entity_view
     region: content
   field_promo_slide:
-    weight: 103
-    label: above
+    weight: 0
+    label: hidden
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_promotional_slide:
     weight: 102
@@ -141,11 +62,12 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_authors: true
+  field_centers: true
   field_meta_tags: true
   field_topics: true
   langcode: true

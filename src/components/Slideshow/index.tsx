@@ -1,54 +1,32 @@
-import React, { useState } from 'react';
-import Slide from "../Slide";
+import React from 'react';
+import SlideDisplay from "../SlideDisplay";
 import {
   Carousel,
-  CarouselItem, Col,
-  Container, Spinner, Row
+  CarouselItem
 } from "react-bootstrap";
-import {
-  EntityComponentProps,
-  JSONAPIEntityReferenceData
-} from "../../DataTypes/EntityComponentProps";
-import SlideDataInterface from "../../DataTypes/SlideDataInterface";
+import * as SlideDatatype from "../../DataTypes/Slide";
 
+interface SlideShowProps {
+  items: Array<SlideDatatype.SlideInterface>;
+  view_mode: string;
+}
 
-const SlideShow: React.FunctionComponent<EntityComponentProps> = (props: EntityComponentProps) => {
-
-  const getCarousel = (slideData: Array<SlideDataInterface> = []) => {
-    if (slideData.length) {
-      return (
-        <Carousel>
-          {slideData.map((slide: SlideDataInterface, key) => {
-            return (
-              <CarouselItem key={key} id={slide.id}>
-                <Slide {...slide} view={"full"} />
-              </CarouselItem>
-            )
-          })}
-        </Carousel>
-      );
-    }
-    return (
-      <div className={"w-25 text-align-center border-0"}>
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      </div>
-    );
-  }
-
-  console.log("Rendering Slideshow:", props);
-
+const SlideShow: React.FunctionComponent = (props: SlideShowProps) => {
+  console.debug("SlideShow", props);
   return (
-    <>
-      {getCarousel(props.items)}
-    </>
+    <Carousel>
+      {props.items.map((slide: SlideDatatype.SlideInterface, key: number ) => {
+        const slideData = new SlideDatatype.default(slide);
+        return (
+          <CarouselItem key={key} id={slide.id}>
+            <SlideDisplay data={slideData} view_mode={props.view_mode ?? "full"} />
+          </CarouselItem>
+        )
+      })}
+    </Carousel>
   );
 }
 
-SlideShow.defaultProps = {
-  items: [],
-  data: {}
-}
+
 
 export default SlideShow;

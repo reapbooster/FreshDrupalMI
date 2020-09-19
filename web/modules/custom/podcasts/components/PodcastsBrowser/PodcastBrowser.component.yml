@@ -1,0 +1,8 @@
+name: 'Podcasts Browser'
+machine_name: PodcastBrowser
+description: 'Podcasts react component'
+js:
+  Podcasts.entry.js: { }
+cache:
+  max-age: 0
+

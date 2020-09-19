@@ -1,7 +1,0 @@
-name: Event
-description: 'Event Article Component.'
-js:
-  Event.entry.js: { }
-cache:
-  max-age: 0
-

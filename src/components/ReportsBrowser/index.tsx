@@ -1,17 +1,20 @@
 import React from 'react';
-import List from '../List';
+import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
+import {MediaReportInterface} from "../../DataTypes/MediaReport";
 
-const ReportsBrowser = (props) => {
+interface ResportsBrowserProps {
+  items: Array<MediaReportInterface>;
+  view_mode: string;
+}
+
+const ReportsBrowser = (props: ResportsBrowserProps) => {
   return (
     <>
-      <List
-        id="ExploreReports"
-        url="/jsonapi/media/report?jsonapi_include=true"
-        entityTypeId="media"
-        bundle="report"
+      <MediaDisplayList
+        {...props}
       />
     </>
   )
 }
 
-export default ReportsBrowser;
+export { ReportsBrowser as default } ;

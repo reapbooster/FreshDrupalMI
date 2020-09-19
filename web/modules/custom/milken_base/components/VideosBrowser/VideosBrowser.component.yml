@@ -1,4 +1,5 @@
 name: 'Videos Browser'
+machine_name: VideosBrowser
 description: 'Videos Browser entry'
 js:
   VideosBrowser.entry.js: { }

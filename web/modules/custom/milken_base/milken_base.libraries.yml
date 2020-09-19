@@ -1,6 +1,0 @@
-slide_display:
-  version: 1.0.0
-  footer: true
-  webpack: true
-  js:
-    js/SlideDisplay.js: { preprocess: 0, source: 'js/SlideDisplay.ts' }

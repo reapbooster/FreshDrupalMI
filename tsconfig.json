@@ -26,7 +26,7 @@
         "./web/themes/custom/milken/config",
         "./web/themes/custom/milken/gulp",
         "./web/modules/custom/milken_base",
-        "./config/node"
+        "./config/node", "web/modules/custom/podcasts/components/PodcastsBrowser"
     ],
     "lib": [
       "es2016"
