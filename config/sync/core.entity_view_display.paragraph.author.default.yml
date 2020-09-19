@@ -5,7 +5,10 @@ dependencies:
   config:
     - field.field.paragraph.author.field_job_position
     - field.field.paragraph.author.field_name
+    - field.field.paragraph.author.field_photo
     - paragraphs.paragraphs_type.author
+  module:
+    - image
 id: paragraph.author.default
 targetEntityType: paragraph
 bundle: author
@@ -13,18 +16,26 @@ mode: default
 content:
   field_job_position:
     weight: 1
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_name:
     weight: 0
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
+  field_photo:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
 hidden:
-  field_photo: true
   search_api_excerpt: true

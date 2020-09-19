@@ -1,4 +1,5 @@
 name: 'ReportsBrowser'
+machine_name: ReportBrowser
 description: 'Reports Browser react component'
 js:
   ReportsBrowser.entry.js: { }

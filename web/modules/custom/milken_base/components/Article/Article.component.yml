@@ -1,7 +1,0 @@
-name: Article
-description: 'React Article Component.'
-js:
-  Article.entry.js: { }
-cache:
-  max-age: 0
-

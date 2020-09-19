@@ -1,7 +1,7 @@
 name: 'Events Browser'
+machine_name: EventsBrowser
 description: 'Events Browser entry'
 js:
   EventsBrowser.entry.js: { }
 cache:
   max-age: 0
-

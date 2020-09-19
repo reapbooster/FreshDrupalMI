@@ -1,33 +1,100 @@
 
 import JSONApiUrl from "./JSONApiUrl";
 
-interface Link {
+interface LinkInterface {
   href: JSONApiUrl;
+  title?: string;
+  uri?: string;
 }
 
-interface ListListProps {
-  self?: Link;
-  previous?: Link;
-  next?: Link;
-  first?: Link;
-  last?: Link;
-}
+class Link implements LinkInterface {
+  title: string;
+  private _href: JSONApiUrl;
 
-
-class LinkList {
-  self?:      JSONApiUrl;
-  previous?:  JSONApiUrl;
-  next?:      JSONApiUrl;
-  first?:     JSONApiUrl;
-  last?:      JSONApiUrl;
-
-  constructor(incoming) {
-    for (var i in incoming) {
-      if (incoming[i].href) {
-        this[i] = new JSONApiUrl(incoming[i].href);
-      }
-    }
+  constructor(incoming: LinkInterface) {
+    Object.assign(this, incoming);
   }
+
+  get href(): JSONApiUrl {
+    return this._href;
+  }
+  set href(value) {
+    if (!value instanceof JSONApiUrl) {
+      value = new JSONApiUrl(value);
+    }
+    this._href = value;
+  }
+
+  get uri(): string {
+    return this._href.toString()
+  }
+
+  set uri(incoming: string) {
+    this._href = new JSONApiUrl(incoming);
+  }
+
 }
 
-export { LinkList as default, Link }
+interface LinkListInterface {
+  self?: LinkInterface;
+  previous?: LinkInterface;
+  next?: LinkInterface;
+  first?: LinkInterface;
+  last?: LinkInterface;
+}
+
+
+class LinkList implements LinkListInterface{
+  private _self?:      Link;
+  private _previous?:  Link;
+  private _next?:      Link;
+  private _first?:     Link;
+  private _last?:      Link;
+
+  constructor(incoming: LinkListInterface) {
+    Object.assign(this, incoming);
+  }
+
+  get self(): Link {
+    return this._self;
+  }
+
+  set self(value: Link) {
+    this._self = value;
+  }
+
+  get previous(): Link {
+    return this._previous;
+  }
+
+  set previous(value: Link) {
+    this._previous = value;
+  }
+
+  get next(): Link {
+    return this._next;
+  }
+
+  set next(value: Link) {
+    this._next = value;
+  }
+
+  get first(): Link {
+    return this._first;
+  }
+
+  set first(value: Link) {
+    this._first = value;
+  }
+
+  get last(): Link {
+    return this._last;
+  }
+
+  set last(value: Link) {
+    this._last = value;
+  }
+
+}
+
+export { LinkList as default, LinkListInterface, LinkInterface, Link }

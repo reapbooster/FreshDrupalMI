@@ -9,38 +9,7 @@ import Loading from "../Loading";
 import MilkenImage, {MilkenImageAttributes} from '../MilkenImage';
 import {Row, Col, Container, Panel} from "react-bootstrap";
 
-class PodcastEpisodeData {
-  id: string;
-  type: string;
-  links: LinkList;
-  status: boolean;
-  created: string;
-  langcode: string;
-  parent_id: string;
-  parent_type: string;
-  field_summary: TextField;
-  paragraph_type: ParagraphType;
-  field_episode: number;
-  field_transcript: object;
-  field_audio_file: AudioProps;
-  parent_field_name: string;
-  field_podcast_image: [];
-  field_podcast_service_links: Array<PodcastServiceLink>;
-  field_content_alternative_area: TextField;
 
-  constructor(values) {
-    for (var idx in values) {
-      if (values.hasOwnProperty(idx)){
-        this[idx] = values[idx];
-      }
-    }
-  }
-
-  isEmpty() {
-    return (!this.id);
-  }
-
-}
 
 
 const PodcastEpisodeDefaultView: React.FunctionComponent = (props: EntityComponentPropsInterface) => {

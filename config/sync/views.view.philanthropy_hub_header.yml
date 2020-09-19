@@ -3,10 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_background_image
     - field.storage.taxonomy_term.field_icon
     - field.storage.taxonomy_term.field_tag_color
-    - image.style.fullscreen
     - taxonomy.vocabulary.ph_hub
   module:
     - color_field
@@ -72,69 +70,6 @@ display:
           separator: ''
           hide_empty: false
       fields:
-        field_background_image:
-          id: field_background_image
-          table: taxonomy_term__field_background_image
-          field: field_background_image
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: image_url
-          settings:
-            image_style: fullscreen
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
         name:
           id: name
           table: taxonomy_term_field_data
@@ -143,7 +78,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -209,7 +144,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -273,7 +208,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -333,115 +268,7 @@ display:
           id: field_tag_color
           table: taxonomy_term__field_tag_color
           field: field_tag_color
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: color
-          type: color_field_formatter_text
-          settings:
-            format: hex
-            opacity: true
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
           plugin_id: field
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: true
-            text: "<div class=\"jumbotron mb-3\" id=\"philanthropy-header-jumbotron\" data-bg-image=\"{{ field_background_image }}\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"header-inner col-md-12 col-lg-6\">\r\n      <p><a id=\"opportunity-hub-link\" href=\"/explore/hubs\">Opportunity Hub</a></p>\r\n      <h1 class=\"display-4\" >{{ name }}</h1>\r\n      <p class=\"lead\">{{ description__value }}</p>\r\n    </div>\r\n  </div>\r\n</div>"
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: div
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: false
-          plugin_id: custom
       filters:
         status:
           value: '1'
@@ -527,7 +354,6 @@ display:
         - url
         - user.permissions
       tags:
-        - 'config:field.storage.taxonomy_term.field_background_image'
         - 'config:field.storage.taxonomy_term.field_icon'
         - 'config:field.storage.taxonomy_term.field_tag_color'
   block_1:
@@ -546,6 +372,5 @@ display:
         - url
         - user.permissions
       tags:
-        - 'config:field.storage.taxonomy_term.field_background_image'
         - 'config:field.storage.taxonomy_term.field_icon'
         - 'config:field.storage.taxonomy_term.field_tag_color'

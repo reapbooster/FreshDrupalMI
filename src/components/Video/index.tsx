@@ -1,17 +1,20 @@
 
 import React from 'react';
-import { graphql, Link } from "gatsby";
 import VideoFull from "./VideoFull";
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
-import VideoDataInterface from "../../DataTypes/VideoDataInterface";
+import * as DataObject from "../../DataTypes/MediaVideo";
 
 interface VideoProps {
-  view: string,
-  id: number,
-  uuid: string,
+  data: DataObject.MediaVideoInterface;
+  view_mode: string;
 }
 
-const Video: React.FunctionComponent = (props: VideoDataInterface) => {
+const Video: React.FunctionComponent = (props: VideoProps) => {
+
+  return (
+    <div>
+      <h1>{props.data.label}</h1>
+    </div>
+  );
 
 }
 

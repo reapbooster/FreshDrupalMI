@@ -129,3 +129,4 @@ old
 web/modules/custom/**/components/**/*.entry.js
 web/modules/custom/milken_base/components/**/*.js
 web/modules/custom/milken_base/js/*.js
+/webpack.libraries.yml

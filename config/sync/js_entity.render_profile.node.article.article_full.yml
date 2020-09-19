@@ -1,0 +1,32 @@
+uuid: 13331308-cf17-4c7d-9d94-8e1650708563
+langcode: en
+status: true
+dependencies: {  }
+id: node.article.article_full
+label: Article-full
+name: article_full
+target_entity_type: node
+target_entity_bundle: article
+configuration:
+  view_mode: default
+  components:
+    field_centers:
+      property_name: field_centers
+    field_content:
+      property_name: field_content
+    field_promo_slide:
+      property_name: field_promo_slide
+    field_promotional_slide:
+      property_name: field_promotional_slide
+    links:
+      property_name: links
+    uid:
+      property_name: uid
+    title:
+      property_name: title
+    created:
+      property_name: created
+caching:
+  cache_tag:
+    excluded_entities:
+      node: node
