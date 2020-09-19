@@ -1,6 +1,5 @@
 
 import React from 'react';
-import Slide from "../../DataTypes/SlideDataInterface";
 import SlideShow from "../Slideshow";
 import {Col} from "react-bootstrap";
 import * as DataObject from '../../DataTypes/ParagraphSlide'
@@ -16,7 +15,7 @@ const ParagraphDisplaySlide: React.FunctionComponent = ( props: ParagraphDisplay
   return (
     <Col lg={12}>
       <SlideShow
-        items={props.field_slides}
+        items={props.data.field_slides}
         view_mode="full"
       />
     </Col>

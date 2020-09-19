@@ -1,8 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import NodeLandingPage, { NodeLandingPageInterface } from '../../DataTypes/NodeLandingPage'
-import ParagraphDisplay from '../ParagraphDisplay';
-import {ParagraphList} from "../ParagraphList";
+import { NodeLandingPageInterface } from '../../DataTypes/NodeLandingPage'
+import ParagraphDisplayList from '../ParagraphDisplay/ParagraphDisplayList'
 
 interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
@@ -14,7 +13,7 @@ const NodeLandingPageDisplay: React.FunctionComponent = (props: NodeLandingPageD
   return (
     <>
       <Container>
-        <ParagraphList items={props.data.field_content} />
+        <ParagraphDisplayList items={props.data.field_content} />
       </Container>
     </>
   )

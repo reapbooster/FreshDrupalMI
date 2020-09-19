@@ -44,7 +44,11 @@ function EventComponentFactory(incoming: EventInterface) {
 }
 
 
-
+/**
+ * implementation of the Controller
+ *
+ * @param EventDisplayProps
+ */
 interface EventDisplayProps {
   key?: number;
   data: EventInterface;
@@ -58,7 +62,7 @@ const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
     ecp.getData(eventData.getIncluded())
       .then(res => res.json)
       .then((ajaxData) => {
-
+        setEventData(EventDataFactory(props.date))
       });
     return (
       <>

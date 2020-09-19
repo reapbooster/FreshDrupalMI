@@ -1,11 +1,16 @@
 import React from 'react';
-import ListComponentSource from '../../DataTypes/ListComponentSource';
-import EntityList, {EntityListProps} from '../EntityList';
+import EventDisplayList from '../EventDisplay/EventDisplayList'
+import {EventInterface} from '../../DataTypes/Event'
 
-const EventsBrowser = (props: EntityListProps) => {
+interface EventsBrowserProps {
+  items: Array<EventInterface>
+  view_mode: string;
+}
+
+const EventsBrowser = (props: EventsBrowserProps) => {
   return (
     <>
-      <EntityList 
+      <EventDisplayList
         {...props}
       />
     </>

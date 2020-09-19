@@ -9,7 +9,7 @@ interface ParagraphBlockInterface extends RevisionableEntityInterface {
 class ParagraphBlock extends RevisionableEntity {
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

@@ -12,7 +12,7 @@ class PhilanthropyHubSource extends ListComponentSource {
   };
 
   refresh(filter) {
-    
+    return this.getSourceData()
   }
 
   onHashChanged(){

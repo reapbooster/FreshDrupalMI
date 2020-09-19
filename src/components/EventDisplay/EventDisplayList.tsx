@@ -20,3 +20,4 @@ const EventDisplayList: React.FunctionComponent = (props: EventDisplayListProps)
   )
 }
 
+export {EventDisplayList as default, EventDisplayListProps}

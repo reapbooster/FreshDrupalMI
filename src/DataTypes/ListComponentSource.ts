@@ -4,12 +4,12 @@ import JSONApiUrl from './JSONApiUrl';
 interface ListComponentSourceInterface {
   id: string;
   url?: string;
-  items?: Array<Any>;
+  items?: Array<any>;
   entityTypeId: string;
 }
 
 class ListComponentSource implements ListComponentSourceInterface {
-  
+
   id: string;
   _url?: JSONApiUrl;
   items: [];
@@ -51,7 +51,7 @@ class ListComponentSource implements ListComponentSourceInterface {
       }
       return resolve(self.items);
     })
-    
+
   }
 
 }

@@ -9,21 +9,26 @@ interface NodeLandingPageInterface extends NodeInterface {
 
 class NodeLandingPage extends Node {
 
-  _field_content: Array<Paragraph>;
+  _field_content: Array<ParagraphInterface>;
   _field_hero_image: MediaImage;
 
+  constructor(props) {
+    const content = props.field_content;
+    super(props);
+    this.field_content = content;
+  }
+
   get field_content(): Array<ParagraphInterface> {
-    return this._field_content;
+    return this._field_content ?? [];
   }
 
   set field_content(incoming: Array<ParagraphInterface>) {
-    this._field_content = incoming.map((item) => {
-      return Paragraph.factory(item);
-    })
+    this._field_content = incoming;
   }
 
   hasData(): boolean {
-    return (this.field_content.length > 0) ?? false
+    console.debug("NodeLandingPage has data?", this);
+    return this.field_content?.length ? true : false;
   }
 
   getIncluded(): string {

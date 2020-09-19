@@ -33,6 +33,7 @@ module:
   datetime_range: 0
   dblog: 0
   dbug: 0
+  decoupled_router: 0
   default_content: 0
   default_content_deploy: 0
   delete_all: 0
@@ -134,6 +135,7 @@ module:
   settings_tray: 0
   simple_oauth: 0
   social_media: 0
+  subrequests: 0
   svg_image_field: 0
   syslog: 0
   system: 0

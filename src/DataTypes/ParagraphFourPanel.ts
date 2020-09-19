@@ -9,7 +9,7 @@ interface ParagraphFourPanelInterface extends RevisionableEntityInterface {
 class ParagraphFourPanel extends RevisionableEntity {
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

@@ -9,7 +9,7 @@ interface ParagraphFourTileBlockQueueInterface extends RevisionableEntityInterfa
 class ParagraphFourTileBlockQueue extends RevisionableEntity {
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

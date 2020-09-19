@@ -9,7 +9,7 @@ interface ParagraphTilesInterface extends RevisionableEntityInterface {
 class ParagraphTiles extends RevisionableEntity implements  ParagraphTilesInterface{
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

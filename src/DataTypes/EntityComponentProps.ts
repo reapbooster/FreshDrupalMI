@@ -1,6 +1,5 @@
 import PathObject from "./PathObject";
 
-
 interface EntityComponentPropsInterface {
   view_mode?: string;
   id?: string;
@@ -95,6 +94,9 @@ class EntityComponentProps implements EntityComponentPropsInterface {
     return this.title || this.name || null;
   }
 
+  set label(incoming: string) {
+    this.title = incoming;
+  }
 
 
 

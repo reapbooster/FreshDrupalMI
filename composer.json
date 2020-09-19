@@ -59,6 +59,7 @@
         "drupal/ctools": "3.x-dev",
         "drupal/custom_elements": "^1.0@beta",
         "drupal/decoupled_kit": "^1.1",
+        "drupal/decoupled_router": "^1.12",
         "drupal/default_content": "1.x-dev",
         "drupal/default_content_deploy": "1.x-dev",
         "drupal/delete_all": "^1.2",
@@ -92,7 +93,7 @@
         "drupal/fontawesome": "2.x-dev",
         "drupal/form_options_attributes": "^2.0",
         "drupal/gatsby": "1.x-dev",
-        "drupal/gin": "^3.0@alpha",
+        "drupal/gin": "3.x-dev",
         "drupal/gin_login": "^1.0@RC",
         "drupal/gin_toolbar": "^1.0@beta",
         "drupal/graphql": "4.x-dev",
@@ -167,6 +168,7 @@
         "drupal/slick": "^2.0",
         "drupal/social_media": "^1.8",
         "drupal/sophron": "^1.0@beta",
+        "drupal/subrequests": "^3.0",
         "drupal/svg_image_field": "^1.2",
         "drupal/taxonomy_import": "^1.0",
         "drupal/taxonomy_machine_name": "^1.0@beta",
@@ -272,13 +274,11 @@
         "post-install-cmd": [
             "@drupal-scaffold",
             "@install-codestandards",
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "npm install"
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ],
         "post-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "@install-codestandards",
-            "npm install"
+            "@install-codestandards"
         ],
         "post-create-project-cmd": [
             "@drupal-scaffold",

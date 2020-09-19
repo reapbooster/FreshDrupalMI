@@ -73,13 +73,13 @@ interface NodeDisplayProps {
 const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
 
   const [ nodeData, setNodeData ] = useState(NodeDataFactory(props.data));
-
+  console.debug("NodeDisplay", nodeData);
   if (!nodeData.hasData()) {
     const ecp = new EntityComponentProps(nodeData);
     ecp.getData(nodeData.getIncluded())
     .then(res => res.json())
     .then((remoteData) => {
-      console.debug("NodeData", remoteData);
+      console.debug("NodeData back from json", remoteData);
       setNodeData(NodeDataFactory(remoteData.data));
     });
     return (

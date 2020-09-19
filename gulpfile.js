@@ -8,6 +8,7 @@
 
 const browserSync = require('browser-sync').create();
 const changed = require('gulp-changed');
+const wp = require('webpack');
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
 const shell = require("gulp-shell");
@@ -57,8 +58,7 @@ gulp.task(
     cwd: path.resolve(basePath, "web")
   })
 );
-
-gulp.task("themeBuild", (done) => {
+gulp.task('milkenThemeBuild', (done) => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
     .pipe(sourcemaps.init())
@@ -87,6 +87,14 @@ gulp.task("themeBuild", (done) => {
     .pipe(print())
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
+
+gulp.task('ginThemeBuild', shell.task('yarn install && yarn build', {
+  cwd: path.resolve(basePath, "web/themes/contrib/gin")
+}));
+
+gulp.task("themeBuild", gulp.parallel(['milkenThemeBuild', 'ginThemeBuild']));
+
+
 
 gulp.task(
   "buildComponents",

@@ -9,7 +9,7 @@ interface ParagraphBodyContentInterface extends RevisionableEntityInterface {
 class ParagraphBodyContent extends RevisionableEntity {
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

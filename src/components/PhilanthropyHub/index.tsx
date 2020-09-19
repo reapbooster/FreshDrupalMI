@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
-import EntityList from '../EntityList';
-import { useQueryState } from "use-location-state";
-import history from "history/browser";
 import PhilanthopyHubSource from './PhilanthopyHubSource';
 import DropdownFacet from "../List/DropdownFacet";
 import HorizontalMenuFacet from "../List/HorizontalMenuFacet";
-import { NodeOpportunityInterface } from "../../DataTypes/NodeOpportunity";
-
+import NodeListDisplay from '../NodeDisplay/NodeDisplayList';
 
 interface PhilanthropyHubProps {
   source: PhilanthopyHubSource;
@@ -65,7 +61,7 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
       </Container>
 
       <div className="philanthropy-hub-root">
-        <EntityList
+        <NodeListDisplay
           items={props.source.items}
           loadAll
           className="card-columns"
@@ -76,4 +72,4 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
   );
 };
 
-export default PhilanthropyHub;
+export {PhilanthropyHub as default, PhilanthropyHubProps};

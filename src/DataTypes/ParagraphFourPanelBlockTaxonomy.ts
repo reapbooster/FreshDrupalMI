@@ -9,7 +9,7 @@ interface ParagraphFourPanelBlockTaxonomyInterface extends RevisionableEntityInt
 class ParagraphFourPanelBlockTaxonomy extends RevisionableEntity {
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

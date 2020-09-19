@@ -5,7 +5,6 @@ import {
   CarouselItem
 } from "react-bootstrap";
 import * as SlideDatatype from "../../DataTypes/Slide";
-import ErrorBoundary from '../../Utility/ErrorBoundary';
 
 interface SlideShowProps {
   items: Array<SlideDatatype.SlideInterface>;
@@ -13,6 +12,7 @@ interface SlideShowProps {
 }
 
 const SlideShow: React.FunctionComponent = (props: SlideShowProps) => {
+  console.debug("SlideShow", props);
   return (
     <Carousel>
       {props.items.map((slide: SlideDatatype.SlideInterface, key: number ) => {

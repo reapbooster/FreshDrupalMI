@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ParagraphDisplaySlide from "./ParagraphSlide";
+import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
 import ParagraphDisplayFourPanel from './ParagraphDisplayFourPanel'
 import ParagraphDisplayBodyContent from "./ParagraphDisplayBodyContent";
 import ParagraphDisplayPullQuote from "./ParagraphDisplayPullQuote";

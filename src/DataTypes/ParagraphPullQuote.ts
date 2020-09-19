@@ -36,7 +36,7 @@ class ParagraphPullQuote extends RevisionableEntity {
 
 
   hasData(): boolean{
-    return false;
+    return true;
   }
 
   getIncluded(): string {

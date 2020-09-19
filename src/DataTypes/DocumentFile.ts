@@ -8,7 +8,7 @@ interface DocumentFileInterface extends FileInterface {
 class DocumentFile extends File implements DocumentFileInterface {
 
   hasData(): boolean {
-    return false;
+    return true;
   }
   getIncluded(): string {
     return "";
