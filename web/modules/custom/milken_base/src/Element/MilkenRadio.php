@@ -5,7 +5,7 @@ namespace Drupal\milken_base\Element;
 use Drupal\Core\Render\Element\Radio;
 
 /**
- * Class MilkenRadio.
+ * Milken Radio Button Class.
  *
  * @package Drupal\milken_base\Element
  */

@@ -13,7 +13,7 @@ use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\MigrationInterface;
 
 /**
- * Class MilkenMigrateDestinationBase.
+ * Milken Migrate Destination Base Class.
  *
  * @package Drupal\milken_migrate\Plugin\migrate\destination
  */

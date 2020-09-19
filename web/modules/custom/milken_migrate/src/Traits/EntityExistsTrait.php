@@ -5,7 +5,7 @@ namespace Drupal\milken_migrate\Traits;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Trait EntityExistsTrait.
+ * Provides Entity Exists Trait.
  *
  * @package Drupal\milken_migrate\Traits
  */

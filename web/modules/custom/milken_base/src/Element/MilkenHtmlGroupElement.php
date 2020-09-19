@@ -25,7 +25,6 @@ class MilkenHtmlGroupElement extends HtmlElement {
    */
   public static function processHtmlElement(array &$element, FormStateInterface $form_state) {
     $toReturn = parent::processHtmlElement($element, $form_state);
-    kint($toReturn);
     return $toReturn;
   }
 

@@ -40,7 +40,8 @@ class MenuLinkContent extends MilkenMigrateDestinationBase implements ContainerF
     $this->rollbackAction = MigrateIdMapInterface::ROLLBACK_DELETE;
     $parenID = FALSE;
     if ($row->hasDestinationProperty('parent')) {
-      [$parentEntityType, $parentUUID] = explode(":", $row->getDestinationProperty('parent'));
+      [$parentEntityType, $parentUUID] = explode(":",
+        $row->getDestinationProperty('parent'));
       $parent = \Drupal::entityTypeManager()
         ->getStorage($parentEntityType)
         ->loadByProperties(['uuid' => $parentUUID]);

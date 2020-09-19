@@ -2,14 +2,13 @@
 
 namespace Drupal\milken_migrate\Traits;
 
-use Drupal;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\Row;
 use GuzzleHttp\Client;
 
 /**
- * Trait JsonAPIDataFetcherTrait.
+ * Supplies Json API Data Fetcher Trait.
  *
  * @package Drupal\milken_migrate\Traits
  */
@@ -30,7 +29,7 @@ trait JsonAPIDataFetcherTrait {
     $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org");
     $relatedSourcePath .= '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
     $relatedSourcePath .= "?jsonapi_include=true";
-    Drupal::logger('milken_migrate')
+    \Drupal::logger('milken_migrate')
       ->debug("Getting related record: {$relatedSourcePath}");
     $response = $this->getClient()->get($relatedSourcePath);
     $responseData = json_decode($response->getBody(), TRUE);

@@ -8,7 +8,7 @@ use Drupal\migrate\Event\MigratePreRowSaveEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class MigrateRowSubscriber.
+ * Migrate Row Subscriber.
  *
  * @package Drupal\milken_migrate
  */

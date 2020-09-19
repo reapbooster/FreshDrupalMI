@@ -11,7 +11,7 @@ use Drupal\migrate\MigrateSkipRowException;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
 
 /**
- * Class Paragraphs.
+ * Supplies Paragraph Class.
  *
  * @package Drupal\milken_migrate\Plugin\migrate\destination
  *

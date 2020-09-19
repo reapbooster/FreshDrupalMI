@@ -6,7 +6,7 @@ use Drupal\Console\Core\Generator\Generator;
 use Drupal\Console\Core\Generator\GeneratorInterface;
 
 /**
- * Class MigrateMenuItemsGenerator.
+ * Migrate Menu Items Generator Class.
  *
  * @package Drupal\Console\Generator
  */

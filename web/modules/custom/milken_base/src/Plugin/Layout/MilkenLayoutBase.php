@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefault;
 
 /**
- * Class MilkenLayoutBase.
+ * Milken Layout Base class.
  *
  * @package Drupal\milken_base\Plugin\Layout
  */

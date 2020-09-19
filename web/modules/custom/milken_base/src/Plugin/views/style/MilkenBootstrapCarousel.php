@@ -64,10 +64,8 @@ class MilkenBootstrapCarousel extends StylePluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
-
-    $fields = ['' => $this->t('<None>')];
-    $fields += $this->displayHandler->getFieldLabels(TRUE);
-
+    // $fields = ['' => $this->t('<None>')];
+    // $fields += $this->displayHandler->getFieldLabels(TRUE);
     $form['interval'] = [
       '#type' => 'number',
       '#title' => $this->t('Interval'),
