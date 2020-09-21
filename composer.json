@@ -255,7 +255,7 @@
         "build-assets": [
             "@install-vendor-dir",
             "@prepare-for-pantheon",
-            "npm run build"
+            "npm install && npm run build"
         ],
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
         "code-sniff": [
