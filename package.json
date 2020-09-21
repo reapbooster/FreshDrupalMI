@@ -9,9 +9,8 @@
   },
   "directories": {
     "bin": "./bin",
-    "doc": "./doc",
-    "lib": "./lib",
-    "man": "./man"
+    "docs": "./docs",
+    "lib": "./lib"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
