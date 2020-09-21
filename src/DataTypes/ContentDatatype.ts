@@ -1,64 +1,77 @@
-import LinkList, { LinkListInterface } from './LinkList';
-import User, { UserInterface } from './User';
-import PathObject, { PathObjectInterface } from './PathObject';
-import NodeType, { NodeTypeInterface } from './NodeType';
-import Entity, {EntityInterface} from "./Entity";
+import LinkList, { LinkListInterface } from "./LinkList";
+import User, { UserInterface } from "./User";
+import PathObject, { PathObjectInterface } from "./PathObject";
+import NodeType, { NodeTypeInterface } from "./NodeType";
+import Entity, { EntityInterface } from "./Entity";
 
-interface ContentDatatypeInterface extends EntityInterface {
-
-  changed: string,
-  created: string,
-  default_langcode: boolean,
-  drupal_internal__nid: number,
-  drupal_internal__vid: number,
-  langcode: string,
-  metatag?: object,
-  node_type: NodeTypeInterface,
-  path: PathObjectInterface,
-  promote: boolean,
-  revision_log?: string,
-  revision_timestamp: string,
-  revision_translation_affected: boolean,
-  revision_uid: UserInterface,
-  status: boolean,
-  sticky: boolean,
-  title: string,
-  uid: UserInterface,
-
-}
-
-abstract class ContentDatatype extends Entity implements ContentDatatypeInterface {
-
-  _changed: Date;
-  _created: Date;
-  _revision_timestamp: Date;
-  _uid: User;
-  _path: PathObject;
-  _node_type: NodeTypeInterface;
-  _links: LinkList;
-  _revision_uid: User;
-
+export interface ContentDatatypeInterface extends EntityInterface {
+  changed: string;
+  created: string;
   default_langcode: boolean;
   drupal_internal__nid: number;
   drupal_internal__vid: number;
   langcode: string;
-  metatag?: object;
+  metatag?: Record<string, unknown>;
+  node_type: NodeTypeInterface;
+  path: PathObjectInterface;
   promote: boolean;
   revision_log?: string;
-  revision_translation_affected: boolean;
+  revision_timestamp?: string;
+  revision_translation_affected?: boolean;
+  revision_uid: UserInterface;
   status: boolean;
   sticky: boolean;
   title: string;
+  uid: UserInterface;
+}
 
-  get revision_timestamp() : string  {
+export default abstract class ContentDatatype
+  extends Entity
+  implements ContentDatatypeInterface {
+  private _revision_timestamp?: Date;
+
+  private _uid?: User;
+
+  private _path?: PathObject;
+
+  private _revision_uid?: User;
+
+  default_langcode?: boolean;
+
+  drupal_internal__nid?: number;
+
+  drupal_internal__vid?: number;
+
+  langcode?: string;
+
+  metatag?: Record<string, unknown>;
+
+  revision_log?: string;
+
+  revision_translation_affected?: boolean;
+
+  promote?: boolean;
+
+  status?: boolean;
+
+  sticky?: boolean;
+
+  title?: string;
+
+  constructor(incoming: ContentDatatypeInterface) {
+    super(incoming);
+    Object.assign(this, incoming);
+  }
+
+  get revision_timestamp(): string {
     return this._revision_timestamp.toString();
   }
 
-  set revision_timestamp(incoming) {
+  set revision_timestamp(incoming: string) {
     this._revision_timestamp = new Date(incoming);
   }
 
-  get created() {
+  get created(): string {
     return this._created.toString();
   }
 
@@ -70,11 +83,11 @@ abstract class ContentDatatype extends Entity implements ContentDatatypeInterfac
     return this._changed.toString();
   }
 
-  set changed(incoming) {
+  set changed(incoming: string) {
     this._changed = new Date(incoming);
   }
 
-  get path() : PathObjectInterface {
+  get path(): PathObjectInterface {
     return this._path;
   }
 
@@ -82,19 +95,19 @@ abstract class ContentDatatype extends Entity implements ContentDatatypeInterfac
     this._path = new PathObject(incoming);
   }
 
-  get user() : UserInterface {
+  get uid(): UserInterface {
     return this._uid;
   }
 
-  get uid() : UserInterface {
+  set uid(incoming: UserInterface) {
+    this._uid = new User(incoming);
+  }
+
+  get user(): UserInterface {
     return this._uid;
   }
 
   set user(incoming: UserInterface) {
-    this._uid = new User(incoming)
-  }
-
-  set uid(incoming: UserInterface) {
     this._uid = new User(incoming);
   }
 
@@ -102,7 +115,7 @@ abstract class ContentDatatype extends Entity implements ContentDatatypeInterfac
     return this._node_type;
   }
 
-  set node_type(incoming) {
+  set node_type(incoming: NodeTypeInterface) {
     this._node_type = new NodeType(incoming);
   }
 
@@ -121,9 +134,4 @@ abstract class ContentDatatype extends Entity implements ContentDatatypeInterfac
   set revision_uid(incoming: UserInterface) {
     this._revision_uid = new User(incoming);
   }
-
-
 }
-
-
-export { ContentDatatype as default, ContentDatatypeInterface }

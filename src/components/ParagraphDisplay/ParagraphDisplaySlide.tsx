@@ -1,11 +1,11 @@
-
 import React from 'react';
 import SlideShow from "../Slideshow";
 import {Col} from "react-bootstrap";
-import * as DataObject from '../../DataTypes/ParagraphSlide'
+import {ParagraphSlideInterface} from '../../DataTypes/ParagraphSlide';
+import ErrorBoundary from '../../Utility/ErrorBoundary';
 
 interface ParagraphDisplaySlideProps {
-  data: DataObject.default;
+  data: ParagraphSlideInterface;
   view_mode: string;
 }
 
@@ -14,10 +14,12 @@ const ParagraphDisplaySlide: React.FunctionComponent = ( props: ParagraphDisplay
   console.log("ParagraphSlide", props);
   return (
     <Col lg={12}>
-      <SlideShow
-        items={props.data.field_slides}
-        view_mode="full"
-      />
+      <ErrorBoundary>
+        <SlideShow
+          items={props.data.field_slides}
+          view_mode={props.view_mode}
+        />
+      </ErrorBoundary>
     </Col>
   );
 

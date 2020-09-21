@@ -1,9 +1,3 @@
+import EntityComponentBase from "./EntityComponentBase";
 
-import EntityComponentBase from './EntityComponentBase';
-
-
-class Type extends EntityComponentBase {
-
-
-
-}
+export default class Type extends EntityComponentBase {}

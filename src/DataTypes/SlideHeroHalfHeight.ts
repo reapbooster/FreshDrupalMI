@@ -8,7 +8,7 @@ import ImageFile, { ImageFileInterface } from "./ImageFile";
 import SlideType, { SlideTypeInterface } from "./SlideType";
 import { Link, LinkInterface } from "./LinkList";
 
-export interface SlideFiftyFiftyInterface extends SlideInterface {
+export interface SlideHeroHalfHeightInterface extends SlideInterface {
   field_background_color: ColorObjectInterface;
   field_link: boolean;
   field_promoted: boolean;
@@ -19,9 +19,9 @@ export interface SlideFiftyFiftyInterface extends SlideInterface {
   field_slide_text: Array<SlideKeyValueTextInterface>;
 }
 
-export default class SlideFiftyFifty
+export class HeroHalfHeight
   extends Slide
-  implements SlideFiftyFiftyInterface {
+  implements SlideHeroHalfHeightInterface {
   private _field_background_color: ColorObjectInterface;
 
   private _field_background_image: ImageFile;
@@ -38,7 +38,7 @@ export default class SlideFiftyFifty
 
   field_published: boolean;
 
-  constructor(incoming: SlideFiftyFiftyInterface) {
+  constructor(incoming: SlideHeroHalfHeightInterface) {
     super(incoming);
     Object.assign(this, incoming);
     console.debug("Slide-fify-fifty", this);
@@ -101,3 +101,5 @@ export default class SlideFiftyFifty
   }
   
 }
+
+export default HeroHalfHeight;

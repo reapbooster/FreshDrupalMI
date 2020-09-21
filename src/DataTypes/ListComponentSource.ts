@@ -1,23 +1,28 @@
-import JSONApiUrl from './JSONApiUrl';
+import JSONApiUrl from "./JSONApiUrl";
 
-
-interface ListComponentSourceInterface {
+export interface ListComponentSourceInterface {
   id: string;
   url?: string;
   items?: Array<any>;
   entityTypeId: string;
 }
 
-class ListComponentSource implements ListComponentSourceInterface {
-
+export default abstract class ListComponentSource
+  implements ListComponentSourceInterface {
   id: string;
+
   _url?: JSONApiUrl;
+
   items: [];
+
   entityTypeId: string;
+
   abortController: AbortController;
 
   constructor(incoming: ListComponentSourceInterface) {
-    Object.assign(this, incoming);
+    if (incoming) {
+      Object.assign(this, incoming);
+    }
     this.abortController = new AbortController();
   }
 
@@ -34,26 +39,22 @@ class ListComponentSource implements ListComponentSourceInterface {
     return this.getSourceData();
   }
 
-  getSourceData() : Promise<Array<any>> {
+  getSourceData(): Promise<Array<any>> {
     const self = this;
     return new Promise((resolve, reject) => {
       if (self.url?.toString()) {
-        return  fetch(self.url, { signal: this.abortController.signal })
-        .then(res => res.json())
-        .then(ajaxData => {
-          ajaxData.data.map((item) => {
-            self.items.push(item);
-          });
-        })
-        .catch(e => {
+        return fetch(self.url, { signal: this.abortController.signal })
+          .then((res) => res.json())
+          .then((ajaxData) => {
+            ajaxData.data.map((item) => {
+              self.items.push(item);
+            });
+          })
+          .catch((e) => {
             console.error(`Fetch 1 error: ${e.message}`);
-        });
+          });
       }
       return resolve(self.items);
-    })
-
+    });
   }
-
 }
-
-export {ListComponentSource as default, ListComponentSourceInterface}

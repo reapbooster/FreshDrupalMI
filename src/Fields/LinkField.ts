@@ -1,11 +1,5 @@
+interface LinkFieldInterface {}
 
+class LinkField implements LinkFieldInterface {}
 
-interface LinkFieldInterface {
-
-}
-
-class LinkField implements LinkFieldInterface {
-
-}
-
-export {LinkField as default, LinkFieldInterface}
+export { LinkField as default, LinkFieldInterface };

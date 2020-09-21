@@ -1,34 +1,39 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
-import {ColorObjectInterface} from "./ColorObject";
-import {SlideInterface} from "./Slide";
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
+import ColorObject, { ColorObjectInterface } from "./ColorObject";
+import { SlideInterface } from "./Slide";
+import Paragraph, { ParagraphInterface } from "./Paragraph";
 
-
-
-interface ParagraphSlideInterface extends RevisionableEntityInterface {
-  field_background_color: ColorObjectInterface;
-  field_slides: Array<SlideInterface>
-}
-
-class ParagraphSlide  {
-
+export interface ParagraphSlideInterface extends ParagraphInterface {
   field_background_color: ColorObjectInterface;
   field_slides: Array<SlideInterface>;
+}
 
-  constructor(props: ParagraphSlideInterface) {
-    Object.assign(this, props);
-    this.field_slides = props.field_slides;
-    this.field_background_color = props.field_background_color;
+export default class ParagraphSlide extends Paragraph implements ParagraphSlideInterface {
+  _field_background_color: ColorObjectInterface;
+
+  field_slides: Array<SlideInterface>;
+
+  constructor(incoming: ParagraphSlideInterface) {
+    super(incoming);
+    Object.assign(this, incoming);
     console.debug("ParagraphSlide constructor", this);
   }
 
-  hasData(): boolean{
-    return this.field_slides?.length ? true : false;
+  get field_background_color(): ColorObjectInterface {
+    return this._field_background_color;
+  }
+
+  set field_background_color(incoming: ColorObjectInterface) {
+    this._field_background_color = new ColorObject(incoming);
+  }
+
+  hasData(): boolean {
+    return this.field_slides?.length >= 1 ?? false;
   }
 
   getIncluded(): string {
-    return "&include=field_slides";
+    return "&include=field_slides,field_slides.field_background_image";
   }
-
 }
-
-export {ParagraphSlide as default, ParagraphSlideInterface}

@@ -1,30 +1,43 @@
-import ContentDatatype, {ContentDatatypeInterface} from './ContentDatatype';
-import TaxonomyTerm, {TaxonomyTermInterface} from './TaxonomyTerm';
+import ContentDatatype, { ContentDatatypeInterface } from "./ContentDatatype";
+import TaxonomyTerm, { TaxonomyTermInterface } from "./TaxonomyTerm";
 import Slide, { SlideInterface } from "./Slide";
 import Paragraph, { ParagraphInterface } from "./Paragraph";
 
+export interface ArticleInterface extends ContentDatatypeInterface {
+  field_authors: TaxonomyTermInterface;
+  field_centers: TaxonomyTermInterface;
+  field_topics: TaxonomyTermInterface;
+  field_promo_slide: SlideInterface;
+  field_content: Array<ParagraphInterface>;
 
-interface ArticleInterface extends ContentDatatypeInterface {
-  field_authors: TaxonomyTermInterface,
-  field_centers: TaxonomyTermInterface,
-  field_topics: TaxonomyTermInterface,
-  field_promo_slide: SlideInterface,
-  field_content: Array<ParagraphInterface>,
+  public static getIncluded(): string;
+
+  hasData(): boolean;
 }
 
-class Article extends ContentDatatype {
+export default class Article
+  extends ContentDatatype
+  implements ArticleInterface {
+  private _field_authors?: TaxonomyTerm;
 
-  _field_authors: TaxonomyTerm;
-  _field_centers: TaxonomyTerm;
-  _field_topics: TaxonomyTerm;
-  _field_promo_slide: Slide;
-  _field_content: Array<Paragraph>;
+  private _field_centers?: TaxonomyTerm;
 
-  get field_authors(): TaxonomyTerm {
+  private _field_topics?: TaxonomyTerm;
+
+  private _field_promo_slide?: Slide;
+
+  private _field_content?: Array<ParagraphInterface>;
+
+  constructor(incoming: ArticleInterface) {
+    super(incoming);
+    Object.assign(this, incoming);
+  }
+
+  get field_authors(): TaxonomyTermInterface {
     return this._field_authors;
   }
 
-  set field_authors(incoming) {
+  set field_authors(incoming: TaxonomyTermInterface) {
     this._field_authors = new TaxonomyTerm(incoming);
   }
 
@@ -57,19 +70,16 @@ class Article extends ContentDatatype {
   }
 
   set field_content(incoming: Array<ParagraphInterface>) {
-    this._field_content = incoming.map(( item:ParagraphInterface ) => {
+    this._field_content = incoming.map((item: ParagraphInterface) => {
       return new Paragraph(item);
-    })
+    });
   }
 
-  hasData() : boolean {
-    return (this.field_content?.length > 0) ?? false;
+  hasData(): boolean {
+    return this.field_content?.length > 0 ?? false;
   }
 
-  getIncluded() {
+  public static getIncluded(): string {
     return "&include=field_promo_slide,field_promo_slide.field_background_image,field_content";
   }
-
 }
-
-export { Article as default, ArticleInterface};

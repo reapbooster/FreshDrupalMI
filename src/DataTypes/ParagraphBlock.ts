@@ -1,21 +1,17 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
 
-
-
-interface ParagraphBlockInterface extends RevisionableEntityInterface {
-
-}
+type ParagraphBlockInterface = RevisionableEntityInterface;
 
 class ParagraphBlock extends RevisionableEntity {
-
-  hasData(): boolean{
+  hasData(): boolean {
     return true;
   }
 
   getIncluded(): string {
     return "";
   }
-
 }
 
-export {ParagraphBlock as default, ParagraphBlockInterface}
+export { ParagraphBlock as default, ParagraphBlockInterface };

@@ -1,13 +1,7 @@
-import Node, {NodeInterface} from './Node';
+import Node, { NodeInterface } from "./Node";
 
+type NodeOpportunityInterface = NodeInterface;
 
-interface NodeOpportunityInterface extends NodeInterface {
+class NodeOpportunity extends Node {}
 
-}
-
-class NodeOpportunity extends Node {
-
-}
-
-
-export {NodeOpportunity as default, NodeOpportunityInterface}
+export { NodeOpportunity as default, NodeOpportunityInterface };

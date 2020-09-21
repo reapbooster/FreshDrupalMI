@@ -1,4 +1,4 @@
-import {EntityComponentProps} from "./EntityComponentProps";
+import { EntityComponentProps } from "./EntityComponentProps";
 
 interface ImageStyleAttributesInterface {
   srcSet: string;
@@ -13,13 +13,15 @@ interface ImageStyleObjectInterface {
   imageAttributes: ImageStyleAttributesInterface;
 }
 
-
 class ImageStyleObject implements ImageStyleObjectInterface {
-
   thumbnail: string;
+
   medium: string;
+
   large: string;
+
   fullscreen: string;
+
   [propName: string]: any; // Other sizes
 
   constructor(values: Array<object> = null) {
@@ -34,21 +36,21 @@ class ImageStyleObject implements ImageStyleObjectInterface {
     Object.assign(this, reduced);
   }
 
-  reducer(accumulator = {}, currentValue, idx, sourceArray ) {
+  reducer(accumulator = {}, currentValue, idx, sourceArray) {
     const keys = Object.keys(currentValue);
     accumulator[keys[0]] = currentValue[keys[0]];
     return accumulator;
   }
-  
-  getStyleByMachineName(styleName: string) : string | null {
-    return this[styleName] as string ?? null;
+
+  getStyleByMachineName(styleName: string): string | null {
+    return (this[styleName] as string) ?? null;
   }
 
   get srcSet(): string {
     return `${this.thumbnail} 100w, ${this.medium} 220w, ${this.large} 480w, ${this.fullscreen} 1920w`;
   }
 
-  get imageAttributes() : ImageStyleAttributesInterface {
+  get imageAttributes(): ImageStyleAttributesInterface {
     return {
       srcSet: this.getSrcSet(),
       className: "lazyload",
@@ -56,15 +58,14 @@ class ImageStyleObject implements ImageStyleObjectInterface {
       "data-sizes": "auto",
       style: {
         objectFit: "cover",
-      }
-    }
+      },
+    };
   }
 }
 
-
 class HolderImageStyleObject implements ImageStyleObjectInterface {
+  include: "&include=field_media_image,bundle";
 
-  include: "&include=field_media_image,bundle"
   ecp: EntityComponentProps;
 
   constructor(props) {
@@ -91,14 +92,17 @@ class HolderImageStyleObject implements ImageStyleObjectInterface {
       "data-sizes": "auto",
       style: {
         objectFit: "cover",
-      }
-    }
+      },
+    };
   }
 
   getStyleByMachineName(): string {
     return this.srcSet;
   }
-
 }
 
-export {ImageStyleObject as default, HolderImageStyleObject, ImageStyleObjectInterface};
+export {
+  ImageStyleObject as default,
+  HolderImageStyleObject,
+  ImageStyleObjectInterface,
+};

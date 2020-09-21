@@ -1,17 +1,15 @@
-
-interface ColorObjectInterface {
+export interface ColorObjectInterface {
   color: string;
   opacity: number;
 }
 
-
-class ColorObject {
+export default class ColorObject implements ColorObjectInterface {
   color: string;
+
   opacity: number;
 
   constructor(incoming: ColorObjectInterface) {
-    Object.assign(this, incoming)
+    this.color = incoming.color;
+    this.opacity = incoming.opacity;
   }
 }
-
-export  { ColorObject as default, ColorObjectInterface }

@@ -1,9 +1,7 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
-import PathObject, {PathObjectInterface} from './PathObject';
+import PathObject, { PathObjectInterface } from "./PathObject";
+import ContentDatatype, { ContentDatatypeInterface } from "./ContentDatatype";
 
-
-interface NodeInterface extends RevisionableEntityInterface {
-
+interface NodeInterface extends ContentDatatypeInterface {
   drupal_internal__nid: number;
   path: PathObjectInterface;
   promoted: boolean;
@@ -11,15 +9,17 @@ interface NodeInterface extends RevisionableEntityInterface {
   sticky: boolean;
   hasData(): boolean;
   getIncluded(): string;
+}
 
- }
-
-abstract class Node extends RevisionableEntity implements NodeInterface {
-
+abstract class Node extends ContentDatatype implements NodeInterface {
   drupal_internal__nid: number;
+
   _path: PathObject;
+
   promoted: boolean;
+
   status: boolean;
+
   sticky: boolean;
 
   get path(): PathObjectInterface {
@@ -32,8 +32,9 @@ abstract class Node extends RevisionableEntity implements NodeInterface {
 
   abstract hasData(): boolean;
 
-  abstract getIncluded(); string;
+  abstract getIncluded();
 
- }
+  string;
+}
 
-export { Node as default, NodeInterface }
+export { Node as default, NodeInterface };

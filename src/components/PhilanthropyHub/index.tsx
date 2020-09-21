@@ -4,21 +4,23 @@ import PhilanthopyHubSource from './PhilanthopyHubSource';
 import DropdownFacet from "../List/DropdownFacet";
 import HorizontalMenuFacet from "../List/HorizontalMenuFacet";
 import NodeListDisplay from '../NodeDisplay/NodeDisplayList';
+import PhilanthropyHubSource from "./PhilanthopyHubSource";
 
-interface PhilanthropyHubProps {
+export interface PhilanthropyHubProps {
   source: PhilanthopyHubSource;
   view_mode: string;
 }
 
 const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) => {
-
+  console.debug("Philanthropy Hub", props);
+  const {source, view_mode} = props;
   useEffect(() => {
     onHashChanged();
     window.addEventListener("hashchange", onHashChanged);
     return () => window.removeEventListener("hashchange", onHashChanged);
   }, [window.location.hash]);
 
-  props.source.getSourceData();
+  source.getSourceData();
 
   return (
     <Container fluid id={"hub-".concat(props.id)}>
@@ -60,16 +62,21 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
         </Row>
       </Container>
 
-      <div className="philanthropy-hub-root">
+      <div id="philanthropy-hub-root">
         <NodeListDisplay
-          items={props.source.items}
+          items={source.items}
           loadAll
           className="card-columns"
-          url={url}
+          url={source.url}
         />
       </div>
     </Container>
   );
 };
 
-export {PhilanthropyHub as default, PhilanthropyHubProps};
+PhilanthropyHub.defaultProps = {
+  source: PhilanthropyHubSource.getDefaultSource(),
+  view_mode: "card",
+}
+
+export default PhilanthropyHub;

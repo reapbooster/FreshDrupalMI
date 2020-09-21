@@ -1,5 +1,5 @@
 import React from 'react';
-import SlideDisplay from '../SlideDisplay';
+import {SlideDisplay} from '../SlideDisplay';
 import { Row, Container, Col } from 'react-bootstrap';
 import { BodyField } from "../../Fields/BodyField";
 import * as ArticleDatatype from '../../DataTypes/Article'

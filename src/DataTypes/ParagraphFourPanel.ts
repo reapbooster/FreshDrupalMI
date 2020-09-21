@@ -1,21 +1,17 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
 
-
-
-interface ParagraphFourPanelInterface extends RevisionableEntityInterface {
-
-}
+type ParagraphFourPanelInterface = RevisionableEntityInterface;
 
 class ParagraphFourPanel extends RevisionableEntity {
-
-  hasData(): boolean{
+  hasData(): boolean {
     return true;
   }
 
   getIncluded(): string {
     return "";
   }
-
 }
 
-export {ParagraphFourPanel as default, ParagraphFourPanelInterface}
+export { ParagraphFourPanel as default, ParagraphFourPanelInterface };

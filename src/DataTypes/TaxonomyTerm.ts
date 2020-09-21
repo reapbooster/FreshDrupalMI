@@ -1,37 +1,55 @@
-import ColorObject, {ColorObjectInterface} from "./ColorObject";
-import {FontAwesomeIconProps} from "@fortawesome/react-fontawesome";
-import PathObject, {PathObjectInterface} from "./PathObject";
-import LinkList, {LinkListInterface} from './LinkList';
-import Entity, {EntityInterface} from './Entity';
+import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
+import ColorObject, { ColorObjectInterface } from "./ColorObject";
+import PathObject, { PathObjectInterface } from "./PathObject";
+import Entity, { EntityInterface } from "./Entity";
 
-interface TaxonomyTermInterface extends EntityInterface {
+export interface TaxonomyTermInterface extends EntityInterface {
+  description?: string;
+  drupal_internal__tid?: number;
+  field_visibility?: boolean;
+  vid?: string;
 
-  description: string;
-  drupal_internal__tid: number;
-  field_tag_color: ColorObjectInterface,
-  field_tag_icon: FontAwesomeIconProps;
-  field_visibility: boolean;
-  path: PathObjectInterface;
-  vid: string;
-
+  field_tag_color?: ColorObjectInterface;
+  field_tag_icon?: FontAwesomeIconProps;
+  path?: PathObjectInterface;
 }
 
-class TaxonomyTerm extends Entity implements TaxonomyTermInterface {
-  
-  _field_tag_color: ColorObject;
-  _path: PathObject;
-  description: string;
-  drupal_internal__tid: number;
-  field_tag_icon: FontAwesomeIconProps;
-  field_visibility: boolean;
-  vid: string;
+export default class TaxonomyTerm
+  extends Entity
+  implements TaxonomyTermInterface {
+  description?: string;
 
-  get field_tag_color(): ColorObjectInterface {
-    return this._field_tag_color;
+  drupal_internal__tid?: number;
+
+  field_visibility?: boolean;
+
+  vid?: string;
+
+  private _field_tag_color?: ColorObject;
+
+  private _field_tag_icon?: FontAwesomeIconProps;
+
+  private _path?: PathObject;
+
+  constructor(incoming: TaxonomyTermInterface) {
+    super(incoming);
+    Object.assign(this, incoming);
+  }
+
+  get field_tag_color(): ColorObjectInterface | null {
+    return this._field_tag_color ?? null;
   }
 
   set field_tag_color(incoming: ColorObjectInterface) {
     this._field_tag_color = new ColorObject(incoming);
+  }
+
+  get field_tag_icon(): FontAwesomeIconProps {
+    return this._field_tag_icon;
+  }
+
+  set field_tag_icon(field_tag_icon: FontAwesomeIconProps) {
+    this._field_tag_icon = field_tag_icon;
   }
 
   get path(): PathObjectInterface {
@@ -41,7 +59,4 @@ class TaxonomyTerm extends Entity implements TaxonomyTermInterface {
   set path(incoming: PathObjectInterface) {
     this._path = new PathObject(incoming);
   }
-
 }
-
-export { TaxonomyTerm as default, TaxonomyTermInterface };

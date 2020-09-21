@@ -1,11 +1,9 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
 
-interface EventSummitInterface extends RevisionableEntityInterface {
+type EventSummitInterface = RevisionableEntityInterface;
 
-}
+class EventSummit extends RevisionableEntity {}
 
-class EventSummit extends RevisionableEntity {
-
-}
-
-export {EventSummit as default, EventSummitInterface}
+export { EventSummit as default, EventSummitInterface };

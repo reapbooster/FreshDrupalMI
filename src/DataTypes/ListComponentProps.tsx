@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
+import { CardColumns, Row } from "react-bootstrap";
+import Masonry from "react-masonry-component";
 import JSONApiUrl from "./JSONApiUrl";
-import { CardColumns, Row } from 'react-bootstrap';
-import Masonry from 'react-masonry-component';
 import MediaVideo from "../components/Media/MediaVideo";
 import MediaReport from "../components/Media/MediaReport";
 import MediaPodcast from "../components/Media/MediaPodcast";
 import Loading from "../components/Loading";
-import EventConference from '../components/Event/EventConference';
+import EventConference from "../components/Event/EventConference";
 import TileView from "../components/NodeDisplay/TileView";
 import EventSummit from "../components/Event/EventSummit";
 import EventMeeting from "../components/Event/EventMeeting";
@@ -30,7 +30,6 @@ interface ListComponentState {
   loaded: boolean;
 }
 
-
 enum ListItemComponents {
   media_video = MediaVideo,
   media_report = MediaReport,
@@ -42,22 +41,26 @@ enum ListItemComponents {
   node_opportunity = NodeOpportunityCard,
 }
 
-
-
-
-class ListComponentProps extends React.Component <ListComponentPropsInterface, ListComponentState> {
-
+class ListComponentProps extends React.Component<
+  ListComponentPropsInterface,
+  ListComponentState
+> {
   id: string;
+
   _url: JSONApiUrl;
+
   key: number;
+
   error?: Error;
+
   onSelectHandler: any;
+
   view_mode: string;
 
   constructor(props: ListComponentPropsInterface) {
     super(props);
     this.state = {
-      items: (props.items || [])
+      items: props.items || [],
     };
     this.refresh = this.refresh.bind(this);
     this.getData = this.getData.bind(this);
@@ -67,12 +70,12 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     this.handleError = this.handleError.bind(this);
     this.abortController = new AbortController();
 
-    var remaining = Object.assign({}, props);
+    const remaining = { ...props };
     delete remaining.items;
     Object.assign(this, remaining);
   }
 
-  toObject() : ListComponentPropsInterface {
+  toObject(): ListComponentPropsInterface {
     return {
       entityTypeId: this.props.entityTypeId,
       id: this.id,
@@ -81,7 +84,7 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       onSelectHandler: this.onSelectHandler,
       view_mode: this.view_mode,
       key: this.key,
-      loadAll: this.props.loadAll
+      loadAll: this.props.loadAll,
     };
   }
 
@@ -92,79 +95,80 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     }
     if (this.url) {
       console.debug("listComponenet calling url: ", this.url.toString());
-      return fetch(this.url.toString(), { signal: this.abortController.signal })
-        .catch(this.handleError);
-    } else {
-      this.handleError(new Error("No URL to make a refresh call"));
-      resolve([]);
+      return fetch(this.url.toString(), {
+        signal: this.abortController.signal,
+      }).catch(this.handleError);
     }
+    this.handleError(new Error("No URL to make a refresh call"));
+    resolve([]);
   }
 
-
   hasItems(): boolean {
-    return (!!this.state?.items?.length || 0);
+    return !!this.state?.items?.length || 0;
   }
 
   handleError(err) {
     this.error = err;
 
-    if(err.name === 'AbortError') {
+    if (err.name === "AbortError") {
       console.log(this.url);
     }
-    console.log("Entity Component Props has encountered an error with fetching the items:", err);
+    console.log(
+      "Entity Component Props has encountered an error with fetching the items:",
+      err
+    );
   }
 
   get loaded() {
-    return (this.state.loaded || this.hasItems() );
+    return this.state.loaded || this.hasItems();
   }
 
   get label() {
     return this.id;
   }
 
-  refresh(evt: CustomEvent = null) : Promise<any> {
+  refresh(evt: CustomEvent = null): Promise<any> {
     if (evt) {
       evt.stopImmediatePropagation();
       evt.preventDefault();
     }
 
-    var toMutate = this.url.clone();
+    let toMutate = this.url.clone();
     if (evt?.detail) {
-
       // Flag keys for deletion
-      let clearKeys = [];
+      const clearKeys = [];
 
       // Do not touch these URL params
-      const blacklist = ['jsonapi_include', 'include'];
+      const blacklist = ["jsonapi_include", "include"];
 
-      for(const key of toMutate.query.keys()) {
-        if( blacklist.includes(key) ) { continue; }
-        if( !evt.detail.filter.hasOwnProperty(key) || !evt.detail.filter[key] ) {
-            clearKeys.push(key);
+      for (const key of toMutate.query.keys()) {
+        if (blacklist.includes(key)) {
+          continue;
         }
-      };
+        if (!evt.detail.filter.hasOwnProperty(key) || !evt.detail.filter[key]) {
+          clearKeys.push(key);
+        }
+      }
 
       // If filter passed, update URL parameters
       if (evt?.detail?.filter) {
-
-        for (var f in evt.detail.filter) {
-
+        for (const f in evt.detail.filter) {
           // Sensible default filter if not a complex filter key
-          const key = f.includes('filter') ? f : `filter[${f}]`;
+          const key = f.includes("filter") ? f : `filter[${f}]`;
 
           if (toMutate.query.has(key)) {
-            console.debug("changing value of query param: ", toMutate.query)
-            toMutate.query.set(key, evt.detail.filter[f])
+            console.debug("changing value of query param: ", toMutate.query);
+            toMutate.query.set(key, evt.detail.filter[f]);
           } else {
-            console.debug("Appending query param: ", toMutate.query)
+            console.debug("Appending query param: ", toMutate.query);
             toMutate.query.append(key, evt.detail.filter[f]);
           }
         }
       }
 
       // Clear flagged keys
-      clearKeys?.map( key => {
-        console.debug('Clear URL key', key);
+      clearKeys?.map((key) => {
+        console.debug("Clear URL key", key);
         toMutate.query.delete(key);
       });
 
@@ -176,83 +180,87 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       this._url = toMutate;
     }
 
-    if( this?.url && ( this.url.toString() !== toMutate.toString() ) ) {
-      console.log('Fetch URL changed, abort current request');
+    if (this?.url && this.url.toString() !== toMutate.toString()) {
+      console.log("Fetch URL changed, abort current request");
       this.abortController.abort();
     }
 
     return this.loadChain();
   }
 
-  loadChain() : Promise<any> {
-
+  loadChain(): Promise<any> {
     console.log("Loading an API page");
 
-    var self = this;
+    const self = this;
 
-    console.log('self', self);
+    console.log("self", self);
 
     return fetch(this._url.toString(), { signal: this.abortController.signal })
-      .then(res => res.json())
-      .then(ajaxData => {
-
+      .then((res) => res.json())
+      .then((ajaxData) => {
         // Result is empty
-        if(!ajaxData?.data) { return; }
+        if (!ajaxData?.data) {
+          return;
+        }
 
         // Check for additional pages on the API
         const pageCount = 50;
         let newItems = ajaxData.data;
 
-        if(self.loadAll && ajaxData?.links?.next?.href && ajaxData?.meta?.count > pageCount) {
-
-          console.log('Loading more');
+        if (
+          self.loadAll &&
+          ajaxData?.links?.next?.href &&
+          ajaxData?.meta?.count > pageCount
+        ) {
+          console.log("Loading more");
 
           // Prepare URLs for concurrent requests
 
           const total = ajaxData.meta.count;
-          let pageUrl = new JSONApiUrl(ajaxData.links.next.href);
-          let pages = [ ajaxData.links.next.href ];
+          const pageUrl = new JSONApiUrl(ajaxData.links.next.href);
+          const pages = [ajaxData.links.next.href];
           let offset = pageCount;
 
-          while( offset + pageCount < total ) {
+          while (offset + pageCount < total) {
             offset += pageCount;
-            pageUrl.query.set('page[offset]', offset);
-            pages.push( pageUrl.toString());
+            pageUrl.query.set("page[offset]", offset);
+            pages.push(pageUrl.toString());
           }
 
           // console.log('All request pages', pages);
 
-          Promise.all( pages.map( url => fetch(url, { signal: this.abortController.signal }) ) )
-            .then( results => {
-              return Promise.all(results.map( response => {
-            		return response.json();
-            	}));
-            }).then( allData => {
-
-              allData.map( data => {
-                if(data?.data?.length) {
-                    newItems = newItems.concat(data.data);
+          Promise.all(
+            pages.map((url) =>
+              fetch(url, { signal: this.abortController.signal })
+            )
+          )
+            .then((results) => {
+              return Promise.all(
+                results.map((response) => {
+                  return response.json();
+                })
+              );
+            })
+            .then((allData) => {
+              allData.map((data) => {
+                if (data?.data?.length) {
+                  newItems = newItems.concat(data.data);
                 }
               });
 
               self.setState({ items: newItems });
-
-            }).catch(function (error) {
-            	console.debug('Error reading API pages', error);
+            })
+            .catch(function (error) {
+              console.debug("Error reading API pages", error);
             });
-
-
-        }
-        else {
+        } else {
           self.setState({ items: newItems });
         }
-
       })
-      .catch(e => {
-          console.warn(`Fetch 1 error: ${e.message}`);
+      .catch((e) => {
+        console.warn(`Fetch 1 error: ${e.message}`);
       });
   }
-
 
   get items() {
     if (this.hasItems()) {
@@ -260,33 +268,35 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
       return this.state.items.map((item, key: number) => {
         const Component = ListItemComponents[item.type.replace("--", "_")];
         if (Component == undefined) {
-          throw new Error("List Component Type not defined: ".concat(item.type.replace("--", "_")));
+          throw new Error(
+            "List Component Type not defined: ".concat(
+              item.type.replace("--", "_")
+            )
+          );
         }
-        return <Component {...item} key={key} />
+        return <Component {...item} key={key} />;
       });
-    } else {
-      return (
-        <div>
-          <h1>No results for this combination of filters.</h1>
-        </div>
-      );
     }
+    return (
+      <div>
+        <h1>No results for this combination of filters.</h1>
+      </div>
+    );
   }
 
   componentDidMount() {
-    document.getElementsByClassName('list-component').item(0).addEventListener("refresh", this.refresh);
+    document
+      .getElementsByClassName("list-component")
+      .item(0)
+      .addEventListener("refresh", this.refresh);
     this.refresh();
   }
 
   render() {
-    return (
-      <Row className="list-component">
-        {this.items}
-      </Row>
-    );
+    return <Row className="list-component">{this.items}</Row>;
   }
 
-  get url() : JSONApiUrl {
+  get url(): JSONApiUrl {
     return this._url;
   }
 
@@ -296,10 +306,6 @@ class ListComponentProps extends React.Component <ListComponentPropsInterface, L
     }
     this._url = url;
   }
-
 }
-
-
-
 
 export { ListComponentProps as default, ListComponentPropsInterface };

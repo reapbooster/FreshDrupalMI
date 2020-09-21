@@ -1,12 +1,12 @@
 import React from 'react';
 import * as DataObject from '../../DataTypes/Slide';
 
-interface FiftyFiftyProps {
+export interface SlideDisplayFiftyFiftyProps {
   data: DataObject.default;
   view_mode: string;
 }
 
-const FiftyFifty : React.FunctionComponent = (props: FiftyFiftyProps) => {
+export const SlideDisplayFiftyFifty : React.FunctionComponent = (props: SlideDisplayFiftyFiftyProps) => {
 
   console.debug("FiftyFifty", props);
 
@@ -41,6 +41,6 @@ const FiftyFifty : React.FunctionComponent = (props: FiftyFiftyProps) => {
 
 }
 
-export default FiftyFifty;
+export default SlideDisplayFiftyFifty;
 
 

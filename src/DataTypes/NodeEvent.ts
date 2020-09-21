@@ -1,17 +1,15 @@
-import Node, { NodeInterface } from './Node'
+import Node, { NodeInterface } from "./Node";
 
-
-interface NodeEventInterface extends NodeInterface {
-
-}
+type NodeEventInterface = NodeInterface;
 
 class NodeEvent extends Node implements NodeEventInterface {
   hasData(): boolean {
     return false;
   }
+
   getIncluded() {
     return "";
   }
 }
 
-export {NodeEvent as default, NodeEventInterface}
+export { NodeEvent as default, NodeEventInterface };

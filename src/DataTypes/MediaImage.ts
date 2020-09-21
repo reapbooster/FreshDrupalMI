@@ -1,23 +1,25 @@
-import ImageFile, { ImageFileInterface } from './ImageFile';
+import ImageFile, { ImageFileInterface } from "./ImageFile";
 
-import ImageStyleObject, { ImageStyleObjectInterface, HolderImageStyleObject } from './ImageStyleObject';
-import Media, { MediaInterface } from './Media';
+import ImageStyleObject, {
+  ImageStyleObjectInterface,
+  HolderImageStyleObject,
+} from "./ImageStyleObject";
+import Media, { MediaInterface } from "./Media";
 
 interface MediaImageInterface extends MediaInterface {
-
   field_media_image: ImageFileInterface;
   field_photo_subject_name: string;
   field_photo_subject_title: string;
   field_photo_subject_org: string;
-
 }
 
 class MediaImage extends Media implements MediaImageInterface {
-
   _field_media_image: ImageFile;
 
   field_photo_subject_name: string;
+
   field_photo_subject_title: string;
+
   field_photo_subject_org: string;
 
   get srcset() {
@@ -42,7 +44,6 @@ class MediaImage extends Media implements MediaImageInterface {
     }
     return new ImageStyleObject(this.field_media_image.image_style_uri);
   }
-
 }
 
-export { MediaImage as default, MediaImageInterface }
+export { MediaImage as default, MediaImageInterface };

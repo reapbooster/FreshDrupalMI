@@ -1,28 +1,37 @@
-import ListComponentSource from '../../DataTypes/ListComponentSource';
+import { ListComponentPropsInterface } from "../../DataTypes/ListComponentProps";
+import ListComponentSource, {
+  ListComponentSourceInterface,
+} from "../../DataTypes/ListComponentSource";
 
-
-
-class PhilanthropyHubSource extends ListComponentSource {
+export default class PhilanthropyHubSource
+  extends ListComponentSource
+  implements ListComponentSourceInterface {
+  constructor(incoming: ListComponentSourceInterface){
+    super(incoming);
+    Object.assign(this, incoming);
+  }
 
   static filters: {
-    terms: "field_terms",
-    actions: "field_actions",
-    region: "field_region",
-    focus: "field_focus",
+    terms: "field_terms";
+    actions: "field_actions";
+    region: "field_region";
+    focus: "field_focus";
   };
 
   refresh(filter) {
-    return this.getSourceData()
+    return this.getSourceData();
   }
 
-  onHashChanged(){
+  onHashChanged() {
     console.debug("Hash change trigger");
     const params = new URLSearchParams(window.location.hash.replace("#", ""));
     let newFilter = {};
+    // eslint-disable-next-line no-restricted-syntax
     for (let [field, values] of params) {
       field = `field_${field}`;
       values = values.split(",");
 
+      // eslint-disable-next-line no-restricted-syntax
       for (const fieldValue of values) {
         const conjunction = "AND";
         const filterKey = `${field}-${fieldValue}`;
@@ -40,7 +49,7 @@ class PhilanthropyHubSource extends ListComponentSource {
 
         newFilter = {
           ...newFilter,
-          ...newValue
+          ...newValue,
         };
       }
     }
@@ -48,19 +57,22 @@ class PhilanthropyHubSource extends ListComponentSource {
     this.refresh(newFilter);
   }
 
-  notifyListComponent(newFilter: Object){
+  notifyListComponent(newFilter: Object) {
     const evt = new CustomEvent("refresh", {
       bubbles: false,
       cancelable: false,
       detail: {
-        filter: newFilter
-      }
+        filter: newFilter,
+      },
     });
-    document
-      .querySelector("#list-component-root")
-      .dispatchEvent(evt);
+    document.querySelector("#list-component-root").dispatchEvent(evt);
   }
 
+  public static getDefaultSource(): Promise<ListComponentPropsInterface> {
+    console.debug("getting default source", process.env);
+    return fetch(process.env.CONFIG_FILE)
+      .then((data) => {
+        return new PhilanthropyHubSource(data);
+      });
+  }
 }
-
-export default PhilanthropyHubSource;

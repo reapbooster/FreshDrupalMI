@@ -1,5 +1,5 @@
-import ColorObject from './ColorObject';
-import LinkList from '../DataTypes/LinkList'
+import ColorObject from "./ColorObject";
+import LinkList from "./LinkList";
 import JSONApiUrl from "./JSONApiUrl";
 
 interface FacetValueInterface {
@@ -19,16 +19,27 @@ interface FacetValueInterface {
 
 class FacetValue {
   type?: string;
+
   id?: string;
+
   machine_name?: string;
+
   links?: LinkList;
+
   weight?: number;
+
   value?: string;
+
   name?: string;
+
   title?: string;
+
   selected?: boolean;
+
   field_tag_icon?: object;
+
   field_tag_color?: ColorObject;
+
   field_visibility?: boolean;
 
   constructor(incoming) {
@@ -36,7 +47,7 @@ class FacetValue {
   }
 
   get label(): string {
-    return (this.title || this.name) || this.id;
+    return this.title || this.name || this.id;
   }
 }
 
@@ -55,50 +66,58 @@ interface FacetProps {
 
 class Facet {
   url: JSONApiUrl;
+
   _label: string;
+
   _values: Array<FacetValue>;
+
   defaultSelected: boolean;
+
   dispatcher: HTMLElement;
+
   allowMultiple = false;
 
   constructor(incoming: FacetProps) {
     Object.assign(this, incoming);
-    this.dispatcher = document.createElement('nav');
+    this.dispatcher = document.createElement("nav");
   }
 
   hasValues() {
-    return (this.values?.length || 0)
+    return this.values?.length || 0;
   }
 
-  async getData(query: string = ""): Promise<any> {
+  async getData(query = ""): Promise<any> {
     console.debug("get Data called: ", this);
     if (this.url) {
       console.debug("Facet is calling url: ", this.url.toString());
-      return fetch(this.url.toString())
-        .catch(this.handleError);
-    } else {
-      this.handleError(new Error("No URL to make a refresh call"));
+      return fetch(this.url.toString()).catch(this.handleError);
     }
+    this.handleError(new Error("No URL to make a refresh call"));
   }
 
-  refresh(done) : Promise<any> {
-    var self = this;
+  refresh(done): Promise<any> {
+    const self = this;
     return this.getData()
-      .then(res => res.json())
-      .then(ajaxData => {
-        done(new Facet({
-          url: this.url,
-          id: this.id,
-          type: this.type,
-          label: this.label,
-          values: ajaxData.data,
-        }));
+      .then((res) => res.json())
+      .then((ajaxData) => {
+        done(
+          new Facet({
+            url: this.url,
+            id: this.id,
+            type: this.type,
+            label: this.label,
+            values: ajaxData.data,
+          })
+        );
       });
   }
 
   handleError(err) {
     this.error = err;
-    console.error("Entity Component Props has encountered an error with fetching the items:", err);
+    console.error(
+      "Entity Component Props has encountered an error with fetching the items:",
+      err
+    );
   }
 
   get label() {
@@ -113,14 +132,13 @@ class Facet {
     return this._values;
   }
 
-  clone() : Facet {
-    var toReturn = new Facet();
+  clone(): Facet {
+    const toReturn = new Facet();
     Object.assign(toReturn, this);
     return toReturn;
   }
 
   set values(values: Array<FacetValueInterface>) {
-
     // this.dispatcher.dispatchEvent(new FacetChangeEvent({ values: values }));
     this._values = values.map((value) => new FacetValue(value));
   }
@@ -133,7 +151,7 @@ class Facet {
   }
 
   setActive(machine_name) {
-    var toReturn = this.clone();
+    const toReturn = this.clone();
     if (this.allowMultiple === false) {
       // if you don't allow mutliple, set everything
       // to false and turn on the one you need
@@ -147,20 +165,19 @@ class Facet {
   }
 
   setActiveItem(machine_name = null) {
-    var self = this;
+    const self = this;
     this._values.map((value: FacetValue, key) => {
       if (value.machine_name == machine_name) {
         self.values[key].selected = true;
-      }
-      else {
+      } else {
         self.values[key].selected = false;
       }
     });
-    return self
+    return self;
   }
 
   setInactiveItem(machine_name = null) {
-    var self = this;
+    const self = this;
     this._values.map((value: FacetValue, key) => {
       if (machine_name === null || value.machine_name == machine_name) {
         self.values[key].selected = false;
@@ -170,18 +187,21 @@ class Facet {
   }
 
   getActive(): Array<FacetValue> {
-    return this.values.map((value) => {
-      if (value.selected == true) {
-        return value;
-      }
-      return null;
-    }).filter((obj) => { return obj });
+    return this.values
+      .map((value) => {
+        if (value.selected == true) {
+          return value;
+        }
+        return null;
+      })
+      .filter((obj) => {
+        return obj;
+      });
   }
 
-
   getValuesForJsonAPIFilters() {
-    var toReturn = {};
-    for (var v in this._values) {
+    const toReturn = {};
+    for (const v in this._values) {
       toReturn[this._values[v].machine_name] = this._values[v].value;
     }
     return toReturn;
@@ -189,11 +209,10 @@ class Facet {
 }
 
 interface FacetChangeEventProps {
-  values: Array<FacetValue>
+  values: Array<FacetValue>;
 }
 
 class FacetChangeEvent extends Event {
-
   facetValues: Array<FacetValue>;
 
   constructor(props: FacetChangeEventProps) {

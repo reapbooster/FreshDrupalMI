@@ -1,21 +1,20 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
 
-
-
-interface ParagraphFourTileBlockQueueInterface extends RevisionableEntityInterface {
-
-}
+type ParagraphFourTileBlockQueueInterface = RevisionableEntityInterface;
 
 class ParagraphFourTileBlockQueue extends RevisionableEntity {
-
-  hasData(): boolean{
+  hasData(): boolean {
     return true;
   }
 
   getIncluded(): string {
     return "";
   }
-
 }
 
-export {ParagraphFourTileBlockQueue as default, ParagraphFourTileBlockQueueInterface}
+export {
+  ParagraphFourTileBlockQueue as default,
+  ParagraphFourTileBlockQueueInterface,
+};

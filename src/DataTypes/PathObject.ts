@@ -1,24 +1,17 @@
-
-
-interface PathObjectInterface {
-
+export interface PathObjectInterface {
   alias: string;
   pid: number;
   langcode: string;
-
 }
 
-class PathObject {
-
+export default class PathObject implements PathObjectInterface {
   alias: string;
+
   pid: number;
+
   langcode: string;
 
   constructor(incoming: PathObjectInterface) {
     Object.assign(this, incoming);
   }
-
 }
-
-
-export  { PathObject as default, PathObjectInterface };

@@ -1,6 +1,8 @@
-import RevisionableEntity, {RevisionableEntityInterface} from '../DataTypes/RevisionableEntity';
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
 
-interface SlideKeyValueTextInterface {
+export interface SlideKeyValueTextInterface {
   key: string;
   description: string;
   value: string;
@@ -8,11 +10,15 @@ interface SlideKeyValueTextInterface {
   processed: string;
 }
 
-class SlideKeyValueText {
+export class SlideKeyValueText {
   key: string;
+
   description: string;
+
   value: string;
+
   format: string;
+
   processed: string;
 
   constructor(incoming: SlideKeyValueTextInterface) {
@@ -20,14 +26,12 @@ class SlideKeyValueText {
   }
 }
 
-
-interface SlideInterface extends RevisionableEntityInterface {
+export interface SlideInterface extends RevisionableEntityInterface {
   drupal_internal__id: number;
 }
 
-abstract class Slide extends RevisionableEntity implements SlideInterface{
+export default abstract class Slide
+  extends RevisionableEntity
+  implements SlideInterface {
   drupal_internal__id: number;
 }
-
-
-export { Slide as default, SlideKeyValueTextInterface, SlideKeyValueText, SlideInterface }

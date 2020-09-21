@@ -91,7 +91,7 @@ interface ParagraphDisplayProps {
 
 const ParagraphDisplay: React.FunctionComponent = (props: ParagraphDisplayProps) => {
   const [paragraphData, setParagraphData] = useState(ParagraphDataFactory(props.data));
-  console.debug("Paragraph Display", paragraphData);
+  console.debug("Paragraph Display data:", paragraphData);
   if (!paragraphData.hasData()) {
     const ecp = new EntityComponentProps(paragraphData);
     ecp.getData(paragraphData.getIncluded())
@@ -107,7 +107,7 @@ const ParagraphDisplay: React.FunctionComponent = (props: ParagraphDisplayProps)
     )
   }
 
-  const Component = ParagraphComponentFactory(props.data);
+  const Component = ParagraphComponentFactory(paragraphData);
   // @ts-ignore
   return (
     <ErrorBoundary key={props.key ?? 0}>

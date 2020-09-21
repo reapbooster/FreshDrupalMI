@@ -1,15 +1,13 @@
-
-
 class JSONApiUrl {
-
   parsed: URL;
+
   query: URLSearchParams;
 
   constructor(incoming: string = null, searchParams: URLSearchParams = null) {
     if (incoming) {
       const split = incoming.split("?");
-      var location = new URL(document.location.href.toString());
-      this.parsed = new URL(split[0],location.origin);
+      const location = new URL(document.location.href.toString());
+      this.parsed = new URL(split[0], location.origin);
       // If new search params are provided, use those, else
       // the query from the supplied URL
       this.query = searchParams ?? new URLSearchParams(split[1]);
@@ -32,10 +30,12 @@ class JSONApiUrl {
     }
     console.debug("New Filter", params);
     let newFilter = {};
-    for (let [field, values] of params) {
-      var fullField = `field_${field}`;
-      var splitValues = values.split(",");
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [field, values] of params) {
+      const fullField = `field_${field}`;
+      const splitValues = values.split(",");
 
+      // eslint-disable-next-line no-restricted-syntax
       for (const fieldValue of splitValues) {
         const conjunction = "AND";
         const filterKey = `${field}-${fieldValue}`;
@@ -53,14 +53,13 @@ class JSONApiUrl {
 
         newFilter = {
           ...newFilter,
-          ...newValue
+          ...newValue,
         };
       }
     }
     console.debug("new Filter returned", newFilter);
     return newFilter;
   }
-
 }
 
 export default JSONApiUrl;

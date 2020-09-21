@@ -1,41 +1,47 @@
-import Slide, {SlideInterface, SlideKeyValueText, SlideKeyValueTextInterface} from "./Slide";
-import ColorObject, {ColorObjectInterface} from "./ColorObject";
-import ImageFile, {ImageFileInterface} from "./ImageFile";
-import SlideType, {SlideTypeInterface} from "./SlideType";
-import Link, {LinkInterface} from './LinkList';
+import Slide, {
+  SlideInterface,
+  SlideKeyValueText,
+  SlideKeyValueTextInterface,
+} from "./Slide";
+import ColorObject, { ColorObjectInterface } from "./ColorObject";
+import ImageFile, { ImageFileInterface } from "./ImageFile";
+import SlideType, { SlideTypeInterface } from "./SlideType";
+import { Link, LinkInterface } from "./LinkList";
 
-
-interface SlideFullWidthOneColumnInterface extends SlideInterface {
-
-  field_background_color: ColorObjectInterface;
-  field_link: boolean;
+export interface SlideFullWidthOneColumnInterface extends SlideInterface {
+  field_background_color?: ColorObjectInterface;
+  field_link?: boolean;
   field_promoted: boolean;
   field_published: boolean;
-  field_text_color: ColorObjectInterface;
+  field_text_color?: ColorObjectInterface;
   slide_type: SlideTypeInterface;
-  field_background_image: ImageFileInterface;
-  field_slide_text: Array<SlideKeyValueTextInterface>;
-
+  field_background_image?: ImageFileInterface;
+  field_slide_text?: Array<SlideKeyValueTextInterface>;
 }
 
-class SlideFullWidthOneColumn  implements SlideFullWidthOneColumnInterface {
-
+export default class SlideFullWidthOneColumn
+  extends Slide
+  implements SlideFullWidthOneColumnInterface {
   private _field_background_color: ColorObjectInterface;
+
   private _field_background_image: ImageFile;
+
   private _field_link: Link;
+
   private _field_slide_text: Array<SlideKeyValueTextInterface>;
+
   private _field_text_color: ColorObjectInterface;
+
   private _slide_type: SlideType;
+
   field_promoted: boolean;
+
   field_published: boolean;
 
-  constructor(incoming: SlideInterface) {
+  constructor(incoming: SlideFullWidthOneColumnInterface) {
+    super(incoming);
     Object.assign(this, incoming);
-    this.field_background_color = incoming.field_background_color ?? null;
-    this.field_background_image = incoming.field_background_image ?? null;
-    this.field_link = incoming.field_link ?? null;
-    this.field_slide_text = incoming.field_slide_text ?? null;
-    console.debug('SlideFullWidthOneColumn', this);
+    console.debug("SlideFullWidthOneColumn", this);
   }
 
   get field_background_color(): ColorObjectInterface {
@@ -85,6 +91,12 @@ class SlideFullWidthOneColumn  implements SlideFullWidthOneColumnInterface {
   set slide_type(value: SlideType) {
     this._slide_type = value;
   }
-}
 
-export {SlideFullWidthOneColumn as default, SlideFullWidthOneColumnInterface};
+  getIncluded(): string {
+    return "&include=field_background_image";
+  }
+
+  hasData(): boolean {
+    return this.field_published !== undefined && this.field_published !== null;
+  }
+}

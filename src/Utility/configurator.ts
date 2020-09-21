@@ -1,50 +1,48 @@
 if (webpack == undefined) {
-  const webpack = require('webpack');
+  const webpack = require("webpack");
 }
-var configurator = (name, file) => {
+const configurator = (name, file) => {
   const parsedFileName = parsePath(file);
-  console.log(`Configuring: ${parsedFileName.libraryName}`)
-  var babelLoader = {
-    loader: 'babel-loader',
+  console.log(`Configuring: ${parsedFileName.libraryName}`);
+  const babelLoader = {
+    loader: "babel-loader",
     options: {
       cacheDirectory: false,
       presets: [
-        '@babel/preset-env',
-        '@babel/preset-react',
-        '@babel/preset-typescript'
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/preset-typescript",
       ],
       plugins: [
         "@babel/transform-runtime",
-        '@babel/plugin-transform-typescript',
+        "@babel/plugin-transform-typescript",
         "@babel/plugin-proposal-export-default-from",
         "@babel/plugin-proposal-object-rest-spread",
         "@babel/plugin-proposal-optional-chaining",
         "@babel/plugin-proposal-class-properties",
         "transform-custom-element-classes",
-        "@babel/plugin-transform-react-jsx"
-      ]
-    }
+        "@babel/plugin-transform-react-jsx",
+      ],
+    },
   };
 
-  var toReturn = {
+  const toReturn = {
     entry: {},
     mode: "development",
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
     cache: false,
     output: {
-      filename: parsedFileName.libraryName + ".entry.js",
-      path: parsedFileName.dirname
+      filename: `${parsedFileName.libraryName}.entry.js`,
+      path: parsedFileName.dirname,
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
-      plugins: [
-
-      ],
+      extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
+      plugins: [],
       alias: {
-        components: '/var/www/src/components'
-      }
+        components: "/var/www/src/components",
+      },
     },
 
     module: {
@@ -53,37 +51,35 @@ var configurator = (name, file) => {
         {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
-          use: [
-            babelLoader
-          ]
+          use: [babelLoader],
         },
 
         // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-        {enforce: "pre", test: /\.js$/, loader: "source-map-loader"},
+        { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
         {
           test: /\.css$/i,
-          use: ['style-loader', 'css-loader'],
-        }
-      ]
+          use: ["style-loader", "css-loader"],
+        },
+      ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        'Holder': 'holderjs',
-        'holder': 'holderjs',
-        'window.Holder': 'holderjs'
+        Holder: "holderjs",
+        holder: "holderjs",
+        "window.Holder": "holderjs",
       }),
       new webpack.LoaderOptionsPlugin({
-        debug: true
-      })
+        debug: true,
+      }),
     ],
     stats: {
       warnings: true,
       colors: true,
       modules: true,
       reasons: true,
-      errorDetails: true
-    }
-  }
+      errorDetails: true,
+    },
+  };
   toReturn.entry[parsedFileName.libraryName] = file;
   return toReturn;
 };

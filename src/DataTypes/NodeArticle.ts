@@ -1,7 +1,7 @@
-import Node, { NodeInterface } from './Node';
-import TaxonomyTerm, {TaxonomyTermInterface} from './TaxonomyTerm';
-import Paragraph, {ParagraphInterface} from "./Paragraph";
-import Slide, {SlideInterface} from "./Slide";
+import Node, { NodeInterface } from "./Node";
+import TaxonomyTerm, { TaxonomyTermInterface } from "./TaxonomyTerm";
+import Paragraph, { ParagraphInterface } from "./Paragraph";
+import Slide, { SlideInterface } from "./Slide";
 
 interface NodeArticleInterface extends NodeInterface {
   field_authors: object;
@@ -9,15 +9,17 @@ interface NodeArticleInterface extends NodeInterface {
   field_content: Array<ParagraphInterface>;
   field_promo_slide: SlideInterface;
   field_topics: TaxonomyTermInterface;
-
 }
 
 class NodeArticle extends Node implements NodeArticleInterface {
-
   field_authors: object;
+
   private _field_centers: TaxonomyTermInterface;
+
   private _field_content: Array<Paragraph>;
+
   private _field_promo_slide: Slide;
+
   private _field_topics: TaxonomyTermInterface;
 
   hasData(): boolean {
@@ -61,5 +63,4 @@ class NodeArticle extends Node implements NodeArticleInterface {
   }
 }
 
-export {NodeArticle as default, NodeArticleInterface}
-
+export { NodeArticle as default, NodeArticleInterface };

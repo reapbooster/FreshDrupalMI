@@ -1,29 +1,29 @@
 import LinkList, { LinkListInterface } from "./LinkList";
 
-
-interface EntityInterface {
-  changed: string;
-  created: string;
+export interface EntityInterface {
+  changed?: string;
+  created?: string;
   id: string;
   links: LinkListInterface;
   type: string;
-  label: string;
 }
 
-
-abstract class Entity implements EntityInterface {
-  _changed: Date;
-  _created: Date;
-  _links: LinkList;
+export default abstract class Entity implements EntityInterface {
   id: string;
+
   type: string;
-  label: string;
+
+  private _changed?: Date;
+
+  private _created?: Date;
+
+  private _links?: LinkList;
 
   constructor(incoming: EntityInterface) {
     Object.assign(this, incoming);
   }
 
-  get links(): LinkListInterface {
+  get links(): LinkListInterface | undefined {
     return this._links;
   }
 
@@ -31,23 +31,23 @@ abstract class Entity implements EntityInterface {
     this._links = new LinkList(incoming);
   }
 
-  get created() {
-    return this._created.toString();
+  get created(): string | undefined {
+    return this._created?.toString();
   }
 
   set created(incoming: string) {
-    this._created = new Date(incoming);
+    if (incoming) {
+      this._created = new Date(incoming);
+    }
   }
 
-  get changed(): string {
-    return this._changed.toString();
+  get changed(): string | undefined {
+    return this._changed?.toString();
   }
 
-  set changed(incoming) {
-    this._changed = new Date(incoming);
+  set changed(incoming: string) {
+    if (incoming) {
+      this._changed = new Date(incoming);
+    }
   }
-
 }
-
-
-export {Entity as default, EntityInterface}

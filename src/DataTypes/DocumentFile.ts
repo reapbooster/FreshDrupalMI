@@ -1,19 +1,15 @@
-import File, {FileInterface} from './File';
+import File, { FileInterface } from "./File";
 
-interface DocumentFileInterface extends FileInterface {
+export type DocumentFileInterface = FileInterface;
 
-
-}
-
-class DocumentFile extends File implements DocumentFileInterface {
-
+export default class DocumentFile
+  extends File
+  implements DocumentFileInterface {
   hasData(): boolean {
-    return true;
+    return this.uri !== undefined && this.uri !== null;
   }
-  getIncluded(): string {
+
+  public static getIncluded(): string {
     return "";
   }
-
 }
-
-export {DocumentFile as default, DocumentFileInterface}

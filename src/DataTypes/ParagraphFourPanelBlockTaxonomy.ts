@@ -1,21 +1,20 @@
-import RevisionableEntity, {RevisionableEntityInterface} from './RevisionableEntity';
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
 
-
-
-interface ParagraphFourPanelBlockTaxonomyInterface extends RevisionableEntityInterface {
-
-}
+type ParagraphFourPanelBlockTaxonomyInterface = RevisionableEntityInterface;
 
 class ParagraphFourPanelBlockTaxonomy extends RevisionableEntity {
-
-  hasData(): boolean{
+  hasData(): boolean {
     return true;
   }
 
   getIncluded(): string {
     return "";
   }
-
 }
 
-export {ParagraphFourPanelBlockTaxonomy as default, ParagraphFourPanelBlockTaxonomyInterface}
+export {
+  ParagraphFourPanelBlockTaxonomy as default,
+  ParagraphFourPanelBlockTaxonomyInterface,
+};

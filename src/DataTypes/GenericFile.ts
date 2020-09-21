@@ -1,4 +1,7 @@
-import {DrupalDefaultEntityInterface, DrupalDefaultEntityValues} from "./DrupalDefaultEntityAttributes";
+import {
+  DrupalDefaultEntityInterface,
+  DrupalDefaultEntityValues,
+} from "./DrupalDefaultEntityAttributes";
 
 interface GenericFileInterface extends DrupalDefaultEntityInterface {
   uri: GenericFileUri;
@@ -13,9 +16,10 @@ interface GenericFileUri {
 
 class GenericFile extends DrupalDefaultEntityValues {
   uri: GenericFileUri;
+
   filemime: string;
+
   filesize: number;
 }
 
-
-export { GenericFile as default, GenericFileInterface, GenericFileUri }
+export { GenericFile as default, GenericFileInterface, GenericFileUri };

@@ -1,5 +1,3 @@
-
-
 interface TextFieldInterface {
   value: string;
   format: string;
@@ -7,9 +5,10 @@ interface TextFieldInterface {
 }
 
 class TextField {
-
   value: string;
+
   format: string;
+
   processed: string;
 
   constructor(incoming: TextFieldInterface) {
@@ -19,8 +18,6 @@ class TextField {
   toString() {
     return this.processed;
   }
-
 }
-
 
 export { TextField as default, TextFieldInterface };

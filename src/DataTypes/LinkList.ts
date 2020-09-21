@@ -1,14 +1,14 @@
-
 import JSONApiUrl from "./JSONApiUrl";
 
-interface LinkInterface {
+export interface LinkInterface {
   href: JSONApiUrl;
   title?: string;
   uri?: string;
 }
 
-class Link implements LinkInterface {
+export class Link implements LinkInterface {
   title: string;
+
   private _href: JSONApiUrl;
 
   constructor(incoming: LinkInterface) {
@@ -18,6 +18,7 @@ class Link implements LinkInterface {
   get href(): JSONApiUrl {
     return this._href;
   }
+
   set href(value) {
     if (!value instanceof JSONApiUrl) {
       value = new JSONApiUrl(value);
@@ -26,16 +27,15 @@ class Link implements LinkInterface {
   }
 
   get uri(): string {
-    return this._href.toString()
+    return this._href.toString();
   }
 
   set uri(incoming: string) {
     this._href = new JSONApiUrl(incoming);
   }
-
 }
 
-interface LinkListInterface {
+export interface LinkListInterface {
   self?: LinkInterface;
   previous?: LinkInterface;
   next?: LinkInterface;
@@ -43,13 +43,16 @@ interface LinkListInterface {
   last?: LinkInterface;
 }
 
+export default class LinkList implements LinkListInterface {
+  private _self?: Link;
 
-class LinkList implements LinkListInterface{
-  private _self?:      Link;
-  private _previous?:  Link;
-  private _next?:      Link;
-  private _first?:     Link;
-  private _last?:      Link;
+  private _previous?: Link;
+
+  private _next?: Link;
+
+  private _first?: Link;
+
+  private _last?: Link;
 
   constructor(incoming: LinkListInterface) {
     Object.assign(this, incoming);
@@ -94,7 +97,4 @@ class LinkList implements LinkListInterface{
   set last(value: Link) {
     this._last = value;
   }
-
 }
-
-export { LinkList as default, LinkListInterface, LinkInterface, Link }

@@ -1,6 +1,8 @@
-import Entity, {EntityInterface} from "./Entity";
-import ImageStyleObject, { ImageStyleObjectInterface } from './ImageStyleObject';
-import File, {FileInterface} from './File';
+import Entity, { EntityInterface } from "./Entity";
+import ImageStyleObject, {
+  ImageStyleObjectInterface,
+} from "./ImageStyleObject";
+import File, { FileInterface } from "./File";
 
 interface ImageFileMetaDataInterface {
   alt?: string;
@@ -8,7 +10,6 @@ interface ImageFileMetaDataInterface {
   width?: number;
   height?: number;
 }
-
 
 interface ImageFileInterface extends FileInterface {
   filemime: string;
@@ -22,31 +23,38 @@ interface ImageFileInterface extends FileInterface {
 
 class ImageFile extends File implements ImageFileInterface {
   filemime: string;
+
   filename: string;
+
   filesize: number | string;
+
   _image_style_uri: ImageStyleObject;
+
   meta: ImageFileMetaDataInterface;
+
   status: boolean;
 
   constructor(incoming: ImageFileInterface) {
-    const incomingImageStyles = incoming.image_style_uri || null;
-    delete incoming.image_style_uri;
     super(incoming);
-    if (incomingImageStyles) {
-      this.setImageStyles(incomingImageStyles);
-    }
+    Object.assign(this, incoming);
+    this.setImageStyles(incoming.image_style_uri);
   }
 
-  get image_style_uri() : ImageStyleObjectInterface {
+  get image_style_uri(): ImageStyleObjectInterface {
     return this._image_style_uri;
   }
 
   set image_style_uri(incoming) {
-    this._image_style_uri = new ImageStyleObject(incoming);
+    if (Array.isArray(incoming)) {
+      this._image_style_uri = new ImageStyleObject(incoming);
+    }
+    if (incoming instanceof ImageStyleObject) {
+      this._image_style_uri = incoming;
+    }
   }
 
   hasData(): boolean {
-    return (intval(this.filesize) > 0);
+    return this._image_style_uri || false;
   }
 
   getIncluded(): string {
@@ -54,7 +62,10 @@ class ImageFile extends File implements ImageFileInterface {
   }
 
   get imageMultiUrl(): string {
-    return this.imageStyleObject.srcSet();
+    return ( this.hasData() ?
+      this.imageStyleObject?.srcSet :
+      `"holder.js/100x100" 100w, "holder.js/220x220" 220w, "holder.js/480x480" 480w, "holder.js/1920x1080" 1920w`
+    );
   }
 
   get imageStyleObject(): ImageStyleObjectInterface | null {
@@ -64,8 +75,6 @@ class ImageFile extends File implements ImageFileInterface {
   setImageStyles(incoming: Array<object>) {
     this._image_style_uri = new ImageStyleObject(incoming);
   }
-
 }
 
-
-export { ImageFile as default, ImageFileInterface, ImageFileMetaDataInterface }
+export { ImageFile as default, ImageFileInterface, ImageFileMetaDataInterface };

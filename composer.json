@@ -242,8 +242,7 @@
     "scripts": {
         "update-vendor-dir": [
             "php -d memory_limit=-1 `which composer` update --optimize-autoloader --prefer-dist",
-            "vendor/bin/phpcs --config-set installed_paths web/modules/contrib/coder/coder_sniffer",
-            "npm upgrade && npm audit fix"
+            "vendor/bin/phpcs --config-set installed_paths web/modules/contrib/coder/coder_sniffer"
         ],
         "install-vendor-dir": [
             "php -d memory_limit=-1 `which composer` install --optimize-autoloader --prefer-dist",

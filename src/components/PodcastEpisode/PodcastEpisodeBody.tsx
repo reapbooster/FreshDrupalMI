@@ -35,7 +35,7 @@ const PodcastEpisodeBody: React.FunctionComponent = (props: PropsWithChildren<Po
                   </span>
                   <br />
                   <p>
-                    <learnMoreLink href={props.path.alias}>LEARN MORE ></learnMoreLink>
+                    <learnMoreLink href={props.path.alias}>LEARN MORE &gt;</learnMoreLink>
                   </p>
                 </Col>
               </Row>
