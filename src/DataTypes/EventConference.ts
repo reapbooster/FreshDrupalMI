@@ -51,7 +51,7 @@ export class EventConference extends Event {
     return "&include=entity_type,field_picture";
   }
 
-  hasData(){
+  hasData(): boolean {
     return this.field_grid_event_id !== undefined;
   }
 

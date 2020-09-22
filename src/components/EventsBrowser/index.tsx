@@ -8,11 +8,10 @@ export interface EventsBrowserProps {
 }
 
 export const EventsBrowser = (props: EventsBrowserProps) => {
+
   return (
     <>
-      <EventDisplayList
-        {...props}
-      />
+      <h1>Themed Event List Browser Goes here</h1>
     </>
   )
 }

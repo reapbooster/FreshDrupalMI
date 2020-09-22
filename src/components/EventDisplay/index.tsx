@@ -55,19 +55,25 @@ export function EventComponentFactory(incoming: EventInterface) {
  * @param EventDisplayProps
  */
 export interface EventDisplayProps {
-  key?: number;
   data: EventInterface;
   view_mode: string;
+  key?: number;
+
 }
 
 export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
-  const [ eventData, setEventData ] = useState(EventDataFactory(props.data));
+  const { data, view_mode, key } = props;
+  if (!data instanceof Event) {
+    data = EventDataFactory(props.data);
+  }
+  const [ eventData, setEventData ] = useState(data);
   if (!eventData.hasData()) {
+    console.debug("Event Does Not Have Data");
     const ecp = new EntityComponentProps(eventData);
     ecp.getData(eventData.getIncluded())
       .then(res => res.json)
       .then((ajaxData) => {
-        setEventData(EventDataFactory(props.date))
+        setEventData(EventDataFactory(ajaxData.data));
       });
     return (
       <>

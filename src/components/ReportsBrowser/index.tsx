@@ -10,9 +10,7 @@ interface ResportsBrowserProps {
 const ReportsBrowser = (props: ResportsBrowserProps) => {
   return (
     <>
-      <MediaDisplayList
-        {...props}
-      />
+      <h1>Themed Reports Browser goes here.</h1>
     </>
   )
 }

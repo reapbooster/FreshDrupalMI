@@ -1,0 +1,33 @@
+uuid: 19e996fc-0933-49bb-a868-207791240a32
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.videos
+  module:
+    - component
+id: videos-block_display-0
+label: 'Block page'
+variant: block_display
+variant_settings:
+  blocks:
+    1d20d510-2139-45f0-a73f-1b7961760ea7:
+      id: 'component:VideosBrowser'
+      label: 'Videos Browser'
+      provider: component
+      label_display: visible
+      region: top
+      weight: 0
+      uuid: 1d20d510-2139-45f0-a73f-1b7961760ea7
+      form_configuration: null
+      context_mapping: {  }
+  id: block_display
+  uuid: 2499e9f2-c371-43a8-b5f1-570628801e21
+  label: null
+  weight: 0
+  page_title: Videos
+page: videos
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

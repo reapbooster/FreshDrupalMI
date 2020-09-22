@@ -1,18 +1,16 @@
 import React from 'react';
 import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
-import {MediaVideoInterface} from "../../DataTypes/MediaVideo";
 
-interface VideoBrowserProps {
-  items: Array<MediaVideoInterface>;
-  view_mode: string;
+
+export interface VideosBrowserProps{
+
 }
 
-const VideoBrowser = (props: VideoBrowserProps) => {
+const VideoBrowser = () => {
+
   return (
     <>
-      <MediaDisplayList
-        {...props}
-      />
+      <h1>Themed Videos List Browser Goes here</h1>
     </>
   )
 }

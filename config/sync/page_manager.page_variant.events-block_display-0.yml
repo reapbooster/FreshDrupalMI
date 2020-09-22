@@ -1,0 +1,33 @@
+uuid: c655fe55-6913-45a2-b277-045cb995de1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.events
+  module:
+    - component
+id: events-block_display-0
+label: 'Block page'
+variant: block_display
+variant_settings:
+  blocks:
+    82aa7834-79ad-471c-996d-41029e94517e:
+      id: 'component:EventsBrowser'
+      label: 'Events Browser'
+      provider: component
+      label_display: visible
+      region: top
+      weight: 0
+      uuid: 82aa7834-79ad-471c-996d-41029e94517e
+      form_configuration: null
+      context_mapping: {  }
+  id: block_display
+  uuid: cccf2d6f-2d56-4f23-8ea5-4fb12cf841a9
+  label: null
+  weight: 0
+  page_title: ''
+page: events
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

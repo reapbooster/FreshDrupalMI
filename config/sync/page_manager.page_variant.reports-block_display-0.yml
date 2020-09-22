@@ -1,0 +1,33 @@
+uuid: 06cb757b-3a9e-4160-8d97-73d79ab6c199
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.reports
+  module:
+    - component
+id: reports-block_display-0
+label: 'Block page'
+variant: block_display
+variant_settings:
+  blocks:
+    04c6852c-0c46-418b-990c-534441839c02:
+      id: 'component:ReportsBrowser'
+      label: ReportsBrowser
+      provider: component
+      label_display: visible
+      region: top
+      weight: 0
+      uuid: 04c6852c-0c46-418b-990c-534441839c02
+      form_configuration: null
+      context_mapping: {  }
+  id: block_display
+  uuid: 79015b7e-1841-4fb0-977f-8a9af9f964dc
+  label: null
+  weight: 0
+  page_title: Reports
+page: reports
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

@@ -1,0 +1,12 @@
+uuid: f4d6fb6e-2fc5-4dfa-9912-174c1a3acaeb
+langcode: en
+status: true
+dependencies: {  }
+id: videos
+label: Videos
+description: ''
+use_admin_theme: false
+path: /explore/videos
+access_logic: and
+access_conditions: {  }
+parameters: {  }
