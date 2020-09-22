@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import ImageFile from '../../DataTypes/ImageFile';
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
-import {EventSummitInterface} from "../../DataTypes/EventSummit";
+import {EventConferenceInterface} from "../../DataTypes/EventConference";
 
 interface EventConferenceDisplayProps {
-  data: EventSummitInterface;
+  data: EventConferenceInterface;
   view_mode: string;
   key?: number;
 }

@@ -1,10 +1,9 @@
-import RevisionableEntity, {
-  RevisionableEntityInterface,
-} from "./RevisionableEntity";
-import TextField, { TextFieldInterface } from "../Fields/TextField";
-import TaxonomyTerm, { TaxonomyTermInterface } from "./TaxonomyTerm";
+import Event, {
+  EventInterface,
+} from "./Event";
+import { TextFieldInterface } from "../Fields/TextField";
 
-interface EventMeetingInterface extends RevisionableEntityInterface {
+export interface EventMeetingInterface extends EventInterface {
   field_blurb?: string;
   field_campaign_id?: string;
   field_campaign_name?: string;
@@ -25,7 +24,7 @@ interface EventMeetingInterface extends RevisionableEntityInterface {
   field_tracks: object;
 }
 
-class EventMeeting extends RevisionableEntity {
+export class EventMeeting extends Event {
   field_blurb?: string;
 
   field_campaign_id?: string;
@@ -61,6 +60,19 @@ class EventMeeting extends RevisionableEntity {
   field_picture: object;
 
   field_tracks: object;
+
+  constructor(incoming: EventMeetingInterface) {
+    super(incoming);
+    Object.assign(this, incoming)
+  }
+
+  getIncluded(): string {
+    return "&include=entity_type,field_picture";
+  }
+
+  hasData(){
+    return this.field_grid_event_id !== undefined;
+  }
 }
 
-export { EventMeeting as default, EventMeetingInterface };
+export default EventMeeting;

@@ -1,12 +1,11 @@
-<div id="event-data">
-  <script type="application/json" data-drupal-selector="drupal-event-json">{
-    "id": "{{ eck_entity.uuid.value }}",
-    "entityTypeId": "{{ eck_entity.getEntityTypeId }}",
-    "bundle": "{{ eck_entity.bundle }}",
-    "view_mode": "{{ view_mode }}"
-    }</script>
-</div>
+{{ attach_library('milken/EventDisplay') }}
 
-<div id="event-component">&nbsp;</div>
-
-{{ attach_library('milken/Event') }}
+<event-detail
+    data-drupal-selector="drupal-event-json"
+    data-id="{{ eck_entity.uuid.value }}"
+    data-type="{{ eck_entity.getEntityTypeId }}--{{ eck_entity.bundle }}"
+    data-drupal-internal-id="{{ eck_entity.id.value }}"
+    data-entity-type-id="{{ eck_entity.getEntityTypeId }}"
+    data-bundle="{{ eck_entity.bundle }}"
+    data-view-mode="full" >
+</event-detail>

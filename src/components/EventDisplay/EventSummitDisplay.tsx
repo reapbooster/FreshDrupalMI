@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import ImageFile from '../../DataTypes/ImageFile';
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
-import {EventSummitInterface} from "../../DataTypes/EventSummit";
+import { EventSummitInterface } from "../../DataTypes/EventSummit";
 
-interface EventSummitProps {
+export interface EventSummitProps {
   data: EventSummitInterface;
   view_mode: string;
   key?: number;
 }
 
-const EventSummit = (props: EventSummitProps) => {
+export const EventSummit = (props: EventSummitProps) => {
   const eventDate = moment(props.data.field_event_date, moment.ISO_8601);
   return (
     <>

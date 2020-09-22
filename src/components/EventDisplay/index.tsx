@@ -1,23 +1,28 @@
 import React, {useState} from 'react';
-import {ConferenceEvent, EventInterface, MeetingEvent, SummitEvent} from "../../DataTypes/Event";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-
+import {EventInterface} from '../../DataTypes/Event';
+import EventConference from "../../DataTypes/EventConference";
+import EventMeeting from "../../DataTypes/EventMeeting";
+import EventSummit from "../../DataTypes/EventSummit";
+import EventConferenceDisplay from './EventConferenceDisplay';
+import EventSummitDisplay from './EventSummitDisplay';
+import EventMeetingDisplay from './EventMeetingDisplay';
 
 /**
  * Implementation of the Data Model
  *
  * @param incoming
  */
-function EventDataFactory(incoming: EventInterface) {
+export function EventDataFactory(incoming: EventInterface) {
   switch(incoming.type){
     case "event--conference":
-      return new ConferenceEvent(incoming);
+      return new EventConference(incoming);
     case "event--meeting":
-      return new MeetingEvent(incoming);
+      return new EventMeeting(incoming);
     case "event--summit":
-      return new SummitEvent(incoming);
+      return new EventSummit(incoming);
     default:
       console.error("Cannot determine Data Class", incoming);
       throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
@@ -29,14 +34,14 @@ function EventDataFactory(incoming: EventInterface) {
  *
  * @param incoming
  */
-function EventComponentFactory(incoming: EventInterface) {
+export function EventComponentFactory(incoming: EventInterface) {
   switch(incoming.type) {
     case "event--conference":
-      return new ConferenceEvent(incoming);
+      return EventConferenceDisplay;
     case "event--meeting":
-      return new MeetingEvent(incoming);
+      return EventMeetingDisplay;
     case "event--summit":
-      return new SummitEvent(incoming);
+      return EventSummitDisplay;
     default:
       console.error("Cannot determine Component for", incoming);
       throw new Error("Cannot Determine Component for ".concat(incoming.type));
@@ -49,14 +54,14 @@ function EventComponentFactory(incoming: EventInterface) {
  *
  * @param EventDisplayProps
  */
-interface EventDisplayProps {
+export interface EventDisplayProps {
   key?: number;
   data: EventInterface;
   view_mode: string;
 }
 
-const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
-  const [eventData, setEventData] = useState(EventDataFactory(props.data));
+export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
+  const [ eventData, setEventData ] = useState(EventDataFactory(props.data));
   if (!eventData.hasData()) {
     const ecp = new EntityComponentProps(eventData);
     ecp.getData(eventData.getIncluded())
@@ -81,4 +86,4 @@ const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
 
 }
 
-export {EventDisplay as default, EventDisplayProps, EventDataFactory, EventComponentFactory}
+export default EventDisplay;

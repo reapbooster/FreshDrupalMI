@@ -2,12 +2,12 @@ import React from 'react';
 import EventDisplayList from '../EventDisplay/EventDisplayList'
 import {EventInterface} from '../../DataTypes/Event'
 
-interface EventsBrowserProps {
+export interface EventsBrowserProps {
   items: Array<EventInterface>
   view_mode: string;
 }
 
-const EventsBrowser = (props: EventsBrowserProps) => {
+export const EventsBrowser = (props: EventsBrowserProps) => {
   return (
     <>
       <EventDisplayList
@@ -17,4 +17,4 @@ const EventsBrowser = (props: EventsBrowserProps) => {
   )
 }
 
-export {EventsBrowser as default};
+export default EventsBrowser

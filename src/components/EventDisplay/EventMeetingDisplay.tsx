@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import ImageFile from '../../DataTypes/ImageFile';
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
-import {EventMeetingInterface} from "../../DataTypes/EventMeeting";
+import { EventMeetingInterface } from "../../DataTypes/EventMeeting";
 
 interface EventMeetingProps {
   data: EventMeetingInterface;

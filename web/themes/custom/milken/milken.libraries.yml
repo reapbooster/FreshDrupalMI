@@ -41,6 +41,16 @@ MediaDisplay:
   js:
     js/MediaDisplay.entry.js: { preprocess: 0, source: 'js/MediaDisplay.entry.tsx' }
 
+EventDisplay:
+  version: 1.0.0
+  footer: true
+  webpack: true
+  drupalSettings:
+    node: null
+  js:
+    js/EventDisplay.entry.js: { preprocess: 0, source: 'js/EventDisplay.entry.tsx' }
+
+
 philanthropy_hub:
   version: 1.0.0
   footer: true

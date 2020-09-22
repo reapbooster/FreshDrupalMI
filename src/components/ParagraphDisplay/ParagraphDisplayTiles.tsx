@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {Col} from "react-bootstrap";
-import EntityQueue from '../EntityQueue';
+import EntitySubqueueDisplay from '../EntitySubqueueDisplay';
 import * as DataObject from '../../DataTypes/ParagraphTiles'
 
 interface ParagraphDisplayTilesProps  {
@@ -15,7 +15,7 @@ const ParagraphDisplayTiles: React.FunctionComponent = (props : ParagraphTilesPr
   return (
     <Col lg={12}>
       <h3>{paragraphData.field_title}</h3>
-      <EntityQueue
+      <EntitySubqueueDisplay
         data={paragraphData.field_tile_queue}
         view_mode={props.view_mode ?? "tiles"}
       />
