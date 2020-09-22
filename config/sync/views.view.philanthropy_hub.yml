@@ -221,7 +221,7 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-      path: philanthropy/hub
+      path: philanthropy/hub2
     cache_metadata:
       max-age: -1
       contexts:

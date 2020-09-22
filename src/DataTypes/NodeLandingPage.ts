@@ -28,8 +28,7 @@ export class NodeLandingPage extends Node implements NodeLandingPageInterface, L
   }
 
   hasData(): boolean {
-    console.debug("NodeLandingPage has data?", this);
-    return Array.isArray(this.field_content);
+    return this.status !== undefined;
   }
 
   getIncluded(): string {

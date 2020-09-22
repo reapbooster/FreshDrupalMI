@@ -29,10 +29,6 @@ export default class ParagraphSlide extends Paragraph implements ParagraphSlideI
     this._field_background_color = new ColorObject(incoming);
   }
 
-  hasData(): boolean {
-    return this.field_slides?.length >= 1 ?? false;
-  }
-
   getIncluded(): string {
     return "&include=field_slides,field_slides.field_background_image";
   }

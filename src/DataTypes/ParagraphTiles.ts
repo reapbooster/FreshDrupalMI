@@ -18,10 +18,6 @@ export class ParagraphTiles extends Paragraph implements ParagraphTilesInterface
     Object.assign(this, props);
   }
 
-  hasData(): boolean {
-    return Array.isArray(this.field_tile_queue?.items);
-  }
-
   getIncluded(): string {
     return "&include=field_tile_queue,field_tile_queue.items,paragraph_type";
   }

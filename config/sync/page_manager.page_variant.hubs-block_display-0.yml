@@ -18,43 +18,21 @@ variant_settings:
     -
       layout_id: layout_onecol
       layout_settings:
-        label: Header
+        label: Content
       components:
-        038b1a36-d5cf-48e2-9811-3451a138da9b:
-          uuid: 038b1a36-d5cf-48e2-9811-3451a138da9b
+        63670537-b73a-4970-ad49-bcfbf06a3cc3:
+          uuid: 63670537-b73a-4970-ad49-bcfbf06a3cc3
           region: content
           configuration:
-            id: 'views_block:philanthropy_hub_header-block_1'
-            label: ''
-            provider: views
-            label_display: '0'
-            views_label: ''
-            items_per_page: none
-            context_mapping:
-              name: args
-          additional:
-            layout_builder_styles_style: ''
-          weight: 1
-        a74a55a6-1eea-4c0e-a686-45e78dde1062:
-          uuid: a74a55a6-1eea-4c0e-a686-45e78dde1062
-          region: content
-          configuration:
-            id: 'views_block:philanthropy_hub-block_1'
-            label: ''
-            provider: views
-            label_display: '0'
-            views_label: ''
-            items_per_page: '1'
+            id: 'component:PhilanthropyHub'
+            label: 'Philanthropy Hub'
+            provider: component
+            label_display: visible
+            form_configuration: null
             context_mapping: {  }
           additional:
             layout_builder_styles_style: ''
-          weight: 2
-      third_party_settings: {  }
-    -
-      layout_id: layout_onecol
-      layout_settings:
-        label: Content
-      components: {  }
+          weight: 0
       third_party_settings: {  }
 page: hubs
 weight: 0

@@ -37,13 +37,6 @@ class ParagraphBodyContent
   }
 
 
-  hasData(): boolean {
-    return (
-      this.field_body?.processed !== undefined &&
-      this.field_body?.processed !== null
-    );
-  }
-
   getIncluded(): string {
     return "";
   }

@@ -6,7 +6,7 @@ id: events
 label: Events
 description: ''
 use_admin_theme: false
-path: /events
+path: /explore/events
 access_logic: and
 access_conditions: {  }
 parameters: {  }

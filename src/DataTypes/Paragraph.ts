@@ -41,4 +41,8 @@ export default abstract class Paragraph
     this._paragraph_type = new ParagraphsType(incoming);
   }
 
+  hasData(): boolean {
+    return this.status !== undefined;
+  }
+
 }

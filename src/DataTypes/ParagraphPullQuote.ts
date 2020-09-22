@@ -9,7 +9,7 @@ export interface ParagraphPullQuoteInterface extends ParagraphInterface {
   field_text_size: string;
 }
 
-export default class ParagraphPullQuote 
+export default class ParagraphPullQuote
   extends Paragraph
   implements ParagraphPullQuoteInterface {
   field_alignment: string;
@@ -39,13 +39,6 @@ export default class ParagraphPullQuote
 
   set field_body(value: BodyFieldInterface) {
     this._field_body = new BodyField(value);
-  }
-
-  hasData(): boolean {
-    return (
-      this._field_body?.processed !== undefined &&
-      this._field_body?.processed !== null
-    );
   }
 
   public static getIncluded(): string {

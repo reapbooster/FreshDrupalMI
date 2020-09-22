@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Card} from 'react-bootstrap'
 import { Container } from 'react-bootstrap';
 import NodeLandingPage, { NodeLandingPageInterface } from '../../DataTypes/NodeLandingPage'
 import ParagraphDisplayList from '../ParagraphDisplay/ParagraphDisplayList'
@@ -43,7 +44,12 @@ const NodeLandingPageDisplay: React.FunctionComponent = (props: NodeLandingPageD
     case "tiles":
       return (
         <>
-          <h3>Smaller tile view</h3>
+          <Card>
+            <Card.title>{landingPageData.title}</Card.title>
+            <Card.Body>
+              <p>Image Goes here</p>
+            </Card.Body>
+          </Card>
         </>
       );
   }

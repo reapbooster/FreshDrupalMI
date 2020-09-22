@@ -44,6 +44,7 @@ permissions:
   - 'edit own hero_image media'
   - 'edit own podcast_episode media'
   - 'edit own video media'
+  - 'issue subrequests'
   - 'search content'
   - 'update any media'
   - 'update media'

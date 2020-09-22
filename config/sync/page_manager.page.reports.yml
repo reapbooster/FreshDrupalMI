@@ -6,7 +6,7 @@ id: reports
 label: Reports
 description: ''
 use_admin_theme: false
-path: /reports
+path: /explore/reports
 access_logic: and
 access_conditions: {  }
 parameters: {  }
