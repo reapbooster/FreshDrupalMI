@@ -1,4 +1,5 @@
 import JSONApiUrl from "./JSONApiUrl";
+import {EntityInterface} from "./Entity";
 
 export interface ListComponentSourceInterface {
   id: string;
@@ -39,14 +40,15 @@ export default abstract class ListComponentSource
     return this.getSourceData();
   }
 
-  getSourceData(): Promise<Array<any>> {
+  getSourceData(): Promise<Array<EntityInterface>> {
     const self = this;
     return new Promise((resolve, reject) => {
       if (self.url?.toString()) {
         return fetch(self.url, { signal: this.abortController.signal })
           .then((res) => res.json())
           .then((ajaxData) => {
-            ajaxData.data.map((item) => {
+            return ajaxData.data.map((item) => {
+              // push them to the local list object
               self.items.push(item);
             });
           })

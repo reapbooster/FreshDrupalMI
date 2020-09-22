@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container } from 'react-bootstrap';
-import { NodeLandingPageInterface } from '../../DataTypes/NodeLandingPage'
+import NodeLandingPage, { NodeLandingPageInterface } from '../../DataTypes/NodeLandingPage'
 import ParagraphDisplayList from '../ParagraphDisplay/ParagraphDisplayList'
+import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import Loading from '../Loading';
 
 interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
@@ -9,14 +11,43 @@ interface NodeLandingPageDisplayProps {
 }
 
 const NodeLandingPageDisplay: React.FunctionComponent = (props: NodeLandingPageDisplayProps) => {
+  const { data, view_mode } = props;
+  if (!data instanceof NodeLandingPage) {
+    data = new NodeLandingPage(data)
+  }
+  const [landingPageData, setLandingPageData] = useState(data);
+  if (!landingPageData.hasData()) {
+    var ecp = new EntityComponentProps(landingPageData);
+    ecp.getData(landingPageData.getIncluded())
+      .then(res => res.json())
+      .then(ajaxData => {
+        setLandingPageData(new NodeLandingPage(ajaxData.data));
+      });
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
+  console.debug("landing page data", landingPageData);
+  switch(view_mode) {
+    case "full":
+      return (
+        <>
+          <Container>
+            <ParagraphDisplayList
+              list={landingPageData} view_mode={view_mode} />
+          </Container>
+        </>
+      );
+    case "tiles":
+      return (
+        <>
+          <h3>Smaller tile view</h3>
+        </>
+      );
+  }
 
-  return (
-    <>
-      <Container>
-        <ParagraphDisplayList items={props.data.field_content} />
-      </Container>
-    </>
-  )
 };
 
 export { NodeLandingPageDisplay as default }

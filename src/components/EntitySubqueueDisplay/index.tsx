@@ -1,20 +1,26 @@
 import React, {useState} from 'react';
-import {EntitySubqueue, EntityQueue } from '../../DataTypes/EntitySubqueue';
+import {EntitySubqueue, EntityQueue, EntitySubqueueInterface } from '../../DataTypes/EntitySubqueue';
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
-import List from '../List';
+import ListDisplay, {ListDisplayProps} from '../ListDisplay';
 import { EntityInterface } from "../../DataTypes/Entity";
+import {ListableInterface} from "../../DataTypes/Listable";
 
-export interface EntitySubqueueDisplayProps {
-  items: Array<EntityInterface>;
+export interface EntitySubqueueDisplayProps extends EntityInterface{
+  queue: ListableInterface;
   view_mode: string;
 }
 
-export const EntitySubqueueDisplay = (props) => {
+export const EntitySubqueueDisplay: React.FunctionComponent = (props: EntitySubqueueDisplayProps) => {
+  const { queue, view_mode} = props;
+  if (!queue instanceof EntitySubqueue) {
+    const queue = new EntitySubqueue(queue);
+  }
 
-  const [entitySubqueueData, setEntitySubqueueData] = useState(new EntityQueue(props.data));
+  const [entitySubqueueData, setEntitySubqueueData] = useState(queue);
 
   if (!entitySubqueueData.hasData()) {
+
     const ecp = new EntityComponentProps(entitySubqueueData);
     ecp.getData(entitySubqueueData.getIncluded())
       .then(res => res.json())
@@ -31,12 +37,11 @@ export const EntitySubqueueDisplay = (props) => {
 
   return (
     <>
-      <List id={entitySubqueueData.id}
-                items={entitySubqueueData.items}
-                view_mode={props.view_mode}
-                entityTypeId={entitySubqueueData.queue?.entity_settings?.target_type}
-                browser="false"
-          />
+      <ListDisplay
+        list={entitySubqueueData}
+        view_mode={view_mode}
+        browser="false"
+      />
     </>
   )
 

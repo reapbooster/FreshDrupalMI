@@ -11,13 +11,13 @@ interface ParagraphDisplaySlideProps {
 
 
 const ParagraphDisplaySlide: React.FunctionComponent = ( props: ParagraphDisplaySlideProps ) => {
-  console.log("ParagraphSlide", props);
+  const {data, view_mode} = props;
   return (
     <Col lg={12}>
       <ErrorBoundary>
         <SlideShow
-          items={props.data.field_slides}
-          view_mode={props.view_mode}
+          items={data.field_slides}
+          view_mode={view_mode}
         />
       </ErrorBoundary>
     </Col>

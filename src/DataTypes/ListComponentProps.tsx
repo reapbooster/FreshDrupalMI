@@ -38,11 +38,14 @@ class ListComponentProps extends React.Component<
 
   view_mode: string;
 
+  abortController?: AbortController;
+
   constructor(props: ListComponentPropsInterface) {
     super(props);
     this.state = {
       items: props.items || [],
     };
+    Object.assign(this, props);
     this.refresh = this.refresh.bind(this);
     this.getData = this.getData.bind(this);
     this.loadChain = this.loadChain.bind(this);
@@ -50,10 +53,6 @@ class ListComponentProps extends React.Component<
     this.hasItems = this.hasItems.bind(this);
     this.handleError = this.handleError.bind(this);
     this.abortController = new AbortController();
-
-    const remaining = { ...props };
-    delete remaining.items;
-    Object.assign(this, remaining);
   }
 
   toObject(): ListComponentPropsInterface {
@@ -243,39 +242,7 @@ class ListComponentProps extends React.Component<
       });
   }
 
-  get items() {
-    if (this.hasItems()) {
-      // console.log("rendering list component items: ", this.state.items);
-      return this.state.items.map((item, key: number) => {
-        const Component = ListItemComponents[item.type.replace("--", "_")];
-        if (Component == undefined) {
-          throw new Error(
-            "List Component Type not defined: ".concat(
-              item.type.replace("--", "_")
-            )
-          );
-        }
-        return <Component {...item} key={key} />;
-      });
-    }
-    return (
-      <div>
-        <h1>No results for this combination of filters.</h1>
-      </div>
-    );
-  }
 
-  componentDidMount() {
-    document
-      .getElementsByClassName("list-component")
-      .item(0)
-      .addEventListener("refresh", this.refresh);
-    this.refresh();
-  }
-
-  render() {
-    return <Row className="list-component">{this.items}</Row>;
-  }
 
   get url(): JSONApiUrl {
     return this._url;

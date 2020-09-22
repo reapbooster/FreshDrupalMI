@@ -1,19 +1,27 @@
 import React from 'react';
-import {NodeInterface} from "../../DataTypes/Node";
-import NodeDisplay from '../EventDisplay';
+import {EntityInterface} from '../../DataTypes/Entity';
+import NodeDisplay from './index';
+import {ListableInterface} from "../../DataTypes/Listable";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 interface NodeDisplayListProps {
-  items: Array<NodeInterface>;
+  list: ListableInterface
   view_mode: string;
 }
 
 
 const NodeDisplayList: React.FunctionComponent = (props: NodeDisplayListProps) => {
+  const {list, view_mode} = props;
   return (
     <>
-      {props.items.map((item) => {
+      {list.getItems().map((item: EntityInterface, key: number) => {
         return (
-          <NodeDisplay item={item} view_mode={props.view_mode} />
+          <ErrorBoundary key={key}>
+            <NodeDisplay
+              item={item}
+              view_mode={view_mode}
+            />
+          </ErrorBoundary>
         );
       })}
     </>

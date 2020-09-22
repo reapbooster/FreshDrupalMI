@@ -1,27 +1,28 @@
-import React from 'react';
-import { EventInterface } from '../../DataTypes/Event'
+import React from "react";
+import { EntityInterface } from "../../DataTypes/Entity";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
+import { ListableInterface } from "../../DataTypes/Listable";
 import EventDisplay from ".";
 
 export interface EventDisplayListProps {
-  items: Array<EventInterface>;
+  list: ListableInterface;
   view_mode: string;
 }
 
-
 export const EventDisplayList: React.FunctionComponent = (props: EventDisplayListProps) => {
-  return (
-    <>
-      {props.items.map((item: EventInterface, key: number) => {
-        return (
+  const {list, view_mode} = props;
+  return list.getItems().map((item: EntityInterface, key: number) => {
+    return (
+      <>
+        <ErrorBoundary key={key}>
           <EventDisplay
             data={item}
-            key={key}
-            view_mode={props.view_mode}
+            view_mode={view_mode}
           />
-        )
-      })}
-    </>
-  )
+        </ErrorBoundary>
+      </>
+    )
+  });
 }
 
 export default EventDisplayList;

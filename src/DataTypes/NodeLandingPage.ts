@@ -1,39 +1,48 @@
 import Node, { NodeInterface } from "./Node";
 import Paragraph, { ParagraphInterface } from "./Paragraph";
 import MediaImage, { MediaImageInterface } from "./MediaImage";
+import {ListableInterface} from "./Listable";
+import {EntityInterface} from "./Entity";
 
-interface NodeLandingPageInterface extends NodeInterface {
+export interface NodeLandingPageInterface extends NodeInterface, ListableInterface {
   field_content: Array<ParagraphInterface>;
   field_hero_image: MediaImageInterface;
 }
 
-class NodeLandingPage extends Node {
-  _field_content: Array<ParagraphInterface>;
+export class NodeLandingPage extends Node implements NodeLandingPageInterface, ListableInterface {
+  field_content: Array<ParagraphInterface>;
 
   _field_hero_image: MediaImage;
 
   constructor(props) {
-    const content = props.field_content;
     super(props);
-    this.field_content = content;
+    Object.assign(this, props);
   }
 
-  get field_content(): Array<ParagraphInterface> {
-    return this._field_content ?? [];
+  get field_hero_image() : MediaImageInterface{
+    return this._field_hero_image;
   }
 
-  set field_content(incoming: Array<ParagraphInterface>) {
-    this._field_content = incoming;
+  set field_hero_image(incoming: MediaImageInterface) {
+    this._field_hero_image = new MediaImage(incoming);
   }
 
   hasData(): boolean {
     console.debug("NodeLandingPage has data?", this);
-    return !!this.field_content?.length;
+    return Array.isArray(this.field_content);
   }
 
   getIncluded(): string {
     return "&include=field_content,field_hero_image";
   }
+
+  getItems(): Array<EntityInterface> {
+    return this.field_content ?? [];
+  }
+
+  refreshItems(url: JSONApiUrl) {
+    // TODO
+  }
 }
 
-export { NodeLandingPage as default, NodeLandingPageInterface };
+export default NodeLandingPage;

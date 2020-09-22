@@ -71,8 +71,8 @@ interface NodeDisplayProps {
 }
 
 const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
-
-  const [ nodeData, setNodeData ] = useState(NodeDataFactory(props.data));
+  const {key, data, view_mode} = props;
+  const [ nodeData, setNodeData ] = useState(NodeDataFactory(data));
   console.debug("NodeDisplay", nodeData);
   if (!nodeData.hasData()) {
     const ecp = new EntityComponentProps(nodeData);
@@ -90,8 +90,10 @@ const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
   }
   const Component = NodeComponentFactory(props.data);
   return (
-    <ErrorBoundary>
-      <Component data={nodeData} />
+    <ErrorBoundary key={key}>
+      <Component
+        data={nodeData}
+        view_mode={view_mode} />
     </ErrorBoundary>
   );
 }

@@ -2,10 +2,17 @@ import { ListComponentPropsInterface } from "../../DataTypes/ListComponentProps"
 import ListComponentSource, {
   ListComponentSourceInterface,
 } from "../../DataTypes/ListComponentSource";
+import {ListableInterface} from "../../DataTypes/Listable";
+import {EntityInterface} from '../../DataTypes/Entity';
+import JSONApiUrl from "../../DataTypes/JSONApiUrl";
 
-export default class PhilanthropyHubSource
+export class PhilanthropyHubSource
   extends ListComponentSource
-  implements ListComponentSourceInterface {
+  implements ListComponentSourceInterface, ListableInterface {
+
+  browser?: React.Component | undefined;
+  url?: JSONApiUrl;
+
   constructor(incoming: ListComponentSourceInterface){
     super(incoming);
     Object.assign(this, incoming);
@@ -18,7 +25,11 @@ export default class PhilanthropyHubSource
     focus: "field_focus";
   };
 
-  refresh(filter) {
+  refreshItems(filter) {
+    return this.getSourceData();
+  }
+
+  getItems(): Array<EntityInterface> {
     return this.getSourceData();
   }
 
@@ -75,4 +86,8 @@ export default class PhilanthropyHubSource
         return new PhilanthropyHubSource(data);
       });
   }
+
+
 }
+
+export default PhilanthropyHubSource;

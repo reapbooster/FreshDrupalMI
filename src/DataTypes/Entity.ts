@@ -6,6 +6,8 @@ export interface EntityInterface {
   id: string;
   links: LinkListInterface;
   type: string;
+  hasData(): boolean;
+  getIncluded(): string;
 }
 
 export default abstract class Entity implements EntityInterface {
@@ -50,4 +52,9 @@ export default abstract class Entity implements EntityInterface {
       this._changed = new Date(incoming);
     }
   }
+
+  abstract hasData(): boolean;
+  abstract getIncluded(): string;
+
+
 }

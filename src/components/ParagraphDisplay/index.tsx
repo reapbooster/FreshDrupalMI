@@ -26,6 +26,7 @@ import ParagraphTiles from '../../DataTypes/ParagraphTiles';
  */
 
 function ParagraphDataFactory(incoming: ParagraphInterface) : Paragraph {
+  console.debug("Paragraph Data Factory:", incoming);
   switch (incoming.type) {
     case "paragraph--block":
       return new ParagraphBlock(incoming);
@@ -57,6 +58,7 @@ function ParagraphDataFactory(incoming: ParagraphInterface) : Paragraph {
  * @param incoming: ParagraphIterface
  */
 function ParagraphComponentFactory(incoming: ParagraphInterface): React.FunctionComponent {
+  console.debug("Paragraph Component Factory", incoming);
   switch(incoming.type) {
     case "paragraph--slide":
       return ParagraphDisplaySlide;

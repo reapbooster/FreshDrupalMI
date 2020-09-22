@@ -2,33 +2,28 @@ import React from 'react';
 import ParagraphDisplay from '../ParagraphDisplay';
 import {EntityInterface} from "../../DataTypes/Entity";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import {ListableInterface} from "../../DataTypes/Listable";
 
-interface ParagraphDisplayListProps {
-  items: Array<DataObject.ParagraphInterface>;
+export interface ParagraphDisplayListProps {
+  list: ListableInterface;
   view_mode: string;
 }
 
 export const ParagraphDisplayList: React.FunctionComponent = (props: ParagraphDisplayListProps) => {
-  if (props.items?.length) {
-    return props.items.map((item: EntityInterface, key: number) => {
-      return (
-        <>
-          <ParagraphDisplay
-            key={key}
-            data={item}
-            view_mode="full"
-          />
-        </>
-      )
-    });
-  } else {
+  const {list, view_mode} = props;
+  return list.getItems().map((item, key) => {
     return (
       <>
-        <h1 className="visually-hidden">No Paragraph Items to render</h1>
+        <ErrorBoundary key={key}>
+          <ParagraphDisplay
+            data={item}
+            view_mode={view_mode}
+          />
+        </ErrorBoundary>
       </>
     )
-  }
+  });
 }
 
 
-export { ParagraphDisplayList as default, ParagraphDisplayListProps };
+export default ParagraphDisplayList;

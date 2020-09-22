@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
-import PhilanthopyHubSource from './PhilanthopyHubSource';
-import DropdownFacet from "../List/DropdownFacet";
-import HorizontalMenuFacet from "../List/HorizontalMenuFacet";
-import NodeListDisplay from '../NodeDisplay/NodeDisplayList';
-import PhilanthropyHubSource from "./PhilanthopyHubSource";
+import PhilanthropyHubSource from './PhilanthropyHubSource';
+import DropdownFacet from "../ListDisplay/DropdownFacet";
+import HorizontalMenuFacet from "../ListDisplay/HorizontalMenuFacet";
+import NodeDisplayList from '../NodeDisplay/NodeDisplayList';
 
 export interface PhilanthropyHubProps {
-  source: PhilanthopyHubSource;
+  source: PhilanthropyHubSource;
   view_mode: string;
 }
 
@@ -63,11 +62,10 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
       </Container>
 
       <div id="philanthropy-hub-root">
-        <NodeListDisplay
-          items={source.items}
+        <NodeDisplayList
+          list={source}
           loadAll
           className="card-columns"
-          url={source.url}
         />
       </div>
     </Container>
