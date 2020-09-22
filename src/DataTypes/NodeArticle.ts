@@ -2,6 +2,9 @@ import Node, { NodeInterface } from "./Node";
 import TaxonomyTerm, { TaxonomyTermInterface } from "./TaxonomyTerm";
 import Paragraph, { ParagraphInterface } from "./Paragraph";
 import Slide, { SlideInterface } from "./Slide";
+import {ListableInterface} from "./Listable";
+import {EntityInterface} from "./Entity";
+import JSONApiUrl from "./JSONApiUrl";
 
 interface NodeArticleInterface extends NodeInterface {
   field_authors: object;
@@ -11,7 +14,7 @@ interface NodeArticleInterface extends NodeInterface {
   field_topics: TaxonomyTermInterface;
 }
 
-class NodeArticle extends Node implements NodeArticleInterface {
+class NodeArticle extends Node implements NodeArticleInterface, ListableInterface {
   field_authors: object;
 
   private _field_centers: TaxonomyTermInterface;
@@ -22,12 +25,29 @@ class NodeArticle extends Node implements NodeArticleInterface {
 
   private _field_topics: TaxonomyTermInterface;
 
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+
   hasData(): boolean {
-    return false;
+    return this.status !== undefined;
   }
 
   getIncluded(): string {
     return "";
+  }
+
+  getItems(): Array<EntityInterface> {
+    return this.field_content;
+  }
+
+  refreshItems(url: JSONApiUrl) {
+    // TODO:
+  }
+
+  get browser() {
+    return false;
   }
 
   get field_centers(): TaxonomyTermInterface {
@@ -51,7 +71,7 @@ class NodeArticle extends Node implements NodeArticleInterface {
   }
 
   set field_promo_slide(value: SlideInterface) {
-    this._field_promo_slide = Slide.factory(value);
+    this._field_promo_slide = value;
   }
 
   get field_topics(): TaxonomyTermInterface {
