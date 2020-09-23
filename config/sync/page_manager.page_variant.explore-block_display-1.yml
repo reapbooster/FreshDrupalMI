@@ -1,4 +1,4 @@
-uuid: 69de718d-323e-4679-a7b3-2da0ce1f2395
+uuid: 28a7fbc6-461e-4582-b17a-1d74fe5f810c
 langcode: en
 status: true
 dependencies:
@@ -12,20 +12,21 @@ label: Videos
 variant: block_display
 variant_settings:
   blocks:
-    ec295741-b7da-405f-a08f-90a680ab818e:
+    2c8b696e-5b61-4b97-bf53-a7bdc599f6c1:
       id: 'component:VideosBrowser'
       label: 'Videos Browser'
       provider: component
       label_display: visible
-      region: top
+      region: bottom
       weight: 0
-      uuid: ec295741-b7da-405f-a08f-90a680ab818e
+      uuid: 2c8b696e-5b61-4b97-bf53-a7bdc599f6c1
       form_configuration: null
       context_mapping: {  }
   id: block_display
-  uuid: edf6d5e1-0100-4cc2-854d-3c0fa35b6e29
+  uuid: eac4334f-7261-4134-b8e5-90b47185a38a
   label: null
   weight: 0
+  sections: {  }
   page_title: 'Explore Videos'
 page: explore
 weight: 0

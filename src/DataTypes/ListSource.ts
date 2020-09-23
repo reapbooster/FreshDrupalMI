@@ -1,5 +1,6 @@
 import JSONApiUrl from "./JSONApiUrl";
 import {EntityInterface} from "./Entity";
+import {ListableInterface} from "./Listable";
 
 export interface ListComponentSourceInterface {
   id: string;
@@ -8,8 +9,8 @@ export interface ListComponentSourceInterface {
   entityTypeId: string;
 }
 
-export default abstract class ListComponentSource
-  implements ListComponentSourceInterface {
+export class ListSource
+  implements ListComponentSourceInterface, ListableInterface {
   id: string;
 
   _url?: JSONApiUrl;
@@ -40,6 +41,10 @@ export default abstract class ListComponentSource
     return this.getSourceData();
   }
 
+  getItems(){
+    return this.items;
+  }
+
   getSourceData(): Promise<Array<EntityInterface>> {
     const self = this;
     return new Promise((resolve, reject) => {
@@ -60,3 +65,5 @@ export default abstract class ListComponentSource
     });
   }
 }
+
+export default ListSource;

@@ -1,0 +1,10 @@
+name: 'Podcast Browser'
+machine_name: PodcastBrowser
+description: 'Podcast Browser react component'
+type: block
+core_version_requirement:  ^8 || ^9
+js:
+  'PodcastBrowser.entry.js': { }
+cache:
+  max-age: 60
+

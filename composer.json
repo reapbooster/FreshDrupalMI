@@ -59,7 +59,7 @@
         "drupal/ctools": "3.x-dev",
         "drupal/custom_elements": "^1.0@beta",
         "drupal/decoupled_kit": "^1.1",
-        "drupal/decoupled_router": "^1.12",
+        "drupal/decoupled_router": "^2.0",
         "drupal/default_content": "1.x-dev",
         "drupal/default_content_deploy": "1.x-dev",
         "drupal/delete_all": "^1.2",

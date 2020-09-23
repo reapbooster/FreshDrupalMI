@@ -3,9 +3,18 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import PhilanthropyHub from "components/PhilanthropyHub";
 
-const parsedData = JSON.parse(document.querySelector('#hub-data > script[type="application/json"][data-drupal-selector="drupal-hub-json"]').textContent);
-parsedData.data = {};
+const PhilanthropyHubContainer = document.querySelector('philanthropy-hub');
+
+const PhilanthropyHubSource = {
+  id: PhilanthropyHubContainer.dataset.id,
+  type: PhilanthropyHubContainer.dataset.type,
+  view_mode: PhilanthropyHubContainer.dataset.viewMode,
+  url: PhilanthropyHubContainer.dataset.url
+}
+
 ReactDOM.render(
-  <PhilanthropyHub {...parsedData} />,
-  document.getElementById('hub-component')
+  <PhilanthropyHub source={PhilanthropyHubSource} />,
+  PhilanthropyHubContainer
 );
+
+

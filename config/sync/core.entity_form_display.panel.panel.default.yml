@@ -10,6 +10,7 @@ dependencies:
     - field.field.panel.panel.field_grid_event_id
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
+    - field.field.panel.panel.field_private
     - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
     - field.field.panel.panel.field_sponsor
@@ -18,8 +19,79 @@ dependencies:
     - field.field.panel.panel.field_why
   module:
     - datetime_range
+    - field_group
     - link
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+        - group_authoring
+        - group_event
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_content:
+      children:
+        - field_description
+        - field_panel_alt_text
+        - field_summary
+        - field_why
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Content
+    group_authoring:
+      children:
+        - langcode
+        - uid
+        - created
+        - field_private
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Authoring
+    group_event:
+      children:
+        - field_event
+        - field_sess
+        - field_links
+        - field_grid_event_id
+        - field_sponsor
+        - field_room
+        - field_tracks
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Event
 id: panel.panel.default
 targetEntityType: panel
 bundle: panel
@@ -45,6 +117,16 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  field_event:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_grid_event_id:
     weight: 14
     settings:
@@ -68,6 +150,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_private:
+    weight: 23
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_room:
     weight: 21
@@ -146,5 +235,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  field_event: true
+hidden: {  }

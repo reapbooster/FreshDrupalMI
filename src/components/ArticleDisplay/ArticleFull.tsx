@@ -33,7 +33,9 @@ const ArticleFull = (props: ArticleFullProps) => {
       <Row id={`promo-slide-${props.id}`}>
         <Container fluid={true}>
           <ErrorBoundary>
-            <SlideDisplay data={nodeArticleData.field_promo_slide} view_mode={"full"} />
+            <SlideDisplay
+              data={nodeArticleData.field_promo_slide}
+              view_mode={"full"} />
           </ErrorBoundary>
         </Container>
       </Row>

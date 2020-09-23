@@ -10,6 +10,7 @@ dependencies:
     - field.field.panel.panel.field_grid_event_id
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
+    - field.field.panel.panel.field_private
     - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
     - field.field.panel.panel.field_sponsor
@@ -79,6 +80,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_private:
+    weight: 13
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_room:
     weight: 11

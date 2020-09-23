@@ -169,13 +169,33 @@ source:
       name: link10
       label: Link10
       selector: /attributes/link10
+    -
+      name: private
+      label: Private
+      selector: /attributes/private
+    -
+      name: created
+      label: 'Link Text 10'
+      selector: /attributes/datecreated
+    -
+      name: changed
+      label: Link10
+      selector: /attributes/datemodified
+    -
+      name: starttime
+      label: 'Start Time'
+      selector: /attributes/starttimed
+    -
+      name: endtimed
+      label: 'End Time'
+      selector: /attributes/endtimed
   ids:
     pid:
       type: integer
 process:
   pid: pid
-  title: paneltext
-  name: paneltext
+  title: name
+  name: name
   langcode:
     plugin: default_value
     default_value: en
@@ -195,6 +215,7 @@ process:
   field_summary/format:
     plugin: default_value
     default_value: full_html
+  field_private: private
   created:
     plugin: 'milken_migrate:unix_date'
     source: created

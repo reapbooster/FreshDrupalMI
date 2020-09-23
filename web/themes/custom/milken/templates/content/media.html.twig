@@ -1,0 +1,11 @@
+{{ attach_library('milken/MediaDisplay') }}
+
+<media-display
+  {{ attributes }}
+  data-id="{{ media.uuid.value }}"
+  data-type="{{ media.getEntityTypeId() }}--{{ media.bundle.value }}"
+  data-entity-type-id="{{ media.getEntityTypeId() }}"
+  data-drupal-internal-mid="{{ media.id.value }}"
+  data-bundle="{{ media.bundle.value }}"
+  data-view-mode="{{ view_mode }}"
+></media-display>

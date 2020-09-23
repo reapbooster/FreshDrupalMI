@@ -1,4 +1,4 @@
-uuid: 5affb5a5-64aa-4c38-939d-4c3d4e9673c3
+uuid: 04162b30-6a44-4bee-bdf4-4805e0d8db64
 langcode: en
 status: true
 dependencies:
@@ -12,18 +12,18 @@ label: Events
 variant: block_display
 variant_settings:
   blocks:
-    bcbddc7e-87c4-41d6-861b-162bfe8da7f9:
+    908cb159-ceee-4ddc-a7d9-8ef39690c644:
       id: 'component:EventsBrowser'
-      label: 'Events Browser'
+      label: EventsBrowser
       provider: component
       label_display: visible
-      region: top
+      region: bottom
       weight: 0
-      uuid: bcbddc7e-87c4-41d6-861b-162bfe8da7f9
+      uuid: 908cb159-ceee-4ddc-a7d9-8ef39690c644
       form_configuration: null
       context_mapping: {  }
   id: block_display
-  uuid: 17b2bfe9-024d-4796-a841-2ad94b0dffc5
+  uuid: 422c1ace-2779-4c34-bd97-23d56fd29c1c
   label: null
   weight: 0
   page_title: 'Explore Events'

@@ -1,7 +1,10 @@
 name: 'Search'
+machine_name: search
 description: 'Search react component'
+type: component
+core_version_requirement:  ^8 || ^9
 js:
   Search.entry.js: { }
 cache:
-  max-age: 0
+  max-age: 60
 

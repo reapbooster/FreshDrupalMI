@@ -9,30 +9,6 @@ use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Config\Entity\ConfigEntityType;
 
 /**
- * Implements hook_element_plugin_alter().
- */
-function milken_base_element_plugin_alter(array &$definitions) {
-  // $definitions['radio']['class'] = '\Drupal\milken_base\Element\MilkenRadio';
-  // $definitions['radios']['class'] =
-  // '\Drupal\milken_base\Element\MilkenRadios';
-}
-
-/**
- * Implements hook_theme_registry_alter().
- */
-function milken_base_theme_registry_alter(&$theme_registry) {
-  // \Kint::dump($theme_registry);
-  // TODO: obtain this list dynamically based on layout group
-  $module_theme_hooks = ['one_col_full_width', 'half_n_half'];
-  foreach ($theme_registry as $theme_hook => $registry_entry) {
-    if (in_array($theme_hook, $module_theme_hooks)) {
-      $theme_registry[$theme_hook]['preprocess functions'][] = 'milken_base_template_preprocess_layout_function';
-    }
-  }
-  $theme_registry['paragraphs_actions']['preprocess functions'][] = 'milken_base_paragraph_action';
-}
-
-/**
  * Implements hook_entity_type_alter().
  */
 function milken_migrations_entity_type_alter(array &$entity_types) {
@@ -46,3 +22,6 @@ function milken_migrations_entity_type_alter(array &$entity_types) {
     $entity_types['menu_link_content']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMenuLinkContentControlHandler');
   }
 }
+
+
+

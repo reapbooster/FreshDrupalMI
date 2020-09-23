@@ -1,6 +1,7 @@
 {{ attach_library('milken/NodeDisplay') }}
 
 <node-detail
+    {{ attributes }}
     id="milken-node-detail"
     data-id="{{ node.uuid.value }}"
     data-type="node--{{node.bundle}}"

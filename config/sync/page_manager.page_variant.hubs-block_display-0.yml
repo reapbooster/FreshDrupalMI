@@ -32,6 +32,21 @@ variant_settings:
             context_mapping: {  }
           additional:
             layout_builder_styles_style: ''
+          weight: 1
+        638be396-5706-40c3-acc0-c5aa94aed406:
+          uuid: 638be396-5706-40c3-acc0-c5aa94aed406
+          region: content
+          configuration:
+            id: 'block_content:4db4fb05-4ee9-426c-b5d7-6b7ba5faf895'
+            label: 'Hub Header Philanthropy'
+            provider: block_content
+            label_display: visible
+            status: true
+            info: ''
+            view_mode: full
+            context_mapping: {  }
+          additional:
+            layout_builder_styles_style: ''
           weight: 0
       third_party_settings: {  }
 page: hubs

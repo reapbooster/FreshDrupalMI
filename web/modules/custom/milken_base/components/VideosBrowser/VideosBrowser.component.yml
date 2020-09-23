@@ -1,8 +1,9 @@
 name: 'Videos Browser'
 machine_name: VideosBrowser
 description: 'Videos Browser entry'
+type: block
+core_version_requirement:  ^8 || ^9
 js:
-  VideosBrowser.entry.js: { }
+  'VideosBrowser.entry.js': { }
 cache:
-  max-age: 0
-
+  max-age: 60

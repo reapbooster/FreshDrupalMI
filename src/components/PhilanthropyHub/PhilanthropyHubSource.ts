@@ -1,13 +1,13 @@
 import { ListComponentPropsInterface } from "../../DataTypes/ListComponentProps";
-import ListComponentSource, {
+import ListSource, {
   ListComponentSourceInterface,
-} from "../../DataTypes/ListComponentSource";
+} from "../../DataTypes/ListSource";
 import {ListableInterface} from "../../DataTypes/Listable";
 import {EntityInterface} from '../../DataTypes/Entity';
 import JSONApiUrl from "../../DataTypes/JSONApiUrl";
 
 export class PhilanthropyHubSource
-  extends ListComponentSource
+  extends ListSource
   implements ListComponentSourceInterface, ListableInterface {
 
   browser?: React.Component | undefined;

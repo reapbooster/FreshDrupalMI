@@ -1,0 +1,24 @@
+EventsBrowser:
+  version: 1.0
+  js:
+    components/EventsBrowser/EventsBrowser.entry.js: { source: 'components/EventsBrowser/EventsBrowser.entry.tsx' }
+
+PhilanthropyHub:
+  version: 1.0
+  js:
+    components/PhilanthropyHub/PhilanthropyHub.entry.js: { source: 'components/PhilanthropyHub/PhilanthropyHub.entry.tsx' }
+
+PodcastBrowser:
+  version: 1.0
+  js:
+    components/PodcastBrowser/PodcastBrowser.entry.js: { source: 'components/PodcastBrowser/PodcastBrowser.entry.tsx' }
+
+ReportsBrowser:
+  version: 1.0
+  js:
+    components/ReportsBrowser/ReportsBrowser.entry.js: { source: 'components/ReportsBrowser/ReportsBrowser.entry.tsx' }
+
+VideosBrowser:
+  version: 1.0
+  js:
+    components/VideosBrowser/VideosBrowser.entry.js: { source: 'components/VideosBrowser/VideosBrowser.entry.tsx' }

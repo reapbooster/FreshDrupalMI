@@ -1,9 +1,20 @@
 
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import EventsBrowser from "components/EventsBrowser";
 
+const EventsBrowserContainer = document.querySelector('events-browser');
+
+const EventsBrowserSource = {
+  id: EventsBrowserContainer.dataset.id,
+  type: EventsBrowserContainer.dataset.type,
+  view_mode: EventsBrowserContainer.dataset.viewMode,
+  url: EventsBrowserContainer.dataset.url
+}
+
 ReactDOM.render(
-  <EventsBrowser />,
-  document.getElementById('main-wrapper')
+  <EventsBrowser source={EventsBrowserSource} />,
+  EventsBrowserContainer
 );
+
+

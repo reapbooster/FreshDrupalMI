@@ -1,4 +1,4 @@
-uuid: a376631b-3646-4c4d-9194-1bfb1d96ac03
+uuid: 1ed487f9-f986-4e67-928d-e75d276b8578
 langcode: en
 status: true
 dependencies:
@@ -8,31 +8,31 @@ dependencies:
     - component
     - system
 id: explore-block_display-2
-label: Podcasts
+label: Reports
 variant: block_display
 variant_settings:
   blocks:
-    7bd5d37d-bcb8-480e-9656-bcb8e0306282:
-      id: 'component:Podcasts'
-      label: 'Podcasts Browser'
+    2cf61d77-a912-468a-82a9-1ab6570c7bf2:
+      id: 'component:ReportsBrowser'
+      label: 'Reports Browser'
       provider: component
       label_display: visible
-      region: top
+      region: bottom
       weight: 0
-      uuid: 7bd5d37d-bcb8-480e-9656-bcb8e0306282
+      uuid: 2cf61d77-a912-468a-82a9-1ab6570c7bf2
       form_configuration: null
       context_mapping: {  }
   id: block_display
-  uuid: cea9acf4-f53f-4dd3-8174-11074f0cc065
+  uuid: bdac1d73-46e9-4fbb-ab9b-5db402598e5e
   label: null
   weight: 0
-  page_title: 'Explore Podcasts'
+  page_title: 'Explore Reports'
 page: explore
 weight: 0
 selection_criteria:
   -
     id: request_path
-    pages: /explore/podcasts
+    pages: /explore/reports
     negate: false
     context_mapping: {  }
 selection_logic: and

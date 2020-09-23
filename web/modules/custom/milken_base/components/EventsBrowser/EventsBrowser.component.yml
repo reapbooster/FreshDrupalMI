@@ -1,7 +1,9 @@
-name: 'Events Browser'
+name: 'EventsBrowser'
 machine_name: EventsBrowser
 description: 'Events Browser entry'
+type: block
+core_version_requirement:  ^8 || ^9
 js:
-  EventsBrowser.entry.js: { }
+  'EventsBrowser.entry.js': { }
 cache:
-  max-age: 0
+  max-age: 60
