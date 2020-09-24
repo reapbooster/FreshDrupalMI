@@ -119,17 +119,14 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
       return this.state?.data?.map(
         (item, key) => {
           const open = ( this.state.activeKey == item.field_episode )
-          const ecp = new EntityComponentProps(item)
-          ecp.key = key;
           return (
             <ErrorBoundary
               key={key}
             >
               <PodcastEpisode
-                {...item}
+                data={item}
                 view_mode={"panel"}
                 open={open}
-                entityComponentProps={ecp}
                 onSelectHandler={this.setActiveKeyHandler}
               />
             </ErrorBoundary>

@@ -37,7 +37,6 @@ export class ImageFile extends File implements ImageFileInterface {
   constructor(incoming: ImageFileInterface) {
     super(incoming);
     Object.assign(this, incoming);
-    this.setImageStyles(incoming.image_style_uri);
   }
 
   get image_style_uri(): ImageStyleObjectInterface {
@@ -45,6 +44,7 @@ export class ImageFile extends File implements ImageFileInterface {
   }
 
   set image_style_uri(incoming) {
+    console.log("setting image style uri", incoming);
     if (Array.isArray(incoming)) {
       this._image_style_uri = new ImageStyleObject(incoming);
     }

@@ -9,13 +9,13 @@ import PathObject, { PathObjectInterface } from "./PathObject";
 import MediaType, { MediaTypeInterface } from "./MediaType";
 import Media, { MediaInterface } from "./Media";
 
-interface MediaPodcastServiceLinkInterface {
+export interface MediaPodcastServiceLinkInterface {
   key: string;
   description: string;
   value: string;
 }
 
-interface MediaPodcastEpisodeInterface extends MediaInterface {
+export interface MediaPodcastEpisodeInterface extends MediaInterface {
   field_body: TextField;
   field_episode: number;
   field_media_audio_file: AudioFileInterface;
@@ -30,7 +30,7 @@ interface MediaPodcastEpisodeInterface extends MediaInterface {
   path: PathObject;
 }
 
-class MediaPodcastEpisode
+export class MediaPodcastEpisode
   extends Media
   implements MediaPodcastEpisodeInterface {
   field_photo_subject_name: string;
@@ -43,7 +43,7 @@ class MediaPodcastEpisode
 
   _field_media_audio_file: AudioFile;
 
-  private _field_body: TextField;
+  field_body: TextField;
 
   field_episode: number;
 
@@ -83,16 +83,11 @@ class MediaPodcastEpisode
   }
 
   set field_media_audio_file(incoming: AudioFileInterface) {
-    this._field_media_audio_file = new AudioFile(incoming);
+    if (incoming) {
+      this._field_media_audio_file = new AudioFile(incoming);
+    }
   }
 
-  get field_body(): TextField {
-    return this._field_body;
-  }
-
-  set field_body(value: TextField) {
-    this._field_body = value;
-  }
 
   get field_media_image(): ImageFileInterface {
     return this._field_media_image;
@@ -127,8 +122,4 @@ class MediaPodcastEpisode
   }
 }
 
-export {
-  MediaPodcastEpisode as default,
-  MediaPodcastEpisodeInterface,
-  MediaPodcastServiceLinkInterface,
-};
+export default MediaPodcastEpisode;

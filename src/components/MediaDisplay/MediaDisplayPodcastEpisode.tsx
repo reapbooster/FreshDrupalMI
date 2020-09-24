@@ -7,7 +7,7 @@ interface MediaDisplayPodcastEpisodeProps {
   view_mode: string;
 }
 
-const MediaDisplayPodcastEpisode : React.FunctionComponent = (props) => {
+const MediaDisplayPodcastEpisode : React.FunctionComponent = (props: MediaDisplayPodcastEpisodeProps) => {
 
 
   return (

@@ -13,14 +13,11 @@ export interface ResportsBrowserProps {
 
 export const ReportsBrowser = (props: ResportsBrowserProps) => {
   var {source, view_mode, container } = props;
-  if (!source instanceof ListSource) {
-    source = new ListSource(source);
-  }
+  const DataObject = new ListSource(source);
   const ContainerDiv = container ?? styled.div`
     max-width: 18rem;
   `;
-
-  const [ reportsSource, setReportsSource ] = useState(source);
+  const [ reportsSource, setReportsSource ] = useState(DataObject);
   if (!reportsSource.hasData()) {
     reportsSource.refreshItems()
       .then((items) => {

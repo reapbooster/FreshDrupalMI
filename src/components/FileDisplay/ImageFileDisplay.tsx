@@ -12,19 +12,17 @@ interface ImageFileDisplayProps {
 
 const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps) => {
   var {data, view_mode, key, style} = props;
-  if (!data instanceof ImageFile) {
-    data = new ImageFile(data);
-  }
+  const DataObject = new ImageFile(data);
   // TODO: swap this out on View_mode change
   const imageTagStyle = style ?? {
     maxWidth: "320px",
     maxHeight: "200px",
   };
-  const [ imageData , setImageData ] = useState(data);
+  const [ imageData , setImageData ] = useState(DataObject);
   console.debug("ImageFileDisplay:", imageData);
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
-    ecp.getData(data.getIncluded())
+    ecp.getData(imageData.getIncluded())
       .then(res => res.json())
       .then((ajaxData) => {
         console.debug("MilkenImage: Data back from JSON", ajaxData);

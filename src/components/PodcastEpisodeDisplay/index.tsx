@@ -1,10 +1,10 @@
 
 import React, {useState} from 'react';
 import {Card, Button, ButtonGroup, Media, Container, Row, Col, Accordion} from 'react-bootstrap';
-import MediaPodcastEpisode, {MediaPodcastEpisodeInterface} from '../../DataTypes/MediaPodcastEpisode'
+import MediaPodcastEpisode , {MediaPodcastEpisodeInterface} from '../../DataTypes/MediaPodcastEpisode'
 import PodcastEpisodeBody, { PodcastEpisodeBodyProps } from './PodcastEpisodeBody';
 import { EntityComponentProps, EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
-import EntityComponentBase, { EntityComponentState } from "../../DataTypes/EntityComponentBase";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 export interface PodcastEpisodeProps extends MediaPodcastEpisodeInterface {
   data: MediaPodcastEpisodeInterface;
@@ -32,14 +32,13 @@ const accordionToggleStyle = {
 
 
 export const PodcastEpisodeDisplay = (props: PodcastEpisodeProps) => {
+  console.debug("Podcast Episode Display", props);
   var {data, onSelectHandler, open, key} = props;
-  if (!data instanceof MediaPodcastEpisode) {
-    data = new MediaPodcastEpisode(data);
-  }
-  const [episodeData, setEpisodeData] = useState(data);
+  const DataObject = new MediaPodcastEpisode(data);
+  const [episodeData, setEpisodeData] = useState(DataObject);
+  console.debug("Stated EpisodeData", episodeData);
   if (!episodeData.hasData()) {
-
-    const ecp = new EntityComponentProps(data);
+    const ecp = new EntityComponentProps(episodeData);
     ecp.getData(data.getIncluded())
       .then(res => res.json())
       .then(ajaxData => {
@@ -65,7 +64,9 @@ export const PodcastEpisodeDisplay = (props: PodcastEpisodeProps) => {
         </Accordion.Toggle>
       </Card.Header >
       <Accordion.Collapse eventKey={episodeData.field_episode}>
-        {body}
+        <ErrorBoundary>
+          {body}
+        </ErrorBoundary>
       </Accordion.Collapse>
     </Card>
   );

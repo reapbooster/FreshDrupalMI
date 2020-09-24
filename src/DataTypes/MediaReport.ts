@@ -5,9 +5,11 @@ import ImageFile, { ImageFileInterface } from "./ImageFile";
 import { Link, LinkInterface } from "./LinkList";
 import DocumentFile, { DocumentFileInterface } from "./DocumentFile";
 import Event, { EventInterface } from "./Event";
+import User, {UserInterface} from "./User";
 
 export interface MediaReportInterface extends MediaInterface {
-  field_author: object;
+  thumbnail: ImageFileInterface;
+  field_author: UserInterface;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;
   field_cover: ImageFileInterface;
@@ -21,27 +23,26 @@ export interface MediaReportInterface extends MediaInterface {
 }
 
 export class MediaReport extends Media implements MediaReportInterface {
-  field_author: Record<string, unknown>;
+  field_content: Array<ParagraphInterface>;
+  field_essay: Link;
+  private _thumbnail: ImageFile;
+  private _field_author: User;
 
-  _field_centers: TaxonomyTerm;
+  private _field_centers: TaxonomyTerm;
 
-  _field_content: Array<ParagraphInterface>;
+  private _field_cover: ImageFile;
 
-  _field_cover: ImageFile;
+  private _field_custom_author: Record<string, unknown>;
 
-  _field_custom_author: Record<string, unknown>;
+  private _field_media_file: DocumentFile;
 
-  _field_essay: Link;
+  private _field_program_initiatives: TaxonomyTerm;
 
-  _field_media_file: DocumentFile;
+  private _field_related_event: Event;
 
-  _field_program_initiatives: TaxonomyTerm;
+  private _field_term_collection: TaxonomyTerm;
 
-  _field_related_event: Event;
-
-  _field_term_collection: TaxonomyTerm;
-
-  _field_topics: TaxonomyTerm;
+  private _field_topics: TaxonomyTerm;
 
   constructor(props) {
     super(props);
@@ -49,15 +50,23 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_media_file,field_cover";
+    return "&include=thumbnail,field_cover,field_media_file";
   }
 
   hasData(): boolean {
-    return this.name?.length > 0 ?? false;
+    return this.status !== undefined;
   }
 
   getThumbnail(): ImageFileInterface {
-    return this.field_cover;
+    return this._thumbnail;
+  }
+
+  get field_author(): User {
+    return this._field_author;
+  }
+
+  set field_author(value: User) {
+    this._field_author = value;
   }
 
   get field_centers(): TaxonomyTermInterface {
@@ -66,14 +75,6 @@ export class MediaReport extends Media implements MediaReportInterface {
 
   set field_centers(incoming: TaxonomyTermInterface) {
     this._field_centers = new TaxonomyTerm(incoming);
-  }
-
-  get field_content(): Array<ParagraphInterface> {
-    return this._field_content;
-  }
-
-  set field_content(incoming: Array<ParagraphInterface>) {
-    this._field_content = incoming.map((item) => Paragraph.factory(item));
   }
 
   get field_cover(): ImageFileInterface {
@@ -93,20 +94,54 @@ export class MediaReport extends Media implements MediaReportInterface {
     this._field_centers = incoming;
   }
 
-  get field_content(): Array<ParagraphInterface> {
-    return this._field_content;
+  get field_media_file(): DocumentFile {
+    return this._field_media_file;
   }
 
-  set field_content(incoming: Array<ParagraphInterface>) {
-    this._field_content = incoming.map((item) => Paragraph.factory(item));
+  set field_media_file(value: DocumentFile) {
+    this._field_media_file = value;
   }
 
-  get field_cover(): ImageFileInterface {
-    return this._field_cover;
+  get field_program_initiatives(): TaxonomyTerm {
+    return this._field_program_initiatives;
   }
 
-  set field_cover(incoming: ImageFileInterface) {
-    this._field_cover = new ImageFile(incoming);
+  set field_program_initiatives(value: TaxonomyTerm) {
+    this._field_program_initiatives = value;
+  }
+
+  get field_related_event(): Event {
+    return this._field_related_event;
+  }
+
+  set field_related_event(value: Event) {
+    this._field_related_event = value;
+  }
+
+  get field_term_collection(): TaxonomyTerm {
+    return this._field_term_collection;
+  }
+
+  set field_term_collection(value: TaxonomyTerm) {
+    this._field_term_collection = value;
+  }
+
+  get field_topics(): TaxonomyTerm {
+    return this._field_topics;
+  }
+
+  set field_topics(value: TaxonomyTerm) {
+    this._field_topics = value;
+  }
+
+  get thumbnail(): ImageFileInterface {
+    return this._thumbnail;
+  }
+
+  set thumbnail(value: ImageFileInterface) {
+    if (value) {
+      this._thumbnail = new ImageFile(value);
+    }
   }
 }
 

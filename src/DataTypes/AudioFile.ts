@@ -1,5 +1,16 @@
-import { FileInterface } from "./File";
+import * as FileDataObject from "./File";
 
-export type AudioFileInterface = FileInterface;
+export interface AudioFileInterface extends FileDataObject.FileInterface {
 
-export default class AudioFile extends File implements AudioFileInterface {}
+}
+
+export class AudioFile extends FileDataObject.default implements AudioFileInterface {
+
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+
+}
+
+export default AudioFile;

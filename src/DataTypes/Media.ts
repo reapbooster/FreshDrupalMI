@@ -9,14 +9,6 @@ export interface MediaInterface extends RevisionableEntityInterface {
   path: PathObjectInterface;
   bundle: MediaTypeInterface;
   name: string;
-  field_filemime: string;
-  field_filesize: number;
-  field_height: string | number;
-  field_media_image: ImageFileInterface;
-  field_photo_subject_name: string;
-  field_photo_subject_title: string;
-  field_media_in_library: boolean;
-  field_width: string | number;
 
   hasData(): boolean;
 
