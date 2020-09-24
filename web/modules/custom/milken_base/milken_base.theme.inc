@@ -39,5 +39,3 @@ function template_preprocess_milken_bootstrap_carousel(array &$vars) {
   // $description = $view->style_plugin->options['description'];
   // $fieldLabels = $view->display_handler->getFieldLabels(TRUE);
 }
-
-

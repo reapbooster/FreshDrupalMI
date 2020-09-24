@@ -75,7 +75,7 @@ class MediaPodcastEpisode
   }
 
   hasData(): boolean {
-    return false;
+    return this.status !== undefined;
   }
 
   get field_media_audio_file(): AudioFileInterface {

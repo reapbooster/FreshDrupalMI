@@ -5,6 +5,7 @@ import AudioFileDisplay from '../FileDisplay/AudioFileDisplay';
 import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
 import styled, {StyledComponent} from 'styled-components';
 import { MediaPodcastEpisodeInterface, MediaPodcastServiceLinkInterface } from "../../DataTypes/MediaPodcastEpisode";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 
 export interface PodcastEpisodeBodyProps extends MediaPodcastEpisodeInterface {
@@ -25,17 +26,19 @@ const ImageFileDisplayContainer = styled.div`
 
 export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisodeBodyProps) => {
   const {data, view_mode, container} = props;
-
+  console.debug("PodcastEpisodeBody", props);
   return (
     <>
       <Card.Body>
         <Container className={"col-xs-12 col-lg-12"}>
           <Row>
             <Col xs={12} sm={3}>
+              <ErrorBoundary>
               <ImageFileDisplay
                 data={data.field_media_image}
                 container={ImageFileDisplayContainer}
               />
+              </ErrorBoundary>
             </Col>
             <Col xs={12} sm={9}>
               <Row style={{ margin: "auto", }}>
@@ -52,10 +55,12 @@ export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisod
               <Row>
                 <Col className={"col-md-10"}>
                   <br />
-                  <AudioFileDisplay
-                    data={data.field_media_audio_file}
-                    view_mode={"full"}
-                  />
+                  <ErrorBoundary>
+                    <AudioFileDisplay
+                      data={data.field_media_audio_file}
+                      view_mode={"full"}
+                    />
+                  </ErrorBoundary>
                   <br />
                 </Col>
               </Row>

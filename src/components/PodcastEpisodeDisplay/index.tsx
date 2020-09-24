@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import {Card, Button, ButtonGroup, Media, Container, Row, Col, Accordion} from 'react-bootstrap';
 import MediaPodcastEpisode, {MediaPodcastEpisodeInterface} from '../../DataTypes/MediaPodcastEpisode'
 import PodcastEpisodeBody, { PodcastEpisodeBodyProps } from './PodcastEpisodeBody';
@@ -31,38 +31,44 @@ const accordionToggleStyle = {
 
 
 
-export class PodcastEpisodeDisplay extends EntityComponentBase<PodcastEpisodeProps, EntityComponentState> {
+export const PodcastEpisodeDisplay = (props: PodcastEpisodeProps) => {
+  var {data, onSelectHandler, open, key} = props;
+  if (!data instanceof MediaPodcastEpisode) {
+    data = new MediaPodcastEpisode(data);
+  }
+  const [episodeData, setEpisodeData] = useState(data);
+  if (!episodeData.hasData()) {
 
-  include = "";
-
-  render() {
-    console.debug("Podcast Episode Render", this);
-    var body = (<p />);
-    if (this.props.open === true) {
-      const episodeBodyProps = Object.assign(this.state.attributes, this.ecp, this.props?.entityComponentProps);
-      body = ( <PodcastEpisodeBody {...episodeBodyProps} open={this.props.open} /> );
-    }
-      return (
-        <Card key={this.props.key}
-              data-episode={this.props.field_episode}
-              id={this.ecp.id}
-        >
-          <Card.Header style={cardHeaderStyle}>
-            <Accordion.Toggle
-              eventKey={this.props.field_episode}
-              style={accordionToggleStyle}>
-              <Card.Title  style={cardTitleStyle}>
-                  <strong>Episode {this.state?.attributes?.field_episode}</strong>&nbsp;&#58;&nbsp;{this.state?.attributes?.field_summary?.value}
-              </Card.Title>
-            </Accordion.Toggle>
-          </Card.Header >
-          <Accordion.Collapse eventKey={this.props.field_episode}>
-            {body}
-          </Accordion.Collapse>
-        </Card>
-      );
-    }
-
+    const ecp = new EntityComponentProps(data);
+    ecp.getData(data.getIncluded())
+      .then(res => res.json())
+      .then(ajaxData => {
+        setEpisodeData(new MediaPodcastEpisode(ajaxData.data));
+      })
+  }
+  var body = (<p />);
+  if (open) {
+    body = ( <PodcastEpisodeBody data={episodeData} open={open} /> );
+  }
+  return (
+    <Card key={key}
+          data-episode={episodeData.field_episode}
+          id={episodeData.id}
+    >
+      <Card.Header style={cardHeaderStyle}>
+        <Accordion.Toggle
+          eventKey={episodeData.field_episode}
+          style={accordionToggleStyle}>
+          <Card.Title  style={cardTitleStyle}>
+            <strong>Episode {episodeData.field_episode}</strong>&nbsp;&#58;&nbsp;{episodeData.field_summary?.value}
+          </Card.Title>
+        </Accordion.Toggle>
+      </Card.Header >
+      <Accordion.Collapse eventKey={episodeData.field_episode}>
+        {body}
+      </Accordion.Collapse>
+    </Card>
+  );
 
 }
 

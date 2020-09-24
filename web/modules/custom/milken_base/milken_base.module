@@ -22,6 +22,3 @@ function milken_migrations_entity_type_alter(array &$entity_types) {
     $entity_types['menu_link_content']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMenuLinkContentControlHandler');
   }
 }
-
-
-
