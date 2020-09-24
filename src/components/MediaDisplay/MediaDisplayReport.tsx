@@ -1,29 +1,39 @@
 import React, { useState } from 'react';
-import * as DataObject from '../../DataTypes/MediaReport';
+import MediaReport, {MediaReportInterface} from '../../DataTypes/MediaReport';
 import { Col, Card } from 'react-bootstrap';
-import MediaDisplayImage from './MediaDisplayImage'
+import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
+import moment from "moment";
 
-interface MediaReportProps {
-  data: DataObject.MediaReportInterface;
+export interface MediaDisplayReportProps {
+  data: MediaReportInterface;
   view_mode: string;
 }
 
 
-const MediaReport: React.FunctionComponent = (props: ReportDataInterface) => {
-
-
-
+export const MediaDisplayReport: React.FunctionComponent = (props: MediaDisplayReportProps) => {
+  const {data, view_mode} = props;
+  const [reportData, setReportData] = useState(new MediaReport(data));
+  if (!reportData.hasData()) {
+    var ecp = new EntityComponentProps(reportData);
+    ecp.getData(reportData.getIncluded())
+      .then(res => res.json())
+      .then (ajaxData => {
+        setReportData(new MediaReport(ajaxData.data));
+      });
+  }
+  const created = moment(reportData, moment.ISO_8601);
   return (
     <>
-      <Col lg={3} sm={4} key={props.key}>
+      <Col lg={3} sm={4} >
           <a className="card my-5"
-                href={"report/".concat(props.drupal_internal__mid)}
-                data-drupal-id={props.drupal_internal__mid}
-                data-drupal-type={props.type}
-                data-uuid={props.id}>
-            <MediaDisplayImage data={props.data.field_cover} view_mode="thumbnail" />
+                href={"report/".concat(reportData.drupal_internal__mid)}
+                data-drupal-id={reportData.drupal_internal__mid}
+                data-drupal-type={reportData.type}
+                data-uuid={reportData.id}>
+            <ImageFileDisplay data={reportData.getThumbnail()} view_mode="thumbnail" />
             <Card.Body style={{minHeight: "150px"}}>
-              <Card.Title>{props.name}</Card.Title>
+              <Card.Title>{reportData.name}</Card.Title>
             </Card.Body>
             <Card.Footer>{created.format('MMMM D, YYYY')}</Card.Footer>
           </a>
@@ -32,4 +42,4 @@ const MediaReport: React.FunctionComponent = (props: ReportDataInterface) => {
   );
 }
 
-export default MediaReport;
+export default MediaDisplayReport;

@@ -1,13 +1,16 @@
 import React, {PropsWithChildren} from "react";
 import {Col, Card, Media, Accordion, Row, Container} from "react-bootstrap";
 import PodcastEpisodeServiceLinks from "./PodcastEpisodeServiceLinks";
-
-import MediaImage from '../../DataTypes/MediaImage';
-import styled from 'styled-components';
+import AudioFileDisplay from '../FileDisplay/AudioFileDisplay';
+import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
+import styled, {StyledComponent} from 'styled-components';
 import { MediaPodcastEpisodeInterface, MediaPodcastServiceLinkInterface } from "../../DataTypes/MediaPodcastEpisode";
 
-interface PodcastEpisodeBodyProps extends MediaPodcastEpisodeInterface {
- 
+
+export interface PodcastEpisodeBodyProps extends MediaPodcastEpisodeInterface {
+  data: MediaPodcastEpisodeInterface;
+  view_mode: string;
+  container: StyledComponent;
 }
 
 const learnMoreLink = styled.a`
@@ -15,42 +18,50 @@ const learnMoreLink = styled.a`
     font-weight: bold;
 `;
 
+const ImageFileDisplayContainer = styled.div`
+  height: 120px;
+`;
 
 
-const PodcastEpisodeBody: React.FunctionComponent = (props: PropsWithChildren<PodcastEpisodeBodyProps>) => {
-  console.debug("Podcast Episode Body incoming props", props);
+export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisodeBodyProps) => {
+  const {data, view_mode, container} = props;
+
   return (
     <>
       <Card.Body>
         <Container className={"col-xs-12 col-lg-12"}>
           <Row>
             <Col xs={12} sm={3}>
-              <MediaImage field_media_image={props.field_media_image} height={"120px"} />
+              <ImageFileDisplay
+                data={data.field_media_image}
+                container={ImageFileDisplayContainer}
+              />
             </Col>
             <Col xs={12} sm={9}>
               <Row style={{ margin: "auto", }}>
                 <Col cellPadding={"1rem"}>
-                  <span dangerouslySetInnerHTML={{__html: props.field_body?.value}}
+                  <span dangerouslySetInnerHTML={{__html: data.field_body?.value}}
                         className={"text-muted"} >
                   </span>
                   <br />
                   <p>
-                    <learnMoreLink href={props.path.alias}>LEARN MORE &gt;</learnMoreLink>
+                    <learnMoreLink href={data.path.alias}>LEARN MORE &gt;</learnMoreLink>
                   </p>
                 </Col>
               </Row>
               <Row>
                 <Col className={"col-md-10"}>
                   <br />
-                  <Audio
-                    {...props.field_media_audio_file}
+                  <AudioFileDisplay
+                    data={data.field_media_audio_file}
+                    view_mode={"full"}
                   />
                   <br />
                 </Col>
               </Row>
               <Row cellPadding={"1rem"}>
                 <PodcastEpisodeServiceLinks
-                  links={props.field_service_links}
+                  links={data.field_service_links}
                 />
               </Row>
             </Col>
@@ -62,4 +73,4 @@ const PodcastEpisodeBody: React.FunctionComponent = (props: PropsWithChildren<Po
 
 }
 
-export {PodcastEpisodeBody as default, PodcastEpisodeBodyProps};
+export default PodcastEpisodeBody;

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import EventDisplayList from '../EventDisplay/EventDisplayList'
-import URLListSource from "../../DataTypes/URLListSource";
 import ListSource, {ListComponentSourceInterface} from "../../DataTypes/ListSource";
 import Loading from "../Loading";
-import JSONApiUrl from "../../DataTypes/JSONApiUrl";
+import styled from 'styled-components';
+import {instanceOf} from "prop-types";
+
+const ContainerDiv = styled.div`
+  max-width: 18rem;
+`;
 
 export interface EventsBrowserProps {
   source?: ListComponentSourceInterface
@@ -11,28 +15,32 @@ export interface EventsBrowserProps {
 }
 
 export const EventsBrowser = (props: EventsBrowserProps) => {
-  var { source } = props;
-
-  const [listSource, setListSource] = useState(source);
-
-  if (listSource instanceof URLListSource && !listSource.items) {
-    fetch(listSource.url)
-      .then(res => res.json())
-      .then(ajaxData => {
-        setListSource(new ListSource({
-          items: ajaxData.data,
-          id: listSource.id,
-          url: listSource.url,
-          entityTypeId: listSource.entityTypeId,
-        }));
-      });
-    return (<Loading />)
+  console.debug('EventsBrowser: props', props);
+  var { source, view_mode } = props;
+  if (!source instanceof ListSource) {
+    source = new ListSource(source);
   }
+  console.debug("Source:", source);
+  var [listSource, setListSource] = useState(source);
+  console.debug("List Source:", listSource);
+  if (!listSource.hasData()) {
+    listSource.refreshItems()
+      .then((items) => {
+        var toSet = new ListSource(ListSource.toObject());
+        console.debug("after clone", toSet);
+        toSet.items = items;
+        setListSource(toSet);
+      });
+    return (<Loading />);
+  }
+  console.debug("listSource.items should be populated", listSource);
   return (
     <>
       <EventDisplayList
         list={listSource}
-        view_mode={"card"} />
+        view_mode={props.view_mode}
+        container={ContainerDiv}
+      />
     </>
   )
 }

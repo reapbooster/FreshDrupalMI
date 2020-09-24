@@ -15,10 +15,9 @@ const MediaDisplayImage: React.FunctionComponent = (props: MediaDisplayImageProp
 
   if (!mediaImage.hasData()) {
     const ecp = new EntityComponentProps(mediaImage);
-    ecp.getData()
+    ecp.getData(mediaImage.getIncluded())
       .then(res => res.json())
       .then((incoming) => {
-        console.debug("Image Style Object:", incoming);
         setMediaImage(new MediaImage(incoming.data));
       });
     return (
@@ -27,6 +26,7 @@ const MediaDisplayImage: React.FunctionComponent = (props: MediaDisplayImageProp
       </>
     )
   }
+
   return (
     <>
       <img

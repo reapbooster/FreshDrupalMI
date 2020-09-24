@@ -6,7 +6,7 @@ import PodcastEpisodeBody, { PodcastEpisodeBodyProps } from './PodcastEpisodeBod
 import { EntityComponentProps, EntityComponentPropsInterface } from "../../DataTypes/EntityComponentProps";
 import EntityComponentBase, { EntityComponentState } from "../../DataTypes/EntityComponentBase";
 
-interface PodcastEpisodeProps extends MediaPodcastEpisodeInterface {
+export interface PodcastEpisodeProps extends MediaPodcastEpisodeInterface {
   data: MediaPodcastEpisodeInterface;
   onSelectHandler: any;
   open: boolean;
@@ -31,7 +31,7 @@ const accordionToggleStyle = {
 
 
 
-class PodcastEpisode extends EntityComponentBase<PodcastEpisodeProps, EntityComponentState> {
+export class PodcastEpisodeDisplay extends EntityComponentBase<PodcastEpisodeProps, EntityComponentState> {
 
   include = "";
 
@@ -66,4 +66,4 @@ class PodcastEpisode extends EntityComponentBase<PodcastEpisodeProps, EntityComp
 
 }
 
-export { PodcastEpisode as default, PodcastEpisodeProps };
+export default PodcastEpisodeDisplay;

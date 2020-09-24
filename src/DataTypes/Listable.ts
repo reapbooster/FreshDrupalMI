@@ -6,11 +6,11 @@ export interface ListableInterface {
 
   id: string;
 
-  getItems(): Array<EntityInterface>;
+  items?: Array<EntityInterface> | undefined;
 
   refreshItems(url: JSONApiUrl): void;
 
-  url?: JSONApiUrl;
+  url?: string;
 
   browser: React.Component | React.ReactNodeArray;
 

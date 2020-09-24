@@ -14,13 +14,30 @@ interface MediaImageInterface extends MediaInterface {
 }
 
 class MediaImage extends Media implements MediaImageInterface {
+
   _field_media_image: ImageFile;
+
+  field_media_in_library: boolean;
 
   field_photo_subject_name: string;
 
   field_photo_subject_title: string;
 
   field_photo_subject_org: string;
+
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+
+
+  getIncluded(): string {
+    return "&included=thumbnail,field_media_audio_file";
+  }
+
+  hasData(): boolean {
+    return false;
+  }
 
   get srcset() {
     return this._image.image_style_uri;
@@ -32,6 +49,10 @@ class MediaImage extends Media implements MediaImageInterface {
 
   set field_media_image(incoming: ImageFileInterface) {
     this._field_media_image = new ImageFile(incoming);
+  }
+
+  getThumbnail(): ImageFileInterface {
+    return this.field_media_image;
   }
 
   getStyleObject(): ImageStyleObjectInterface {

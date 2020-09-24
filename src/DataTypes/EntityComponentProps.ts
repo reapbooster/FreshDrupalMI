@@ -73,9 +73,9 @@ class EntityComponentProps implements EntityComponentPropsInterface {
     console.debug("get Data called: ", this);
     if (this.entityTypeId && this.bundle) {
       return fetch(
-        `/jsonapi/${this.entityTypeId}/${this.bundle}/${
+        new Request(`/jsonapi/${this.entityTypeId}/${this.bundle}/${
           this.id || ""
-        }?jsonapi_include=1${include}`
+        }?jsonapi_include=1${include}`, {redirect: 'manual'})
       ).catch(this.handleError);
     }
     this.handleError(new Error("Not Enough Data to make a getData call"));

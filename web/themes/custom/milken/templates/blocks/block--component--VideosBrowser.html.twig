@@ -1,10 +1,10 @@
 {{ attach_library('milken_base/VideosBrowser') }}
 
-<video-browser
+<videos-browser
   data-id="video-browser"
-  data-url="/jsonapi/media/video?jsonapi_include=true&include=field_region,field_focus,field_terms,field_actions"
+  data-url="/jsonapi/media/video?jsonapi_include=true&page[limit]=10&include=thumbnail"
   data-entity-type-id="media"
   data-view-mode="card"
 >
-</video-browser>
+</videos-browser>
 

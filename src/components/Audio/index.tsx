@@ -19,13 +19,7 @@ interface AudioEntityProps {
 }
 
 const Audio = (props: AudioEntityProps) => {
-  if (props.uri?.url) {
-    return (
-      <>
-        <audio controls src={props.uri?.url} style={{ width: "100%", marginBottom: "2rem", }}/>
-      </>
-    );
-  }
+
 
   return (
     <>

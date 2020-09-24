@@ -61,6 +61,15 @@ class MediaPodcastEpisode
 
   private _path: PathObject;
 
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+
+  getThumbnail(): ImageFileInterface {
+    return this.field_media_image;
+  }
+
   getIncluded(): string {
     return "&include=field_media_image,field_media_audio_file";
   }

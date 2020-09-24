@@ -17,7 +17,8 @@ import MediaPodcastEpisode from "../../DataTypes/MediaPodcastEpisode";
  *
  * @param incoming: MediaInterface
  */
-function MediaDataFactory(incoming: MediaInterface): Media {
+export function MediaDataFactory(incoming: MediaInterface): MediaInterface {
+  console.debug("MediaDataFactory", incoming);
   switch(incoming.type) {
     case "media--video":
       return new MediaVideo(incoming);
@@ -38,7 +39,8 @@ function MediaDataFactory(incoming: MediaInterface): Media {
  *
  * @param incoming: MediaInterface
  */
-function MediaComponentFactory(incoming: MediaInterface) : React.FunctionComponent {
+export function MediaComponentFactory(incoming: MediaInterface) {
+  console.debug("MediaComponentFactory", incoming);
   switch(incoming.type) {
     case "media--video":
       return MediaDisplayVideo;
@@ -62,15 +64,16 @@ function MediaComponentFactory(incoming: MediaInterface) : React.FunctionCompone
  * @param props: MediaDisplayProps
  */
 
-interface MediaDisplayProps {
+export interface MediaDisplayProps {
   key?: number;
   data: MediaInterface;
   view_mode: string;
 }
 
-const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
-  const [ mediaData, setMediaData ] = useState(MediaDataFactory(props.data));
-
+export const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
+  const {key, data, view_mode} = props;
+  const [ mediaData, setMediaData ] = useState(MediaDataFactory(data));
+  console.debug("MediaDisplay", props, mediaData);
   if (!mediaData.hasData()) {
     const ecp = new EntityComponentProps(mediaData);
     ecp.getData(mediaData.getIncluded())
@@ -85,12 +88,14 @@ const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
       </div>
     )
   }
-  const Component = MediaDataFactory(props.data)
+  const Component = MediaComponentFactory(mediaData);
+  console.debug('get MediaDisplayComponent', Component);
   return (
-    <ErrorBoundary key={props.key ?? 0}>
+    <ErrorBoundary key={key ?? 0}>
       <Component
         data={mediaData}
-        view_mode={props.view_mode} />
+        view_mode={view_mode}
+        style={{width: "18rem"}} />
     </ErrorBoundary>
   )
 }
@@ -98,4 +103,4 @@ const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
 
 
 
-export { MediaDisplay as default, MediaDisplayProps, MediaComponentFactory, MediaDataFactory };
+export default MediaDisplay;

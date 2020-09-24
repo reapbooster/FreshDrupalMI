@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
-import MediaImage, {MediaImageInterface} from '../../DataTypes/MediaImage';
 import Loading from "../Loading";
 import ImageFile, {ImageFileInterface} from "../../DataTypes/ImageFile";
-import ImageStyleObject, {ImageStyleObjectInterface} from "../../DataTypes/ImageStyleObject";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 
 interface ImageFileDisplayProps {
   data: ImageFileInterface
+  view_mode: string;
   key?: number;
+  style: Record<string, any>;
 }
 
 const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps) => {
-
-  const [ imageData , setImageData ] = useState(new ImageFile(props.data));
+  var {data, view_mode, key, style} = props;
+  if (!data instanceof ImageFile) {
+    data = new ImageFile(data);
+  }
+  // TODO: swap this out on View_mode change
+  const imageTagStyle = style ?? {
+    maxWidth: "320px",
+    maxHeight: "200px",
+  };
+  const [ imageData , setImageData ] = useState(data);
   console.debug("ImageFileDisplay:", imageData);
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
-    ecp.getData('&include=image')
+    ecp.getData(data.getIncluded())
       .then(res => res.json())
       .then((ajaxData) => {
         console.debug("MilkenImage: Data back from JSON", ajaxData);
@@ -35,8 +43,8 @@ const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps)
           data-drupal-id={imageData.id}
           data-drupal-type={imageData.type}
           data-uuid={imageData.id}
-          {...imageData.imageStyleObject.imageAttributes}
-          height={props.height}
+          {...imageStyleObject.imageAttributes}
+          style={imageTagStyle}
         />
       </>
     );

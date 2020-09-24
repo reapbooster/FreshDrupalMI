@@ -6,7 +6,7 @@ import { Link, LinkInterface } from "./LinkList";
 import DocumentFile, { DocumentFileInterface } from "./DocumentFile";
 import Event, { EventInterface } from "./Event";
 
-interface MediaReportInterface extends MediaInterface {
+export interface MediaReportInterface extends MediaInterface {
   field_author: object;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;
@@ -20,7 +20,7 @@ interface MediaReportInterface extends MediaInterface {
   field_topics: TaxonomyTermInterface;
 }
 
-class MediaReport extends Media implements MediaReportInterface {
+export class MediaReport extends Media implements MediaReportInterface {
   field_author: Record<string, unknown>;
 
   _field_centers: TaxonomyTerm;
@@ -42,6 +42,23 @@ class MediaReport extends Media implements MediaReportInterface {
   _field_term_collection: TaxonomyTerm;
 
   _field_topics: TaxonomyTerm;
+
+  constructor(props) {
+    super(props);
+    Object.assign(props);
+  }
+
+  getIncluded(): string {
+    return "&include=field_media_file,field_cover";
+  }
+
+  hasData(): boolean {
+    return this.name?.length > 0 ?? false;
+  }
+
+  getThumbnail(): ImageFileInterface {
+    return this.field_cover;
+  }
 
   get field_centers(): TaxonomyTermInterface {
     return this._field_centers;
@@ -93,4 +110,4 @@ class MediaReport extends Media implements MediaReportInterface {
   }
 }
 
-export { MediaReport as default, MediaReportInterface };
+export default MediaReport;

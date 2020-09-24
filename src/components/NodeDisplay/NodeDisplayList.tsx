@@ -14,11 +14,11 @@ const NodeDisplayList: React.FunctionComponent = (props: NodeDisplayListProps) =
   const {list, view_mode} = props;
   return (
     <>
-      {list.getItems().map((item: EntityInterface, key: number) => {
+      {list.items?.map((item: EntityInterface, key: number) => {
         return (
           <ErrorBoundary key={key}>
             <NodeDisplay
-              item={item}
+              data={item}
               view_mode={view_mode}
             />
           </ErrorBoundary>

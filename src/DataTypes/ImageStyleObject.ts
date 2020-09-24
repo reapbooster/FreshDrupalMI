@@ -52,7 +52,7 @@ class ImageStyleObject implements ImageStyleObjectInterface {
 
   get imageAttributes(): ImageStyleAttributesInterface {
     return {
-      srcSet: this.getSrcSet(),
+      srcSet: this.srcSet,
       className: "lazyload",
       "data-aspectratio": "220/150",
       "data-sizes": "auto",

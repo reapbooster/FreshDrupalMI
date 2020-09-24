@@ -1,6 +1,6 @@
 import React from 'react';
 import MediaPodcastEpisode, {MediaPodcastEpisodeInterface} from '../../DataTypes/MediaPodcastEpisode'
-import PodcastEpisode from '../PodcastEpisode';
+import PodcastEpisodeDisplay from '../PodcastEpisodeDisplay';
 
 interface MediaDisplayPodcastEpisodeProps {
   data: MediaPodcastEpisodeInterface;
@@ -12,7 +12,7 @@ const MediaDisplayPodcastEpisode : React.FunctionComponent = (props) => {
 
   return (
     <>
-      <PodcastEpisode {...props} />
+      <PodcastEpisodeDisplay {...props} />
     </>
   );
 

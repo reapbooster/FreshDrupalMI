@@ -4,7 +4,7 @@ import Event, { EventInterface } from "./Event";
 import { BodyFieldData } from "../Fields/BodyField";
 import Media, { MediaInterface } from "./Media";
 
-interface MediaVideoInterface extends MediaInterface {
+export interface MediaVideoInterface extends MediaInterface {
   field_body: BodyFieldData;
   field_centers: Array<TaxonomyTermInterface>;
   field_embedded_id: string;
@@ -26,7 +26,10 @@ interface MediaVideoInterface extends MediaInterface {
   getIncluded(): string;
 }
 
-class MediaVideo extends Media {
+export class MediaVideo extends Media implements MediaVideoInterface {
+
+  _thumbnail: ImageFileInterface;
+
   _field_centers: Array<TaxonomyTermInterface>;
 
   _field_event_reference?: Event;
@@ -59,12 +62,21 @@ class MediaVideo extends Media {
 
   field_width: number;
 
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+
+  getThumbnail(): ImageFileInterface {
+    return this.thumbnail;
+  }
+
   hasData(): boolean {
-    return this.field_media_oembed_video || this.field_thumbnail_uri;
+    return this.status !== undefined;
   }
 
   getIncluded() {
-    return "&included=field_media-oembed_video,field_speakers";
+    return "&include=thumbnail";
   }
 
   get field_term_collection(): Array<TaxonomyTermInterface> {
@@ -72,9 +84,11 @@ class MediaVideo extends Media {
   }
 
   set field_term_collection(incoming: Array<TaxonomyTermInterface>) {
-    this._field_term_collection = incoming.map((item) => {
-      return new TaxonomyTerm(item);
-    });
+    if (incoming.length ?? false) {
+      this._field_term_collection = incoming.map((item) => {
+        return new TaxonomyTerm(item);
+      });
+    }
   }
 
   get field_topics(): Array<TaxonomyTermInterface> {
@@ -82,9 +96,11 @@ class MediaVideo extends Media {
   }
 
   set field_topics(incoming: Array<TaxonomyTermInterface>) {
-    this._field_topics = incoming.map((item) => {
-      return new TaxonomyTerm(item);
-    });
+    if (incoming.length ?? false) {
+      this._field_topics = incoming.map((item) => {
+        return new TaxonomyTerm(item);
+      });
+    }
   }
 
   get field_centers(): Array<TaxonomyTermInterface> {
@@ -92,9 +108,11 @@ class MediaVideo extends Media {
   }
 
   set field_centers(incoming: Array<TaxonomyTermInterface>) {
-    this._field_centers = incoming.map((item) => {
-      return new TaxonomyTerm(item);
-    });
+    if (incoming.length ?? false) {
+      this._field_centers = incoming.map((item) => {
+        return new TaxonomyTerm(item);
+      });
+    }
   }
 
   get event(): EventInterface {
@@ -102,8 +120,24 @@ class MediaVideo extends Media {
   }
 
   set event(incoming: EventInterface) {
-    this._field_event_reference = Event.factory(incoming);
+    this._field_event_reference = incoming;
   }
+
+  get thumbnail(): ImageFileInterface {
+    return this._thumbnail;
+  }
+
+  set thumbnail(incoming: ImageFileInterface) {
+    this._thumbnail = new ImageFile(incoming);
+  }
+
+  field_event_reference: EventInterface;
+  field_media_image: ImageFileInterface;
+  field_media_in_library: boolean;
+  field_photo_subject_name: string;
+  field_photo_subject_title: string;
+  field_program_initiatives: Array<TaxonomyTermInterface>;
+
 }
 
-export { MediaVideo as default, MediaVideoInterface };
+export default MediaVideo;

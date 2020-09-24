@@ -4,13 +4,14 @@ class JSONApiUrl {
   query: URLSearchParams;
 
   constructor(incoming: string = null, searchParams: URLSearchParams = null) {
+    console.log("jsonapiURL: Incoming", incoming);
     if (incoming) {
-      const split = incoming.split("?");
+      // This is to deal with relative URL's that dont' have a pathl
       const location = new URL(document.location.href.toString());
-      this.parsed = new URL(split[0], location.origin);
+      this.parsed = new URL(incoming, location.origin.toString());
       // If new search params are provided, use those, else
-      // the query from the supplied URL
-      this.query = searchParams ?? new URLSearchParams(split[1]);
+      // the query from the supplied URL.
+      this.query = searchParams ?? this.parsed.searchParams;
     }
 
     console.debug("JsonapiURL: constructor", this);

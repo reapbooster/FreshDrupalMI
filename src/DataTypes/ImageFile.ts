@@ -4,14 +4,14 @@ import ImageStyleObject, {
 } from "./ImageStyleObject";
 import File, { FileInterface } from "./File";
 
-interface ImageFileMetaDataInterface {
+export interface ImageFileMetaDataInterface {
   alt?: string;
   title?: string;
   width?: number;
   height?: number;
 }
 
-interface ImageFileInterface extends FileInterface {
+export interface ImageFileInterface extends FileInterface {
   filemime: string;
   filename: string;
   filesize: number | string;
@@ -21,7 +21,7 @@ interface ImageFileInterface extends FileInterface {
   imageStyleObject: ImageStyleObjectInterface;
 }
 
-class ImageFile extends File implements ImageFileInterface {
+export class ImageFile extends File implements ImageFileInterface {
   filemime: string;
 
   filename: string;
@@ -77,4 +77,4 @@ class ImageFile extends File implements ImageFileInterface {
   }
 }
 
-export { ImageFile as default, ImageFileInterface, ImageFileMetaDataInterface };
+export default ImageFile;

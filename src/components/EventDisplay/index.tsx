@@ -9,6 +9,7 @@ import EventSummit from "../../DataTypes/EventSummit";
 import EventConferenceDisplay from './EventConferenceDisplay';
 import EventSummitDisplay from './EventSummitDisplay';
 import EventMeetingDisplay from './EventMeetingDisplay';
+import styled,{StyledComponent} from "styled-components";
 
 /**
  * Implementation of the Data Model
@@ -58,13 +59,16 @@ export interface EventDisplayProps {
   data: EventInterface;
   view_mode: string;
   key?: number;
-
+  container?: StyledComponent;
 }
 
 export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
-  const { data, view_mode, key } = props;
+  var { data, view_mode, key, container } = props;
+  const ContainerDiv = container ?? styled.div`
+    max-width: 18rem;
+  `;
   if (!data instanceof Event) {
-    data = EventDataFactory(props.data);
+    data = EventDataFactory(data);
   }
   const [ eventData, setEventData ] = useState(data);
   if (!eventData.hasData()) {
@@ -84,8 +88,12 @@ export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) 
   const Component = EventComponentFactory(eventData);
   return (
     <>
-      <ErrorBoundary key={props.key ?? 0}>
-        <Component data={eventData} view_mode={props.view_mode} />
+      <ErrorBoundary key={key ?? 0}>
+        <Component
+          data={eventData}
+          view_mode={view_mode}
+          container={ContainerDiv}
+        />
       </ErrorBoundary>
     </>
   )

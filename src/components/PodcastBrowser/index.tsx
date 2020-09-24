@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {Col, Container, Navbar, Row, Nav, NavItem, Accordion, Panel, Alert} from 'react-bootstrap';
-import PodcastEpisode, { PodcastEpisodeProps } from "../PodcastEpisode";
+import PodcastEpisode, { PodcastEpisodeProps } from "../PodcastEpisodeDisplay";
 import Loading from "../Loading";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,6 +11,7 @@ import Paginator from './Paginator';
 import JSONApiUrl from "../../DataTypes/JSONApiUrl";
 import LinkList from '../../DataTypes/LinkList';
 import PodcastBrowserNavbar from "./PodcastBrowserNavbar";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 interface PodcastBrowserState {
   currentURL: JSONApiUrl;
@@ -121,14 +122,18 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
           const ecp = new EntityComponentProps(item)
           ecp.key = key;
           return (
-            <PodcastEpisode
-              {...item}
+            <ErrorBoundary
               key={key}
-              view_mode={"panel"}
-              open={open}
-              entityComponentProps={ecp}
-              onSelectHandler={this.setActiveKeyHandler}
-            />
+            >
+              <PodcastEpisode
+                {...item}
+                view_mode={"panel"}
+                open={open}
+                entityComponentProps={ecp}
+                onSelectHandler={this.setActiveKeyHandler}
+              />
+            </ErrorBoundary>
+
           );
         });
     }
