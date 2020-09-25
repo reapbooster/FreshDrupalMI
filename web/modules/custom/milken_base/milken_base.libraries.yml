@@ -22,3 +22,8 @@ VideosBrowser:
   version: 1.0
   js:
     components/VideosBrowser/VideosBrowser.entry.js: { source: 'components/VideosBrowser/VideosBrowser.entry.tsx' }
+
+ArticlesBrowser:
+  version: 1.0
+  js:
+    components/ArticlesBrowser/ArticlesBrowser.entry.js: { source: 'components/VideosBrowser/VideosBrowser.entry.tsx' }

@@ -8,3 +8,26 @@ js:
 cache:
   max-age: 60
 
+
+form_configuration:
+  id:
+    type: textfield
+    title: "Id"
+  type:
+    type: textfield
+    title: "Type"
+  view_mode:
+    type: textfield
+    title: "View Mode"
+  url:
+    type: textfield
+    title: "Url"
+  tag:
+    type: textfield
+    title: "html tag"
+    default_value: "philanthropy-hub"
+  attach_library:
+    type: textfield
+    title: "Attach Library"
+    default_value: "milken_base/PhilanthropyHub"
+

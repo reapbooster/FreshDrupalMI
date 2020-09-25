@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {CardColumns} from 'react-bootstrap';
 import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
 import {MediaReportInterface} from "../../DataTypes/MediaReport";
 import ListSource from "../../DataTypes/ListSource";
@@ -32,10 +33,12 @@ export const ReportsBrowser = (props: ResportsBrowserProps) => {
   console.debug("VideosBrowser: Source W/Data", reportsSource);
   return (
     <>
-      <MediaDisplayList
-        list={reportsSource}
-        view_mode={view_mode}
-        container={ContainerDiv} />
+      <CardColumns>
+        <MediaDisplayList
+          list={reportsSource}
+          view_mode={view_mode}
+          container={ContainerDiv} />
+      </CardColumns>
     </>
   )
 }

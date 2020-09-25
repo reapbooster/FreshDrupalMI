@@ -88,9 +88,9 @@ const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
       </div>
     )
   }
-  const Component = NodeComponentFactory(props.data);
+  const Component = NodeComponentFactory(nodeData.data);
   return (
-    <ErrorBoundary key={key}>
+    <ErrorBoundary key={key ?? 0}>
       <Component
         data={nodeData}
         view_mode={view_mode} />

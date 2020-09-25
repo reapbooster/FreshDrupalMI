@@ -20,7 +20,13 @@ variant_settings:
       region: bottom
       weight: 0
       uuid: eb7d1fb2-d804-4b8f-bc57-26f1a116c8cb
-      form_configuration: null
+      form_configuration:
+        id: podcast_browser
+        type: media--podcast_episode
+        view_mode: accprdiom
+        url: '/jsonapi/media/podcast_episode?jsonapi_include=true'
+        tag: podcast-browser
+        attach_library: milken_base/PodcastBrowser
       context_mapping: {  }
   id: block_display
   uuid: e36969b6-899a-4c91-9175-74faf83e785e

@@ -20,7 +20,13 @@ variant_settings:
       region: bottom
       weight: 0
       uuid: 908cb159-ceee-4ddc-a7d9-8ef39690c644
-      form_configuration: null
+      form_configuration:
+        id: events_browser
+        type: event--conference
+        view_mode: card
+        url: '/jsonapi/event/conference?jsonapi_include=true'
+        tag: events-browser
+        attach_library: milken_base/EventsBrowser
       context_mapping: {  }
   id: block_display
   uuid: 422c1ace-2779-4c34-bd97-23d56fd29c1c

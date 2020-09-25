@@ -20,7 +20,13 @@ variant_settings:
       region: bottom
       weight: 0
       uuid: 2cf61d77-a912-468a-82a9-1ab6570c7bf2
-      form_configuration: null
+      form_configuration:
+        id: reports_browser
+        type: media--report
+        view_mode: card
+        url: '/jsonapi/media/report?jsonapi_include=true'
+        tag: reports-browser
+        attach_library: milken_base/ReportsBrowser
       context_mapping: {  }
   id: block_display
   uuid: bdac1d73-46e9-4fbb-ab9b-5db402598e5e

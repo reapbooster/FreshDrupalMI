@@ -1,0 +1,44 @@
+uuid: 9e658607-60bd-4a53-9b44-604256d076c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.explore
+  module:
+    - component
+id: explore-block_display-4
+label: Articles
+variant: block_display
+variant_settings:
+  blocks:
+    9252cdc1-96b9-4e42-a3b3-76b84cb0809d:
+      id: 'component:ArticlesBrowser'
+      label: 'Articles Browser'
+      provider: component
+      label_display: visible
+      region: bottom
+      weight: 0
+      uuid: 9252cdc1-96b9-4e42-a3b3-76b84cb0809d
+      form_configuration:
+        id: articles_browser
+        type: node--article
+        view_mode: card
+        url: '/jsonapi/node/article?jsonapi_include=true'
+        tag: articles-browser
+        attach_library: milken_base/ArticlesBrowser
+      context_mapping: {  }
+  id: block_display
+  uuid: a3fdfd2c-670a-4aa0-b8cf-359e8fe07e68
+  label: null
+  weight: 0
+  page_title: 'Explore Articles'
+page: explore
+weight: 0
+selection_criteria:
+  -
+    id: request_path
+    pages: /explore/articles
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }
