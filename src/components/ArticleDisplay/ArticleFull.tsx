@@ -7,6 +7,7 @@ import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import SlideShow from "../Slideshow";
 
 export interface ArticleFullProps {
   data: NodeArticleInterface;
@@ -15,28 +16,46 @@ export interface ArticleFullProps {
 
 const ArticleFull = (props: ArticleFullProps) => {
   const {data, view_mode} = props;
-  if (!data instanceof NodeArticle) {
-    data = new NodeArticle(data);
-  }
-  const [nodeArticleData, setNodeArticleData] = useState(data);
+  const DataObject = new NodeArticle(data);
+  const [nodeArticleData, setNodeArticleData] = useState(DataObject);
   if (!nodeArticleData.hasData()) {
+    console.debug("retrieving node data", nodeArticleData);
     const ecp = new EntityComponentProps(nodeArticleData);
     ecp.getData(nodeArticleData.getIncluded())
       .then(res => res.json())
       .then(ajaxData => {
-        setNodeArticleData(new NodeArticle(ajaxData));
+        setNodeArticleData(new NodeArticle(ajaxData.data));
       });
     return (<Loading />);
   }
+  console.debug("Should have node data now", nodeArticleData);
+  const getSlideDisplay = (field) => {
+    if (Array.isArray(field)) {
+      return (
+        <SlideShow items={field} view_mode={"full"} />
+      );
+    }
+    if (field !== undefined) {
+      return (
+        <ErrorBoundary>
+          <SlideDisplay
+            data={field}
+            view_mode={"full"} />
+        </ErrorBoundary>
+      );
+    }
+    return (
+      <div>
+        <h1>TODO: Create a default slide for content that doesn't have one.</h1>
+      </div>
+    )
+  }
+
   return (
     <>
       <Row id={`promo-slide-${props.id}`}>
         <Container fluid={true}>
-          <ErrorBoundary>
-            <SlideDisplay
-              data={nodeArticleData.field_promo_slide}
-              view_mode={"full"} />
-          </ErrorBoundary>
+            {getSlideDisplay(nodeArticleData.field_promo_slide)}
         </Container>
       </Row>
       <Row>

@@ -5,24 +5,24 @@ import NodeType, { NodeTypeInterface } from "./NodeType";
 import Entity, { EntityInterface } from "./Entity";
 
 export interface ContentDatatypeInterface extends EntityInterface {
-  changed: string;
-  created: string;
-  default_langcode: boolean;
-  drupal_internal__nid: number;
-  drupal_internal__vid: number;
-  langcode: string;
+  changed?: string;
+  created?: string;
+  default_langcode?: boolean;
+  drupal_internal__nid?: number;
+  drupal_internal__vid?: number;
+  langcode?: string;
   metatag?: Record<string, unknown>;
-  node_type: NodeTypeInterface;
-  path: PathObjectInterface;
-  promote: boolean;
+  node_type?: NodeTypeInterface;
+  path?: PathObjectInterface;
+  promote?: boolean;
   revision_log?: string;
   revision_timestamp?: string;
   revision_translation_affected?: boolean;
-  revision_uid: UserInterface;
-  status: boolean;
-  sticky: boolean;
-  title: string;
-  uid: UserInterface;
+  revision_uid?: UserInterface;
+  status?: boolean;
+  sticky?: boolean;
+  title?: string;
+  uid?: UserInterface;
 }
 
 export default abstract class ContentDatatype

@@ -65,13 +65,13 @@ function NodeComponentFactory(incoming) : React.FunctionComponent {
  */
 
 interface NodeDisplayProps {
-  key?: number;
   data: NodeInterface;
   view_mode: string;
+  key?: number;
 }
 
 const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
-  const {key, data, view_mode} = props;
+  const {data, view_mode, key} = props;
   const [ nodeData, setNodeData ] = useState(NodeDataFactory(data));
   console.debug("NodeDisplay", nodeData);
   if (!nodeData.hasData()) {
@@ -88,7 +88,7 @@ const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
       </div>
     )
   }
-  const Component = NodeComponentFactory(nodeData.data);
+  const Component = NodeComponentFactory(nodeData);
   return (
     <ErrorBoundary key={key ?? 0}>
       <Component

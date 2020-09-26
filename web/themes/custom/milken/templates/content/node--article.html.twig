@@ -1,6 +1,6 @@
-{{ attach_library('milken/NodeDisplay') }}
+{{ attach_library('milken/ArticleDisplay') }}
 
-<node-detail
+<article-detail
     {{ attributes }}
     id="milken-node-detail"
     data-id="{{ node.uuid.value }}"
@@ -10,7 +10,7 @@
     data-entity-type-id="node"
     data-bundle="{{ node.bundle }}"
     data-view-mode="{{ view_mode }}"
-></node-detail>
+></article-detail>
 
 
 

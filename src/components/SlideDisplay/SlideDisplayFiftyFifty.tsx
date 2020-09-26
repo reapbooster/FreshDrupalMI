@@ -1,42 +1,35 @@
-import React from 'react';
-import * as DataObject from '../../DataTypes/Slide';
+import React, { useState } from 'react';
+import Slide, {SlideInterface} from '../../DataTypes/Slide';
+import SlideFiftyFifty from "../../DataTypes/SlideFiftyFifty";
+import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import Loading from "../Loading";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 export interface SlideDisplayFiftyFiftyProps {
-  data: DataObject.default;
+  data: SlideInterface;
   view_mode: string;
 }
 
 export const SlideDisplayFiftyFifty : React.FunctionComponent = (props: SlideDisplayFiftyFiftyProps) => {
 
   console.debug("FiftyFifty", props);
+  const { data, view_mode } = props;
+  const DataObject = new SlideFiftyFifty(data);
+  const [slideData, setSlideData] = useState(DataObject);
 
-  // ========== BACKGROUND IMAGE STUFF ==========
-  const backgroundImageStyleObject = new HolderImageStyleObject();
-  const image = new ImageFile(props.data.field_background_image);
-
-
-  if (image.imageStyleObject) {
-    console("I have the data I need:", image);
-    backgroundImageStyleObject = image.imageStyleObject;
-  } else {
-    console.debug('using state to get background image style object', image);
-    const [ backgroundImageStyleObject, setBackgroundImageStyleObject ] = useState(backgroundImageStyleObject);
-  }
-  if (backgroundImageStyleObject.getData !== undefined) {
-    backgroundImageStyleObject
-      .getData()
+  if (!slideData.hasData()){
+    const ecp = new EntityComponentProps(slideData);
+    ecp.getData(slideData.getIncluded())
       .then(res => res.json())
-      .then((incoming) => {
-      console.log("response", incoming);
-      const image = new ImageFile(incoming.data);
-      setBackgroundImageStyleObject(image.imageStyleObject);
-    });
+      .then(ajaxData => {
+        setSlideData(new SlideFiftyFifty(ajaxData.data));
+      });
+    return (<Loading />);
   }
-
-  console.log("backgroundImageStyleObject", backgroundImageStyleObject);
-
+  const leftOrRight = slideData.type.split("_").pop();
+  console.log("Slide Fifty Fifty Data:", slideData);
   return (
-      <div><h3>Slide--Fifty-Fifty</h3></div>
+      <div><h3>Slide--Fifty-Fifty - {leftOrRight}</h3></div>
   )
 
 }

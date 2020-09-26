@@ -14,7 +14,7 @@ interface NodeArticleInterface extends NodeInterface {
   field_topics: TaxonomyTermInterface;
 }
 
-class NodeArticle extends Node implements NodeArticleInterface, ListableInterface {
+class NodeArticle extends Node implements NodeArticleInterface {
   field_authors: object;
 
   private _field_centers: TaxonomyTermInterface;
@@ -35,15 +35,11 @@ class NodeArticle extends Node implements NodeArticleInterface, ListableInterfac
   }
 
   getIncluded(): string {
-    return "";
+    return "&include=field_promo_slide";
   }
 
   getItems(): Array<EntityInterface> {
     return this.field_content;
-  }
-
-  refreshItems(url: JSONApiUrl) {
-    // TODO:
   }
 
   get browser() {
@@ -71,7 +67,9 @@ class NodeArticle extends Node implements NodeArticleInterface, ListableInterfac
   }
 
   set field_promo_slide(value: SlideInterface) {
-    this._field_promo_slide = value;
+    if (value.data === undefined) {
+      this._field_promo_slide = value;
+    }
   }
 
   get field_topics(): TaxonomyTermInterface {

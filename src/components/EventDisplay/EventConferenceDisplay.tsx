@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ImageFile from '../../DataTypes/ImageFile';
+import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
 import EventConference, {EventConferenceInterface} from "../../DataTypes/EventConference";
@@ -33,9 +34,11 @@ export const EventConferenceDisplay = (props: EventConferenceDisplayProps) => {
           data-uuid={data.id}
         >
           <ErrorBoundary>
-            <ImageFile
+            <ImageFileDisplay
               data={data.field_picture}
               view_mode="thumbnail"
+              width="100%"
+              height="220px"
             />
           </ErrorBoundary>
           <Card.Body style={{minHeight: "150px"}}>
