@@ -1,31 +1,23 @@
-/**
- * Node List Display
- * Generic list of nodes when the bundle is unknown.
- * 
- * 
- * 
- */
-
 import React from 'react';
 import {EntityInterface} from '../../DataTypes/Entity';
-import NodeDisplay from './index';
-import {ListableInterface} from "../../DataTypes/Listable";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import SlideDisplay from "./index";
+import {ListableInterface} from "../../DataTypes/Listable";
 
-interface NodeDisplayListProps {
-  list: ListableInterface
+export interface SlideDisplayListProps {
+  list: ListableInterface;
   view_mode: string;
 }
 
 
-const NodeDisplayList: React.FunctionComponent = (props: NodeDisplayListProps) => {
+export const SlideDisplayList: React.FunctionComponent = (props: SlideDisplayListProps) => {
   const {list, view_mode} = props;
   return (
     <>
       {list.items?.map((item: EntityInterface, key: number) => {
         return (
           <ErrorBoundary key={key}>
-            <NodeDisplay
+            <SlideDisplay
               data={item}
               view_mode={view_mode}
             />
@@ -36,4 +28,4 @@ const NodeDisplayList: React.FunctionComponent = (props: NodeDisplayListProps) =
   );
 }
 
-export {NodeDisplayList as default, NodeDisplayListProps}
+export default SlideDisplayList()

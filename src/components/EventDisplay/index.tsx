@@ -67,12 +67,11 @@ export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) 
   const ContainerDiv = container ?? styled.div`
     max-width: 18rem;
   `;
-  if (!data instanceof Event) {
-    data = EventDataFactory(data);
-  }
-  const [ eventData, setEventData ] = useState(data);
+  const DataObject = EventDataFactory(data);
+
+  const [ eventData, setEventData ] = useState(DataObject);
   if (!eventData.hasData()) {
-    console.debug("Event Does Not Have Data");
+    console.debug("Event Does Not Have Data", eventData);
     const ecp = new EntityComponentProps(eventData);
     ecp.getData(eventData.getIncluded())
       .then(res => res.json)

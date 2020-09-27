@@ -20,7 +20,9 @@ const SlideShow: React.FunctionComponent = (props: SlideShowProps) => {
             console.debug("Sending to slide display...", slide);
             return (
               <CarouselItem key={key} id={slide.id}>
-                <SlideDisplay data={slide} view_mode={props.view_mode ?? "full"} />
+                <ErrorBoundary>
+                  <SlideDisplay data={slide} view_mode={props.view_mode ?? "full"} />
+                </ErrorBoundary>
               </CarouselItem>
             )
           })}

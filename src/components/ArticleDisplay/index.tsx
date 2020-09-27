@@ -12,19 +12,20 @@ interface ArticleDisplayProps {
 
 
 const ArticleDisplay: React.FunctionComponent = (props: ArticleDisplayProps) => {
+  const {data, view_mode} = props;
 
-  switch (props.view_mode) {
+  switch (view_mode) {
     case "card":
       return (
         <ErrorBoundary>
-          <ArticleCard {...props.data} />
+          <ArticleCard data={data} view_mode={view_mode} />
         </ErrorBoundary>
       );
 
     default:
       return (
         <ErrorBoundary>
-          <ArticleFull {...props.data} />
+          <ArticleFull data={data} view_mode={view_mode} />
         </ErrorBoundary>
       );
   }

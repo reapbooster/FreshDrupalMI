@@ -64,7 +64,8 @@ export interface SlideDisplayProps {
 
 export const SlideDisplay: React.FunctionComponent = (props: SlideDisplayProps) => {
   console.debug("Slide Display", props);
-  const [ slideData, setSlideData ] = useState(SlideDataFactory(props.data));
+  const {data, view_mode} = props;
+  const [ slideData, setSlideData ] = useState(SlideDataFactory(data));
   if (!slideData.hasData()) {
     const ecp = new EntityComponentProps(slideData);
     ecp.getData(slideData.getIncluded())
@@ -83,7 +84,7 @@ export const SlideDisplay: React.FunctionComponent = (props: SlideDisplayProps) 
 
   return (
     <ErrorBoundary>
-      <Component data={slideData} view_mode={props.view_mode ?? "full"} />
+      <Component data={slideData} view_mode={view_mode ?? "full"} />
     </ErrorBoundary>
   );
 }

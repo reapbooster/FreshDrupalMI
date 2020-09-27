@@ -1,6 +1,7 @@
 import Entity, { EntityInterface } from './Entity';
 import {ListableInterface} from "./Listable";
 import JSONApiUrl from "./JSONApiUrl";
+import EntityComponentProps from './EntityComponentProps';
 
 export interface EntityQueueInterface extends EntityInterface {
 
@@ -24,7 +25,7 @@ export interface EntitySubqueueInterface extends EntityInterface {
 
 export class EntitySubqueue extends Entity implements EntitySubqueueInterface, ListableInterface {
   queue: EntityQueue;
-  items: Array<EntityInterface>;
+  _items: Array<EntityInterface>;
 
   constructor(incoming) {
     super(incoming);
@@ -39,12 +40,25 @@ export class EntitySubqueue extends Entity implements EntitySubqueueInterface, L
     return Array.isArray(this.items);
   }
 
-  getItems(): Array<EntityInterface> {
-      return this.items ?? [];
+  get items(): Array<EntityInterface> {
+      return this._items ?? [];
   }
 
-  refreshItems(url: JSONApiUrl) {
-    //TODO
+  set items(incoming: Array<EntityInterface>) {
+    if (incoming) {
+      this._items = incoming;
+    }
+  }
+
+  refreshItems() {
+    const self = this;
+    const ecp = new EntityComponentProps(this);
+    ecp.getData(this.getIncluded())
+      .then(res => res.json())
+      .then(ajaxData => {
+        Object.assign(self, ajaxData.data);
+        return self.items;
+      });
   }
 
   get browser() {

@@ -19,6 +19,7 @@ form_configuration:
   view_mode:
     type: textfield
     title: "View Mode"
+    default_value: "card"
   url:
     type: textfield
     title: "Url"

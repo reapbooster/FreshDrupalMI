@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import NodeDisplayList from '../NodeDisplay/NodeDisplayList';
+import ArticleList from './ArticleList';
 import ListSource, {ListComponentSourceInterface} from "../../DataTypes/ListSource";
 import Loading from "../Loading";
 import {CardColumns} from 'react-bootstrap';
@@ -22,7 +22,7 @@ export const ArticlesBrowser = (props: ArticlesBrowserProps) => {
   if (!articleSource.hasData()) {
     articleSource.refreshItems()
       .then((items) => {
-        console.debug("Coming home", items, this);
+        console.debug("Coming home", items);
         var toSet = new ListSource(articleSource.toObject());
         console.debug("after clone", toSet);
         toSet.items = items;
@@ -34,7 +34,7 @@ export const ArticlesBrowser = (props: ArticlesBrowserProps) => {
   return (
     <>
       <CardColumns>
-        <NodeDisplayList
+        <ArticleList
           list={articleSource}
           view_mode={props.view_mode ?? "card"}
           container={IndividualArticleContainer}

@@ -41,7 +41,7 @@ export class HeroHalfHeight
   constructor(incoming: SlideHeroHalfHeightInterface) {
     super(incoming);
     Object.assign(this, incoming);
-    console.debug("Slide-fify-fifty", this);
+    console.debug("Slide-Hero Half Height", this);
   }
 
   get field_background_color(): ColorObjectInterface {
@@ -97,9 +97,9 @@ export class HeroHalfHeight
   }
 
   hasData(): boolean {
-    return this.field_published !== undefined && this.field_published !== null;
+    return this.drupal_internal__id !== undefined;
   }
-  
+
 }
 
 export default HeroHalfHeight;

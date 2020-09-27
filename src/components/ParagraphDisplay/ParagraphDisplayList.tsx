@@ -1,3 +1,12 @@
+/**
+ * Paragraph List 
+ * Used to display paragraphs from an entity ref revisions field.
+ * 
+ * 
+ * 
+ */
+
+
 import React from 'react';
 import ParagraphDisplay from '../ParagraphDisplay';
 import {EntityInterface} from "../../DataTypes/Entity";
@@ -11,7 +20,7 @@ export interface ParagraphDisplayListProps {
 
 export const ParagraphDisplayList: React.FunctionComponent = (props: ParagraphDisplayListProps) => {
   const {list, view_mode} = props;
-  return list.getItems().map((item, key) => {
+  return list.items.map((item, key) => {
     return (
       <>
         <ErrorBoundary key={key}>

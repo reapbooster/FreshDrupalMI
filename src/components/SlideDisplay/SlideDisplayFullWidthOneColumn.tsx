@@ -5,6 +5,7 @@ import ImageFile, { ImageFileInterface } from '../../DataTypes/ImageFile'
 import { SlideDisplayProps } from '.';
 import SlideFullWidthOneColumn, { SlideFullWidthOneColumnInterface } from '../../DataTypes/SlideFullWidthOneColumn';
 import { EntityComponentProps } from '../../DataTypes/EntityComponentProps';
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 export interface SlideDisplayFullWidthOneColumnProps {
   data: SlideFullWidthOneColumnInterface;
@@ -76,15 +77,17 @@ export const SlideDisplayFullWidthOneColumn : React.FunctionComponent = (props: 
   // ========== RENDER ==========
   return (
     <>
-    <Row className={"align-items-center"} style={rowStyle} data-view-mode={view_mode}>
-      <Jumbotron fluid={true}
-        className={"d-block align-items-center"}
-        style={jumbotronStyle}>
-          <Container>
-            {textLines}
-          </Container>
-      </Jumbotron>
-    </Row>
+      <ErrorBoundary>
+        <Row className={"align-items-center"} style={rowStyle} data-view-mode={view_mode}>
+          <Jumbotron fluid={true}
+            className={"d-block align-items-center"}
+            style={jumbotronStyle}>
+              <Container>
+                {textLines}
+              </Container>
+          </Jumbotron>
+        </Row>
+      </ErrorBoundary>
     </>
   );
 };

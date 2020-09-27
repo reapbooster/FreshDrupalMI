@@ -4,7 +4,7 @@ status: true
 dependencies: {  }
 id: explore
 label: Explore
-description: ''
+description: 'Explore pages are basic entity lists.'
 use_admin_theme: false
 path: '/explore/{args}'
 access_logic: and

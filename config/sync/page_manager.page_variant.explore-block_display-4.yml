@@ -6,6 +6,7 @@ dependencies:
     - page_manager.page.explore
   module:
     - component
+    - system
 id: explore-block_display-4
 label: Articles
 variant: block_display

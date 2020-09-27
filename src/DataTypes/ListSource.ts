@@ -56,8 +56,11 @@ export class ListSource
     return this.items?.length > 0 ?? false;
   }
 
-  clone(): ListSource {
-    return new ListSource(this.toObject());
+  public static clone(incoming: ListComponentSourceInterface): ListSource {
+    if (incoming instanceof ListSource) {
+      return new ListSource(incoming.toObject());
+    }
+    return new ListSource(incoming);
   }
 
   refreshItems(): Promise<Array<EntityInterface>> {

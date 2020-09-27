@@ -97,7 +97,7 @@ export default class SlideFiftyFifty
   }
 
   hasData(): boolean {
-    return this.field_published !== undefined && this.field_published !== null;
+    return this.drupal_internal__id !== undefined;
   }
-  
+
 }

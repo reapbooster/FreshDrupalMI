@@ -1,7 +1,7 @@
 import PathObject from "./PathObject";
 import { EntityInterface } from "./Entity";
 
-interface EntityComponentPropsInterface {
+export interface EntityComponentPropsInterface {
   view_mode?: string;
   id?: string;
   entityTypeId?: string;
@@ -15,14 +15,14 @@ interface EntityComponentPropsInterface {
   path?: PathObject;
 }
 
-interface JSONAPIEntityReferenceData {
+export interface JSONAPIEntityReferenceData {
   type: string;
   id: string;
   data?: Record<string, unknown>;
   items?: Array<any>;
 }
 
-class EntityComponentProps implements EntityComponentPropsInterface {
+export class EntityComponentProps implements EntityComponentPropsInterface {
   view_mode: string;
 
   id: string;
@@ -112,8 +112,4 @@ class EntityComponentProps implements EntityComponentPropsInterface {
   }
 }
 
-export {
-  EntityComponentProps,
-  EntityComponentPropsInterface,
-  JSONAPIEntityReferenceData,
-};
+export default EntityComponentProps;

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import ImageFile from '../../DataTypes/ImageFile';
 import {Card, Col} from "react-bootstrap";
 import moment from 'moment';
 import { EventMeetingInterface } from "../../DataTypes/EventMeeting";
 import EventConference from "../../DataTypes/EventConference";
 import styled, {StyledComponent} from "styled-components";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
 
 export interface EventMeetingProps {
   data: EventMeetingInterface;
@@ -27,16 +27,18 @@ export const EventMeetingDisplay = (props: EventMeetingProps) => {
     <>
       <ContainerDiv className={"card"}>
         <a
-          href={"event/".concat(data.drupal_internal__id)}
+          href={"event/".concat(data.drupal_internal__id.toString())}
           className="my-5"
           data-drupal-id={data.drupal_internal__id}
           data-drupal-type={data.type}
           data-uuid={data.id}
         >
           <ErrorBoundary>
-            <ImageFile
+            <ImageFileDisplay
               data={data.field_picture}
               view_mode="thumbnail"
+              width="100%"
+              height="220px"
             />
           </ErrorBoundary>
           <Card.Body style={{minHeight: "150px"}}>

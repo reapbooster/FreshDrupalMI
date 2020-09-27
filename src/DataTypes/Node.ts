@@ -32,9 +32,8 @@ abstract class Node extends ContentDatatype implements NodeInterface {
 
   abstract hasData(): boolean;
 
-  abstract getIncluded();
+  abstract getIncluded(): string;
 
-  string;
 }
 
 export { Node as default, NodeInterface };

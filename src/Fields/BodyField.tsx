@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface BodyFieldProps {
-  data: Array<BodyFieldInterface>
+  data: Array<BodyFieldInterface> | BodyFieldInterface;
 }
 
-interface BodyFieldInterface {
+export interface BodyFieldInterface {
   value: string;
   format: string;
   processed: string;
   summary: string;
 }
 
-class BodyField implements BodyFieldInterface {
+export class BodyField implements BodyFieldInterface {
   value: string;
   format: string;
   processed: string;
@@ -22,13 +22,17 @@ class BodyField implements BodyFieldInterface {
   }
 }
 
-const BodyFieldDisplay = (props: BodyFieldProps) => {
-  console.debug("BodyFieldDisplay", props);
-  const articleData = props.data?.map((fieldData: BodyFieldInterface) => fieldData.processed);
+export const BodyFieldDisplay = (props: BodyFieldProps) => {
+  const { data } = props;
+  console.debug("BodyFieldDisplay", data);
+  const articleText = Array.isArray(data) ?
+    data?.map((fieldData: BodyFieldInterface) => fieldData.processed).join() :
+    data.processed
+  ;
   return (
-    <article dangerouslySetInnerHTML={{__html: articleData.join()}} />
+    <article dangerouslySetInnerHTML={{__html: articleText}} />
   );
 
 }
 
-export { BodyField as default, BodyFieldDisplay, BodyFieldInterface, BodyFieldProps };
+export default BodyField;
