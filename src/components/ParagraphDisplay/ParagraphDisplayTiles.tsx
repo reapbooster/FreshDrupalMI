@@ -1,7 +1,6 @@
 
 import React, {useState} from 'react';
 import {Col} from "react-bootstrap";
-import EntitySubqueueDisplay from '../EntitySubqueueDisplay';
 import ParagraphTiles, {ParagraphTilesInterface} from '../../DataTypes/ParagraphTiles'
 import ListDisplay from "../ListDisplay";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
@@ -16,7 +15,8 @@ export interface ParagraphDisplayTilesProps  {
 
 export const ParagraphDisplayTiles: React.FunctionComponent = (props : ParagraphDisplayTilesProps) => {
   const { data, view_mode } = props;
-  const [paragraphData, setParagraphData] = useState(new ParagraphTiles(data));
+  const DataObject = new ParagraphTiles(data);
+  const [ paragraphData, setParagraphData ] = useState(DataObject);
   if (!paragraphData.hasData()) {
     const ecp = new EntityComponentProps(paragraphData);
     ecp.getData(paragraphData.getIncluded())
@@ -30,17 +30,14 @@ export const ParagraphDisplayTiles: React.FunctionComponent = (props : Paragraph
         </>
     )
   }
-  if (!paragraphData instanceof ParagraphTiles) {
-    paragraphData = new ParagraphTiles(paragraphData);
-  }
   console.log("paragraph display tiles", paragraphData);
   return (
     <Col lg={12}>
       <h3>{paragraphData.field_title}</h3>
       <ErrorBoundary>
-        <EntitySubqueueDisplay
-          queue={paragraphData}
-          view_mode={"tiles"}
+        <ListDisplay
+          list={paragraphData.items}
+          view_mode={"tile"}
         />
       </ErrorBoundary>
     </Col>

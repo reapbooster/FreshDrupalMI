@@ -1,4 +1,4 @@
-uuid: 11c491f9-baf5-4bed-8f1e-f768590f3fce
+uuid: b25051a4-6c22-4179-83a2-6a739aa859a4
 langcode: en
 status: true
 dependencies:
@@ -7,39 +7,38 @@ dependencies:
   module:
     - component
     - system
-id: explore-block_display-0
-label: Meetings
+id: explore-block_display-6
+label: Summits
 variant: block_display
 variant_settings:
   blocks:
-    c235f4cf-0994-4f80-80e7-703cf5abfbce:
+    310cb74e-ae1e-4274-991b-29617a0ed70a:
       id: 'component:EventsBrowser'
       label: EventsBrowser
       provider: component
       label_display: visible
       region: bottom
       weight: 0
-      uuid: c235f4cf-0994-4f80-80e7-703cf5abfbce
+      uuid: 310cb74e-ae1e-4274-991b-29617a0ed70a
       form_configuration:
-        id: meetings_browser
-        type: event--meeting
+        id: summit_browser
+        type: event--summit
         view_mode: card
-        url: '/jsonapi/event/meeting?jsonapi_include=true&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc'
+        url: '/jsonapi/event/summit?jsonapi_include=true&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc'
         tag: events-browser
         attach_library: milken_base/EventsBrowser
       context_mapping: {  }
   id: block_display
-  uuid: 16403b4c-1cad-4f67-a5ce-e911f90abf21
+  uuid: 361e26f8-6b08-43e3-a9ad-32f4a64ebfd4
   label: null
   weight: 0
-  sections: {  }
-  page_title: 'Explore Meetings'
+  page_title: 'Explore Summits'
 page: explore
 weight: 0
 selection_criteria:
   -
     id: request_path
-    pages: "/explore/meetings\r\n/explore/meeting"
+    pages: "/events/summit\r\n/events/summits"
     negate: false
     context_mapping: {  }
 selection_logic: and

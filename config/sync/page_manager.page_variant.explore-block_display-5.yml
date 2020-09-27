@@ -1,4 +1,4 @@
-uuid: 11c491f9-baf5-4bed-8f1e-f768590f3fce
+uuid: 9f892c1e-deea-4d52-8395-5d1db2064432
 langcode: en
 status: true
 dependencies:
@@ -7,39 +7,38 @@ dependencies:
   module:
     - component
     - system
-id: explore-block_display-0
-label: Meetings
+id: explore-block_display-5
+label: Conferences
 variant: block_display
 variant_settings:
   blocks:
-    c235f4cf-0994-4f80-80e7-703cf5abfbce:
+    089a79f8-39e3-4153-bb16-4ae3f868e346:
       id: 'component:EventsBrowser'
       label: EventsBrowser
       provider: component
       label_display: visible
       region: bottom
       weight: 0
-      uuid: c235f4cf-0994-4f80-80e7-703cf5abfbce
+      uuid: 089a79f8-39e3-4153-bb16-4ae3f868e346
       form_configuration:
-        id: meetings_browser
-        type: event--meeting
+        id: conferences_browser
+        type: event--conference
         view_mode: card
-        url: '/jsonapi/event/meeting?jsonapi_include=true&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc'
+        url: '/jsonapi/event/conference?jsonapi_include=true&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc'
         tag: events-browser
         attach_library: milken_base/EventsBrowser
       context_mapping: {  }
   id: block_display
-  uuid: 16403b4c-1cad-4f67-a5ce-e911f90abf21
+  uuid: aa323d85-4ff5-4272-aa50-ec1519dcc83e
   label: null
   weight: 0
-  sections: {  }
-  page_title: 'Explore Meetings'
+  page_title: 'Explore Conferences'
 page: explore
 weight: 0
 selection_criteria:
   -
     id: request_path
-    pages: "/explore/meetings\r\n/explore/meeting"
+    pages: "/events/conference\r\n/events/conferences"
     negate: false
     context_mapping: {  }
 selection_logic: and

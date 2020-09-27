@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import NodeDisplay from "components/NodeDisplay";
 
-const ArticleDetail = document.querySelector('node-detail');
+const NodeDetail = document.querySelector('node-detail');
 
 const NodeDetailData = {
   id: NodeDetail.dataset.id,

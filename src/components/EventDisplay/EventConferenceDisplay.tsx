@@ -27,7 +27,7 @@ export const EventConferenceDisplay = (props: EventConferenceDisplayProps) => {
     <>
       <ContainerDiv className={"card"}>
         <a
-          href={"event/".concat(data.drupal_internal__id)}
+          href={"event/".concat(data.drupal_internal__id.toString())}
           className="my-5"
           data-drupal-id={data.drupal_internal__id}
           data-drupal-type={data.type}

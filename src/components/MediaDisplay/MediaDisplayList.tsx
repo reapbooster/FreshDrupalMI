@@ -1,3 +1,12 @@
+/**
+ * Media List Display
+ * Use this when the bundle type is unknown. 
+ * If the bundle type is known, create a new Bundle-specific list
+ * 
+ * 
+ */
+
+
 import React from "react";
 import {EntityInterface} from "../../DataTypes/Entity";
 import MediaDisplay from ".";

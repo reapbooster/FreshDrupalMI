@@ -6,6 +6,15 @@ import {ListableInterface} from "../../DataTypes/Listable";
 import styled,{StyledComponent} from "styled-components";
 
 
+/**
+ * Event List
+ * Generic display of events in a list.
+ * 
+ * 
+ * 
+ */
+
+
 export interface EventDisplayListProps {
   list: ListableInterface;
   view_mode: string;

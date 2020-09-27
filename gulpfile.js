@@ -129,27 +129,14 @@ gulp.task(
   gulp.series(["tsCompile", gulp.parallel(["themeBuild", "buildComponents"])])
 );
 
-gulp.task("browsersync-reload", function (done) {
-  browserSync.reload({ stream: true });
-  done();
-});
-
-gulp.task("watch", () => {
-  gulp.watch(
-    "./web/themes/custom/milken/scss/*.scss",
-    {},
-    gulp.series("themeBuild")
-  );
-
-  console.log("Building components.");
-
+gulp.task('watchComponents', (done) => {
   const configurator = require("./config/node/configurator").default;
-
   try {
     const webpackConfigs = glob.sync("./**/*.entry.tsx", {}).map((file) => {
-      return configurator(file);
+      var toReturn = configurator(file);
+      toReturn.watch = true;
+      return toReturn;
     });
-    webpackConfigs.watch = true;
     wp(webpackConfigs, (err, stats) => {
       if (err) {
         throw new PluginError("webpack:build", err);
@@ -161,9 +148,12 @@ gulp.task("watch", () => {
           colors: true,
         })
       );
+      //TODO: browsersync trigger
     });
   } catch (err) {
     console.error(err);
     process.exit(1);
   }
-});
+})
+
+gulp.task("watch", gulp.series(['tsCompile', 'watchComponents']));

@@ -4,14 +4,14 @@ import EntitySubqueue, {EntitySubqueueInterface} from "./EntitySubqueue";
 import {ListableInterface} from "./Listable";
 import JSONApiUrl from "./JSONApiUrl";
 
-export interface ParagraphTilesInterface extends ParagraphInterface, ListableInterface {
+export interface ParagraphTilesInterface extends ParagraphInterface {
   field_title: string;
   field_tile_queue: EntitySubqueueInterface;
 }
 
 export class ParagraphTiles extends Paragraph implements ParagraphTilesInterface, ListableInterface {
   field_title: string;
-  field_tile_queue: EntitySubqueue;
+  _field_tile_queue: EntitySubqueue;
 
   constructor(props) {
     super(props);
@@ -22,16 +22,20 @@ export class ParagraphTiles extends Paragraph implements ParagraphTilesInterface
     return "&include=field_tile_queue,field_tile_queue.items,paragraph_type";
   }
 
-  getItems(): Array<EntityInterface> {
-    return this.field_tile_queue?.items ?? [];
+  get field_tile_queue(): EntitySubqueueInterface {
+    return this._field_tile_queue;
   }
 
-  refreshItems(url: JSONApiUrl) {
-    // TODO
+  set field_tile_queue(incoming: EntitySubqueueInterface) {
+    this._field_tile_queue = new EntitySubqueue(incoming);
   }
 
-  get browser() {
-    return false;
+  get browser(){
+    return null;
+  }
+
+  hasData() {
+    return Array.isArray(this.field_tile_queue?.items);
   }
 
 }

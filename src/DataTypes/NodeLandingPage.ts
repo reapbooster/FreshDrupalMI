@@ -3,6 +3,8 @@ import Paragraph, { ParagraphInterface } from "./Paragraph";
 import MediaImage, { MediaImageInterface } from "./MediaImage";
 import {ListableInterface} from "./Listable";
 import {EntityInterface} from "./Entity";
+import path from 'path';
+
 
 export interface NodeLandingPageInterface extends NodeInterface, ListableInterface {
   field_content: Array<ParagraphInterface>;
@@ -35,13 +37,15 @@ export class NodeLandingPage extends Node implements NodeLandingPageInterface, L
     return "&include=field_content,field_hero_image";
   }
 
-  getItems(): Array<EntityInterface> {
+  get items(): Array<EntityInterface> {
     return this.field_content ?? [];
   }
 
-  refreshItems(url: JSONApiUrl) {
-    // TODO
+  set items(incoming: Array<EntityInterface>) {
+    this.field_content = incoming;
   }
+
 }
+
 
 export default NodeLandingPage;

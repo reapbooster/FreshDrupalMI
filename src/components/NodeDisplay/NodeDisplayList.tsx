@@ -1,3 +1,11 @@
+/**
+ * Node List Display
+ * Generic list of nodes when the bundle is unknown.
+ * 
+ * 
+ * 
+ */
+
 import React from 'react';
 import {EntityInterface} from '../../DataTypes/Entity';
 import NodeDisplay from './index';

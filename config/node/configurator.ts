@@ -107,12 +107,14 @@ export function configurator(file) {
       new MiniCssExtractPlugin({ filename: "css/[name].css", chunkFilename: "css/[id].css"}),
       new DrupalLibrariesWebpackPlugin(),
       new webpack.HotModuleReplacementPlugin(),
+      /**
       new BrowserSyncWebpackPlugin({
         proxy: "localhost:8080",
         notify: false,
         port: 3130,
         reloadDelay: 3000
       }),
+       **/
     ],
     stats: {
       warnings: true,

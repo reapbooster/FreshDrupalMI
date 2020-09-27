@@ -1,4 +1,5 @@
 import LinkList, { LinkListInterface } from "./LinkList";
+import EntityComponentProps from '../DataTypes/EntityComponentProps';
 
 export interface EntityInterface {
   changed?: string;
@@ -51,6 +52,21 @@ export default abstract class Entity implements EntityInterface {
     if (incoming) {
       this._changed = new Date(incoming);
     }
+  }
+
+  get  baseDataUrl(): JSONApiUrl {
+    return new JSONApiUrl(path.join("jsonapi", this.type.replace('--', '/'), this.id), new URLSearchParams('jsonapi_include=true'));
+  }
+
+  refreshValues(): Promise<EntityInterface> {
+    var self = this;
+    const ecp = new EntityComponentProps(this);
+    return ecp.getData(this.getIncluded())
+      .then(res => res.json())
+      .then((ajaxData) => {
+        Object.assign(self, ajaxData.data);
+        return self;
+    });
   }
 
   abstract hasData(): boolean;

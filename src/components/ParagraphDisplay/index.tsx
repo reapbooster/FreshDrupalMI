@@ -110,7 +110,6 @@ const ParagraphDisplay: React.FunctionComponent = (props: ParagraphDisplayProps)
   }
 
   const Component = ParagraphComponentFactory(paragraphData);
-  // @ts-ignore
   return (
     <ErrorBoundary key={props.key ?? 0}>
       <Component
