@@ -4,19 +4,19 @@ import { Container } from 'react-bootstrap';
 import NodeLandingPage, { NodeLandingPageInterface } from '../../DataTypes/NodeLandingPage'
 import ParagraphDisplayList from '../ParagraphDisplay/ParagraphDisplayList'
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import MediaDisplayImage from '../MediaDisplay/MediaDisplayImage'
 import Loading from '../Loading';
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
-interface NodeLandingPageDisplayProps {
+export interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
   view_mode: string;
 }
 
-const NodeLandingPageDisplay: React.FunctionComponent = (props: NodeLandingPageDisplayProps) => {
+export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
   const { data, view_mode } = props;
-  if (!data instanceof NodeLandingPage) {
-    data = new NodeLandingPage(data)
-  }
-  const [landingPageData, setLandingPageData] = useState(data);
+  const DataObject = new NodeLandingPage(data);
+  const [landingPageData, setLandingPageData] = useState(DataObject);
   if (!landingPageData.hasData()) {
     var ecp = new EntityComponentProps(landingPageData);
     ecp.getData(landingPageData.getIncluded())
@@ -30,7 +30,14 @@ const NodeLandingPageDisplay: React.FunctionComponent = (props: NodeLandingPageD
       </>
     );
   }
-  console.debug("landing page data", landingPageData);
+
+  const onClickHandler = (evt) => {
+    console.debug("onClickHandler", evt);
+    document.location.href = evt.currentTarget.dataset.alias;
+  }
+
+
+  console.debug("landing page data => ".concat(landingPageData.title), landingPageData);
   switch(view_mode) {
     case "full":
       return (
@@ -41,19 +48,28 @@ const NodeLandingPageDisplay: React.FunctionComponent = (props: NodeLandingPageD
           </Container>
         </>
       );
-    case "tiles":
+    case "tile":
       return (
-        <>
-          <Card>
-            <Card.title>{landingPageData.title}</Card.title>
+          <Card onClick={onClickHandler} data-alias={landingPageData.path.alias}>
+            <Card.Title className="text-center">{landingPageData.title}</Card.Title>
             <Card.Body>
-              <p>Image Goes here</p>
+              <ErrorBoundary>
+                <MediaDisplayImage
+                  data={landingPageData.field_hero_image}
+                  view_mode={"thumbnail"}
+                />
+              </ErrorBoundary>
             </Card.Body>
           </Card>
-        </>
       );
+      default:
+        return (
+          <div>
+            <h4>Don't have a component for this node/view_mode</h4>
+          </div>
+        )
   }
 
 };
 
-export { NodeLandingPageDisplay as default }
+export default NodeLandingPageDisplay;

@@ -1,6 +1,6 @@
 import { EntityComponentProps } from "./EntityComponentProps";
 
-interface ImageStyleAttributesInterface {
+export interface ImageStyleAttributesInterface {
   srcSet: string;
   className: string;
   "data-aspectratio": string;
@@ -8,12 +8,12 @@ interface ImageStyleAttributesInterface {
   style: object;
 }
 
-interface ImageStyleObjectInterface {
+export interface ImageStyleObjectInterface {
   srcSet: string;
   imageAttributes: ImageStyleAttributesInterface;
 }
 
-class ImageStyleObject implements ImageStyleObjectInterface {
+export class ImageStyleObject implements ImageStyleObjectInterface {
   thumbnail: string;
 
   medium: string;
@@ -63,7 +63,7 @@ class ImageStyleObject implements ImageStyleObjectInterface {
   }
 }
 
-class HolderImageStyleObject implements ImageStyleObjectInterface {
+export class HolderImageStyleObject implements ImageStyleObjectInterface {
   include: "&include=field_media_image,bundle";
 
   ecp: EntityComponentProps;
@@ -86,7 +86,7 @@ class HolderImageStyleObject implements ImageStyleObjectInterface {
 
   get imageAttributes() {
     return {
-      srcSet: this.getSrcSet(),
+      srcSet: this.srcSet,
       className: "lazyload",
       "data-aspectratio": "220/150",
       "data-sizes": "auto",
@@ -101,8 +101,4 @@ class HolderImageStyleObject implements ImageStyleObjectInterface {
   }
 }
 
-export {
-  ImageStyleObject as default,
-  HolderImageStyleObject,
-  ImageStyleObjectInterface,
-};
+export default ImageStyleObject;
