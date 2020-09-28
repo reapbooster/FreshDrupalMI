@@ -21,7 +21,7 @@ weight: 0
 selection_criteria:
   -
     id: request_path
-    pages: /explore/events
+    pages: "/explore/events\r\n/explore/event"
     negate: false
     context_mapping: {  }
 selection_logic: and

@@ -28,7 +28,13 @@ variant_settings:
             label: 'Philanthropy Hub'
             provider: component
             label_display: visible
-            form_configuration: null
+            form_configuration:
+              id: philanthropy_hub
+              type: node--opportunity
+              view_mode: card
+              url: '/jsonapi/node/opportunity?jsonapi_include=true&include=field_region,field_focus,field_terms,field_actions,field_hub'
+              tag: philanthropy-hub
+              attach_library: milken_base/PhilanthropyHub
             context_mapping: {  }
           additional:
             layout_builder_styles_style: ''
@@ -40,7 +46,7 @@ variant_settings:
             id: 'block_content:4db4fb05-4ee9-426c-b5d7-6b7ba5faf895'
             label: 'Hub Header Philanthropy'
             provider: block_content
-            label_display: visible
+            label_display: '0'
             status: true
             info: ''
             view_mode: full

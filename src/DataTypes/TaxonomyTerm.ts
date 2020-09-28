@@ -41,7 +41,9 @@ export default class TaxonomyTerm
   }
 
   set field_tag_color(incoming: ColorObjectInterface) {
-    this._field_tag_color = new ColorObject(incoming);
+    if (incoming !== undefined) {
+      this._field_tag_color = new ColorObject(incoming);
+    }
   }
 
   get field_tag_icon(): FontAwesomeIconProps {
@@ -49,7 +51,9 @@ export default class TaxonomyTerm
   }
 
   set field_tag_icon(field_tag_icon: FontAwesomeIconProps) {
-    this._field_tag_icon = field_tag_icon;
+    if (field_tag_icon !== undefined) {
+      this._field_tag_icon = field_tag_icon;
+    }
   }
 
   get path(): PathObjectInterface {
@@ -57,6 +61,8 @@ export default class TaxonomyTerm
   }
 
   set path(incoming: PathObjectInterface) {
-    this._path = new PathObject(incoming);
+    if (incoming !== undefined) {
+      this._path = new PathObject(incoming);
+    }
   }
 }

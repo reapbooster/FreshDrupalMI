@@ -1,5 +1,5 @@
 import JSONApiUrl from "./JSONApiUrl";
-import {EntityInterface} from "./Entity";
+import Entity, {EntityInterface} from "./Entity";
 import {ListableInterface} from "./Listable";
 
 
@@ -10,17 +10,18 @@ export interface ListComponentSourceInterface {
   entityTypeId?: string;
   bundle?: string;
   hasData(): boolean;
-  refreshItems(): Promise<Array<EntityInterface>>;
+  refresh(): Promise<Array<EntityInterface>>;
 }
 
 export class ListSource
   implements ListComponentSourceInterface, ListableInterface {
+
   id: string;
   bundle: string;
 
   _url?: JSONApiUrl;
 
-  items: Array<EntityInterface>;
+  _items: Array<EntityInterface>;
 
   entityTypeId: string;
 
@@ -53,7 +54,8 @@ export class ListSource
   }
 
   hasData(): boolean {
-    return this.items?.length > 0 ?? false;
+    // if Items is undefined, the first call has not been made
+    return Array.isArray(this.items);
   }
 
   public static clone(incoming: ListComponentSourceInterface): ListSource {
@@ -63,23 +65,37 @@ export class ListSource
     return new ListSource(incoming);
   }
 
-  refreshItems(): Promise<Array<EntityInterface>> {
+  async refresh(url: JSONApiUrl = null): Promise<Array<EntityInterface>> {
+    // if you don't get a new URL, use the one you have
+    console.debug("refresh called!", this, url);
+    const toSend = (url instanceof JSONApiUrl)? url :  this._url;
     const self = this;
     return new Promise((resolve, reject) => {
-      if (self.url?.toString()) {
-        return fetch(self.url, { signal: this.abortController.signal })
-          .then(res => res.json())
-          .then((ajaxData) => {
-            console.debug("back from jsonapi", ajaxData);
-            self.items = ajaxData.data;
-            resolve(self.items);
-          })
-          .catch((e) => {
-            console.error(`Fetch 1 error: ${e.message}`);
-          });
-      }
-      return resolve(self.items);
+      console.debug("fetching data...", toSend);
+      return fetch(toSend.toString(), { signal: this.abortController.signal })
+        .then(res => res.json())
+        .then((ajaxData) => {
+          console.debug("back from jsonapi", ajaxData);
+          self.addItems(ajaxData.data);
+          resolve(self.items);
+        })
+        .catch((e) => {
+          console.error(`Fetch 1 error: ${e.message}`);
+          reject(new Error("Error fetching items for list: ".concat()));
+        });
     });
+  }
+
+  get items(): Array<EntityInterface> {
+    return this._items;
+  }
+
+  set items(incoming: Array<EntityInterface>) {
+    this._items = incoming;
+  }
+
+  addItems(incoming: Array<EntityInterface>) {
+    this._items.push(...incoming);
   }
 
   toObject(): ListComponentSourceInterface {

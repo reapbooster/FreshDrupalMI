@@ -12,6 +12,8 @@ const PhilanthropyHubSource = {
   url: PhilanthropyHubContainer.dataset.url
 }
 
+console.debug("getting ready to render", PhilanthropyHubSource);
+
 ReactDOM.render(
   <PhilanthropyHub source={PhilanthropyHubSource} />,
   PhilanthropyHubContainer

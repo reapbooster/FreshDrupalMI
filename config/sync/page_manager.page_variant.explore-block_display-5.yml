@@ -38,7 +38,7 @@ weight: 0
 selection_criteria:
   -
     id: request_path
-    pages: "/events/conference\r\n/events/conferences"
+    pages: "/explore/conference\r\n/explore/conferences"
     negate: false
     context_mapping: {  }
 selection_logic: and
