@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import SlidesBrowser from "components/SlideBrowser";
+import SlidesBrowser from "Components/SlideBrowser";
 
 const SlidesBrowserContainer = document.querySelector('slides-browser');
 

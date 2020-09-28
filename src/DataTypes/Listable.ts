@@ -8,7 +8,7 @@ export interface ListableInterface {
 
   items?: Array<EntityInterface> | undefined;
 
-  refreshItems(url: JSONApiUrl): void;
+  refresh(url: JSONApiUrl): Promise<Array<EntityInterface>>;
 
   url?: string;
 

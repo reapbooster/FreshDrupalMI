@@ -1,25 +1,23 @@
 /**
  * List Display
  * Use this when you don't know what kind of entities you're displaying.
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
 import React from 'react';
-import {Row} from 'react-bootstrap';
 import {EntityInterface} from "../../DataTypes/Entity";
-import {ListableInterface} from "../../DataTypes/Listable";
 import ParagraphDisplay from '../ParagraphDisplay';
 import NodeDisplay from '../NodeDisplay';
 import MediaDisplay from '../MediaDisplay';
 import EventDisplay from "../EventDisplay";
-import styled from 'styled-components';
-
+import styled, {StyledComponent} from 'styled-components';
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 export const ListDisplayFactory = (item: EntityInterface) => {
   const [entityTypeId, bundle] = item.type.split("--");
-
+  console.debug("list display factory", entityTypeId);
   switch(entityTypeId) {
     case "paragraph":
       return ParagraphDisplay;
@@ -37,13 +35,14 @@ export const ListDisplayFactory = (item: EntityInterface) => {
 }
 
 export interface ListDisplayProps {
+  id: string;
   list: Array<EntityInterface> | Promise<Array<EntityInterface>>;
   view_mode: string;
-  container: JSX.Element;
+  container?: StyledComponent<any, any>;
 }
 
-export const ListDisplay: React.FunctionComponent = function(props: ListDisplayProps) {
-  const {list, view_mode, container } = props;
+export const ListDisplay = function(props: ListDisplayProps) {
+  const {id, list, view_mode, container } = props;
   const ContainerComponent = container ?? styled.div`
     display: flex;
   `;
@@ -57,17 +56,18 @@ export const ListDisplay: React.FunctionComponent = function(props: ListDisplayP
     )
   }
   return (
-    <ContainerComponent fluid id={"list-".concat(list.id)}>
+    <ContainerComponent id={"list-".concat(id)}>
       {list.map((item: EntityInterface, key: number)=> {
+        console.debug(" ==> list item:", item);
         const Component = ListDisplayFactory(item);
         return (
-          <ErrorBoundary>
-            <Component
-                data={item}
-                view_mode={view_mode}
-                key={key}
-            />
-          </ErrorBoundary>
+            <ErrorBoundary key={key}>
+              <Component
+                  data={item}
+                  view_mode={view_mode}
+                  key={key}
+              />
+            </ErrorBoundary>
         );
       })}
     </ContainerComponent>

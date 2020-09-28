@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import ArticlesBrowser from "components/ArticlesBrowser";
+import ArticlesBrowser from "Components/ArticlesBrowser";
 
 const ArticlesBrowserContainer = document.querySelector('articles-browser');
 

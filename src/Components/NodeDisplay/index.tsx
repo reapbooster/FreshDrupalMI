@@ -18,7 +18,7 @@ import NodeArticle from "../../DataTypes/NodeArticle";
  *
  * @param incoming: NodeInterface
  */
-function NodeDataFactory(incoming: NodeInterface): Node {
+function NodeDataFactory(incoming: NodeInterface) {
   console.debug("NodeDataFactory", incoming);
   switch (incoming.type) {
     case "node--landing_page":
@@ -40,7 +40,7 @@ function NodeDataFactory(incoming: NodeInterface): Node {
  *
  * @param incoming: NodeInterface
  */
-function NodeComponentFactory(incoming) : React.FunctionComponent {
+function NodeComponentFactory(incoming) {
   console.debug("NodeComponentFactory", incoming);
   switch (incoming.type) {
     case "node--article":
@@ -70,10 +70,11 @@ interface NodeDisplayProps {
   key?: number;
 }
 
-const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
+const NodeDisplay = (props: EntityInterface) => {
   const {data, view_mode, key} = props;
-  const [ nodeData, setNodeData ] = useState(NodeDataFactory(data));
-  console.debug("NodeDisplay", nodeData);
+  const DataObject = NodeDataFactory(data);
+  const [ nodeData, setNodeData ] = useState(DataObject);
+  console.debug("NodeDisplay => ".concat(nodeData.type), nodeData);
   if (!nodeData.hasData()) {
     const ecp = new EntityComponentProps(nodeData);
     ecp.getData(nodeData.getIncluded())
@@ -90,11 +91,9 @@ const NodeDisplay: React.FunctionComponent = (props: EntityInterface) => {
   }
   const Component = NodeComponentFactory(nodeData);
   return (
-    <ErrorBoundary key={key ?? 0}>
-      <Component
-        data={nodeData}
-        view_mode={view_mode} />
-    </ErrorBoundary>
+    <Component
+      data={nodeData}
+      view_mode={view_mode} />
   );
 }
 

@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Button, Card, Badge, Overlay, OverlayTrigger, Tooltip} from 'react-bootstrap';
-import {NodeOpportunityInterface} from "../../DataTypes/NodeOpportunity";
+import NodeOpportunity, {NodeOpportunityInterface} from "../../DataTypes/NodeOpportunity";
 import {TaxonomyTermInterface} from "../../DataTypes/TaxonomyTerm";
+import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 
-interface NodeOpportunityCardProps {
+export interface NodeOpportunityCardProps {
   data: NodeOpportunityInterface;
   view_mode: string;
 }
 
-const NodeOpportunityCard: React.FunctionComponent = (props: NodeOpportunityCardProps) => {
+export const NodeOpportunityCardDisplay = (props: NodeOpportunityCardProps) => {
+  const {data, view_mode} = props;
+  // if you don't have data, go get it
+  const DataObject = new NodeOpportunity(data);
+  const [nodeData, setNodeData] = useState(DataObject);
+  if (!DataObject.hasData()) {
+    const ecp = new EntityComponentProps(DataObject);
+    ecp.getData(DataObject.getIncluded())
+      .then(res => res.json())
+      .then((ajaxData) => {
+        const returnedData = new NodeOpportunity(ajaxData.data);
+        setNodeData(returnedData);
+      });
+  }
 
   const clickHandler = (term) => {
-
     const params = new URLSearchParams(window.location.hash.replace('#', ''));
-
     const filter_param = term.type.split('_').slice(-1)[0];
     const newValue = term.machine_name;
-
     let currentValue = params?.get(filter_param)?.split(',') || [];
     if(!currentValue.includes(newValue)) {
       currentValue.push(newValue);
@@ -24,7 +35,6 @@ const NodeOpportunityCard: React.FunctionComponent = (props: NodeOpportunityCard
       window.location.hash = params;
       window.dispatchEvent(new HashChangeEvent("hashchange"))
     }
-
   }
 
   const getBadge = (props: TaxonomyTermInterface, key: number) => {
@@ -42,20 +52,22 @@ const NodeOpportunityCard: React.FunctionComponent = (props: NodeOpportunityCard
     </Tooltip>
   );
 
-  console.log('NodeOpportunityCard', props);
-  const data = props.data;
+  console.log('NodeOpportunityCard Data', nodeData);
+
   return (
-    <Card key={data.machine_name}>
+    <Card key={nodeData.machine_name}>
      <OverlayTrigger
         placement="top"
-        overlay={<Tooltip id="button-tooltip"><div dangerouslySetInnerHTML={{__html: data.field_body?.value}}></div></Tooltip>}
+        overlay={(
+          <Tooltip id="button-tooltip"><div dangerouslySetInnerHTML={{__html: nodeData.field_body?.value}}></div></Tooltip>
+        )}
       >
         <Card.Body>
-          <Card.Title>{data.title}</Card.Title>
+          <Card.Title>{nodeData.title}</Card.Title>
 
-          { data?.field_actions?.map && data?.field_actions?.map(getBadge) }
-          { data?.field_focus?.map && data?.field_focus?.map(getBadge) }
-          { data?.field_terms?.map && data?.field_terms?.map(getBadge) }
+          { nodeData?.field_actions?.map && nodeData?.field_actions?.map(getBadge) }
+          { nodeData?.field_focus?.map && nodeData?.field_focus?.map(getBadge) }
+          { nodeData?.field_terms?.map && nodeData?.field_terms?.map(getBadge) }
 
         </Card.Body>
       </OverlayTrigger>
@@ -63,7 +75,7 @@ const NodeOpportunityCard: React.FunctionComponent = (props: NodeOpportunityCard
         <Button
           className="mr-sm-2"
           variant="outline"
-          href={data?.path?.alias ?? false}
+          href={nodeData?.path?.alias ?? false}
         >
           <span>View more</span>
         </Button>
@@ -74,4 +86,4 @@ const NodeOpportunityCard: React.FunctionComponent = (props: NodeOpportunityCard
 }
 
 
-export default NodeOpportunityCard;
+export default NodeOpportunityCardDisplay;

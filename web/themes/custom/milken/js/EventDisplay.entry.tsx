@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import EventDisplay from "components/EventDisplay";
+import EventDisplay from "Components/EventDisplay";
 
 const EventDetail = document.querySelector('event-detail');
 

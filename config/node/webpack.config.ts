@@ -67,7 +67,7 @@ module.exports = () => {
 
         ],
         alias: {
-          components: pathUtility.resolve('./src/components'),
+          components: pathUtility.resolve('./src/Components'),
           DataTypes: pathUtility.resolve('./src/DataTypes'),
           Fields: pathUtility.resolve('./src/Fields'),
           Utility: pathUtility.resolve('./src/Utility'),

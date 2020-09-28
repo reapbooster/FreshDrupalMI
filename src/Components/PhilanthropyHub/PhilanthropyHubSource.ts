@@ -10,8 +10,7 @@ export class PhilanthropyHubSource
   extends ListSource
   implements ListComponentSourceInterface, ListableInterface {
 
-  browser?: React.Component | undefined;
-  url?: JSONApiUrl;
+  onHashChangedCallback?: CallableFunction;
 
   constructor(incoming: ListComponentSourceInterface){
     super(incoming);
@@ -24,14 +23,6 @@ export class PhilanthropyHubSource
     region: "field_region";
     focus: "field_focus";
   };
-
-  refreshItems(filter) {
-    return this.getSourceData();
-  }
-
-  getItems(): Array<EntityInterface> {
-    return this.getSourceData();
-  }
 
   onHashChanged() {
     console.debug("Hash change trigger");
@@ -65,7 +56,12 @@ export class PhilanthropyHubSource
       }
     }
     console.debug("New params", newFilter);
-    this.refresh(newFilter);
+    try {
+      this.refresh(newFilter).then(this.onHashChangedCallback);
+    } catch(e) {
+      console.error(e.getMessage());
+      return [];
+    }
   }
 
   notifyListComponent(newFilter: Object) {

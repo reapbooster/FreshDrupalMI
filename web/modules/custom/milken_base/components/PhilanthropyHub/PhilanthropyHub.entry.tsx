@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import PhilanthropyHub from "components/PhilanthropyHub";
+import PhilanthropyHub from "Components/PhilanthropyHub";
 
 const PhilanthropyHubContainer = document.querySelector('philanthropy-hub');
 
@@ -11,6 +11,8 @@ const PhilanthropyHubSource = {
   view_mode: PhilanthropyHubContainer.dataset.viewMode,
   url: PhilanthropyHubContainer.dataset.url
 }
+
+console.debug("getting ready to render", PhilanthropyHubSource);
 
 ReactDOM.render(
   <PhilanthropyHub source={PhilanthropyHubSource} />,

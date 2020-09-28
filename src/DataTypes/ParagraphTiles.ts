@@ -37,7 +37,6 @@ export class ParagraphTiles extends Paragraph implements ParagraphTilesInterface
   hasData() {
     return Array.isArray(this.field_tile_queue?.items);
   }
-
 }
 
 export default ParagraphTiles;

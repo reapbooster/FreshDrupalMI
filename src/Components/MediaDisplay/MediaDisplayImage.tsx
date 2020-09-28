@@ -5,13 +5,15 @@ import Loading from "../Loading";
 import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
 
 
-interface MediaDisplayImageProps {
+export interface MediaDisplayImageProps {
   data: MediaImage;
   view_mode: string;
  }
 
-const MediaDisplayImage: React.FunctionComponent = (props: MediaDisplayImageProps) => {
-  const [ mediaImage, setMediaImage ] = useState(new MediaImage(props.data));
+export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
+  const {data, view_mode} = props;
+  const DataObject = new MediaImage(data)
+  const [ mediaImage, setMediaImage ] = useState(DataObject);
 
   if (!mediaImage.hasData()) {
     const ecp = new EntityComponentProps(mediaImage);
@@ -26,18 +28,28 @@ const MediaDisplayImage: React.FunctionComponent = (props: MediaDisplayImageProp
       </>
     )
   }
+  var attributes = mediaImage.imageAttributes;
 
+  switch (view_mode) {
+    case "thumbnail":
+      attributes.width = "100%";
+      attributes.height = "200px";
+      break;
+
+    case "fullsize":
+      attributes.width = "100%";
+      attributes.height = "100%";
+  }
   return (
     <>
       <img
         data-drupal-id={mediaImage.drupal_internal__mid}
         data-drupal-type={mediaImage.type}
         data-uuid={mediaImage.id}
-        {...mediaImage.getStyleObject().imageAttributes}
-        height={mediaImage.field_height.concat('px')}
+        {...attributes}
         />
     </>
   );
 }
 
-export { MediaDisplayImage as default, MediaDisplayImageProps };
+export default MediaDisplayImage;

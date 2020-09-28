@@ -41,7 +41,7 @@ const configurator = (name, file) => {
       extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
       plugins: [],
       alias: {
-        components: "/var/www/src/components",
+        components: "/var/www/src/Components",
       },
     },
 

@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import PodcastBrowser from "components/PodcastBrowser";
+import PodcastBrowser from "Components/PodcastBrowser";
 
 const source = document.querySelector('podcast-browser-source');
 

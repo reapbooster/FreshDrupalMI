@@ -1,31 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import PhilanthropyHubSource from './PhilanthropyHubSource';
-import DropdownFacet from "../ListDisplay/DropdownFacet";
-import HorizontalMenuFacet from "../ListDisplay/HorizontalMenuFacet";
-import NodeDisplayList from '../NodeDisplay/NodeDisplayList';
+import DropdownFacet from "./DropdownFacet";
+import HorizontalMenuFacet from "./HorizontalMenuFacet";
+import {ListComponentSourceInterface} from "../../DataTypes/ListSource";
+import NodeOpportunityCardDisplay from "../NodeDisplay/NodeOpportunityCardDisplay";
 
 export interface PhilanthropyHubProps {
-  source: PhilanthropyHubSource;
+  source: ListComponentSourceInterface;
   view_mode: string;
 }
 
-const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) => {
+
+
+export const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) => {
   console.debug("Philanthropy Hub", props);
   const {source, view_mode} = props;
-  useEffect(() => {
-    onHashChanged();
-    window.addEventListener("hashchange", onHashChanged);
-    return () => window.removeEventListener("hashchange", onHashChanged);
-  }, [window.location.hash]);
+  const DataSource = new PhilanthropyHubSource(source);
+  const [ sourceData, setSourceData ] = useState(DataSource);
 
-  source.getSourceData();
+  sourceData.onHashChangedCallback = (itemList) => {
+    console.debug("back from all calls", itemList);
+    const clone = new PhilanthropyHubSource(sourceData.toObject())
+    clone.items = itemList;
+    console.debug("Datasource Cloned", clone);
+    setSourceData(clone);
+  }
+
+  useEffect(() => {
+    sourceData.onHashChanged();
+    window.addEventListener("hashchange", DataSource.onHashChanged);
+    return () => window.removeEventListener("hashchange", DataSource.onHashChanged);
+  }, [window.location.hash]);
 
   return (
     <Container fluid id={"hub-".concat(props.id)}>
       <DropdownFacet
         type="taxonomy_term--ph_region"
-        id={props.id.concat("-region")}
+        id={sourceData.id.concat("-region")}
         label="Region"
         urlParam="ph_region"
         field="field_region"
@@ -41,7 +53,7 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
           <Col>
             <HorizontalMenuFacet
               url="/jsonapi/taxonomy_term/ph_focus?jsonapi_include=true"
-              id={props.id.concat("-field_focus")}
+              id={sourceData.id.concat("-field_focus")}
               type="taxonomy_term--ph_focus"
               label="Focus"
               urlParam="ph_focus"
@@ -51,7 +63,7 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
           <Col>
             <HorizontalMenuFacet
               url="/jsonapi/taxonomy_term/ph_actions?jsonapi_include=true"
-              id={props.id.concat("-field_actions")}
+              id={sourceData.id.concat("-field_actions")}
               type="taxonomy_term--ph_actions"
               label="Actions"
               urlParam="ph_actions"
@@ -62,11 +74,11 @@ const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) =
       </Container>
 
       <div id="philanthropy-hub-root">
-        <NodeDisplayList
-          list={source}
-          loadAll
-          className="card-columns"
-        />
+        {sourceData.items.map((item, key) => {
+          return (
+            <NodeOpportunityCardDisplay data={item} view_mode={"card"} />
+          );
+        })}
       </div>
     </Container>
   );

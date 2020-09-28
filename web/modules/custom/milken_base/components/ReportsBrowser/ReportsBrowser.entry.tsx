@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import ReportsBrowser from "components/ReportsBrowser";
+import ReportsBrowser from "Components/ReportsBrowser";
 
 const ReportsBrowserContainer = document.querySelector('reports-browser');
 

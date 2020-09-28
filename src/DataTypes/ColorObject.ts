@@ -9,7 +9,7 @@ export default class ColorObject implements ColorObjectInterface {
   opacity: number;
 
   constructor(incoming: ColorObjectInterface) {
-    this.color = incoming.color;
-    this.opacity = incoming.opacity;
+    this.color = (incoming)? incoming.color : "#ffffff";
+    this.opacity = (incoming)? incoming.opacity : 1;
   }
 }

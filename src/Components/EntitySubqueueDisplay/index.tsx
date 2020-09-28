@@ -13,10 +13,7 @@ export interface EntitySubqueueDisplayProps extends EntityInterface{
 
 export const EntitySubqueueDisplay: React.FunctionComponent = (props: EntitySubqueueDisplayProps) => {
   const { queue, view_mode} = props;
-  if (!queue instanceof EntitySubqueue) {
-    const queue = new EntitySubqueue(queue);
-  }
-
+  const DataObject = new EntitySubqueue(queue);
   const [entitySubqueueData, setEntitySubqueueData] = useState(queue);
 
   if (!entitySubqueueData.hasData()) {
@@ -38,7 +35,8 @@ export const EntitySubqueueDisplay: React.FunctionComponent = (props: EntitySubq
   return (
     <>
       <ListDisplay
-        list={entitySubqueueData}
+        id={entitySubqueueData.id}
+        list={entitySubqueueData.items}
         view_mode={view_mode}
         browser="false"
       />

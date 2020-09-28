@@ -1,3 +1,9 @@
+/**
+ * FILE: ParagraphDisplay/index.tsx
+ * Us the Paragraph display when you don't know the bundle of the paragraph or paragraphs being displayed.
+ *
+ */
+
 import React, { useState } from 'react';
 import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
 import ParagraphDisplayFourPanel from './ParagraphDisplayFourPanel'

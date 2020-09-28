@@ -37,28 +37,17 @@ export class EntitySubqueue extends Entity implements EntitySubqueueInterface, L
   }
 
   hasData() {
-    return Array.isArray(this.items);
+    return Array.isArray(this._items);
   }
 
   get items(): Array<EntityInterface> {
-      return this._items ?? [];
+      return this._items;
   }
 
   set items(incoming: Array<EntityInterface>) {
     if (incoming) {
       this._items = incoming;
     }
-  }
-
-  refreshItems() {
-    const self = this;
-    const ecp = new EntityComponentProps(this);
-    ecp.getData(this.getIncluded())
-      .then(res => res.json())
-      .then(ajaxData => {
-        Object.assign(self, ajaxData.data);
-        return self.items;
-      });
   }
 
   get browser() {
