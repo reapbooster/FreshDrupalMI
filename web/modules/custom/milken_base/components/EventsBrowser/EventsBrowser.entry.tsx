@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import EventsBrowser from "components/EventsBrowser";
+import EventsBrowser from "Components/EventsBrowser";
 
 const EventsBrowserContainer = document.querySelector('events-browser');
 

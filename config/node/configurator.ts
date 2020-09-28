@@ -65,7 +65,7 @@ export function configurator(file) {
 
       ],
       alias: {
-        components: pathUtility.resolve('./src/components'),
+        Components: pathUtility.resolve('./src/Components'),
         DataTypes: pathUtility.resolve('./src/DataTypes'),
         Fields: pathUtility.resolve('./src/Fields'),
         Utility: pathUtility.resolve('./src/Utility'),

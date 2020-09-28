@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import VideosBrowser from "components/VideosBrowser";
+import VideosBrowser from "Components/VideosBrowser";
 
 const VideosBrowserContainer = document.querySelector('videos-browser');
 

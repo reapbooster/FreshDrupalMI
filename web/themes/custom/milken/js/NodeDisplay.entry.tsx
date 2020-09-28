@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import NodeDisplay from "components/NodeDisplay";
+import NodeDisplay from "Components/NodeDisplay";
 
 const NodeDetail = document.querySelector('node-detail');
 

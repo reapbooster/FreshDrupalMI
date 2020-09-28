@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import PhilanthropyHub from "components/PhilanthropyHub";
+import PhilanthropyHub from "Components/PhilanthropyHub";
 
 const PhilanthropyHubContainer = document.querySelector('philanthropy-hub');
 
