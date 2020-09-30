@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
-import Filters from './Filters';
-import ResultsList from './ResultsList';
-import KeywordForm from './KeywordForm';
-import SearchAPIRequest from './SearchApiRequest';
-import FilterList from './FilterList'
-import SearchResult, {SearchResultProps} from "./SearchResult";
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import ResultsList from "./ResultsList";
+import KeywordForm from "./KeywordForm";
+import FilterList from "./FilterList";
+import SearchResult from "./SearchResult";
 
 interface SearchState {
-  keywords: string,
-  results: Array<SearchResult>,
+  keywords: string;
+  results: Array<SearchResult>;
   filters: FilterList;
-  currentActiveRequest: boolean
+  currentActiveRequest: boolean;
 }
 
 class Search extends React.Component<any, SearchState> {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -27,9 +24,9 @@ class Search extends React.Component<any, SearchState> {
   }
 
   componentDidMount(): void {
-    let keywords = this.getQueryVariable('keywords');
+    const keywords = this.getQueryVariable("keywords");
     if (keywords) {
-      this.searchOnSubmitHandler({keywords: keywords});
+      this.searchOnSubmitHandler({ keywords: keywords });
     }
   }
 
@@ -38,7 +35,10 @@ class Search extends React.Component<any, SearchState> {
       <Container fluid={true} className={"outline"}>
         <Row>
           <Col lg={12} className={"py-1"}>
-            <Container fluid={true} className={"text-align-center mx-auto my-2"}>
+            <Container
+              fluid={true}
+              className={"text-align-center mx-auto my-2"}
+            >
               <h5 className={"display-5"}>Search the Milken Institute</h5>
               <KeywordForm
                 onSubmit={this.searchOnSubmitHandler.bind(this)}
@@ -47,11 +47,11 @@ class Search extends React.Component<any, SearchState> {
             </Container>
           </Col>
         </Row>
-        <Row >
-          <Col lg={2} sm={1} style={{"background": "#dfdfdf"}}>
+        <Row>
+          <Col lg={2} sm={1} style={{ background: "#dfdfdf" }}>
             {this.state.filters}
           </Col>
-          <Col lg={10} sm={11} style={{"minHeight": "300px"}}>
+          <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
             <ResultsList
               results={this.state.results}
               currentActiveRequest={this.state.currentActiveRequest}
@@ -64,19 +64,19 @@ class Search extends React.Component<any, SearchState> {
 
   setResults(results: Array<SearchResult>) {
     this.setState({
-      results: results
+      results: results,
     });
   }
 
   setKeywords(keywords: string) {
     this.setState({
-      keywords: keywords
+      keywords: keywords,
     });
   }
 
   setCurrentActiveRequest(requestIsActive: boolean) {
     this.setState({
-      currentActiveRequest: requestIsActive
+      currentActiveRequest: requestIsActive,
     });
   }
 
@@ -85,45 +85,43 @@ class Search extends React.Component<any, SearchState> {
     this.setCurrentActiveRequest(true);
     this.setKeywords(values.keywords);
     fetch(`/api/v1.0/search?_format=json&keywords=${values.keywords}`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((ajaxResults) => {
         console.log(ajaxResults);
         if (ajaxResults) {
           this.setCurrentActiveRequest(false);
           const me = this;
-          var results = [];
+          const results = [];
           ajaxResults.data.map((singleresult) => {
             results.push(<SearchResult {...singleresult} />);
           });
           this.setState({
-            "results": results
+            results: results,
           });
 
-          const activeFilters = (<FilterList filters={ajaxResults.filters} />) ;
+          const activeFilters = <FilterList filters={ajaxResults.filters} />;
           this.setState({
-            filters: activeFilters
+            filters: activeFilters,
           });
           console.log("Search Object", this);
         }
       });
   }
 
-
   getQueryVariable(variable: string): string {
-    var query = window.location.search.substring(1);
-    console.log(query)
-    var vars = query.split("&");
-    console.log(vars)
-    for (var i=0;i<vars.length;i++) {
-      var pair = vars[i].split("=");
-      console.log(pair)
-        if(pair[0] == variable){
-          return pair[1];
-        }
-       }
-     return("");
-   }
-
+    const query = window.location.search.substring(1);
+    console.log(query);
+    const vars = query.split("&");
+    console.log(vars);
+    for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split("=");
+      console.log(pair);
+      if (pair[0] == variable) {
+        return pair[1];
+      }
+    }
+    return "";
+  }
 }
 
 export default Search;

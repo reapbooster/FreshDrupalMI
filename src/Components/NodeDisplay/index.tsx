@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import Loading from '../Loading';
-import Entity, { EntityInterface } from '../../DataTypes/Entity';
-import Node, {NodeInterface} from '../../DataTypes/Node';
+import React, { useState } from "react";
+import Loading from "../Loading";
+import { EntityInterface } from "../../DataTypes/Entity";
+import { NodeInterface } from "../../DataTypes/Node";
 import NodeArticleDisplay from "./NodeArticleDisplay";
-import NodeEventDisplay from './NodeEventDisplay';
-import NodeOpportunityCardDisplay from './NodeOpportunityCardDisplay';
+import NodeEventDisplay from "./NodeEventDisplay";
+import NodeOpportunityCardDisplay from "./NodeOpportunityCardDisplay";
 import NodeLandingPageDisplay from "./NodeLandingPageDisplay";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
-import { EntityComponentProps } from '../../DataTypes/EntityComponentProps';
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import NodeLandingPage from "../../DataTypes/NodeLandingPage";
 import NodeOpportunity from "../../DataTypes/NodeOpportunity";
 import NodeEvent from "../../DataTypes/NodeEvent";
@@ -57,7 +56,6 @@ function NodeComponentFactory(incoming) {
   }
 }
 
-
 /**
  * Create the Controller
  *
@@ -71,30 +69,32 @@ interface NodeDisplayProps {
 }
 
 const NodeDisplay = (props: EntityInterface) => {
-  const {data, view_mode, key} = props;
+  const { data, view_mode, key } = props;
   const DataObject = NodeDataFactory(data);
-  const [ nodeData, setNodeData ] = useState(DataObject);
+  const [nodeData, setNodeData] = useState(DataObject);
   console.debug("NodeDisplay => ".concat(nodeData.type), nodeData);
   if (!nodeData.hasData()) {
     const ecp = new EntityComponentProps(nodeData);
-    ecp.getData(nodeData.getIncluded())
-    .then(res => res.json())
-    .then((remoteData) => {
-      console.debug("NodeData back from json", remoteData);
-      setNodeData(NodeDataFactory(remoteData.data));
-    });
+    ecp
+      .getData(nodeData.getIncluded())
+      .then((res) => res.json())
+      .then((remoteData) => {
+        console.debug("NodeData back from json", remoteData);
+        setNodeData(NodeDataFactory(remoteData.data));
+      });
     return (
       <div>
         <Loading />
       </div>
-    )
+    );
   }
   const Component = NodeComponentFactory(nodeData);
-  return (
-    <Component
-      data={nodeData}
-      view_mode={view_mode} />
-  );
-}
+  return <Component data={nodeData} view_mode={view_mode} />;
+};
 
-export { NodeDisplay as default, NodeDisplayProps, NodeDataFactory, NodeComponentFactory };
+export {
+  NodeDisplay as default,
+  NodeDisplayProps,
+  NodeDataFactory,
+  NodeComponentFactory,
+};

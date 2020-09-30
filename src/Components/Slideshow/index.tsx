@@ -1,35 +1,33 @@
-import React from 'react';
+import React from "react";
+import { Carousel, CarouselItem } from "react-bootstrap";
 import { SlideDisplay } from "../SlideDisplay";
-import {
-  Carousel,
-  CarouselItem
-} from "react-bootstrap";
-import Slide, {SlideInterface} from "../../DataTypes/Slide";
-import ErrorBoundary from '../../Utility/ErrorBoundary';
+import { SlideInterface } from "../../DataTypes/Slide";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
-interface SlideShowProps {
+export interface SlideShowProps {
   items?: Array<SlideInterface>;
   view_mode: string;
 }
 
-const SlideShow: React.FunctionComponent = (props: SlideShowProps) => {
+export const SlideShow = (props: SlideShowProps) => {
   console.debug("SlideShow", props);
   return (
-      <Carousel>
-          {props.items?.map((slide: SlideInterface, key: number ) => {
-            console.debug("Sending to slide display...", slide);
-            return (
-              <CarouselItem key={key} id={slide.id}>
-                <ErrorBoundary>
-                  <SlideDisplay data={slide} view_mode={props.view_mode ?? "full"} />
-                </ErrorBoundary>
-              </CarouselItem>
-            )
-          })}
-      </Carousel>
+    <Carousel>
+      {props.items?.map((slide: SlideInterface, key: number) => {
+        console.debug("Sending to slide display...", slide);
+        return (
+          <CarouselItem key={key} id={slide.id}>
+            <ErrorBoundary>
+              <SlideDisplay
+                data={slide}
+                view_mode={props.view_mode ?? "full"}
+              />
+            </ErrorBoundary>
+          </CarouselItem>
+        );
+      })}
+    </Carousel>
   );
-}
-
-
+};
 
 export default SlideShow;

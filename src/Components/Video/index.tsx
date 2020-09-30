@@ -1,6 +1,4 @@
-
-import React from 'react';
-import VideoFull from "./VideoFull";
+import React from "react";
 import * as DataObject from "../../DataTypes/MediaVideo";
 
 interface VideoProps {
@@ -9,14 +7,11 @@ interface VideoProps {
 }
 
 const Video: React.FunctionComponent = (props: VideoProps) => {
-
   return (
     <div>
       <h1>{props.data.label}</h1>
     </div>
   );
-
-}
-
+};
 
 export default Video;

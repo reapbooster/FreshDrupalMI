@@ -1,36 +1,38 @@
-
-import React, {useState} from 'react';
-import {Col} from "react-bootstrap";
-import ParagraphTiles, {ParagraphTilesInterface} from '../../DataTypes/ParagraphTiles'
-import ListDisplay from "../ListDisplay";
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import React, { useState } from "react";
+import { Col } from "react-bootstrap";
+import ParagraphTiles, {
+  ParagraphTilesInterface,
+} from "../../DataTypes/ParagraphTiles";
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import EntitySubqueueDisplay from "../EntitySubqueueDisplay";
 
-export interface ParagraphDisplayTilesProps  {
+export interface ParagraphDisplayTilesProps {
   data: ParagraphTilesInterface;
   view_mode?: string;
 }
 
-
-export const ParagraphDisplayTiles: React.FunctionComponent = (props : ParagraphDisplayTilesProps) => {
+export const ParagraphDisplayTiles: React.FunctionComponent = (
+  props: ParagraphDisplayTilesProps
+) => {
   const { data, view_mode } = props;
   const DataObject = new ParagraphTiles(data);
-  const [ paragraphData, setParagraphData ] = useState(DataObject);
+  const [paragraphData, setParagraphData] = useState(DataObject);
   if (!paragraphData.hasData()) {
     console.debug("Paragraph does not have data", paragraphData);
     const ecp = new EntityComponentProps(paragraphData);
-    ecp.getData(paragraphData.getIncluded())
-      .then(res => res.json())
-      .then(ajaxData => {
-        setParagraphData(new ParagraphTiles(ajaxData.data))
+    ecp
+      .getData(paragraphData.getIncluded())
+      .then((res) => res.json())
+      .then((ajaxData) => {
+        setParagraphData(new ParagraphTiles(ajaxData.data));
       });
     return (
       <>
         <Loading />
-        </>
-    )
+      </>
+    );
   }
   console.log("paragraph display tiles", paragraphData);
   return (
@@ -43,8 +45,7 @@ export const ParagraphDisplayTiles: React.FunctionComponent = (props : Paragraph
         />
       </ErrorBoundary>
     </Col>
-  )
-
-}
+  );
+};
 
 export default ParagraphDisplayTiles;

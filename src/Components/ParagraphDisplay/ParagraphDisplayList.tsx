@@ -1,38 +1,35 @@
 /**
- * Paragraph List 
- * Used to display paragraphs from an entity ref revisions field.
- * 
- * 
- * 
+ * Paragraph List
+ * Used to display paragraphs from an entity ref revisions field
+ * on a content object.
+ *
+ *
+ *
  */
 
-
-import React from 'react';
-import ParagraphDisplay from '../ParagraphDisplay';
-import {EntityInterface} from "../../DataTypes/Entity";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
-import {ListableInterface} from "../../DataTypes/Listable";
+import React from "react";
+import { ParagraphDisplay } from ".";
+import { ErrorBoundary } from "../../Utility/ErrorBoundary";
+import { ParagraphInterface } from "../../DataTypes/Paragraph";
 
 export interface ParagraphDisplayListProps {
-  list: ListableInterface;
+  list?: Array<ParagraphInterface>;
   view_mode: string;
 }
 
-export const ParagraphDisplayList: React.FunctionComponent = (props: ParagraphDisplayListProps) => {
-  const {list, view_mode} = props;
-  return list.items.map((item, key) => {
-    return (
-      <>
-        <ErrorBoundary key={key}>
-          <ParagraphDisplay
-            data={item}
-            view_mode={view_mode}
-          />
-        </ErrorBoundary>
-      </>
-    )
-  });
-}
-
+export const ParagraphDisplayList = (props: ParagraphDisplayListProps) => {
+  const { list, view_mode } = props;
+  return (
+    list.items?.map((item, key) => {
+      return (
+        <>
+          <ErrorBoundary key={key}>
+            <ParagraphDisplay data={item} view_mode={view_mode} />
+          </ErrorBoundary>
+        </>
+      );
+    }) ?? []
+  );
+};
 
 export default ParagraphDisplayList;

@@ -1,21 +1,24 @@
 {
   "presets": [
-    ["@babel/env", {
+    ["@babel/preset-env", {
       "targets": {
         "browsers": "last 2 Chrome versions",
         "node": "current"
-      }
-    }],
-    "@babel/react",
-    "@babel/preset-typescript"
+      },
+      "useBuiltIns": "usage" }],
+    "@babel/preset-typescript",
+    "@babel/preset-react"
   ],
   "plugins": [
     "@babel/transform-runtime",
+    "@babel/plugin-transform-typescript",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-proposal-optional-chaining",
     "@babel/plugin-proposal-class-properties",
     "transform-custom-element-classes",
+    "@babel/plugin-transform-react-jsx",
+    "babel-plugin-styled-components",
     ["babel-plugin-transform-builtin-classes", {
       "globals": ["Array", "Error", "HTMLElement"]
     }],

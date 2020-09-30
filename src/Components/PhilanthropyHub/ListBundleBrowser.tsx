@@ -1,14 +1,12 @@
-
-import React from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import React from "react";
+import { Form, FormControl, Nav, Navbar } from "react-bootstrap";
 import Loading from "../Loading";
-import JSONApiUrl from '../../DataTypes/JSONApiUrl';
-
+import JSONApiUrl from "../../DataTypes/JSONApiUrl";
 
 interface ListBundleBrowserProps {
   entityTypeId: string;
   bundle: string;
-  bundleTypes?: Array<ListBundle>
+  bundleTypes?: Array<ListBundle>;
   url: JSONApiUrl;
 }
 
@@ -16,7 +14,7 @@ interface ListBundleBrowserState {
   loading: boolean;
   loaded: boolean;
   entityTypeId: string;
-  bundleTypes: Array<ListBundle>
+  bundleTypes: Array<ListBundle>;
 }
 
 interface ListBundle {
@@ -35,7 +33,14 @@ interface ListBundle {
   field_map: object;
 }
 
-class ListBundleBrowser extends React.Component<ListBundleBrowserProps, ListBundleBrowserState>{
+class ListBundleBrowser extends React.Component<
+  ListBundleBrowserProps,
+  ListBundleBrowserState
+> {
+  static defaultProps = {
+    loading: false,
+    loaded: false,
+  };
 
   constructor(props) {
     super(props);
@@ -44,28 +49,25 @@ class ListBundleBrowser extends React.Component<ListBundleBrowserProps, ListBund
       loaded: props.loaded,
       entityTypeId: props.entityTypeId,
       bundleTypes: [],
-    }
+    };
     this.navbarLinks = this.navbarLinks.bind(this);
-  }
-
-  static defaultProps = {
-    loading: false,
-    loaded: false,
   }
 
   componentDidMount() {
     if (!this.loading && !this.loaded) {
-      var self = this;
+      const self = this;
       self.setState({
-        loading: true
+        loading: true,
       });
-      fetch(`/jsonapi/${this.props.entityTypeId}_type/${this.props.entityTypeId}_type/?jsonapi_include=true`)
-        .then(res => res.json())
-        .then(ajaxData => {
+      fetch(
+        `/jsonapi/${this.props.entityTypeId}_type/${this.props.entityTypeId}_type/?jsonapi_include=true`
+      )
+        .then((res) => res.json())
+        .then((ajaxData) => {
           self.setState({
             loading: false,
             loaded: true,
-            bundleTypes: ajaxData.data
+            bundleTypes: ajaxData.data,
           });
         });
     }
@@ -75,39 +77,49 @@ class ListBundleBrowser extends React.Component<ListBundleBrowserProps, ListBund
     if (this.state.loaded) {
       return (
         <Navbar>
-          <Navbar.Brand className="display-1 pr-2">{this.state.entityTypeId}</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav"  />
+          <Navbar.Brand className="display-1 pr-2">
+            {this.state.entityTypeId}
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               {this.navbarLinks(this.state.bundleTypes)}
             </Nav>
             <Form inline>
-              <FormControl type="text" placeholder="Filter" className="mr-sm-2" />
+              <FormControl
+                type="text"
+                placeholder="Filter"
+                className="mr-sm-2"
+              />
             </Form>
           </Navbar.Collapse>
         </Navbar>
-      )
+      );
     } else if (this.state.loading) {
-      return ( <Loading /> );
+      return <Loading />;
     } else {
       return (
         <>
           <h1>No Data</h1>
         </>
-      )
+      );
     }
   }
 
   navbarLinks(bundleTypes: Array<ListBundle>) {
-    return bundleTypes.map((bundle: ListBundle, key : number) => {
+    return bundleTypes.map((bundle: ListBundle, key: number) => {
       return (
         <>
           <Nav.Link key={key}>{bundle.label}</Nav.Link>
         </>
       );
-    })
+    });
   }
-
 }
 
-export { ListBundleBrowser as default, ListBundleBrowserProps, ListBundleBrowserState, ListBundle }
+export {
+  ListBundleBrowser as default,
+  ListBundleBrowserProps,
+  ListBundleBrowserState,
+  ListBundle,
+};

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Loading from "../Loading";
-import ImageFile, {ImageFileInterface} from "../../DataTypes/ImageFile";
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
-import Holder from 'react-holder-component';
+import ImageFile, { ImageFileInterface } from "../../DataTypes/ImageFile";
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
+import Holder from "react-holder-component";
 
 interface ImageFileDisplayProps {
-  data: ImageFileInterface
+  data: ImageFileInterface;
   view_mode: string;
   key?: number;
   style: Record<string, any>;
@@ -13,25 +13,24 @@ interface ImageFileDisplayProps {
   height?: string;
 }
 
-const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps) => {
-  var {data, view_mode, key, style, width, height} = props;
-  var attributes = {
-    "width": width ?? "100%",
-    "height": height ?? "200px,"
+const ImageFileDisplay: React.FunctionComponent = (
+  props: ImageFileDisplayProps
+) => {
+  const { data, view_mode, key, style, width, height } = props;
+  const attributes = {
+    width: width ?? "100%",
+    height: height ?? "200px,",
   };
 
   if (!data?.id) {
     return (
       <>
-        <Holder 
-          updateOnResize={"true"} 
-          {...attributes}
-        />
+        <Holder updateOnResize={"true"} {...attributes} />
       </>
     );
   }
   if (style) {
-    attributes['style'] = style;
+    attributes["style"] = style;
   }
   const DataObject = new ImageFile(data);
   // TODO: swap this out on View_mode change
@@ -39,12 +38,13 @@ const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps)
     maxWidth: "320px",
     maxHeight: "200px",
   };
-  const [ imageData , setImageData ] = useState(DataObject);
+  const [imageData, setImageData] = useState(DataObject);
   console.debug("ImageFileDisplay:", imageData);
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
-    ecp.getData(imageData.getIncluded())
-      .then(res => res.json())
+    ecp
+      .getData(imageData.getIncluded())
+      .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("MilkenImage: Data back from JSON", ajaxData);
         setImageData(new ImageFile(ajaxData.data));
@@ -53,7 +53,7 @@ const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps)
       <>
         <Loading />
       </>
-    )
+    );
   } else {
     const imageStyleObject = imageData.imageStyleObject;
     return (
@@ -68,6 +68,6 @@ const ImageFileDisplay: React.FunctionComponent = (props: ImageFileDisplayProps)
       </>
     );
   }
-}
+};
 
-export { ImageFileDisplay as default, ImageFileDisplayProps }
+export { ImageFileDisplay as default, ImageFileDisplayProps };

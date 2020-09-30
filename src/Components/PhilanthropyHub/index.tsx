@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
-import PhilanthropyHubSource from './PhilanthropyHubSource';
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import PhilanthropyHubSource from "./PhilanthropyHubSource";
 import DropdownFacet from "./DropdownFacet";
 import HorizontalMenuFacet from "./HorizontalMenuFacet";
-import {ListComponentSourceInterface} from "../../DataTypes/ListSource";
+import { ListComponentSourceInterface } from "../../DataTypes/ListSource";
 import NodeOpportunityCardDisplay from "../NodeDisplay/NodeOpportunityCardDisplay";
 
 export interface PhilanthropyHubProps {
@@ -11,26 +11,27 @@ export interface PhilanthropyHubProps {
   view_mode: string;
 }
 
-
-
-export const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubProps) => {
+export const PhilanthropyHub: React.FunctionComponent = (
+  props: PhilanthropyHubProps
+) => {
   console.debug("Philanthropy Hub", props);
-  const {source, view_mode} = props;
+  const { source, view_mode } = props;
   const DataSource = new PhilanthropyHubSource(source);
-  const [ sourceData, setSourceData ] = useState(DataSource);
+  const [sourceData, setSourceData] = useState(DataSource);
 
   sourceData.onHashChangedCallback = (itemList) => {
     console.debug("back from all calls", itemList);
-    const clone = new PhilanthropyHubSource(sourceData.toObject())
+    const clone = new PhilanthropyHubSource(sourceData.toObject());
     clone.items = itemList;
     console.debug("Datasource Cloned", clone);
     setSourceData(clone);
-  }
+  };
 
   useEffect(() => {
     sourceData.onHashChanged();
     window.addEventListener("hashchange", DataSource.onHashChanged);
-    return () => window.removeEventListener("hashchange", DataSource.onHashChanged);
+    return () =>
+      window.removeEventListener("hashchange", DataSource.onHashChanged);
   }, [window.location.hash]);
 
   return (
@@ -75,9 +76,7 @@ export const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubP
 
       <div id="philanthropy-hub-root">
         {sourceData.items.map((item, key) => {
-          return (
-            <NodeOpportunityCardDisplay data={item} view_mode={"card"} />
-          );
+          return <NodeOpportunityCardDisplay data={item} view_mode="card" />;
         })}
       </div>
     </Container>
@@ -87,6 +86,6 @@ export const PhilanthropyHub: React.FunctionComponent = (props: PhilanthropyHubP
 PhilanthropyHub.defaultProps = {
   source: PhilanthropyHubSource.getDefaultSource(),
   view_mode: "card",
-}
+};
 
 export default PhilanthropyHub;

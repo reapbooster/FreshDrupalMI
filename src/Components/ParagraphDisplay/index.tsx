@@ -4,17 +4,17 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
-import ParagraphDisplayFourPanel from './ParagraphDisplayFourPanel'
+import ParagraphDisplayFourPanel from "./ParagraphDisplayFourPanel";
 import ParagraphDisplayBodyContent from "./ParagraphDisplayBodyContent";
 import ParagraphDisplayPullQuote from "./ParagraphDisplayPullQuote";
 import ParagraphDisplayBlock from "./ParagraphDisplayBlock";
-import ParagraphDisplayTiles from './ParagraphDisplayTiles';
+import ParagraphDisplayTiles from "./ParagraphDisplayTiles";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-import Loading from '../Loading';
-import Paragraph, { ParagraphInterface } from "../../DataTypes/Paragraph";
+import Loading from "../Loading";
+import { ParagraphInterface } from "../../DataTypes/Paragraph";
 import ParagraphBlock from "../../DataTypes/ParagraphBlock";
 import ParagraphFourPanel from "../../DataTypes/ParagraphFourPanel";
 import ParagraphSlide from "../../DataTypes/ParagraphSlide";
@@ -22,8 +22,7 @@ import ParagraphFourTileBlockQueue from "../../DataTypes/ParagraphFourTileBlockQ
 import ParagraphFourPanelBlockTaxonomy from "../../DataTypes/ParagraphFourPanelBlockTaxonomy";
 import ParagraphBodyContent from "../../DataTypes/ParagraphBodyContent";
 import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
-import ParagraphTiles from '../../DataTypes/ParagraphTiles';
-
+import ParagraphTiles from "../../DataTypes/ParagraphTiles";
 
 /**
  * Create the DataModel
@@ -31,7 +30,7 @@ import ParagraphTiles from '../../DataTypes/ParagraphTiles';
  * @param props: MediaDisplayProps
  */
 
-function ParagraphDataFactory(incoming: ParagraphInterface) : Paragraph {
+export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
   console.debug("Paragraph Data Factory:", incoming);
   switch (incoming.type) {
     case "paragraph--block":
@@ -51,21 +50,20 @@ function ParagraphDataFactory(incoming: ParagraphInterface) : Paragraph {
     case "paragraph--tiles":
       return new ParagraphTiles(incoming);
 
-
     default:
       console.error("Cannot determine Data Class", incoming);
       throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
   }
-}
+};
 
 /**
  * Create the View Component
  *
  * @param incoming: ParagraphIterface
  */
-function ParagraphComponentFactory(incoming: ParagraphInterface): React.FunctionComponent {
+export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
   console.debug("Paragraph Component Factory", incoming);
-  switch(incoming.type) {
+  switch (incoming.type) {
     case "paragraph--slide":
       return ParagraphDisplaySlide;
     case "paragraph--four_panel":
@@ -82,8 +80,7 @@ function ParagraphComponentFactory(incoming: ParagraphInterface): React.Function
       console.error(`missing config for ${incoming.type}`);
       throw new Error(`Missing config for ${incoming.type}`);
   }
-
-}
+};
 
 /**
  * Create the controller
@@ -91,39 +88,39 @@ function ParagraphComponentFactory(incoming: ParagraphInterface): React.Function
  * @param ParagraphDisplayProps
  */
 
-interface ParagraphDisplayProps {
+export interface ParagraphDisplayProps {
   key?: number;
   data: ParagraphInterface;
   view_mode: string;
 }
 
-const ParagraphDisplay: React.FunctionComponent = (props: ParagraphDisplayProps) => {
-  const [paragraphData, setParagraphData] = useState(ParagraphDataFactory(props.data));
+export const ParagraphDisplay = (props: ParagraphDisplayProps) => {
+  const { key, data, view_mode } = props;
+  const DataObject = ParagraphDataFactory(data);
+  const [paragraphData, setParagraphData] = useState(DataObject);
   console.debug("Paragraph Display data:", paragraphData);
   if (!paragraphData.hasData()) {
     const ecp = new EntityComponentProps(paragraphData);
-    ecp.getData(paragraphData.getIncluded())
-    .then(res => res.json())
-    .then((remoteData) => {
-      console.debug("ParagraphData", remoteData);
-      setParagraphData(ParagraphDataFactory(remoteData.data));
-    });
+    ecp
+      .getData(paragraphData.getIncluded())
+      .then((res) => res.json())
+      .then((remoteData) => {
+        console.debug("ParagraphData", remoteData);
+        setParagraphData(ParagraphDataFactory(remoteData.data));
+      });
     return (
       <div>
         <Loading />
       </div>
-    )
+    );
   }
 
   const Component = ParagraphComponentFactory(paragraphData);
   return (
     <ErrorBoundary key={props.key ?? 0}>
-      <Component
-        data={paragraphData}
-        view_mode={props.view_mode} />
+      <Component data={paragraphData} view_mode={view_mode} />
     </ErrorBoundary>
   );
+};
 
-}
-
-export { ParagraphDisplay as default, ParagraphDisplayProps, ParagraphComponentFactory, ParagraphDataFactory }
+export default ParagraphDisplay;

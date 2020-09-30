@@ -5,7 +5,7 @@ import Paragraph, { ParagraphInterface } from "./Paragraph";
 interface ParagraphBodyContentInterface extends ParagraphInterface {
   field_background?: ColorObjectInterface;
   field_body?: BodyFieldInterface;
-  field_num_text_columns: Number;
+  field_num_text_columns: number;
 }
 
 class ParagraphBodyContent

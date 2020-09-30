@@ -1,10 +1,10 @@
-import React from 'react';
-import { Col, Row, Spinner } from 'react-bootstrap';
-import SearchResult from './SearchResult';
+import React from "react";
+import { Col, Row, Spinner } from "react-bootstrap";
+import SearchResult from "./SearchResult";
 
 interface ResultsListProps {
-  results: Array<SearchResult>,
-  currentActiveRequest: boolean,
+  results: Array<SearchResult>;
+  currentActiveRequest: boolean;
 }
 
 const ResultsList = (props: ResultsListProps) => {
@@ -19,28 +19,24 @@ const ResultsList = (props: ResultsListProps) => {
           </div>
         </Col>
       </Row>
-      );
+    );
   } else if (props.results.length >= 1) {
     return (
       <ol>
         {props.results.map((result, key) => {
           console.log("result:", result);
-          return (
-            <li key={key}>{result}</li>
-          );
+          return <li key={key}>{result}</li>;
         })}
       </ol>
     );
   } else {
-    return (
-      <h1>No results found.</h1>
-    )
+    return <h1>No results found.</h1>;
   }
-}
+};
 
 ResultsList.defaultProps = {
   results: [],
-  currentActiveRequest: false
-}
+  currentActiveRequest: false,
+};
 
 export default ResultsList;

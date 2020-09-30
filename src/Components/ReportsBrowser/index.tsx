@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {CardColumns} from 'react-bootstrap';
-import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
-import {MediaReportInterface} from "../../DataTypes/MediaReport";
+import React, { useState } from "react";
+import { CardColumns } from "react-bootstrap";
+import MediaDisplayList from "../MediaDisplay/MediaDisplayList";
+import { MediaReportInterface } from "../../DataTypes/MediaReport";
 import ListSource from "../../DataTypes/ListSource";
 import Loading from "../Loading";
-import styled,{StyledComponent} from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 
 export interface ResportsBrowserProps {
   source: Array<MediaReportInterface>;
@@ -13,22 +13,23 @@ export interface ResportsBrowserProps {
 }
 
 export const ReportsBrowser = (props: ResportsBrowserProps) => {
-  var {source, view_mode, container } = props;
+  const { source, view_mode, container } = props;
   const DataObject = new ListSource(source);
-  const ContainerDiv = container ?? styled.div`
-    max-width: 18rem;
-  `;
-  const [ reportsSource, setReportsSource ] = useState(DataObject);
+  const ContainerDiv =
+    container ??
+    styled.div`
+      max-width: 18rem;
+    `;
+  const [reportsSource, setReportsSource] = useState(DataObject);
   if (!reportsSource.hasData()) {
-    reportsSource.refreshItems()
-      .then((items) => {
-        console.debug("Coming home", items, this);
-        var toSet = new ListSource(reportsSource.toObject());
-        console.debug("after clone", toSet);
-        toSet.items = items;
-        setReportsSource(toSet);
-      });
-    return (<Loading />);
+    reportsSource.refreshItems().then((items) => {
+      console.debug("Coming home", items, this);
+      const toSet = new ListSource(reportsSource.toObject());
+      console.debug("after clone", toSet);
+      toSet.items = items;
+      setReportsSource(toSet);
+    });
+    return <Loading />;
   }
   console.debug("VideosBrowser: Source W/Data", reportsSource);
   return (
@@ -37,10 +38,11 @@ export const ReportsBrowser = (props: ResportsBrowserProps) => {
         <MediaDisplayList
           list={reportsSource}
           view_mode={view_mode}
-          container={ContainerDiv} />
+          container={ContainerDiv}
+        />
       </CardColumns>
     </>
-  )
-}
+  );
+};
 
-export { ReportsBrowser as default } ;
+export { ReportsBrowser as default };

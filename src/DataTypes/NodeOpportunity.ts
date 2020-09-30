@@ -38,7 +38,7 @@ export class NodeOpportunity extends Node implements NodeOpportunityInterface{
   }
 
   set field_focus(value: TaxonomyTermInterface) {
-    this._field_focus = new TaxonomyTerm(value);;
+    this._field_focus = new TaxonomyTerm(value);
   }
 
   get field_hub(): TaxonomyTermInterface {
@@ -46,7 +46,7 @@ export class NodeOpportunity extends Node implements NodeOpportunityInterface{
   }
 
   set field_hub(value: TaxonomyTermInterface) {
-    this._field_hub = new TaxonomyTerm(value);;
+    this._field_hub = new TaxonomyTerm(value);
   }
 
   get field_region(): TaxonomyTermInterface {
@@ -54,7 +54,7 @@ export class NodeOpportunity extends Node implements NodeOpportunityInterface{
   }
 
   set field_region(value: TaxonomyTermInterface) {
-    this._field_region = new TaxonomyTerm(value);;
+    this._field_region = new TaxonomyTerm(value);
   }
 
   get field_short_summary(): TextFieldInterface {
@@ -62,7 +62,7 @@ export class NodeOpportunity extends Node implements NodeOpportunityInterface{
   }
 
   set field_short_summary(value: TextFieldInterface) {
-    this._field_short_summary = new TaxonomyTerm(value);;
+    this._field_short_summary = new TaxonomyTerm(value);
   }
 
   get field_long_description(): TextFieldInterface {
@@ -70,7 +70,7 @@ export class NodeOpportunity extends Node implements NodeOpportunityInterface{
   }
 
   set field_long_description(value: TextFieldInterface) {
-    this._field_long_description = new TaxonomyTerm(value);;
+    this._field_long_description = new TaxonomyTerm(value);
   }
 
   get field_terms(): TaxonomyTermInterface {
@@ -78,7 +78,7 @@ export class NodeOpportunity extends Node implements NodeOpportunityInterface{
   }
 
   set field_terms(value: TaxonomyTermInterface) {
-    this._field_terms = new TaxonomyTerm(value);;
+    this._field_terms = new TaxonomyTerm(value);
   }
 
   get field_url(): Link {

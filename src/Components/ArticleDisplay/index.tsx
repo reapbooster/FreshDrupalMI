@@ -1,19 +1,16 @@
-import React from 'react';
-import * as DataObject from '../../DataTypes/NodeArticle'
-import Loading from "../Loading";
-import ArticleFull from './ArticleFull';
+import React from "react";
+import * as DataObject from "../../DataTypes/NodeArticle";
+import ArticleFull from "./ArticleFull";
 import ArticleCard from "./ArticleCard";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 
-interface ArticleDisplayProps {
+export interface ArticleDisplayProps {
   data: DataObject.NodeArticleInterface;
   view_mode: string;
 }
 
-
-const ArticleDisplay: React.FunctionComponent = (props: ArticleDisplayProps) => {
-  const {data, view_mode} = props;
-
+export const ArticleDisplay = (props: ArticleDisplayProps) => {
+  const { data, view_mode } = props;
   switch (view_mode) {
     case "card":
       return (
@@ -29,7 +26,6 @@ const ArticleDisplay: React.FunctionComponent = (props: ArticleDisplayProps) => 
         </ErrorBoundary>
       );
   }
+};
 
-}
-
-export {ArticleDisplay as default, ArticleDisplayProps};
+export default ArticleDisplay;

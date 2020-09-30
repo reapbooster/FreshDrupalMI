@@ -1,5 +1,5 @@
-import React from 'react';
-import * as DataObject from '../../DataTypes/ParagraphBlock';
+import React from "react";
+import * as DataObject from "../../DataTypes/ParagraphBlock";
 
 interface ParagraphDisplayBlockProps {
   data: DataObject.ParagraphBlockInterface;
@@ -12,7 +12,7 @@ const ParagraphDisplayBlock = (props: ParagraphDisplayBlockProps) => {
     <div>
       <h1>Paragraph Block</h1>
     </div>
-  )
-}
+  );
+};
 
 export { ParagraphDisplayBlock as default, ParagraphDisplayBlockProps };

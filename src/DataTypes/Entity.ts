@@ -59,7 +59,7 @@ export default abstract class Entity implements EntityInterface {
   }
 
   refreshValues(): Promise<EntityInterface> {
-    var self = this;
+    const self = this;
     const ecp = new EntityComponentProps(this);
     return ecp.getData(this.getIncluded())
       .then(res => res.json())

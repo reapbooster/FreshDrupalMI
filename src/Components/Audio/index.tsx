@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from "react";
 import Loading from "../Loading";
-import {EntityComponentPropsInterface} from "../../DataTypes/EntityComponentProps";
-import {GenericFileUri} from "../../DataTypes/GenericFile";
-import LinkProperty from '../../DataTypes/LinkProperty';
+import { GenericFileUri } from "../../DataTypes/GenericFile";
+import LinkProperty from "../../DataTypes/LinkProperty";
 
 interface AudioEntityProps {
   type: string;
@@ -19,15 +18,11 @@ interface AudioEntityProps {
 }
 
 const Audio = (props: AudioEntityProps) => {
-
-
   return (
     <>
-      <Loading/>
+      <Loading />
     </>
   );
-}
-
-
+};
 
 export default Audio;

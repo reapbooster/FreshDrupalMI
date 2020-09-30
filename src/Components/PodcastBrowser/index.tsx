@@ -1,15 +1,10 @@
-
-import React from 'react';
-import {Col, Container, Navbar, Row, Nav, NavItem, Accordion, Panel, Alert} from 'react-bootstrap';
-import PodcastEpisode, { PodcastEpisodeProps } from "../PodcastEpisodeDisplay";
+import React from "react";
+import { Accordion, Alert, Col, Container, Row } from "react-bootstrap";
+import PodcastEpisode from "../PodcastEpisodeDisplay";
 import Loading from "../Loading";
-import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSortNumericDownAlt, faSortNumericDown } from '@fortawesome/free-solid-svg-icons'
-import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
-import Paginator from './Paginator';
+import Paginator from "./Paginator";
 import JSONApiUrl from "../../DataTypes/JSONApiUrl";
-import LinkList from '../../DataTypes/LinkList';
+import LinkList from "../../DataTypes/LinkList";
 import PodcastBrowserNavbar from "./PodcastBrowserNavbar";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 
@@ -23,7 +18,6 @@ interface PodcastBrowserState {
 }
 
 class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
-
   constructor(props) {
     super(props);
     this.setActiveKeyHandler = this.setActiveKeyHandler.bind(this);
@@ -32,18 +26,20 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
     this.replaceUrl = this.replaceUrl.bind(this);
     this.queryPropertyChange = this.queryPropertyChange.bind(this);
     this.state = {
-    currentURL: new JSONApiUrl('/jsonapi/media/podcast_episode?jsonapi_include=1&sort[sort-name-episode][direction]=DESC&sort[sort-name-episode][path]=field_episode&include=field_media_image,field_media_audio_file'),
-    loading: false,
-    activeKey: 0,
-    data: [],
-    links: [],
-    error: null,
-  };
+      currentURL: new JSONApiUrl(
+        "/jsonapi/media/podcast_episode?jsonapi_include=1&sort[sort-name-episode][direction]=DESC&sort[sort-name-episode][path]=field_episode&include=field_media_image,field_media_audio_file"
+      ),
+      loading: false,
+      activeKey: 0,
+      data: [],
+      links: [],
+      error: null,
+    };
   }
 
   setActiveKeyHandler(eventKey) {
     console.debug("Setting Active Key: ", eventKey);
-    this.setState({ activeKey: eventKey })
+    this.setState({ activeKey: eventKey });
   }
 
   componentDidMount() {
@@ -59,10 +55,13 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
   }
 
   queryPropertyChange(evt: Event) {
-    var newUrl = this.state.currentURL.clone();
+    const newUrl = this.state.currentURL.clone();
     console.debug("queryPropertyChange", evt.currentTarget?.dataset);
     if (evt.currentTarget?.dataset?.jsonapiQueryProperty) {
-      newUrl.query.set(evt.currentTarget.dataset.jsonapiQueryProperty, evt.currentTarget.dataset.jsonapiQueryValue)
+      newUrl.query.set(
+        evt.currentTarget.dataset.jsonapiQueryProperty,
+        evt.currentTarget.dataset.jsonapiQueryValue
+      );
     }
     this.refresh(newUrl);
   }
@@ -72,12 +71,12 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
       url = this.state.currentURL;
     }
     const me = this;
-    this.setState({loading: true, currentURL: url});
+    this.setState({ loading: true, currentURL: url });
     fetch(url.toString())
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((ajaxData) => {
         if (ajaxData.data !== undefined && ajaxData.data[0] !== undefined) {
-          var newState = {
+          const newState = {
             loading: false,
             data: ajaxData.data,
             links: new LinkList(ajaxData.links),
@@ -87,17 +86,18 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
           console.debug("NEW PODCAST BROWSER STATE", newState);
           me.setState(newState);
         }
-      }).catch((err) => {
+      })
+      .catch((err) => {
         this.setState({
           error: err,
-        })
-    });
+        });
+      });
   }
 
   getPodcastList() {
     // => Condition : loading
     if (this.state.loading == true) {
-      return ( <Loading/> );
+      return <Loading />;
     }
     // => Condition : has error
     if (this.state.error instanceof Error) {
@@ -105,7 +105,7 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
         <Alert>
           <h1>{this.state.error.message}</h1>
         </Alert>
-      )
+      );
     }
     // => Condition : loaded, no error, but no data
     if (this.state.data.length == 0) {
@@ -116,23 +116,19 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
       );
     } else {
       // => Condition : loaded, no error, data returned
-      return this.state?.data?.map(
-        (item, key) => {
-          const open = ( this.state.activeKey == item.field_episode )
-          return (
-            <ErrorBoundary
-              key={key}
-            >
-              <PodcastEpisode
-                data={item}
-                view_mode={"panel"}
-                open={open}
-                onSelectHandler={this.setActiveKeyHandler}
-              />
-            </ErrorBoundary>
-
-          );
-        });
+      return this.state?.data?.map((item, key) => {
+        const open = this.state.activeKey == item.field_episode;
+        return (
+          <ErrorBoundary key={key}>
+            <PodcastEpisode
+              data={item}
+              view_mode={"panel"}
+              open={open}
+              onSelectHandler={this.setActiveKeyHandler}
+            />
+          </ErrorBoundary>
+        );
+      });
     }
   }
 
@@ -140,7 +136,11 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
     return (
       <Container>
         <Row>
-          <Col xs={12} lg={12} style={{position: "relative", textAlign: "right", }}>
+          <Col
+            xs={12}
+            lg={12}
+            style={{ position: "relative", textAlign: "right" }}
+          >
             <PodcastBrowserNavbar
               links={this.state.links}
               currentURL={this.state.currentURL}
@@ -150,7 +150,7 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} lg={12} style={{position: "relative"}}>
+          <Col xs={12} lg={12} style={{ position: "relative" }}>
             <Accordion
               id="PodcastAccordion"
               activeKey={this.state.activeKey}
@@ -161,16 +161,11 @@ class PodcastBrowser extends React.Component<any, PodcastBrowserState> {
           </Col>
         </Row>
         <Row>
-          <Paginator
-            links={this.state.links}
-            clickHandler={this.replaceUrl} />
+          <Paginator links={this.state.links} clickHandler={this.replaceUrl} />
         </Row>
       </Container>
     );
   }
-
-
 }
-
 
 export default PodcastBrowser;

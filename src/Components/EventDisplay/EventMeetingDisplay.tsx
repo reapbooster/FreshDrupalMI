@@ -1,27 +1,27 @@
-import React, {useState} from 'react';
-import {Card, Col} from "react-bootstrap";
-import moment from 'moment';
+import React from "react";
+import { Card } from "react-bootstrap";
+import moment from "moment";
 import { EventMeetingInterface } from "../../DataTypes/EventMeeting";
 import EventConference from "../../DataTypes/EventConference";
-import styled, {StyledComponent} from "styled-components";
+import styled, { StyledComponent } from "styled-components";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
+import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
 
 export interface EventMeetingProps {
   data: EventMeetingInterface;
   view_mode: string;
   key?: number;
-  container?: StyledComponent,
+  container?: StyledComponent;
 }
 
 export const EventMeetingDisplay = (props: EventMeetingProps) => {
-  var {data, view_mode, key, container} = props;
-  if (!data instanceof EventConference) {
-    data = new EventConference(data);
-  }
-  const ContainerDiv = container ?? styled.div`
-    max-width: 18rem;
-  `;
+  let { data, view_mode, key, container } = props;
+
+  const ContainerDiv =
+    container ??
+    styled.div`
+      max-width: 18rem;
+    `;
   const eventDate = moment(data.field_event_date, moment.ISO_8601);
   return (
     <>
@@ -41,14 +41,14 @@ export const EventMeetingDisplay = (props: EventMeetingProps) => {
               height="220px"
             />
           </ErrorBoundary>
-          <Card.Body style={{minHeight: "150px"}}>
+          <Card.Body style={{ minHeight: "150px" }}>
             <Card.Title>{data.title}</Card.Title>
           </Card.Body>
-          <Card.Footer>{eventDate.format('MMMM D, YYYY')}</Card.Footer>
+          <Card.Footer>{eventDate.format("MMMM D, YYYY")}</Card.Footer>
         </a>
       </ContainerDiv>
     </>
   );
-}
+};
 
 export default EventMeetingDisplay;

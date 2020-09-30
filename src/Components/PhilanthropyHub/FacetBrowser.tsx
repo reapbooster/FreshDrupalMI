@@ -1,9 +1,6 @@
-
-import React from 'react';
-
+import React from "react";
 
 class FacetBrowser extends React.Component {
-
   render() {
     return (
       <div>
@@ -11,7 +8,6 @@ class FacetBrowser extends React.Component {
       </div>
     );
   }
-
 }
 
 export default FacetBrowser;

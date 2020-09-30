@@ -1,7 +1,5 @@
 import React from "react";
-import { Row } from "react-bootstrap";
 import JSONApiUrl from "./JSONApiUrl";
-
 
 interface ListComponentPropsInterface {
   id: string;
@@ -20,7 +18,6 @@ interface ListComponentState {
   items: Array<any>;
   loaded: boolean;
 }
-
 
 class ListComponentProps extends React.Component<
   ListComponentPropsInterface,
@@ -241,8 +238,6 @@ class ListComponentProps extends React.Component<
         console.warn(`Fetch 1 error: ${e.message}`);
       });
   }
-
-
 
   get url(): JSONApiUrl {
     return this._url;

@@ -1,21 +1,19 @@
 import JSONApiUrl from "./JSONApiUrl";
-import Entity, {EntityInterface} from "./Entity";
-import {ListableInterface} from "./Listable";
+import Entity, { EntityInterface } from "./Entity";
+import { ListableInterface } from "./Listable";
 
-
-export interface ListComponentSourceInterface {
+export interface ListSourceInterface {
   id: string;
   url?: string;
-  items?: Array<any>;
+  items?: Array<EntityInterface>;
   entityTypeId?: string;
   bundle?: string;
+  browser: boolean;
   hasData(): boolean;
-  refresh(): Promise<Array<EntityInterface>>;
+  refresh(): Promise<ListSourceInterface>;
 }
 
-export class ListSource
-  implements ListComponentSourceInterface, ListableInterface {
-
+export abstract class ListSource implements ListSourceInterface, ListableInterface {
   id: string;
   bundle: string;
 
@@ -27,16 +25,15 @@ export class ListSource
 
   abortController: AbortController;
 
-  browser: any;
+  browser: boolean;
 
-  constructor(incoming: ListComponentSourceInterface) {
-    console.debug("list Source Constructor", incoming);
-    this._items = [];
+  constructor(incoming: ListSourceInterface) {
     if (incoming) {
       Object.assign(this, incoming);
     }
     this.browser = false;
     this.abortController = new AbortController();
+    console.debug("list Source Constructor", this);
   }
 
   get url(): string {
@@ -46,7 +43,6 @@ export class ListSource
   set url(incoming: string) {
     this._url = new JSONApiUrl(incoming);
   }
-
 
   updateQuery(newQuery: URLSearchParams): Promise<Array<any>> {
     this._url.query = newQuery;
@@ -58,33 +54,14 @@ export class ListSource
     return Array.isArray(this.items);
   }
 
-  public static clone(incoming: ListComponentSourceInterface): ListSource {
+  public static clone(incoming: ListSourceInterface): ListSource {
     if (incoming instanceof ListSource) {
       return new ListSource(incoming.toObject());
     }
     return new ListSource(incoming);
   }
 
-  async refresh(url: JSONApiUrl = null): Promise<Array<EntityInterface>> {
-    // if you don't get a new URL, use the one you have
-    console.debug("refresh called!", this, url);
-    const toSend = (url instanceof JSONApiUrl)? url :  this._url;
-    const self = this;
-    return new Promise((resolve, reject) => {
-      console.debug("fetching data...", toSend);
-      return fetch(toSend.toString(), { signal: this.abortController.signal })
-        .then(res => res.json())
-        .then((ajaxData) => {
-          console.debug("back from jsonapi", ajaxData);
-          self.addItems(ajaxData.data);
-          resolve(self.items);
-        })
-        .catch((e) => {
-          console.error(`Fetch 1 error: ${e.message}`);
-          reject(new Error("Error fetching items for list: ".concat()));
-        });
-    });
-  }
+  abstract refresh(): Promise<ListSourceInterface>;
 
   get items(): Array<EntityInterface> {
     return this._items;
@@ -95,17 +72,28 @@ export class ListSource
   }
 
   addItems(incoming: Array<EntityInterface>) {
+    if (!Array.isArray(this.items)) {
+      this._items = [];
+    }
     this._items.push(...incoming);
   }
 
-  toObject(): ListComponentSourceInterface {
+  abstract clone(): ListSourceInterface;
+
+  toObject(): ListSourceInterface {
     return {
       id: this.id,
       url: this.url,
       items: this.items,
       entityTypeId: this.entityTypeId,
       bundle: this.bundle,
-    }
+    };
+  }
+
+  getInstance(...args: any[]) {
+    var instance = Object.create(Object.getPrototypeOf(this));
+    instance.constructor.apply(instance, args);
+    return instance;
   }
 }
 
