@@ -15,6 +15,7 @@ dependencies:
     - field.field.event.conference.field_grid_event_id
     - field.field.event.conference.field_hero_image
     - field.field.event.conference.field_name_short
+    - field.field.event.conference.field_overview
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
     - field.field.event.conference.field_sequential_id
@@ -23,6 +24,7 @@ dependencies:
     - field.field.event.conference.field_venue
   module:
     - datetime
+    - entity_reference_revisions
     - text
 id: event.conference.default
 targetEntityType: event
@@ -125,6 +127,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_overview:
+    type: entity_reference_revisions_entity_view
+    weight: 19
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
   field_published:
     weight: 13

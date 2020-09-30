@@ -7,6 +7,7 @@ import SlideFullWidthOneColumn, {
 } from "../../DataTypes/SlideFullWidthOneColumn";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import Loading from "../Loading";
 
 export interface SlideDisplayFullWidthOneColumnProps {
   data: SlideFullWidthOneColumnInterface;
@@ -17,30 +18,31 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
   props: SlideDisplayProps
 ) => {
   const { data, view_mode } = props;
-  if (!data instanceof SlideFullWidthOneColumn) {
-    data = new SlideFullWidthOneColumn(data);
-  }
+  const DataObject = new SlideFullWidthOneColumn(data);
+
   console.debug("Full Width One Column DATA:", data);
 
   // ========== BACKGROUND IMAGE STUFF ==========
 
-  const [backgroundImage, setBackgroundImage] = useState(
-    data.field_background_image
+  const [slideData, setSlideData] = useState(
+    DataObject
   );
 
-  if (!backgroundImage.hasData()) {
-    const ecp = new EntityComponentProps(backgroundImage);
+  if (!slideData.hasData()) {
+    const ecp = new EntityComponentProps(slideData);
     ecp
-      .getData(backgroundImage.getIncluded())
+      .getData(slideData.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("background Image Info back from jsonapi", ajaxData);
-        setBackgroundImage(new ImageFile(ajaxData.data));
+        setSlideData(new SlideFullWidthOneColumn(ajaxData.data));
       });
+    return <Loading />;
   }
+  const backgroundImage = slideData.field_background_image;
 
   // ========== STYLES ==========
-  const rowStyle = { backgroundColor: `${data.field_background_color?.color}` };
+  const rowStyle = { backgroundColor: `${slideData.field_background_color?.color}` };
   const backgroundVersion = window.matchMedia("min-width: 700px").matches
     ? `url('${backgroundImage.image_style_uri.getStyleByMachineName(
         "fullscreen"
@@ -58,26 +60,26 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     backgroundImage: backgroundVersion,
   };
   const textLines = [];
-  if (data.field_slide_text?.length) {
-    for (const key in data.field_slide_text) {
+  if (slideData.field_slide_text?.length) {
+    for (const key in slideData.field_slide_text) {
       textLines.push(
         <p
           key={textLines.length + 1}
-          className={data.field_slide_text[key]["key"]}
-          style={{ color: `${data.field_text_color?.color}` }}
+          className={slideData.field_slide_text[key]["key"]}
+          style={{ color: `${slideData.field_text_color?.color}` }}
         >
-          {data.field_slide_text[key]["value"]}
+          {slideData.field_slide_text[key]["value"]}
         </p>
       );
     }
   }
-  if (data.field_link?.title && data.field_link?.uri) {
+  if (slideData.field_link?.title && slideData.field_link?.uri) {
     textLines.push(
       <p key={textLines.length + 1}>
         <a
-          href={`${data.field_link?.uri || "#"}`}
+          href={`${slideData.field_link?.uri || "#"}`}
           className="btn btn-primary btn-lg"
-          style={{ color: `${data.field_text_color?.color} || #000000` }}
+          style={{ color: `${slideData.field_text_color?.color} || #000000` }}
         >
           {data.field_link?.title || "#"}
         </a>

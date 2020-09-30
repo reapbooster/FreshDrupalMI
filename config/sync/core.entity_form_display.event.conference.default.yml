@@ -15,6 +15,7 @@ dependencies:
     - field.field.event.conference.field_grid_event_id
     - field.field.event.conference.field_hero_image
     - field.field.event.conference.field_name_short
+    - field.field.event.conference.field_overview
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
     - field.field.event.conference.field_sequential_id
@@ -23,8 +24,115 @@ dependencies:
     - field.field.event.conference.field_venue
   module:
     - datetime
+    - field_group
     - media_library
+    - paragraphs
+    - path
     - text
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_overview
+        - group_authoring
+        - group_dates
+        - group_promotion
+        - group_event_details
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_overview:
+      children:
+        - field_name_short
+        - field_description
+        - field_blurb
+        - field_hero_image
+        - field_overview
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Overview
+    group_authoring:
+      children:
+        - langcode
+        - created
+        - field_published
+        - path
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Authoring
+    group_dates:
+      children:
+        - field_registration_deadline
+        - field_event_date
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Dates
+    group_promotion:
+      children:
+        - field_campaign_name
+        - field_campaign_id
+        - field_campaign_type
+        - field_campaign_type_public
+        - field_campaign_owner
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Promotion
+    group_event_details:
+      children:
+        - field_grid_event_id
+        - field_venue
+        - field_speakers
+        - field_sequential_id
+        - field_tracks
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Event Details'
 id: event.conference.default
 targetEntityType: event
 bundle: conference
@@ -121,6 +229,24 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_overview:
+    type: paragraphs
+    weight: 31
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+    region: content
   field_published:
     weight: 23
     settings:
@@ -173,6 +299,12 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
   title:
     type: string_textfield

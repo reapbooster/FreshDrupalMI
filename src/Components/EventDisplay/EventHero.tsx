@@ -1,15 +1,15 @@
 import React from 'react';
+import {EventInterface} from "../../DataTypes/Event";
+import styled from 'styled-components';
+import {Jumbotron} from "react-bootstrap";
 
 
-export interface EventHeroProps {
-  data: EventInterface;
+export const EventHero = (props: EventHeroProps) => {
+  const { data } = props;
 
-}
-
-export EventHero = (props: EventHeroProps) => {
   return (
-    <div>
-      <h1>Event Hero</h1>
-    </div>
+    <Jumbotron style={{minHeight: "300px", midWidth: "100%"}}>
+      <h1>{data.title}</h1>
+    </Jumbotron>
   )
 }

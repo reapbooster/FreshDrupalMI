@@ -96,9 +96,7 @@ gulp.task(
   })
 );
 
-gulp.task("themeBuild", gulp.parallel(["milkenThemeBuild", "ginThemeBuild"]));
-
-gulp.task("buildComponents", (done) => {
+gulp.task('buildEntryFiles', (done) => {
   console.log("Building components.");
   const configurator = require("./config/node/configurator").default;
   try {
@@ -123,6 +121,10 @@ gulp.task("buildComponents", (done) => {
     process.exit(1);
   }
 });
+
+gulp.task("themeBuild", gulp.parallel(["milkenThemeBuild", "ginThemeBuild"]));
+
+gulp.task("buildComponents", gulp.series(['tsCompile', 'buildEntryFiles']) );
 
 gulp.task(
   "default",

@@ -3,10 +3,10 @@ import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import { EventInterface } from "../../DataTypes/Event";
-
+import { EventCardDisplay } from "./EventCardDisplay";
+import { EventFullDisplay } from "./EventFullDisplay";
 import styled, { StyledComponent } from "styled-components";
-import {EventDataFactory} from "./EventFactories";
-
+import { EventDataFactory } from "./EventFactories";
 
 /**
  * implementation of the Controller
@@ -37,7 +37,7 @@ export const EventDisplay: React.FunctionComponent = (
     const ecp = new EntityComponentProps(eventData);
     ecp
       .getData(eventData.getIncluded())
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((ajaxData) => {
         setEventData(EventDataFactory(ajaxData.data));
       });
@@ -47,15 +47,30 @@ export const EventDisplay: React.FunctionComponent = (
       </>
     );
   }
-  return (
-    <Error
-  )
-  switch(view_mode) {
-    case "card":
-      return
 
-
+  const getComponent = (vm) => {
+    switch (vm) {
+      case "card":
+        return <EventCardDisplay data={eventData} />;
+      case "full":
+        return <EventFullDisplay data={eventData} />;
+      default:
+        const Comp = styled.div`
+          border: 1px solid orange;
+        `;
+        return (
+          <Comp>
+            <event-display {...eventData} ></event-display>
+          </Comp>
+        );
+    }
   }
+
+  return (
+  <ErrorBoundary>
+    {getComponent(view_mode)}
+  </ErrorBoundary>
+  );
 };
 
 export default EventDisplay;

@@ -1,0 +1,53 @@
+uuid: b7c1b3ed-8dcb-4c9f-b677-dd5de8d3160c
+langcode: en
+status: true
+dependencies: {  }
+id: event.summit.event_summit
+label: 'Event Summit'
+name: event_summit
+target_entity_type: event
+target_entity_bundle: summit
+configuration:
+  view_mode: default
+  components:
+    created:
+      property_name: created
+    field_blurb:
+      property_name: blurb
+    field_campaign_id:
+      property_name: campaign_id
+    field_campaign_name:
+      property_name: campaign_name
+    field_campaign_owner:
+      property_name: campaign_owner
+    field_campaign_type:
+      property_name: campaign_type
+    field_campaign_type_public:
+      property_name: campaign_type_public
+    field_description:
+      property_name: description
+    field_event_date:
+      property_name: event_date
+    field_grid_event_id:
+      property_name: grid_event_id
+    field_hero_image:
+      property_name: hero_image
+    field_name_short:
+      property_name: name_short
+    field_published:
+      property_name: published
+    field_registration_deadline:
+      property_name: registration_deadline
+    field_sequential_id:
+      property_name: sequential_id
+    field_speakers:
+      property_name: speakers
+    field_tracks:
+      property_name: tracks
+    field_venue:
+      property_name: venue
+    title:
+      property_name: title
+caching:
+  cache_tag:
+    excluded_entities: {  }
