@@ -3,6 +3,10 @@ import {EventInterface} from "../../DataTypes/Event";
 import styled from 'styled-components';
 import {Jumbotron} from "react-bootstrap";
 
+export interface EventHeroProps {
+  data: EventInterface;
+}
+
 
 export const EventHero = (props: EventHeroProps) => {
   const { data } = props;

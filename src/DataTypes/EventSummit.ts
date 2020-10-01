@@ -1,5 +1,6 @@
 import Event, {EventInterface} from './Event';
 import {TextFieldInterface} from "../Fields/TextField";
+import {ParagraphInterface} from "./Paragraph";
 
 export interface EventSummitInterface extends EventInterface {
   field_blurb?: string;
@@ -20,6 +21,8 @@ export interface EventSummitInterface extends EventInterface {
   event_type: object;
   field_picture: object;
   field_tracks: object;
+  field_content: Array<ParagraphInterface>;
+
 }
 
 export class EventSummit extends Event {
@@ -41,6 +44,8 @@ export class EventSummit extends Event {
   event_type: object;
   field_picture: object;
   field_tracks: object;
+  field_content: Array<ParagraphInterface>;
+
 
   constructor(incoming: EventSummitInterface) {
     super(incoming);

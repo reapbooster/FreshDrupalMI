@@ -5,6 +5,12 @@ import {EventInterface} from "../../DataTypes/Event";
 import {EventDataFactory} from "./EventFactories";
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import { EventHero } from './EventHero';
+import { EventProgram} from "./EventProgram";
+import { EventSponsors } from './EventSponsors';
+import { EventSpeakers } from './EventSpeakers';
+import Loading from "../Loading";
+import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
+
 export interface EventFullDisplayProps {
   data: EventInterface;
   view_mode: string;
@@ -22,7 +28,8 @@ export const EventFullDisplay = (props: EventFullDisplayProps) => {
       .then(ajaxData => {
         var DO = EventDataFactory(ajaxData.data);
         setEventData(DO);
-      })
+      });
+    return <Loading />;
   }
   return (
     <>
@@ -30,7 +37,7 @@ export const EventFullDisplay = (props: EventFullDisplayProps) => {
         <Row>
           <EventHero data={eventData} />
           <Tabs defaultActiveKey="overview" id="uncontrolled-tab-example">
-            <Tab eventKey="overview" title="Preview">
+            <Tab eventKey="overview" title="Overview">
               <h3>Overview</h3>
             </Tab>
             <Tab eventKey="program" title="Program">
@@ -42,6 +49,20 @@ export const EventFullDisplay = (props: EventFullDisplayProps) => {
             <Tab eventKey="sponsors" title="Sponsors">
               <h3>Sponsors</h3>
             </Tab>
+            <Tab.Content>
+              <Tab.Pane accessKey="overview">
+                <ParagraphDisplayList view_mode="full" list={eventData} />
+              </Tab.Pane>
+              <Tab.Pane accessKey="program">
+                <EventProgram  gridID={eventData.field_grid_event_id} />
+              </Tab.Pane>
+              <Tab.Content accessKey="speakers">
+                <EventSpeakers gridID={eventData.field_grid_event_id} />
+              </Tab.Content>
+              <Tab.Content accessKey="sponsors">
+                <EventSponsors gridID={eventData.field_grid_event_id} />
+              </Tab.Content>
+            </Tab.Content>
           </Tabs>
         </Row>
       </Container>
