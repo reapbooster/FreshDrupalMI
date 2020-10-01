@@ -69,13 +69,22 @@ export const EventFullDisplay = (props: EventFullDisplayProps) => {
                 />
               </Tab.Pane>
               <Tab.Pane eventKey="program" title="Program">
-                <EventProgram gridID={eventData.field_grid_event_id} />
+                <EventProgram
+                  gridID={eventData.field_grid_event_id}
+                  data={eventData}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="speakers" title="Speakers">
-                <EventSpeakers gridID={eventData.field_grid_event_id} />
+                <EventSpeakers
+                  gridID={eventData.field_grid_event_id}
+                  data={eventData}
+                />
               </Tab.Pane>
               <Tab.Pane eventKey="sponsors" title="Sponsors">
-                <EventSponsors gridID={eventData.field_grid_event_id} />
+                <EventSponsors
+                  gridID={eventData.field_grid_event_id}
+                  data={eventData}
+                />
               </Tab.Pane>
             </Tab.Content>
           </Col>
