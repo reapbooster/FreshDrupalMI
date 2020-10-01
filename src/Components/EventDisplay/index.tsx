@@ -20,9 +20,7 @@ export interface EventDisplayProps {
   container?: StyledComponent;
 }
 
-export const EventDisplay: React.FunctionComponent = (
-  props: EventDisplayProps
-) => {
+export const EventDisplay = (props: EventDisplayProps) => {
   const { data, view_mode, key, container } = props;
   const ContainerDiv =
     container ??
@@ -51,26 +49,22 @@ export const EventDisplay: React.FunctionComponent = (
   const getComponent = (vm) => {
     switch (vm) {
       case "card":
-        return <EventCardDisplay data={eventData} />;
+        return <EventCardDisplay data={eventData} key={key} />;
       case "full":
-        return <EventFullDisplay data={eventData} />;
+        return <EventFullDisplay data={eventData} key={key} />;
       default:
         const Comp = styled.div`
           border: 1px solid orange;
         `;
         return (
           <Comp>
-            <event-display {...eventData} ></event-display>
+            <event-display {...eventData}></event-display>
           </Comp>
         );
     }
-  }
+  };
 
-  return (
-  <ErrorBoundary>
-    {getComponent(view_mode)}
-  </ErrorBoundary>
-  );
+  return <ErrorBoundary>{getComponent(view_mode)}</ErrorBoundary>;
 };
 
 export default EventDisplay;

@@ -3,7 +3,8 @@ import { EntityInterface } from "../../DataTypes/Entity";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import EventDisplay from ".";
 import styled, { StyledComponent } from "styled-components";
-import {EventInterface} from "../../DataTypes/Event";
+import { EventInterface } from "../../DataTypes/Event";
+import EventCardDisplay from "../EventDisplay/EventCardDisplay";
 
 /**
  * Event List
@@ -23,9 +24,7 @@ export interface EventDisplayListProps {
   container?: StyledComponent;
 }
 
-export const EventsDisplayList = (
-  props: EventDisplayListProps
-) => {
+export const EventsDisplayList = (props: EventDisplayListProps) => {
   console.debug("EventDisplayList", props);
   const { list, view_mode, container } = props;
   const ContainerDiv =
@@ -33,25 +32,23 @@ export const EventsDisplayList = (
     styled.div`
       max-width: 18rem;
     `;
-  return list.map((item: EntityInterface, key: number) => {
-    return (
-      <>
-        <ErrorBoundary key={key}>
-          <EventDisplay
-            data={item}
-            view_mode={view_mode}
-            container={ContainerDiv}
-          />
-        </ErrorBoundary>
-      </>
-    );
-  }) ?? [];
+  return (
+    list.map((item: EntityInterface, key: number) => {
+      return (
+        <>
+          <ErrorBoundary key={key}>
+            <EventCardDisplay data={item} />
+          </ErrorBoundary>
+        </>
+      );
+    }) ?? []
+  );
 };
 
 EventsDisplayList.defaultProps = {
   list: [],
   view_mode: "card",
   container: EventsDisplayListContainerDiv,
-}
+};
 
 export default EventsDisplayList;

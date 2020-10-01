@@ -1,21 +1,22 @@
-import {ListSource, ListSourceInterface} from "../../DataTypes/ListSource";
-import {EventInterface} from "../../DataTypes/Event";
+import { ListSource, ListSourceInterface } from "../../DataTypes/ListSource";
+import { EventInterface } from "../../DataTypes/Event";
 import JSONApiUrl from "../../DataTypes/JSONApiUrl";
-
 
 interface EventsListSourceInterface extends ListSourceInterface {
   items: Array<EventInterface>;
 }
 
-export class EventsListSource extends ListSource implements EventsListSourceInterface {
+export class EventsListSource
+  extends ListSource
+  implements EventsListSourceInterface {
   _items: Array<EventInterface>;
 
-  constructor(props) {
+  constructor(props: EventsListSourceInterface) {
     super(props);
     Object.assign(this, props);
   }
 
-  get items() : Array<EventInterface> {
+  get items(): Array<EventInterface> {
     return this._items;
   }
 
@@ -24,7 +25,7 @@ export class EventsListSource extends ListSource implements EventsListSourceInte
   }
 
   public clone<T extends object>(source: T): T {
-    var self = this;
+    const self = this;
     return this.getInstance(this);
   }
 
@@ -37,7 +38,7 @@ export class EventsListSource extends ListSource implements EventsListSourceInte
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("back from jsonapi", ajaxData);
-        var theClone = self.clone();
+        const theClone = self.clone();
         console.debug("THE CLONED DATA:", theClone);
         theClone.addItems(ajaxData.data);
         return theClone;

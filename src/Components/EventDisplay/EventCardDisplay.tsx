@@ -2,10 +2,10 @@ import styled from "styled-components";
 import moment from "moment";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
-import {Card} from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import React from "react";
-import {EventDataFactory} from "./EventFactories";
-import {EventInterface} from "../../DataTypes/Event";
+import { EventDataFactory } from "./EventFactories";
+import { EventInterface } from "../../DataTypes/Event";
 
 interface EventCardDisplayInterface {
   data: EventInterface;
@@ -13,17 +13,17 @@ interface EventCardDisplayInterface {
 }
 
 export const EventCardDisplay = (props: EventCardDisplayInterface) => {
-  const {data, key} = props;
+  const { data, key } = props;
   const eventData = EventDataFactory(data);
   const ContainerDiv = styled.div`
-      max-width: 18rem;
-    `;
+    max-width: 18rem;
+  `;
   const eventDate = moment(eventData.field_event_date, moment.ISO_8601);
   return (
     <>
       <ContainerDiv className={"card"} key={key ?? 0}>
         <a
-          href={"event/".concat(eventData.drupal_internal__id.toString())}
+          href={eventData.path.alias}
           className="my-5"
           data-drupal-id={eventData.drupal_internal__id}
           data-drupal-type={eventData.type}
@@ -45,6 +45,6 @@ export const EventCardDisplay = (props: EventCardDisplayInterface) => {
       </ContainerDiv>
     </>
   );
-}
+};
 
 export default EventCardDisplay;

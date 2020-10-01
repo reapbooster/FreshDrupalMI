@@ -1,8 +1,7 @@
-import {EventInterface} from "../../DataTypes/Event";
+import { EventInterface } from "../../DataTypes/Event";
 import EventConference from "../../DataTypes/EventConference";
 import EventMeeting from "../../DataTypes/EventMeeting";
 import EventSummit from "../../DataTypes/EventSummit";
-
 
 /**
  * Implementation of the Data Model
@@ -21,5 +20,4 @@ export const EventDataFactory = (incoming: EventInterface) => {
       console.error("Cannot determine Data Class", incoming);
       throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
   }
-}
-
+};

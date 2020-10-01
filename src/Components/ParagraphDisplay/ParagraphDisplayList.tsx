@@ -20,7 +20,7 @@ export interface ParagraphDisplayListProps {
 export const ParagraphDisplayList = (props: ParagraphDisplayListProps) => {
   const { list, view_mode } = props;
   return (
-    list.items?.map((item, key) => {
+    list?.map((item, key) => {
       return (
         <>
           <ErrorBoundary key={key}>
