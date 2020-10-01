@@ -1,8 +1,6 @@
 import * as FileDataObject from "./File";
 
-export interface AudioFileInterface extends FileDataObject.FileInterface {
-
-}
+export type AudioFileInterface = FileDataObject.FileInterface
 
 export class AudioFile extends FileDataObject.default implements AudioFileInterface {
 

@@ -2,26 +2,25 @@ import Node, { NodeInterface } from "./Node";
 import TaxonomyTerm, { TaxonomyTermInterface } from "./TaxonomyTerm";
 import Paragraph, { ParagraphInterface } from "./Paragraph";
 import Slide, { SlideInterface } from "./Slide";
-import {ListableInterface} from "./Listable";
-import {EntityInterface} from "./Entity";
-import JSONApiUrl from "./JSONApiUrl";
+import { EntityInterface } from "./Entity";
+import { UserInterface } from "./User";
 
-interface NodeArticleInterface extends NodeInterface {
-  field_authors: object;
+export interface NodeArticleInterface extends NodeInterface {
+  field_authors: UserInterface;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;
-  field_promo_slide: SlideInterface;
+  field_promo_slide?: SlideInterface;
   field_topics: TaxonomyTermInterface;
 }
 
-class NodeArticle extends Node implements NodeArticleInterface {
-  field_authors: object;
+export class NodeArticle extends Node implements NodeArticleInterface {
+  field_authors: object | undefined;
 
   private _field_centers: TaxonomyTermInterface;
 
   private _field_content: Array<Paragraph>;
 
-  private _field_promo_slide: Slide;
+  private _field_promo_slide?: Slide | undefined;
 
   private _field_topics: TaxonomyTermInterface;
 
@@ -46,7 +45,7 @@ class NodeArticle extends Node implements NodeArticleInterface {
     return false;
   }
 
-  get field_centers(): TaxonomyTermInterface {
+  get field_centers(): TaxonomyTermInterface | undefined {
     return this._field_centers;
   }
 
@@ -54,7 +53,7 @@ class NodeArticle extends Node implements NodeArticleInterface {
     this._field_centers = new TaxonomyTerm(value);
   }
 
-  get field_content(): Array<ParagraphInterface> {
+  get field_content(): Array<ParagraphInterface> | undefined {
     return this._field_content;
   }
 
@@ -62,7 +61,7 @@ class NodeArticle extends Node implements NodeArticleInterface {
     this._field_content = value;
   }
 
-  get field_promo_slide(): SlideInterface {
+  get field_promo_slide(): SlideInterface | undefined {
     return this._field_promo_slide;
   }
 
@@ -72,7 +71,7 @@ class NodeArticle extends Node implements NodeArticleInterface {
     }
   }
 
-  get field_topics(): TaxonomyTermInterface {
+  get field_topics(): TaxonomyTermInterface | undefined {
     return this._field_topics;
   }
 
@@ -81,4 +80,4 @@ class NodeArticle extends Node implements NodeArticleInterface {
   }
 }
 
-export { NodeArticle as default, NodeArticleInterface };
+export default NodeArticle;

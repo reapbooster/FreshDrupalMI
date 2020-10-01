@@ -1,6 +1,110 @@
 uuid: a1abae09-99a7-4743-95a2-d90d36be41dd
 langcode: en
 status: true
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_overview
+        - group_authoring
+        - group_dates
+        - group_promotion
+        - group_event_details
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_overview:
+      children:
+        - field_name_short
+        - field_description
+        - field_blurb
+        - field_hero_image
+        - field_overview
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Overview
+    group_authoring:
+      children:
+        - langcode
+        - created
+        - field_published
+        - path
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Authoring
+    group_dates:
+      children:
+        - field_registration_deadline
+        - field_event_date
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Dates
+    group_promotion:
+      children:
+        - field_campaign_name
+        - field_campaign_id
+        - field_campaign_type
+        - field_campaign_type_public
+        - field_campaign_owner
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Promotion
+    group_event_details:
+      children:
+        - field_grid_event_id
+        - field_venue
+        - field_speakers
+        - field_sequential_id
+        - field_tracks
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Event Details'
 dependencies:
   config:
     - eck.eck_type.event.summit
@@ -15,6 +119,7 @@ dependencies:
     - field.field.event.summit.field_grid_event_id
     - field.field.event.summit.field_hero_image
     - field.field.event.summit.field_name_short
+    - field.field.event.summit.field_overview
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
     - field.field.event.summit.field_sequential_id
@@ -23,6 +128,8 @@ dependencies:
     - field.field.event.summit.field_venue
   module:
     - datetime
+    - entity_reference_revisions
+    - path
     - text
 id: event.summit.default
 targetEntityType: event
@@ -123,6 +230,16 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_overview:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_autocomplete
+    region: content
   field_published:
     weight: 11
     settings:
@@ -175,6 +292,12 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
   title:
     type: string_textfield

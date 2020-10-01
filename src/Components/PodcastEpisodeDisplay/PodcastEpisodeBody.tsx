@@ -1,12 +1,11 @@
-import React, {PropsWithChildren} from "react";
-import {Col, Card, Media, Accordion, Row, Container} from "react-bootstrap";
+import React from "react";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import PodcastEpisodeServiceLinks from "./PodcastEpisodeServiceLinks";
-import AudioFileDisplay from '../FileDisplay/AudioFileDisplay';
-import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
-import styled, {StyledComponent} from 'styled-components';
-import { MediaPodcastEpisodeInterface, MediaPodcastServiceLinkInterface } from "../../DataTypes/MediaPodcastEpisode";
+import AudioFileDisplay from "../FileDisplay/AudioFileDisplay";
+import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
+import styled, { StyledComponent } from "styled-components";
+import { MediaPodcastEpisodeInterface } from "../../DataTypes/MediaPodcastEpisode";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-
 
 export interface PodcastEpisodeBodyProps extends MediaPodcastEpisodeInterface {
   data: MediaPodcastEpisodeInterface;
@@ -23,9 +22,10 @@ const ImageFileDisplayContainer = styled.div`
   height: 120px;
 `;
 
-
-export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisodeBodyProps) => {
-  const {data, view_mode, container} = props;
+export const PodcastEpisodeBody: React.FunctionComponent = (
+  props: PodcastEpisodeBodyProps
+) => {
+  const { data, view_mode, container } = props;
   console.debug("PodcastEpisodeBody", props);
   return (
     <>
@@ -34,21 +34,24 @@ export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisod
           <Row>
             <Col xs={12} sm={3}>
               <ErrorBoundary>
-              <ImageFileDisplay
-                data={data.field_media_image}
-                container={ImageFileDisplayContainer}
-              />
+                <ImageFileDisplay
+                  data={data.field_media_image}
+                  container={ImageFileDisplayContainer}
+                />
               </ErrorBoundary>
             </Col>
             <Col xs={12} sm={9}>
-              <Row style={{ margin: "auto", }}>
+              <Row style={{ margin: "auto" }}>
                 <Col cellPadding={"1rem"}>
-                  <span dangerouslySetInnerHTML={{__html: data.field_body?.value}}
-                        className={"text-muted"} >
-                  </span>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: data.field_body?.value }}
+                    className={"text-muted"}
+                  ></span>
                   <br />
                   <p>
-                    <learnMoreLink href={data.path.alias}>LEARN MORE &gt;</learnMoreLink>
+                    <learnMoreLink href={data.path.alias}>
+                      LEARN MORE &gt;
+                    </learnMoreLink>
                   </p>
                 </Col>
               </Row>
@@ -65,9 +68,7 @@ export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisod
                 </Col>
               </Row>
               <Row cellPadding={"1rem"}>
-                <PodcastEpisodeServiceLinks
-                  links={data.field_service_links}
-                />
+                <PodcastEpisodeServiceLinks links={data.field_service_links} />
               </Row>
             </Col>
           </Row>
@@ -75,7 +76,6 @@ export const PodcastEpisodeBody: React.FunctionComponent = (props: PodcastEpisod
       </Card.Body>
     </>
   );
-
-}
+};
 
 export default PodcastEpisodeBody;

@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import MediaImage, {MediaImageInterface} from '../../DataTypes/MediaImage';
-import ImageStyleObject, {HolderImageStyleObject} from "../../DataTypes/ImageStyleObject";
+import React, { useState } from "react";
+import MediaImage from "../../DataTypes/MediaImage";
 import Loading from "../Loading";
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
-
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 
 export interface MediaDisplayImageProps {
   data: MediaImage;
   view_mode: string;
- }
+}
 
 export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
-  const {data, view_mode} = props;
-  const DataObject = new MediaImage(data)
-  const [ mediaImage, setMediaImage ] = useState(DataObject);
+  const { data, view_mode } = props;
+  const DataObject = new MediaImage(data);
+  const [mediaImage, setMediaImage] = useState(DataObject);
 
   if (!mediaImage.hasData()) {
     const ecp = new EntityComponentProps(mediaImage);
-    ecp.getData(mediaImage.getIncluded())
-      .then(res => res.json())
+    ecp
+      .getData(mediaImage.getIncluded())
+      .then((res) => res.json())
       .then((incoming) => {
         setMediaImage(new MediaImage(incoming.data));
       });
@@ -26,9 +25,9 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
       <>
         <Loading />
       </>
-    )
+    );
   }
-  var attributes = mediaImage.imageAttributes;
+  const attributes = mediaImage.imageAttributes;
 
   switch (view_mode) {
     case "thumbnail":
@@ -47,9 +46,9 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
         data-drupal-type={mediaImage.type}
         data-uuid={mediaImage.id}
         {...attributes}
-        />
+      />
     </>
   );
-}
+};
 
 export default MediaDisplayImage;

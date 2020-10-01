@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 import Facet, { FacetProps, FacetValue } from "../../DataTypes/Facet";
-import Loading from "../Loading";
-import {Dropdown, Nav, NavDropdown, NavItem} from 'react-bootstrap';
+import { Dropdown } from "react-bootstrap";
 import FontAwesomeIcon from "react-fontawesome";
-import { useQueryState } from 'use-location-state';
+import { useQueryState } from "use-location-state";
 
 const DropdownFacet = (props: FacetProps) => {
-
-  const [ facetValues, setFacetValues ] = useState(new Facet(props));
-  const [ activeTerm, setActiveTerm ] = useQueryState(props.field.replace("field_", ""), "");
+  const [facetValues, setFacetValues] = useState(new Facet(props));
+  const [activeTerm, setActiveTerm] = useQueryState(
+    props.field.replace("field_", ""),
+    ""
+  );
 
   // TODO: Make these props
-  const titleSubject = props.titleSubject || 'Entries';
+  const titleSubject = props.titleSubject || "Entries";
   const titleValuesToEnablePostfix = props.titleValuesToEnablePostfix || [];
-  const titleConjunction = props.titleConjunction || '';
+  const titleConjunction = props.titleConjunction || "";
 
   if (!facetValues.hasValues()) {
     facetValues.refresh(setFacetValues);
@@ -24,46 +25,43 @@ const DropdownFacet = (props: FacetProps) => {
     );
   }
 
-  let dropdownSelectHandler = (machine_name) => {
-
+  const dropdownSelectHandler = (machine_name) => {
     // let newFacetValues = facetValues.setActive(machine_name);
     // setFacetValues(newFacetValues);
 
     setActiveTerm(machine_name);
+  };
 
-  }
+  const renderedFacetValues = facetValues?.values.map(
+    (value: FacetValue, key: number) => {
+      if (!value.field_visibility) {
+        return;
+      }
+      return (
+        <Dropdown.Item
+          key={key}
+          eventKey={value.machine_name}
+          value={value.machine_name}
+        >
+          {value.name}
+        </Dropdown.Item>
+      );
+    }
+  );
 
-  let renderedFacetValues = facetValues?.values.map((value: FacetValue, key: number) => {
-
-    if(!value.field_visibility) { return; }
-    return (
-      <Dropdown.Item
-        key={key}
-        eventKey={value.machine_name}
-        value={value.machine_name}
-      >
-        {value.name}
-      </Dropdown.Item>
-    );
-  });
-
-  let allOptionFacetValue = !props.allOptionTitle ? [] : (
+  const allOptionFacetValue = !props.allOptionTitle ? (
+    []
+  ) : (
     <>
       <Dropdown.Divider />
-      <Dropdown.Item
-        key={-1}
-        eventKey={false}
-        value={false}
-      >
+      <Dropdown.Item key={-1} eventKey={false} value={false}>
         {props.allOptionTitle}
       </Dropdown.Item>
     </>
   );
 
-  const activeKey = facetValues?.values.find( (value: FacetValue) => {
-
+  const activeKey = facetValues?.values.find((value: FacetValue) => {
     return value.machine_name === activeTerm;
-
   }) ?? { label: "All" };
 
   // console.debug("Dropdown Facet:", facetValues);
@@ -73,9 +71,17 @@ const DropdownFacet = (props: FacetProps) => {
 
   let prefix, postfix;
 
-  if(titleSubject && titleValuesToEnablePostfix) {
-    prefix = <span className="d-none d-md-inline-block">{!titleValuesToEnablePostfix.includes(activeKey.label) ? `${titleSubject} ${titleConjunction} `: ''}</span>;
-    postfix = (titleValuesToEnablePostfix.includes(activeKey.label) ? ' ' + titleSubject : '')
+  if (titleSubject && titleValuesToEnablePostfix) {
+    prefix = (
+      <span className="d-none d-md-inline-block">
+        {!titleValuesToEnablePostfix.includes(activeKey.label)
+          ? `${titleSubject} ${titleConjunction} `
+          : ""}
+      </span>
+    );
+    postfix = titleValuesToEnablePostfix.includes(activeKey.label)
+      ? " " + titleSubject
+      : "";
   }
 
   return (
@@ -83,7 +89,10 @@ const DropdownFacet = (props: FacetProps) => {
       <h1 className="title-dropdown text-center">
         <Dropdown onSelect={dropdownSelectHandler}>
           {prefix}
-          <Dropdown.Toggle variant="outline" id={"facet-".concat(facetValues.id)}>
+          <Dropdown.Toggle
+            variant="outline"
+            id={"facet-".concat(facetValues.id)}
+          >
             {activeKey.label}
             {postfix}
           </Dropdown.Toggle>
@@ -96,6 +105,6 @@ const DropdownFacet = (props: FacetProps) => {
       </h1>
     </>
   );
-}
+};
 
 export default DropdownFacet;

@@ -43,6 +43,10 @@ export class EntityComponentProps implements EntityComponentPropsInterface {
 
   open?: boolean;
 
+  title?: string;
+
+  name?: string;
+
   constructor(incoming?: EntityComponentPropsInterface) {
     const propCopy = { ...incoming };
     if (propCopy?.type) {
@@ -53,6 +57,7 @@ export class EntityComponentProps implements EntityComponentPropsInterface {
       }
     }
     this.setData(propCopy);
+    this.handleError = this.handleError.bind(this);
   }
 
   toObject(): EntityComponentPropsInterface {
@@ -73,9 +78,12 @@ export class EntityComponentProps implements EntityComponentPropsInterface {
     console.debug("get Data called: ", this);
     if (this.entityTypeId && this.bundle) {
       return fetch(
-        new Request(`/jsonapi/${this.entityTypeId}/${this.bundle}/${
-          this.id || ""
-        }?jsonapi_include=1${include}`, {redirect: 'manual'})
+        new Request(
+          `/jsonapi/${this.entityTypeId}/${this.bundle}/${
+            this.id || ""
+          }?jsonapi_include=1${include}`,
+          { redirect: "manual" }
+        )
       ).catch(this.handleError);
     }
     this.handleError(new Error("Not Enough Data to make a getData call"));

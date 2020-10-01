@@ -1,4 +1,5 @@
 const pathUtility = require('path');
+const fs = require('fs');
 const webpack = require("webpack");
 const PluginError = require("plugin-error");
 const Logger = require('fancy-log');
@@ -6,6 +7,33 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DrupalLibrariesWebpackPlugin = require('drupal-libraries-webpack-plugin');
 const BrowserSyncWebpackPlugin = require('browser-sync-webpack-plugin');
+const babelLoader = {
+  loader: 'babel-loader',
+  options: {
+    cacheDirectory: true,
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-typescript',
+      "@babel/preset-react",
+    ],
+    plugins: [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-export-default-from",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-transform-classes",
+      "@babel/plugin-transform-react-jsx",
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-transform-typescript",
+      "babel-plugin-styled-components"
+    ],
+    "exclude": [
+      // \\ for Windows, \/ for Mac OS and Linux
+      /node_modules[\/]core-js/,
+      /node_modules[\/]webpack[\/]buildin/,
+    ],
+  }
+};
 
 export function parsePath(incoming) {
   const basename = pathUtility.basename(incoming, pathUtility.extname(incoming));
@@ -20,33 +48,6 @@ export function parsePath(incoming) {
 export function configurator(file) {
   const parsedFileName = parsePath(file);
   console.log(`Configuring: ${parsedFileName.libraryName}`)
-  var babelLoader = {
-    loader: 'babel-loader',
-    options: {
-      cacheDirectory: false,
-      presets: [
-        '@babel/preset-env',
-        '@babel/preset-typescript',
-        "@babel/preset-react"
-      ],
-      plugins: [
-        "@babel/transform-runtime",
-        '@babel/plugin-transform-typescript',
-        "@babel/plugin-proposal-export-default-from",
-        "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-proposal-optional-chaining",
-        "@babel/plugin-proposal-class-properties",
-        "transform-custom-element-classes",
-        "@babel/plugin-transform-react-jsx",
-        "babel-plugin-styled-components",
-        ["babel-plugin-transform-builtin-classes", {
-          "globals": ["Array", "Error", "HTMLElement"]
-        }],
-        "@babel/plugin-transform-classes"
-      ]
-    }
-  };
-
 
   var toReturn = {
     entry: { },
@@ -77,9 +78,7 @@ export function configurator(file) {
         {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
-          use: [
-            babelLoader
-          ]
+          use: [ babelLoader ]
         },
         {
           enforce: "pre",

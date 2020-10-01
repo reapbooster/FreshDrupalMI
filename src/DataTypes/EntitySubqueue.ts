@@ -1,15 +1,13 @@
-import Entity, { EntityInterface } from './Entity';
-import {ListableInterface} from "./Listable";
+import Entity, { EntityInterface } from "./Entity";
+import { ListableInterface } from "./Listable";
 import JSONApiUrl from "./JSONApiUrl";
-import EntityComponentProps from './EntityComponentProps';
+import EntityComponentProps from "./EntityComponentProps";
 
 export interface EntityQueueInterface extends EntityInterface {
-
   vid: string;
 }
 
 export class EntityQueue extends Entity implements EntityQueueInterface {
-
   vid: string;
 
   constructor(props) {
@@ -23,7 +21,9 @@ export interface EntitySubqueueInterface extends EntityInterface {
   items: Array<EntityInterface>;
 }
 
-export class EntitySubqueue extends Entity implements EntitySubqueueInterface, ListableInterface {
+export class EntitySubqueue
+  extends Entity
+  implements EntitySubqueueInterface, ListableInterface {
   queue: EntityQueue;
   _items: Array<EntityInterface>;
 
@@ -41,7 +41,7 @@ export class EntitySubqueue extends Entity implements EntitySubqueueInterface, L
   }
 
   get items(): Array<EntityInterface> {
-      return this._items;
+    return this._items;
   }
 
   set items(incoming: Array<EntityInterface>) {
@@ -53,7 +53,6 @@ export class EntitySubqueue extends Entity implements EntitySubqueueInterface, L
   get browser() {
     return false;
   }
-
 }
 
 export default EntitySubqueue;

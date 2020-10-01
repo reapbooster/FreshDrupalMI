@@ -2,27 +2,30 @@ import { ListComponentPropsInterface } from "../../DataTypes/ListComponentProps"
 import ListSource, {
   ListComponentSourceInterface,
 } from "../../DataTypes/ListSource";
-import {ListableInterface} from "../../DataTypes/Listable";
-import {EntityInterface} from '../../DataTypes/Entity';
-import JSONApiUrl from "../../DataTypes/JSONApiUrl";
+import { ListableInterface } from "../../DataTypes/Listable";
 
 export class PhilanthropyHubSource
   extends ListSource
   implements ListComponentSourceInterface, ListableInterface {
-
-  onHashChangedCallback?: CallableFunction;
-
-  constructor(incoming: ListComponentSourceInterface){
-    super(incoming);
-    Object.assign(this, incoming);
-  }
-
   static filters: {
     terms: "field_terms";
     actions: "field_actions";
     region: "field_region";
     focus: "field_focus";
   };
+  onHashChangedCallback?: CallableFunction;
+
+  constructor(incoming: ListComponentSourceInterface) {
+    super(incoming);
+    Object.assign(this, incoming);
+  }
+
+  public static getDefaultSource(): Promise<ListComponentPropsInterface> {
+    console.debug("getting default source", process.env);
+    return fetch(process.env.CONFIG_FILE).then((data) => {
+      return new PhilanthropyHubSource(data);
+    });
+  }
 
   onHashChanged() {
     console.debug("Hash change trigger");
@@ -58,7 +61,7 @@ export class PhilanthropyHubSource
     console.debug("New params", newFilter);
     try {
       this.refresh(newFilter).then(this.onHashChangedCallback);
-    } catch(e) {
+    } catch (e) {
       console.error(e.getMessage());
       return [];
     }
@@ -74,16 +77,6 @@ export class PhilanthropyHubSource
     });
     document.querySelector("#list-component-root").dispatchEvent(evt);
   }
-
-  public static getDefaultSource(): Promise<ListComponentPropsInterface> {
-    console.debug("getting default source", process.env);
-    return fetch(process.env.CONFIG_FILE)
-      .then((data) => {
-        return new PhilanthropyHubSource(data);
-      });
-  }
-
-
 }
 
 export default PhilanthropyHubSource;

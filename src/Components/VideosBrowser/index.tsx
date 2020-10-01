@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
-import MediaDisplayList from '../MediaDisplay/MediaDisplayList';
-import ListSource, {ListComponentSourceInterface} from "../../DataTypes/ListSource";
+import React, { useState } from "react";
+import MediaDisplayList from "../MediaDisplay/MediaDisplayList";
+import ListSource, {
+  ListComponentSourceInterface,
+} from "../../DataTypes/ListSource";
 import Loading from "../Loading";
-import {CardColumns} from 'react-bootstrap';
+import { CardColumns } from "react-bootstrap";
 import styled from "styled-components";
 
 const IndividualVideoContainer = styled.div`
   max-width: 18rem;
-`
+`;
 
 export interface VideosBrowserProps {
   source: ListComponentSourceInterface;
@@ -17,18 +19,22 @@ export interface VideosBrowserProps {
 export const VideosBrowser = (props: VideosBrowserProps) => {
   console.debug("VideosBrowser", props);
   const source = new ListSource(props.source);
-  const [ videoSource, setVideoSource ] = useState(source);
-  console.debug('Video Source', videoSource, videoSource.hasData(), videoSource.items );
+  const [videoSource, setVideoSource] = useState(source);
+  console.debug(
+    "Video Source",
+    videoSource,
+    videoSource.hasData(),
+    videoSource.items
+  );
   if (!videoSource.hasData()) {
-    videoSource.refreshItems()
-      .then((items) => {
-        console.debug("Coming home", items, this);
-        var toSet = new ListSource(videoSource.toObject());
-        console.debug("after clone", toSet);
-        toSet.items = items;
-        setVideoSource(toSet);
-      });
-    return (<Loading />);
+    videoSource.refreshItems().then((items) => {
+      console.debug("Coming home", items, this);
+      const toSet = new ListSource(videoSource.toObject());
+      console.debug("after clone", toSet);
+      toSet.items = items;
+      setVideoSource(toSet);
+    });
+    return <Loading />;
   }
   console.debug("VideosBrowser: Source W/Data", videoSource);
   return (
@@ -41,7 +47,7 @@ export const VideosBrowser = (props: VideosBrowserProps) => {
         />
       </CardColumns>
     </>
-  )
-}
+  );
+};
 
 export default VideosBrowser;

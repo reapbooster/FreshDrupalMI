@@ -1,47 +1,39 @@
-import React, { useState } from 'react';
-import EventDisplayList from '../EventDisplay/EventDisplayList'
-import ListSource, {ListComponentSourceInterface} from "../../DataTypes/ListSource";
+import React, { useState } from "react";
+import EventsDisplayList from "./EventsDisplayList";
 import Loading from "../Loading";
-import styled from 'styled-components';
-import {CardColumns} from 'react-bootstrap';
-
-const ContainerDiv = styled.div`
-  max-width: 18rem;
-`;
+import { CardColumns } from "react-bootstrap";
+import EventsListSource from "./EventsListSource";
 
 export interface EventsBrowserProps {
-  source?: ListComponentSourceInterface
+  source?: EventsListSource;
   view_mode: string;
 }
 
 export const EventsBrowser = (props: EventsBrowserProps) => {
-  console.debug('EventsBrowser: props', props);
-  var { source, view_mode } = props;
-  const DataObject = new ListSource(source);
-  var [listSource, setListSource] = useState(DataObject);
-  console.debug("List Source:", listSource);
-  if (!listSource.hasData()) {
-    listSource.refreshItems()
-      .then((items) => {
-        var toSet = new ListSource(ListSource.clone());
-        console.debug("after clone", toSet);
-        toSet.items = items;
-        setListSource(toSet);
-      });
-    return (<Loading />);
+  console.debug("EventsBrowser: props", props);
+  const { source, view_mode } = props;
+  const DataObject = new EventsListSource(source);
+  const [eventsListSource, setEventsListSource] = useState(DataObject);
+  console.debug("List Source:", eventsListSource);
+
+  if (!eventsListSource.hasData()) {
+    eventsListSource.refresh().then((cloned) => {
+      setEventsListSource(cloned);
+    });
+    return <Loading />;
   }
-  console.debug("listSource.items should be populated", listSource);
+
+  console.debug("listSource.items should be populated", eventsListSource);
   return (
     <>
-    <CardColumns>
-      <EventDisplayList
-        list={listSource}
-        view_mode={props.view_mode}
-        container={ContainerDiv}
-      />
+      <CardColumns>
+        <EventsDisplayList
+          list={eventsListSource.items}
+          view_mode={view_mode}
+        />
       </CardColumns>
     </>
-  )
-}
+  );
+};
 
-export default EventsBrowser
+export default EventsBrowser;

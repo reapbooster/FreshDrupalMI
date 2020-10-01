@@ -15,6 +15,7 @@ dependencies:
     - field.field.event.summit.field_grid_event_id
     - field.field.event.summit.field_hero_image
     - field.field.event.summit.field_name_short
+    - field.field.event.summit.field_overview
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
     - field.field.event.summit.field_sequential_id
@@ -23,6 +24,7 @@ dependencies:
     - field.field.event.summit.field_venue
   module:
     - datetime
+    - entity_reference_revisions
     - text
 id: event.summit.default
 targetEntityType: event
@@ -124,6 +126,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_overview:
+    weight: 19
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
     region: content
   field_published:
     weight: 1

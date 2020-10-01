@@ -1,13 +1,22 @@
-
 import React from "react";
 import ReactDOM from "react-dom";
-import EventDisplay from "Components/EventDisplay";
+import { EventFullDisplay } from "Components/EventDisplay/EventFullDisplay";
 
-const EventDetail = document.querySelector('event-detail');
+const EventDetail: HTMLElement = document.querySelector("event-detail");
 
-console.debug("Event Detail:", EventDetail.dataset);
+const EventDetailData = {
+  entityTypeId: EventDetail.dataset?.entityTypeId,
+  bundle: EventDetail.dataset?.bundle,
+  drupalInternalId: EventDetail.dataset?.drupalInternalId,
+  id: EventDetail.dataset?.id,
+  type: EventDetail.dataset?.type,
+};
 
 ReactDOM.render(
-  <EventDisplay data={EventDetail.dataset} view_mode={"full"} />,
+  <EventFullDisplay
+    data={EventDetailData}
+    view_mode={EventDetail.dataset?.viewMode}
+    gridID={EventDetail.dataset?.gridId}
+  />,
   EventDetail
 );

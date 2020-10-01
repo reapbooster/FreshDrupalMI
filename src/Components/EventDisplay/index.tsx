@@ -1,54 +1,12 @@
-import React, {useState} from 'react';
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import React, { useState } from "react";
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-import {EventInterface} from '../../DataTypes/Event';
-import EventConference from "../../DataTypes/EventConference";
-import EventMeeting from "../../DataTypes/EventMeeting";
-import EventSummit from "../../DataTypes/EventSummit";
-import EventConferenceDisplay from './EventConferenceDisplay';
-import EventSummitDisplay from './EventSummitDisplay';
-import EventMeetingDisplay from './EventMeetingDisplay';
-import styled,{StyledComponent} from "styled-components";
-
-/**
- * Implementation of the Data Model
- *
- * @param incoming
- */
-export function EventDataFactory(incoming: EventInterface) {
-  switch(incoming.type){
-    case "event--conference":
-      return new EventConference(incoming);
-    case "event--meeting":
-      return new EventMeeting(incoming);
-    case "event--summit":
-      return new EventSummit(incoming);
-    default:
-      console.error("Cannot determine Data Class", incoming);
-      throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
-  }
-}
-
-/**
- * Implementation of the View
- *
- * @param incoming
- */
-export function EventComponentFactory(incoming: EventInterface) {
-  switch(incoming.type) {
-    case "event--conference":
-      return EventConferenceDisplay;
-    case "event--meeting":
-      return EventMeetingDisplay;
-    case "event--summit":
-      return EventSummitDisplay;
-    default:
-      console.error("Cannot determine Component for", incoming);
-      throw new Error("Cannot Determine Component for ".concat(incoming.type));
-  }
-}
-
+import { EventInterface } from "../../DataTypes/Event";
+import { EventCardDisplay } from "./EventCardDisplay";
+import { EventFullDisplay } from "./EventFullDisplay";
+import styled, { StyledComponent } from "styled-components";
+import { EventDataFactory } from "./EventFactories";
 
 /**
  * implementation of the Controller
@@ -62,19 +20,22 @@ export interface EventDisplayProps {
   container?: StyledComponent;
 }
 
-export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) => {
-  var { data, view_mode, key, container } = props;
-  const ContainerDiv = container ?? styled.div`
-    max-width: 18rem;
-  `;
+export const EventDisplay = (props: EventDisplayProps) => {
+  const { data, view_mode, key, container } = props;
+  const ContainerDiv =
+    container ??
+    styled.div`
+      max-width: 18rem;
+    `;
   const DataObject = EventDataFactory(data);
 
-  const [ eventData, setEventData ] = useState(DataObject);
+  const [eventData, setEventData] = useState(DataObject);
   if (!eventData.hasData()) {
     console.debug("Event Does Not Have Data", eventData);
     const ecp = new EntityComponentProps(eventData);
-    ecp.getData(eventData.getIncluded())
-      .then(res => res.json)
+    ecp
+      .getData(eventData.getIncluded())
+      .then((res) => res.json())
       .then((ajaxData) => {
         setEventData(EventDataFactory(ajaxData.data));
       });
@@ -84,19 +45,26 @@ export const EventDisplay: React.FunctionComponent = (props: EventDisplayProps) 
       </>
     );
   }
-  const Component = EventComponentFactory(eventData);
-  return (
-    <>
-      <ErrorBoundary key={key ?? 0}>
-        <Component
-          data={eventData}
-          view_mode={view_mode}
-          container={ContainerDiv}
-        />
-      </ErrorBoundary>
-    </>
-  )
 
-}
+  const getComponent = (vm) => {
+    switch (vm) {
+      case "card":
+        return <EventCardDisplay data={eventData} key={key} />;
+      case "full":
+        return <EventFullDisplay data={eventData} key={key} />;
+      default:
+        const Comp = styled.div`
+          border: 1px solid orange;
+        `;
+        return (
+          <Comp>
+            <event-display {...eventData}></event-display>
+          </Comp>
+        );
+    }
+  };
+
+  return <ErrorBoundary>{getComponent(view_mode)}</ErrorBoundary>;
+};
 
 export default EventDisplay;

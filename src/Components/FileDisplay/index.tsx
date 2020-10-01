@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
-import {FileInterface} from '../../DataTypes/File'
+import React, { useState } from "react";
+import { FileInterface } from "../../DataTypes/File";
 import ImageFile from "../../DataTypes/ImageFile";
 import DocumentFile from "../../DataTypes/DocumentFile";
-import ImageFileDisplay from './ImageFileDisplay';
-import DocumentFileDisplay from './DocumentFileDisplay';
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import ImageFileDisplay from "./ImageFileDisplay";
+import DocumentFileDisplay from "./DocumentFileDisplay";
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+
 /**
  * Implementation of the Model:
  *
@@ -30,8 +31,10 @@ function FileDataFactory(incoming: FileInterface): File {
  *
  * @param incoming: FileInterface
  */
-function FileComponentFactory(incoming: FileInterface): React.FunctionComponent {
-  switch(incoming.type) {
+function FileComponentFactory(
+  incoming: FileInterface
+): React.FunctionComponent {
+  switch (incoming.type) {
     case "file--image":
       return ImageFileDisplay;
     case "file--document":
@@ -41,7 +44,6 @@ function FileComponentFactory(incoming: FileInterface): React.FunctionComponent 
       throw new Error("Cannot Determine Data Class for ".concat(incoming.type));
   }
 }
-
 
 /**
  * Implementation of the Controller
@@ -55,11 +57,12 @@ interface FileDisplayProps {
 }
 
 const FileDisplay = (props) => {
-  const [ fileData, setFileData ] = useState(FileDataFactory(props.data));
+  const [fileData, setFileData] = useState(FileDataFactory(props.data));
   if (!fileData.hasData()) {
     const ecp = new EntityComponentProps(fileData);
-    ecp.getData(fileData.getIncluded())
-      .then(res => res.json)
+    ecp
+      .getData(fileData.getIncluded())
+      .then((res) => res.json)
       .then((ajaxData) => {
         setFileData(FileDataFactory(ajaxData.data));
       });
@@ -72,10 +75,14 @@ const FileDisplay = (props) => {
   const Component = FileComponentFactory(fileData);
   return (
     <ErrorBoundary key={props.key ?? 0}>
-      <Component
-        data={fileData} />
+      <Component data={fileData} />
     </ErrorBoundary>
-  )
-}
+  );
+};
 
-export {FileDisplay as default, FileDisplayProps, FileComponentFactory, FileDataFactory}
+export {
+  FileDisplay as default,
+  FileDisplayProps,
+  FileComponentFactory,
+  FileDataFactory,
+};

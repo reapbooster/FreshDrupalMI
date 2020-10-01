@@ -1,28 +1,31 @@
-import React, {useState} from 'react';
-import {EntitySubqueue, EntityQueue, EntitySubqueueInterface } from '../../DataTypes/EntitySubqueue';
-import {EntityComponentProps} from "../../DataTypes/EntityComponentProps";
+import React, { useState } from "react";
+import {
+  EntitySubqueue,
+  EntitySubqueueInterface,
+} from "../../DataTypes/EntitySubqueue";
+import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
-import ListDisplay, {ListDisplayProps} from '../ListDisplay';
+import ListDisplay from "../ListDisplay";
 import { EntityInterface } from "../../DataTypes/Entity";
-import {ListableInterface} from "../../DataTypes/Listable";
+import { ListableInterface } from "../../DataTypes/Listable";
 
-export interface EntitySubqueueDisplayProps extends EntityInterface{
-  queue: ListableInterface;
+export interface EntitySubqueueDisplayProps extends EntityInterface {
+  queue: EntitySubqueueInterface;
   view_mode: string;
 }
 
-export const EntitySubqueueDisplay: React.FunctionComponent = (props: EntitySubqueueDisplayProps) => {
-  const { queue, view_mode} = props;
+export const EntitySubqueueDisplay = (props: EntitySubqueueDisplayProps) => {
+  const { queue, view_mode } = props;
   const DataObject = new EntitySubqueue(queue);
   const [entitySubqueueData, setEntitySubqueueData] = useState(queue);
 
   if (!entitySubqueueData.hasData()) {
-
     const ecp = new EntityComponentProps(entitySubqueueData);
-    ecp.getData(entitySubqueueData.getIncluded())
-      .then(res => res.json())
-      .then(ajaxData => {
-        console.debug('EntitySubqueue back from ajax call');
+    ecp
+      .getData(entitySubqueueData.getIncluded())
+      .then((res) => res.json())
+      .then((ajaxData) => {
+        console.debug("EntitySubqueue back from ajax call");
         setEntitySubqueueData(new EntitySubqueue(ajaxData.data));
       });
     return (
@@ -41,8 +44,7 @@ export const EntitySubqueueDisplay: React.FunctionComponent = (props: EntitySubq
         browser="false"
       />
     </>
-  )
-
-}
+  );
+};
 
 export default EntitySubqueueDisplay;

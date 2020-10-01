@@ -8,13 +8,12 @@ export interface TaxonomyTermInterface extends EntityInterface {
   drupal_internal__tid?: number;
   field_visibility?: boolean;
   vid?: string;
-
   field_tag_color?: ColorObjectInterface;
   field_tag_icon?: FontAwesomeIconProps;
   path?: PathObjectInterface;
 }
 
-export default class TaxonomyTerm
+export class TaxonomyTerm
   extends Entity
   implements TaxonomyTermInterface {
   description?: string;
@@ -36,8 +35,8 @@ export default class TaxonomyTerm
     Object.assign(this, incoming);
   }
 
-  get field_tag_color(): ColorObjectInterface | null {
-    return this._field_tag_color ?? null;
+  get field_tag_color(): ColorObjectInterface | undefined {
+    return this._field_tag_color;
   }
 
   set field_tag_color(incoming: ColorObjectInterface) {
@@ -65,4 +64,14 @@ export default class TaxonomyTerm
       this._path = new PathObject(incoming);
     }
   }
+
+  hasData(): boolean {
+    return this.status !== undefined;
+  }
+
+  getIncluded(): string {
+    return "&include=field_tag_icon";
+  }
 }
+
+export default TaxonomyTerm;

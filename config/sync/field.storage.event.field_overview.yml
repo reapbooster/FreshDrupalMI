@@ -1,0 +1,21 @@
+uuid: 6ad6d83c-41ac-4127-878e-ec456ac79370
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+    - entity_reference_revisions
+    - paragraphs
+id: event.field_overview
+field_name: field_overview
+entity_type: event
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

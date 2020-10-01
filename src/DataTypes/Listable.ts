@@ -1,9 +1,7 @@
-import React from 'react';
 import JSONApiUrl from "./JSONApiUrl";
-import {EntityInterface} from "./Entity";
+import { EntityInterface } from "./Entity";
 
 export interface ListableInterface {
-
   id: string;
 
   items?: Array<EntityInterface> | undefined;
@@ -12,7 +10,5 @@ export interface ListableInterface {
 
   url?: string;
 
-  browser: React.Component | React.ReactNodeArray;
-
-
+  browser: boolean;
 }

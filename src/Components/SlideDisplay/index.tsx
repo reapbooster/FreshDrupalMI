@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import SlideDisplayFullWidthOneColumn from "./SlideDisplayFullWidthOneColumn";
-import SlideDisplayFiftyFifty from './SlideDisplayFiftyFifty';
-import SlideDisplayHeroHalfHeight from './SlideDisplayHeroHalfHeight';
+import SlideDisplayFiftyFifty from "./SlideDisplayFiftyFifty";
+import SlideDisplayHeroHalfHeight from "./SlideDisplayHeroHalfHeight";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-import { EntityInterface } from '../../DataTypes/Entity';
-import { SlideInterface } from '../../DataTypes/Slide';
-import SlideFiftyFifty from '../../DataTypes/SlideFiftyFifty';
-import SlideFullWidthOneColumn from '../../DataTypes/SlideFullWidthOneColumn';
-import SlideHeroHalfHeight from '../../DataTypes/SlideHeroHalfHeight';
+import { EntityInterface } from "../../DataTypes/Entity";
+import { SlideInterface } from "../../DataTypes/Slide";
+import SlideFiftyFifty from "../../DataTypes/SlideFiftyFifty";
+import SlideFullWidthOneColumn from "../../DataTypes/SlideFullWidthOneColumn";
+import SlideHeroHalfHeight from "../../DataTypes/SlideHeroHalfHeight";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
-import Loading from '../Loading';
+import Loading from "../Loading";
 
 /**
  * Implementation of the Data Model
@@ -17,7 +17,7 @@ import Loading from '../Loading';
  * @param incoming: SlideInterface
  */
 export function SlideDataFactory(incoming: EntityInterface) {
-  switch(incoming.type) {
+  switch (incoming.type) {
     case "slide--50_50_text_on_left":
       return new SlideFullWidthOneColumn(incoming);
     case "slide--50_50_text_on_right":
@@ -27,7 +27,7 @@ export function SlideDataFactory(incoming: EntityInterface) {
     case "slide--hero_half_height":
       return new SlideHeroHalfHeight(incoming);
     default:
-      throw new Error('no Data type defined for: '.concat(incoming.type));
+      throw new Error("no Data type defined for: ".concat(incoming.type));
   }
 }
 
@@ -37,7 +37,7 @@ export function SlideDataFactory(incoming: EntityInterface) {
  * @param incoming: SlideInterface
  */
 export function SlideComponentFactory(incoming: EntityInterface) {
-  switch(incoming.type) {
+  switch (incoming.type) {
     case "slide--50_50_text_on_left":
       return SlideDisplayFiftyFifty;
     case "slide--50_50_text_on_right":
@@ -47,9 +47,8 @@ export function SlideComponentFactory(incoming: EntityInterface) {
     case "slide--hero_half_height":
       return SlideDisplayHeroHalfHeight;
     default:
-      throw new Error('no Component type defined for: '.concat(incoming.type));
+      throw new Error("no Component type defined for: ".concat(incoming.type));
   }
-
 }
 
 /**
@@ -58,18 +57,19 @@ export function SlideComponentFactory(incoming: EntityInterface) {
  * @param SlideDisplayProps
  */
 export interface SlideDisplayProps {
-  data: SlideInterface;
+  data?: SlideInterface;
   view_mode?: string;
 }
 
-export const SlideDisplay: React.FunctionComponent = (props: SlideDisplayProps) => {
+export const SlideDisplay = (props: SlideDisplayProps) => {
   console.debug("Slide Display", props);
-  const {data, view_mode} = props;
-  const [ slideData, setSlideData ] = useState(SlideDataFactory(data));
+  const { data, view_mode } = props;
+  const [slideData, setSlideData] = useState(SlideDataFactory(data));
   if (!slideData.hasData()) {
     const ecp = new EntityComponentProps(slideData);
-    ecp.getData(slideData.getIncluded())
-      .then(res => res.json())
+    ecp
+      .getData(slideData.getIncluded())
+      .then((res) => res.json())
       .then((jsonData) => {
         console.debug("SlideData -- Set Data Returned", jsonData);
         setSlideData(SlideDataFactory(jsonData.data));
@@ -78,7 +78,7 @@ export const SlideDisplay: React.FunctionComponent = (props: SlideDisplayProps) 
       <>
         <Loading />
       </>
-    )
+    );
   }
   const Component = SlideComponentFactory(slideData);
 
@@ -87,6 +87,6 @@ export const SlideDisplay: React.FunctionComponent = (props: SlideDisplayProps) 
       <Component data={slideData} view_mode={view_mode ?? "full"} />
     </ErrorBoundary>
   );
-}
+};
 
 export default SlideDisplay;

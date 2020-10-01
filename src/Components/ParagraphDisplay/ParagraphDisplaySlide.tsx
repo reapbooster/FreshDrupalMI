@@ -1,28 +1,25 @@
-import React from 'react';
+import React from "react";
 import SlideShow from "../Slideshow";
-import {Col} from "react-bootstrap";
-import {ParagraphSlideInterface} from '../../DataTypes/ParagraphSlide';
-import ErrorBoundary from '../../Utility/ErrorBoundary';
+import { Col } from "react-bootstrap";
+import { ParagraphSlideInterface } from "../../DataTypes/ParagraphSlide";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 interface ParagraphDisplaySlideProps {
   data: ParagraphSlideInterface;
   view_mode: string;
 }
 
-
-const ParagraphDisplaySlide: React.FunctionComponent = ( props: ParagraphDisplaySlideProps ) => {
-  const {data, view_mode} = props;
+const ParagraphDisplaySlide: React.FunctionComponent = (
+  props: ParagraphDisplaySlideProps
+) => {
+  const { data, view_mode } = props;
   return (
     <Col lg={12}>
       <ErrorBoundary>
-        <SlideShow
-          items={data.field_slides}
-          view_mode={view_mode}
-        />
+        <SlideShow items={data.field_slides} view_mode={view_mode} />
       </ErrorBoundary>
     </Col>
   );
+};
 
-}
-
-export {ParagraphDisplaySlide as default, ParagraphDisplaySlideProps};
+export { ParagraphDisplaySlide as default, ParagraphDisplaySlideProps };

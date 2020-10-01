@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
-import Loading from '../Loading';
-import ErrorBoundary from '../../Utility/ErrorBoundary';
-import Media, { MediaInterface } from '../../DataTypes/Media';
-import MediaDisplayImage from './MediaDisplayImage';
+import Loading from "../Loading";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
+import { MediaInterface } from "../../DataTypes/Media";
+import MediaDisplayImage from "./MediaDisplayImage";
 import MediaDisplayVideo from "./MediaDisplayVideo";
 import MediaDisplayReport from "./MediaDisplayReport";
 import MediaDisplayPodcastEpisode from "./MediaDisplayPodcastEpisode";
@@ -19,7 +19,7 @@ import MediaPodcastEpisode from "../../DataTypes/MediaPodcastEpisode";
  */
 export function MediaDataFactory(incoming: MediaInterface): MediaInterface {
   console.debug("MediaDataFactory", incoming);
-  switch(incoming.type) {
+  switch (incoming.type) {
     case "media--video":
       return new MediaVideo(incoming);
     case "media--image":
@@ -41,7 +41,7 @@ export function MediaDataFactory(incoming: MediaInterface): MediaInterface {
  */
 export function MediaComponentFactory(incoming: MediaInterface) {
   console.debug("MediaComponentFactory", incoming);
-  switch(incoming.type) {
+  switch (incoming.type) {
     case "media--video":
       return MediaDisplayVideo;
     case "media--image":
@@ -51,12 +51,12 @@ export function MediaComponentFactory(incoming: MediaInterface) {
     case "media--podcast":
       return MediaDisplayPodcastEpisode;
     default:
-      console.error('cannot find component', incoming);
-      throw new Error("Cannot find component for props.type ".concat(incoming.type));
+      console.error("cannot find component", incoming);
+      throw new Error(
+        "Cannot find component for props.type ".concat(incoming.type)
+      );
   }
 }
-
-
 
 /**
  * Create the Controller
@@ -70,37 +70,38 @@ export interface MediaDisplayProps {
   view_mode: string;
 }
 
-export const MediaDisplay: React.FunctionComponent = (props: MediaDisplayProps) => {
-  const {key, data, view_mode} = props;
-  const [ mediaData, setMediaData ] = useState(MediaDataFactory(data));
+export const MediaDisplay: React.FunctionComponent = (
+  props: MediaDisplayProps
+) => {
+  const { key, data, view_mode } = props;
+  const [mediaData, setMediaData] = useState(MediaDataFactory(data));
   console.debug("MediaDisplay", props, mediaData);
   if (!mediaData.hasData()) {
     const ecp = new EntityComponentProps(mediaData);
-    ecp.getData(mediaData.getIncluded())
-    .then(res => res.json())
-    .then((remoteData) => {
-      console.debug("Media Remote Data", remoteData);
-      setMediaData(MediaDataFactory(remoteData.data));
-    });
+    ecp
+      .getData(mediaData.getIncluded())
+      .then((res) => res.json())
+      .then((remoteData) => {
+        console.debug("Media Remote Data", remoteData);
+        setMediaData(MediaDataFactory(remoteData.data));
+      });
     return (
       <div>
         <Loading />
       </div>
-    )
+    );
   }
   const Component = MediaComponentFactory(mediaData);
-  console.debug('get MediaDisplayComponent', Component);
+  console.debug("get MediaDisplayComponent", Component);
   return (
     <ErrorBoundary key={key ?? 0}>
       <Component
         data={mediaData}
         view_mode={view_mode}
-        style={{width: "18rem"}} />
+        style={{ width: "18rem" }}
+      />
     </ErrorBoundary>
-  )
-}
-
-
-
+  );
+};
 
 export default MediaDisplay;

@@ -1,4 +1,17 @@
-class JSONApiUrl {
+import { EntityInterface } from "./Entity";
+import { LinkListInterface } from "./LinkList";
+
+export interface JsonApiListResponse {
+  data: Array<EntityInterface>;
+  links: LinkListInterface;
+}
+
+export interface JSONApiContentResponse {
+  data: EntityInterface;
+  links: LinkListInterface;
+}
+
+export class JSONApiUrl {
   parsed: URL;
 
   query: URLSearchParams;

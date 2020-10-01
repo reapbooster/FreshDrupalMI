@@ -3,7 +3,7 @@
     "compilerOptions": {
       "allowJs": true,
       "checkJs": true,
-      "target": "es2015",
+      "target": "ESNext",
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
       "module": "commonjs",
@@ -29,7 +29,11 @@
         "./config/node", "web/modules/custom/podcasts/components/PodcastsBrowser"
     ],
     "lib": [
-      "es2016"
+      "dom",
+      "dom.iterable",
+      "es2016",
+      "esnext",
+      "es2020"
     ],
     "exclude": [
         "**/*.d.ts",

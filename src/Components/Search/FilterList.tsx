@@ -1,30 +1,32 @@
-import React from 'react';
-import {Form} from 'react-bootstrap';
-import { FacetType, FacetDisplay, FacetInterface, FacetTypeProps } from './Facet';
+import React from "react";
+import { Form } from "react-bootstrap";
+import { FacetInterface, FacetType, FacetTypeProps } from "./Facet";
 
 interface FilterListProps {
-  filters: Array<FacetTypeProps>
+  filters: Array<FacetTypeProps>;
 }
 
-const FilterList: React.FunctionComponent<FilterListProps> = (props: FilterListProps ) => {
+const FilterList: React.FunctionComponent<FilterListProps> = (
+  props: FilterListProps
+) => {
   console.log("Filter List Props:", props);
   if (props.filters.length >= 1) {
     return (
       <>
         <Form>
-          {props.filters.map((facetType: FacetInterface, key: number) => <FacetType {...facetType} key={key} />)}
+          {props.filters.map((facetType: FacetInterface, key: number) => (
+            <FacetType {...facetType} key={key} />
+          ))}
         </Form>
       </>
     );
   } else {
-    return (<div></div>);
+    return <div></div>;
   }
-
-}
+};
 
 FilterList.defaultProps = {
-  filters: []
-}
-
+  filters: [],
+};
 
 export default FilterList;
