@@ -48,7 +48,7 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
         <>
           <Container>
             <ParagraphDisplayList
-              list={landingPageData}
+              list={landingPageData.field_content}
               view_mode={view_mode}
             />
           </Container>
