@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+rm -Rf `yarn cache dir` && composer clear-cache
+rm -Rf node_modules && rm -Rf vendor
+rm -Rf web/modules/contrib && rm -Rf web/themes/contrib && rm -Rf web/core
+
+rm yarn.lock && rm composer.lock
+
+composer install-vendor-dir && yarn install
