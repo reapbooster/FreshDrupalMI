@@ -11,7 +11,6 @@ dependencies:
     - paragraphs.paragraphs_type.podcast_episode
     - paragraphs.paragraphs_type.pull_quote
     - paragraphs.paragraphs_type.slide
-    - paragraphs.paragraphs_type.tiles
   module:
     - entity_reference_revisions
     - paragraph_blocks
@@ -39,7 +38,6 @@ settings:
       block: block
       podcast_episode: podcast_episode
       slide: slide
-      tiles: tiles
     target_bundles_drag_drop:
       author:
         enabled: true

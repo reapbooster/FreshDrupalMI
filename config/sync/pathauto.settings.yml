@@ -1,10 +1,6 @@
 enabled_entity_types:
   - user
   - event
-  - panel
-  - people
-  - rooms
-  - slide
 punctuation:
   double_quotes: 0
   quotes: 0

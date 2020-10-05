@@ -6,13 +6,13 @@
 <span id="slide-{{ eck_entity.get('uuid').value }}" class="slide-display-custom-element">
   <slide-display
     id="slide-display-{{ eck_entity.get('uuid').value }}"
-    data-background-color="{{ eck_entity.get('field_background_color').value.color | default ("#000000")  }}"
-    data-background-opacity="{{ eck_entity.get('field_background_color').value.opacity | default("1") }}"
-    data-text-color="{{ eck_entity.get('field_text_color').value.color | default("#ffffff") }}"
-    data-text-opacity="{{ eck_entity.get('field_text_color').value.opacity | default("1") }}"
-    data-view-mode="{{ view_mode }}"
-    data-entity-type-id="{{ eck_entity.getEntityTypeId }}"
-    data-bundle="{{ eck_entity.bundle }}"
+    background-color="{{ eck_entity.get('field_background_color').value.color | default ("#000000")  }}"
+    background-opacity="{{ eck_entity.get('field_background_color').value.opacity | default("1") }}"
+    text-color="{{ eck_entity.get('field_text_color').value.color | default("#ffffff") }}"
+    text-opacity="{{ eck_entity.get('field_text_color').value.opacity | default("1") }}"
+    view-mode="{{ view_mode }}"
+    entity-type-id="{{ eck_entity.getEntityTypeId }}"
+    bundle="{{ eck_entity.bundle }}"
     {% if background_image %}
       data-background-image="{{ background_image.uri.url }}"
     {% endif %}
@@ -20,6 +20,8 @@
       data-title="{{ eck_entity.get('title').value }}"
     {% endif %}
     changed="{{ eck_entity.get('changed').value }}"
+    data-can-edit="{{ user.hasPermission('edit-any-slide-entities') }}"
+
   >
     <span slot="id">{{ eck_entity.get('uuid').value }}</span>
     <span slot="slide-text">

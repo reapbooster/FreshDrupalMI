@@ -12,10 +12,11 @@ import ErrorBoundary from "../../Utility/ErrorBoundary";
 export interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
   view_mode: string;
+  can_edit: boolean;
 }
 
 export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
-  const { data, view_mode } = props;
+  const { data, view_mode, can_edit } = props;
   const DataObject = new NodeLandingPage(data);
   const [landingPageData, setLandingPageData] = useState(DataObject);
   if (!landingPageData.hasData()) {
@@ -50,6 +51,7 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
             <ParagraphDisplayList
               list={landingPageData.field_content}
               view_mode={view_mode}
+              can_edit={can_edit}
             />
           </Container>
         </>

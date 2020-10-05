@@ -3,10 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.items_from_an_entityqueue.field_background_color
     - field.field.paragraph.items_from_an_entityqueue.field_subqueue
     - field.field.paragraph.items_from_an_entityqueue.field_view_mode
     - paragraphs.paragraphs_type.items_from_an_entityqueue
   module:
+    - color_field
     - entity_browser_entity_form
     - inline_entity_form
 id: paragraph.items_from_an_entityqueue.default
@@ -22,6 +24,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_background_color:
+    weight: 4
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
   field_subqueue:
     weight: 2
     settings:

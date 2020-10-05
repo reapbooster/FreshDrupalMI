@@ -1,0 +1,60 @@
+uuid: 2709d1be-a5f6-4222-932d-aca0d59d7c98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_tiles.field_background_color
+    - field.field.paragraph.content_tiles.field_content_refs
+    - field.field.paragraph.content_tiles.field_title
+    - field.field.paragraph.content_tiles.field_view_mode
+    - paragraphs.paragraphs_type.content_tiles
+  module:
+    - color_field
+id: paragraph.content_tiles.default
+targetEntityType: paragraph
+bundle: content_tiles
+mode: default
+content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_background_color:
+    weight: -6
+    settings:
+      placeholder_color: ''
+      placeholder_opacity: ''
+    third_party_settings: {  }
+    type: color_field_widget_default
+    region: content
+  field_content_refs:
+    weight: -9
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_title:
+    weight: -7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_view_mode:
+    weight: -8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true
