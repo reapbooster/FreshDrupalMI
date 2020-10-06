@@ -27,3 +27,8 @@ ArticlesBrowser:
   version: 1.0
   js:
     components/ArticlesBrowser/ArticlesBrowser.entry.js: { source: 'components/VideosBrowser/VideosBrowser.entry.tsx' }
+
+slide_display:
+  version: 1.0
+  js:
+    js/slide_display.js: { source: js/slide_display.ts }

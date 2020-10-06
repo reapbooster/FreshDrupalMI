@@ -8,31 +8,9 @@
 
 import React from "react";
 import { EntityInterface } from "../../DataTypes/Entity";
-import ParagraphDisplay from "../ParagraphDisplay";
-import NodeDisplay from "../NodeDisplay";
-import MediaDisplay from "../MediaDisplay";
-import EventDisplay from "../EventDisplay";
 import styled, { StyledComponent } from "styled-components";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
-
-export const ListDisplayFactory = (item: EntityInterface) => {
-  const [entityTypeId, bundle] = item.type.split("--");
-  console.debug("list display factory", entityTypeId);
-  switch (entityTypeId) {
-    case "paragraph":
-      return ParagraphDisplay;
-    case "node":
-      return NodeDisplay;
-    case "media":
-      return MediaDisplay;
-    case "event":
-      return EventDisplay;
-
-    default:
-      console.error(`missing display component for ${entityTypeId}`);
-      throw new Error(`Missing config for ${entityTypeId}`);
-  }
-};
+import ListDisplayFactory from "./ListDisplayFactory";
 
 export interface ListDisplayProps {
   id: string;
@@ -50,10 +28,12 @@ export const ListDisplay = function (props: ListDisplayProps) {
     `;
 
   console.debug("list display:", list);
-  if (list.length === 0 ?? true) {
+  if (!Array.isArray(list)) {
     return (
       <>
-        <h1>Nothing in list to display</h1>
+        <ContainerComponent>
+          <h1>Nothing in list to display</h1>
+        </ContainerComponent>
       </>
     );
   }

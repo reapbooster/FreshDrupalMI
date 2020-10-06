@@ -9,11 +9,10 @@ export interface ParagraphDisplayTilesProps {
   data: ParagraphTilesInterface;
 }
 
-export const ParagraphDisplayTiles: React.FunctionComponent = (
-  props: ParagraphDisplayTilesProps
-) => {
+export const ParagraphDisplayTiles = (props: ParagraphDisplayTilesProps) => {
   const { data } = props;
-  const DataObject: ParagraphTilesInterface = ParagraphDataFactory(data);
+  console.debug("ParagraphDisplayTiles => initial data:", data);
+  const DataObject = ParagraphDataFactory(data);
   const [paragraphData, setParagraphData] = useState(DataObject);
   if (!paragraphData.hasData()) {
     console.debug("Paragraph does not have data", paragraphData);
@@ -31,11 +30,11 @@ export const ParagraphDisplayTiles: React.FunctionComponent = (
       </>
     );
   }
-  console.log("paragraph display tiles", paragraphData);
+  console.log("paragraph display tiles should have data:", paragraphData);
   return (
     <ListDisplay
       id="tiles-list-{paragraphData.id}"
-      list={paragraphData.tiles}
+      list={paragraphData.items}
       view_mode={paragraphData.field_view_mode}
     />
   );

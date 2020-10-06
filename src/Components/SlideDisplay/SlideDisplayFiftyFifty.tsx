@@ -29,6 +29,7 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
   }
   const leftOrRight = slideData.type.split("_").pop();
   console.log("Slide Fifty Fifty Data:", slideData);
+
   return (
     <div>
       <h3>Slide--Fifty-Fifty - {leftOrRight}</h3>

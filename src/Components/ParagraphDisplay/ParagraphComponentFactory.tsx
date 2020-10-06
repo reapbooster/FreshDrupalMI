@@ -1,11 +1,11 @@
-import {ParagraphInterface} from "../../DataTypes/Paragraph";
+import { ParagraphInterface } from "../../DataTypes/Paragraph";
 import ParagraphDisplayAuthor from "./ParagraphDisplayAuthor";
 import ParagraphDisplayBlock from "./ParagraphDisplayBlock";
 import ParagraphDisplayBodyContent from "./ParagraphDisplayBodyContent";
 import ParagraphDisplayPullQuote from "./ParagraphDisplayPullQuote";
 import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
 import ParagraphDisplayTiles from "./ParagraphDisplayTiles";
-import {ParagraphDisplayPodcastEpisode} from "./ParagraphDisplayPodcastEpisode";
+import { ParagraphDisplayPodcastEpisode } from "./ParagraphDisplayPodcastEpisode";
 
 /**
  * Create the View Component
@@ -22,7 +22,7 @@ export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
     case "paragraph--body_content":
       return ParagraphDisplayBodyContent;
     case "paragraph--podcast_episode":
-      return ParagraphDisplayPodcastEpisode:
+      return ParagraphDisplayPodcastEpisode;
     case "paragraph--pull_quote":
       return ParagraphDisplayPullQuote;
     case "paragraph--slide":

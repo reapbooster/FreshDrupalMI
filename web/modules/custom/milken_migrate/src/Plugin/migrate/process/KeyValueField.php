@@ -33,13 +33,48 @@ class KeyValueField extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $toReturn = [];
-    foreach ($value as $ordinal => $text) {
-      if (trim($text) !== "") {
-        $toReturn[] = [
-          "key" => "display-" . ($ordinal + 1),
-          "value" => $text,
-          'format' => 'full_html',
-        ];
+
+    $firstRow = $row->getSourceProperty('field_ch_supporting_text_above');
+    if ($firstRow) {
+      $toReturn[] = [
+        "key" => "h2",
+        "value" => $firstRow,
+        'format' => 'full_html',
+      ];
+    }
+    $secondRow = $row->getSourceProperty('name');
+    if ($secondRow) {
+      $toReturn[] = [
+        "key" => "h1",
+        "value" => $secondRow,
+        'format' => 'full_html',
+      ];
+    }
+    $thirdRow = $row->getSourceProperty('field_ch_supporting_text_below');
+    if ($thirdRow) {
+      $toReturn[] = [
+        "key" => "h3",
+        "value" => $thirdRow,
+        'format' => 'full_html',
+      ];
+    }
+    $fourthRow = $row->getSourceProperty('field_supertitle_cta');
+    if ($fourthRow) {
+      $toReturn[] = [
+        "key" => "h4",
+        "value" => $fourthRow,
+        'format' => 'full_html',
+      ];
+    }
+    if (empty($toReturn)) {
+      foreach ($value as $ordinal => $text) {
+        if (trim($text) !== "") {
+          $toReturn[] = [
+            "key" => "h" . $ordinal,
+            "value" => $text,
+            'format' => 'full_html',
+          ];
+        }
       }
     }
     $row->setDestinationProperty($destination_property, $toReturn);

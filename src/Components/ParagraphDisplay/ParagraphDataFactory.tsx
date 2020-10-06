@@ -1,4 +1,4 @@
-import { ParagraphInterface } from "../../DataTypes/Paragraph";
+import Paragraph, { ParagraphInterface } from "../../DataTypes/Paragraph";
 import ParagraphAuthor from "../../DataTypes/ParagraphAuthor";
 import ParagraphBlock from "../../DataTypes/ParagraphBlock";
 import ParagraphBodyContent from "../../DataTypes/ParagraphBodyContent";
@@ -11,7 +11,7 @@ import {
 } from "../../DataTypes/ParagraphTiles";
 import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
 import ParagraphSlide from "../../DataTypes/ParagraphSlide";
-
+import ParagraphPodcastEpisode from "../../DataTypes/ParagraphPodcastEpisode";
 /**
  * Create the DataModel
  *
@@ -20,6 +20,9 @@ import ParagraphSlide from "../../DataTypes/ParagraphSlide";
 
 export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
   console.debug("Paragraph Data Factory:", incoming);
+  if (incoming instanceof Paragraph) {
+    return incoming;
+  }
   switch (incoming.type) {
     case "paragraph--author":
       return new ParagraphAuthor(incoming);
