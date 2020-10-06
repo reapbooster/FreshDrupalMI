@@ -12,6 +12,9 @@ type: list_string
 settings:
   allowed_values:
     -
+      value: full
+      label: Full
+    -
       value: card
       label: Card
     -
@@ -20,6 +23,12 @@ settings:
     -
       value: list_item
       label: 'List Item'
+    -
+      value: slide_prom
+      label: 'Slide Promo'
+    -
+      value: douple_height_tile
+      label: 'Double Height Tile'
   allowed_values_function: ''
 module: options
 locked: false

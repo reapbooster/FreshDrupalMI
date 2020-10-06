@@ -32,15 +32,6 @@ NodeDisplay:
   js:
     js/NodeDisplay.entry.js: { preprocess: 0, source: 'js/NodeDisplay.entry.tsx' }
 
-MediaDisplay:
-  version: 1.0.0
-  footer: true
-  webpack: true
-  drupalSettings:
-    media: null
-  js:
-    js/MediaDisplay.entry.js: { preprocess: 0, source: 'js/MediaDisplay.entry.tsx' }
-
 EventDisplay:
   version: 1.0.0
   footer: true
@@ -58,3 +49,9 @@ ArticleDisplay:
     event: null
   js:
     js/ArticleDisplay.entry.js: { preprocess: 0, source: 'js/ArticleDisplay.entry.tsx' }
+
+image_display:
+  version: 1.0.0
+  header: true
+  js:
+    js/image-display.js: { preprocess: 0, source: 'js/image-display.ts' }

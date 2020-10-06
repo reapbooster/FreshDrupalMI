@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.media.field_event_reference
     - media.type.video
-    - node.type.event
 id: media.video.field_event_reference
 field_name: field_event_reference
 entity_type: media
@@ -19,8 +18,7 @@ default_value_callback: ''
 settings:
   handler: 'default:node'
   handler_settings:
-    target_bundles:
-      event: event
+    target_bundles: {  }
     sort:
       field: _none
     auto_create: false

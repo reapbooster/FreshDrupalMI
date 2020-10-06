@@ -1,19 +1,20 @@
-const pathUtility = require('path');
-const fs = require('fs');
+const { v4: uuidv4 } = require("uuid");
+const pathUtility = require("path");
+const fs = require("fs");
 const webpack = require("webpack");
 const PluginError = require("plugin-error");
-const Logger = require('fancy-log');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const DrupalLibrariesWebpackPlugin = require('drupal-libraries-webpack-plugin');
-const BrowserSyncWebpackPlugin = require('browser-sync-webpack-plugin');
+const Logger = require("fancy-log");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
+const BrowserSyncWebpackPlugin = require("browser-sync-webpack-plugin");
 const babelLoader = {
-  loader: 'babel-loader',
+  loader: "babel-loader",
   options: {
     cacheDirectory: true,
     presets: [
-      '@babel/preset-env',
-      '@babel/preset-typescript',
+      "@babel/preset-env",
+      "@babel/preset-typescript",
       "@babel/preset-react",
     ],
     plugins: [
@@ -25,32 +26,35 @@ const babelLoader = {
       "@babel/plugin-transform-react-jsx",
       "@babel/plugin-transform-runtime",
       "@babel/plugin-transform-typescript",
-      "babel-plugin-styled-components"
+      "babel-plugin-styled-components",
     ],
-    "exclude": [
+    exclude: [
       // \\ for Windows, \/ for Mac OS and Linux
       /node_modules[\/]core-js/,
       /node_modules[\/]webpack[\/]buildin/,
     ],
-  }
+  },
 };
 
 export function parsePath(incoming) {
-  const basename = pathUtility.basename(incoming, pathUtility.extname(incoming));
+  const basename = pathUtility.basename(
+    incoming,
+    pathUtility.extname(incoming)
+  );
   return {
     full: pathUtility.resolve(incoming),
     dirname: pathUtility.dirname(incoming),
     basename: basename,
-    libraryName: basename.replace('.entry', '')
+    libraryName: basename.replace(".entry", ""),
   };
 }
 
 export function configurator(file) {
   const parsedFileName = parsePath(file);
-  console.log(`Configuring: ${parsedFileName.libraryName}`)
+  console.log(`Configuring: ${parsedFileName.libraryName}`);
 
-  var toReturn = {
-    entry: { },
+  const toReturn = {
+    entry: {},
     mode: "development",
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
@@ -58,19 +62,18 @@ export function configurator(file) {
     output: {
       filename: parsedFileName.libraryName + ".entry.js",
       path: pathUtility.resolve(parsedFileName.dirname),
+      jsonpFunction: uuidv4(),
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
-      plugins: [
-
-      ],
+      extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
+      plugins: [],
       alias: {
-        Components: pathUtility.resolve('./src/Components'),
-        DataTypes: pathUtility.resolve('./src/DataTypes'),
-        Fields: pathUtility.resolve('./src/Fields'),
-        Utility: pathUtility.resolve('./src/Utility'),
-      }
+        Components: pathUtility.resolve("./src/Components"),
+        DataTypes: pathUtility.resolve("./src/DataTypes"),
+        Fields: pathUtility.resolve("./src/Fields"),
+        Utility: pathUtility.resolve("./src/Utility"),
+      },
     },
 
     module: {
@@ -78,32 +81,40 @@ export function configurator(file) {
         {
           test: /\.ts(x?)$/,
           exclude: /node_modules/,
-          use: [ babelLoader ]
+          use: [babelLoader],
         },
         {
           enforce: "pre",
           test: /\.js$/,
-          loader: "source-map-loader"
+          loader: "source-map-loader",
         },
         {
           test: /\.css$/i,
-          use: ['style-loader', 'css-loader'],
+          use: [
+            "react-web-component-style-loader",
+            "style-loader",
+            "css-loader",
+          ],
         },
         {
           test: /\.s[ac]ss$/i,
           use: [
-            'style-loader',
-            'css-loader',
-            'sass-loader'
+            "react-web-component-style-loader",
+            "style-loader",
+            "css-loader",
+            "sass-loader",
           ],
-        }
-      ]
+        },
+      ],
     },
     plugins: [
       new webpack.LoaderOptionsPlugin({
-        debug: true
+        debug: true,
       }),
-      new MiniCssExtractPlugin({ filename: "css/[name].css", chunkFilename: "css/[id].css"}),
+      new MiniCssExtractPlugin({
+        filename: "css/[name].css",
+        chunkFilename: "css/[id].css",
+      }),
       new DrupalLibrariesWebpackPlugin(),
       /**
        *  new BrowserSyncWebpackPlugin({
@@ -120,11 +131,11 @@ export function configurator(file) {
       colors: true,
       modules: true,
       reasons: true,
-      errorDetails: true
-    }
-  }
+      errorDetails: true,
+    },
+  };
   toReturn.entry[parsedFileName.libraryName] = file;
   return toReturn;
-};
+}
 
 export default configurator;

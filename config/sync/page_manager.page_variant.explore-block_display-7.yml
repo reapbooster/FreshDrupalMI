@@ -1,0 +1,43 @@
+uuid: a69af024-cfe2-462c-b25f-9a98c658e58c
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.explore
+  content:
+    - 'block_content:hub_headers:1582e9e1-81ed-448a-ba9b-66fb54dee9d0'
+  module:
+    - block_content
+    - system
+id: explore-block_display-7
+label: Events
+variant: block_display
+variant_settings:
+  blocks:
+    f2f682f0-0863-4978-882d-2365f964705c:
+      id: 'block_content:1582e9e1-81ed-448a-ba9b-66fb54dee9d0'
+      label: 'Event Display'
+      provider: block_content
+      label_display: visible
+      status: true
+      info: ''
+      view_mode: full
+      region: top
+      weight: 0
+      uuid: f2f682f0-0863-4978-882d-2365f964705c
+      context_mapping: {  }
+  id: block_display
+  uuid: 5b71e1c9-7d66-4317-a1da-812e665ca303
+  label: null
+  weight: 0
+  page_title: 'Explore Events'
+page: explore
+weight: 0
+selection_criteria:
+  -
+    id: request_path
+    pages: /explore/events
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }

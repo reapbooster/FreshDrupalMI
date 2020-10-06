@@ -27,10 +27,6 @@ dependencies:
     - entity_reference_revisions
     - path
     - text
-id: event.meeting.default
-targetEntityType: event
-bundle: meeting
-mode: default
 third_party_settings:
   field_group:
     group_tabs:
@@ -135,6 +131,10 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: 'Event Details'
+id: event.meeting.default
+targetEntityType: event
+bundle: meeting
+mode: default
 content:
   created:
     type: datetime_timestamp

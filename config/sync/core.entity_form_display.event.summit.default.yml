@@ -1,6 +1,32 @@
 uuid: a1abae09-99a7-4743-95a2-d90d36be41dd
 langcode: en
 status: true
+dependencies:
+  config:
+    - eck.eck_type.event.summit
+    - field.field.event.summit.field_blurb
+    - field.field.event.summit.field_campaign_id
+    - field.field.event.summit.field_campaign_name
+    - field.field.event.summit.field_campaign_owner
+    - field.field.event.summit.field_campaign_type
+    - field.field.event.summit.field_campaign_type_public
+    - field.field.event.summit.field_description
+    - field.field.event.summit.field_event_date
+    - field.field.event.summit.field_grid_event_id
+    - field.field.event.summit.field_hero_image
+    - field.field.event.summit.field_name_short
+    - field.field.event.summit.field_overview
+    - field.field.event.summit.field_published
+    - field.field.event.summit.field_registration_deadline
+    - field.field.event.summit.field_sequential_id
+    - field.field.event.summit.field_speakers
+    - field.field.event.summit.field_tracks
+    - field.field.event.summit.field_venue
+  module:
+    - datetime
+    - entity_reference_revisions
+    - path
+    - text
 third_party_settings:
   field_group:
     group_tabs:
@@ -105,32 +131,6 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: 'Event Details'
-dependencies:
-  config:
-    - eck.eck_type.event.summit
-    - field.field.event.summit.field_blurb
-    - field.field.event.summit.field_campaign_id
-    - field.field.event.summit.field_campaign_name
-    - field.field.event.summit.field_campaign_owner
-    - field.field.event.summit.field_campaign_type
-    - field.field.event.summit.field_campaign_type_public
-    - field.field.event.summit.field_description
-    - field.field.event.summit.field_event_date
-    - field.field.event.summit.field_grid_event_id
-    - field.field.event.summit.field_hero_image
-    - field.field.event.summit.field_name_short
-    - field.field.event.summit.field_overview
-    - field.field.event.summit.field_published
-    - field.field.event.summit.field_registration_deadline
-    - field.field.event.summit.field_sequential_id
-    - field.field.event.summit.field_speakers
-    - field.field.event.summit.field_tracks
-    - field.field.event.summit.field_venue
-  module:
-    - datetime
-    - entity_reference_revisions
-    - path
-    - text
 id: event.summit.default
 targetEntityType: event
 bundle: summit

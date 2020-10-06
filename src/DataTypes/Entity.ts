@@ -1,14 +1,14 @@
 import LinkList, { LinkListInterface } from "./LinkList";
-import EntityComponentProps from '../DataTypes/EntityComponentProps';
+import EntityComponentProps from "../DataTypes/EntityComponentProps";
+import JSONApiUrl from "./JSONApiUrl";
+import * as PathUtility from "path";
 
 export interface EntityInterface {
   changed?: string;
   created?: string;
   id: string;
-  links: LinkListInterface;
+  links?: LinkListInterface;
   type: string;
-  hasData(): boolean;
-  getIncluded(): string;
 }
 
 export default abstract class Entity implements EntityInterface {
@@ -54,23 +54,30 @@ export default abstract class Entity implements EntityInterface {
     }
   }
 
-  get  baseDataUrl(): JSONApiUrl {
-    return new JSONApiUrl(path.join("jsonapi", this.type.replace('--', '/'), this.id), new URLSearchParams('jsonapi_include=true'));
+  get baseDataUrl(): JSONApiUrl {
+    return new JSONApiUrl(
+      PathUtility.join("jsonapi", this.type.replace("--", "/"), this.id),
+      new URLSearchParams("jsonapi_include=true")
+    );
   }
 
   refreshValues(): Promise<EntityInterface> {
     const self = this;
     const ecp = new EntityComponentProps(this);
-    return ecp.getData(this.getIncluded())
-      .then(res => res.json())
+    return ecp
+      .getData(this.getIncluded())
+      .then((res) => res.json())
       .then((ajaxData) => {
         Object.assign(self, ajaxData.data);
         return self;
-    });
+      });
   }
 
-  abstract hasData(): boolean;
-  abstract getIncluded(): string;
+  hasData() {
+    return this._created !== undefined;
+  }
 
-
+  getIncluded() {
+    return "";
+  }
 }

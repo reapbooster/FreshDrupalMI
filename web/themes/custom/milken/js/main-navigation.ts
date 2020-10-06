@@ -1,10 +1,9 @@
-
 interface ReturnedData {
-  data: Array<MenuItemDataInterface>,
+  data: Array<MenuItemDataInterface>;
   jsonapi: object;
   links: object;
   meta: object;
-};
+}
 
 interface MenuItemDataInterface {
   type: string;
@@ -16,28 +15,28 @@ interface MenuItemDataInterface {
   revision_log_message?: string;
   enabled: boolean;
   title: string;
-  description?: string,
+  description?: string;
   menu_name: string;
   link: object;
   external: boolean;
   rediscover: boolean;
   weight: number;
-  expanded: boolean
-  parent?: string
+  expanded: boolean;
+  parent?: string;
   changed: string;
   default_langcode: boolean;
   revision_translation_affected: boolean;
   view_mode: string;
-  metatag?: object
+  metatag?: object;
   bundle: object;
   revision_user: object;
-};
+}
 
-var templateObject = [
-  document.createElement('template'),
-  document.createElement('template'),
-  document.createElement('template'),
-  document.createElement('template'),
+const templateObject = [
+  document.createElement("template"),
+  document.createElement("template"),
+  document.createElement("template"),
+  document.createElement("template"),
 ];
 templateObject[0].innerHTML = `
       <div class="col col-md-3 col-sm-12" id="menucito-About">
@@ -145,7 +144,6 @@ templateObject[2].innerHTML = `
 
   `;
 
-
 templateObject[3].innerHTML = `
         <div class="col col-md-3 col-sm-12" id="menucito-Last" >
             <ul class="menu-content right-column">
@@ -240,14 +238,13 @@ const containerStyle = {
 
 const menuRevealStyle = {
   zIndex: "9999",
-  position: "absolute"
+  position: "absolute",
+};
 
-}
-
-customElements.define('milken-main-navigation',
+customElements.define(
+  "milken-main-navigation",
 
   class extends HTMLElement {
-
     container: HTMLElement;
     menuReveal: HTMLElement;
     menuClose: HTMLElement;
@@ -260,12 +257,11 @@ customElements.define('milken-main-navigation',
     show() {
       console.debug("show", this.container);
       this.container.style.display = "block";
-      this.menuClose = document.getElementById('menu-close');
+      this.menuClose = document.getElementById("menu-close");
       this.menuClose.addEventListener("click", this.hide);
     }
 
     connectedCallback() {
-      console.debug("CONNECTED CALLBACK");
       this.hide();
     }
 
@@ -273,12 +269,12 @@ customElements.define('milken-main-navigation',
       super();
       this.show = this.show.bind(this);
       this.hide = this.hide.bind(this);
-      const shadowRoot = this.attachShadow({mode: 'open'});
-      this.container = document.createElement('div');
+      const shadowRoot = this.attachShadow({ mode: "open" });
+      this.container = document.createElement("div");
       this.container.className = "container-fluid";
-      this.container.id = 'menu-root';
+      this.container.id = "menu-root";
       Object.assign(this.container.style, containerStyle);
-      var row = document.createElement('div')
+      const row = document.createElement("div");
       row.className = "row";
       row.style.display = "flex";
       templateObject.map((item) => {
@@ -286,9 +282,9 @@ customElements.define('milken-main-navigation',
       });
       this.container.appendChild(row);
       shadowRoot.appendChild(this.container);
-      this.menuClose = document.createElement('div');
-      this.menuReveal = document.getElementById('menu-reveal');
-      this.menuReveal.addEventListener('click', this.show);
+      this.menuClose = document.createElement("div");
+      this.menuReveal = document.getElementById("menu-reveal");
+      this.menuReveal.addEventListener("click", this.show);
       Object.assign(this.menuReveal.style, menuRevealStyle);
     }
   }
