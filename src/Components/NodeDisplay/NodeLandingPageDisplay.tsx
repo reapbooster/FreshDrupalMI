@@ -46,7 +46,7 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
     case "full":
       return (
         <>
-          <Container>
+          <Container fluid="true">
             <ParagraphDisplayList
               list={landingPageData.field_content}
               view_mode={view_mode}
