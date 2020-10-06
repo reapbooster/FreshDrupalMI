@@ -13,25 +13,25 @@
     data-view-mode="{{ view_mode }}"
     data-entity-type-id="{{ eck_entity.getEntityTypeId }}"
     data-bundle="{{ eck_entity.bundle }}"
-    {% if background_image %}
-        data-background-image="{{ background_image.uri.url }}"
-    {% endif %}
-    {% if eck_entity.get('title') %}
-      data-title="{{ eck_entity.get('title').value }}"
-    {% endif %}
+
     changed="{{ eck_entity.get('changed').value }}"
+    created="{{ eck_entity.get('created').value }}"
+
   >
     <span slot="id">{{ eck_entity.get('uuid').value }}</span>
     <span slot="slide-text">
       {% if slide_text %}
         {% for line in slide_text %}
-          <h3 class="{{ line.key }}">{{ line.value }}</h3>
+          <span class="{{ line.key }}">{{ line.value }}</span>
         {% endfor %}
       {% endif %}
     </span>
+    {% if eck_entity.get('title') %}
+      <span slot="title">{{ eck_entity.get('title').value }}</span>
+    {% endif %}
 
-    <span slot="field_background_image_tag">
-      <img srcset="" />
+    <span slot="background-image-thumbnail">
+      <img src="{{ node.field_image.entity.uri.value | image_style('thumbnail') }} " />
     </span>
   </slide-display>
 </span>

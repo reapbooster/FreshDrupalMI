@@ -2,8 +2,11 @@ const slideDisplayTemplate = document.createElement("template");
 
 slideDisplayTemplate.innerHTML = `
   <div
-    style="border: 3px solid white;padding: 1rem;"
-  ><slot name="title"></slot></div>
+    style="border: 3px solid white;padding: 1rem; max-width: 2rem; margin-right: 1rem;"
+  >
+    <slot name="background-image-thumbnail"></slot>
+    <slot name="title"></slot>
+  </div>
 `;
 
 customElements.define(
