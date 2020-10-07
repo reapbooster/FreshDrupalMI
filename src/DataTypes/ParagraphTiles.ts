@@ -14,6 +14,9 @@ export interface ParagraphTilesInterface extends ParagraphInterface {
   field_background_color: ColorObjectInterface;
 }
 
+/**
+ * Paragraph Tiles
+ */
 export abstract class ParagraphTiles
   extends Paragraph
   implements ParagraphTilesInterface {
@@ -21,13 +24,13 @@ export abstract class ParagraphTiles
   field_view_mode: string;
   private _field_background_color: ColorObject;
 
-  constructor(props) {
+  protected constructor(props) {
     super(props);
     Object.assign(this, props);
   }
 
   getIncluded(): string {
-    return "&include=field_tile_queue,field_tile_queue.items,paragraph_type";
+    return "&include=paragraph_type";
   }
 
   get field_background_color(): ColorObjectInterface {
@@ -43,13 +46,16 @@ export abstract class ParagraphTiles
   }
 
   hasData() {
-    return Array.isArray(this.tiles);
+    return this.status !== undefined;
   }
   abstract tiles: Array<EntityInterface>;
 }
 
 export default ParagraphTiles;
 
+/**
+ * Paragraph Event Tiles
+ */
 export class ParagraphEventTiles
   extends ParagraphTiles
   implements ParagraphTilesInterface {
@@ -61,14 +67,22 @@ export class ParagraphEventTiles
   }
 
   get tiles(): Array<EventInterface> {
+    console.debug("Paragraph Event Tiles", this);
     return this.field_event_references;
   }
 
   set tiles(incoming: Array<EventInterface>) {
     this.field_event_references = incoming;
   }
+
+  getIncluded(): string {
+    return super.getIncluded().concat(",field_event_references");
+  }
 }
 
+/**
+ * Paragraph Media Tiles
+ */
 export class ParagraphMediaTiles
   extends ParagraphTiles
   implements ParagraphTilesInterface {
@@ -80,14 +94,22 @@ export class ParagraphMediaTiles
   }
 
   get tiles(): Array<MediaInterface> {
+    console.debug("Paragraph Media Tiles", this);
     return this.field_media_refs;
   }
 
   set tiles(incoming: Array<MediaInterface>) {
     this.field_media_refs = incoming;
   }
+
+  getIncluded(): string {
+    return super.getIncluded().concat(",field_media_refs");
+  }
 }
 
+/**
+ * Paragraph Content Tiles
+ */
 export class ParagraphContentTiles
   extends ParagraphTiles
   implements ParagraphTilesInterface {
@@ -99,14 +121,22 @@ export class ParagraphContentTiles
   }
 
   get tiles(): Array<ContentDatatypeInterface> {
+    console.debug("Paragraph Content Tiles", this);
     return this.field_content_refs;
   }
 
   set tiles(incoming: Array<ContentDatatypeInterface>) {
     this.field_content_refs = incoming;
   }
+
+  getIncluded(): string {
+    return super.getIncluded().concat(",field_content_refs");
+  }
 }
 
+/**
+ * Paragraph EntityQueue Tiles
+ */
 export class ParagraphEntityQueueTiles
   extends ParagraphTiles
   implements ParagraphTilesInterface {
@@ -118,16 +148,25 @@ export class ParagraphEntityQueueTiles
   }
 
   get tiles(): Array<EntityInterface> {
+    console.debug("Paragraph EntityQueue Tiles", this);
     return this.field_subqueue?.items;
   }
 
   set tiles(incoming: Array<EntityInterface>) {
-    this.field_subqueue = {
-      items: incoming,
-    };
+    if (this.field_subqueue === undefined) {
+      this.field_subqueue = {};
+    }
+    this.field_subqueue.items = incoming;
+  }
+
+  getIncluded(): string {
+    return super.getIncluded().concat(",field_subqueue,field_subqueue.items");
   }
 }
 
+/**
+ * Paragraph Slide Tiles
+ */
 export class ParagraphSlideTiles
   extends ParagraphTiles
   implements ParagraphTilesInterface {
@@ -139,10 +178,15 @@ export class ParagraphSlideTiles
   }
 
   get tiles(): Array<SlideInterface> {
+    console.debug("Paragraph Slide Tiles", this);
     return this.field_slide_refs;
   }
 
   set tiles(incoming: Array<SlideInterface>) {
     this.field_slide_refs = incoming;
+  }
+
+  getIncluded(): string {
+    return super.getIncluded().concat(",field_slide_refs");
   }
 }

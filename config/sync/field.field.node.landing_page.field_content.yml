@@ -5,12 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_content
     - node.type.landing_page
-    - paragraphs.paragraphs_type.author
-    - paragraphs.paragraphs_type.block
-    - paragraphs.paragraphs_type.body_content
-    - paragraphs.paragraphs_type.podcast_episode
-    - paragraphs.paragraphs_type.pull_quote
-    - paragraphs.paragraphs_type.slide
+    - paragraphs.paragraphs_type.unmigrated_paragraph
   module:
     - entity_reference_revisions
     - paragraph_blocks
@@ -30,49 +25,44 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
+    negate: 1
     target_bundles:
-      body_content: body_content
-      pull_quote: pull_quote
-      author: author
-      block: block
-      podcast_episode: podcast_episode
-      slide: slide
+      unmigrated_paragraph: unmigrated_paragraph
     target_bundles_drag_drop:
       author:
-        enabled: true
         weight: 13
+        enabled: false
       block:
-        enabled: true
         weight: 14
+        enabled: false
       body_content:
-        enabled: true
         weight: 3
-      four_tile_media:
+        enabled: false
+      content_tiles:
         weight: 16
         enabled: false
-      four_tile_media_taxonomy:
+      event_tiles:
         weight: 17
         enabled: false
       items_from_an_entityqueue:
         weight: 18
         enabled: false
-      media_tiles_from_view:
+      media_tiles:
         weight: 19
         enabled: false
       podcast_episode:
-        enabled: true
         weight: 20
-      pull_quote:
-        enabled: true
-        weight: 4
-      slide:
-        enabled: true
-        weight: 22
-      tiles:
-        enabled: true
-        weight: 23
-      unmigrated_paragraph:
-        weight: 24
         enabled: false
+      pull_quote:
+        weight: 4
+        enabled: false
+      slide:
+        weight: 22
+        enabled: false
+      slide_tiles:
+        weight: 23
+        enabled: false
+      unmigrated_paragraph:
+        enabled: true
+        weight: 24
 field_type: entity_reference_revisions

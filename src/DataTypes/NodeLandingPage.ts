@@ -1,17 +1,20 @@
 import Node, { NodeInterface } from "./Node";
 import Paragraph, { ParagraphInterface } from "./Paragraph";
 import MediaImage, { MediaImageInterface } from "./MediaImage";
-import {ListableInterface} from "./Listable";
-import {EntityInterface} from "./Entity";
-import path from 'path';
+import { ListableInterface } from "./Listable";
+import { EntityInterface } from "./Entity";
+import path from "path";
 
-
-export interface NodeLandingPageInterface extends NodeInterface, ListableInterface {
+export interface NodeLandingPageInterface
+  extends NodeInterface,
+    ListableInterface {
   field_content: Array<ParagraphInterface>;
   field_hero_image: MediaImageInterface;
 }
 
-export class NodeLandingPage extends Node implements NodeLandingPageInterface, ListableInterface {
+export class NodeLandingPage
+  extends Node
+  implements NodeLandingPageInterface, ListableInterface {
   field_content: Array<ParagraphInterface>;
 
   _field_hero_image: MediaImage;
@@ -21,7 +24,7 @@ export class NodeLandingPage extends Node implements NodeLandingPageInterface, L
     Object.assign(this, props);
   }
 
-  get field_hero_image() : MediaImageInterface{
+  get field_hero_image(): MediaImageInterface {
     return this._field_hero_image;
   }
 
@@ -38,14 +41,12 @@ export class NodeLandingPage extends Node implements NodeLandingPageInterface, L
   }
 
   get items(): Array<EntityInterface> {
-    return this.field_content ?? [];
+    return this.field_content;
   }
 
   set items(incoming: Array<EntityInterface>) {
     this.field_content = incoming;
   }
-
 }
-
 
 export default NodeLandingPage;

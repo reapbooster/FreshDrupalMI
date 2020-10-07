@@ -90,7 +90,7 @@ content:
       features:
         duplicate: duplicate
         collapse_edit_all: collapse_edit_all
-        add_above: 0
+        add_above: add_above
       paragraphs_browser: content
       modal_width: 80%
       modal_height: auto

@@ -19,6 +19,13 @@ export const ArticleDisplay = (props: ArticleDisplayProps) => {
         </ErrorBoundary>
       );
 
+    case "tile":
+      return (
+        <div>
+          <h1>Article Tile View</h1>
+        </div>
+      );
+
     default:
       return (
         <ErrorBoundary>

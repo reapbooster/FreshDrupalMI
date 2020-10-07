@@ -23,19 +23,12 @@ export default class SlideFiftyFifty
   extends Slide
   implements SlideFiftyFiftyInterface {
   private _field_background_color: ColorObjectInterface;
-
   private _field_background_image: ImageFile;
-
   private _field_link: Link;
-
   private _field_slide_text: Array<SlideKeyValueTextInterface>;
-
   private _field_text_color: ColorObjectInterface;
-
   private _slide_type: SlideType;
-
   field_promoted: boolean;
-
   field_published: boolean;
 
   constructor(incoming: SlideFiftyFiftyInterface) {
@@ -99,5 +92,4 @@ export default class SlideFiftyFifty
   hasData(): boolean {
     return this.drupal_internal__id !== undefined;
   }
-
 }

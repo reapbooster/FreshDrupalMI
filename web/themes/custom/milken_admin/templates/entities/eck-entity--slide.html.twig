@@ -13,6 +13,7 @@
     data-view-mode="{{ view_mode }}"
     data-entity-type-id="{{ eck_entity.getEntityTypeId }}"
     data-bundle="{{ eck_entity.bundle }}"
+<<<<<<< HEAD:web/themes/custom/milken_admin/templates/entities/eck-entity--slide.html.twig
 <<<<<<< Updated upstream:web/themes/custom/milken_admin/templates/eck-entity--slide.html.twig
     {% if background_image %}
         data-background-image="{{ background_image.uri.url }}"
@@ -25,19 +26,31 @@
     changed="{{ eck_entity.get('changed').value }}"
     created="{{ eck_entity.get('created').value }}"
 >>>>>>> Stashed changes:web/themes/custom/milken_admin/templates/entities/eck-entity--slide.html.twig
+=======
+
+    changed="{{ eck_entity.get('changed').value }}"
+    created="{{ eck_entity.get('created').value }}"
+
+>>>>>>> origin/master:web/themes/custom/milken_admin/templates/eck-entity--slide.html.twig
   >
     <span slot="id">{{ eck_entity.get('uuid').value }}</span>
     <span slot="slide-text">
       {% if slide_text %}
         {% for line in slide_text %}
-          <h3 class="{{ line.key }}">{{ line.value }}</h3>
+          <span class="{{ line.key }}">{{ line.value }}</span>
         {% endfor %}
       {% endif %}
     </span>
+<<<<<<< HEAD:web/themes/custom/milken_admin/templates/entities/eck-entity--slide.html.twig
 <<<<<<< Updated upstream:web/themes/custom/milken_admin/templates/eck-entity--slide.html.twig
+=======
+    {% if eck_entity.get('title') %}
+      <span slot="title">{{ eck_entity.get('title').value }}</span>
+    {% endif %}
+>>>>>>> origin/master:web/themes/custom/milken_admin/templates/eck-entity--slide.html.twig
 
-    <span slot="field_background_image_tag">
-      <img srcset="" />
+    <span slot="background-image-thumbnail">
+      <img src="{{ node.field_image.entity.uri.value | image_style('thumbnail') }} " />
     </span>
 =======
     {% if eck_entity.get('title') %}

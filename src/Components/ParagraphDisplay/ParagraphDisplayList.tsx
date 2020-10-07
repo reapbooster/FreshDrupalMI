@@ -19,18 +19,21 @@ export interface ParagraphDisplayListProps {
 
 export const ParagraphDisplayList = (props: ParagraphDisplayListProps) => {
   const { list, view_mode } = props;
-  return (
-    list?.map((item, key) => {
-      console.log("Paragraph Display List => ", list);
-      return (
-        <>
-          <ErrorBoundary key={key}>
-            <ParagraphDisplay data={item} view_mode={view_mode} />
-          </ErrorBoundary>
-        </>
-      );
-    }) ?? []
-  );
+  if (Array.isArray(list)) {
+    return (
+      list?.map((item, key) => {
+        console.log("Paragraph Display List => ", list);
+        return (
+          <>
+            <ErrorBoundary key={key}>
+              <ParagraphDisplay data={item} view_mode={view_mode} />
+            </ErrorBoundary>
+          </>
+        );
+      }) ?? []
+    );
+  }
+  return [];
 };
 
 export default ParagraphDisplayList;

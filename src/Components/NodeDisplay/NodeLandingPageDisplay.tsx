@@ -40,16 +40,17 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
   };
 
   console.debug(
-    "landing page data => ".concat(landingPageData.title),
+    "landing page data ==> ".concat(landingPageData.title),
     landingPageData
   );
   switch (view_mode) {
     case "full":
+      console.debug("LandingPageData.items => ", landingPageData.items);
       return (
         <>
           <Container>
             <ParagraphDisplayList
-              list={landingPageData.field_content}
+              list={landingPageData.items}
               view_mode={view_mode}
               can_edit={can_edit}
             />
