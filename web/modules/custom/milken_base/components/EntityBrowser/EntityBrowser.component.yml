@@ -1,10 +1,10 @@
-name: 'Articles Browser'
-machine_name: ArticlesBrowser
-description: 'Articles Browser entry file'
+name: 'Entity Browser'
+machine_name: EntityBrowser
+description: 'Entity Browser entry file'
 type: block
 core_version_requirement:  ^8 || ^9
 js:
-  'ArticlesBrowser.entry.js': { }
+  'EntityBrowser.entry.js': { }
 cache:
   max-age: 60
 
@@ -26,8 +26,8 @@ form_configuration:
   tag:
     type: textfield
     title: "html tag"
-    default_value: "articles-browser"
+    default_value: "entity-browser"
   attach_library:
     type: textfield
     title: "Attach Library"
-    default_value: "milken_base/ArticlesBrowser"
+    default_value: "milken_base/EntityBrowser"

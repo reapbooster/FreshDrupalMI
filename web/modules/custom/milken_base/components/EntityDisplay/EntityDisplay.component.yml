@@ -1,10 +1,10 @@
-name: 'EventsBrowser'
-machine_name: EventsBrowser
-description: 'Events Browser entry'
+name: 'Entity Display'
+machine_name: EntityDisplay
+description: 'Entity Display entry file'
 type: block
 core_version_requirement:  ^8 || ^9
 js:
-  'EventsBrowser.entry.js': { }
+  'EntityDisplay.entry.js': { }
 cache:
   max-age: 60
 
@@ -19,14 +19,15 @@ form_configuration:
   view_mode:
     type: textfield
     title: "View Mode"
+    default_value: "card"
   url:
     type: textfield
     title: "Url"
   tag:
     type: textfield
     title: "html tag"
-    default_value: "events-browser"
+    default_value: "entity-display"
   attach_library:
     type: textfield
     title: "Attach Library"
-    default_value: "milken_base/EventsBrowser"
+    default_value: "milken_base/EntityDisplay"

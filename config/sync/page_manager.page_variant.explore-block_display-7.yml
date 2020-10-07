@@ -4,27 +4,29 @@ status: true
 dependencies:
   config:
     - page_manager.page.explore
-  content:
-    - 'block_content:hub_headers:1582e9e1-81ed-448a-ba9b-66fb54dee9d0'
   module:
-    - block_content
+    - component
     - system
 id: explore-block_display-7
 label: Events
 variant: block_display
 variant_settings:
   blocks:
-    f2f682f0-0863-4978-882d-2365f964705c:
-      id: 'block_content:1582e9e1-81ed-448a-ba9b-66fb54dee9d0'
-      label: 'Event Display'
-      provider: block_content
+    14426bce-3be1-47f7-b5e2-d360b1d193de:
+      id: 'component:EntityBrowser'
+      label: 'Entity Browser'
+      provider: component
       label_display: visible
-      status: true
-      info: ''
-      view_mode: full
       region: top
       weight: 0
-      uuid: f2f682f0-0863-4978-882d-2365f964705c
+      uuid: 14426bce-3be1-47f7-b5e2-d360b1d193de
+      form_configuration:
+        id: events_browser
+        type: event--conference
+        view_mode: card
+        url: '/jsonapi/event/conference?jsonapi_include=true'
+        tag: entity-browser
+        attach_library: milken_base/EntityBrowser
       context_mapping: {  }
   id: block_display
   uuid: 5b71e1c9-7d66-4317-a1da-812e665ca303

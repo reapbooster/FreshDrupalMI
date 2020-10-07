@@ -1,7 +1,9 @@
-EventsBrowser:
+
+EntityBrowser:
   version: 1.0
   js:
-    components/EventsBrowser/EventsBrowser.entry.js: { source: 'components/EventsBrowser/EventsBrowser.entry.tsx' }
+    components/EntityBrowser/EntityBrowser.entry.js: { source: 'components/EntityBrowser/EntityBrowser.entry.tsx' }
+
 
 PhilanthropyHub:
   version: 1.0
@@ -13,17 +15,12 @@ PodcastBrowser:
   js:
     components/PodcastBrowser/PodcastBrowser.entry.js: { source: 'components/PodcastBrowser/PodcastBrowser.entry.tsx' }
 
-ReportsBrowser:
+slide_display:
   version: 1.0
   js:
-    components/ReportsBrowser/ReportsBrowser.entry.js: { source: 'components/ReportsBrowser/ReportsBrowser.entry.tsx' }
+    js/slide_display.js: { source: "js/slide_display.ts" }
 
-VideosBrowser:
+EntityDisplay:
   version: 1.0
-  js:
-    components/VideosBrowser/VideosBrowser.entry.js: { source: 'components/VideosBrowser/VideosBrowser.entry.tsx' }
-
-ArticlesBrowser:
-  version: 1.0
-  js:
-    components/ArticlesBrowser/ArticlesBrowser.entry.js: { source: 'components/VideosBrowser/VideosBrowser.entry.tsx' }
+    js:
+      components/EntityDisplay/EntityDisplay.entry.js: { source: 'components/EntityDisplay/EntityDisplay.entry.tsx' }

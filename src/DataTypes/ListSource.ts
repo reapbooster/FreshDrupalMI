@@ -13,7 +13,7 @@ export interface ListSourceInterface {
   refresh(): Promise<ListSourceInterface>;
 }
 
-export abstract class ListSource implements ListSourceInterface, ListableInterface {
+export class ListSource implements ListSourceInterface, ListableInterface {
   id: string;
   bundle: string;
 
@@ -61,7 +61,25 @@ export abstract class ListSource implements ListSourceInterface, ListableInterfa
     return new ListSource(incoming);
   }
 
-  abstract refresh(): Promise<ListSourceInterface>;
+  async refresh(url: JSONApiUrl = null): Promise<ListSource> {
+    // if you don't get a new URL, use the one you have
+    console.debug("refresh called!", this, url);
+    const toSend = url instanceof JSONApiUrl ? url : this._url;
+    const self = this;
+    return fetch(toSend.toString(), { signal: this.abortController.signal })
+      .then((res) => res.json())
+      .then((ajaxData) => {
+        console.debug("back from jsonapi", ajaxData);
+        const theClone = self.clone();
+        console.debug("THE CLONED DATA:", theClone);
+        theClone.addItems(ajaxData.data);
+        return theClone;
+      })
+      .catch((e) => {
+        console.error(`Fetch 1 error: ${e.message}`);
+        throw new Error("Error fetching items for list: ".concat(e.message));
+      });
+  }
 
   get items(): Array<EntityInterface> {
     return this._items;
@@ -72,13 +90,11 @@ export abstract class ListSource implements ListSourceInterface, ListableInterfa
   }
 
   addItems(incoming: Array<EntityInterface>) {
-    if (!Array.isArray(this.items)) {
+    if (!Array.isArray(this._items)) {
       this._items = [];
     }
     this._items.push(...incoming);
   }
-
-  abstract clone(): ListSourceInterface;
 
   toObject(): ListSourceInterface {
     return {
@@ -91,7 +107,7 @@ export abstract class ListSource implements ListSourceInterface, ListableInterfa
   }
 
   getInstance(...args: any[]) {
-    var instance = Object.create(Object.getPrototypeOf(this));
+    const instance = Object.create(Object.getPrototypeOf(this));
     instance.constructor.apply(instance, args);
     return instance;
   }

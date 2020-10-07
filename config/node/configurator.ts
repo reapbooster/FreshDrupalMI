@@ -1,16 +1,12 @@
 const { v4: uuidv4 } = require("uuid");
 const pathUtility = require("path");
-const fs = require("fs");
 const webpack = require("webpack");
-const PluginError = require("plugin-error");
-const Logger = require("fancy-log");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
-const BrowserSyncWebpackPlugin = require("browser-sync-webpack-plugin");
 const babelLoader = {
   loader: "babel-loader",
   options: {
+    sourceType: "unambiguous",
     cacheDirectory: true,
     presets: [
       "@babel/preset-env",
@@ -73,6 +69,7 @@ export function configurator(file) {
         DataTypes: pathUtility.resolve("./src/DataTypes"),
         Fields: pathUtility.resolve("./src/Fields"),
         Utility: pathUtility.resolve("./src/Utility"),
+        bootstrap: pathUtility.resolve("./web/libraries/bootstrap"),
       },
     },
 
@@ -90,19 +87,20 @@ export function configurator(file) {
         },
         {
           test: /\.css$/i,
-          use: [
-            "react-web-component-style-loader",
-            "style-loader",
-            "css-loader",
-          ],
+          use: ["sass-to-string", "style-loader", "css-loader"],
         },
         {
           test: /\.s[ac]ss$/i,
           use: [
-            "react-web-component-style-loader",
-            "style-loader",
-            "css-loader",
-            "sass-loader",
+            "sass-to-string",
+            {
+              loader: "sass-loader",
+              options: {
+                sassOptions: {
+                  outputStyle: "compressed",
+                },
+              },
+            },
           ],
         },
       ],

@@ -17,7 +17,6 @@ import { EventSpeakers } from "./EventSpeakers";
 import Loading from "../Loading";
 import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
 import { Event } from "../../DataTypes/Event";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export interface EventFullDisplayProps {
   bundle: string;

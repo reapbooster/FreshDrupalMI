@@ -12,21 +12,21 @@ label: Videos
 variant: block_display
 variant_settings:
   blocks:
-    2c8b696e-5b61-4b97-bf53-a7bdc599f6c1:
-      id: 'component:VideosBrowser'
-      label: 'Videos Browser'
+    2ab06b5b-02c9-4e56-ac85-43cbc452dfb9:
+      id: 'component:EntityBrowser'
+      label: 'Entity Browser'
       provider: component
       label_display: visible
       region: bottom
       weight: 0
-      uuid: 2c8b696e-5b61-4b97-bf53-a7bdc599f6c1
+      uuid: 2ab06b5b-02c9-4e56-ac85-43cbc452dfb9
       form_configuration:
         id: videos_browser
         type: media--video
         view_mode: card
         url: '/jsonapi/media/video?jsonapi_include=true'
-        tag: videos-browser
-        attach_library: milken_base/VideosBrowser
+        tag: entity-browser
+        attach_library: milken_base/EntityBrowser
       context_mapping: {  }
   id: block_display
   uuid: eac4334f-7261-4134-b8e5-90b47185a38a

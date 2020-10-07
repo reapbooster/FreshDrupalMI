@@ -8,10 +8,10 @@
 
 import React from "react";
 import { EntityInterface } from "../../DataTypes/Entity";
-import MediaDisplay from ".";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import { ListableInterface } from "../../DataTypes/Listable";
 import styled, { StyledComponent } from "styled-components";
+import MediaComponentFactory from "./MediaComponentFactory";
 
 interface MediaDisplayListProps {
   list: ListableInterface;
@@ -29,10 +29,11 @@ const MediaDisplayList: React.FunctionComponent = (
       max-width: 18rem;
     `;
   return list.items?.map((item: EntityInterface, key: number) => {
+    const Component = MediaComponentFactory(item);
     return (
       <>
         <ErrorBoundary key={key}>
-          <MediaDisplay
+          <Component
             data={item}
             view_mode={view_mode}
             container={ContainerDiv}

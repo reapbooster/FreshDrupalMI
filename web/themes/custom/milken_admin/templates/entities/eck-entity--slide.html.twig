@@ -13,6 +13,7 @@
     data-view-mode="{{ view_mode }}"
     data-entity-type-id="{{ eck_entity.getEntityTypeId }}"
     data-bundle="{{ eck_entity.bundle }}"
+<<<<<<< Updated upstream:web/themes/custom/milken_admin/templates/eck-entity--slide.html.twig
     {% if background_image %}
         data-background-image="{{ background_image.uri.url }}"
     {% endif %}
@@ -20,6 +21,10 @@
       data-title="{{ eck_entity.get('title').value }}"
     {% endif %}
     changed="{{ eck_entity.get('changed').value }}"
+=======
+    changed="{{ eck_entity.get('changed').value }}"
+    created="{{ eck_entity.get('created').value }}"
+>>>>>>> Stashed changes:web/themes/custom/milken_admin/templates/entities/eck-entity--slide.html.twig
   >
     <span slot="id">{{ eck_entity.get('uuid').value }}</span>
     <span slot="slide-text">
@@ -29,12 +34,26 @@
         {% endfor %}
       {% endif %}
     </span>
+<<<<<<< Updated upstream:web/themes/custom/milken_admin/templates/eck-entity--slide.html.twig
 
     <span slot="field_background_image_tag">
       <img srcset="" />
     </span>
+=======
+    {% if eck_entity.get('title') %}
+      <span slot="title">{{ eck_entity.get('title').value }}</span>
+    {% endif %}
+    <img slot="background-image-thumbnail"
+         srcset="{{ eck_entity.field_background_image.entity.uri.value | image_style('thumbnail') }} 100w
+          {{ eck_entity.field_background_image.entity.uri.value | image_style('medium') }} 220w
+          {{ eck_entity.field_background_image.entity.uri.value | image_style('large') }} 480w
+          {{ eck_entity.field_background_image.entity.uri.value | image_style('fullscreen') }} 1920w"
+          {% if eck_entity.field_background_image.entity.meta.alt %}
+          alt="{{ eck_entity.field_background_image.entity.meta.alt }}"
+          {% endif %}
+         typeof="Image"
+         class="card-img-top"
+    />
+>>>>>>> Stashed changes:web/themes/custom/milken_admin/templates/entities/eck-entity--slide.html.twig
   </slide-display>
 </span>
-
-
-

@@ -1,4 +1,4 @@
-uuid: b25051a4-6c22-4179-83a2-6a739aa859a4
+uuid: cac0d9a7-5918-4f2f-925c-8b137a318872
 langcode: en
 status: true
 dependencies:
@@ -7,38 +7,38 @@ dependencies:
   module:
     - component
     - system
-id: explore-block_display-6
-label: Summits
+id: explore-block_display-8
+label: Slides
 variant: block_display
 variant_settings:
   blocks:
-    d718e03a-bd28-445c-b467-938f6a08913b:
+    26f9a340-4eb0-4f83-86f6-144dad9ab4fd:
       id: 'component:EntityBrowser'
       label: 'Entity Browser'
       provider: component
       label_display: visible
       region: bottom
       weight: 0
-      uuid: d718e03a-bd28-445c-b467-938f6a08913b
+      uuid: 26f9a340-4eb0-4f83-86f6-144dad9ab4fd
       form_configuration:
-        id: summits_browser
-        type: event--sum
+        id: slides_browser
+        type: slide--full_width_one_column
         view_mode: card
-        url: '/jsonapi/event/summit?jsonapi_include=true&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc'
+        url: '/jsonapi/slide/full_width_one_column?jsonapi_include=true'
         tag: entity-browser
         attach_library: milken_base/EntityBrowser
       context_mapping: {  }
   id: block_display
-  uuid: 361e26f8-6b08-43e3-a9ad-32f4a64ebfd4
+  uuid: b922c11d-79fe-4bab-b365-e5ae5d5bcd5c
   label: null
   weight: 0
-  page_title: 'Explore Summits'
+  page_title: 'Explore Slides'
 page: explore
 weight: 0
 selection_criteria:
   -
     id: request_path
-    pages: "/explore/summit\r\n/explore/summits"
+    pages: /explore/slides
     negate: false
     context_mapping: {  }
 selection_logic: and
