@@ -77,7 +77,7 @@ trait JsonAPIDataFetcherTrait {
    * @return \Drupal\file\FileInterface|null
    *   return FileInterface or Null.
    */
-  public function getRemoteFile(string $name, string $url) {
+  public function getRemoteFile(string $name, string $url): ?FileInterface {
     \Drupal::logger('milken_migrate')
       ->debug("Getting remote file: {$url}");
     try {

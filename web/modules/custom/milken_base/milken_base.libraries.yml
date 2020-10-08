@@ -4,7 +4,6 @@ EntityBrowser:
   js:
     components/EntityBrowser/EntityBrowser.entry.js: { source: 'components/EntityBrowser/EntityBrowser.entry.tsx' }
 
-
 PhilanthropyHub:
   version: 1.0
   js:
@@ -18,9 +17,9 @@ PodcastBrowser:
 slide_display:
   version: 1.0
   js:
-    js/slide_display.js: { source: "js/slide_display.ts" }
+    js/slide_display.js: { source: 'js/slide_display.ts' }
 
 EntityDisplay:
   version: 1.0
-    js:
-      components/EntityDisplay/EntityDisplay.entry.js: { source: 'components/EntityDisplay/EntityDisplay.entry.tsx' }
+  js:
+    components/EntityDisplay/EntityDisplay.entry.js: { source: 'components/EntityDisplay/EntityDisplay.entry.tsx' }

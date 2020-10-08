@@ -101,8 +101,8 @@ source:
       label: 'Cvent ID'
       selector: /attributes/cventid
   ids:
-    sequentialID:
-      type: integer
+    eventid:
+      type: string
 process:
   field_sequential_id:
     plugin: skip_on_empty

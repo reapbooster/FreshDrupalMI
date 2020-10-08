@@ -4,24 +4,28 @@ import { ListableInterface } from "./Listable";
 
 export interface ListSourceInterface {
   id: string;
+  type: string;
   url?: string;
   items?: Array<EntityInterface>;
   entityTypeId?: string;
   bundle?: string;
   browser: boolean;
+  view_mode: string;
   hasData(): boolean;
   refresh(): Promise<ListSourceInterface>;
 }
 
-export class ListSource implements ListSourceInterface, ListableInterface {
+export class ListSource
+  implements ListSourceInterface, ListableInterface, EntityInterface {
   id: string;
   bundle: string;
+  type: string;
+  entityTypeId: string;
+  view_mode: string;
 
   _url?: JSONApiUrl;
 
   _items: Array<EntityInterface>;
-
-  entityTypeId: string;
 
   abortController: AbortController;
 
@@ -33,6 +37,13 @@ export class ListSource implements ListSourceInterface, ListableInterface {
     }
     this.browser = false;
     this.abortController = new AbortController();
+    if (incoming.type) {
+      const [entityTypeId, bundle] = incoming.type?.split("--");
+      this.entityTypeId = entityTypeId;
+      this.bundle = bundle;
+    } else if (incoming.entityTypeId && incoming.bundle) {
+      this.type = incoming.entityTypeId.concat("--", incoming.bundle);
+    }
     console.debug("list Source Constructor", this);
   }
 
@@ -44,9 +55,9 @@ export class ListSource implements ListSourceInterface, ListableInterface {
     this._url = new JSONApiUrl(incoming);
   }
 
-  updateQuery(newQuery: URLSearchParams): Promise<Array<any>> {
+  updateQuery(newQuery: URLSearchParams): Promise<ListSourceInterface> {
     this._url.query = newQuery;
-    return this.getSourceData();
+    return this.refresh();
   }
 
   hasData(): boolean {
@@ -61,7 +72,7 @@ export class ListSource implements ListSourceInterface, ListableInterface {
     return new ListSource(incoming);
   }
 
-  async refresh(url: JSONApiUrl = null): Promise<ListSource> {
+  async refresh(url: JSONApiUrl = null): Promise<ListSourceInterface> {
     // if you don't get a new URL, use the one you have
     console.debug("refresh called!", this, url);
     const toSend = url instanceof JSONApiUrl ? url : this._url;

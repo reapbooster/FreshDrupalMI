@@ -12,32 +12,34 @@ const IndividualItemContainer = styled.div`
 
 export interface EntityBrowserProps {
   source: EntityBrowserSource;
-  view_mode: string;
 }
 
 export const EntityBrowser = (props: EntityBrowserProps) => {
-  console.debug("VideosBrowser", props);
-  const { source, view_mode } = props;
+  console.debug("PROPS", props);
+  const { source } = props;
+  const view_mode = props.source.view_mode;
+  console.debug("Entity Browser", source, view_mode);
   const SourceDataObject = new EntityBrowserSource(source);
   const [sourceData, setSourceData] = useState(SourceDataObject);
   console.debug("Entity Source", sourceData);
   if (!sourceData.hasData()) {
     sourceData.refresh().then((sourceWithItems) => {
+      sourceWithItems.view_mode = view_mode;
       setSourceData(sourceWithItems);
     });
     return <Loading />;
   }
-  const Component = EntityComponentFactory(source);
-  console.debug("EntityBrowser: Source W/Data", sourceData);
+  console.debug("EntityBrowser: Source W/Data", sourceData, view_mode);
   return (
     <>
       <CardColumns>
         {sourceData.items.map((item, key) => {
+          const Component = EntityComponentFactory(item);
           return (
             <ErrorBoundary key={key}>
               <Component
                 data={item}
-                view_mode={view_mode}
+                view_mode={sourceData.view_mode}
                 container={IndividualItemContainer}
               />
             </ErrorBoundary>

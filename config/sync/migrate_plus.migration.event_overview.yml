@@ -67,6 +67,50 @@ source:
       name: status
       label: Status
       selector: /status
+    -
+      name: field_4_tile_section_1
+      label: field_4_tile_section_1
+      selector: /field_4_tile_section_1
+    -
+      name: field_event_live_info
+      label: field_event_live_info
+      selector: /field_event_live_info
+    -
+      name: field_event_overview_image
+      label: field_event_overview_image
+      selector: /field_event_overview_image
+    -
+      name: field_event_pp_image
+      label: field_event_pp_image
+      selector: /field_event_pp_image
+    -
+      name: field_event_featured_content
+      label: field_event_featured_content
+      selector: field_event_featured_content
+    -
+      name: field_event_header_image
+      label: field_event_header_image
+      selector: /field_event_header_image
+    -
+      name: field_event_image
+      label: field_event_image
+      selector: /field_event_image
+    -
+      name: field_event_program
+      label: field_event_program
+      selector: /field_event_program
+    -
+      name: field_event_related_videos
+      label: field_event_related_videos
+      selector: /field_event_related_videos
+    -
+      name: field_event_sponsors
+      label: field_event_sponsors
+      selector: /field_event_sponsors
+    -
+      name: field_term_program_initiatives
+      label: field_term_program_initiatives
+      selector: /field_term_program_initiatives
   constants:
     source_url_base: 'https://milkeninstitute.org'
   ids:
@@ -75,8 +119,6 @@ source:
     uuid:
       type: string
 process:
-  uuid: uuid
-  name: name
   langcode:
     plugin: default_value
     default_value: en

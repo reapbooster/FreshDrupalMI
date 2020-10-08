@@ -9,3 +9,8 @@ services:
     arguments: []
     tags:
       - { name: drupal.generator }
+  milken_migrate.milken_migrate_event_title_card:
+    class: Drupal\milken_migrate\Command\EventTitleCardCommand
+    arguments: []
+    tags:
+      - { name: drupal.command }

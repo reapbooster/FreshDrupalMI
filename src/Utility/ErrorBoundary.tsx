@@ -39,9 +39,7 @@ export class ErrorBoundary extends React.Component<
     const content = this.state.hasError ? (
       <>
         <div className="alert alert-danger">
-          <h4>
-            {this.state.error?.message ?? "Something Went Wrong"}
-          </h4>
+          <h4>{this.state.error?.message ?? "Something Went Wrong"}</h4>
         </div>
       </>
     ) : (
@@ -49,7 +47,9 @@ export class ErrorBoundary extends React.Component<
     );
     return (
       <>
-        <error-boundary key={this.props.key || 0}>{content}</error-boundary>
+        <error-boundary className="error-boundary" key={this.props.key}>
+          {content}
+        </error-boundary>
       </>
     );
   }

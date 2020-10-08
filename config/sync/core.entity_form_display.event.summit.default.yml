@@ -14,17 +14,23 @@ dependencies:
     - field.field.event.summit.field_event_date
     - field.field.event.summit.field_grid_event_id
     - field.field.event.summit.field_hero_image
+    - field.field.event.summit.field_meta_tags
     - field.field.event.summit.field_name_short
     - field.field.event.summit.field_overview
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
     - field.field.event.summit.field_sequential_id
     - field.field.event.summit.field_speakers
+    - field.field.event.summit.field_title_card_image
     - field.field.event.summit.field_tracks
     - field.field.event.summit.field_venue
+    - image.style.thumbnail
   module:
     - datetime
     - entity_reference_revisions
+    - field_group
+    - image
+    - metatag
     - path
     - text
 third_party_settings:
@@ -222,6 +228,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_meta_tags:
+    weight: 33
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_name_short:
     weight: 22
     settings:
@@ -267,6 +280,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_title_card_image:
+    weight: 32
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
     region: content
   field_tracks:
     weight: 25

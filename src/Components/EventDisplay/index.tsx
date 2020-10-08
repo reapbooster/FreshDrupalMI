@@ -17,18 +17,11 @@ export interface EventDisplayProps {
   data: EventInterface;
   view_mode: string;
   key?: number;
-  container?: StyledComponent;
 }
 
 export const EventDisplay = (props: EventDisplayProps) => {
-  const { data, view_mode, key, container } = props;
-  const ContainerDiv =
-    container ??
-    styled.div`
-      max-width: 18rem;
-    `;
+  const { data, view_mode, key } = props;
   const DataObject = EventDataFactory(data);
-
   const [eventData, setEventData] = useState(DataObject);
   if (!eventData.hasData()) {
     console.debug("Event Does Not Have Data", eventData);
@@ -37,7 +30,8 @@ export const EventDisplay = (props: EventDisplayProps) => {
       .getData(eventData.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
-        setEventData(EventDataFactory(ajaxData.data));
+        const DataObject = EventDataFactory(ajaxData.data);
+        setEventData(DataObject);
       });
     return (
       <>
@@ -46,25 +40,29 @@ export const EventDisplay = (props: EventDisplayProps) => {
     );
   }
 
-  const getComponent = (vm) => {
-    switch (vm) {
-      case "card":
-        return <EventCardDisplay data={eventData} key={key} />;
-      case "full":
-        return <EventFullDisplay data={eventData} key={key} />;
-      default:
-        const Comp = styled.div`
-          border: 1px solid orange;
-        `;
-        return (
-          <Comp>
-            <event-display {...eventData}></event-display>
-          </Comp>
-        );
-    }
-  };
+  return (
+    <ErrorBoundary>
+      <EventDisplayComponentChooser data={eventData} view_mode={view_mode} />
+    </ErrorBoundary>
+  );
+};
 
-  return <ErrorBoundary>{getComponent(view_mode)}</ErrorBoundary>;
+const EventDisplayComponentChooser = ({ data, view_mode, key }) => {
+  console.debug("EventDisplayComponentChooser => ", data, view_mode);
+  switch (view_mode) {
+    case "card":
+      return <EventCardDisplay data={data} key={key} />;
+    case "full":
+      return <EventFullDisplay data={data} key={key} />;
+    default:
+      throw new Error("No valid mode value.", view_mode);
+  }
+};
+
+EventDisplayComponentChooser.defaultProps = {
+  data: {},
+  view_mode: "dont-render",
+  key: 0,
 };
 
 export default EventDisplay;
