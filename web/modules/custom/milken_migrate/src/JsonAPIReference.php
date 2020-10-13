@@ -83,7 +83,7 @@ class JsonAPIReference {
    */
   public function __construct(array $values = NULL) {
     \Drupal::logger(__CLASS__)
-      ->debug(__CLASS__ . "::" . print_r($values, true));
+      ->debug(__CLASS__ . "::" . print_r($values, TRUE));
     if ($values == NULL || (isset($values['data']) && empty($values['data']))) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }

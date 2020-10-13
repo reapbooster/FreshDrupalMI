@@ -30,15 +30,13 @@ export const EventCardDisplay = (props: EventCardDisplayInterface) => {
           data-drupal-type={eventData.type}
           data-uuid={eventData.id}
         >
-          <ErrorBoundary>
-            <ImageFileDisplay
-              data={eventData.field_title_card_image}
-              view_mode="thumbnail"
-              width="100%"
-              height="220px"
-              className="card-img-top"
-            />
-          </ErrorBoundary>
+          <ImageFileDisplay
+            data={eventData.field_title_card_image}
+            view_mode="thumbnail"
+            width="100%"
+            height="220px"
+            className="card-img-top"
+          />
           <Card.Body style={{ minHeight: "150px" }}>
             <Card.Title>{eventData.title}</Card.Title>
           </Card.Body>
