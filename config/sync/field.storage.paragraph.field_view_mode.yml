@@ -24,10 +24,10 @@ settings:
       value: list_item
       label: 'List Item'
     -
-      value: slide_prom
+      value: slide_promo
       label: 'Slide Promo'
     -
-      value: douple_height_tile
+      value: double_height_tile
       label: 'Double Height Tile'
   allowed_values_function: ''
 module: options

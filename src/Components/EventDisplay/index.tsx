@@ -5,6 +5,7 @@ import ErrorBoundary from "../../Utility/ErrorBoundary";
 import { EventInterface } from "../../DataTypes/Event";
 import { EventCardDisplay } from "./EventCardDisplay";
 import { EventFullDisplay } from "./EventFullDisplay";
+import { EventDoubleHeightTile } from "./EventDoubleHeightTile";
 import styled, { StyledComponent } from "styled-components";
 import { EventDataFactory } from "./EventFactories";
 
@@ -52,10 +53,12 @@ const EventDisplayComponentChooser = ({ data, view_mode, key }) => {
   switch (view_mode) {
     case "card":
       return <EventCardDisplay data={data} key={key} />;
+    case "double_height_tile":
+      return <EventDoubleHeightTile data={data} key={key} />;
     case "full":
       return <EventFullDisplay data={data} key={key} />;
     default:
-      throw new Error("No valid mode value.", view_mode);
+      throw new Error("No valid view mode value.", view_mode);
   }
 };
 

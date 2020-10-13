@@ -24,7 +24,7 @@ variant_settings:
         id: events_browser
         type: event--conference
         view_mode: card
-        url: '/jsonapi/event/conference?jsonapi_include=true&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc'
+        url: /jsonapi/event/conference
         tag: entity-browser
         attach_library: milken_base/EntityBrowser
       context_mapping: {  }

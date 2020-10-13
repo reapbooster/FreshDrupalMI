@@ -21,7 +21,7 @@
   "scripts": {
     "test": "jest",
     "dev": "gulp watch",
-    "build": "gulp"
+    "build": "gulp build"
   },
   "author": "",
   "license": "ISC",

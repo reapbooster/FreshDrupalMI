@@ -20,6 +20,7 @@ dependencies:
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
     - field.field.event.summit.field_sequential_id
+    - field.field.event.summit.field_social_network_links
     - field.field.event.summit.field_speakers
     - field.field.event.summit.field_title_card_image
     - field.field.event.summit.field_tracks
@@ -28,6 +29,7 @@ dependencies:
     - datetime
     - entity_reference_revisions
     - image
+    - key_value_field
     - metatag
     - text
 id: event.summit.default
@@ -174,6 +176,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_integer
+    region: content
+  field_social_network_links:
+    weight: 22
+    label: above
+    settings:
+      value_only: false
+    third_party_settings: {  }
+    type: key_value
     region: content
   field_speakers:
     weight: 13

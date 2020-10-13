@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Loading from "../Loading";
-import { CardColumns } from "react-bootstrap";
+import { CardDeck } from "react-bootstrap";
 import styled from "styled-components";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import EntityBrowserSource from "./EntityBrowserSource";
@@ -32,7 +32,7 @@ export const EntityBrowser = (props: EntityBrowserProps) => {
   console.debug("EntityBrowser: Source W/Data", sourceData, view_mode);
   return (
     <>
-      <CardColumns>
+      <CardDeck>
         {sourceData.items.map((item, key) => {
           const Component = EntityComponentFactory(item);
           return (
@@ -45,7 +45,7 @@ export const EntityBrowser = (props: EntityBrowserProps) => {
             </ErrorBoundary>
           );
         })}
-      </CardColumns>
+      </CardDeck>
     </>
   );
 };

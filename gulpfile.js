@@ -46,18 +46,28 @@ function typescriptCompileCallback(error, stdout, stderr) {
   console.error(error);
 }
 
+/**
+ *  Build typescript before you do any of the others
+ */
+
 gulp.task(
-  "drupalCoreBuild",
-  shell.task("cd web/core && npm install && npm run build")
-);
-gulp.task("clearDrupalCache", shell.task("drush cr"));
-gulp.task(
-  "tsCompile",
+  "buildTypescript",
   shell.task("tsc --esModuleInterop --resolveJsonModule", {
     cwd: path.resolve(basePath, "web"),
   })
 );
-gulp.task("milkenThemeBuild", (done) => {
+
+/**
+ * Build Drupal Stuff
+ */
+
+gulp.task(
+  "buildDrupalCore",
+  shell.task("cd web/core && npm install && npm run build")
+);
+gulp.task("clearDrupalCache", shell.task("drush cr"));
+
+gulp.task("buildMilkenTheme", (done) => {
   return gulp
     .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
     .pipe(sourcemaps.init())
@@ -90,13 +100,17 @@ gulp.task("milkenThemeBuild", (done) => {
 });
 
 gulp.task(
-  "ginThemeBuild",
+  "buildGinTheme",
   shell.task("yarn install && yarn build", {
     cwd: path.resolve(basePath, "web/themes/contrib/gin"),
   })
 );
 
-gulp.task('buildEntryFiles', (done) => {
+/**
+ * Build React components
+ */
+
+gulp.task("buildEntryFiles", (done) => {
   console.log("Building components.");
   const configurator = require("./config/node/configurator").default;
   try {
@@ -122,16 +136,38 @@ gulp.task('buildEntryFiles', (done) => {
   }
 });
 
-gulp.task("themeBuild", gulp.parallel(["milkenThemeBuild", "ginThemeBuild"]));
-
-gulp.task("buildComponents", gulp.series(['tsCompile', 'buildEntryFiles']) );
+/**
+ * Synthetic tasks
+ */
 
 gulp.task(
-  "default",
-  gulp.series(["tsCompile", gulp.parallel(["themeBuild", "buildComponents"])])
+  "themeBuild",
+  gulp.parallel([
+    "buildTypescript",
+    "buildDrupalCore",
+    "buildGinTheme",
+    "buildMilkenTheme",
+  ])
 );
 
-gulp.task('watchComponents', (done) => {
+const gulpDefaultTask = gulp.series(["buildTypescript", "buildEntryFiles"]);
+
+gulp.task("componentBuild", gulpDefaultTask);
+
+gulp.task("default", gulpDefaultTask);
+gulp.task(
+  "build",
+  gulp.series([
+    "buildTypescript",
+    gulp.parallel(["themeBuild", "componentBuild"]),
+  ])
+);
+
+/**
+ * Watches:
+ */
+
+gulp.task("watchComponents", (done) => {
   const configurator = require("./config/node/configurator").default;
   try {
     const webpackConfigs = glob.sync("./**/*.entry.tsx", {}).map((file) => {
@@ -156,6 +192,6 @@ gulp.task('watchComponents', (done) => {
     console.error(err);
     process.exit(1);
   }
-})
+});
 
-gulp.task("watch", gulp.series(['tsCompile', 'watchComponents']));
+gulp.task("watch", gulp.series(["buildTypescript", "watchComponents"]));

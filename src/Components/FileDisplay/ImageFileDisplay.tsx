@@ -11,12 +11,13 @@ interface ImageFileDisplayProps {
   style: Record<string, any>;
   width?: string;
   height?: string;
+  className?: string;
 }
 
 const ImageFileDisplay: React.FunctionComponent = (
   props: ImageFileDisplayProps
 ) => {
-  const { data, view_mode, key, style, width, height } = props;
+  const { data, view_mode, key, style, width, height, className } = props;
   const attributes = {
     width: width ?? "100%",
     height: height ?? "200px,",
@@ -37,6 +38,7 @@ const ImageFileDisplay: React.FunctionComponent = (
   const imageTagStyle = style ?? {
     maxWidth: "320px",
     maxHeight: "200px",
+    width: "100%",
   };
   const [imageData, setImageData] = useState(DataObject);
   console.debug("ImageFileDisplay:", imageData);
@@ -64,6 +66,7 @@ const ImageFileDisplay: React.FunctionComponent = (
           data-uuid={imageData.id}
           {...imageStyleObject.imageAttributes}
           style={imageTagStyle}
+          className={className}
         />
       </>
     );

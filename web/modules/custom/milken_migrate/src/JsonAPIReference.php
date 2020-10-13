@@ -82,6 +82,8 @@ class JsonAPIReference {
    * @throws Drupal\migrate\MigrateSkipProcessException
    */
   public function __construct(array $values = NULL) {
+    \Drupal::logger(__CLASS__)
+      ->debug(__CLASS__ . "::" . print_r($values, true));
     if ($values == NULL || (isset($values['data']) && empty($values['data']))) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }
@@ -133,6 +135,7 @@ class JsonAPIReference {
   public function setValues(array $values) {
     foreach ($values as $key => $value) {
       if ($key == "type") {
+        $this->type = $value;
         [$entityTypeId, $bundleTypeId] = explode("--", $value);
         $this->setEntityTypeId($entityTypeId);
         $this->setBundleTypeId($bundleTypeId);

@@ -17,6 +17,7 @@ export const EventCardDisplay = (props: EventCardDisplayInterface) => {
   const eventData = EventDataFactory(data);
   const ContainerDiv = styled.div`
     max-width: 18rem;
+    margin-bottom: 2rem;
   `;
   const eventDate = moment(eventData.field_event_date, moment.ISO_8601);
   return (
@@ -31,10 +32,11 @@ export const EventCardDisplay = (props: EventCardDisplayInterface) => {
         >
           <ErrorBoundary>
             <ImageFileDisplay
-              data={eventData.field_picture}
+              data={eventData.field_title_card_image}
               view_mode="thumbnail"
               width="100%"
               height="220px"
+              className="card-img-top"
             />
           </ErrorBoundary>
           <Card.Body style={{ minHeight: "150px" }}>

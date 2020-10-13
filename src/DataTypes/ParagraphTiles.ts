@@ -48,7 +48,6 @@ export abstract class ParagraphTiles
   hasData() {
     return this.status !== undefined;
   }
-  abstract tiles: Array<EntityInterface>;
 }
 
 export default ParagraphTiles;
@@ -62,6 +61,7 @@ export class ParagraphEventTiles
   field_event_references: Array<EventInterface>;
 
   constructor(props) {
+    console.debug("Paragraph Event Tiles", props);
     super(props);
     Object.assign(this, props);
   }

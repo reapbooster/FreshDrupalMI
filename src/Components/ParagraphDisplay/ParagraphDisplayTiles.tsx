@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Container } from "react-bootstrap";
 import { ParagraphTilesInterface } from "../../DataTypes/ParagraphTiles";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
@@ -21,8 +22,9 @@ export const ParagraphDisplayTiles = (props: ParagraphDisplayTilesProps) => {
       .getData(paragraphData.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
-        const DataObject = ParagraphDataFactory(ajaxData.data);
-        setParagraphData(DataObject);
+        console.debug("ParagraphDisplayTiles", ajaxData);
+        const returnedData = paragraphDataFactory(data);
+        setParagraphData(returnedData);
       });
     return (
       <>
@@ -31,12 +33,15 @@ export const ParagraphDisplayTiles = (props: ParagraphDisplayTilesProps) => {
     );
   }
   console.log("paragraph display tiles should have data:", paragraphData);
+  // TODO: make this a flex box that holds to 100% and hides anything offscreen
   return (
-    <ListDisplay
-      id="tiles-list-{paragraphData.id}"
-      list={paragraphData.items}
-      view_mode={paragraphData.field_view_mode}
-    />
+    <Container>
+      <ListDisplay
+        id={"tiles-list-".concat(paragraphData.id)}
+        list={paragraphData.tiles}
+        view_mode={paragraphData.field_view_mode}
+      />
+    </Container>
   );
 };
 

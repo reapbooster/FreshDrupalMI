@@ -3,32 +3,35 @@ langcode: en
 status: true
 dependencies:
   config:
-    - views.view.file_entity_browser
     - views.view.slides
   module:
     - views
 name: slide_entity_browser
 label: 'Slide Entity Browser'
-display: iframe
+display: modal
 display_configuration:
   width: '650'
   height: '500'
   link_text: 'Select entities'
   auto_open: true
-selection_display: view
+selection_display: multi_step_display
 selection_display_configuration:
-  view: slides
-  view_display: entity_browser_1
-widget_selector: tabs
+  entity_type: slide
+  display: rendered_entity
+  display_settings:
+    view_mode: entity_browser
+  select_text: 'Use selected'
+  selection_hidden: false
+widget_selector: drop_down
 widget_selector_configuration: {  }
 widgets:
-  e376db98-85f6-45c8-b319-09e1704e2a02:
+  b786c133-855c-473b-8fbf-cd010a135f5f:
     settings:
-      view: file_entity_browser
+      view: slides
       view_display: entity_browser_1
       submit_text: 'Select entities'
-      auto_select: false
-    uuid: e376db98-85f6-45c8-b319-09e1704e2a02
+      auto_select: true
+    uuid: b786c133-855c-473b-8fbf-cd010a135f5f
     weight: 1
-    label: view
+    label: 'Select Existing Entities'
     id: view

@@ -75,9 +75,13 @@ export class ListSource
   async refresh(url: JSONApiUrl = null): Promise<ListSourceInterface> {
     // if you don't get a new URL, use the one you have
     console.debug("refresh called!", this, url);
-    const toSend = url instanceof JSONApiUrl ? url : this._url;
+    const toSend =
+      url instanceof JSONApiUrl ? url.toString() : this._url.toString();
+
     const self = this;
-    return fetch(toSend.toString(), { signal: this.abortController.signal })
+    return fetch(toSend, {
+      signal: this.abortController.signal,
+    })
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("back from jsonapi", ajaxData);

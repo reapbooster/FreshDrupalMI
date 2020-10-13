@@ -4,6 +4,9 @@ import RevisionableEntity, {
 import PathObject, { PathObjectInterface } from "./PathObject";
 import { TextFieldInterface } from "../Fields/TextField";
 import { ParagraphInterface } from "./Paragraph";
+import { ImageFileInterface } from "./ImageFile";
+import { TaxonomyTermInterface } from "./TaxonomyTerm";
+import { EntityTypeInterface } from "./EntityType";
 
 export interface EventInterface extends RevisionableEntityInterface {
   drupal_internal__id?: number;
@@ -26,9 +29,10 @@ export interface EventInterface extends RevisionableEntityInterface {
   field_sequential_id?: number;
   field_speakers?: string;
   field_venue?: string;
-  event_type?: Record<string, any>;
-  field_picture?: Record<string, any>;
-  field_tracks?: Record<string, any>;
+  event_type?: EntityTypeInterface;
+  field_hero_image: ImageFileInterface;
+  field_title_card_image?: ImageFileInterface;
+  field_tracks?: TaxonomyTermInterface;
   field_content?: Array<ParagraphInterface>;
 }
 
@@ -55,9 +59,9 @@ export abstract class Event
   field_sequential_id?: number;
   field_speakers?: string;
   field_venue?: string;
-  event_type?: Record<string, any>;
-  field_picture?: Record<string, any>;
-  field_tracks?: Record<string, any>;
+  event_type?: EntityTypeInterface;
+  field_title_card_image: ImageFileInterface;
+  field_tracks?: TaxonomyTermInterface;
   field_content?: Array<ParagraphInterface>;
 
   get path(): PathObjectInterface {
@@ -73,7 +77,7 @@ export abstract class Event
   }
 
   getIncluded(): string {
-    return "&include=field_overview";
+    return "&include=field_overview&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc";
   }
 
   getEventDate(): Date {
