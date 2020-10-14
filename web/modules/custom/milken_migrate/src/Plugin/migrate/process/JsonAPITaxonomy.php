@@ -15,7 +15,7 @@ use Drupal\taxonomy\Entity\Term;
  * This plugin gets a taxonomy term and returns the ID in a jsonAPI Migration.
  *
  * @MigrateProcessPlugin(
- *   id = "jsonapi_taxonomy",
+ *   id = "milken_migrate:jsonapi_taxonomy",
  *   handle_multiples = true,
  * )
  */
@@ -38,9 +38,13 @@ class JsonAPITaxonomy extends ProcessPluginBase {
     if (is_array($value)) {
       foreach ($value as $relatedRecord) {
         if (isset($relatedRecord['id']) && $relatedRecord['id'] != "missing") {
+          [$entityTypeId, $vocabulary] = explode("--", $relatedRecord['type']);
+          $properties['uuid'] = $relatedRecord['id'];
+          // if the VOCABULARY value is not set, use the value from the remote site
+          $properties['vid'] = isset($this->configuration['vocabulary']) ? $this->configuration['vocabulary'] : $vocabulary;
           $term = \Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
-            ->loadByProperties(['uuid' => $relatedRecord['id']]);
+            ->loadByProperties($properties);
           if (count($term)) {
             $term = array_shift($term);
           }
@@ -71,6 +75,12 @@ class JsonAPITaxonomy extends ProcessPluginBase {
     }
     $row->setDestinationProperty($destination_property, $destination_values);
     return $destination_values;
+  }
+
+  private function translateVocabularyToNewSite($jsonapiTypeValue) {
+
+
+
   }
 
 }

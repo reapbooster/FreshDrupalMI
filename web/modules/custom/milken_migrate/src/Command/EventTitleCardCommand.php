@@ -92,6 +92,8 @@ class EventTitleCardCommand extends ContainerAwareCommand {
         $eventImage = $localEvent->toArray()['field_title_card_image'];
       }
 
+
+
       $localEvent->save();
 
     }

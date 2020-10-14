@@ -23,3 +23,9 @@ EntityDisplay:
   version: 1.0
   js:
     components/EntityDisplay/EntityDisplay.entry.js: { source: 'components/EntityDisplay/EntityDisplay.entry.tsx' }
+
+
+Dashboard:
+  version: 1.0
+  js:
+    components/Dashboard/Dashboard.entry.js: { source: 'components/Dashboard/Dashboard.entry.tsx' }

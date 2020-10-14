@@ -95,7 +95,7 @@
         "drupal/gatsby": "1.x-dev",
         "drupal/gin": "3.x-dev",
         "drupal/gin_login": "^1.0@RC",
-        "drupal/gin_toolbar": "^1.0@beta",
+        "drupal/gin_toolbar": "1.x-dev",
         "drupal/graphql": "4.x-dev",
         "drupal/hax": "^3.2",
         "drupal/hook_event_dispatcher": "^1.27",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "465d2759e4a8b498427cda031fb00d22",
+    "content-hash": "6fb8dc4eb1ebcd8b12d15cf3ee75f045",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -725,7 +725,7 @@
             "version": "1.8.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bgrins/spectrum.git",
+                "url": "https://github.com/bgrins/spectrum.git",
                 "reference": "9aa028de7e8039c41ac792485a928edb97d4ac40"
             },
             "dist": {
@@ -8150,7 +8150,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gatsby.git",
-                "reference": "596ce090cec03b0d63317e835ba84e8d59bf871d"
+                "reference": "37d000272195f8df1b6486e98676e0d9c44d46e9"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -8165,8 +8165,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-rc3+2-dev",
-                    "datestamp": "1600466417",
+                    "version": "8.x-1.0-rc3+14-dev",
+                    "datestamp": "1602367810",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -8200,7 +8200,7 @@
                 "source": "http://cgit.drupalcode.org/gatsby",
                 "issues": "https://www.drupal.org/project/issues/gatsby"
             },
-            "time": "2020-10-10T22:09:44+00:00"
+            "time": "2020-10-13T15:56:16+00:00"
         },
         {
             "name": "drupal/gin",
@@ -8325,29 +8325,26 @@
         },
         {
             "name": "drupal/gin_toolbar",
-            "version": "1.0.0-beta12",
+            "version": "dev-1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gin_toolbar.git",
-                "reference": "8.x-1.0-beta12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-8.x-1.0-beta12.zip",
-                "reference": "8.x-1.0-beta12",
-                "shasum": "3f24ab8867138584c7e6dee702b96b4f774c4341"
+                "reference": "4c957c42091542c27329be9607f399f55fe828a0"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
                 "drupal": {
-                    "version": "8.x-1.0-beta12",
-                    "datestamp": "1597406503",
+                    "version": "8.x-1.0-beta12+2-dev",
+                    "datestamp": "1598632287",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -8380,7 +8377,8 @@
                     "type": "other",
                     "url": "https://paypal.me/saschaeggi"
                 }
-            ]
+            ],
+            "time": "2020-08-28T16:31:06+00:00"
         },
         {
             "name": "drupal/graphql",
@@ -22049,16 +22047,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v4.5.2",
+            "version": "v4.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "5f2480a90ab911babc53039835fe78c6fc12646d"
+                "reference": "a716fb03f965dc0846df479e14388b1b4b93d7ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/5f2480a90ab911babc53039835fe78c6fc12646d",
-                "reference": "5f2480a90ab911babc53039835fe78c6fc12646d",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a716fb03f965dc0846df479e14388b1b4b93d7ce",
+                "reference": "a716fb03f965dc0846df479e14388b1b4b93d7ce",
                 "shasum": ""
             },
             "replace": {
@@ -22102,7 +22100,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-08-06T16:22:43+00:00"
+            "time": "2020-10-13T15:38:30+00:00"
         },
         {
             "name": "twig/twig",
@@ -24363,7 +24361,7 @@
         "drupal/gatsby": 20,
         "drupal/gin": 20,
         "drupal/gin_login": 5,
-        "drupal/gin_toolbar": 10,
+        "drupal/gin_toolbar": 20,
         "drupal/graphql": 20,
         "drupal/image_style_warmer": 10,
         "drupal/imageapi_optimize": 15,

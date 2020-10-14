@@ -28,11 +28,12 @@ dependencies:
     - image.style.thumbnail
   module:
     - datetime
-    - entity_reference_revisions
     - field_group
     - image
     - key_value_field
+    - media_library
     - metatag
+    - paragraphs
     - path
     - text
 third_party_settings:
@@ -44,6 +45,7 @@ third_party_settings:
         - group_dates
         - group_promotion
         - group_event_details
+        - group_media
       parent_name: ''
       weight: 20
       format_type: tabs
@@ -55,10 +57,9 @@ third_party_settings:
       label: Tabs
     group_overview:
       children:
-        - field_name_short
         - field_description
         - field_blurb
-        - field_hero_image
+        - field_name_short
         - field_overview
       parent_name: group_tabs
       weight: 20
@@ -78,7 +79,7 @@ third_party_settings:
         - field_published
         - path
       parent_name: group_tabs
-      weight: 20
+      weight: 60
       format_type: tab
       region: content
       format_settings:
@@ -105,11 +106,13 @@ third_party_settings:
       label: Dates
     group_promotion:
       children:
-        - field_campaign_name
         - field_campaign_id
+        - field_campaign_name
+        - field_campaign_owner
         - field_campaign_type
         - field_campaign_type_public
-        - field_campaign_owner
+        - field_meta_tags
+        - field_social_network_links
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -124,10 +127,10 @@ third_party_settings:
     group_event_details:
       children:
         - field_grid_event_id
-        - field_venue
         - field_speakers
-        - field_sequential_id
+        - field_venue
         - field_tracks
+        - field_sequential_id
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -139,6 +142,21 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: 'Event Details'
+    group_media:
+      children:
+        - field_hero_image
+        - field_title_card_image
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Media
 id: event.summit.default
 targetEntityType: event
 bundle: summit
@@ -223,12 +241,9 @@ content:
   field_hero_image:
     weight: 28
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      media_types: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: media_library_widget
     region: content
   field_meta_tags:
     weight: 33
@@ -248,12 +263,14 @@ content:
   field_overview:
     weight: 31
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_autocomplete
+    type: entity_reference_paragraphs
     region: content
   field_published:
     weight: 11

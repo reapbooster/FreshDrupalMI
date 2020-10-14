@@ -20,7 +20,7 @@ use Drupal\migrate\Row;
  * @endcode
  *
  * @MigrateProcessPlugin(
- *   id = "milken_reference",
+ *   id = "milken_migrate:reference",
  * )
  */
 class Reference extends ProcessPluginBase {

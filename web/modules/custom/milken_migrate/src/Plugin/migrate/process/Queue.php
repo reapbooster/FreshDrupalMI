@@ -25,7 +25,7 @@ use Drupal\migrate\Row;
  * be derived.
  *
  * @MigrateProcessPlugin(
- *   id = "milken_create_queue_from_array",
+ *   id = "milken_migrate:queue",
  * );
  */
 class Queue extends ProcessPluginBase implements MigrateProcessInterface {

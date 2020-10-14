@@ -37,7 +37,7 @@ source:
       label: Type
       selector: /attributes/type
     -
-      name: eventid
+      name: grid_event_id
       label: EventID
       selector: /attributes/eventid
     -
@@ -100,8 +100,12 @@ source:
       name: cventid
       label: 'Cvent ID'
       selector: /attributes/cventid
+    -
+      name: publish
+      label: Publish
+      selector: /attributes/publish
   ids:
-    eventid:
+    grid_event_id:
       type: string
 process:
   field_sequential_id:
@@ -153,13 +157,11 @@ process:
   field_grid_event_id:
     plugin: callback
     callable: mb_strtolower
-    source: eventid
-  field_published:
-    plugin: default_value
-    default_value: true
+    source: grid_event_id
   status:
-    plugin: default_value
-    default_value: true
+    plugin: callback
+    callable: boolval
+    source: publish
   uid:
     plugin: default_value
     default_value: 2

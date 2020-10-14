@@ -11,7 +11,7 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags: null
 migration_group: milken
-label: 'Paragraph--4_tile_section VIA JSON API'
+label: 'Paragraph--4_tile_taxonomy VIA JSON API'
 source:
   plugin: url
   urls: 'https://milkeninstitute.org/jsonapi/paragraph/4_tile_section'
@@ -23,7 +23,6 @@ source:
   jsonapi_include: true
   included:
     - field_4tile_items
-    - field_topic_tag_sarasa
   fields:
     -
       name: paragraph_id
@@ -96,21 +95,18 @@ process:
   queue_machine_name:
     plugin: machine_name
     source: title
-  four_tile_items:
+  field_subqueue:
     -
       plugin: skip_on_empty
       source: field_4tile_items
       message: 'Field field_4tile_items is missing'
       method: row
     -
-      plugin: milken_create_queue_from_array
+      plugin: 'milken_migrate:queue'
       source: field_4tile_items
       title_source: title
       queue_machine_name_source: queue_machine_name
-  field_topics:
-    plugin: jsonapi_taxonomy
-    source: field_topic_tag_sarasa
 destination:
   plugin: 'entity_reference_revisions:paragraph'
-  default_bundle: four_tile_block_queue
+  default_bundle: items_from_an_entityqueue
 migration_dependencies: {  }

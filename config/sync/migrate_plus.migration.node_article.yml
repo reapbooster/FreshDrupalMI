@@ -151,19 +151,19 @@ process:
     link_bundle: article
     prepend_to: field_content
   field_centers_general:
-    plugin: jsonapi_taxonomy
+    plugin: 'milken_migrate:jsonapi_taxonomy'
     vocabulary: centers
     source: centers_tax
   field_term_collection:
-    plugin: jsonapi_taxonomy
+    plugin: 'milken_migrate:jsonapi_taxonomy'
     vocabulary: collections
     source: term_collection_tax
   field_term_program_initiatives:
-    plugin: jsonapi_taxonomy
+    plugin: 'milken_migrate:jsonapi_taxonomy'
     vocabulary: program_initiatives
     source: program_initiatives_tax
   field_topics:
-    plugin: jsonapi_taxonomy
+    plugin: 'milken_migrate:jsonapi_taxonomy'
     vocabulary: topics
     source: topics_tax
   import_body_field_to_paragraph:

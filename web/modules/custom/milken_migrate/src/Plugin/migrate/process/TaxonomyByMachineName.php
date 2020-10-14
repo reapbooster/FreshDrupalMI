@@ -12,7 +12,7 @@ use Drupal\taxonomy\Entity\Term;
  * This plugin gets a taxonomy term and returns the ID in a jsonAPI Migration.
  *
  * @MigrateProcessPlugin(
- *   id = "milken_migrate:toxonomy_by_name",
+ *   id = "milken_migrate:taxonomy_by_name",
  *   handle_multiples=true,
  * )
  */

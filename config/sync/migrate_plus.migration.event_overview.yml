@@ -36,9 +36,9 @@ source:
     - field_term_program_initiatives
   fields:
     -
-      name: nid
-      label: 'Media ID'
-      selector: /drupal_internal__nid
+      name: grid_event_id
+      label: 'Grid Event ID'
+      selector: /field_grid_event_id
     -
       name: uuid
       label: 'Unique ID'
@@ -114,11 +114,10 @@ source:
   constants:
     source_url_base: 'https://milkeninstitute.org'
   ids:
-    nid:
-      type: integer
-    uuid:
+    grid_event_id:
       type: string
 process:
+  field_grid_event_id: grid_event_id
   langcode:
     plugin: default_value
     default_value: en
