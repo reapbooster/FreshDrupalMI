@@ -40,7 +40,8 @@ class JsonAPITaxonomy extends ProcessPluginBase {
         if (isset($relatedRecord['id']) && $relatedRecord['id'] != "missing") {
           [$entityTypeId, $vocabulary] = explode("--", $relatedRecord['type']);
           $properties['uuid'] = $relatedRecord['id'];
-          // if the VOCABULARY value is not set, use the value from the remote site
+          // If the VOCABULARY value is not set, use the value
+          // from the remote site.
           $properties['vid'] = isset($this->configuration['vocabulary']) ? $this->configuration['vocabulary'] : $vocabulary;
           $term = \Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
@@ -75,12 +76,6 @@ class JsonAPITaxonomy extends ProcessPluginBase {
     }
     $row->setDestinationProperty($destination_property, $destination_values);
     return $destination_values;
-  }
-
-  private function translateVocabularyToNewSite($jsonapiTypeValue) {
-
-
-
   }
 
 }

@@ -20,6 +20,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class MilkenMigrateDestinationBase extends EntityContentBase {
 
+  /**
+   * Container to share.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   */
   protected $container;
 
   /**
@@ -33,6 +38,8 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
    *   The plugin implementation definition.
    * @param \Drupal\migrate\Plugin\MigrationInterface $migration
    *   The migration entity.
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   Container from which to pull all your storage needs.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, ContainerInterface $container) {
     $entity_type = static::getEntityTypeId($plugin_id);

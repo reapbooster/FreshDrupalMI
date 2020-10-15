@@ -23,7 +23,13 @@ use Drupal\milken_migrate\JsonAPIReference;
 class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
 
   /**
+   * Get id of entity to which we're migrating.
    *
+   * @param \Drupal\migrate\Row $row
+   *   Row data.
+   *
+   * @return string
+   *   Returns the value of the property 'grid_event_id'.
    */
   protected function getEntityId(Row $row) {
     return $row->getSourceProperty('grid_event_id');
@@ -213,12 +219,12 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
    *   The Event Entity.
    * @param string $tabName
    *   Name for the new tab.
-   * @param $paragraph_field
+   * @param array $paragraph_field
    *   Field data from the old site.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function importTab(EntityInterface $entity, string $tabName, $paragraph_field) {
+  public function importTab(EntityInterface $entity, string $tabName, array $paragraph_field) {
     // .9 create new paragraph tab with the string TabName as the ID.
     $paragraph_storage = $this->container->get('entity_type.manager')->getStorage('paragraph');
     $paragraph_tab = $paragraph_storage->create([
