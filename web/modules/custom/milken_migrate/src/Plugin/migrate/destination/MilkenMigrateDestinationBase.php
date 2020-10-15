@@ -9,8 +9,9 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\migrate\destination\EntityContentBase;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
-use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\Row;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Milken Migrate Destination Base Class.
@@ -19,6 +20,60 @@ use Drupal\migrate\Plugin\MigrationInterface;
  */
 abstract class MilkenMigrateDestinationBase extends EntityContentBase {
 
+  protected $container;
+
+  /**
+   * Constructs a content entity.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
+   *   The migration entity.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, ContainerInterface $container) {
+    $entity_type = static::getEntityTypeId($plugin_id);
+    $entityStorage = $container->get('entity_type.manager')->getStorage($entity_type);
+    $fieldManger = $container->get('entity_field.manager');
+    $fieldTypeManager = $container->get('plugin.manager.field.field_type');
+    $bundles = array_keys(
+      $container->get('entity_type.bundle.info')
+        ->getBundleInfo($entity_type)
+    );
+    parent::__construct($configuration, $plugin_id, $plugin_definition,
+      $migration,
+      $entityStorage,
+      $bundles,
+      $fieldManger,
+      $fieldTypeManager
+    );
+    $this->container = $container;
+    $this->storage = $entityStorage;
+    $this->entityFieldManager = $fieldManger;
+    $this->fieldTypeManager = $fieldTypeManager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
+
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $migration,
+      $container,
+      array_keys($container->get('entity_type.bundle.info')
+        ->getBundleInfo($entity_type)),
+      $container->get('entity_field.manager'),
+      $container->get('plugin.manager.field.field_type')
+    );
+  }
+
   /**
    * Supports Rollback?
    *
@@ -26,6 +81,7 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
    *    Yes or no.
    */
   protected $supportsRollback = TRUE;
+
   /**
    * Type of Entity.
    *
@@ -33,6 +89,7 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
    *    EckEntityInterface is produced.
    */
   protected $entityType;
+
   /**
    * Field Manager.
    *
@@ -74,7 +131,7 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
   /**
    * Must be implemented and add any related reference fields.
    */
-  abstract public function setRelatedFields(Row $row, EntityInterface $entity) : EntityInterface;
+  abstract public function setRelatedFields(Row $row, EntityInterface $entity): EntityInterface;
 
   /**
    * Get a list of fields and their labels.

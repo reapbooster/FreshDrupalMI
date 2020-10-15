@@ -11,6 +11,6 @@ accent_color: ''
 preset_focus_color: gin
 focus_color: ''
 high_contrast_mode: 0
-classic_toolbar: vertical
+classic_toolbar: '1'
 icon_default: 1
 icon_upload: ''

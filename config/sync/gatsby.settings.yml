@@ -1,9 +1,12 @@
 preview:
   landing_page: 0
   opportunity: 0
+  session: 0
 iframe:
   landing_page: 0
   opportunity: 0
+  session: 0
 target:
   landing_page: window
   opportunity: window
+  session: window

@@ -10,13 +10,13 @@ dependencies:
     - field.field.event.summit.field_campaign_owner
     - field.field.event.summit.field_campaign_type
     - field.field.event.summit.field_campaign_type_public
+    - field.field.event.summit.field_content_tabs
     - field.field.event.summit.field_description
     - field.field.event.summit.field_event_date
     - field.field.event.summit.field_grid_event_id
     - field.field.event.summit.field_hero_image
     - field.field.event.summit.field_meta_tags
     - field.field.event.summit.field_name_short
-    - field.field.event.summit.field_overview
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
     - field.field.event.summit.field_sequential_id
@@ -94,6 +94,15 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_content_tabs:
+    weight: 23
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
   field_description:
     weight: 4
     label: above
@@ -139,15 +148,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
-    region: content
-  field_overview:
-    weight: 19
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
     region: content
   field_published:
     weight: 1

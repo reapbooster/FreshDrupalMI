@@ -193,8 +193,59 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       \Drupal::logger(__CLASS__)
         ->debug("field_social_network_links =>" . print_r($to_set, TRUE));
     }
+
+    if ($remoteEvent['field_enable_program_overview'] === TRUE) {
+      $this->importTab($entity, 'Overview', $remoteEvent['field_event_featured_content']);
+    }
+
+    if ($remoteEvent['field_enable_program_details'] === TRUE) {
+      $this->importTab('Details', $remoteEvent['need_detail_field']);
+    }
+
     $entity->save();
     return $entity;
+  }
+
+  /**
+   * Do the work of moving an event tab from the old site to new.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The Event Entity.
+   * @param string $tabName
+   *   Name for the new tab.
+   * @param $paragraph_field
+   *   Field data from the old site.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function importTab(EntityInterface $entity, string $tabName, $paragraph_field) {
+    // .9 create new paragraph tab with the string TabName as the ID.
+    $paragraph_storage = $this->container->get('entity_type.manager')->getStorage('paragraph');
+    $paragraph_tab = $paragraph_storage->create([
+      'type' => 'paragraph_tab',
+    ]);
+    // Loop over the $paragraph_field.
+    foreach ($paragraph_field as $paragraph) {
+      // Search for local paragraph replica via uuid.
+      $results = $paragraph_storage->loadByProperties(['uuid' => $paragraph['id']]);
+      $tab_contents = $paragraph_tab->get('field_tab_contents');
+      if (count($results)) {
+        // 3. If does exist, save references to the paragraphs in the
+        //    newly-created tab.
+        $tab_contents[] = reset($results);
+      }
+      else {
+        // 4. If doesn't exist, flag as "un-migrated".
+      }
+      $paragraph_tab->set('field_tab_contents', $tab_contents);
+      // 5. Save Paragraph Tab.
+      $paragraph_tab->save();
+    }
+    // 6. Connect the Paragraph Tab to the event => field_content_tabs
+    $content_tabs = $entity->get('field_content_tabs');
+    $content_tabs[] = $paragraph_tab;
+    $entity->set('field_content_tabs', $content_tabs);
+    $entity->save();
   }
 
 }

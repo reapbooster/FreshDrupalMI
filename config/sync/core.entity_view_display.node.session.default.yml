@@ -1,0 +1,30 @@
+uuid: 24aea7fe-85ba-4015-b0c9-129fe5c3de17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.session.field_event
+    - node.type.session
+  module:
+    - user
+id: node.session.default
+targetEntityType: node
+bundle: session
+mode: default
+content:
+  field_event:
+    weight: 101
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

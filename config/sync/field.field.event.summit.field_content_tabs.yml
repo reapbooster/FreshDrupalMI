@@ -1,21 +1,22 @@
-uuid: e3386c5c-3512-4e42-8049-e3bba9145905
+uuid: 749508c9-19dd-4651-94f6-cc3c17e3857f
 langcode: en
 status: true
 dependencies:
   config:
     - eck.eck_type.event.summit
-    - field.storage.event.field_overview
+    - field.storage.event.field_content_tabs
+    - paragraphs.paragraphs_type.paragraph_tab
   module:
     - entity_reference_revisions
     - paragraph_blocks
 third_party_settings:
   paragraph_blocks:
     status: 1
-id: event.summit.field_overview
-field_name: field_overview
+id: event.summit.field_content_tabs
+field_name: field_content_tabs
 entity_type: event
 bundle: summit
-label: Overview
+label: Tabs
 description: ''
 required: false
 translatable: true
@@ -24,43 +25,50 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
-    target_bundles: null
+    negate: 0
+    target_bundles:
+      paragraph_tab: paragraph_tab
     target_bundles_drag_drop:
       author:
-        weight: 13
-        enabled: false
-      block:
-        weight: 14
-        enabled: false
-      body_content:
         weight: 15
         enabled: false
-      four_tile_media:
+      block:
         weight: 16
         enabled: false
-      four_tile_media_taxonomy:
+      body_content:
         weight: 17
         enabled: false
-      items_from_an_entityqueue:
+      content_tiles:
         weight: 18
         enabled: false
-      media_tiles_from_view:
+      event_tiles:
         weight: 19
         enabled: false
-      podcast_episode:
+      items_from_an_entityqueue:
         weight: 20
         enabled: false
-      pull_quote:
+      media_tiles:
         weight: 21
         enabled: false
-      slide:
+      paragraph_tab:
+        enabled: true
         weight: 22
-        enabled: false
-      tiles:
+      podcast_episode:
         weight: 23
         enabled: false
-      unmigrated_paragraph:
+      pull_quote:
         weight: 24
+        enabled: false
+      slide:
+        weight: 25
+        enabled: false
+      slide_tiles:
+        weight: 26
+        enabled: false
+      tiles_taxonomy:
+        weight: 27
+        enabled: false
+      unmigrated_paragraph:
+        weight: 28
         enabled: false
 field_type: entity_reference_revisions

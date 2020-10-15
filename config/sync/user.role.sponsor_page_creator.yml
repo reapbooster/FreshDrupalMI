@@ -7,6 +7,15 @@ label: 'Sponsor Page creator'
 weight: 69
 is_admin: false
 permissions:
+  - 'administer display modes'
+  - 'administer event fields'
+  - 'administer media fields'
+  - 'administer node display'
+  - 'administer node fields'
+  - 'administer paragraph fields'
+  - 'administer people fields'
+  - 'administer slide fields'
+  - 'administer taxonomy_term fields'
   - 'create event entities'
   - 'create panel entities'
   - 'create people entities'

@@ -6,4 +6,13 @@ id: editors
 label: Editors
 weight: 64
 is_admin: null
-permissions: {  }
+permissions:
+  - 'administer display modes'
+  - 'administer event fields'
+  - 'administer media fields'
+  - 'administer node display'
+  - 'administer node fields'
+  - 'administer paragraph fields'
+  - 'administer people fields'
+  - 'administer slide fields'
+  - 'administer taxonomy_term fields'

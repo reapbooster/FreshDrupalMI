@@ -1,4 +1,4 @@
-uuid: 6ad6d83c-41ac-4127-878e-ec456ac79370
+uuid: d2c04f53-a1e7-454a-a152-27778933a6dc
 langcode: en
 status: true
 dependencies:
@@ -6,8 +6,8 @@ dependencies:
     - eck
     - entity_reference_revisions
     - paragraphs
-id: event.field_overview
-field_name: field_overview
+id: event.field_tabs
+field_name: field_tabs
 entity_type: event
 type: entity_reference_revisions
 settings:

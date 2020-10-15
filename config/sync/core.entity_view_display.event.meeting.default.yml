@@ -10,13 +10,13 @@ dependencies:
     - field.field.event.meeting.field_campaign_owner
     - field.field.event.meeting.field_campaign_type
     - field.field.event.meeting.field_campaign_type_public
+    - field.field.event.meeting.field_content_tabs
     - field.field.event.meeting.field_description
     - field.field.event.meeting.field_event_date
     - field.field.event.meeting.field_grid_event_id
     - field.field.event.meeting.field_hero_image
     - field.field.event.meeting.field_meta_tags
     - field.field.event.meeting.field_name_short
-    - field.field.event.meeting.field_overview
     - field.field.event.meeting.field_published
     - field.field.event.meeting.field_registration_deadline
     - field.field.event.meeting.field_sequential_id
@@ -99,6 +99,15 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_content_tabs:
+    weight: 23
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
   field_description:
     weight: 5
     label: above
@@ -144,15 +153,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
-    region: content
-  field_overview:
-    weight: 19
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
     region: content
   field_published:
     weight: 1

@@ -7,6 +7,7 @@ import { ParagraphInterface } from "./Paragraph";
 import { ImageFileInterface } from "./ImageFile";
 import { TaxonomyTermInterface } from "./TaxonomyTerm";
 import { EntityTypeInterface } from "./EntityType";
+import { ParagraphTabInterface } from "./ParagraphTab";
 
 export interface EventInterface extends RevisionableEntityInterface {
   drupal_internal__id?: number;
@@ -33,7 +34,7 @@ export interface EventInterface extends RevisionableEntityInterface {
   field_hero_image: ImageFileInterface;
   field_title_card_image?: ImageFileInterface;
   field_tracks?: TaxonomyTermInterface;
-  field_content?: Array<ParagraphInterface>;
+  field_content_tabs?: Array<ParagraphTabInterface>;
 }
 
 export abstract class Event
@@ -62,7 +63,7 @@ export abstract class Event
   event_type?: EntityTypeInterface;
   field_title_card_image: ImageFileInterface;
   field_tracks?: TaxonomyTermInterface;
-  field_content?: Array<ParagraphInterface>;
+  field_content_tabs?: Array<ParagraphTabInterface>;
 
   get path(): PathObjectInterface {
     return this._path;

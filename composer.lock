@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fb8dc4eb1ebcd8b12d15cf3ee75f045",
+    "content-hash": "414f5dfb128eb48a43a528ac4c2ab661",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -9292,6 +9292,66 @@
             }
         },
         {
+            "name": "drupal/jsonapi_schema",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/jsonapi_schema.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_schema-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "31fd6599e9c844edfc599e67c3501669ac4716e2"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1597997774",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Gabe Sullice (gabesullice)",
+                    "homepage": "https://www.drupal.org/u/gabesullice",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Mateu Aguiló Bosch (e0ipso)",
+                    "homepage": "https://www.drupal.org/u/e0ipso",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "gabesullice",
+                    "homepage": "https://www.drupal.org/user/2287430"
+                }
+            ],
+            "description": "Provides schema for all JSON:API routes.",
+            "homepage": "http://drupal.org/project/jsonapi_schema",
+            "keywords": [
+                "Drupal",
+                "JSON Schema",
+                "JSON:API"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/jsonapi_schema",
+                "issues": "https://www.drupal.org/project/issues/jsonapi_schema"
+            }
+        },
+        {
             "name": "drupal/key_value_field",
             "version": "1.2.0",
             "source": {
@@ -9573,6 +9633,50 @@
             "homepage": "https://www.drupal.org/project/layout_builder_styles",
             "support": {
                 "source": "https://git.drupalcode.org/project/layout_builder_styles"
+            }
+        },
+        {
+            "name": "drupal/layout_builder_tabs",
+            "version": "1.0.0-beta3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_tabs.git",
+                "reference": "1.0.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_tabs-1.0.0-beta3.zip",
+                "reference": "1.0.0-beta3",
+                "shasum": "be240bc3ae63e9411cad5ef946123dcb9ca9ea23"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-beta3",
+                    "datestamp": "1595066380",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "mandclu",
+                    "homepage": "https://www.drupal.org/user/52136"
+                }
+            ],
+            "description": "Provides a layout to show blocks as a tabs set",
+            "homepage": "https://www.drupal.org/project/layout_builder_tabs",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_builder_tabs"
             }
         },
         {
@@ -24370,8 +24474,10 @@
         "drupal/jsonapi_cross_bundles": 15,
         "drupal/jsonapi_extras": 20,
         "drupal/jsonapi_resources": 10,
+        "drupal/jsonapi_schema": 10,
         "drupal/layout_builder_kit": 10,
         "drupal/layout_builder_styles": 10,
+        "drupal/layout_builder_tabs": 10,
         "drupal/layout_library": 10,
         "drupal/layout_paragraphs": 10,
         "drupal/layout_section_classes": 5,

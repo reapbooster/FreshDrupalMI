@@ -82,6 +82,7 @@ module:
   jsonapi_image_styles: 0
   jsonapi_include: 0
   jsonapi_resources: 0
+  jsonapi_schema: 0
   key_value_field: 0
   kint: 0
   language: 0
@@ -89,6 +90,7 @@ module:
   layout_builder_kit: 0
   layout_builder_restrictions: 0
   layout_builder_styles: 0
+  layout_builder_tabs: 0
   layout_discovery: 0
   layout_paragraphs: 0
   link: 0

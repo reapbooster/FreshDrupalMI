@@ -1,0 +1,22 @@
+uuid: dd919452-b52e-492e-bf23-f8285b15011d
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.program_day
+id: paragraph.program_day.default
+targetEntityType: paragraph
+bundle: program_day
+mode: default
+content:
+  admin_title:
+    type: string_textfield
+    weight: -10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

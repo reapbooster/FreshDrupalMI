@@ -10,13 +10,13 @@ dependencies:
     - field.field.event.meeting.field_campaign_owner
     - field.field.event.meeting.field_campaign_type
     - field.field.event.meeting.field_campaign_type_public
+    - field.field.event.meeting.field_content_tabs
     - field.field.event.meeting.field_description
     - field.field.event.meeting.field_event_date
     - field.field.event.meeting.field_grid_event_id
     - field.field.event.meeting.field_hero_image
     - field.field.event.meeting.field_meta_tags
     - field.field.event.meeting.field_name_short
-    - field.field.event.meeting.field_overview
     - field.field.event.meeting.field_published
     - field.field.event.meeting.field_registration_deadline
     - field.field.event.meeting.field_sequential_id
@@ -33,7 +33,7 @@ dependencies:
     - key_value_field
     - media_library
     - metatag
-    - paragraphs
+    - paragraphs_browser
     - path
     - text
 third_party_settings:
@@ -60,7 +60,7 @@ third_party_settings:
         - field_description
         - field_blurb
         - field_name_short
-        - field_overview
+        - field_content_tabs
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -216,6 +216,28 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_content_tabs:
+    weight: 61
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: '0'
+      add_mode: paragraphs_browser
+      form_display_mode: default
+      default_paragraph_type: paragraph_tab
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+        add_above: add_above
+      paragraphs_browser: _na
+      modal_width: 80%
+      modal_height: auto
+    third_party_settings: {  }
+    type: paragraphs_browser
+    region: content
   field_description:
     weight: 15
     settings:
@@ -259,18 +281,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-    region: content
-  field_overview:
-    weight: 31
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    type: entity_reference_paragraphs
     region: content
   field_published:
     weight: 11

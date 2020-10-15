@@ -6,4 +6,13 @@ id: content_creator
 label: 'Content creator'
 weight: 63
 is_admin: null
-permissions: null
+permissions:
+  - 'administer display modes'
+  - 'administer event fields'
+  - 'administer media fields'
+  - 'administer node display'
+  - 'administer node fields'
+  - 'administer paragraph fields'
+  - 'administer people fields'
+  - 'administer slide fields'
+  - 'administer taxonomy_term fields'

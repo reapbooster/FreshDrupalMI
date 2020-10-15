@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Row,
   Nav,
@@ -11,215 +11,101 @@ import {
 import { EventDataFactory } from "./EventFactories";
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import { EventHero } from "./EventHero";
-import { EventProgram } from "./EventProgram";
-import { EventSponsors } from "./EventSponsors";
-import { EventSpeakers } from "./EventSpeakers";
 import Loading from "../Loading";
 import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
-import { Event } from "../../DataTypes/Event";
+import {Event, EventInterface} from "../../DataTypes/Event";
+import {ParagraphTabInterface} from "../../DataTypes/ParagraphTab";
+
+if (String.ucWords === undefined) {
+  String.prototype.ucWords = function () {
+    const str = this.toLowerCase();
+    return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g, function (s) {
+      return s.toUpperCase();
+    });
+  };
+}
 
 export interface EventFullDisplayProps {
-  bundle: string;
-  canEdit: boolean;
-  class: string;
-  drupalInternalId: string;
-  drupalSelector: string;
-  entityTypeId: string;
-  gridId: string;
-  id: string;
-  type: string;
-  viewMode: string;
+  data: EventInterface;
 }
 
-export interface EventFullDisplayState {
-  data: Event;
-  loading: boolean;
-  loaded: boolean;
-  gridId: string;
-  view_mode: string;
-  entityTypeId: string;
-  bundle: string;
-  can_edit: boolean;
+
+
+export const getNavTabs = (paragraphTab: ParagraphTabInterface, key: number) => {
+  return (
+    <NavItem key={key}>
+      <NavLink
+        data-toggle="tab"
+        role="tab"
+        aria-controls={paragraphTab.admin_title}
+        aria-selected={false}
+        href={"#".concat(paragraphTab.admin_title.toLowerCase()}
+        active={false}
+      >
+        {paragraphTab.admin_title.toString().ucWords()}
+      </NavLink>
+    </NavItem>
+  );
 }
 
-export class EventFullDisplay extends React.Component<
-  EventFullDisplayProps,
-  EventFullDisplayState
-> {
-  constructor(props) {
-    super(props);
-    console.debug("EventFullDisplay => construct", props);
-    const DataObject = {
-      id: props.id,
-      type: props.type,
-    };
-    this.state = {
-      data: EventDataFactory(DataObject),
-      loading: false,
-      loaded: false,
-      gridId: props.gridId,
-      view_mode: props.viewMode,
-      entityTypeId: props.entityTypeId,
-      bundle: props.bundle,
-      can_edit: props.canEdit,
-    };
-  }
-
-  componentDidMount() {
-    const { data } = this.state;
-    if (!data.hasData()) {
-      this.setState({ loading: true });
-      const ecp = new EntityComponentProps(data);
-      ecp
-        .getData(data.getIncluded())
-        .then((res) => res.json())
-        .then((ajaxData) => {
-          const DataObject = EventDataFactory(ajaxData.data);
-          this.setState({
-            loading: false,
-            loaded: true,
-            data: DataObject,
-          });
-        })
-        .catch((err) => {
-          console.error(
-            "EventFullDisplay => Error response from JSONAPI:",
-            err
-          );
-        });
-    }
-  }
-
-  webComponentConnected() {
-    console.debug("EventFullDisplay => webComponentConnected", this);
-  }
-
-  render() {
-    console.debug("EventFullDisplay => Render", this.props, this.state);
-    const { data, loading, loaded } = this.state;
-    if (loaded === true) {
-      return (
-        <>
-          <EventHero data={data} />
-          <Container
-            id={"event-tabs".concat(data.id)}
-            defaultActiveKey="overview"
-          >
-            <Row p={3} className={"bg-light text-dark"}>
-              <Col sm={12}>
-                <Nav tabs justified role="tablist">
-                  <NavItem>
-                    <NavLink
-                      data-toggle="tab"
-                      role="tab"
-                      aria-controls="overview"
-                      aria-selected="true"
-                      href="#overview"
-                      active
-                    >
-                      Overview
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      data-toggle="tab"
-                      role="tab"
-                      aria-controls="program"
-                      aria-selected="false"
-                      href="#program"
-                    >
-                      Program
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      data-toggle="tab"
-                      role="tab"
-                      aria-controls="speakers"
-                      aria-selected="false"
-                      href="#Speakers"
-                    >
-                      Speakers
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      data-toggle="tab"
-                      role="tab"
-                      aria-controls="sponsors"
-                      aria-selected="false"
-                      href="sponsors"
-                    >
-                      Sponsors
-                    </NavLink>
-                  </NavItem>
-                </Nav>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={12}>
-                <div className="tab-content">
-                  <div
-                    className="tab-pane active"
-                    id="overview"
-                    role="tabpanel"
-                    aria-labelledby="overview"
-                    title="Overview"
-                  >
-                    <h3>Overview</h3>
-                    <ParagraphDisplayList
-                      view_mode="full"
-                      list={data.field_content}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane active"
-                    id="program"
-                    role="tabpanel"
-                    aria-labelledby="program"
-                    title="Program"
-                  >
-                    <EventProgram
-                      gridID={data.field_grid_event_id}
-                      data={data}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane active"
-                    id="speakers"
-                    role="tabpanel"
-                    aria-labelledby="speakers"
-                    title="Program"
-                  >
-                    <EventSpeakers
-                      gridID={data.field_grid_event_id}
-                      data={data}
-                    />
-                  </div>
-                  <div
-                    className="tab-pane active"
-                    id="sponsors"
-                    role="tabpanel"
-                    aria-labelledby="sponsors"
-                    title="Sponsors"
-                  >
-                    <EventSponsors
-                      gridID={data.field_grid_event_id}
-                      data={data}
-                    />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </>
-      );
-    } else if (loading === true || (loading === false && loaded === false)) {
-      console.debug("EventFullDisplay => Loading", this.props, this.state);
-      return <Loading />;
-    }
-    return <div>No Data To Render</div>;
-  }
+export const getTabPanes = (paragraphTab: ParagraphTabInterface, key: number) => {
+  return (
+    <div className="tab-content" key={key}>
+      <div
+        className={"tab-pane-"}
+        id="overview"
+        role="tabpanel"
+        aria-labelledby="overview"
+        title="Overview"
+      >
+        <h3>{paragraphTab.admin_title.toString().ucWords()}</h3>
+        <ParagraphDisplayList
+          view_mode="full"
+          list={paragraphTab.field_tab_content}
+        />
+      </div>
+    </div>
+  );
 }
+
+export const EventFullDisplay = (props: EventFullDisplayProps ) => {
+  console.debug("EventFullDisplay => Render", props);
+  const {data}= props;
+  const DataObject = EventDataFactory(data);
+  const [eventData, setEventData] = useState(DataObject);
+
+  if (!eventData.hasData()) {
+    const ecp = new EntityComponentProps(eventData);
+    ecp.getData(eventData.getIncluded())
+      .then(res => res.json())
+      .then(ajaxData => {
+        const DataObject = new EventDataFactory(ajaxData.data);
+        setEventData(DataObject);
+      });
+    return <Loading />;
+  }
+  console.debug("Event should have data now:", eventData);
+  return (
+    <>
+      <EventHero data={eventData.field_hero_image} />
+      <Container
+        id={"event-tabs".concat(data.id)}
+        defaultActiveKey="overview"
+      >
+        <Row p={3} className={"bg-light text-dark"}>
+          <Col sm={12}>
+            <Nav tabs justified role="tablist">
+              {eventData.field_content_tabs.map((item, key) => getNavTabs)}
+            </Nav>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12}>{eventData.field_content_tabs.map((item, key) => getTabPanes)}</Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
+
 
 export default EventFullDisplay;
