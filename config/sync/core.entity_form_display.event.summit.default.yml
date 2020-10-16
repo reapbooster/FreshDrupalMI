@@ -19,9 +19,11 @@ dependencies:
     - field.field.event.summit.field_name_short
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
+    - field.field.event.summit.field_related_media
     - field.field.event.summit.field_sequential_id
     - field.field.event.summit.field_social_network_links
     - field.field.event.summit.field_speakers
+    - field.field.event.summit.field_sponsors
     - field.field.event.summit.field_title_card_image
     - field.field.event.summit.field_tracks
     - field.field.event.summit.field_venue
@@ -295,6 +297,16 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_related_media:
+    weight: 63
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_sequential_id:
     weight: 26
     settings:
@@ -325,6 +337,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_sponsors:
+    weight: 64
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_title_card_image:
     weight: 32
