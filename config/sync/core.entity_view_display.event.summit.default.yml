@@ -210,11 +210,12 @@ content:
     type: entity_reference_label
     region: content
   field_venue:
-    weight: 14
+    weight: 24
     label: above
-    settings: {  }
+    settings:
+      link: true
     third_party_settings: {  }
-    type: basic_string
+    type: entity_reference_label
     region: content
   title:
     label: hidden

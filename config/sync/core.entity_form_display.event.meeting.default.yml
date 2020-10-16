@@ -345,12 +345,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_venue:
-    weight: 25
+    weight: 62
     settings:
-      rows: 5
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Row,
   Nav,
@@ -13,8 +13,8 @@ import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import { EventHero } from "./EventHero";
 import Loading from "../Loading";
 import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
-import {Event, EventInterface} from "../../DataTypes/Event";
-import {ParagraphTabInterface} from "../../DataTypes/ParagraphTab";
+import { Event, EventInterface } from "../../DataTypes/Event";
+import { ParagraphTabInterface } from "../../DataTypes/ParagraphTab";
 
 if (String.ucWords === undefined) {
   String.prototype.ucWords = function () {
@@ -29,9 +29,10 @@ export interface EventFullDisplayProps {
   data: EventInterface;
 }
 
-
-
-export const getNavTabs = (paragraphTab: ParagraphTabInterface, key: number) => {
+export const getNavTabs = (
+  paragraphTab: ParagraphTabInterface,
+  key: number
+) => {
   return (
     <NavItem key={key}>
       <NavLink
@@ -39,16 +40,19 @@ export const getNavTabs = (paragraphTab: ParagraphTabInterface, key: number) => 
         role="tab"
         aria-controls={paragraphTab.admin_title}
         aria-selected={false}
-        href={"#".concat(paragraphTab.admin_title.toLowerCase()}
+        href={"#".concat(paragraphTab.admin_title.toLowerCase())}
         active={false}
       >
         {paragraphTab.admin_title.toString().ucWords()}
       </NavLink>
     </NavItem>
   );
-}
+};
 
-export const getTabPanes = (paragraphTab: ParagraphTabInterface, key: number) => {
+export const getTabPanes = (
+  paragraphTab: ParagraphTabInterface,
+  key: number
+) => {
   return (
     <div className="tab-content" key={key}>
       <div
@@ -66,19 +70,20 @@ export const getTabPanes = (paragraphTab: ParagraphTabInterface, key: number) =>
       </div>
     </div>
   );
-}
+};
 
-export const EventFullDisplay = (props: EventFullDisplayProps ) => {
+export const EventFullDisplay = (props: EventFullDisplayProps) => {
   console.debug("EventFullDisplay => Render", props);
-  const {data}= props;
+  const { data } = props;
   const DataObject = EventDataFactory(data);
   const [eventData, setEventData] = useState(DataObject);
 
   if (!eventData.hasData()) {
     const ecp = new EntityComponentProps(eventData);
-    ecp.getData(eventData.getIncluded())
-      .then(res => res.json())
-      .then(ajaxData => {
+    ecp
+      .getData(eventData.getIncluded())
+      .then((res) => res.json())
+      .then((ajaxData) => {
         const DataObject = new EventDataFactory(ajaxData.data);
         setEventData(DataObject);
       });
@@ -88,10 +93,7 @@ export const EventFullDisplay = (props: EventFullDisplayProps ) => {
   return (
     <>
       <EventHero data={eventData.field_hero_image} />
-      <Container
-        id={"event-tabs".concat(data.id)}
-        defaultActiveKey="overview"
-      >
+      <Container id={"event-tabs".concat(data.id)} defaultActiveKey="overview">
         <Row p={3} className={"bg-light text-dark"}>
           <Col sm={12}>
             <Nav tabs justified role="tablist">
@@ -100,12 +102,13 @@ export const EventFullDisplay = (props: EventFullDisplayProps ) => {
           </Col>
         </Row>
         <Row>
-          <Col sm={12}>{eventData.field_content_tabs.map((item, key) => getTabPanes)}</Col>
+          <Col sm={12}>
+            {eventData.field_content_tabs.map((item, key) => getTabPanes)}
+          </Col>
         </Row>
       </Container>
     </>
   );
-}
-
+};
 
 export default EventFullDisplay;

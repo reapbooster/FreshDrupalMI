@@ -1,4 +1,4 @@
-uuid: 5dc92471-15c0-4e33-bfed-9242ad4c36a9
+uuid: 916c35b8-ae2a-4cff-bcac-831574397f32
 langcode: en
 status: true
 dependencies:
@@ -7,9 +7,9 @@ dependencies:
 id: event.field_venue
 field_name: field_venue
 entity_type: event
-type: string_long
+type: entity_reference
 settings:
-  case_sensitive: false
+  target_type: location
 module: core
 locked: false
 cardinality: 1
