@@ -19,10 +19,11 @@ dependencies:
     - field.field.event.conference.field_name_short
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
+    - field.field.event.conference.field_related_media
     - field.field.event.conference.field_sequential_id
     - field.field.event.conference.field_social_network_links
     - field.field.event.conference.field_speakers
-    - field.field.event.conference.field_tabs
+    - field.field.event.conference.field_sponsors
     - field.field.event.conference.field_title_card_image
     - field.field.event.conference.field_tracks
     - field.field.event.conference.field_venue
@@ -170,6 +171,15 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_related_media:
+    type: entity_reference_entity_view
+    weight: 27
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
   field_sequential_id:
     weight: 15
     label: above
@@ -194,14 +204,13 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_tabs:
-    type: entity_reference_revisions_entity_view
-    weight: 24
+  field_sponsors:
+    weight: 28
     label: above
     settings:
-      view_mode: default
-      link: ''
+      link: true
     third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_title_card_image:
     weight: 20

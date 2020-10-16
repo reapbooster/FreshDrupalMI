@@ -1,0 +1,32 @@
+uuid: 4e6dc908-2e18-48c0-9c1c-0e3a0aa65fda
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - system
+  theme:
+    - milken
+id: breadcrumbs_2
+theme: milken
+region: header
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: visible
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      article: article
+      career: career
+      landing_page: landing_page
+      opportunity: opportunity
+      session: session
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
