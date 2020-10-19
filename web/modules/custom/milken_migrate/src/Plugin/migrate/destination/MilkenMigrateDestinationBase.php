@@ -28,6 +28,35 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
   protected $container;
 
   /**
+   * Logger.
+   *
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+  /**
+   * Supports Rollback?
+   *
+   * @var bool
+   *    Yes or no.
+   */
+  protected $supportsRollback = TRUE;
+
+  /**
+   * Type of Entity.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeInterface
+   *    EckEntityInterface is produced.
+   */
+  protected $entityType;
+
+  /**
+   * Field Manager.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
+  protected $entityFieldManager;
+
+  /**
    * Constructs a content entity.
    *
    * @param array $configuration
@@ -61,6 +90,7 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     $this->storage = $entityStorage;
     $this->entityFieldManager = $fieldManger;
     $this->fieldTypeManager = $fieldTypeManager;
+    $this->logger = $container->get('logger.factory')->get(__CLASS__);
   }
 
   /**
@@ -82,34 +112,10 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
   }
 
   /**
-   * Supports Rollback?
-   *
-   * @var bool
-   *    Yes or no.
-   */
-  protected $supportsRollback = TRUE;
-
-  /**
-   * Type of Entity.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeInterface
-   *    EckEntityInterface is produced.
-   */
-  protected $entityType;
-
-  /**
-   * Field Manager.
-   *
-   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
-   */
-  protected $entityFieldManager;
-
-  /**
    * {@inheritdoc}
    */
   public function import(Row $row, array $old_destination_id_values = []) {
-    \Drupal::logger(__CLASS__)
-      ->debug('Importing:' . print_r($row, TRUE));
+    $this->logger->debug('Importing:' . print_r($row, TRUE));
     $this->rollbackAction = MigrateIdMapInterface::ROLLBACK_DELETE;
     $entity = $this->getEntity($row, $old_destination_id_values);
     if (!$entity instanceof ContentEntityInterface) {
@@ -117,13 +123,11 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     }
     assert($entity instanceof ContentEntityInterface, "Cannot get the entity object");
     $this->setRelatedFields($row, $entity);
-    \Drupal::logger(__CLASS__)
-      ->debug('Related Fields set:' . print_r($row, TRUE));
+    $this->logger->debug('Related Fields set:' . print_r($row, TRUE));
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
-    \Drupal::logger(__CLASS__)
-      ->debug('saving these values:' . print_r($entity->toArray(), TRUE));
+    $this->logger->debug('saving these values:' . print_r($entity->toArray(), TRUE));
     $ids = $this->save($entity, $old_destination_id_values);
     $map['destid1'] = $entity->id();
     $row->setIdMap($map);

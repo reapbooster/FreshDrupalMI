@@ -1,6 +1,6 @@
 uuid: 0966678d-7544-4b6a-ac17-5869b650dcbc
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -11,7 +11,7 @@ _core:
 id: milken_admin_branding
 theme: milken_admin
 region: content
-weight: -3
+weight: 2
 provider: null
 plugin: system_branding_block
 settings:
