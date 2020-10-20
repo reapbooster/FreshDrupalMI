@@ -115,6 +115,7 @@ third_party_settings:
         - field_campaign_type_public
         - field_meta_tags
         - field_social_network_links
+        - field_sponsors
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -133,7 +134,6 @@ third_party_settings:
         - field_speakers
         - field_tracks
         - field_venue
-        - field_sponsors
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -147,6 +147,7 @@ third_party_settings:
       label: 'Event Details'
     group_media:
       children:
+        - field_related_media
         - field_hero_image
         - field_title_card_image
       parent_name: group_tabs
@@ -163,7 +164,6 @@ third_party_settings:
     group_tabbed_content:
       children:
         - field_content_tabs
-        - field_related_media
       parent_name: group_tabs
       weight: 20
       format_type: tab

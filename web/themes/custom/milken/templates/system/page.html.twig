@@ -103,7 +103,7 @@
         <div id="main" class="{{ container }}">
           {{ page.breadcrumb }}
           <div class="row row-offcanvas row-offcanvas-left clearfix">
-            <main{{ content_attributes }}>
+            <main{{ content_attributes.removeClass('col').setAttribute('style', 'width: 100%') }}>
               <section class="section">
                 <a id="main-content" tabindex="-1"></a>
                 {{ page.content }}

@@ -14,7 +14,7 @@ const ParagraphDisplaySlide: React.FunctionComponent = (
 ) => {
   const { data, view_mode } = props;
   return (
-    <Col lg={12}>
+    <Col lg={12} style={{ margin: 0, padding: 0 }}>
       <ErrorBoundary>
         <SlideShow items={data.field_slides} view_mode={view_mode} />
       </ErrorBoundary>

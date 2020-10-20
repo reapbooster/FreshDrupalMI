@@ -49,7 +49,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 30
+          items_per_page: 0
           offset: 0
           id: 0
           total_pages: null
@@ -69,6 +69,57 @@ display:
           quantity: 4
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          override: true
+          sticky: false
+          caption: ''
+          summary: ''
+          description: ''
+          columns:
+            title: title
+            type: type
+            field_event_date: field_event_date
+            field_grid_event_id: field_grid_event_id
+            operations: operations
+          info:
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            type:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_event_date:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_grid_event_id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: field_event_date
+          empty_table: false
       row:
         type: fields
       fields:
@@ -202,6 +253,70 @@ display:
           entity_type: event
           entity_field: type
           plugin_id: field
+        field_event_date:
+          id: field_event_date
+          table: event__field_event_date
+          field: field_event_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Event Date'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: html_date
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         field_grid_event_id:
           id: field_grid_event_id
           table: event__field_grid_event_id
@@ -316,70 +431,6 @@ display:
           destination: false
           entity_type: event
           plugin_id: entity_operations
-        field_event_date:
-          id: field_event_date
-          table: event__field_event_date
-          field: field_event_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Event Date'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_default
-          settings:
-            timezone_override: ''
-            format_type: html_date
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
       filters:
         title:
           id: title
@@ -432,50 +483,7 @@ display:
           entity_type: event
           entity_field: title
           plugin_id: string
-      sorts:
-        changed:
-          id: changed
-          table: event_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-          entity_type: event
-          entity_field: changed
-          plugin_id: date
-        title:
-          id: title
-          table: event_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: true
-          expose:
-            label: Title
-          entity_type: event
-          entity_field: title
-          plugin_id: standard
-        type:
-          id: type
-          table: event_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: true
-          expose:
-            label: Type
-          entity_type: event
-          entity_field: type
-          plugin_id: standard
+      sorts: {  }
       title: 'Events Admin'
       header: {  }
       footer: {  }
@@ -490,8 +498,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
       tags:
         - 'config:field.storage.event.field_event_date'
         - 'config:field.storage.event.field_grid_event_id'
@@ -510,8 +516,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - 'url.query_args:sort_by'
-        - 'url.query_args:sort_order'
       tags:
         - 'config:field.storage.event.field_event_date'
         - 'config:field.storage.event.field_grid_event_id'

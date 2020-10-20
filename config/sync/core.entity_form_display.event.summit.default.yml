@@ -115,6 +115,7 @@ third_party_settings:
         - field_campaign_type_public
         - field_meta_tags
         - field_social_network_links
+        - field_sponsors
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -148,6 +149,7 @@ third_party_settings:
       children:
         - field_hero_image
         - field_title_card_image
+        - field_related_media
       parent_name: group_tabs
       weight: 20
       format_type: tab

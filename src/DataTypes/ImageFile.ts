@@ -15,7 +15,7 @@ export interface ImageFileInterface extends FileInterface {
   filemime: string;
   filename: string;
   filesize: number | string;
-  image_style_uri: Array<object>;
+  image_style_uri: ImageStyleObjectInterface;
   meta: ImageFileMetaDataInterface;
   status: boolean;
   imageStyleObject: ImageStyleObjectInterface;
@@ -62,17 +62,16 @@ export class ImageFile extends File implements ImageFileInterface {
   }
 
   get imageMultiUrl(): string {
-    return ( this.hasData() ?
-      this.imageStyleObject?.srcSet :
-      `"holder.js/100x100" 100w, "holder.js/220x220" 220w, "holder.js/480x480" 480w, "holder.js/1920x1080" 1920w`
-    );
+    return this.hasData()
+      ? this.imageStyleObject?.srcSet
+      : `"holder.js/100x100" 100w, "holder.js/220x220" 220w, "holder.js/480x480" 480w, "holder.js/1920x1080" 1920w`;
   }
 
   get imageStyleObject(): ImageStyleObjectInterface | null {
     return this._image_style_uri ?? null;
   }
 
-  setImageStyles(incoming: Array<object>) {
+  setImageStyles(incoming: Array<Record<string, string>>) {
     this._image_style_uri = new ImageStyleObject(incoming);
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import NodeLandingPage, {
   NodeLandingPageInterface,
 } from "../../DataTypes/NodeLandingPage";
@@ -8,12 +8,19 @@ import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import MediaDisplayImage from "../MediaDisplay/MediaDisplayImage";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import styled from "styled-components";
 
 export interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
   view_mode: string;
   can_edit: boolean;
 }
+
+const Container = styled.div`
+  margin: 0;
+  padding: 0;
+  width: 100%;
+`;
 
 export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
   const { data, view_mode, can_edit } = props;
