@@ -52,8 +52,8 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     // Phpredis is built into the Pantheon application container.
     $settings['redis.connection']['interface'] = 'PhpRedis';
     // These are dynamic variables handled by Pantheon.
-    $settings['redis.connection']['host']     = $_ENV['CACHE_HOST'];
-    $settings['redis.connection']['port']     = $_ENV['CACHE_PORT'];
+    $settings['redis.connection']['host'] = $_ENV['CACHE_HOST'];
+    $settings['redis.connection']['port'] = $_ENV['CACHE_PORT'];
     $settings['redis.connection']['password'] = $_ENV['CACHE_PASSWORD'];
 
     $settings['cache']['default'] = 'cache.backend.redis';
@@ -92,4 +92,12 @@ $settings['twig_sandbox_whitelisted_methods'] = [
   'view',
 ];
 
-$settings['http_client_config']['verify'] = false;
+$settings['http_client_config'] = [
+  "http_errors" => FALSE,
+  'synchronous' => TRUE,
+  'connect_timeout' => 2.5,
+  'timeout' => 5,
+  'verify' => FALSE,
+  'debug' => FALSE,
+];
+

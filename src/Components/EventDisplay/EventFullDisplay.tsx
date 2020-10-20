@@ -62,7 +62,7 @@ export const getTabPanes = (
         aria-labelledby="overview"
         title="Overview"
       >
-        <h3>{paragraphTab.admin_title.toString().ucWords()}</h3>
+        <h3>{paragraphTab.admin_title?.toString().ucWords()}</h3>
         <ParagraphDisplayList
           view_mode="full"
           list={paragraphTab.field_tab_content}
@@ -84,7 +84,7 @@ export const EventFullDisplay = (props: EventFullDisplayProps) => {
       .getData(eventData.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
-        const DataObject = new EventDataFactory(ajaxData.data);
+        const DataObject = EventDataFactory(ajaxData.data);
         setEventData(DataObject);
       });
     return <Loading />;
@@ -92,20 +92,30 @@ export const EventFullDisplay = (props: EventFullDisplayProps) => {
   console.debug("Event should have data now:", eventData);
   return (
     <>
-      <EventHero data={eventData.field_hero_image} />
-      <Container id={"event-tabs".concat(data.id)} defaultActiveKey="overview">
-        <Row p={3} className={"bg-light text-dark"}>
-          <Col sm={12}>
-            <Nav tabs justified role="tablist">
-              {eventData.field_content_tabs.map((item, key) => getNavTabs)}
-            </Nav>
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={12}>
-            {eventData.field_content_tabs.map((item, key) => getTabPanes)}
-          </Col>
-        </Row>
+      <Container fluid={true}>
+        <EventHero data={eventData.field_hero_image} />
+        <Container
+          id={"event-tabs".concat(data.id)}
+          defaultActiveKey="overview"
+          fluid={true}
+        >
+          <Row p={3} className={"bg-light text-dark"}>
+            <Col sm={12}>
+              <Nav tabs justified role="tablist">
+                {eventData.field_content_tabs.map((item, key) => {
+                  return getNavTabs(item, key);
+                })}
+              </Nav>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+              {eventData.field_content_tabs.map((item, key) => {
+                return getTabPanes(item, key);
+              })}
+            </Col>
+          </Row>
+        </Container>
       </Container>
     </>
   );

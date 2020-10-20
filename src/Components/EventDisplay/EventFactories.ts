@@ -2,13 +2,14 @@ import EventConference from "../../DataTypes/EventConference";
 import EventMeeting from "../../DataTypes/EventMeeting";
 import EventSummit from "../../DataTypes/EventSummit";
 import { EntityInterface } from "../../DataTypes/Entity";
+import { EventInterface } from "../../DataTypes/Event";
 
 /**
  * Implementation of the Data Model
  *
  * @param incoming
  */
-export const EventDataFactory = (incoming: EntityInterface) => {
+export const EventDataFactory: EventInterface = (incoming: EntityInterface) => {
   switch (incoming.type) {
     case "event--conference":
       return new EventConference(incoming);

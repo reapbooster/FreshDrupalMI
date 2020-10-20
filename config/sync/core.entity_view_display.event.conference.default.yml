@@ -113,7 +113,7 @@ content:
     type: text_default
     region: content
   field_event_date:
-    weight: 17
+    weight: 29
     label: above
     settings:
       format_type: medium

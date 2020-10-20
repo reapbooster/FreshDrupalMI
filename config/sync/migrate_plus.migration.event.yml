@@ -158,10 +158,7 @@ process:
     plugin: callback
     callable: mb_strtolower
     source: grid_event_id
-  status:
-    plugin: callback
-    callable: boolval
-    source: publish
+  status: publish
   uid:
     plugin: default_value
     default_value: 2

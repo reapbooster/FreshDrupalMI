@@ -13,6 +13,7 @@ use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\paragraphs\ParagraphInterface;
+use function Aws\boolean_value;
 
 /**
  * Provides Event destination.
@@ -24,6 +25,11 @@ use Drupal\paragraphs\ParagraphInterface;
  * )
  */
 class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * @var
+   */
+  protected $field_grid_event_id;
 
   /**
    * {@inheritDoc}
@@ -181,7 +187,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $mediaHandle = $this->addMedia($remoteEvent['field_event_header_image']);
           if ($mediaHandle instanceof MediaInterface) {
             $entity->set('field_hero_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
           }
           $entity->field_related_media[] = ['target_id' => $mediaHandle->id()];
@@ -194,7 +200,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
 
           if ($mediaHandle instanceof MediaInterface) {
             $entity->set('field_title_card_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
             $eventImage = $mediaHandle;
           }
@@ -208,7 +214,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $mediaHandle = $this->addMedia($remoteEvent['field_event_summary_image']);
           if ($mediaHandle instanceof MediaInterface && empty($titleCardImage)) {
             $entity->set('field_title_card_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
             $eventImage = $mediaHandle;
           }
@@ -221,7 +227,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $mediaHandle = $this->addMedia($remoteEvent['field_event_video_still']);
           if ($mediaHandle instanceof MediaInterface && empty($titleCardImage)) {
             $entity->set('field_title_card_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
           }
           $entity->field_related_media[] = ['target_id' => $mediaHandle->id()];
@@ -251,15 +257,14 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         }
 
         // OVERVIEW TAB.
-        if ($remoteEvent['field_enable_program_overview'] === TRUE) {
-          $entity->field_content_tabs[] = $this->createTab('Overview', $remoteEvent['field_event_featured_content']);
+        if (boolean_value($remoteEvent['field_enable_program_overview']) === TRUE) {
+          $entity->field_content_tabs[] = $this->createTab($row, 'Overview', $remoteEvent['field_event_featured_content']);
         }
 
         // PROGRAM TAB.
-        if ($remoteEvent['field_enable_program_details'] === TRUE) {
-          $entity->field_content_tabs[] = $this->createTab('Program', $remoteEvent['field_poi_featured_content_1']);
+        if (boolean_value($remoteEvent['field_enable_program_details']) === TRUE) {
+          $entity->field_content_tabs[] = $this->createTab($row,'Program', $remoteEvent['field_poi_featured_content_1']);
         }
-
         $this->logger->debug("Saving entity:" . print_r($entity->toArray(), TRUE));
         $entity->save();
         $this->logger->debug("Entity saved" . print_r($entity->toArray(), TRUE));
@@ -300,19 +305,49 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   }
 
   /**
-   * Do the work of moving an event tab from the old site to new.
+   * Create media object from File reference.
    *
-   * @param string $tabName
-   *   Name for the new tab.
-   * @param array $paragraph_field
-   *   Field data from the old site.
+   * @param string $name
+   *   Title field of the newly created media object.
+   * @param array $details
+   *   File reference and metadata.
    *
-   * @return ParagraphInterface
-   *   A new paragraph TAB instance.
+   * @return \Drupal\media\MediaInterface
+   *   A newly-created entity object.
    *
-   * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \Drupal\migrate\MigrateException
    */
-  public function createTab(string $tabName, array $paragraph_field): ParagraphInterface {
+  protected function createMedia(string $name, array $details): MediaInterface {
+    try {
+      $media = $this->container
+        ->get('entity_type.manager')
+        ->getStorage('media')
+        ->create($details);
+      $media->enforceIsNew();
+      $this->logger->debug("Media Object: " . print_r($media->toArray(), TRUE));
+      $media->setName($name)
+        ->setPublished(TRUE)
+        ->save();
+      $this->logger->debug("Saved. Media ID: " . $media->id());
+      return $media;
+    } catch (\Exception $e) {
+      $this->logger->error("Cannot save media object" . print_r($details, TRUE));
+      throw new MigrateException("Yeah, this isn't work for me. Can we just be entityFriends?");
+    }
+    return NULL;
+  }
+
+
+  /**
+   * @param \Drupal\migrate\Row $row
+   * @param string $tabName
+   * @param array $paragraph_field
+   *
+   * @return \Drupal\milken_migrate\Plugin\migrate\destination\Array
+   * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+   * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+   */
+  public function createTab(Row $row, string $tabName, array $paragraph_field): Array {
     // .9 create new paragraph tab with the string TabName as the ID.
     $paragraph_storage = $this->container
       ->get('entity_type.manager')
@@ -321,9 +356,32 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       'type' => 'paragraph_tab',
       'name' => $tabName,
       'title' => $tabName,
+      'langcode' => 'en',
     ]);
+    if ($tabName == "Overview" && !empty($row->getSourceProperty('what_we_do_headline'))) {
+      $whatWeDo = $paragraph_storage
+        ->create([
+          "type" => "body_content",
+          "title" => $row->getSourceProperty('what_we_do_headline'),
+          'field_body' => [
+            'value' => $row->getSourceProperty('what_we_do_text'),
+            'format' => 'full_html'
+          ],
+          'langcode' => 'en',
+        ]);
+      $whatWeDo->enforceIsNew();
+      $whatWeDo->setPublished(true)->save();
+      $paragraph_tab->field_tab_contents[] = [
+        'target_id' => $whatWeDo->id(),
+        'target_revision_id' => $whatWeDo->getRevisionId(),
+      ];
+    }
     // Loop over the $paragraph_field.
     foreach ($paragraph_field as $paragraph) {
+      if ($paragraph["type"] === "paragraph--program_day") {
+        $paragraph_tab->field_tab_contents[] = $this->createProgramDay($row->getSourceProperty('id'), $paragraph);
+        continue;
+      }
       // Search for local paragraph replica via uuid.
       $results = $paragraph_storage->loadByProperties(['uuid' => $paragraph['id']]);
       if (count($results)
@@ -333,18 +391,22 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         //    newly-created tab.
         $paragraph_tab->field_tab_contents[] = [
           'target_id' => $result->id(),
-          'revision_id' => $result->getRevisionId(),
+          'target_revision_id' => $result->getRevisionId(),
         ];
         $this->logger->debug("Paragraph Tab:" . print_r($paragraph_tab->field_tab_contents, TRUE));
       }
       else {
         $this->logger->debug("Unmigrated Paragraph Tab:" . print_r($paragraph, TRUE));
       }
+      $paragraph_tab->enforceIsNew();
       // 5. Save Paragraph Tab.
-      $paragraph_tab->save();
+      $paragraph_tab->setPublished(true)->save();
     }
     // return the tab
-    return $paragraph_tab;
+    return [
+      'target_id' => $paragraph_tab->id(),
+      'target_revision_id' => $paragraph_tab->getRevisionId(),
+    ];
   }
 
   /**
@@ -385,42 +447,36 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         'field_address' => $address,
         'title' => $address_label,
       ]);
-      $location->save();
+      $location->enforceIsNew();
+      $location->setPublished(true)->save();
       $this->logger->debug('Location Created' . print_r($location->toArray(), TRUE));
     }
     return ['target_id' => $location->id()];
   }
 
   /**
-   * Create media object from File reference.
+   * @param $eventID
+   * @param $paragraph
    *
-   * @param string $name
-   *   Title field of the newly created media object.
-   * @param array $details
-   *   File reference and metadata.
-   *
-   * @return \Drupal\media\MediaInterface
-   *   A newly-created entity object.
-   *
-   * @throws \Drupal\migrate\MigrateException
+   * @return mixed
+   * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+   * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
    */
-  protected function createMedia(string $name, array $details): MediaInterface {
-    try {
-      $media = $this->container
-        ->get('entity_type.manager')
-        ->getStorage('media')
-        ->create($details);
-      $this->logger->debug("Media Object: " . print_r($media->toArray(), TRUE));
-      $media->setName($name)
-        ->setPublished(TRUE)
-        ->save();
-      $this->logger->debug("Saved. Media ID: " . $media->id());
-      return $media;
-    } catch (\Exception $e) {
-      $this->logger->error("Cannot save media object" . print_r($details, TRUE));
-      throw new MigrateException("Yeah, this isn't work for me. Can we just be entityFriends?");
-    }
-    return NULL;
+  protected function createProgramDay($eventID, $paragraph) {
+    $day = \DateTime::createFromFormat('Y-m-d', $paragraph['field_event_prog_program_day']);
+    $toReturn = $this
+      ->container
+      ->get('entity_type.manager')
+      ->getStorage('paragraph')
+      ->create([
+        'type' => 'program_day',
+        'field_event_id' => $eventID,
+        'field_program_date' => $day,
+        'langcode' => 'en',
+    ]);
+    $toReturn->enforceIsNew(true);
+    $toReturn->setPublished(TRUE)->save();
+    return $toReturn;
   }
 
 }

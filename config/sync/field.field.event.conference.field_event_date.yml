@@ -1,4 +1,4 @@
-uuid: 5f7d1958-0e11-40f4-8521-4818b80670a8
+uuid: 7b88fb73-3e24-499a-a95b-99773ad4d419
 langcode: en
 status: true
 dependencies:
@@ -14,7 +14,7 @@ bundle: conference
 label: 'Event Date'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

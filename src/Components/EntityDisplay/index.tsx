@@ -6,14 +6,15 @@ import EntityComponentFactory from "../EntityBrowser/EntityComponentFactory";
 export interface EntityDisplayProps {
   data: EntityInterface;
   view_mode: string;
+  can_edit: boolean;
 }
 
 export const EntityDisplay = (props) => {
-  const { data, view_mode } = props;
+  const { data, view_mode, can_edit } = props;
   const Component = EntityComponentFactory(data);
   return (
     <ErrorBoundary>
-      <Component data={data} view_mode={view_mode} />
+      <Component data={data} view_mode={view_mode} can_edit={can_edit} />
     </ErrorBoundary>
   );
 };

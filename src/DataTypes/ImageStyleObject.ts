@@ -11,6 +11,7 @@ export interface ImageStyleAttributesInterface {
 export interface ImageStyleObjectInterface {
   srcSet: string;
   imageAttributes: ImageStyleAttributesInterface;
+  backgroundImageSet: string;
 }
 
 export class ImageStyleObject implements ImageStyleObjectInterface {
@@ -24,7 +25,7 @@ export class ImageStyleObject implements ImageStyleObjectInterface {
 
   [propName: string]: any; // Other sizes
 
-  constructor(values: Array<object> = null) {
+  constructor(values: Array<Record<string, string>> = null) {
     if (values !== null) {
       this.reduce(values);
     }
@@ -60,6 +61,10 @@ export class ImageStyleObject implements ImageStyleObjectInterface {
         objectFit: "cover",
       },
     };
+  }
+
+  get backgroundImageSet() {
+    return `image-set( url(${this.thumbnail}) 100w, url(${this.medium}) 220w, url(${this.large}) 480w, url(${this.fullscreen}) 1920w )`;
   }
 }
 
@@ -99,6 +104,12 @@ export class HolderImageStyleObject implements ImageStyleObjectInterface {
   getStyleByMachineName(): string {
     return this.srcSet;
   }
+
+  /* eslint-disable */
+  get backgroundImageSet() {
+    return `image-set( url("holder.js/100x100") 100w, url("holder.js/220x220") 220w, url("holder.js/480x480") 480w, url("holder.js/1920x1080") 1920w )`;
+  }
+  /* eslint-enable */
 }
 
 export default ImageStyleObject;

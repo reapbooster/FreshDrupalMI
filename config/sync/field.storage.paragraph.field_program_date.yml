@@ -1,13 +1,13 @@
-uuid: eba053bf-10b0-4532-8d15-c1ab4cd1c030
+uuid: bd408021-bae3-4aae-b699-f9b59386aed7
 langcode: en
 status: true
 dependencies:
   module:
     - datetime
-    - eck
-id: event.field_event_date
-field_name: field_event_date
-entity_type: event
+    - paragraphs
+id: paragraph.field_program_date
+field_name: field_program_date
+entity_type: paragraph
 type: datetime
 settings:
   datetime_type: datetime

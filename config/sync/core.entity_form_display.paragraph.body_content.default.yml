@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.body_content.field_background
     - field.field.paragraph.body_content.field_body
     - field.field.paragraph.body_content.field_num_text_columns
+    - field.field.paragraph.body_content.field_show_title
     - paragraphs.paragraphs_type.body_content
   module:
     - field_group
@@ -43,6 +44,7 @@ third_party_settings:
       region: content
     group_authoring:
       children:
+        - status
         - created
       parent_name: group_tabs
       weight: 25
@@ -96,6 +98,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_show_title:
+    weight: 1
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   status:
     type: boolean_checkbox
