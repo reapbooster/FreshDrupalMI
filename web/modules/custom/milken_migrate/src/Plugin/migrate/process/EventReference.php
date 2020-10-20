@@ -7,7 +7,7 @@ use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 
 /**
- * Search for Event ID and return reference to internal event entity
+ * Search for Event ID and return reference to internal event entity.
  *
  * @Class BodyEmbed
  * @code
@@ -52,6 +52,5 @@ class EventReference extends ProcessPluginBase {
     }
     return [];
   }
-
 
 }

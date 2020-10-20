@@ -27,9 +27,11 @@ use function Aws\boolean_value;
 class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPluginInterface {
 
   /**
-   * @var
+   * My Grid eventID.
+   *
+   * @var string
    */
-  protected $field_grid_event_id;
+  protected $fieldGridEventId;
 
   /**
    * {@inheritDoc}
@@ -181,7 +183,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $entity->set('field_meta_tags', $remoteEvent['field_meta_tags']);
         }
 
-        // HEADER IMAGEl
+        // HEADER IMAGEl.
         if (!array_key_exists('data', $remoteEvent['field_event_header_image'])
           && !empty($remoteEvent['field_event_header_image'])) {
           $mediaHandle = $this->addMedia($remoteEvent['field_event_header_image']);
@@ -202,9 +204,8 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
             $entity->set('field_title_card_image', [
               'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
-            $eventImage = $mediaHandle;
           }
-          $entity->field_related_media[] = [ 'target_id' => $mediaHandle->id() ];
+          $entity->field_related_media[] = ['target_id' => $mediaHandle->id()];
         }
         $titleCardImage = $entity->get('field_title_card_image')->value;
 
@@ -216,7 +217,6 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
             $entity->set('field_title_card_image', [
               'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
-            $eventImage = $mediaHandle;
           }
           $entity->field_related_media[] = ['target_id' => $mediaHandle->id()];
         }
@@ -241,7 +241,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
             if (isset($social_link['field_url']['uri']) && trim($social_link['field_url']['uri']) !== "") {
               $to_set[] = [
                 "key" => (trim($social_link['field_url']['title']) !== "")
-                  ? trim($social_link['field_url']['title']) : $social_link['field_social_network']['name'],
+                ? trim($social_link['field_url']['title']) : $social_link['field_social_network']['name'],
                 "value" => $social_link['field_url']['uri'],
               ];
             }
@@ -263,13 +263,14 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
 
         // PROGRAM TAB.
         if (boolean_value($remoteEvent['field_enable_program_details']) === TRUE) {
-          $entity->field_content_tabs[] = $this->createTab($row,'Program', $remoteEvent['field_poi_featured_content_1']);
+          $entity->field_content_tabs[] = $this->createTab($row, 'Program', $remoteEvent['field_poi_featured_content_1']);
         }
         $this->logger->debug("Saving entity:" . print_r($entity->toArray(), TRUE));
         $entity->save();
         $this->logger->debug("Entity saved" . print_r($entity->toArray(), TRUE));
       }
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       echo $e->getMessage();
       exit($e->getTraceAsString());
     }
@@ -277,9 +278,14 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   }
 
   /**
+   * Add a media object from the supplied data.
+   *
    * @param array $fieldData
+   *   Field data from the jsonapi.
    *
    * @return \Drupal\media\MediaInterface
+   *   Instiantiated Media Object.
+   *
    * @throws \Drupal\Core\Entity\EntityStorageException
    * @throws \Drupal\migrate\MigrateException
    */
@@ -330,24 +336,31 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         ->save();
       $this->logger->debug("Saved. Media ID: " . $media->id());
       return $media;
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       $this->logger->error("Cannot save media object" . print_r($details, TRUE));
       throw new MigrateException("Yeah, this isn't work for me. Can we just be entityFriends?");
     }
     return NULL;
   }
 
-
   /**
-   * @param \Drupal\migrate\Row $row
-   * @param string $tabName
-   * @param array $paragraph_field
+   * Create a new paragraph_tab instance.
    *
-   * @return \Drupal\milken_migrate\Plugin\migrate\destination\Array
+   * @param \Drupal\migrate\Row $row
+   *   Row data from the migration.
+   * @param string $tabName
+   *   Name for the new tab.
+   * @param array $paragraph_field
+   *   Paragraph field to be processed into a tab.
+   *
+   * @return array
+   *   Paragraphs reference array.
+   *
    * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
    * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
    */
-  public function createTab(Row $row, string $tabName, array $paragraph_field): Array {
+  public function createTab(Row $row, string $tabName, array $paragraph_field): array {
     // .9 create new paragraph tab with the string TabName as the ID.
     $paragraph_storage = $this->container
       ->get('entity_type.manager')
@@ -365,12 +378,12 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           "title" => $row->getSourceProperty('what_we_do_headline'),
           'field_body' => [
             'value' => $row->getSourceProperty('what_we_do_text'),
-            'format' => 'full_html'
+            'format' => 'full_html',
           ],
           'langcode' => 'en',
         ]);
       $whatWeDo->enforceIsNew();
-      $whatWeDo->setPublished(true)->save();
+      $whatWeDo->setPublished(TRUE)->save();
       $paragraph_tab->field_tab_contents[] = [
         'target_id' => $whatWeDo->id(),
         'target_revision_id' => $whatWeDo->getRevisionId(),
@@ -400,9 +413,9 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       }
       $paragraph_tab->enforceIsNew();
       // 5. Save Paragraph Tab.
-      $paragraph_tab->setPublished(true)->save();
+      $paragraph_tab->setPublished(TRUE)->save();
     }
-    // return the tab
+    // Return the tab.
     return [
       'target_id' => $paragraph_tab->id(),
       'target_revision_id' => $paragraph_tab->getRevisionId(),
@@ -412,9 +425,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   /**
    * Import the location relationship.
    *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The Event Entity.
-   * @param array $remoteData
+   * @param array $address
    *   Remote Data from the live site.
    *
    * @return array
@@ -448,21 +459,27 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         'title' => $address_label,
       ]);
       $location->enforceIsNew();
-      $location->setPublished(true)->save();
+      $location->setPublished(TRUE)->save();
       $this->logger->debug('Location Created' . print_r($location->toArray(), TRUE));
     }
     return ['target_id' => $location->id()];
   }
 
   /**
-   * @param $eventID
-   * @param $paragraph
+   * Create Program Day paragraph.
+   *
+   * @param string $eventID
+   *   The field_grid_event id.
+   * @param array $paragraph
+   *   Paragraph Data.
    *
    * @return mixed
+   *   Result of the create operation.
+   *
    * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
    * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
    */
-  protected function createProgramDay($eventID, $paragraph) {
+  protected function createProgramDay($eventID, array $paragraph) {
     $day = \DateTime::createFromFormat('Y-m-d', $paragraph['field_event_prog_program_day']);
     $toReturn = $this
       ->container
@@ -473,8 +490,8 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         'field_event_id' => $eventID,
         'field_program_date' => $day,
         'langcode' => 'en',
-    ]);
-    $toReturn->enforceIsNew(true);
+      ]);
+    $toReturn->enforceIsNew(TRUE);
     $toReturn->setPublished(TRUE)->save();
     return $toReturn;
   }
