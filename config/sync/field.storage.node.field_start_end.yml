@@ -1,17 +1,17 @@
-uuid: eba053bf-10b0-4532-8d15-c1ab4cd1c030
+uuid: 41adbe7b-5643-458f-ad91-fd3515def48e
 langcode: en
 status: true
 dependencies:
   module:
-    - datetime
-    - eck
-id: event.field_event_date
-field_name: field_event_date
-entity_type: event
-type: datetime
+    - datetime_range
+    - node
+id: node.field_start_end
+field_name: field_start_end
+entity_type: node
+type: daterange
 settings:
   datetime_type: datetime
-module: datetime
+module: datetime_range
 locked: false
 cardinality: 1
 translatable: true

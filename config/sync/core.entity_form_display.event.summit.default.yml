@@ -47,6 +47,7 @@ third_party_settings:
         - group_promotion
         - group_event_details
         - group_media
+        - group_tabbed_content
         - group_authoring
       parent_name: ''
       weight: 20
@@ -62,7 +63,6 @@ third_party_settings:
         - field_description
         - field_blurb
         - field_name_short
-        - field_content_tabs
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -130,9 +130,9 @@ third_party_settings:
       children:
         - field_grid_event_id
         - field_speakers
-        - field_venue
         - field_tracks
         - field_sequential_id
+        - field_venue
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -159,6 +159,20 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Media
+    group_tabbed_content:
+      children:
+        - field_content_tabs
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Tabbed Content'
 id: event.summit.default
 targetEntityType: event
 bundle: summit
@@ -249,7 +263,7 @@ content:
     type: text_textarea
     region: content
   field_event_date:
-    weight: 27
+    weight: 65
     settings: {  }
     third_party_settings: {  }
     type: datetime_default

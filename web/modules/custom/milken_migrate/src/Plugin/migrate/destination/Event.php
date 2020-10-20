@@ -181,7 +181,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $mediaHandle = $this->addMedia($remoteEvent['field_event_header_image']);
           if ($mediaHandle instanceof MediaInterface) {
             $entity->set('field_hero_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
           }
           $entity->field_related_media[] = ['target_id' => $mediaHandle->id()];
@@ -194,7 +194,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
 
           if ($mediaHandle instanceof MediaInterface) {
             $entity->set('field_title_card_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
             $eventImage = $mediaHandle;
           }
@@ -208,7 +208,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $mediaHandle = $this->addMedia($remoteEvent['field_event_summary_image']);
           if ($mediaHandle instanceof MediaInterface && empty($titleCardImage)) {
             $entity->set('field_title_card_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
             $eventImage = $mediaHandle;
           }
@@ -221,7 +221,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           $mediaHandle = $this->addMedia($remoteEvent['field_event_video_still']);
           if ($mediaHandle instanceof MediaInterface && empty($titleCardImage)) {
             $entity->set('field_title_card_image', [
-              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle)->fid,
+              'target_id' => $mediaHandle->getSource()->getSourceFieldValue($mediaHandle),
             ]);
           }
           $entity->field_related_media[] = ['target_id' => $mediaHandle->id()];
@@ -259,7 +259,6 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         if ($remoteEvent['field_enable_program_details'] === TRUE) {
           $entity->field_content_tabs[] = $this->createTab('Program', $remoteEvent['field_poi_featured_content_1']);
         }
-
         $this->logger->debug("Saving entity:" . print_r($entity->toArray(), TRUE));
         $entity->save();
         $this->logger->debug("Entity saved" . print_r($entity->toArray(), TRUE));

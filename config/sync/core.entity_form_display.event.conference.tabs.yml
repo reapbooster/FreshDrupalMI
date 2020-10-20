@@ -245,12 +245,6 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
-  field_event_date:
-    weight: 27
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_grid_event_id:
     weight: 11
     settings:
@@ -383,6 +377,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_event_date: true
   field_related_media: true
   field_sponsors: true
   field_venue: true

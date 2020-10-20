@@ -29,3 +29,8 @@ Dashboard:
   version: 1.0
   js:
     components/Dashboard/Dashboard.entry.js: { source: 'components/Dashboard/Dashboard.entry.tsx' }
+
+EventDetail:
+  version: 1.0
+  js:
+    components/EventDetail/EventDetail.entry.js: { source: 'components/Dashboard/EventDetail.entry.tsx' }

@@ -31,7 +31,7 @@ export interface EventInterface extends RevisionableEntityInterface {
   field_speakers?: string;
   field_venue?: string;
   event_type?: EntityTypeInterface;
-  field_hero_image: ImageFileInterface;
+  field_hero_image?: ImageFileInterface;
   field_title_card_image?: ImageFileInterface;
   field_tracks?: TaxonomyTermInterface;
   field_content_tabs?: Array<ParagraphTabInterface>;
@@ -64,6 +64,7 @@ export abstract class Event
   field_title_card_image: ImageFileInterface;
   field_tracks?: TaxonomyTermInterface;
   field_content_tabs?: Array<ParagraphTabInterface>;
+  field_hero_image?: ImageFileInterface;
 
   get path(): PathObjectInterface {
     return this._path;
@@ -78,7 +79,7 @@ export abstract class Event
   }
 
   getIncluded(): string {
-    return "&include=field_overview&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc";
+    return "&include=field_content_tabs,field_venue&sort[event-date][path]=field_event_date&sort[event-date][direction]=desc";
   }
 
   getEventDate(): Date {

@@ -1,4 +1,4 @@
-uuid: 594ddbdf-b95d-458e-af1f-37b6f072b149
+uuid: e787cde4-40dd-482c-8dec-7f2a8669c4f8
 langcode: en
 status: true
 dependencies:
@@ -14,7 +14,7 @@ bundle: summit
 label: 'Event Date'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
