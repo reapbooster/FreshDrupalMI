@@ -9,7 +9,7 @@ _core:
 id: milken_local_actions
 theme: milken
 region: content
-weight: 4
+weight: -10
 provider: null
 plugin: local_actions_block
 settings:

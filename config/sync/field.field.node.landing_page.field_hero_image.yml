@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_hero_image
-    - media.type.hero_image
     - media.type.image
     - node.type.landing_page
 id: node.landing_page.field_hero_image
@@ -21,11 +20,10 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      hero_image: hero_image
       image: image
     sort:
       field: name
       direction: ASC
     auto_create: false
-    auto_create_bundle: hero_image
+    auto_create_bundle: null
 field_type: entity_reference

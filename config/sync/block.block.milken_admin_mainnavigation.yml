@@ -11,14 +11,14 @@ dependencies:
 id: milken_admin_mainnavigation
 theme: milken_admin
 region: content
-weight: 3
+weight: -2
 provider: null
 plugin: 'system_menu_block:main'
 settings:
   id: 'system_menu_block:main'
   label: 'Main navigation'
   provider: system
-  label_display: '0'
+  label_display: visible
   level: 1
   depth: 0
   expand_all_items: false

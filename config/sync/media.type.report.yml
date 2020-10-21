@@ -6,10 +6,10 @@ dependencies:
     - crop
 third_party_settings:
   crop:
-    image_field: field_media_file
+    image_field: field_cover
 id: report
 label: Report
-description: ''
+description: 'Document, document preview, and paragraphs field to show published research papers.'
 source: file
 queue_thumbnail_downloads: false
 new_revision: false

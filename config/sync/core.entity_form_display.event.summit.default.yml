@@ -19,11 +19,9 @@ dependencies:
     - field.field.event.summit.field_name_short
     - field.field.event.summit.field_published
     - field.field.event.summit.field_registration_deadline
-    - field.field.event.summit.field_related_media
     - field.field.event.summit.field_sequential_id
     - field.field.event.summit.field_social_network_links
     - field.field.event.summit.field_speakers
-    - field.field.event.summit.field_sponsors
     - field.field.event.summit.field_title_card_image
     - field.field.event.summit.field_tracks
     - field.field.event.summit.field_venue
@@ -47,7 +45,6 @@ third_party_settings:
         - group_promotion
         - group_event_details
         - group_media
-        - group_tabbed_content
         - group_authoring
       parent_name: ''
       weight: 20
@@ -63,6 +60,7 @@ third_party_settings:
         - field_description
         - field_blurb
         - field_name_short
+        - field_content_tabs
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -115,7 +113,6 @@ third_party_settings:
         - field_campaign_type_public
         - field_meta_tags
         - field_social_network_links
-        - field_sponsors
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -131,9 +128,9 @@ third_party_settings:
       children:
         - field_grid_event_id
         - field_speakers
+        - field_venue
         - field_tracks
         - field_sequential_id
-        - field_venue
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -149,7 +146,6 @@ third_party_settings:
       children:
         - field_hero_image
         - field_title_card_image
-        - field_related_media
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -161,20 +157,6 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Media
-    group_tabbed_content:
-      children:
-        - field_content_tabs
-      parent_name: group_tabs
-      weight: 20
-      format_type: tab
-      region: content
-      format_settings:
-        id: ''
-        classes: ''
-        description: ''
-        formatter: closed
-        required_fields: true
-      label: 'Tabbed Content'
 id: event.summit.default
 targetEntityType: event
 bundle: summit
@@ -265,7 +247,7 @@ content:
     type: text_textarea
     region: content
   field_event_date:
-    weight: 65
+    weight: 27
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -313,16 +295,6 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
-  field_related_media:
-    weight: 63
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_sequential_id:
     weight: 26
     settings:
@@ -354,16 +326,6 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_sponsors:
-    weight: 64
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_title_card_image:
     weight: 32
     settings:
@@ -383,14 +345,12 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_venue:
-    weight: 62
+    weight: 24
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: string_textarea
     region: content
   langcode:
     type: language_select

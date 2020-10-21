@@ -5,13 +5,7 @@ dependencies:
   config:
     - eck.eck_type.event.summit
     - field.storage.event.field_sponsors
-    - media.type.document
-    - media.type.hero_image
-    - media.type.image
-    - media.type.podcast_episode
-    - media.type.report
     - media.type.sponsor_logo
-    - media.type.video
 id: event.summit.field_sponsors
 field_name: field_sponsors
 entity_type: event
@@ -26,13 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      document: document
-      hero_image: hero_image
-      image: image
-      podcast_episode: podcast_episode
-      report: report
       sponsor_logo: sponsor_logo
-      video: video
     sort:
       field: _none
     auto_create: false

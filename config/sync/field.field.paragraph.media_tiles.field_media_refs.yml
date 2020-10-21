@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media_refs
-    - media.type.document
-    - media.type.hero_image
     - media.type.image
     - media.type.podcast_episode
     - media.type.report
@@ -26,8 +24,6 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      document: document
-      hero_image: hero_image
       image: image
       podcast_episode: podcast_episode
       report: report
