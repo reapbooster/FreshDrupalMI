@@ -33,4 +33,9 @@ Dashboard:
 EventDetail:
   version: 1.0
   js:
-    components/EventDetail/EventDetail.entry.js: { source: 'components/Dashboard/EventDetail.entry.tsx' }
+    components/EventDetail/EventDetail.entry.js: { source: 'components/EventDetail/EventDetail.entry.tsx' }
+
+MediaDetail:
+  version: 1.0
+  js:
+    components/MediaDetail/MediaDetail.entry.js: { source: 'components/MediaDetail/MediaDetail.entry.tsx' }

@@ -1,18 +1,18 @@
-{{ attach_library('milken/#{media.bundle.value}_display') }}
-
-{% set edit_permission = 'edit-any-#{media.bundle.value}-content' %}
-{% set bundle_name = media.bundle.value %}
+{{ attach_library('milken_base/MediaDetail') }}
 
 
-<{{ bundle_name }}-display
+{%  set bundle = media.get('bundle').entity.id() %}
+
+<media-display
   {{ attributes }}
   id="{{ media.uuid.value }}"
-  type="{{ media.getEntityTypeId() }}--{{ media.bundle.value }}"
-  entity-type-id="{{ media.getEntityTypeId() }}"
-  drupal-internal-mid="{{ media.id.value }}"
-  bundle="{{ media.bundle.value }}"
-  view-mode="{{ view_mode }}"
-  can-edit="{{ user.hasPermission( edit_permission ) }}"
+  data-id="{{ media.uuid.value }}"
+  data-type="{{ media.getEntityTypeId() }}--{{ bundle }}"
+  data-entity-type-id="{{ media.getEntityTypeId() }}"
+  data-drupal-internal-mid="{{ media.id.value }}"
+  data-bundle="{{ bundle }}"
+  data-view-mode="{{ view_mode }}"
+  data-can-edit="{{ user.hasPermission( edit_permission ) }}"
 >
   {{ content }}
-</{{ bundle_name }}-display>
+</media-display>

@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import Loading from "../Loading";
-import { CardDeck } from "react-bootstrap";
-import styled from "styled-components";
+import { CardDeck, CardColumns, Container } from "react-bootstrap";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import EntityBrowserSource from "./EntityBrowserSource";
 import EntityComponentFactory from "./EntityComponentFactory";
-
-const IndividualItemContainer = styled.div`
-  max-width: 18rem;
-`;
+import BundleBrowser from "./BundleBrowser";
 
 export interface EntityBrowserProps {
   source: EntityBrowserSource;
 }
 
 export const EntityBrowser = (props: EntityBrowserProps) => {
-  console.debug("PROPS", props);
   const { source } = props;
   const view_mode = props.source.view_mode;
-  console.debug("Entity Browser", source, view_mode);
   const SourceDataObject = new EntityBrowserSource(source);
   const [sourceData, setSourceData] = useState(SourceDataObject);
-  console.debug("Entity Source", sourceData);
   if (!sourceData.hasData()) {
     sourceData.refresh().then((sourceWithItems) => {
       sourceWithItems.view_mode = view_mode;
@@ -29,24 +22,25 @@ export const EntityBrowser = (props: EntityBrowserProps) => {
     });
     return <Loading />;
   }
-  console.debug("EntityBrowser: Source W/Data", sourceData, view_mode);
   return (
-    <>
-      <CardDeck>
-        {sourceData.items.map((item, key) => {
-          const Component = EntityComponentFactory(item);
-          return (
-            <ErrorBoundary key={key}>
+    <Container fluid={true}>
+      <h2 className={"text-center"}>Browse {sourceData.bundle}</h2>
+      <BundleBrowser bundle={sourceData.bundle} />
+      <ErrorBoundary>
+        <CardColumns>
+          {sourceData.items?.map((item, key) => {
+            const Component = EntityComponentFactory(item);
+            return (
               <Component
+                key={key}
                 data={item}
                 view_mode={sourceData.view_mode}
-                container={IndividualItemContainer}
               />
-            </ErrorBoundary>
-          );
-        })}
-      </CardDeck>
-    </>
+            );
+          })}
+        </CardColumns>
+      </ErrorBoundary>
+    </Container>
   );
 };
 

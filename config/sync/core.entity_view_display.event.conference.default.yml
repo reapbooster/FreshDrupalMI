@@ -247,5 +247,6 @@ content:
     third_party_settings: {  }
 hidden:
   changed: true
+  field_tabs: true
   langcode: true
   search_api_excerpt: true

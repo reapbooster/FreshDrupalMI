@@ -42,13 +42,12 @@ export const MediaDisplay: React.FunctionComponent = (
   const Component = MediaComponentFactory(mediaData);
   console.debug("get MediaDisplayComponent", Component);
   return (
-    <ErrorBoundary key={key ?? 0}>
-      <Component
-        data={mediaData}
-        view_mode={view_mode}
-        style={{ width: "18rem" }}
-      />
-    </ErrorBoundary>
+    <Component
+      key={key}
+      data={mediaData}
+      view_mode={view_mode}
+      style={{ width: "18rem" }}
+    />
   );
 };
 
