@@ -9,7 +9,7 @@ _core:
 id: milken_local_tasks
 theme: milken
 region: content
-weight: 0
+weight: -20
 provider: null
 plugin: local_tasks_block
 settings:

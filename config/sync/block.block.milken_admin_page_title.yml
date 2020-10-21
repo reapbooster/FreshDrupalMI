@@ -8,8 +8,8 @@ _core:
   default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
 id: milken_admin_page_title
 theme: milken_admin
-region: content
-weight: -30
+region: breadcrumb
+weight: -2
 provider: null
 plugin: page_title_block
 settings:

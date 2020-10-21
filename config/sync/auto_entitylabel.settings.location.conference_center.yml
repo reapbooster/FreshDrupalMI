@@ -1,6 +1,0 @@
-status: 3
-pattern: '[location:title]'
-escape: false
-dependencies:
-  config:
-    - eck.eck_type.location.conference_center

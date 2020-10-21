@@ -5,7 +5,6 @@ dependencies:
   config:
     - eck.eck_type.event.summit
     - field.storage.event.field_hero_image
-    - media.type.hero_image
     - media.type.image
 id: event.summit.field_hero_image
 field_name: field_hero_image
@@ -21,10 +20,9 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      hero_image: hero_image
       image: image
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: hero_image
+    auto_create_bundle: null
 field_type: entity_reference

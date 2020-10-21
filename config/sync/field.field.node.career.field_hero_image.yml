@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_hero_image
-    - media.type.hero_image
     - node.type.career
 id: node.career.field_hero_image
 field_name: field_hero_image
@@ -19,8 +18,7 @@ default_value_callback: ''
 settings:
   handler: 'default:media'
   handler_settings:
-    target_bundles:
-      hero_image: hero_image
+    target_bundles: {  }
     sort:
       field: created
       direction: ASC
