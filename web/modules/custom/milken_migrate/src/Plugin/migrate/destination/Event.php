@@ -459,7 +459,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         'title' => $address_label,
       ]);
       $location->enforceIsNew();
-      $location->setPublished(TRUE)->save();
+      $location->save();
       $this->logger->debug('Location Created' . print_r($location->toArray(), TRUE));
     }
     return ['target_id' => $location->id()];
