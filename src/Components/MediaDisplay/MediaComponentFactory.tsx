@@ -1,8 +1,8 @@
 import { MediaInterface } from "../../DataTypes/Media";
-import MediaDisplayVideo from "./MediaDisplayVideo";
 import MediaDisplayImage from "./MediaDisplayImage";
 import MediaDisplayReport from "./MediaDisplayReport";
 import MediaDisplayPodcastEpisode from "./MediaDisplayPodcastEpisode";
+import { VideoDisplay } from "../VideoDisplay";
 
 /**
  * Create the View Component
@@ -13,7 +13,7 @@ export function MediaComponentFactory(incoming: MediaInterface) {
   console.debug("MediaComponentFactory", incoming);
   switch (incoming.type) {
     case "media--video":
-      return MediaDisplayVideo;
+      return VideoDisplay;
     case "media--image":
       return MediaDisplayImage;
     case "media--report":

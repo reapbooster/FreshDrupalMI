@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MediaImage from "../../DataTypes/MediaImage";
 import Loading from "../Loading";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
+import Holder from "react-holder";
 
 export interface MediaDisplayImageProps {
   data: MediaImage;
@@ -21,12 +22,9 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
       .then((incoming) => {
         setMediaImage(new MediaImage(incoming.data));
       });
-    return (
-      <>
-        <Loading />
-      </>
-    );
+    return <Loading />;
   }
+  console.debug("image should have data now: ", mediaImage);
   const attributes = mediaImage.imageAttributes;
 
   switch (view_mode) {
@@ -40,14 +38,12 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
       attributes.height = "100%";
   }
   return (
-    <>
-      <img
-        data-drupal-id={mediaImage.drupal_internal__mid}
-        data-drupal-type={mediaImage.type}
-        data-uuid={mediaImage.id}
-        {...attributes}
-      />
-    </>
+    <img
+      data-drupal-id={mediaImage.drupal_internal__mid}
+      data-drupal-type={mediaImage.type}
+      data-uuid={mediaImage.id}
+      {...attributes}
+    />
   );
 };
 
