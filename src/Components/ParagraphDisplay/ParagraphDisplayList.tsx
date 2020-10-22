@@ -23,13 +23,7 @@ export const ParagraphDisplayList = (props: ParagraphDisplayListProps) => {
     return (
       list?.map((item, key) => {
         console.log("Paragraph Display List => ", list);
-        return (
-          <>
-            <ErrorBoundary key={key}>
-              <ParagraphDisplay data={item} view_mode={view_mode} />
-            </ErrorBoundary>
-          </>
-        );
+        return <ParagraphDisplay data={item} view_mode={view_mode} key={key} />;
       }) ?? []
     );
   }

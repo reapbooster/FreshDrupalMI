@@ -14,6 +14,7 @@ export interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
   view_mode: string;
   can_edit: boolean;
+  key: number;
 }
 
 const Container = styled.div`
@@ -23,7 +24,7 @@ const Container = styled.div`
 `;
 
 export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
-  const { data, view_mode, can_edit } = props;
+  const { data, view_mode, can_edit, key } = props;
   const DataObject = new NodeLandingPage(data);
   const [landingPageData, setLandingPageData] = useState(DataObject);
   if (!landingPageData.hasData()) {
@@ -66,7 +67,11 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
       );
     case "tile":
       return (
-        <Card onClick={onClickHandler} data-alias={landingPageData.path.alias}>
+        <Card
+          onClick={onClickHandler}
+          data-alias={landingPageData.path.alias}
+          key={key}
+        >
           <Card.Title className="text-center">
             {landingPageData.title}
           </Card.Title>

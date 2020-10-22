@@ -25,6 +25,9 @@ source:
   jsonapi_include: true
   included:
     - field_rp_content
+    - field_rp_hero_image
+    - field_rp_pdf_file
+    - field_topics
   fields:
     -
       name: nid
@@ -143,6 +146,9 @@ process:
   field_content:
     plugin: 'milken_migrate:paragraphs'
     source: field_rp_content
+  field_topics:
+    plugin: 'milken_migrate:jsonapi_taxonomy'
+    source: field_topics
   field_cover:
     plugin: 'milken_migrate:remote_image'
     source: cover_image
