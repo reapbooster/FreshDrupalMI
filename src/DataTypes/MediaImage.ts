@@ -36,11 +36,7 @@ class MediaImage extends Media implements MediaImageInterface {
   }
 
   hasData(): boolean {
-    return this.status !== undefined;
-  }
-
-  get srcset() {
-    return this._image.image_style_uri;
+    return this.field_media_image?.imageStyleObject instanceof ImageStyleObject;
   }
 
   get field_media_image(): ImageFileInterface {
@@ -59,26 +55,8 @@ class MediaImage extends Media implements MediaImageInterface {
     this._thumbnail = new ImageFile(incoming);
   }
 
-  get imageAttributes(): Record<string, any> {
-    if (this.hasData()) {
-      return this.styleObject.imageAttributes;
-    }
-    return null;
-  }
-
-  get styleObject(): ImageStyleObjectInterface {
-    if (!this.field_media_image?.image_style_uri?.length) {
-      return new HolderImageStyleObject({
-        id: this.id,
-        type: this.type,
-        view_mode: "full",
-      });
-    }
-    return new ImageStyleObject(this.field_media_image.image_style_uri);
-  }
-
-  getThumbnail(): ImageFileInterface {
-    return this.field_media_image?.imageStyleObject?.thumbnail;
+  getThumbnail() {
+    return this.thumbnail;
   }
 }
 

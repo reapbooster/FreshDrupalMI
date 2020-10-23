@@ -11,6 +11,7 @@ export interface MediaDisplayImageProps {
 
 export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
   const { data, view_mode } = props;
+  console.debug("MediaDisplayImage", props);
   const DataObject = new MediaImage(data);
   const [mediaImage, setMediaImage] = useState(DataObject);
 
@@ -20,13 +21,15 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
       .getData(mediaImage.getIncluded())
       .then((res) => res.json())
       .then((incoming) => {
-        setMediaImage(new MediaImage(incoming.data));
+        const DataObject = new MediaImage(incoming.data);
+        setMediaImage(DataObject);
       });
     return <Loading />;
   }
   console.debug("image should have data now: ", mediaImage);
-  const attributes = mediaImage.imageAttributes;
-
+  const attributes =
+    mediaImage.field_media_image.imageStyleObject.imageAttributes;
+  console.debug("image attributes => ", attributes);
   switch (view_mode) {
     case "thumbnail":
       attributes.width = "100%";
