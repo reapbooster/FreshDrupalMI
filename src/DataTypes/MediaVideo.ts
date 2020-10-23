@@ -5,20 +5,20 @@ import { BodyFieldData } from "../Fields/BodyField";
 import Media, { MediaInterface } from "./Media";
 
 export interface MediaVideoInterface extends MediaInterface {
-  field_body: BodyFieldData;
-  field_centers: Array<TaxonomyTermInterface>;
-  field_embedded_id: string;
-  field_embedded_service: string;
-  field_event_reference: EventInterface;
-  field_height: number;
-  field_media_oembed_video: string;
-  field_program_initiatives: Array<TaxonomyTermInterface>;
-  field_speakers: object;
-  field_subheader: string;
-  field_term_collection: Array<TaxonomyTermInterface>;
-  field_thumbnail_uri: string;
-  field_topics: Array<TaxonomyTermInterface>;
-  field_video_height: number;
+  field_body?: BodyFieldData;
+  field_centers?: Array<TaxonomyTermInterface>;
+  field_embedded_id?: string;
+  field_embedded_service?: string;
+  field_event_reference?: EventInterface;
+  field_height?: number;
+  field_media_oembed_video?: string;
+  field_program_initiatives?: Array<TaxonomyTermInterface>;
+  field_speakers?: object;
+  field_subheader?: string;
+  field_term_collection?: Array<TaxonomyTermInterface>;
+  field_thumbnail_uri?: string;
+  field_topics?: Array<TaxonomyTermInterface>;
+  field_video_height?: number;
   field_video_width: number;
   field_width: number;
 
@@ -27,7 +27,6 @@ export interface MediaVideoInterface extends MediaInterface {
 }
 
 export class MediaVideo extends Media implements MediaVideoInterface {
-
   _thumbnail: ImageFileInterface;
 
   _field_centers: Array<TaxonomyTermInterface>;
@@ -137,8 +136,6 @@ export class MediaVideo extends Media implements MediaVideoInterface {
   set thumbnail(incoming: ImageFileInterface) {
     this._thumbnail = new ImageFile(incoming);
   }
-
-
 }
 
 export default MediaVideo;

@@ -16,7 +16,7 @@ variant_settings:
       id: 'component:PodcastBrowser'
       label: 'Podcast Browser'
       provider: component
-      label_display: visible
+      label_display: '0'
       region: bottom
       weight: 0
       uuid: eb7d1fb2-d804-4b8f-bc57-26f1a116c8cb

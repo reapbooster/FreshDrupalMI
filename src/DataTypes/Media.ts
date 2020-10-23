@@ -1,37 +1,40 @@
-import MediaType, {MediaTypeInterface} from "./MediaType";
-import RevisionableEntity, {RevisionableEntityInterface,} from "./RevisionableEntity";
-import {ImageFileInterface} from "./ImageFile";
-import {PathObjectInterface} from "./PathObject";
-
+import MediaType, { MediaTypeInterface } from "./MediaType";
+import RevisionableEntity, {
+  RevisionableEntityInterface,
+} from "./RevisionableEntity";
+import { ImageFileInterface } from "./ImageFile";
+import { PathObjectInterface } from "./PathObject";
 
 export interface MediaInterface extends RevisionableEntityInterface {
-  drupal_internal__mid: string;
-  path: PathObjectInterface;
+  drupal_internal__mid?: string;
+  path?: PathObjectInterface;
   bundle: MediaTypeInterface;
-  name: string;
+  name?: string;
 
   hasData(): boolean;
 
   getIncluded(): string;
 
-  getThumbnail(): ImageFileInterface;
+  getThumbnail(): ImageFileInterface | undefined;
 }
 
-export abstract class Media extends RevisionableEntity implements MediaInterface {
-  drupal_internal__mid: string;
-  name: string;
-  path: PathObjectInterface;
-  _bundle: MediaType;
+export abstract class Media
+  extends RevisionableEntity
+  implements MediaInterface {
+  drupal_internal__mid?: string;
+  name?: string;
+  path?: PathObjectInterface;
+  _bundle?: MediaType;
 
-  field_filemime: string;
+  field_filemime?: string;
 
-  field_filesize: number;
+  field_filesize?: number;
 
-  field_height: string;
+  field_height?: string;
 
-  field_width: string;
+  field_width?: string;
 
-  status: boolean;
+  status?: boolean;
 
   constructor(props) {
     super(props);
@@ -63,7 +66,6 @@ export abstract class Media extends RevisionableEntity implements MediaInterface
   abstract getIncluded(): string;
 
   abstract getThumbnail(): ImageFileInterface;
-
 }
 
 export default Media;

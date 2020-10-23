@@ -5,7 +5,7 @@ import ImageFile, { ImageFileInterface } from "./ImageFile";
 import { Link, LinkInterface } from "./LinkList";
 import DocumentFile, { DocumentFileInterface } from "./DocumentFile";
 import Event, { EventInterface } from "./Event";
-import User, {UserInterface} from "./User";
+import User, { UserInterface } from "./User";
 
 export interface MediaReportInterface extends MediaInterface {
   thumbnail: ImageFileInterface;
@@ -25,24 +25,16 @@ export interface MediaReportInterface extends MediaInterface {
 export class MediaReport extends Media implements MediaReportInterface {
   field_content: Array<ParagraphInterface>;
   field_essay: Link;
-  private _thumbnail: ImageFile;
-  private _field_author: User;
-
-  private _field_centers: TaxonomyTerm;
-
-  private _field_cover: ImageFile;
-
-  private _field_custom_author: Record<string, unknown>;
-
-  private _field_media_file: DocumentFile;
-
-  private _field_program_initiatives: TaxonomyTerm;
-
-  private _field_related_event: Event;
-
-  private _field_term_collection: TaxonomyTerm;
-
-  private _field_topics: TaxonomyTerm;
+  protected _thumbnail: ImageFile;
+  protected _field_author: User;
+  protected _field_centers: TaxonomyTerm;
+  protected _field_cover: ImageFile;
+  protected _field_custom_author: Record<string, unknown>;
+  protected _field_media_file: DocumentFile;
+  protected _field_program_initiatives: TaxonomyTerm;
+  protected _field_related_event: Event;
+  protected _field_term_collection: TaxonomyTerm;
+  protected _field_topics: TaxonomyTerm;
 
   constructor(props) {
     super(props);

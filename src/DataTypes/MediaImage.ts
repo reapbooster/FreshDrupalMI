@@ -7,24 +7,20 @@ import ImageStyleObject, {
 import Media, { MediaInterface } from "./Media";
 
 interface MediaImageInterface extends MediaInterface {
-  field_media_image: ImageFileInterface;
-  field_photo_subject_name: string;
-  field_photo_subject_title: string;
-  field_photo_subject_org: string;
+  field_media_image?: ImageFileInterface;
+  field_photo_subject_name?: string;
+  field_photo_subject_title?: string;
+  field_photo_subject_org?: string;
 }
 
 class MediaImage extends Media implements MediaImageInterface {
-  _thumbnail: ImageFile;
+  field_media_in_library?: boolean;
+  field_photo_subject_name?: string;
+  field_photo_subject_title?: string;
+  field_photo_subject_org?: string;
 
-  _field_media_image: ImageFile;
-
-  field_media_in_library: boolean;
-
-  field_photo_subject_name: string;
-
-  field_photo_subject_title: string;
-
-  field_photo_subject_org: string;
+  protected _thumbnail?: ImageFile;
+  protected _field_media_image?: ImageFile;
 
   constructor(props) {
     super(props);
