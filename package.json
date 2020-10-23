@@ -215,6 +215,7 @@
     "react-dom": "^16.13.1",
     "react-fontawesome": "^1.7.1",
     "react-helmet": "^5.2.1",
+    "react-holder": "^1.0.0",
     "react-holder-component": "^1.0.5",
     "react-is": "^16.13.1",
     "react-jsonschema-form": "^1.8.1",

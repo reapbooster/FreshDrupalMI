@@ -19,9 +19,11 @@ dependencies:
     - field.field.event.conference.field_name_short
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
+    - field.field.event.conference.field_related_media
     - field.field.event.conference.field_sequential_id
     - field.field.event.conference.field_social_network_links
     - field.field.event.conference.field_speakers
+    - field.field.event.conference.field_sponsors
     - field.field.event.conference.field_tabs
     - field.field.event.conference.field_title_card_image
     - field.field.event.conference.field_tracks
@@ -34,6 +36,7 @@ dependencies:
     - key_value_field
     - media_library
     - metatag
+    - milken_base
     - paragraphs
     - paragraphs_browser
     - path
@@ -108,6 +111,7 @@ third_party_settings:
       label: Dates
     group_promotion:
       children:
+        - field_sponsors
         - field_campaign_name
         - field_campaign_id
         - field_campaign_type
@@ -133,6 +137,7 @@ third_party_settings:
         - field_speakers
         - field_sequential_id
         - field_tracks
+        - field_content_tabs
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -146,6 +151,7 @@ third_party_settings:
       label: 'Event Details'
     group_media:
       children:
+        - field_related_media
         - field_hero_image
         - field_title_card_image
       parent_name: group_tabs
@@ -311,6 +317,16 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_related_media:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_sequential_id:
     weight: 25
     settings:
@@ -342,6 +358,16 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_sponsors:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_tabs:
     type: paragraphs_browser
     weight: 61
@@ -384,11 +410,9 @@ content:
     region: content
   field_venue:
     weight: 14
-    settings:
-      rows: 5
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: string_textarea
+    type: milken_layouts_selection_icons
     region: content
   langcode:
     type: language_select

@@ -33,17 +33,18 @@ export const getNavTabs = (
   paragraphTab: ParagraphTabInterface,
   key: number
 ) => {
+  const adminTitle = paragraphTab.admin_title?.toLowerCase() ?? "Overview";
   return (
     <NavItem key={key}>
       <NavLink
         data-toggle="tab"
         role="tab"
-        aria-controls={paragraphTab.admin_title}
+        aria-controls={adminTitle.ucWords()}
         aria-selected={false}
-        href={"#".concat(paragraphTab.admin_title.toLowerCase())}
+        href={"#".concat()}
         active={false}
       >
-        {paragraphTab.admin_title.toString().ucWords()}
+        {adminTitle.ucWords()}
       </NavLink>
     </NavItem>
   );
@@ -53,16 +54,17 @@ export const getTabPanes = (
   paragraphTab: ParagraphTabInterface,
   key: number
 ) => {
+  const adminTitle = paragraphTab.admin_title?.toLowerCase() ?? "Overview";
   return (
     <div className="tab-content" key={key}>
       <div
-        className={"tab-pane-"}
-        id="overview"
+        className={"tab-pane"}
+        id={adminTitle.toLowerCase().concat(paragraphTab.id)}
         role="tabpanel"
-        aria-labelledby="overview"
-        title="Overview"
+        aria-labelledby={adminTitle.toLowerCase()}
+        title={adminTitle.ucWords()}
       >
-        <h3>{paragraphTab.admin_title?.toString().ucWords()}</h3>
+        <h3>{adminTitle.ucWords()}</h3>
         <ParagraphDisplayList
           view_mode="full"
           list={paragraphTab.field_tab_content}

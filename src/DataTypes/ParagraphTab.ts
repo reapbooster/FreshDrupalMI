@@ -1,6 +1,6 @@
 import Paragraph, { ParagraphInterface } from "./Paragraph";
 
-export interface ParagraphTabInterface {
+export interface ParagraphTabInterface extends ParagraphInterface {
   field_tab_content: Array<ParagraphInterface>;
   admin_title: string;
 }
