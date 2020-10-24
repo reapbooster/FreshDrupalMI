@@ -62,7 +62,7 @@ export class ListSource
 
   hasData(): boolean {
     // if Items is undefined, the first call has not been made
-    return Array.isArray(this.items);
+    return Array.isArray(this.items) && this.items.length >= 1;
   }
 
   public static clone(incoming: ListSourceInterface): ListSource {

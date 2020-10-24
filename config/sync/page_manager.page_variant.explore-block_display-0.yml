@@ -16,7 +16,7 @@ variant_settings:
       id: 'component:EntityBrowser'
       label: 'Entity Browser'
       provider: component
-      label_display: visible
+      label_display: '0'
       region: bottom
       weight: 0
       uuid: 58248a19-3034-4b18-85d1-0c2a88872ebb

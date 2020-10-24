@@ -7,12 +7,12 @@ import React from "react";
 import { EventDataFactory } from "./EventFactories";
 import { EventInterface } from "../../DataTypes/Event";
 
-interface EventCardDisplayInterface {
+interface EventCardDisplayProps {
   data: EventInterface;
   key?: number;
 }
 
-export const EventCardDisplay = (props: EventCardDisplayInterface) => {
+export const EventCardDisplay = (props: EventCardDisplayProps) => {
   const { data, key } = props;
   const eventData = EventDataFactory(data);
   const ContainerDiv = styled.div`

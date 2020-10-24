@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
+
 import { EventInterface } from "../../DataTypes/Event";
-import { EventCardDisplay } from "./EventCardDisplay";
-import { EventFullDisplay } from "./EventFullDisplay";
-import { EventDoubleHeightTile } from "./EventDoubleHeightTile";
-import styled, { StyledComponent } from "styled-components";
-import { EventDataFactory } from "./EventFactories";
+
+import { EventDataFactory, EventComponentFactory } from "./EventFactories";
 
 /**
  * implementation of the Controller
@@ -25,7 +22,6 @@ export const EventDisplay = (props: EventDisplayProps) => {
   const DataObject = EventDataFactory(data);
   const [eventData, setEventData] = useState(DataObject);
   if (!eventData.hasData()) {
-    console.debug("Event Does Not Have Data", eventData);
     const ecp = new EntityComponentProps(eventData);
     ecp
       .getData(eventData.getIncluded())
@@ -40,32 +36,10 @@ export const EventDisplay = (props: EventDisplayProps) => {
       </>
     );
   }
-
-  return (
-    <ErrorBoundary>
-      <EventDisplayComponentChooser data={eventData} view_mode={view_mode} />
-    </ErrorBoundary>
-  );
-};
-
-const EventDisplayComponentChooser = ({ data, view_mode, key }) => {
-  console.debug("EventDisplayComponentChooser => ", data, view_mode);
-  switch (view_mode) {
-    case "card":
-      return <EventCardDisplay data={data} key={key} />;
-    case "double_height_tile":
-      return <EventDoubleHeightTile data={data} key={key} />;
-    case "full":
-      return <EventFullDisplay data={data} key={key} />;
-    default:
-      throw new Error("No valid view mode value.", view_mode);
-  }
-};
-
-EventDisplayComponentChooser.defaultProps = {
-  data: {},
-  view_mode: "dont-render",
-  key: 0,
+  console.debug("render me, baby. Do it long and hard and NOW", eventData);
+  const Component = EventComponentFactory(view_mode);
+  console.debug("component factory", Component);
+  return <Component data={eventData} key={key} />;
 };
 
 export default EventDisplay;
