@@ -71,11 +71,17 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
           onClick={onClickHandler}
           data-alias={landingPageData.path.alias}
           key={key}
+          style={{ width: '20em', margin: '1em' }}
         >
-          <Card.Title className="text-center">
+          <Card.Title 
+            className="text-center text-uppercase my-3"
+            style={{ fontSize: '1.2em' }}
+          >
             {landingPageData.title}
           </Card.Title>
-          <Card.Body>
+          <Card.Body
+            style={{ padding: 0 }}
+          >
             <ErrorBoundary>
               <MediaDisplayImage
                 data={landingPageData.field_hero_image}
