@@ -11,9 +11,12 @@ interface ParagraphDisplayPullQuoteProps {
 const ParagraphDisplayPullQuote: React.FunctionComponent = (
   props: ParagraphDisplayPullQuoteProps
 ) => {
+  const { data } = props;
   // Example styled component
   const Blockquote = styled.blockquote`
-    border: 1px solid orange;
+    text-align: ${data.field_alignment};
+    background-color: ${data.field_background_color};
+    font-size: ${data.field_text_size};
   `;
   return (
     <Col lg={12}>
