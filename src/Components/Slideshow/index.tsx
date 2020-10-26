@@ -12,7 +12,7 @@ export interface SlideShowProps {
 export const SlideShow = (props: SlideShowProps) => {
   console.debug("SlideShow", props);
   return (
-    <Carousel>
+    <Carousel prevIcon="">
       {props.items?.map((slide: SlideInterface, key: number) => {
         console.debug("Sending to slide display...", slide);
         return (

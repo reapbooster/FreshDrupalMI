@@ -49,6 +49,15 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     margin: 0,
     padding: 0,
   };
+
+  const slideTextStyle = {
+    top: "50%",
+    transform: "translateY(-50%)",
+    display: "block",
+    position: "absolute",
+    paddingLeft: "7em",
+  };
+
   console.debug("background image object: ", backgroundImage);
   const Jumbotron = styled.div`
     min-height: 650px;
@@ -109,7 +118,9 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
           <Jumbotron
             className={"jumbotron jumbotron-fluid d-block align-items-center"}
           >
-            <Container>{textLines}</Container>
+            <Container style={slideTextStyle}>
+              {textLines}
+            </Container>
           </Jumbotron>
         </Row>
       </ErrorBoundary>
