@@ -37,8 +37,12 @@ export const ListDisplay = function (props: ListDisplayProps) {
       </>
     );
   }
+
   return (
-    <ContainerComponent id={"list-".concat(id)}>
+    <ContainerComponent 
+      id={"list-".concat(id)}
+      className={ `${( list[0]?.type == "node--landing_page" ) ? "flex-wrap justify-content-center" : ""}` }
+    >
       {list.map((item: EntityInterface, key: number) => {
         console.debug(" ==> list item:", item);
         const Component = ListDisplayFactory(item);

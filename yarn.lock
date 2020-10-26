@@ -7846,6 +7846,14 @@ cacheable-request@^7.0.1:
     normalize-url "^4.1.0"
     responselike "^2.0.0"
 
+cached-loader@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/cached-loader/-/cached-loader-0.1.1.tgz#13bee9f8e7a0b29e1308eac57a05572e12c5510c"
+  integrity sha1-E77p+Oegsp4TCOrFegVXLhLFUQw=
+  dependencies:
+    loader-utils "^0.2.12"
+    mkdirp "^0.5.1"
+
 caching-transform@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/caching-transform/-/caching-transform-3.0.2.tgz#601d46b91eca87687a281e71cef99791b0efca70"
@@ -19244,7 +19252,7 @@ loader-utils@1.2.3:
     emojis-list "^2.0.0"
     json5 "^1.0.1"
 
-loader-utils@^0.2.16:
+loader-utils@^0.2.12, loader-utils@^0.2.16:
   version "0.2.17"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-0.2.17.tgz#f86e6374d43205a6e6c60e9196f17c0299bfb348"
   integrity sha1-+G5jdNQyBabmxg6RlvF8Apm/s0g=
@@ -21820,6 +21828,14 @@ onetime@^5.1.0:
   integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   dependencies:
     mimic-fn "^2.1.0"
+
+only-if-changed-webpack-plugin@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/only-if-changed-webpack-plugin/-/only-if-changed-webpack-plugin-0.0.3.tgz#d8502dfed61407247cb5bc8cc3d78e3df18fd180"
+  integrity sha512-OOwTJGuEiF4E2g5uTNv9E8LP/5MfnXpBtmunofWN1uYpselr+acrkmnc7DxB85ER3rFgQDO8dZv/ZKtns6Eobg==
+  dependencies:
+    async "^1.5.2"
+    mkdirp "^0.5.1"
 
 ono@^4.0.11:
   version "4.0.11"

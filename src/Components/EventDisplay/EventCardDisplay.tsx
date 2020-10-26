@@ -22,7 +22,7 @@ export const EventCardDisplay = (props: EventCardDisplayProps) => {
   const eventDate = moment(eventData.field_event_date, moment.ISO_8601);
   return (
     <>
-      <ContainerDiv className={"card"} key={key ?? 0}>
+      <ContainerDiv className={"card text-align-left"} key={key ?? 0}>
         <a
           href={eventData.path.alias}
           className="my-5"

@@ -5,6 +5,7 @@ import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import VideoFullDisplay from "./VideoFullDisplay";
 import VideoCardDisplay from "./VideoCardDisplay";
 import VideoTileDisplay from "./VideoTileDisplay";
+import VideoListDisplay from "./VideoListDisplay";
 
 export const VideoDisplay = (props) => {
   const { data, view_mode, column } = props;
@@ -27,10 +28,12 @@ export const VideoDisplay = (props) => {
   switch (view_mode) {
     case "full":
       return <VideoFullDisplay data={data} />;
-    case "card":
-      return <VideoCardDisplay data={data} />;
     case "tile":
-      return <VideoTileDisplay data={data} />;
+    case "card":
+      // For this entity, they are the same.
+      return <VideoCardDisplay data={data} />;
+    case "list":
+      return <VideoListDisplay data={data} />;
     default:
       throw new Error(
         "Cannot find component for view mode: ".concat(view_mode)
