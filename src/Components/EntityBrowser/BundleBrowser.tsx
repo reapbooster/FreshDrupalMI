@@ -75,6 +75,14 @@ export const BundleBrowser = (props: BundleBrowserProps) => {
             );
           })}
         </Nav>
+        <form className="form-inline my-2 my-lg-0">
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Filter list"
+            aria-label="Filter List"
+          />
+        </form>
         <Nav>
           <Nav.Item>
             <Nav.Link

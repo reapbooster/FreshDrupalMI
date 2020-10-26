@@ -15,9 +15,9 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
   const created = moment(data.created, moment.ISO_8601);
   return (
     <>
-      <Container>
+      <Container className="text-align-left">
         <a
-          href={"/video/".concat(data.drupal_internal__mid)}
+          href={data.path.alias}
           className="card my-5"
           data-drupal-id={data.drupal_internal__mid}
           data-drupal-type={data.type}

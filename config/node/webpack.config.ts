@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
 const BrowserSyncWebpackPlugin = require("browser-sync-webpack-plugin");
 const postcssImageSet = require("postcss-image-set-polyfill");
+const OnlyIfChangedPlugin = require("only-if-changed-webpack-plugin");
 
 function parsePath(incoming) {
   const basename = pathUtility.basename(
@@ -70,7 +71,12 @@ module.exports = () => {
         ],
       },
     };
-
+    const onlyIfChangedOptions = {
+      rootDir: process.cwd(),
+      devBuild: process.env.NODE_ENV !== "production",
+      filename: parsedFileName.libraryName + ".entry.js",
+      path: parsedFileName.dirname,
+    };
     const toReturn = {
       entry: {},
       mode: "development",
@@ -126,6 +132,10 @@ module.exports = () => {
         new DrupalLibrariesWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new BrowserSyncWebpackPlugin(),
+        new OnlyIfChangedPlugin({
+          cacheDirectory: path.join(onlyIfChangedOptions.rootDir, "tmp/cache"),
+          cacheIdentifier: onlyIfChangedOptions, // all variable opts/environment should be used in cache key
+        }),
       ],
       stats: {
         warnings: true,
