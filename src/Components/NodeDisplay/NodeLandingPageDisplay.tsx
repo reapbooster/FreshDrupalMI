@@ -66,12 +66,16 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
         </>
       );
     case "tile":
+      const lpTileCardStyle = {
+        width: ( window.matchMedia('(min-width: 1200px)').matches ? '20em' : ( window.matchMedia('(min-width: 768px)').matches ? '17em' : '100%' ) ),
+        margin: '1em',
+      }
       return (
         <Card
           onClick={onClickHandler}
           data-alias={landingPageData.path.alias}
           key={key}
-          style={{ width: '20em', margin: '1em' }}
+          style={lpTileCardStyle}
         >
           <Card.Title 
             className="text-center text-uppercase my-3"
