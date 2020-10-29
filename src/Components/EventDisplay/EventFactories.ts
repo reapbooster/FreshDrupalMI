@@ -13,7 +13,7 @@ import { EventFullDisplay } from "./EventFullDisplay";
  *
  * @param incoming
  */
-export const EventDataFactory: EventInterface = (incoming: EntityInterface) => {
+export const EventDataFactory = (incoming: EntityInterface) => {
   switch (incoming.type) {
     case "event--conference":
       return new EventConference(incoming);

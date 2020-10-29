@@ -20,6 +20,7 @@ permissions:
   - 'access media_entity_browser_media_library entity browser pages'
   - 'access media_entity_browser_modal entity browser pages'
   - 'access missing_migration entity listing'
+  - 'access openapi api docs'
   - 'access panel entity listing'
   - 'access rooms entity listing'
   - 'access slide entity listing'

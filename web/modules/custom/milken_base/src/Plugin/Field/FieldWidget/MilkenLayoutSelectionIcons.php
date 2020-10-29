@@ -52,16 +52,19 @@ class MilkenLayoutSelectionIcons extends OptionsButtonsWidget {
           ->getSelectionHandler($fieldDef, $op->getEntity());
         $refs = $selectionHandler->getReferenceableEntities();
         $path = drupal_get_path('module', 'milken_base') . "/images";
-        $result = \Drupal::entityTypeManager()
-          ->getStorage($targetType)
-          ->loadMultiple(array_keys($refs[$targetType]));
-        if (empty($result)) {
-          return [];
+        if (is_array($refs[$targetType])) {
+          $result = \Drupal::entityTypeManager()
+            ->getStorage($targetType)
+            ->loadMultiple(array_keys($refs[$targetType]));
+          if (empty($result)) {
+            return [];
+          }
+          foreach ($result as $layout) {
+            $imageURL = base_path() . $path . "/" . str_replace("_", "-", $layout->id()) . ".png";
+            $options[$layout->id()] = '<img src="' . $imageURL . '" alt="' . $layout->label() . '" />';
+          }
         }
-        foreach ($result as $layout) {
-          $imageURL = base_path() . $path . "/" . str_replace("_", "-", $layout->id()) . ".png";
-          $options[$layout->id()] = '<img src="' . $imageURL . '" alt="' . $layout->label() . '" />';
-        }
+
       }
       $this->options = $options;
     }

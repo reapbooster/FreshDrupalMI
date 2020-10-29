@@ -9,7 +9,7 @@
 
 import React from "react";
 import { ParagraphDisplay } from ".";
-import { ErrorBoundary } from "../../Utility/ErrorBoundary";
+import Entity from "../../DataTypes/Entity";
 import { ParagraphInterface } from "../../DataTypes/Paragraph";
 
 export interface ParagraphDisplayListProps {
@@ -22,8 +22,13 @@ export const ParagraphDisplayList = (props: ParagraphDisplayListProps) => {
   if (Array.isArray(list)) {
     return (
       list?.map((item, key) => {
-        console.log("Paragraph Display List => ", list);
-        return <ParagraphDisplay data={item} view_mode={view_mode} key={key} />;
+        console.log("Paragraph Display Item => ", item);
+        if (item.type !== undefined) {
+          return (
+            <ParagraphDisplay data={item} view_mode={view_mode} key={key} />
+          );
+        }
+        return item;
       }) ?? []
     );
   }

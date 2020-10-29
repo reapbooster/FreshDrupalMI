@@ -3,7 +3,7 @@
     "compilerOptions": {
       "allowJs": true,
       "checkJs": true,
-      "target": "ES2019",
+      "target": "ESNext",
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
       "module": "commonjs",
@@ -19,7 +19,7 @@
       "experimentalDecorators": true,
       "typeRoots": [
         "node_modules/@types"
-      ]
+      ],
     },
     "include": [
       "./web/themes/custom/milken/js",

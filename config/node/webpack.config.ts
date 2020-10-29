@@ -42,6 +42,11 @@ module.exports = () => {
     const babelLoader = {
       loader: "babel-loader",
       options: {
+        exclude: [
+          // \\ for Windows, \/ for Mac OS and Linux
+          /node_modules[\\\/]core-js/,
+          /node_modules[\\\/]webpack[\\\/]buildin/,
+        ],
         cacheDirectory: false,
         presets: [
           "@babel/preset-env",
@@ -92,7 +97,7 @@ module.exports = () => {
         extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
         plugins: [],
         alias: {
-          components: pathUtility.resolve("./src/Components"),
+          Components: pathUtility.resolve("./src/Components"),
           DataTypes: pathUtility.resolve("./src/DataTypes"),
           Fields: pathUtility.resolve("./src/Fields"),
           Utility: pathUtility.resolve("./src/Utility"),
@@ -110,6 +115,7 @@ module.exports = () => {
             enforce: "pre",
             test: /\.js$/,
             loader: "source-map-loader",
+            exclude: /node_modules/,
           },
           {
             test: /\.css$/i,

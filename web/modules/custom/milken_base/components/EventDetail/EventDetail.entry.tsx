@@ -10,7 +10,8 @@ console.debug("getting ready to render", EventDetailData);
 ReactDOM.render(
   <EventFullDisplay
     data={EventDetailData}
-    view_mode={EventDetailContainer.dataset.view_mode}
+    view_mode={EventDetailContainer.dataset.viewMode}
+    can_edit={EventDetailContainer.dataset.canEdit}
   />,
   EventDetailContainer
 );

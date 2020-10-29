@@ -1,20 +1,15 @@
-import React, { useState } from "react";
-import {
-  Row,
-  Nav,
-  NavItem,
-  NavLink,
-  Col,
-  Container,
-} from "@bootstrap-styled/v4";
-
+import React from "react";
+import { Container } from "react-bootstrap";
 import { EventDataFactory } from "./EventFactories";
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import { EventHero } from "./EventHero";
 import Loading from "../Loading";
-import ParagraphDisplayList from "../ParagraphDisplay/ParagraphDisplayList";
-import { Event, EventInterface } from "../../DataTypes/Event";
-import { ParagraphTabInterface } from "../../DataTypes/ParagraphTab";
+import {
+  Event as EventDataObject,
+  EventInterface,
+} from "../../DataTypes/Event";
+import ParagraphTabsDisplay from "../ParagraphTabsDisplay";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 if (String.ucWords === undefined) {
   String.prototype.ucWords = function () {
@@ -27,100 +22,97 @@ if (String.ucWords === undefined) {
 
 export interface EventFullDisplayProps {
   data: EventInterface;
+  view_mode: string;
+  can_edit: boolean;
 }
 
-export const getNavTabs = (
-  paragraphTab: ParagraphTabInterface,
-  key: number
-) => {
-  const adminTitle = paragraphTab.admin_title?.toLowerCase() ?? "Overview";
-  return (
-    <NavItem key={key}>
-      <NavLink
-        data-toggle="tab"
-        role="tab"
-        aria-controls={adminTitle.ucWords()}
-        aria-selected={false}
-        href={"#".concat()}
-        active={false}
-      >
-        {adminTitle.ucWords()}
-      </NavLink>
-    </NavItem>
-  );
-};
+export interface EventFullDisplayState {
+  data: EventInterface;
+  view_mode: string;
+  can_edit: boolean;
+  loading: boolean;
+  loaded: boolean;
+  is_editing: boolean;
+  schema: unknown;
+}
 
-export const getTabPanes = (
-  paragraphTab: ParagraphTabInterface,
-  key: number
-) => {
-  const adminTitle = paragraphTab.admin_title?.toLowerCase() ?? "Overview";
-  return (
-    <div className="tab-content" key={key}>
-      <div
-        className={"tab-pane"}
-        id={adminTitle.toLowerCase().concat(paragraphTab.id)}
-        role="tabpanel"
-        aria-labelledby={adminTitle.toLowerCase()}
-        title={adminTitle.ucWords()}
-      >
-        <h3>{adminTitle.ucWords()}</h3>
-        <ParagraphDisplayList
-          view_mode="full"
-          list={paragraphTab.field_tab_content}
-        />
-      </div>
-    </div>
-  );
-};
-
-export const EventFullDisplay = (props: EventFullDisplayProps) => {
-  console.debug("EventFullDisplay => Render", props);
-  const { data } = props;
-  const DataObject = EventDataFactory(data);
-  const [eventData, setEventData] = useState(DataObject);
-
-  if (!eventData.hasData()) {
-    const ecp = new EntityComponentProps(eventData);
-    ecp
-      .getData(eventData.getIncluded())
-      .then((res) => res.json())
-      .then((ajaxData) => {
-        const DataObject = EventDataFactory(ajaxData.data);
-        setEventData(DataObject);
-      });
-    return <Loading />;
+export class EventFullDisplay extends React.Component<
+  EventFullDisplayProps,
+  EventFullDisplayState
+> {
+  constructor(props) {
+    super(props);
+    const DataObject = EventDataFactory(props.data);
+    console.debug("EventFullDisplay => Constructor", props);
+    this.state = {
+      data: DataObject,
+      view_mode: props.view_mode,
+      can_edit: Boolean(props.can_edit),
+      loading: false,
+      loaded: DataObject.hasData(),
+      is_editing: false,
+      schema: {},
+    };
+    this.editButtonOnClickHandler = this.editButtonOnClickHandler.bind(this);
+    this.getDataObject = this.getDataObject.bind(this);
   }
-  console.debug("Event should have data now:", eventData);
-  return (
-    <>
-      <Container fluid={true}>
-        <EventHero data={eventData.field_hero_image} />
-        <Container
-          id={"event-tabs".concat(data.id)}
-          defaultActiveKey="overview"
-          fluid={true}
-        >
-          <Row p={3} className={"bg-light text-dark"}>
-            <Col sm={12}>
-              <Nav tabs justified role="tablist">
-                {eventData.field_content_tabs.map((item, key) => {
-                  return getNavTabs(item, key);
-                })}
-              </Nav>
-            </Col>
-          </Row>
-          <Row>
-            <Col sm={12}>
-              {eventData.field_content_tabs.map((item, key) => {
-                return getTabPanes(item, key);
-              })}
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-    </>
-  );
-};
+
+  getDataObject(): EventDataObject {
+    let DataObject = this.state.data;
+    if (DataObject.hasData === undefined) {
+      DataObject = EventDataFactory(DataObject);
+    }
+    return DataObject;
+  }
+
+  componentDidMount() {
+    const DataObject = this.getDataObject();
+    const { loading, loaded } = this.state;
+    if (!DataObject.hasData() && !loading && !loaded) {
+      this.setState({ loading: true, loaded: false });
+      const ecp = new EntityComponentProps(DataObject);
+      ecp
+        .getData(DataObject.getIncluded())
+        .then((res) => res.json())
+        .then((ajaxData) => {
+          const resultData = EventDataFactory(ajaxData.data);
+          this.setState({ data: resultData, loaded: true, loading: false });
+        });
+    }
+  }
+
+  editButtonOnClickHandler(evt: Event) {
+    console.debug("editButtonOnClickHandler", evt.currentTarget.dataset);
+  }
+
+  /**
+   * Main Render
+   */
+  render() {
+    console.debug("EventFullDisplay => Render", this.state);
+    const { data, can_edit, loading, loaded, is_editing } = this.state;
+
+    if (loading === true) {
+      return <Loading />;
+    }
+    if (loaded === true) {
+      console.debug("Event should have data now:", data);
+      return (
+        <>
+          <Container fluid={true} style={{ position: "relative" }}>
+            <EventHero data={data.field_hero_image} can_edit={can_edit} />
+            <ErrorBoundary>
+              <ParagraphTabsDisplay
+                content={data.field_content_tabs}
+                can_edit={can_edit}
+              />
+            </ErrorBoundary>
+          </Container>
+        </>
+      );
+    }
+    return <div data-prerender="true"></div>;
+  }
+}
 
 export default EventFullDisplay;
