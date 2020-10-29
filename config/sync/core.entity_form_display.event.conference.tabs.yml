@@ -20,10 +20,11 @@ dependencies:
     - field.field.event.conference.field_name_short
     - field.field.event.conference.field_published
     - field.field.event.conference.field_registration_deadline
+    - field.field.event.conference.field_related_media
     - field.field.event.conference.field_sequential_id
     - field.field.event.conference.field_social_network_links
     - field.field.event.conference.field_speakers
-    - field.field.event.conference.field_tabs
+    - field.field.event.conference.field_sponsors
     - field.field.event.conference.field_title_card_image
     - field.field.event.conference.field_tracks
     - field.field.event.conference.field_venue
@@ -36,7 +37,6 @@ dependencies:
     - media_library
     - metatag
     - paragraphs
-    - paragraphs_browser
     - path
     - text
 third_party_settings:
@@ -343,27 +343,6 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_tabs:
-    type: paragraphs_browser
-    weight: 61
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      closed_mode: summary
-      autocollapse: none
-      closed_mode_threshold: 0
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-      features:
-        duplicate: duplicate
-        collapse_edit_all: collapse_edit_all
-      paragraphs_browser: _na
-      modal_width: 80%
-      modal_height: auto
-    third_party_settings: {  }
-    region: content
   field_title_card_image:
     weight: 32
     settings:
@@ -411,4 +390,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_related_media: true
+  field_sponsors: true

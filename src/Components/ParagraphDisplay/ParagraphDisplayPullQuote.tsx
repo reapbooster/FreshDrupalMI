@@ -15,7 +15,7 @@ const ParagraphDisplayPullQuote: React.FunctionComponent = (
   // Example styled component
   const Blockquote = styled.blockquote`
     text-align: ${data.field_alignment};
-    background-color: ${data.field_background_color.color};
+    background-color: ${data.field_background};
   `;
   return (
     <Col lg={12}>

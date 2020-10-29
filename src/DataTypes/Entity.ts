@@ -9,6 +9,7 @@ export interface EntityInterface {
   id: string;
   links?: LinkListInterface;
   type: string;
+  [x: string]: unknown;
 }
 
 export default abstract class Entity implements EntityInterface {
@@ -21,6 +22,7 @@ export default abstract class Entity implements EntityInterface {
   private _created?: Date;
 
   private _links?: LinkList;
+  [x: string]: unknown;
 
   constructor(incoming: EntityInterface) {
     Object.assign(this, incoming);

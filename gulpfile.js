@@ -101,9 +101,14 @@ gulp.task("buildMilkenTheme", (done) => {
 
 gulp.task(
   "buildGinTheme",
-  shell.task("yarn install && yarn build", {
-    cwd: path.resolve(basePath, "web/themes/contrib/gin"),
-  })
+  gulp.series([
+    shell.task("yarn install && yarn build", {
+      cwd: path.resolve(basePath, "web/themes/contrib/gin"),
+    }),
+    shell.task("cp -R web/themes/contrib/gin/dist/* web/themes/contrib/gin", {
+      cwd: basePath,
+    }),
+  ])
 );
 
 /**
