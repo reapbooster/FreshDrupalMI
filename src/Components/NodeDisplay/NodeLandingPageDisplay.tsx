@@ -66,26 +66,30 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
         </>
       );
     case "tile":
-      const lpTileCardStyle = {
-        width: ( window.matchMedia('(min-width: 1200px)').matches ? '20em' : ( window.matchMedia('(min-width: 768px)').matches ? '17em' : '100%' ) ),
-        margin: '1em',
-      }
+      const CardOuter = styled.div`
+        margin 1em;
+        width: 100%;
+        @media (min-width: 1200px) {
+          width: 20em;
+        }
+        @media (min-width: 768px) {
+          width: 17em;
+        }
+      `;
       return (
-        <Card
+        <CardOuter
           onClick={onClickHandler}
           data-alias={landingPageData.path.alias}
           key={key}
-          style={lpTileCardStyle}
+          className="card"
         >
-          <Card.Title 
+          <Card.Title
             className="text-center text-uppercase my-3"
-            style={{ fontSize: '1.2em' }}
+            style={{ fontSize: "1.2em" }}
           >
             {landingPageData.title}
           </Card.Title>
-          <Card.Body
-            style={{ padding: 0 }}
-          >
+          <Card.Body style={{ padding: 0 }}>
             <ErrorBoundary>
               <MediaDisplayImage
                 data={landingPageData.field_hero_image}
@@ -93,7 +97,7 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
               />
             </ErrorBoundary>
           </Card.Body>
-        </Card>
+        </CardOuter>
       );
     default:
       return (
