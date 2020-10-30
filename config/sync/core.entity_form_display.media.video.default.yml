@@ -11,8 +11,8 @@ dependencies:
     - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
+    - field.field.media.video.field_people
     - field.field.media.video.field_program_initiatives
-    - field.field.media.video.field_speakers
     - field.field.media.video.field_subheader
     - field.field.media.video.field_term_collection
     - field.field.media.video.field_thumbnail_uri
@@ -221,19 +221,19 @@ content:
     settings:
       sidebar: true
     third_party_settings: {  }
-  field_program_initiatives:
-    type: entity_reference_autocomplete
-    weight: 6
-    region: content
+  field_people:
+    weight: 26
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_speakers:
     type: entity_reference_autocomplete
-    weight: 8
+    region: content
+  field_program_initiatives:
+    type: entity_reference_autocomplete
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS

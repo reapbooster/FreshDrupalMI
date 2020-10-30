@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.session.field_event
+    - field.field.node.session.field_livestream
     - field.field.node.session.field_long_description
+    - field.field.node.session.field_people
     - field.field.node.session.field_private
     - field.field.node.session.field_short_summary
     - field.field.node.session.field_start_end
@@ -14,7 +16,9 @@ dependencies:
     - datetime_range
     - field_group
     - link
+    - media_library
     - path
+    - publication_date
     - text
 third_party_settings:
   field_group:
@@ -90,6 +94,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_livestream:
+    type: media_library_widget
+    weight: 128
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
   field_long_description:
     weight: 122
     settings:
@@ -97,6 +108,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_people:
+    weight: 127
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_private:
     weight: 126

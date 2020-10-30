@@ -25,6 +25,7 @@ dependencies:
     - field.field.event.conference.field_social_network_links
     - field.field.event.conference.field_speakers
     - field.field.event.conference.field_sponsors
+    - field.field.event.conference.field_streaming_now
     - field.field.event.conference.field_title_card_image
     - field.field.event.conference.field_tracks
     - field.field.event.conference.field_venue
@@ -393,3 +394,4 @@ content:
 hidden:
   field_related_media: true
   field_sponsors: true
+  field_streaming_now: true
