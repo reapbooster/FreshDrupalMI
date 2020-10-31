@@ -9,6 +9,8 @@ import MediaDisplayImage from "../MediaDisplay/MediaDisplayImage";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
@@ -66,30 +68,69 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
         </>
       );
     case "tile":
+      const CardOuter = styled.div`
+        margin: 1em;
+        width: 100%;
+        box-shadow: 0 8px 16px 0 #bbb;
+        cursor: pointer; 
+        
+        &:hover .card-title { color: var( --color-milken-orange ) !important; };
+        &:hover .card-body div { display: unset; };
+
+        @media (max-width: 767px) {
+          margin: 1em 0;
+        }
+        @media (min-width: 768px) {
+          width: 17em;
+        }
+        @media (min-width: 1200px) {
+          width: 20em;
+        }
+      `;
+
+      const CardLinkBox = styled.div`
+        display: none;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        border-bottom: 4px solid var(--color-milken-orange);
+      `;
+
       return (
-        <Card
+        <CardOuter
           onClick={onClickHandler}
           data-alias={landingPageData.path.alias}
           key={key}
-          style={{ width: '20em', margin: '1em' }}
+          className="card border-0"
         >
-          <Card.Title 
-            className="text-center text-uppercase my-3"
-            style={{ fontSize: '1.2em' }}
+          <Card.Title
+            className="text-center text-uppercase py-3 mb-0 border"
+            style={{ fontSize: "1.0em", color: "var(--color-milken-blue)" }}
           >
             {landingPageData.title}
           </Card.Title>
-          <Card.Body
-            style={{ padding: 0 }}
-          >
+          <Card.Body style={{ padding: 0 }}>
             <ErrorBoundary>
               <MediaDisplayImage
                 data={landingPageData.field_hero_image}
                 view_mode={"thumbnail"}
               />
             </ErrorBoundary>
+            <CardLinkBox>
+              <FontAwesomeIcon 
+                icon={faArrowRight} 
+                style={{
+                  float: "right", 
+                  color: "white", 
+                  backgroundColor: "var(--color-milken-orange)", 
+                  padding: ".5em",
+                  width: "3em",
+                  height: "3em",
+                }} />
+            </CardLinkBox>
           </Card.Body>
-        </Card>
+        </CardOuter>
       );
     default:
       return (
