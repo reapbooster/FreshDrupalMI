@@ -29,16 +29,20 @@ export const NodeDisplay = (props: EntityInterface) => {
     ecp
       .getData(nodeData.getIncluded())
       .then((res) => res.json())
-      .then((remoteData) => {
-        console.debug("NodeData back from json", remoteData);
-        const DataFactory = NodeDataFactory(remoteData.data);
-        setNodeData(DataFactory);
+      .then((ajaxData) => {
+        if (ajaxData.errors) {
+          ajaxData.errors.map((item) => {
+            throw new Error(item);
+          });
+        }
+        const toReturn = NodeDataFactory(ajaxData.data);
+        console.debug("NodeData back from json", toReturn);
+        setNodeData(toReturn);
+      })
+      .catch((reason) => {
+        throw new Error(reason);
       });
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
   const Component = NodeComponentFactory(nodeData);
   return (

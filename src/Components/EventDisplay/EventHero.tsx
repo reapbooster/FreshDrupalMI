@@ -13,6 +13,9 @@ export interface EventHeroProps {
 
 export const EventHero = (props: EventHeroProps) => {
   const { data } = props;
+  if (data.data !== undefined) {
+    return <div />;
+  }
   const DataObject = MediaDataFactory(data);
   const [heroData, setHeroData] = useState(DataObject);
 

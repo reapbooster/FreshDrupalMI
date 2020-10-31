@@ -55,7 +55,6 @@ export class ImageStyleObject implements ImageStyleObjectInterface {
     return {
       srcSet: this.srcSet,
       className: "lazyload",
-      "data-aspectratio": "220/150",
       "data-sizes": "auto",
       style: {
         objectFit: "cover",

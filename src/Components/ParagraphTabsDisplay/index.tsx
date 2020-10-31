@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import ParagraphTab, {
   ParagraphTabInterface,
 } from "../../DataTypes/ParagraphTab";
@@ -8,6 +8,7 @@ import ParagraphsToolbar from "./ParagraphToolbar";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import ParagraphDataFactory from "../ParagraphDisplay/ParagraphDataFactory";
 import uuidv4 from "../../Utility/uuidv4";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 export interface ParagraphTabsDisplayProps {
   content: ParagraphTabInterface[];
@@ -105,6 +106,9 @@ export class ParagraphTabsDisplay extends React.Component<
       "aria-controls": "tab-".concat(paragraphTab.id),
       "aria-selected": active,
       "data-toggle": "tab",
+      style: {
+        textTransform: "uppercase",
+      },
     };
     if (paragraphTab.onClick) {
       linkProperties["onClick"] = paragraphTab.onClick;
@@ -134,27 +138,41 @@ export class ParagraphTabsDisplay extends React.Component<
       role: "tabpanel",
       title: paragraphTab.admin_title?.toString() ?? "Overview",
       "aria-labelledby": "nav-".concat(paragraphTab.id),
+      fluid: true,
+      style: {
+        minHeight: "22rem",
+      },
     };
     console.debug("EventFullDisplay => paneProperties", paneProperties);
     const paneContents: Array<unknown> = [];
     if (paragraphTab.field_tab_content.length) {
       paneContents.push(
-        <ParagraphDisplayList
-          view_mode="full"
-          list={paragraphTab.field_tab_content}
-        />
+        <Row>
+          <Col lg={12} sm={12}>
+            <ParagraphDisplayList
+              view_mode="full"
+              list={paragraphTab.field_tab_content}
+            />
+          </Col>
+        </Row>
       );
     }
     if (can_edit) {
       paneContents.push(
-        <ParagraphsToolbar
-          onClickHandler={this.paragraphsToolbarOnClickHandler}
-          tabKey={key}
-        />
+        <Row>
+          <Col lg={12} sm={12} className="my-3">
+            <Container>
+              <ParagraphsToolbar
+                onClickHandler={this.paragraphsToolbarOnClickHandler}
+                tabKey={key}
+              />
+            </Container>
+          </Col>
+        </Row>
       );
     }
     console.debug("EventFullDisplay => paneContents", paneContents);
-    return <div {...paneProperties}>{paneContents}</div>;
+    return <Container {...paneProperties}>{paneContents}</Container>;
   }
 
   /**
@@ -175,12 +193,14 @@ export class ParagraphTabsDisplay extends React.Component<
     );
     return (
       <Container fluid={true}>
-        <nav className="pt-3">
-          <div className="nav nav-tabs" id="nav-tab" role="tablist">
-            {content.map(this.getNavTab)}
-            {can_edit ? addNewTab : ""}
-          </div>
-        </nav>
+        <Container>
+          <nav className="pt-3">
+            <div className="nav nav-tabs" id="nav-tab" role="tablist">
+              {content.map(this.getNavTab)}
+              {can_edit ? addNewTab : ""}
+            </div>
+          </nav>
+        </Container>
         <div className="tab-content">{content.map(this.getPane)}</div>
       </Container>
     );

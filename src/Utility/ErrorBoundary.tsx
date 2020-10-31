@@ -1,4 +1,5 @@
 import React from "react";
+import ErrorDisplay from "./ErrorDisplay";
 
 export interface ErrorBoundaryProps {
   key?: number;
@@ -7,6 +8,7 @@ export interface ErrorBoundaryProps {
 export interface ErrorBoundaryState {
   error?: Error;
   hasError: boolean;
+  errorInfo?: Record<string, any>;
 }
 
 export class ErrorBoundary extends React.Component<
@@ -15,9 +17,11 @@ export class ErrorBoundary extends React.Component<
 > {
   constructor(props: ErrorBoundaryProps) {
     super(props);
+    const { key } = props;
     this.state = {
       error: null,
       hasError: false,
+      errorInfo: null,
     };
   }
 
@@ -32,25 +36,18 @@ export class ErrorBoundary extends React.Component<
 
   componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
+    this.setState({ error: error, errorInfo: errorInfo });
     console.error(error, errorInfo);
   }
 
   render() {
-    const content = this.state.hasError ? (
-      <>
-        <div className="alert alert-danger">
-          <h4>{this.state.error?.message ?? "Something Went Wrong"}</h4>
-        </div>
-      </>
+    const { error, hasError, errorInfo } = this.state;
+    const { children, key } = this.props;
+
+    return hasError ? (
+      <ErrorDisplay error={error} key={key} errorInfo={errorInfo} />
     ) : (
-      this.props.children
-    );
-    return (
-      <>
-        <error-boundary className="error-boundary" key={this.props.key}>
-          {content}
-        </error-boundary>
-      </>
+      children
     );
   }
 }

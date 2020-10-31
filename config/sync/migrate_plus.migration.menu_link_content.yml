@@ -18,9 +18,9 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
   urls:
-    - 'https://test-milken-institute.pantheonsite.io/jsonapi/menu_link_content/asia'
-    - 'https://test-milken-institute.pantheonsite.io/jsonapi/menu_link_content/footer'
-  jsonapi_host: 'https://test-milken-institute.pantheonsite.io'
+    - 'https://milkeninstitute.org/jsonapi/menu_link_content/asia'
+    - 'https://milkeninstitute.org/jsonapi/menu_link_content/footer'
+  jsonapi_host: 'https://milkeninstitute.org'
   headers:
     Accept: application/vnd.api+json
     Content-Type: application/vnd.api+json

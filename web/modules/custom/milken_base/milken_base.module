@@ -11,7 +11,7 @@ use Drupal\Core\Config\Entity\ConfigEntityType;
 /**
  * Implements hook_entity_type_alter().
  */
-function milken_migrations_entity_type_alter(array &$entity_types) {
+function milken_base_entity_type_alter(array &$entity_types) {
   if ($entity_types['media_type'] instanceof ConfigEntityType) {
     $entity_types['media_type']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMediaTypeAccessControlHandler');
   }

@@ -41,60 +41,13 @@ class EventTitleCardCommand extends ContainerAwareCommand {
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
     // phpcs:ignore
-    $response = \Drupal::httpClient()
-      ->get('https://milkeninstitute.org/jsonapi/node/event?jsonapi_include=true&filter[field_grid_event_id][condition][path]=field_grid_event_id&filter[field_grid_event_id][condition][operator]=IS%20NOT%20NULL&include=field_event_header_image,field_event_video_still,field_event_image,field_event_live_info,field_event_live_info.field_social_network,field_event_summary_image');
-    $list = Json::decode($response->getBody());
-
-    foreach ($list['data'] as $remoteEvent) {
-      $localEvent = $this->getLocalForRemoteEvent($remoteEvent);
-      if (!$localEvent instanceof EntityInterface) {
-        throw new \Exception("Cannot get local entity for remote event:" . print_r($remoteEvent, TRUE));
-      }
-      if (!empty($remoteEvent['field_meta_tags'])) {
-        $localEvent->set('field_meta_tags', $remoteEvent['field_meta_tags']);
-      }
-      $heroImage = $localEvent->toArray()['field_hero_image'];
-      $eventImage = $localEvent->toArray()['field_title_card_image'];
-
-      if (!array_key_exists('data', $remoteEvent['field_event_header_image']) && empty($heroImage)) {
-        echo "field_event_header_image" . PHP_EOL;
-        print_r($remoteEvent['field_event_header_image']);
-        $ref = new JsonAPIReference($remoteEvent['field_event_header_image'][0]);
-        $fileHandle = $ref->getRemote();
-        $localEvent->set('field_hero_image', $fileHandle);
-        $heroImage = $localEvent->toArray()['field_hero_image'];
-      }
-
-      if (!array_key_exists('data', $remoteEvent['field_event_image']) && empty($eventImage)) {
-        echo "Field_event_image" . PHP_EOL;
-        print_r($remoteEvent['field_event_image']);
-        $ref = new JsonAPIReference($remoteEvent['field_event_image']);
-        $fileHandle = $ref->getRemote();
-        $localEvent->set('field_title_card_image', $fileHandle);
-        $eventImage = $localEvent->toArray()['field_title_card_image'];
-      }
-
-      if (!array_key_exists('data', $remoteEvent['field_event_summary_image']) && empty($eventImage)) {
-        echo "field_event_summary_image " . PHP_EOL;
-        print_r($remoteEvent['field_event_summary_image']);
-        $ref = new JsonAPIReference($remoteEvent['field_event_summary_image']);
-        $fileHandle = $ref->getRemote();
-        $localEvent->set('field_title_card_image', $fileHandle);
-        $eventImage = $localEvent->toArray()['field_title_card_image'];
-      }
-
-      if (!array_key_exists('data', $remoteEvent['field_event_video_still']) && empty($eventImage)) {
-        echo "field_event_video_still" . PHP_EOL;
-        print_r($remoteEvent['field_event_video_still']);
-        $ref = new JsonAPIReference($remoteEvent['field_event_video_still']);
-        $fileHandle = $ref->getRemote();
-        $localEvent->set('field_title_card_image', $fileHandle);
-        $eventImage = $localEvent->toArray()['field_title_card_image'];
-      }
-
-      $localEvent->save();
-
-    }
+    // 1. get all events and begin loop.
+    // 2. for each event: Do they have any sessions?
+    // 3. if they do, separate the sessions into days.
+    // 4. create "program" tab on event.
+    // 5. create program_day paragraph for each of the days with event_id and date add to program tab.
+    // 6. save event.
+    $results = \Drupal::entityTypeManager()->getStorage('event')->getQuery()->execute();
 
   }
 

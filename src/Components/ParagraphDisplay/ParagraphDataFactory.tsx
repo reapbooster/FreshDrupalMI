@@ -12,6 +12,7 @@ import {
 import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
 import ParagraphSlide from "../../DataTypes/ParagraphSlide";
 import ParagraphPodcastEpisode from "../../DataTypes/ParagraphPodcastEpisode";
+import ParagraphProgramDay from "../../DataTypes/ParagraphProgramDay";
 /**
  * Create the DataModel
  *
@@ -46,6 +47,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphSlide(incoming);
     case "paragraph--slide_tiles":
       return new ParagraphSlideTiles(incoming);
+    case "paragraph--program_day":
+      return new ParagraphProgramDay(incoming);
 
     default:
       console.error("Cannot determine Data Class", incoming);

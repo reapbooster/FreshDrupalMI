@@ -17,8 +17,8 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  urls: 'https://test-milken-institute.pantheonsite.io/jsonapi/menu/menu'
-  jsonapi_host: 'https://test-milken-institute.pantheonsite.io'
+  urls: 'https://milkeninstitute.org/jsonapi/menu/menu'
+  jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/menu/menu
   item_selector: data
   jsonapi_include: true
