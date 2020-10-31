@@ -1,0 +1,25 @@
+uuid: d1724047-a072-4ae0-a6b8-0fb677fc01f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.video_stream.field_media_oembed_video
+    - field.field.media.video_stream.field_people
+    - field.field.media.video_stream.field_thumbnail
+    - media.type.video_stream
+id: media.video_stream.media_library
+targetEntityType: media
+bundle: video_stream
+mode: media_library
+content: {  }
+hidden:
+  created: true
+  field_media_oembed_video: true
+  field_people: true
+  field_thumbnail: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true

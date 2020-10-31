@@ -1,16 +1,16 @@
-uuid: 3cb0553b-bda7-429f-8452-38187a0d22f7
+uuid: 56c3bc03-8aea-4459-9f07-988fa6c4f384
 langcode: en
 status: true
 dependencies:
   module:
-    - node
-    - taxonomy
-id: node.field_authors
-field_name: field_authors
-entity_type: node
+    - eck
+    - media
+id: event.field_streaming_now
+field_name: field_streaming_now
+entity_type: event
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: media
 module: core
 locked: false
 cardinality: -1

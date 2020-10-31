@@ -4,7 +4,6 @@ status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.article.field_authors
     - field.field.node.article.field_centers
     - field.field.node.article.field_content
     - field.field.node.article.field_meta_tags
@@ -24,7 +23,6 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  field_authors: true
   field_centers: true
   field_content: true
   field_meta_tags: true
@@ -32,4 +30,5 @@ hidden:
   field_promotional_slide: true
   field_topics: true
   langcode: true
+  published_at: true
   search_api_excerpt: true

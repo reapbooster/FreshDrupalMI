@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.small_tile
-    - field.field.node.article.field_authors
     - field.field.node.article.field_centers
     - field.field.node.article.field_content
     - field.field.node.article.field_meta_tags
@@ -24,7 +23,6 @@ bundle: article
 mode: small_tile
 content: {  }
 hidden:
-  field_authors: true
   field_centers: true
   field_content: true
   field_meta_tags: true
@@ -34,4 +32,5 @@ hidden:
   langcode: true
   layout_builder__layout: true
   links: true
+  published_at: true
   search_api_excerpt: true

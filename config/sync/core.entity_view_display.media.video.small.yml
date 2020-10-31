@@ -12,8 +12,8 @@ dependencies:
     - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
+    - field.field.media.video.field_people
     - field.field.media.video.field_program_initiatives
-    - field.field.media.video.field_speakers
     - field.field.media.video.field_subheader
     - field.field.media.video.field_term_collection
     - field.field.media.video.field_thumbnail_uri
@@ -94,8 +94,8 @@ hidden:
   field_height: true
   field_media_oembed_video: true
   field_meta_tags: true
+  field_people: true
   field_program_initiatives: true
-  field_speakers: true
   field_subheader: true
   field_term_collection: true
   field_topics: true

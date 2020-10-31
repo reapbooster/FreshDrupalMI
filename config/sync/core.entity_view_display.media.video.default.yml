@@ -11,8 +11,8 @@ dependencies:
     - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
+    - field.field.media.video.field_people
     - field.field.media.video.field_program_initiatives
-    - field.field.media.video.field_speakers
     - field.field.media.video.field_subheader
     - field.field.media.video.field_term_collection
     - field.field.media.video.field_thumbnail_uri
@@ -137,6 +137,22 @@ third_party_settings:
                 type: number_integer
             additional: {  }
             weight: 5
+          cac99f69-3085-4641-9970-7774e8ccf2c9:
+            uuid: cac99f69-3085-4641-9970-7774e8ccf2c9
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_people'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 6
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -166,6 +182,14 @@ content:
       max_width: 0
       max_height: 0
     third_party_settings: {  }
+    region: content
+  field_people:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_thumbnail_uri:
     weight: 1
@@ -211,7 +235,6 @@ hidden:
   field_event_reference: true
   field_meta_tags: true
   field_program_initiatives: true
-  field_speakers: true
   field_subheader: true
   field_term_collection: true
   field_topics: true

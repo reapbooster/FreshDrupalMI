@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.slide_entity_browser
-    - field.field.node.article.field_authors
     - field.field.node.article.field_centers
     - field.field.node.article.field_content
     - field.field.node.article.field_meta_tags
@@ -17,6 +16,7 @@ dependencies:
     - metatag
     - paragraphs
     - path
+    - publication_date
 third_party_settings:
   field_group:
     group_settings:
@@ -110,16 +110,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_authors:
-    type: entity_reference_autocomplete
-    weight: 0
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_centers:
     weight: 2
     settings:
@@ -202,6 +192,12 @@ content:
       display_label: true
     weight: 5
     region: content
+    third_party_settings: {  }
+  published_at:
+    type: publication_date_timestamp
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox

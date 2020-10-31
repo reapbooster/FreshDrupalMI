@@ -2,6 +2,7 @@ import NodeArticleDisplay from "./NodeArticleDisplay";
 import NodeLandingPageDisplay from "./NodeLandingPageDisplay";
 import NodeEventDisplay from "./NodeEventDisplay";
 import NodeOpportunityCardDisplay from "./NodeOpportunityCardDisplay";
+import { NodeDisplaySession } from "./NodeDisplaySession";
 
 /**
  * Create View Component
@@ -19,6 +20,8 @@ export const NodeComponentFactory = (incoming) => {
       return NodeEventDisplay;
     case "node--opportunity":
       return NodeOpportunityCardDisplay;
+    case "node--session":
+      return NodeDisplaySession;
     default:
       console.error("Cannot determine Component", incoming);
       throw new Error("Cannot Determine Component for ".concat(incoming.type));

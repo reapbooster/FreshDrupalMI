@@ -24,6 +24,7 @@ dependencies:
     - field.field.event.meeting.field_social_network_links
     - field.field.event.meeting.field_speakers
     - field.field.event.meeting.field_sponsors
+    - field.field.event.meeting.field_streaming_now
     - field.field.event.meeting.field_title_card_image
     - field.field.event.meeting.field_tracks
     - field.field.event.meeting.field_venue
@@ -351,6 +352,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_streaming_now:
+    weight: 62
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_title_card_image:
     weight: 32
     settings:
