@@ -61,6 +61,10 @@ $smartbrief-underline: #E1E1E1;
 $imgOverlay: rgba(53, 54, 60, .1);
 $mainParagraphColor: #696969;
 $blueHeaders: #0066cc;
+:root {
+    --color-milken-orange: #{$orangeButtons};
+    --color-milken-blue: #{$newsBlue};
+  }
 
 /**** AFTER DEMO ***/
 $afterDemoBlack: #35363c;
