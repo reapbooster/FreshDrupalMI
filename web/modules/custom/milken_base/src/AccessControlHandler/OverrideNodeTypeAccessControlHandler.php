@@ -17,14 +17,13 @@ class OverrideNodeTypeAccessControlHandler extends NodeTypeAccessControlHandler 
    * {@inheritDoc}
    */
   public function access(EntityInterface $entity, $operation, AccountInterface $account = NULL, $return_as_object = FALSE) {
-    if ( $operation == "view"
+    if ($operation == "view"
       && $entity->bundle() == "session"
-      && $entity->get('field_private')->value === true
+      && $entity->get('field_private')->value === TRUE
       && $account->isAnonymous()) {
-      return false;
+      return FALSE;
     }
     return parent::access($entity, $operation, $account, $return_as_object);
   }
-
 
 }

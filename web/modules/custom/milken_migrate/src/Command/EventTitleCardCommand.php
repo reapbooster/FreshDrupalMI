@@ -2,10 +2,8 @@
 
 namespace Drupal\milken_migrate\Command;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Console\Core\Command\ContainerAwareCommand;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\milken_migrate\JsonAPIReference;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -45,10 +43,12 @@ class EventTitleCardCommand extends ContainerAwareCommand {
     // 2. for each event: Do they have any sessions?
     // 3. if they do, separate the sessions into days.
     // 4. create "program" tab on event.
-    // 5. create program_day paragraph for each of the days with event_id and date add to program tab.
+    // 5. create program_day paragraph for each of the days with event_id
+    //    and date add to program tab.
     // 6. save event.
+    // @codingStandardsIgnoreStart
     $results = \Drupal::entityTypeManager()->getStorage('event')->getQuery()->execute();
-
+    // @codingStandardsIgnoreEnd
   }
 
   /**
