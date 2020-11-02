@@ -39,7 +39,6 @@ export class ParagraphDisplayProgramDay extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data,
       list: props.list,
       loaded: false,
       loading: false,
@@ -47,7 +46,8 @@ export class ParagraphDisplayProgramDay extends React.Component<
   }
 
   componentDidMount() {
-    const { data, list, loading, loaded } = this.state;
+    const { data } = this.props;
+    const { list, loading, loaded } = this.state;
     const DataObject = new ParagraphProgramDay(data);
     if (list.length === 0 && !loading && !loaded) {
       console.debug("List has no data... querying", this.state);
@@ -74,7 +74,6 @@ export class ParagraphDisplayProgramDay extends React.Component<
           console.debug("back from ajax", ajaxData);
           const toReturn = {
             errors: [],
-            data: {},
             loading: false,
             loaded: true,
           };
@@ -102,11 +101,14 @@ export class ParagraphDisplayProgramDay extends React.Component<
   }
 
   render() {
-    const { key, view_mode } = this.props;
+    const { data, key, view_mode } = this.props;
     const { list, errors } = this.state;
+    const DataObject = new ParagraphProgramDay(data);
+    console.debug("Data Object:", DataObject);
     if (list.length === 0) {
       return <Loading />;
     }
+
     if (errors.length) {
       return errors.map((item, key) => <ErrorDisplay error={item} key={key} />);
     }
@@ -115,8 +117,32 @@ export class ParagraphDisplayProgramDay extends React.Component<
       id: "",
       items: list,
     });
+    const dateParts = {};
+    Intl.DateTimeFormat(window.navigator.language, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      fractionalSecondDigits: 3,
+      hour12: true,
+      timeZone: "UTC",
+    })
+      .formatToParts(DataObject.getDateObject())
+      .map((item) => {
+        dateParts[item.type] = item.value;
+      });
+    console.debug("date parts", dateParts);
     return (
       <div key={key}>
+        <h3>
+          <strong className="display-4">{dateParts.day}</strong>
+          &nbsp;
+          {dateParts.month}&nbsp;-&nbsp;
+          <small className="text-muted">{dateParts.year}</small>
+        </h3>
         <NodeDisplayList list={listable} view_mode={view_mode} />
       </div>
     );

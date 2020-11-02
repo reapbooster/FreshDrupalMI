@@ -10,7 +10,7 @@ const browserSync = require("browser-sync").create();
 const changedInPlace = require("gulp-changed-in-place");
 const wp = require("webpack");
 const glob = require("glob");
-
+const webpackStream = require("webpack-stream");
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
 const shell = require("gulp-shell");
@@ -22,6 +22,7 @@ const gsgc = require("gulp-sass-generate-contents");
 const print = require("gulp-print").default;
 const fs = require("fs").promises;
 const Logger = require("fancy-log");
+const clean = require("gulp-clean");
 
 const basePath = path.resolve(".");
 const themePath = path.resolve(basePath, "web/themes/custom/milken");
@@ -119,20 +120,13 @@ gulp.task("buildEntryFiles", (done) => {
   console.log("Building components.");
   const configurator = require("./config/node/configurator").default;
   try {
-    const webpackConfigs = glob.sync("./**/*.entry.tsx", {}).map((file) => {
-      return configurator(file);
-    });
-    wp(webpackConfigs, (err, stats) => {
+    const webpackConfig = configurator(glob.sync("./**/*.entry.tsx", {}));
+    return wp(webpackConfig, (err, stats) => {
       if (err) {
-        throw new PluginError("webpack:build", err);
-        process.exit(1);
+        console.error(err.message);
+        throw new err();
       }
-      Logger.info(
-        "[webpack:build]",
-        stats.toString({
-          colors: true,
-        })
-      );
+      console.log("Compiled:", stats.toString());
       done();
     });
   } catch (err) {
@@ -155,6 +149,23 @@ gulp.task(
   ])
 );
 
+gulp.task("clean", (done) => {
+  return gulp
+    .src(
+      [
+        "./web/modules/custom/**/**/*.js",
+        "./web/modules/custom/**/**/*.js.map",
+        "./src/**/*.js",
+        "./src/**/*.js.map",
+      ],
+      { sourcemaps: true }
+    )
+    .pipe(clean())
+    .on("complete", () => {
+      done();
+    });
+});
+
 const gulpDefaultTask = gulp.series(["buildTypescript", "buildEntryFiles"]);
 
 gulp.task("componentBuild", gulpDefaultTask);
@@ -172,31 +183,12 @@ gulp.task(
  * Watches:
  */
 
-gulp.task("watchComponents", (done) => {
-  const configurator = require("./config/node/configurator").default;
-  try {
-    const webpackConfigs = glob.sync("./**/*.entry.tsx", {}).map((file) => {
-      var toReturn = configurator(file);
-      toReturn.watch = true;
-      return toReturn;
-    });
-    wp(webpackConfigs, (err, stats) => {
-      if (err) {
-        throw new PluginError("webpack:build", err);
-        process.exit(1);
-      }
-      Logger.info(
-        "[webpack:build]",
-        stats.toString({
-          colors: true,
-        })
-      );
-      //TODO: browsersync trigger
-    });
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
-});
+gulp.task(
+  "watchComponents",
+  shell.task("webpack --watch --config=./webpack.config.js")
+);
 
-gulp.task("watch", gulp.series(["buildTypescript", "watchComponents"]));
+gulp.task(
+  "watch",
+  gulp.series(["clean", "buildTypescript", "watchComponents"])
+);
