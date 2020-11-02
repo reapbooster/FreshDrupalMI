@@ -27,8 +27,18 @@ export const NodeDisplaySession = (props: NodeDisplaySessionProps) => {
   switch (view_mode) {
     default:
       return (
-        <div key={key}>
-          <h1>Session: {sessionData.title}</h1>
+        <div
+          data-id={sessionData.uuid}
+          data-drupal-internal-nid={sessionData.drupal_internal__nid}
+          data-entity-type={sessionData.type}
+        >
+          <span data-field="title">{sessionData.title}</span>
+          <span data-field="start">{sessionData.field_start_end.value}</span>
+          <span data-field="end">{sessionData.field_start_end.value_end}</span>
+          <span data-field="summary">{sessionData.field_short_summary}</span>
+          <span data-field="long-description">
+            {sessionData.field_long_description}
+          </span>
         </div>
       );
   }

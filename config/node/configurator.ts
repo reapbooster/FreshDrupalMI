@@ -3,6 +3,13 @@ const pathUtility = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
+const OnlyIfChangedPlugin = require("only-if-changed-webpack-plugin");
+
+const oicOpts = {
+  rootDir: process.cwd(),
+  devBuild: process.env.NODE_ENV !== "production",
+};
+
 const babelLoader = {
   loader: "babel-loader",
   options: {
@@ -41,13 +48,22 @@ export function parsePath(incoming) {
     full: pathUtility.resolve(incoming),
     dirname: pathUtility.dirname(incoming),
     basename: basename,
+    relativeDirectory: pathUtility.relative(".", pathUtility.dirname(incoming)),
     libraryName: basename.replace(".entry", ""),
   };
 }
 
-export function configurator(file) {
-  const parsedFileName = parsePath(file);
-  console.log(`Configuring: ${parsedFileName.libraryName}`);
+export function configurator(entry) {
+  if (typeof entry === "string") {
+    entry = [entry];
+  }
+  const parsedFileNames = entry.map(parsePath);
+  console.log(
+    `Configuring: `,
+    parsedFileNames.map((item) => {
+      return item.libraryName;
+    })
+  );
 
   const toReturn = {
     entry: {},
@@ -55,9 +71,31 @@ export function configurator(file) {
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
     cache: false,
+    optimization: {
+      chunkIds: "natural",
+      noEmitOnErrors: false,
+      moduleIds: "natural",
+      providedExports: false,
+      sideEffects: false,
+      splitChunks: {
+        chunks: "async",
+        minSize: 20000,
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
     output: {
-      filename: parsedFileName.libraryName + ".entry.js",
-      path: pathUtility.resolve(parsedFileName.dirname),
+      filename: "[name].entry.js",
+      path: pathUtility.resolve("."),
       jsonpFunction: uuidv4(),
     },
     resolve: {
@@ -123,6 +161,10 @@ export function configurator(file) {
        * }),
        *
        */
+      new OnlyIfChangedPlugin({
+        cacheDirectory: pathUtility.join(oicOpts.rootDir, "tmp/cache"),
+        cacheIdentifier: oicOpts, // all variable opts/environment should be used in cache key
+      }),
     ],
     stats: {
       warnings: true,
@@ -132,7 +174,14 @@ export function configurator(file) {
       errorDetails: true,
     },
   };
-  toReturn.entry[parsedFileName.libraryName] = file;
+  for (const key in entry) {
+    toReturn.entry[
+      pathUtility.join(
+        parsedFileNames[key].relativeDirectory,
+        parsedFileNames[key].libraryName
+      )
+    ] = entry[key];
+  }
   return toReturn;
 }
 
