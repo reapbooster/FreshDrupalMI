@@ -18,6 +18,7 @@ export interface DatePartsReturnValueInterface {
   minute?: number;
   second?: number;
   hour12?: string;
+  dayPeriod: string;
 }
 
 export function DateParts(

@@ -64,6 +64,7 @@ export class ParagraphDisplayProgramDay extends React.Component<
       );
       apiParams.addFilter("field_start_end.value", eventDate, "STARTS_WITH");
       console.debug("Query Params:", apiParams.getQueryObject());
+      apiParams.addSort("field_start_end.value", "asc");
       this.setState({ loading: true });
       fetch(
         "/jsonapi/node/session?jsonapi_include=true&".concat(

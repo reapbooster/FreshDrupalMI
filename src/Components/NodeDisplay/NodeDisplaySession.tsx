@@ -27,9 +27,10 @@ export const NodeDisplaySession = (props: NodeDisplaySessionProps) => {
     return <Loading />;
   }
   const dates = sessionData.getStartEndObject();
-  console.debug("Node Display Session dates:", dates);
   const startDate = DateParts(dates.getStartDateObject());
   const endDate = DateParts(dates.getEndDateObject());
+  console.debug("Node Display Session dates:", startDate, endDate);
+
   switch (view_mode) {
     default:
       return (
@@ -39,15 +40,15 @@ export const NodeDisplaySession = (props: NodeDisplaySessionProps) => {
           data-entity-type={sessionData.type}
           key={key}
         >
-          <Col data-field="start" sm={1}>
+          <Col data-field="start" sm={2}>
             {startDate.hour}:{startDate.minute}
-            {startDate.hour12}-{endDate.hour}:{endDate.minute}
-            {startDate.hour12}
+            {startDate.dayPeriod}-{endDate.hour}:{endDate.minute}
+            {startDate.dayPeriod}
           </Col>
-          <Col data-field="title" lg={3} sm={2}>
+          <Col data-field="title" lg={4} sm={2}>
             {sessionData.title}
           </Col>
-          <Col data-field="summary" lg={3} sm={2}>
+          <Col data-field="summary" lg={4} sm={2}>
             {sessionData.field_short_summary}
           </Col>
           <Col data-field="long-description" lg={12} sm={12}>
