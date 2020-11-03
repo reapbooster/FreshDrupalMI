@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import NodeSession, { NodeSessionInterface } from "../../DataTypes/NodeSession";
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
+import DateParts from "../../Utility/DateParts";
+import { Row, Col } from "react-bootstrap";
 
 export interface NodeDisplaySessionProps {
   data: NodeSessionInterface;
@@ -24,22 +26,34 @@ export const NodeDisplaySession = (props: NodeDisplaySessionProps) => {
       });
     return <Loading />;
   }
+  const dates = sessionData.getStartEndObject();
+  console.debug("Node Display Session dates:", dates);
+  const startDate = DateParts(dates.getStartDateObject());
+  const endDate = DateParts(dates.getEndDateObject());
   switch (view_mode) {
     default:
       return (
-        <div
+        <Row
           data-id={sessionData.uuid}
           data-drupal-internal-nid={sessionData.drupal_internal__nid}
           data-entity-type={sessionData.type}
+          key={key}
         >
-          <span data-field="title">{sessionData.title}</span>
-          <span data-field="start">{sessionData.field_start_end.value}</span>
-          <span data-field="end">{sessionData.field_start_end.value_end}</span>
-          <span data-field="summary">{sessionData.field_short_summary}</span>
-          <span data-field="long-description">
+          <Col data-field="start" sm={1}>
+            {startDate.hour}:{startDate.minute}
+            {startDate.hour12}-{endDate.hour}:{endDate.minute}
+            {startDate.hour12}
+          </Col>
+          <Col data-field="title" lg={3} sm={2}>
+            {sessionData.title}
+          </Col>
+          <Col data-field="summary" lg={3} sm={2}>
+            {sessionData.field_short_summary}
+          </Col>
+          <Col data-field="long-description" lg={12} sm={12}>
             {sessionData.field_long_description}
-          </span>
-        </div>
+          </Col>
+        </Row>
       );
   }
   return <div>No Data</div>;

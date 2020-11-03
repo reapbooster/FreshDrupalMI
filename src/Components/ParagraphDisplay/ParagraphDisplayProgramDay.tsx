@@ -8,6 +8,7 @@ import { NodeSessionInterface } from "../../DataTypes/NodeSession";
 import NodeDisplayList from "../NodeDisplay/NodeDisplayList";
 import ErrorDisplay from "../../Utility/ErrorDisplay";
 import Listable, { ListableInterface } from "../../DataTypes/Listable";
+import DateParts from "../../Utility/DateParts";
 
 export interface ParagraphDisplayProgramDayProps {
   data: ParagraphProgramDayInterface;
@@ -99,7 +100,6 @@ export class ParagraphDisplayProgramDay extends React.Component<
         });
     }
   }
-
   render() {
     const { data, key, view_mode } = this.props;
     const { list, errors } = this.state;
@@ -117,23 +117,8 @@ export class ParagraphDisplayProgramDay extends React.Component<
       id: "",
       items: list,
     });
-    const dateParts = {};
-    Intl.DateTimeFormat(window.navigator.language, {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      fractionalSecondDigits: 3,
-      hour12: true,
-      timeZone: "UTC",
-    })
-      .formatToParts(DataObject.getDateObject())
-      .map((item) => {
-        dateParts[item.type] = item.value;
-      });
+    // TODO: make this a datatype
+    const dateParts = DateParts(data.field_program_date);
     console.debug("date parts", dateParts);
     return (
       <div key={key}>
