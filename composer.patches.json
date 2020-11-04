@@ -14,6 +14,9 @@
     },
     "drupal/page_manager": {
       "Fix issue with default language": "patches/no_language_interface_context-3100095-2.patch"
+    },
+    "drupal/gin": {
+      "Fix issue with missing file in compiles": "patches/0001-3180713-error-in-dev-master.patch"
     }
   }
 }
