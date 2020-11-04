@@ -51,7 +51,7 @@ trait JsonAPIDataFetcherTrait {
    *   The client.
    */
   protected function getClient(array $configuration = []): Client {
-    // TODO: move this to $this->configuration.
+    // @todo move this to $this->configuration.
     return new Client([
       'base_uri' => $configuration['jsonapi_host'] ?? "https://milkeninstitute.org",
       "http_errors" => FALSE,

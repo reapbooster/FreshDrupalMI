@@ -118,7 +118,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
               'title' => $image_title,
               // 'field_link' => Url::fromUri('/node/'
               // . $row->getSourceProperty('uuid')),
-              // TODO: figure out how to link it back to the node
+              // @todo figure out how to link it back to the node
               'field_published' => TRUE,
             ]);
             $destination_values = ['target_id' => $image->id()];

@@ -123,7 +123,7 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
         $file = $ref->getRemote();
         if ($file instanceof FileInterface) {
           $file->set('uuid', $ref->getId());
-          // TODO: Set File Meta Information.
+          // @todo Set File Meta Information.
           // $file->set('meta', $ref->getProperty('meta'));.
           $file->setPermanent();
           $file->isNew();

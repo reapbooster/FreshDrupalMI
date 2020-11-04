@@ -89,7 +89,7 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
     $this->moduleHandler = $module_handler;
 
     // Just compatible with base module DataParsePluginBase.
-    // todo: Rewrite base class or set our real item selector.
+    // @todo Rewrite base class or set our real item selector.
     if (!isset($configuration['item_selector'])) {
       $configuration['item_selector'] = '';
     }
@@ -207,7 +207,7 @@ class Jsonapi extends DataParserPluginBase implements ContainerFactoryPluginInte
       return [];
     }
     $included = [];
-    // Todo.
+    // @todo .
     $selectors = explode('/', trim('included/', '/'));
     foreach ($selectors as $selector) {
       if (!empty($selector)) {

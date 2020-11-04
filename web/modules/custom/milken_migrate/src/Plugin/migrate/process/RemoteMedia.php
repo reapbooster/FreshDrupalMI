@@ -113,7 +113,7 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
                 'name' => $media_title,
                 // 'field_link' => Url::fromUri('/node/'
                 // . $row->getSourceProperty('uuid')),
-                // TODO: figure out how to link it back to the node
+                // @todo figure out how to link it back to the node
                 'status' => TRUE,
                 'field_published' => TRUE,
               ]);
