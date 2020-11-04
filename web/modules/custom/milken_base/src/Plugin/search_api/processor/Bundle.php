@@ -3,7 +3,7 @@
 namespace Drupal\milken_base\Plugin\search_api\processor;
 
 use Drupal\milken_base\Plugin\search_api\processor\Property\AddEntityTypeIdProperty;
-use Drupal\search_api\Datasource\DatasourceInterface;;
+use Drupal\search_api\Datasource\DatasourceInterface;
 use Drupal\search_api\Processor\ProcessorPluginBase;
 use Drupal\search_api\Item\ItemInterface;
 
