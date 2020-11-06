@@ -24,7 +24,9 @@ export const ListDisplay = function (props: ListDisplayProps) {
   const ContainerComponent =
     container ??
     styled.div`
-      display: flex;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
     `;
 
   console.debug("list display:", list);
@@ -41,7 +43,11 @@ export const ListDisplay = function (props: ListDisplayProps) {
   return (
     <ContainerComponent 
       id={"list-".concat(id)}
-      className={ `${( list[0]?.type == "node--landing_page" ) ? "flex-wrap justify-content-center" : "justify-content-center"}` }
+      className={ `${ 
+        ( props.view_mode == "tile" ) ? 
+        "d-flex flex-wrap justify-content-center" : 
+        ( props.view_mode == "card" ) ? "d-flex justify-content-lg-center justify-content-xs-start overflow-auto" : ""}` 
+      }
     >
       {list.map((item: EntityInterface, key: number) => {
         console.debug(" ==> list item:", item);

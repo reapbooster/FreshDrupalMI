@@ -16,6 +16,8 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`
+    min-width: 222px;
+    
     &:hover { box-shadow: 0 8px 16px 0 grey; }
   `
 
