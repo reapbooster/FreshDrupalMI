@@ -15,6 +15,10 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
   const { data } = props;
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
+  const CardWrapper = styled.div`
+    &:hover { box-shadow: 0 8px 16px 0 grey; }
+  `
+
   const CustomCardHeader = styled.div`
     position: relative;
   `;
@@ -31,20 +35,21 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
 
   return (
     <>
-      <Container className="text-align-left">
+      <CardWrapper className="card my-5 mx-2 text-align-left flex-shrink-1">
         <a
           href={data.path.alias}
-          className="card my-5"
+          className=""
           data-drupal-id={data.drupal_internal__mid}
           data-drupal-type={data.type}
           data-uuid={data.id}
+          style={{ maxWidth: "393px", }}
         >
           <CustomCardHeader>
             <ErrorBoundary>
               <ImageFileDisplay
                 data={data.getThumbnail()}
                 view_mode="thumbnail"
-                style={{ maxWidth: "18rem" }}
+                style={{ maxWidth: "100%" }}
               />
               <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
             </ErrorBoundary>
@@ -54,7 +59,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
           </Card.Body>
           <Card.Footer className="bg-white border-0">Authors and Tags</Card.Footer>
         </a>
-      </Container>
+      </CardWrapper>
     </>
   );
 };

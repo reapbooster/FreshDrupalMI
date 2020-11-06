@@ -35,7 +35,7 @@ export const ParagraphDisplayTiles = (props: ParagraphDisplayTilesProps) => {
   console.log("paragraph display tiles should have data:", paragraphData);
   // TODO: make this a flex box that holds to 100% and hides anything offscreen
   return (
-    <Container>
+    <Container fluid={(props.data.field_view_mode == "card") ? true : false } >
       <ListDisplay
         id={"tiles-list-".concat(paragraphData.id)}
         list={paragraphData.tiles}
