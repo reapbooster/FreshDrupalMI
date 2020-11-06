@@ -71,9 +71,9 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
       const CardOuter = styled.div`
         margin: 1em;
         width: 100%;
-        box-shadow: 0 8px 16px 0 #bbb;
         cursor: pointer; 
         
+        &:hover { box-shadow: 0 8px 16px 0 grey; }
         &:hover .card-title { color: var( --color-milken-orange ) !important; };
         &:hover .card-body div { display: unset; };
 

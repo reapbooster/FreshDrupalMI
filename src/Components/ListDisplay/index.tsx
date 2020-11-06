@@ -11,6 +11,8 @@ import { EntityInterface } from "../../DataTypes/Entity";
 import styled, { StyledComponent } from "styled-components";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import ListDisplayFactory from "./ListDisplayFactory";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export interface ListDisplayProps {
   id: string;
@@ -24,8 +26,27 @@ export const ListDisplay = function (props: ListDisplayProps) {
   const ContainerComponent =
     container ??
     styled.div`
-      display: flex;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
     `;
+
+    const ArrowWrapper = styled.span`
+      height: 100%;
+      font-size: 3em;
+      position: absolute;
+      right: 0;
+      box-shadow: -15px 0 1em 1.5em rgba(255,255,255,0.9);
+    `
+
+    const ArrowRight = styled.span`
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);    
+  `
 
   console.debug("list display:", list);
   if (!Array.isArray(list)) {
@@ -41,7 +62,11 @@ export const ListDisplay = function (props: ListDisplayProps) {
   return (
     <ContainerComponent 
       id={"list-".concat(id)}
-      className={ `${( list[0]?.type == "node--landing_page" ) ? "flex-wrap justify-content-center" : ""}` }
+      className={ `${ 
+        ( props.view_mode == "tile" ) ? 
+        "d-flex flex-wrap justify-content-center" : 
+        ( props.view_mode == "card" ) ? "d-flex justify-content-lg-center justify-content-xs-start overflow-auto" : ""}` 
+      }
     >
       {list.map((item: EntityInterface, key: number) => {
         console.debug(" ==> list item:", item);
@@ -52,6 +77,15 @@ export const ListDisplay = function (props: ListDisplayProps) {
           </ErrorBoundary>
         );
       })}
+
+      {( props.view_mode == "card" ) ? 
+        <ArrowWrapper className={ "d-lg-none" }>
+          <ArrowRight>
+            <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
+          </ArrowRight>
+        </ArrowWrapper>
+        : null }
+        
     </ContainerComponent>
   );
 };
