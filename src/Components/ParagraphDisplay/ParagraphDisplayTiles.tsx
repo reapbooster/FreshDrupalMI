@@ -23,7 +23,7 @@ export const ParagraphDisplayTiles = (props: ParagraphDisplayTilesProps) => {
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("ParagraphDisplayTiles", ajaxData);
-        const returnedData = paragraphDataFactory(data);
+        const returnedData = ParagraphDataFactory(data);
         setParagraphData(returnedData);
       });
     return (
@@ -35,7 +35,9 @@ export const ParagraphDisplayTiles = (props: ParagraphDisplayTilesProps) => {
   console.log("paragraph display tiles should have data:", paragraphData);
   // TODO: make this a flex box that holds to 100% and hides anything offscreen
   return (
-    <Container fluid={(props.data.field_view_mode == "card") ? true : false } >
+    <Container 
+      fluid={(props.data.field_view_mode == "card") ? true : false }
+      className={(props.data.field_view_mode == "card") ? "position-relative" : "" } >
       <ListDisplay
         id={"tiles-list-".concat(paragraphData.id)}
         list={paragraphData.tiles}
