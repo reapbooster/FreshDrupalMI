@@ -28,25 +28,27 @@ export const ListDisplay = function (props: ListDisplayProps) {
     styled.div`
       -ms-overflow-style: none;
       scrollbar-width: none;
-      &::-webkit-scrollbar { display: none; }
+      &::-webkit-scrollbar {
+        display: none;
+      }
     `;
 
-    const ArrowWrapper = styled.span`
-      height: 100%;
-      font-size: 3em;
-      position: absolute;
-      right: 0;
-      box-shadow: -15px 0 1em 1.5em rgba(255,255,255,0.9);
-    `
+  const ArrowWrapper = styled.span`
+    height: 100%;
+    font-size: 3em;
+    position: absolute;
+    right: 0;
+    box-shadow: -15px 0 1em 1.5em rgba(255, 255, 255, 0.9);
+  `;
 
-    const ArrowRight = styled.span`
-      position: absolute;
-      right: 10%;
-      top: 50%;
-      -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);    
-  `
+  const ArrowRight = styled.span`
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  `;
 
   console.debug("list display:", list);
   if (!Array.isArray(list)) {
@@ -60,13 +62,15 @@ export const ListDisplay = function (props: ListDisplayProps) {
   }
 
   return (
-    <ContainerComponent 
+    <ContainerComponent
       id={"list-".concat(id)}
-      className={ `${ 
-        ( props.view_mode == "tile" ) ? 
-        "d-flex flex-wrap justify-content-center" : 
-        ( props.view_mode == "card" ) ? "d-flex justify-content-lg-center justify-content-xs-start overflow-auto" : ""}` 
-      }
+      className={`${
+        props.view_mode == "tile"
+          ? "d-flex flex-wrap justify-content-center"
+          : props.view_mode == "card"
+          ? "d-flex justify-content-lg-center justify-content-xs-start overflow-auto"
+          : ""
+      }`}
     >
       {list.map((item: EntityInterface, key: number) => {
         console.debug(" ==> list item:", item);
@@ -78,14 +82,13 @@ export const ListDisplay = function (props: ListDisplayProps) {
         );
       })}
 
-      {( props.view_mode == "card" ) ? 
-        <ArrowWrapper className={ "d-lg-none" }>
+      {props.view_mode == "card" ? (
+        <ArrowWrapper className={"d-lg-none"}>
           <ArrowRight>
             <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
           </ArrowRight>
         </ArrowWrapper>
-        : null }
-        
+      ) : null}
     </ContainerComponent>
   );
 };

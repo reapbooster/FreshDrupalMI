@@ -1,55 +1,46 @@
-import * as React from "react";
-import { Media } from "react-bootstrap";
+import React from "react";
 
-interface SearchResultProps {
-  relevance: number;
+export interface SearchResultProps {
+  search_api_excerpt: string;
+  search_api_relevance: number;
   uuid: string;
-  entityTypeId: string;
-  bundle: string;
-  id: string;
   label: string;
-  excerpt: string;
+  jsonapi_type: string;
   url: string;
+  bundle: string;
+  entity_type_id: string;
 }
 
-const SearchResult: React.FunctionComponent = (props: SearchResultProps) => {
-  const api_excerpt = () => {
-    console.log("SearchResult... parsing", props);
-    if (props.excerpt !== null) {
-      return (
-        <p
-          dangerouslySetInnerHTML={{ __html: props.excerpt }}
-          className={"text-muted"}
-        ></p>
-      );
-    } else {
-      return <p></p>;
-    }
-  };
+export const SearchResult = (props: SearchResultProps) => {
+  const {
+    search_api_excerpt,
+    search_api_relevance,
+    uuid,
+    label,
+    jsonapi_type,
+    url,
+    bundle,
+    entity_type_id,
+  } = props;
+
   return (
-    <>
-      <Media>
-        <Media.Body>
-          <h5>
-            <a href={props.url}>{props.label}</a>
-          </h5>
-          {api_excerpt()}
-        </Media.Body>
-      </Media>
-    </>
+    <div
+      data-entity-type-id={entity_type_id}
+      data-bundle={bundle}
+      data-url={url}
+      data-type={jsonapi_type}
+      data-uuid={uuid}
+      data-relevance={search_api_relevance}
+    >
+      <div data-property="search-api-excerpt">{search_api_excerpt}</div>
+      <div data-property="search-api-relevance">{search_api_relevance}</div>
+      <div data-property="link">
+        <a href={url} title={label}>
+          {label}
+        </a>
+      </div>
+    </div>
   );
 };
 
-SearchResult.defaultProps = {
-  relevance: 0,
-  uuid: "",
-  entityTypeId: "node",
-  bundle: "article",
-  id: "",
-  label: "",
-  excerpt: "",
-  url: "/",
-};
-
 export default SearchResult;
-export { SearchResultProps };

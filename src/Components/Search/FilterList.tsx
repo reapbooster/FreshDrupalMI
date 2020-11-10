@@ -1,9 +1,10 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { FacetInterface, FacetType, FacetTypeProps } from "./Facet";
+import { FacetListInterface } from "../../DataTypes/Facet";
 
 interface FilterListProps {
-  filters: Array<FacetTypeProps>;
+  filters: Array<FacetListInterface>;
+  currentActiveRequest: boolean;
 }
 
 const FilterList: React.FunctionComponent<FilterListProps> = (

@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_base\AccessControlHandler;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeTypeAccessControlHandler;
@@ -17,11 +18,8 @@ class OverrideNodeTypeAccessControlHandler extends NodeTypeAccessControlHandler 
    * {@inheritDoc}
    */
   public function access(EntityInterface $entity, $operation, AccountInterface $account = NULL, $return_as_object = FALSE) {
-    if ($operation == "view"
-      && $entity->bundle() == "session"
-      && $entity->get('field_private')->value === TRUE
-      && $account->isAnonymous()) {
-      return FALSE;
+    if ($operation == "view") {
+      return AccessResult::allowedIfHasPermission($account, 'access content');
     }
     return parent::access($entity, $operation, $account, $return_as_object);
   }

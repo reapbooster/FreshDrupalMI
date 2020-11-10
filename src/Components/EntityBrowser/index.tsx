@@ -80,12 +80,16 @@ export class EntityBrowser extends React.Component<
           Browse {source.bundle}
         </h2>
         <ErrorBoundary>
-          <BundleBrowser
-            bundleId={source.bundle}
-            entityTypeId={source.entityTypeId}
-            bundleClickHandler={this.bundleNavOnClickHandler}
-            viewClickHandler={this.viewOnClickHandler}
-          />
+          {source.bundle ? (
+            <BundleBrowser
+              bundleId={source.bundle}
+              entityTypeId={source.entityTypeId}
+              bundleClickHandler={this.bundleNavOnClickHandler}
+              viewClickHandler={this.viewOnClickHandler}
+            />
+          ) : (
+            ""
+          )}
         </ErrorBoundary>
         <ErrorBoundary>
           <CardColumns className="text-align-center">

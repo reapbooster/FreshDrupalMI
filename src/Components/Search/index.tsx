@@ -10,6 +10,7 @@ interface SearchState {
   results: Array<SearchResult>;
   filters: FilterList;
   currentActiveRequest: boolean;
+  abortController: AbortController;
 }
 
 class Search extends React.Component<any, SearchState> {
@@ -20,17 +21,29 @@ class Search extends React.Component<any, SearchState> {
       results: [],
       filters: <FilterList filters={[]} />,
       currentActiveRequest: false,
+      abortController: new AbortController(),
     };
   }
 
-  componentDidMount(): void {
-    const keywords = this.getQueryVariable("keywords");
-    if (keywords) {
-      this.searchOnSubmitHandler({ keywords: keywords });
-    }
+  getResults() {
+    const searchParams = new URLSearchParams(document.location.search);
+    fetch(`/api/v1.0/search?_format=json`.concat(searchParams.toString()))
+      .then((res) => res.json())
+      .then((ajaxResults) => {
+        console.debug("back from ajax:", ajaxResults);
+        if (ajaxResults) {
+          this.setState({
+            currentActiveRequest: false,
+            results: ajaxResults.data,
+          });
+        }
+      });
   }
 
   render() {
+    const { filters, results, currentActiveRequest} = this.state;
+    const searchParams = new URLSearchParams(document.location.search);
+    const keywords = searchParams.get("keywords");
     return (
       <Container fluid={true} className={"outline"}>
         <Row>
@@ -42,36 +55,25 @@ class Search extends React.Component<any, SearchState> {
               <h5 className={"display-5"}>Search the Milken Institute</h5>
               <KeywordForm
                 onSubmit={this.searchOnSubmitHandler.bind(this)}
-                keywords={this.state.keywords}
+                keywords={keywords}
               />
             </Container>
           </Col>
         </Row>
         <Row>
           <Col lg={2} sm={1} style={{ background: "#dfdfdf" }}>
-            {this.state.filters}
+
           </Col>
           <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
             <ResultsList
-              results={this.state.results}
-              currentActiveRequest={this.state.currentActiveRequest}
+              results={results}
+              currentActiveRequest={currentActiveRequest}
+              filters=
             />
           </Col>
         </Row>
       </Container>
     );
-  }
-
-  setResults(results: Array<SearchResult>) {
-    this.setState({
-      results: results,
-    });
-  }
-
-  setKeywords(keywords: string) {
-    this.setState({
-      keywords: keywords,
-    });
   }
 
   setCurrentActiveRequest(requestIsActive: boolean) {
@@ -82,45 +84,20 @@ class Search extends React.Component<any, SearchState> {
 
   searchOnSubmitHandler(values) {
     console.log("Searching...", values);
+    const { abortController } = this.state;
     this.setCurrentActiveRequest(true);
-    this.setKeywords(values.keywords);
-    fetch(`/api/v1.0/search?_format=json&keywords=${values.keywords}`)
-      .then((res) => res.json())
-      .then((ajaxResults) => {
-        console.log(ajaxResults);
-        if (ajaxResults) {
-          this.setCurrentActiveRequest(false);
-          const me = this;
-          const results = [];
-          ajaxResults.data.map((singleresult) => {
-            results.push(<SearchResult {...singleresult} />);
-          });
-          this.setState({
-            results: results,
-          });
-
-          const activeFilters = <FilterList filters={ajaxResults.filters} />;
-          this.setState({
-            filters: activeFilters,
-          });
-          console.log("Search Object", this);
-        }
-      });
+    this.setQueryVariable("keywords", values);
   }
 
   getQueryVariable(variable: string): string {
-    const query = window.location.search.substring(1);
-    console.log(query);
-    const vars = query.split("&");
-    console.log(vars);
-    for (let i = 0; i < vars.length; i++) {
-      const pair = vars[i].split("=");
-      console.log(pair);
-      if (pair[0] == variable) {
-        return pair[1];
-      }
-    }
-    return "";
+    const myUrl = new URL(document.location.href);
+    return myUrl.searchParams.get(variable);
+  }
+
+  setQueryVariable(variable, value) {
+    const myUrl = new URL(document.location.href);
+    myUrl.searchParams.set(variable, value);
+    document.location.href = myUrl.toString();
   }
 }
 

@@ -39,3 +39,8 @@ MediaDetail:
   version: 1.0
   js:
     components/MediaDetail/MediaDetail.entry.js: { source: 'components/MediaDetail/MediaDetail.entry.tsx' }
+
+Search:
+  version: 1.0
+  js:
+    components/Search/Search.entry.js: { source: 'components/Search/Search.entry.tsx' }

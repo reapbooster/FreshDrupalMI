@@ -15,6 +15,15 @@ function milken_base_entity_type_alter(array &$entity_types) {
   if ($entity_types['media_type'] instanceof ConfigEntityType) {
     $entity_types['media_type']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMediaTypeAccessControlHandler');
   }
+  if ($entity_types['event_type'] instanceof ConfigEntityType) {
+    $entity_types['event_type']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideEventTypeAccessControlHandler');
+  }
+  if ($entity_types['node_type'] instanceof ConfigEntityType) {
+    $entity_types['node_type']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideNodeTypeAccessControlHandler');
+  }
+  if ($entity_types['slide_type'] instanceof ConfigEntityType) {
+    $entity_types['slide_type']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideSlideTypeAccessControlHandler');
+  }
   if ($entity_types['menu'] instanceof ConfigEntityType) {
     $entity_types['menu']->setHandlerClass('access', 'Drupal\milken_base\AccessControlHandler\OverrideMenuAccessControlHandler');
   }

@@ -1,14 +1,15 @@
 import React from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
-import SearchResult from "./SearchResult";
+import SearchResult, { SearchResultProps } from "./SearchResult";
 
 interface ResultsListProps {
-  results: Array<SearchResult>;
+  results: Array<SearchResultProps>;
   currentActiveRequest: boolean;
 }
 
 const ResultsList = (props: ResultsListProps) => {
-  if (props.currentActiveRequest === true) {
+  const { results, currentActiveRequest } = props;
+  if (currentActiveRequest === true) {
     return (
       <Row className="h-100">
         <Col lg={12} className={"col-sm-12 my-auto"}>
@@ -20,12 +21,16 @@ const ResultsList = (props: ResultsListProps) => {
         </Col>
       </Row>
     );
-  } else if (props.results.length >= 1) {
+  } else if (results.length >= 1) {
     return (
       <ol>
-        {props.results.map((result, key) => {
+        {results.map((result, key) => {
           console.log("result:", result);
-          return <li key={key}>{result}</li>;
+          return (
+            <li key={key}>
+              <SearchResult {...result} />
+            </li>
+          );
         })}
       </ol>
     );

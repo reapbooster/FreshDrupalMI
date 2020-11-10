@@ -9,11 +9,12 @@ interface KeywordFormProps {
 const KeywordForm: React.FunctionComponent<KeywordFormProps> = (
   props: KeywordFormProps
 ) => {
+  const { keywords, onSubmit } = props;
   return (
     <>
       <Formik
-        initialValues={{ keywords: props.keywords }}
-        onSubmit={props.onSubmit}
+        initialValues={{ keywords: keywords }}
+        onSubmit={onSubmit}
         isInitialValid={true}
       >
         {({
