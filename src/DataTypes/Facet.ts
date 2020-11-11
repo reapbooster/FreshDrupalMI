@@ -5,7 +5,7 @@ export interface FacetValueInterface {
   selected: boolean;
 }
 
-export class FacetValue {
+export class FacetValue implements FacetValueInterface {
   id: string;
   value: string;
   label: string;
@@ -22,7 +22,7 @@ export interface FacetListInterface {
   facets: Array<FacetValueInterface>;
 }
 
-export class FacetList {
+export class FacetList implements FacetListInterface {
   label: string;
   formProperty: string;
   facets: Array<FacetValue>;
@@ -30,4 +30,6 @@ export class FacetList {
   constructor(incoming: FacetListInterface) {
     Object.assign(this, incoming);
   }
+
+  addFacet(incoming: FacetValue) {}
 }

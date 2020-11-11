@@ -8,7 +8,8 @@ schema: composable
 schema_configuration:
   composable:
     extensions: {  }
+persisted_queries_settings: {  }
 endpoint: /graphql
-debug: true
+debug_flag: 3
 caching: true
 batching: true

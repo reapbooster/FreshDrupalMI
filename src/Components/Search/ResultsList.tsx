@@ -1,14 +1,16 @@
 import React from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import SearchResult, { SearchResultProps } from "./SearchResult";
+import { FacetList, FacetValue } from "../../DataTypes/Facet";
 
 interface ResultsListProps {
   results: Array<SearchResultProps>;
   currentActiveRequest: boolean;
+  setFilters: any;
 }
 
 const ResultsList = (props: ResultsListProps) => {
-  const { results, currentActiveRequest } = props;
+  const { results, currentActiveRequest, setFilters } = props;
   if (currentActiveRequest === true) {
     return (
       <Row className="h-100">
@@ -22,18 +24,20 @@ const ResultsList = (props: ResultsListProps) => {
       </Row>
     );
   } else if (results.length >= 1) {
-    return (
-      <ol>
-        {results.map((result, key) => {
-          console.log("result:", result);
-          return (
-            <li key={key}>
-              <SearchResult {...result} />
-            </li>
-          );
-        })}
-      </ol>
-    );
+    const mapResults = (results: Array<SearchResultProps>) => {
+      const filters = [];
+      // @todo: add facets to filters list and send back to parent component
+      const toReturn = results.map((result, key) => {
+        return (
+          <li key={key}>
+            <SearchResult {...result} />
+          </li>
+        );
+      });
+      return toReturn;
+    };
+
+    return <ol>{mapResults(results)}</ol>;
   } else {
     return <h1>No results found.</h1>;
   }

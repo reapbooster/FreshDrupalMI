@@ -1,27 +1,49 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import { FacetListInterface, FacetValueInterface } from "../../DataTypes/Facet";
+import { FacetListInterface } from "../../DataTypes/Facet";
+import FacetValueDisplay from "./FacetValueDisplay";
+import { Formik, Field, Form } from "formik";
+import uuidv4 from "../../Utility/uuidv4";
 
-export type FacetListDisplayProps = FacetListInterface;
+export interface FacetListDisplayProps extends FacetListInterface {
+  key: number;
+  filterOnChangeHandler: any;
+}
+
+export const FacetListOnChangeHandler = (evt) => {
+  //TODO: handle change event
+  console.debug("Change event triggered", evt);
+};
 
 export const FacetListDisplay = (props: FacetListDisplayProps) => {
-  const { label, formProperty, facets } = props;
+  console.log("Facet List Display:", props);
+  const { facets, formProperty, label, key, filterOnChangeHandler } = props;
   return (
-    <Form.Group controlId={props.formProperty}>
-      <Form.Label>{label}</Form.Label>
-      {facets.map((item, key) => {
-        return (
-          <Form.Check
-            id={formProperty.concat("-checkbox-", item.id)}
-            key={key}
-            type="checkbox"
-            value={item.id}
-            label={item.label}
-          />
-        );
-      })}
-    </Form.Group>
+    <div data-form-property={formProperty} key={key}>
+      <h1>{label}</h1>
+      <Formik onSubmit={filterOnChangeHandler}>
+        <Form>
+          <ul>
+            {facets.map((item, key) => {
+              return (
+                <li key={key}>
+                  <FacetValueDisplay
+                    facetValue={item}
+                    formVariable={formProperty}
+                    onChangeHandler={FacetListOnChangeHandler}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </Form>
+      </Formik>
+    </div>
   );
+};
+
+FacetListDisplay.defaultProps = {
+  facets: [],
+  key: Math.floor(Math.random() * Math.floor(99999)),
 };
 
 export default FacetListDisplay;

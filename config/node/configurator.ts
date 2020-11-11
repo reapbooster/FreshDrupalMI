@@ -4,6 +4,26 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
 const OnlyIfChangedPlugin = require("only-if-changed-webpack-plugin");
+const term = require("terminal-kit").terminal;
+
+const nameCallback = (module, chunks, cacheGroupKey) => {
+  const moduleFileName = module
+    .identifier()
+    .split("/")
+    .reduceRight((item) => item);
+  const allChunksNames = chunks.map((item) => item.name).join("~");
+  return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+};
+
+const progressCallback = (percentage, message, ...args) => {
+  // e.g. Output each progress message directly to the console:
+  term(
+    Math.floor(percentage * 100)
+      .toString()
+      .concat("%\t"),
+    message
+  ).column(0);
+};
 
 const oicOpts = {
   rootDir: process.cwd(),
@@ -73,13 +93,19 @@ export function configurator(entry) {
     cache: false,
     optimization: {
       chunkIds: "natural",
-      noEmitOnErrors: false,
+      noEmitOnErrors: true,
       moduleIds: "natural",
       providedExports: false,
       sideEffects: false,
       splitChunks: {
-        chunks: "async",
+        chunks: process.env.NODE_ENV == "production" ? "all" : "async",
         minSize: 20000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        automaticNameDelimiter: "~",
+        enforceSizeThreshold: 50000,
         cacheGroups: {
           defaultVendors: {
             test: /[\\/]node_modules[\\/]/,
@@ -151,6 +177,7 @@ export function configurator(entry) {
         filename: "css/[name].css",
         chunkFilename: "css/[id].css",
       }),
+      new webpack.ProgressPlugin(progressCallback),
       new DrupalLibrariesWebpackPlugin(),
       /**
        *  new BrowserSyncWebpackPlugin({

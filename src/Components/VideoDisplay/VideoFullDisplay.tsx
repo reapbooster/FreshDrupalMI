@@ -10,7 +10,17 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   console.debug("VideoFullDisplay", data);
   return (
     <div>
-      <h1>Video Full display</h1>
+      <iframe
+        src={"/media/oembed?maxwidth=0&maxheight=0&url=".concat(
+          data.field_media_oembed_video
+        )}
+        width="100%"
+        height="420"
+        frameBorder="0"
+        allowTransparency
+        class="media-oembed-content"
+        controls={true}
+      />
     </div>
   );
 };

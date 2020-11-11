@@ -4,11 +4,18 @@ import ResultsList from "./ResultsList";
 import KeywordForm from "./KeywordForm";
 import FilterList from "./FilterList";
 import SearchResult from "./SearchResult";
+import {
+  FacetList,
+  FacetValue,
+  FacetValueInterface,
+} from "../../DataTypes/Facet";
+import FacetListDisplay from "./FacetListDisplay";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 interface SearchState {
   keywords: string;
   results: Array<SearchResult>;
-  filters: FilterList;
+  filters: Array<FilterList>;
   currentActiveRequest: boolean;
   abortController: AbortController;
 }
@@ -16,34 +23,49 @@ interface SearchState {
 class Search extends React.Component<any, SearchState> {
   constructor(props) {
     super(props);
+    const searchParams = new URLSearchParams(window.location.search);
     this.state = {
-      keywords: "",
+      keywords: searchParams.get("keywords"),
       results: [],
-      filters: <FilterList filters={[]} />,
+      filters: [],
       currentActiveRequest: false,
       abortController: new AbortController(),
     };
+    this.setFilters = this.setFilters.bind(this);
+    this.getResults = this.getResults.bind(this);
+    this.searchOnSubmitHandler = this.searchOnSubmitHandler.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.keywords) {
+      this.getResults();
+    }
   }
 
   getResults() {
-    const searchParams = new URLSearchParams(document.location.search);
-    fetch(`/api/v1.0/search?_format=json`.concat(searchParams.toString()))
+    const { keywords } = this.state;
+    console.debug("GetResults", keywords);
+    const { abortController } = this.state;
+    fetch(`/api/v1.0/search?_format=json&`.concat("keywords=", keywords), {
+      abortController,
+    })
       .then((res) => res.json())
       .then((ajaxResults) => {
         console.debug("back from ajax:", ajaxResults);
         if (ajaxResults) {
           this.setState({
             currentActiveRequest: false,
-            results: ajaxResults.data,
+            results: ajaxResults,
           });
         }
       });
   }
 
   render() {
-    const { filters, results, currentActiveRequest} = this.state;
+    const { filters, results, currentActiveRequest } = this.state;
     const searchParams = new URLSearchParams(document.location.search);
     const keywords = searchParams.get("keywords");
+    console.debug("Results => ", results);
     return (
       <Container fluid={true} className={"outline"}>
         <Row>
@@ -53,27 +75,39 @@ class Search extends React.Component<any, SearchState> {
               className={"text-align-center mx-auto my-2"}
             >
               <h5 className={"display-5"}>Search the Milken Institute</h5>
-              <KeywordForm
-                onSubmit={this.searchOnSubmitHandler.bind(this)}
-                keywords={keywords}
-              />
+              <ErrorBoundary>
+                <KeywordForm
+                  onSubmit={this.searchOnSubmitHandler}
+                  keywords={keywords}
+                />
+              </ErrorBoundary>
             </Container>
           </Col>
         </Row>
         <Row>
           <Col lg={2} sm={1} style={{ background: "#dfdfdf" }}>
-
+            <ErrorBoundary>
+              {Object.keys(filters).map((item, key) => {
+                return <FacetListDisplay {...filters[item]} key={key} />;
+              })}
+            </ErrorBoundary>
           </Col>
           <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
-            <ResultsList
-              results={results}
-              currentActiveRequest={currentActiveRequest}
-              filters=
-            />
+            <ErrorBoundary>
+              <ResultsList
+                results={results}
+                currentActiveRequest={currentActiveRequest}
+                setFilters={this.setFilters}
+              />
+            </ErrorBoundary>
           </Col>
         </Row>
       </Container>
     );
+  }
+
+  setFilters(filters: Array<FacetList>) {
+    this.setState({ filters });
   }
 
   setCurrentActiveRequest(requestIsActive: boolean) {
@@ -84,9 +118,7 @@ class Search extends React.Component<any, SearchState> {
 
   searchOnSubmitHandler(values) {
     console.log("Searching...", values);
-    const { abortController } = this.state;
-    this.setCurrentActiveRequest(true);
-    this.setQueryVariable("keywords", values);
+    this.setState({ keywords: values.keywords });
   }
 
   getQueryVariable(variable: string): string {

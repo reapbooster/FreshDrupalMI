@@ -10,7 +10,7 @@ console.debug("getting ready to render", MediaDisplayContainer);
 ReactDOM.render(
   <MediaDisplay
     data={MediaDisplayData}
-    view_mode={MediaDisplayContainer.dataset.view_mode}
+    view_mode={MediaDisplayContainer.dataset.viewMode}
   />,
   MediaDisplayContainer
 );

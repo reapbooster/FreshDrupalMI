@@ -10,6 +10,10 @@ const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
 const BrowserSyncWebpackPlugin = require("browser-sync-webpack-plugin");
 const postcssImageSet = require("postcss-image-set-polyfill");
 const OnlyIfChangedPlugin = require("only-if-changed-webpack-plugin");
+const progressCallback = (percentage, message, ...args) => {
+  // e.g. Output each progress message directly to the console:
+  console.info(percentage, message, ...args);
+};
 
 function parsePath(incoming) {
   const basename = pathUtility.basename(
@@ -138,6 +142,7 @@ module.exports = () => {
         new DrupalLibrariesWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new BrowserSyncWebpackPlugin(),
+        new webpack.ProgressPlugin(progressCallback),
         new OnlyIfChangedPlugin({
           cacheDirectory: path.join(onlyIfChangedOptions.rootDir, "tmp/cache"),
           cacheIdentifier: onlyIfChangedOptions, // all variable opts/environment should be used in cache key
@@ -149,6 +154,30 @@ module.exports = () => {
         modules: true,
         reasons: true,
         errorDetails: true,
+      },
+      optimization: {
+        noEmitOnError: true,
+        splitChunks: {
+          chunks: process.env.NODE_ENV == "production" ? "all" : "async",
+          minSize: 20000,
+          maxSize: 0,
+          minChunks: 1,
+          maxAsyncRequests: 30,
+          maxInitialRequests: 30,
+          automaticNameDelimiter: "~",
+          enforceSizeThreshold: 50000,
+          cacheGroups: {
+            defaultVendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true,
+            },
+          },
+        },
       },
     };
     toReturn.entry[parsedFileName.libraryName] = file;
