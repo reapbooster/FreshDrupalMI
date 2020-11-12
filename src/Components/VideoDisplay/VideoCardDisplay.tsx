@@ -13,13 +13,16 @@ export interface VideoCardDisplayProps {
 
 export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
   const { data } = props;
+
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`
     min-width: 222px;
-    
-    &:hover { box-shadow: 0 8px 16px 0 grey; }
-  `
+
+    &:hover {
+      box-shadow: 0 8px 16px 0 grey;
+    }
+  `;
 
   const CustomCardHeader = styled.div`
     position: relative;
@@ -27,7 +30,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
 
   const DateWrapper = styled.div`
     width: 100%;
-    background: rgba(0,0,0,0.53);
+    background: rgba(0, 0, 0, 0.53);
     color: white;
     text-align: right;
     padding-right: 0.5em;
@@ -44,7 +47,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
           data-drupal-id={data.drupal_internal__mid}
           data-drupal-type={data.type}
           data-uuid={data.id}
-          style={{ maxWidth: "393px", }}
+          style={{ maxWidth: "393px" }}
         >
           <CustomCardHeader>
             <ErrorBoundary>
@@ -57,9 +60,13 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
             </ErrorBoundary>
           </CustomCardHeader>
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
-            <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>{data.name}</Card.Title>
+            <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>
+              {data.name}
+            </Card.Title>
           </Card.Body>
-          <Card.Footer className="bg-white border-0">Authors and Tags</Card.Footer>
+          <Card.Footer className="bg-white border-0">
+            Authors and Tags
+          </Card.Footer>
         </a>
       </CardWrapper>
     </>

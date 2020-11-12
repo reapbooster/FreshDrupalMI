@@ -8,11 +8,16 @@ export interface FacetValueDisplayProps {
   onChangeHandler: Function;
 }
 
+const generateKey = (pre) => {
+  return `${pre}_${new Date().getTime()}`;
+};
+
 export const FacetValueDisplay = (props: FacetValueDisplayProps) => {
   const { facetValue, key, formVariable, onChangeHandler } = props;
   const myMachineName = formVariable.concat("[", facetValue.id, "]");
   return (
     <Field
+      key={key}
       type="checkbox"
       id={facetValue.id}
       name={myMachineName}
@@ -23,6 +28,10 @@ export const FacetValueDisplay = (props: FacetValueDisplayProps) => {
       {facetValue.label}
     </Field>
   );
+};
+
+FacetValueDisplay.defaultProps = {
+  key: generateKey(),
 };
 
 export default FacetValueDisplay;

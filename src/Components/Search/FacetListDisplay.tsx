@@ -2,7 +2,6 @@ import React from "react";
 import { FacetListInterface } from "../../DataTypes/Facet";
 import FacetValueDisplay from "./FacetValueDisplay";
 import { Formik, Field, Form } from "formik";
-import uuidv4 from "../../Utility/uuidv4";
 
 export interface FacetListDisplayProps extends FacetListInterface {
   key: number;

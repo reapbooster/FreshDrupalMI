@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import Facet, { FacetProps, FacetValue } from "../../DataTypes/Facet";
+import {
+  FacetList,
+  FacetListInterface,
+  FacetValue,
+  FacetValueInterface,
+} from "../../DataTypes/Facet";
 import { Dropdown } from "react-bootstrap";
 import FontAwesomeIcon from "react-fontawesome";
 import { useQueryState } from "use-location-state";
 
-export const DropdownFacet = (props: FacetProps) => {
-  const [facetValues, setFacetValues] = useState(new Facet(props));
+export const DropdownFacet = (props: FacetListInterface) => {
+  const DataObject = new FacetList(props);
+  const [facetValues, setFacetValues] = useState(DataObject);
   const [activeTerm, setActiveTerm] = useQueryState(
     props.field.replace("field_", ""),
     ""
