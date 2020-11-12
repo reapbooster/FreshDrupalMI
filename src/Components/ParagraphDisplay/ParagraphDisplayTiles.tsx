@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Container } from "react-bootstrap";
 import { ParagraphTilesInterface } from "../../DataTypes/ParagraphTiles";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
@@ -59,6 +59,7 @@ export class ParagraphDisplayTiles extends React.Component<
 
   render() {
     const { data, loading, loaded } = this.state;
+
     if (loading) {
       return (
         <>
@@ -76,7 +77,6 @@ export class ParagraphDisplayTiles extends React.Component<
             id={"tiles-list-".concat(data.id)}
             list={data.tiles}
             view_mode={data.field_view_mode}
-            onClickHandler={this.scrollOnClickHandler}
           />
         </Container>
       );
