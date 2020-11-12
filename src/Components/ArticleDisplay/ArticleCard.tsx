@@ -34,14 +34,16 @@ const ArticleCard = (props: ArticleCardProps) => {
     return <Loading />;
   }
   console.debug("Article Card", articleData);
-  
+
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`
     min-width: 222px;
-    
-    &:hover { box-shadow: 0 8px 16px 0 grey; }
-  `
+
+    &:hover {
+      box-shadow: 0 8px 16px 0 grey;
+    }
+  `;
 
   const CustomCardHeader = styled.div`
     position: relative;
@@ -49,7 +51,7 @@ const ArticleCard = (props: ArticleCardProps) => {
 
   const DateWrapper = styled.div`
     width: 100%;
-    background: rgba(0,0,0,0.53);
+    background: rgba(0, 0, 0, 0.53);
     color: white;
     text-align: right;
     padding-right: 0.5em;
@@ -66,7 +68,7 @@ const ArticleCard = (props: ArticleCardProps) => {
           data-drupal-id={articleData.drupal_internal__nid}
           data-drupal-type={articleData.type}
           data-uuid={articleData.id}
-          style={{ maxWidth: "393px", }}
+          style={{ maxWidth: "393px" }}
         >
           <CustomCardHeader>
             <ErrorBoundary>
@@ -75,9 +77,13 @@ const ArticleCard = (props: ArticleCardProps) => {
             </ErrorBoundary>
           </CustomCardHeader>
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
-            <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>{articleData.title}</Card.Title>
+            <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>
+              {articleData.title}
+            </Card.Title>
           </Card.Body>
-          <Card.Footer className="bg-white border-0">Authors and Tags</Card.Footer>
+          <Card.Footer className="bg-white border-0">
+            Authors and Tags
+          </Card.Footer>
         </a>
       </CardWrapper>
     </>
