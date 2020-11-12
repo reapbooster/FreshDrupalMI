@@ -118,9 +118,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
           <Jumbotron
             className={"jumbotron jumbotron-fluid d-block align-items-center"}
           >
-            <Container style={slideTextStyle}>
-              {textLines}
-            </Container>
+            <Container style={slideTextStyle}>{textLines}</Container>
           </Jumbotron>
         </Row>
       </ErrorBoundary>

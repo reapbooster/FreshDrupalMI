@@ -71,11 +71,17 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
       const CardOuter = styled.div`
         margin: 1em;
         width: 100%;
-        cursor: pointer; 
-        
-        &:hover { box-shadow: 0 8px 16px 0 grey; }
-        &:hover .card-title { color: var( --color-milken-orange ) !important; };
-        &:hover .card-body div { display: unset; };
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 8px 16px 0 grey;
+        }
+        &:hover .card-title {
+          color: var(--color-milken-orange) !important;
+        }
+        &:hover .card-body div {
+          display: unset;
+        }
 
         @media (max-width: 767px) {
           margin: 1em 0;
@@ -118,16 +124,17 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
               />
             </ErrorBoundary>
             <CardLinkBox>
-              <FontAwesomeIcon 
-                icon={faArrowRight} 
+              <FontAwesomeIcon
+                icon={faArrowRight}
                 style={{
-                  float: "right", 
-                  color: "white", 
-                  backgroundColor: "var(--color-milken-orange)", 
+                  float: "right",
+                  color: "white",
+                  backgroundColor: "var(--color-milken-orange)",
                   padding: ".5em",
                   width: "3em",
                   height: "3em",
-                }} />
+                }}
+              />
             </CardLinkBox>
           </Card.Body>
         </CardOuter>
