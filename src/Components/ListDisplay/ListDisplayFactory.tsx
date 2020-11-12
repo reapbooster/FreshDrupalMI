@@ -1,4 +1,4 @@
-import {EntityInterface} from "../../DataTypes/Entity";
+import { EntityInterface } from "../../DataTypes/Entity";
 import ParagraphDisplay from "../ParagraphDisplay";
 import NodeDisplay from "../NodeDisplay";
 import MediaDisplay from "../MediaDisplay";
