@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import SearchResult, { SearchResultProps } from "./SearchResult";
-import { FacetList, FacetValue } from "../../DataTypes/Facet";
+import { FacetList, FacetListManager, FacetValue } from "../../DataTypes/Facet";
 
 interface ResultsListProps {
   results: Array<SearchResultProps>;
@@ -25,7 +25,7 @@ const ResultsList = (props: ResultsListProps) => {
     );
   } else if (results.length >= 1) {
     const mapResults = (results: Array<SearchResultProps>) => {
-      const filters = [];
+      const filters = new FacetListManager();
       // @todo: add facets to filters list and send back to parent component
       const toReturn = results.map((result, key) => {
         return (

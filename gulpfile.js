@@ -122,16 +122,16 @@ gulp.task("buildEntryFiles", (done) => {
   try {
     const webpackConfig = configurator(glob.sync("./**/*.entry.tsx", {}));
     return wp(webpackConfig, (err, stats) => {
-      if (err) {
-        console.error(err.message);
-        throw new err();
+      if (err || stats.hasErrors()) {
+        console.error("error: ", err.message, err.fileName);
       }
-      console.log("Compiled:", stats.toString());
+      if (stats) {
+        console.log("Compiled:", stats.toString());
+      }
       done();
     });
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error("ERROR", err, err.fileName);
   }
 });
 
@@ -166,7 +166,11 @@ gulp.task("clean", (done) => {
     });
 });
 
-const gulpDefaultTask = gulp.series(["buildTypescript", "buildEntryFiles"]);
+const gulpDefaultTask = gulp.series([
+  "clean",
+  "buildTypescript",
+  "buildEntryFiles",
+]);
 
 gulp.task("componentBuild", gulpDefaultTask);
 

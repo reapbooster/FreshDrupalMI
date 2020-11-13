@@ -13,6 +13,7 @@ export interface VideoCardDisplayProps {
 
 export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
   const { data } = props;
+
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`

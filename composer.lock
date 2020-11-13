@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "902e2035c65af23956d9f431eabe046f",
+    "content-hash": "edb2e46258a0a772738a28c4f9dd04b7",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4040,6 +4040,54 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/bootstrap_paragraphs",
                 "issues": "https://drupal.org/project/issues/bootstrap_paragraphs"
+            }
+        },
+        {
+            "name": "drupal/browsersync",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/browsersync.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/browsersync-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "6183ef10ae1ec760e8fa601be8cb91a550c9331f"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1455775140",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Cottser",
+                    "homepage": "https://www.drupal.org/user/1167326"
+                },
+                {
+                    "name": "jorgegc",
+                    "homepage": "https://www.drupal.org/user/834154"
+                }
+            ],
+            "description": "Integrates Browsersync (Node.js module) with Drupal.",
+            "homepage": "https://www.drupal.org/project/browsersync",
+            "support": {
+                "source": "https://git.drupalcode.org/project/browsersync"
             }
         },
         {
@@ -24622,6 +24670,7 @@
         "drupal/block_field": 5,
         "drupal/bootstrap_barrio": 20,
         "drupal/bootstrap_paragraphs": 10,
+        "drupal/browsersync": 10,
         "drupal/business_rules": 10,
         "drupal/component": 10,
         "drupal/config_split": 20,

@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
 const OnlyIfChangedPlugin = require("only-if-changed-webpack-plugin");
 const term = require("terminal-kit").terminal;
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ManifestPlugin = require("webpack-manifest-plugin");
 
 const nameCallback = (module, chunks, cacheGroupKey) => {
   const moduleFileName = module
@@ -92,28 +94,23 @@ export function configurator(entry) {
     devtool: "source-map",
     cache: false,
     optimization: {
-      chunkIds: "natural",
-      noEmitOnErrors: true,
-      moduleIds: "natural",
-      providedExports: false,
-      sideEffects: false,
+      emitOnErrors: false,
       splitChunks: {
-        chunks: process.env.NODE_ENV == "production" ? "all" : "async",
-        minSize: 20000,
-        maxSize: 0,
-        minChunks: 1,
-        maxAsyncRequests: 30,
-        maxInitialRequests: 30,
-        automaticNameDelimiter: "~",
-        enforceSizeThreshold: 50000,
+        chunks: "async",
         cacheGroups: {
           defaultVendors: {
             test: /[\\/]node_modules[\\/]/,
             priority: -10,
+            filename: (pathData) => {
+              // Use pathData object for generating filename string based on your requirements
+              return `web/modules/custom/milken_base/components/common/${pathData.chunk.id}-bundle.js`;
+            },
           },
           default: {
-            minChunks: 2,
-            priority: -20,
+            filename: (pathData) => {
+              // Use pathData object for generating filename string based on your requirements
+              return `web/modules/custom/milken_base/components/common/${pathData.chunk.id}-bundle.js`;
+            },
             reuseExistingChunk: true,
           },
         },
@@ -122,7 +119,6 @@ export function configurator(entry) {
     output: {
       filename: "[name].entry.js",
       path: pathUtility.resolve("."),
-      jsonpFunction: uuidv4(),
     },
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
@@ -178,7 +174,6 @@ export function configurator(entry) {
         chunkFilename: "css/[id].css",
       }),
       new webpack.ProgressPlugin(progressCallback),
-      new DrupalLibrariesWebpackPlugin(),
       /**
        *  new BrowserSyncWebpackPlugin({
        *   proxy: "http://localhost:8080",
@@ -188,9 +183,9 @@ export function configurator(entry) {
        * }),
        *
        */
-      new OnlyIfChangedPlugin({
-        cacheDirectory: pathUtility.join(oicOpts.rootDir, "tmp/cache"),
-        cacheIdentifier: oicOpts, // all variable opts/environment should be used in cache key
+      new ManifestPlugin({
+        publicPath: "/",
+        basePath: "/",
       }),
     ],
     stats: {

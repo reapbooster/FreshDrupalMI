@@ -37,6 +37,7 @@
         "drupal/bootstrap_barrio": "^4.0@dev",
         "drupal/bootstrap_library": "^1.11",
         "drupal/bootstrap_paragraphs": "^2.0@beta",
+        "drupal/browsersync": "^1.0@beta",
         "drupal/business_rules": "^1.0@beta",
         "drupal/cdn": "^3.2",
         "drupal/coder": "^8.3",

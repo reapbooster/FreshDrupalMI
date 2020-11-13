@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import Facet, { FacetProps } from "../../DataTypes/Facet";
+import {
+  FacetList,
+  FacetListInterface,
+  FacetValue,
+  FacetValueInterface,
+} from "../../DataTypes/Facet";
 import Select from "react-select";
 import { useQueryState } from "use-location-state";
 
-const HorizontalMenuFacet = (props: FacetProps) => {
-  const [facetValues, setFacetValues] = useState(new Facet(props));
+const HorizontalMenuFacet = (props: FacetListInterface) => {
+  const DataObject = new FacetList(props);
+  const [facetValues, setFacetValues] = useState(DataObject);
   const [fieldTerms, setFieldTerms] = useQueryState(
     props.field.replace("field_", ""),
     ""

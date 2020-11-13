@@ -1,41 +1,73 @@
-import React from "react";
-import { FacetListInterface } from "../../DataTypes/Facet";
-import FacetValueDisplay from "./FacetValueDisplay";
+import React, { SyntheticEvent } from "react";
+import {
+  FacetList,
+  FacetListInterface,
+  FacetValue,
+} from "../../DataTypes/Facet";
 import { Formik, Field, Form } from "formik";
-import uuidv4 from "../../Utility/uuidv4";
+import SearchResult from "./SearchResult";
 
-export interface FacetListDisplayProps extends FacetListInterface {
+export interface FacetListDisplayProps {
+  facetList: FacetListInterface;
+  results: Array<SearchResult>;
   key: number;
   filterOnChangeHandler: any;
 }
 
-export const FacetListOnChangeHandler = (evt) => {
-  //TODO: handle change event
-  console.debug("Change event triggered", evt);
-};
-
 export const FacetListDisplay = (props: FacetListDisplayProps) => {
   console.log("Facet List Display:", props);
-  const { facets, formProperty, label, key, filterOnChangeHandler } = props;
+  const { facetList, key, filterOnChangeHandler, results } = props;
+  const DataObject = new FacetList(facetList);
+  results.map((item) => {
+    // @todo: add label translation
+    console.log("Result:", item, facetList);
+    const value = new FacetValue({
+      id: item[facetList.formProperty],
+      value: item[facetList.formProperty],
+      label: item[facetList.formProperty],
+    });
+    DataObject.addFacetValue(value);
+  });
+  console.log("About to render", DataObject);
   return (
-    <div data-form-property={formProperty} key={key}>
-      <h1>{label}</h1>
-      <Formik onSubmit={filterOnChangeHandler}>
-        <Form>
-          <ul>
-            {facets.map((item, key) => {
+    <div data-form-property={facetList.formProperty} key={key}>
+      <h5>{facetList.label}</h5>
+      <Formik>
+        {({ values }) => (
+          <Form>
+            {DataObject.facets.map((item, key) => {
+              const myMachineName = facetList.formProperty.concat(
+                "[",
+                item.id,
+                "]"
+              );
+              console.debug("FACET RENDER: ", item, myMachineName);
+
               return (
-                <li key={key}>
-                  <FacetValueDisplay
-                    facetValue={item}
-                    formVariable={formProperty}
-                    onChangeHandler={FacetListOnChangeHandler}
+                <div className="form-check" key={key}>
+                  <Field
+                    type="checkbox"
+                    id={item.id}
+                    name={myMachineName}
+                    value={item.id}
+                    checked={true}
+                    className="form-check-input"
+                    data-form-property={facetList.formProperty}
+                    data-value={item.id}
+                    onChange={filterOnChangeHandler}
                   />
-                </li>
+                  <label
+                    key={key}
+                    htmlFor={item.id}
+                    className="form-check-label"
+                  >
+                    {item.label}
+                  </label>
+                </div>
               );
             })}
-          </ul>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </div>
   );
