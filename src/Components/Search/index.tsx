@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import ResultsList from "./ResultsList";
 import KeywordForm from "./KeywordForm";
-import FilterList from "./FilterList";
+import Filters from "./Filters";
 import SearchResult from "./SearchResult";
 import {
   FacetList,
@@ -15,7 +15,7 @@ import ErrorBoundary from "../../Utility/ErrorBoundary";
 interface SearchState {
   keywords: string;
   results: Array<SearchResult>;
-  filters: Array<FilterList>;
+  filters: Array<Facets>;
   currentActiveRequest: boolean;
   abortController: AbortController;
 }
@@ -62,10 +62,9 @@ class Search extends React.Component<any, SearchState> {
   }
 
   render() {
+    console.debug("Search => Index => ", this.state, this.props);
     const { filters, results, currentActiveRequest } = this.state;
-    const searchParams = new URLSearchParams(document.location.search);
     const keywords = searchParams.get("keywords");
-    console.debug("Results => ", results);
     return (
       <Container fluid={true} className={"outline"}>
         <Row>
@@ -87,9 +86,7 @@ class Search extends React.Component<any, SearchState> {
         <Row>
           <Col lg={2} sm={1} style={{ background: "#dfdfdf" }}>
             <ErrorBoundary>
-              {Object.keys(filters).map((item, key) => {
-                return <FacetListDisplay {...filters[item]} key={key} />;
-              })}
+              <Filters results={results} />
             </ErrorBoundary>
           </Col>
           <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
@@ -107,6 +104,7 @@ class Search extends React.Component<any, SearchState> {
   }
 
   setFilters(filters: Array<FacetList>) {
+    console.debug("Search => set Filters => ", filters);
     this.setState({ filters });
   }
 

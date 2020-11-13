@@ -133,3 +133,4 @@ web/modules/custom/milken_base/js/*.js
 /.vscode
 *.hot-update.json
 /tmp
+/manifest.json

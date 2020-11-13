@@ -96,7 +96,7 @@ export function configurator(entry) {
     optimization: {
       emitOnErrors: false,
       splitChunks: {
-        chunks: "all",
+        chunks: "async",
         cacheGroups: {
           defaultVendors: {
             test: /[\\/]node_modules[\\/]/,
@@ -183,6 +183,10 @@ export function configurator(entry) {
        * }),
        *
        */
+      new ManifestPlugin({
+        publicPath: "/",
+        basePath: "/",
+      }),
     ],
     stats: {
       warnings: true,

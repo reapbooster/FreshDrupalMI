@@ -124,20 +124,15 @@ gulp.task("buildEntryFiles", (done) => {
     return wp(webpackConfig, (err, stats) => {
       if (err || stats.hasErrors()) {
         console.error("error: ", err.message, err.fileName);
-        console.error("stats", stats);
-        done();
       }
       if (stats) {
-        console.log("Compiled:", stats);
-        done();
+        console.log("Compiled:", stats.toString());
       }
-    }).on("error", (err) => {
-      console.log("onErrorHandler", err.message, err.fileName);
+      done();
     });
   } catch (err) {
     console.error("ERROR", err, err.fileName);
   }
-  done();
 });
 
 /**

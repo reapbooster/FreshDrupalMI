@@ -1,10 +1,16 @@
+/**
+ * @interface FacetValueInterface
+ */
 export interface FacetValueInterface {
   id: string;
   value: string;
   label: string;
-  selected: boolean;
+  selected?: boolean;
 }
 
+/**
+ * @class FacetValue
+ */
 export class FacetValue implements FacetValueInterface {
   id: string;
   value: string;
@@ -14,6 +20,7 @@ export class FacetValue implements FacetValueInterface {
 
   constructor(incoming) {
     this.occurrences = 0;
+    this.selected = true;
     Object.assign(this, incoming);
   }
 }
@@ -21,7 +28,7 @@ export class FacetValue implements FacetValueInterface {
 export interface FacetListInterface {
   label: string;
   formProperty: string;
-  facets: Array<FacetValue>;
+  facets?: Array<FacetValue>;
 }
 
 export class FacetList implements FacetListInterface {
@@ -47,7 +54,7 @@ export class FacetList implements FacetListInterface {
   }
 
   addFacetValue(incoming: FacetValue) {
-    if (!this._facets[incoming.id] instanceof FacetValue) {
+    if (!this._facets.hasOwnProperty(incoming.id)) {
       this._facets[incoming.id] = new FacetValue(incoming);
     }
     this._facets[incoming.id].occurrences += 1;
@@ -57,8 +64,11 @@ export class FacetList implements FacetListInterface {
 export class FacetListManager {
   _facetLists: Record<string, FacetList>;
 
-  constructor(props) {
-    Object.assign(this, props);
+  constructor(props = null) {
+    this._facetLists = {};
+    if (props) {
+      Object.assign(this, props);
+    }
   }
 
   get facetLists(): Array<FacetListInterface> {
@@ -72,7 +82,7 @@ export class FacetListManager {
     });
   }
 
-  hasFacet(id: string): boolean {
+  hasFacetList(id: string): boolean {
     return this.facetListIds.indexOf(id) !== -1;
   }
 
@@ -80,17 +90,28 @@ export class FacetListManager {
     return Object.keys(this._facetLists);
   }
 
-  getFacetList(id): FacetListInterface {
+  getFacetList(id): FacetList {
     return this._facetLists[id] ?? null;
   }
 
   hasFacetList(id): boolean {
-    return this._facetLists[id] instanceof FacetList;
+    return this._facetLists?.hasOwnProperty(id);
   }
 
-  addFacetList(incoming: FacetListInterface) {
-    if (!this._facetLists[incoming.id] instanceof FacetList) {
-      this._facetLists[incoming.id] = new FacetList(incoming);
+  addFacetList(label: string, formProperty: string) {
+    if (!this._facetLists?.hasOwnProperty(formProperty)) {
+      this._facetLists[formProperty] = new FacetList({
+        label,
+        formProperty,
+        facets: [],
+      });
     }
+  }
+
+  addFacetValue(formProperty: string, facetValue: FacetValueInterface) {
+    if (!this.hasFacetList(formProperty)) {
+      this.addFacetList(formProperty, formProperty);
+    }
+    this.getFacetList(formProperty).addFacetValue(facetValue);
   }
 }

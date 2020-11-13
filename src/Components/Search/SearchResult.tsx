@@ -55,15 +55,16 @@ export const SearchResult = (props: SearchResultProps) => {
       data-uuid={uuid}
       data-relevance={search_api_relevance}
     >
-      <ExcerptWrapper
-        data-property="search-api-excerpt"
-        dangerouslySetInnerHTML={{ __html: search_api_excerpt }}
-      />
       <div data-property="link">
         <a href={url} title={label}>
           {label}
         </a>
       </div>
+      <ExcerptWrapper
+        data-property="search-api-excerpt"
+        dangerouslySetInnerHTML={{ __html: search_api_excerpt }}
+      />
+
       <MetaDataWrapper
         data-property="search-api-relevance"
         className="text-align-right"
