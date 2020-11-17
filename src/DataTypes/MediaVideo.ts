@@ -71,6 +71,9 @@ export class MediaVideo extends Media implements MediaVideoInterface {
   constructor(props) {
     super(props);
     Object.assign(this, props);
+    if (props.thumbnail !== undefined && this.thumbnail === undefined) {
+      this._thumbnail = new ImageFile(props.thumbnail);
+    }
   }
 
   getThumbnail(): ImageFileInterface {

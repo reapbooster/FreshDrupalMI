@@ -39,6 +39,9 @@ export class MediaReport extends Media implements MediaReportInterface {
   constructor(props) {
     super(props);
     Object.assign(props);
+    if (props.thumbnail !== undefined && this.thumbnail === undefined) {
+      this._thumbnail = new ImageFile(props.thumbnail);
+    }
   }
 
   getIncluded(): string {
@@ -131,7 +134,7 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   set thumbnail(value: ImageFileInterface) {
-    if (value) {
+    if (value.data === undefined && value !== undefined) {
       this._thumbnail = new ImageFile(value);
     }
   }
