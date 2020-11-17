@@ -301,10 +301,11 @@
   "devDependencies": {},
   "jest": {
     "verbose": true,
-    "bail": true,
+    "bail": false,
     "roots": [
       "<rootDir>/src"
     ],
+    "setupFiles": ["dotenv/config"],
     "testRegex": "(src/Tests/.*|(\\.|/)(test|spec))\\.[jt]s?$",
     "testPathIgnorePatterns": [
       "/node_modules/",

@@ -42,6 +42,15 @@ export class MediaReport extends Media implements MediaReportInterface {
     if (props.thumbnail !== undefined && this.thumbnail === undefined) {
       this._thumbnail = new ImageFile(props.thumbnail);
     }
+    if (props.field_cover !== undefined && this.field_cover === undefined) {
+      this._field_cover = new ImageFile(props.field_cover);
+    }
+    if (
+      props.field_media_file !== undefined &&
+      this.field_media_file === undefined
+    ) {
+      this._field_media_file = new DocumentFile(props.field_cover);
+    }
   }
 
   getIncluded(): string {
@@ -89,12 +98,12 @@ export class MediaReport extends Media implements MediaReportInterface {
     this._field_centers = incoming;
   }
 
-  get field_media_file(): DocumentFile {
+  get field_media_file(): DocumentFileInterface {
     return this._field_media_file;
   }
 
-  set field_media_file(value: DocumentFile) {
-    this._field_media_file = value;
+  set field_media_file(value: DocumentFileInterface) {
+    this._field_media_file = new DocumentFile(value) ?? null;
   }
 
   get field_program_initiatives(): TaxonomyTerm {

@@ -37,6 +37,7 @@ export class ImageFile extends File implements ImageFileInterface {
   constructor(incoming: ImageFileInterface) {
     super(incoming);
     Object.assign(this, incoming);
+    this.setImageStyles(incoming.image_style_uri);
   }
 
   get image_style_uri(): ImageStyleObjectInterface {
@@ -54,7 +55,7 @@ export class ImageFile extends File implements ImageFileInterface {
   }
 
   hasData(): boolean {
-    return this._image_style_uri || false;
+    return this.status !== undefined;
   }
 
   getIncluded(): string {
