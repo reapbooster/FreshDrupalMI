@@ -134,3 +134,4 @@ web/modules/custom/milken_base/js/*.js
 *.hot-update.json
 /tmp
 /manifest.json
+/db

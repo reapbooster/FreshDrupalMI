@@ -37,7 +37,6 @@ services:
         source: $HOME/.ssh
         target: /root/.ssh
         read_only: true
-
     links:
       - redis
       - mysql
@@ -50,12 +49,12 @@ services:
   mysql:
     container_name: mi-mysql
     image: milken/mysql-dev
+    #volumes:
+     # - './db:/var/lib/mysql'
     expose:
       - '3306'
     ports:
-      - '3306:3306'
-    volumes:
-      - 'db:/var/lib/mysql'
+      - '33067:3306'
     env_file:
       - .env
 
@@ -78,4 +77,4 @@ services:
 
 volumes:
   web: {}
-  db: {}
+  initmysql: {}

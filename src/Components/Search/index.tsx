@@ -1,22 +1,31 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Pagination } from "react-bootstrap";
 import ResultsList from "./ResultsList";
 import KeywordForm from "./KeywordForm";
 import Filters from "./Filters";
 import SearchResult from "./SearchResult";
 import {
   FacetList,
+  FacetListInterface,
   FacetValue,
   FacetValueInterface,
 } from "../../DataTypes/Facet";
 import FacetListDisplay from "./FacetListDisplay";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
+import Loading from "../Loading";
+
+interface SearchResultFilterState {
+  entity_type_id?: Array<string> | string;
+  bundle?: Array<string> | string;
+}
 
 interface SearchState {
   keywords: string;
   results: Array<SearchResult>;
-  filters: Array<Facets>;
-  currentActiveRequest: boolean;
+  filters: SearchResultFilterState;
+  loading: boolean;
+  loaded: boolean;
+  page: number;
   abortController: AbortController;
 }
 
@@ -24,11 +33,20 @@ class Search extends React.Component<any, SearchState> {
   constructor(props) {
     super(props);
     const searchParams = new URLSearchParams(window.location.search);
+    const filters = {};
+    if (searchParams.has("entity_type_id")) {
+      filters["entity_type_id"] = searchParams.get("entity_type_id");
+    }
+    if (searchParams.has("bundle")) {
+      filters["bundle"] = searchParams.get("entity_type_id");
+    }
     this.state = {
       keywords: searchParams.get("keywords"),
       results: [],
-      filters: [],
-      currentActiveRequest: false,
+      filters: filters,
+      loading: false,
+      loaded: false,
+      page: 1,
       abortController: new AbortController(),
     };
     this.setFilters = this.setFilters.bind(this);
@@ -43,63 +61,111 @@ class Search extends React.Component<any, SearchState> {
   }
 
   getResults() {
-    const { keywords } = this.state;
+    const { keywords, page, filters } = this.state;
+    const newState = { loading: true, loaded: false };
     console.debug("GetResults", keywords);
     const { abortController } = this.state;
-    fetch(`/api/v1.0/search?_format=json&`.concat("keywords=", keywords), {
+    const toSet = new URLSearchParams(window.location.search);
+    if (keywords) {
+      // If keywords are changed, reset the page to 1.
+      toSet.set("keywords", keywords);
+      toSet.delete("page");
+      newState["page"] = 1;
+    } else {
+      // Page is probably being changed.
+      if (toSet.has("page")) {
+        toSet.set("page", page);
+      } else {
+        toSet.append("page", page);
+      }
+    }
+    this.setState(newState);
+    fetch(`/api/v1.0/search?`.concat(toSet.toString()), {
       abortController,
     })
       .then((res) => res.json())
       .then((ajaxResults) => {
         console.debug("back from ajax:", ajaxResults);
+        const stateToSet = {
+          loading: false,
+        };
         if (ajaxResults) {
-          this.setState({
-            currentActiveRequest: false,
-            results: ajaxResults,
-          });
+          stateToSet["results"] = ajaxResults;
+          stateToSet["loaded"] = true;
         }
+        this.setState(stateToSet);
       });
   }
 
   render() {
     console.debug("Search => Index => ", this.state, this.props);
-    const { filters, results, currentActiveRequest } = this.state;
-    const keywords = searchParams.get("keywords");
-    return (
-      <Container fluid={true} className={"outline"}>
-        <Row>
-          <Col lg={12} className={"py-1"}>
-            <Container
-              fluid={true}
-              className={"text-align-center mx-auto my-2"}
-            >
-              <h5 className={"display-5"}>Search the Milken Institute</h5>
+    const {
+      filters,
+      results,
+      links,
+      currentActiveRequest,
+      loading,
+      loaded,
+      page,
+    } = this.state;
+    if (loading) {
+      return <Loading />;
+    }
+    if (loaded) {
+      const searchParams = new URLSearchParams(window.location.search);
+      const keywords = searchParams.get("keywords");
+      const paginationItems = [];
+      for (let number = 0; number <= 9; number++) {
+        paginationItems.push(
+          <Pagination.Item key={number} active={number === page}>
+            {number}
+          </Pagination.Item>
+        );
+      }
+
+      return (
+        <Container fluid={true} className={"outline"}>
+          <Row>
+            <Col lg={12} className={"py-1"}>
+              <Container
+                fluid={true}
+                className={"text-align-center mx-auto my-2"}
+              >
+                <h5 className={"display-5"}>Search the Milken Institute</h5>
+                <ErrorBoundary>
+                  <KeywordForm
+                    onSubmit={this.searchOnSubmitHandler}
+                    keywords={keywords}
+                  />
+                </ErrorBoundary>
+              </Container>
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={2} sm={1} style={{ background: "#dfdfdf" }}>
               <ErrorBoundary>
-                <KeywordForm
-                  onSubmit={this.searchOnSubmitHandler}
-                  keywords={keywords}
+                <Filters results={results} />
+              </ErrorBoundary>
+            </Col>
+            <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
+              <ErrorBoundary>
+                <ResultsList
+                  results={results}
+                  links
+                  currentActiveRequest={currentActiveRequest}
+                  setFilters={this.setFilters}
                 />
               </ErrorBoundary>
-            </Container>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={2} sm={1} style={{ background: "#dfdfdf" }}>
-            <ErrorBoundary>
-              <Filters results={results} />
-            </ErrorBoundary>
-          </Col>
-          <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
-            <ErrorBoundary>
-              <ResultsList
-                results={results}
-                currentActiveRequest={currentActiveRequest}
-                setFilters={this.setFilters}
-              />
-            </ErrorBoundary>
-          </Col>
-        </Row>
-      </Container>
+              <Pagination>{paginationItems}</Pagination>
+            </Col>
+          </Row>
+        </Container>
+      );
+    }
+    return (
+      <div>
+        <h5>No Data</h5>
+      </div>
     );
   }
 
