@@ -4,6 +4,7 @@ import { Card, Col } from "react-bootstrap";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
 import moment from "moment";
+import styled from "styled-components";
 
 export interface MediaDisplayReportProps {
   data: MediaReportInterface;
@@ -27,29 +28,60 @@ export const MediaDisplayReport: React.FunctionComponent = (
         setReportData(DataObject);
       });
   }
-  const created = moment(reportData.changed, moment.ISO_8601);
+  
+  const CardWrapper = styled.div`
+    min-width: 222px;
+
+    &:hover {
+      box-shadow: 0 8px 16px 0 grey;
+    }
+  `;
+
+  const CustomCardHeader = styled.div`
+    position: relative;
+  `;
+  
+  const DateWrapper = styled.div`
+    width: 100%;
+    background: rgba(0, 0, 0, 0.53);
+    color: white;
+    text-align: right;
+    padding-right: 0.5em;
+    position: absolute;
+    bottom: 0;
+  `;
+
+  const created = moment(reportData.changed, "ddd MMM DD YYYY Z");
+
   console.debug("Thumbnail: ", reportData.getThumbnail());
   return (
-    <Card key={key}>
-      <ImageFileDisplay
-        data={reportData.getThumbnail()}
-        view_mode="thumbnail"
-        className={"card-img"}
-      />
-      <Card.Body style={{ minHeight: "150px" }}>
-        <Card.Title>
-          <a
-            href={reportData.path.alias}
-            data-drupal-id={reportData.drupal_internal__mid}
-            data-drupal-type={reportData.type}
-            data-uuid={reportData.id}
-          >
-            {reportData.name}
-          </a>
-        </Card.Title>
-      </Card.Body>
-      <Card.Footer>{created.format("MMMM D, YYYY")}</Card.Footer>
-    </Card>
+    <CardWrapper className="card my-5 mx-2 text-align-left flex-shrink-1" key={key}>
+      <a
+        href={reportData.path.alias}
+        data-drupal-id={reportData.drupal_internal__mid}
+        data-drupal-type={reportData.type}
+        data-uuid={reportData.id}
+        style={{ maxWidth: "393px" }}
+      >
+        <CustomCardHeader>
+          <ImageFileDisplay
+            data={reportData.getThumbnail()}
+            view_mode="thumbnail"
+            className={"card-img"}
+            style={{ maxWidth: "100%" }}
+          />
+          <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
+        </CustomCardHeader>
+        <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
+          <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>
+              {reportData.name}
+          </Card.Title>
+        </Card.Body>
+        <Card.Footer className="bg-white border-0">
+          Authors and Tags
+        </Card.Footer>
+      </a>
+    </CardWrapper>
   );
 };
 
