@@ -6,8 +6,8 @@ test("LiveDataFixture testing", () => {
     const liveDataFixture = new LiveDataFixture(value);
     expect(liveDataFixture).toBeInstanceOf(LiveDataFixture);
     liveDataFixture.getFixtureData().then((fixtureData) => {
-      expect(fixtureData.data).not.toBe(null);
-      expect(fixtureData.data).not.toBe(undefined);
+      expect(fixtureData.data).not.toBeNull();
+      expect(fixtureData.data).toBeDefined();
       expect(fixtureData.data).toBeInstanceOf(Array);
     });
   });

@@ -147,6 +147,10 @@ export class MediaReport extends Media implements MediaReportInterface {
       this._thumbnail = new ImageFile(value);
     }
   }
+
+  getSource() {
+    return this.field_media_file;
+  }
 }
 
 export default MediaReport;

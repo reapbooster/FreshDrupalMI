@@ -300,13 +300,17 @@
   },
   "devDependencies": {},
   "jest": {
-    "verbose": false,
+    "verbose": true,
     "bail": true,
+    "silent": false,
     "roots": [
       "<rootDir>/src"
     ],
     "setupFiles": ["dotenv/config"],
-    "testRegex": "(src/Tests/.*|(\\.|/)(test|spec))\\.[jt]s?$",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ],
+    "testRegex": "(src/Tests/.*|(\\.|/)(test|spec))\\.ts(x?)$",
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/vendor/",
@@ -316,7 +320,8 @@
       "js",
       "json",
       "es6",
-      "ts"
+      "ts",
+      "tsx"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/**/*.js",

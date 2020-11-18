@@ -66,6 +66,8 @@ export abstract class Media
   abstract getIncluded(): string;
 
   abstract getThumbnail(): ImageFileInterface;
+
+  abstract getSource();
 }
 
 export default Media;

@@ -53,27 +53,6 @@ export class MediaPodcastEpisode
   constructor(props) {
     super(props);
     Object.assign(this, props);
-    if (props.thumbnail !== undefined && this.thumbnail === undefined) {
-      this._thumbnail = new ImageFile(props.thumbnail);
-    }
-    if (
-      props.field_media_image !== undefined &&
-      this.field_media_image === undefined
-    ) {
-      this._field_media_image = new ImageFile(props.field_media_image);
-    }
-    if (
-      props.field_media_audio_file !== undefined &&
-      this.field_media_audio_file === undefined
-    ) {
-      this._field_media_audio_file = new AudioFile(props.field_media_audio_file);
-    }
-    if (
-      props.field_transcript !== undefined &&
-      this.field_transcript === undefined
-    ) {
-      this._field_transcript = new DocumentFile(props.field_transcript);
-    }
   }
 
   getThumbnail(): ImageFileInterface {
@@ -81,7 +60,7 @@ export class MediaPodcastEpisode
   }
 
   getIncluded(): string {
-    return "&include=field_media_image,field_media_audio_file";
+    return "&include=field_media_image,thumbnail,field_media_audio_file";
   }
 
   hasData(): boolean {
@@ -140,6 +119,10 @@ export class MediaPodcastEpisode
 
   getThumbnail() {
     return this.thumbnail;
+  }
+
+  getSource() {
+    return this._field_media_audio_file;
   }
 }
 

@@ -139,6 +139,10 @@ export class MediaVideo extends Media implements MediaVideoInterface {
   set thumbnail(incoming: ImageFileInterface) {
     this._thumbnail = new ImageFile(incoming);
   }
+
+  getSource() {
+    return this.field_media_oembed_video;
+  }
 }
 
 export default MediaVideo;
