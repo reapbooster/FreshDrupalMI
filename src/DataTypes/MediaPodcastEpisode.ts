@@ -28,6 +28,7 @@ export interface MediaPodcastEpisodeInterface extends MediaInterface {
   parent_field_name?: string;
   parent_type?: string;
   path?: PathObject;
+  thumbnail: ImageFile;
 }
 
 export class MediaPodcastEpisode
@@ -47,10 +48,32 @@ export class MediaPodcastEpisode
   protected _field_transcript?: DocumentFile;
   protected _media_type?: MediaType;
   protected _path?: PathObject;
+  protected _thumbnail?: ImageFile;
 
   constructor(props) {
     super(props);
     Object.assign(this, props);
+    if (props.thumbnail !== undefined && this.thumbnail === undefined) {
+      this._thumbnail = new ImageFile(props.thumbnail);
+    }
+    if (
+      props.field_media_image !== undefined &&
+      this.field_media_image === undefined
+    ) {
+      this._field_media_image = new ImageFile(props.field_media_image);
+    }
+    if (
+      props.field_media_audio_file !== undefined &&
+      this.field_media_audio_file === undefined
+    ) {
+      this._field_media_audio_file = new AudioFile(props.field_media_audio_file);
+    }
+    if (
+      props.field_transcript !== undefined &&
+      this.field_transcript === undefined
+    ) {
+      this._field_transcript = new DocumentFile(props.field_transcript);
+    }
   }
 
   getThumbnail(): ImageFileInterface {
@@ -105,6 +128,18 @@ export class MediaPodcastEpisode
 
   set path(value: PathObjectInterface) {
     this._path = new PathObject(value);
+  }
+
+  get thumbnail(): ImageFileInterface {
+    return this._thumbnail;
+  }
+
+  set thumbnail(incoming: ImageFileInterface) {
+    this._thumbnail = new ImageFile(incoming);
+  }
+
+  getThumbnail() {
+    return this.thumbnail;
   }
 }
 

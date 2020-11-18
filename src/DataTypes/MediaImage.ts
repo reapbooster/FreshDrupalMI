@@ -41,7 +41,7 @@ class MediaImage extends Media implements MediaImageInterface {
   }
 
   hasData(): boolean {
-    return this.field_media_image?.imageStyleObject instanceof ImageStyleObject;
+    return this.status !== undefined;
   }
 
   get field_media_image(): ImageFileInterface {
