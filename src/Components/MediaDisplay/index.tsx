@@ -22,7 +22,8 @@ export const MediaDisplay: React.FunctionComponent = (
   props: MediaDisplayProps
 ) => {
   const { key, data, view_mode } = props;
-  const [mediaData, setMediaData] = useState(MediaDataFactory(data));
+  const DataObject = MediaDataFactory(data);
+  const [mediaData, setMediaData] = useState(DataObject);
   console.debug("MediaDisplay", props, mediaData);
   if (!mediaData.hasData()) {
     const ecp = new EntityComponentProps(mediaData);
@@ -31,7 +32,8 @@ export const MediaDisplay: React.FunctionComponent = (
       .then((res) => res.json())
       .then((remoteData) => {
         console.debug("Media Remote Data", remoteData);
-        setMediaData(MediaDataFactory(remoteData.data));
+        const newDataObject = MediaDataFactory(remoteData.data);
+        setMediaData(newDataObject);
       });
     return (
       <div>

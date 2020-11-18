@@ -28,6 +28,7 @@ export const MediaDisplayReport: React.FunctionComponent = (
       });
   }
   const created = moment(reportData.changed, moment.ISO_8601);
+  console.debug("Thumbnail: ", reportData.getThumbnail());
   return (
     <Card key={key}>
       <ImageFileDisplay

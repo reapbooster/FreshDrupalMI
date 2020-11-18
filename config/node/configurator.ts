@@ -2,10 +2,7 @@ const { v4: uuidv4 } = require("uuid");
 const pathUtility = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const DrupalLibrariesWebpackPlugin = require("drupal-libraries-webpack-plugin");
-const OnlyIfChangedPlugin = require("only-if-changed-webpack-plugin");
 const term = require("terminal-kit").terminal;
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 
 const nameCallback = (module, chunks, cacheGroupKey) => {

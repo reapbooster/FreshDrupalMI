@@ -2,7 +2,6 @@ import React from "react";
 import { FacetListInterface } from "../../DataTypes/Facet";
 import FacetListDisplay from "./FacetListDisplay";
 import SearchResult from "./SearchResult";
-import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 
 interface FiltersProps {
   searchParams?: Array<FacetListInterface>;
@@ -21,15 +20,15 @@ const Filters = (props: FiltersProps) => {
     ) {
       newSearchParams = new URLSearchParams(document.location.search);
     }
-    console.debug("Filter On Change Handler", changes.currentTarget);
+    console.debug("Filter On Change Handler", changes);
     const { formProperty, value } = changes.currentTarget?.dataset;
     if (newSearchParams.has(formProperty)) {
       newSearchParams.set(formProperty, value);
     } else {
       newSearchParams.append(formProperty, value);
     }
-    console.debug("New Search Params", newSearchParams);
-    //document.location.search = newSearchParams.toString();
+    console.debug("New Search Params", newSearchParams.toString());
+    document.location.search = newSearchParams.toString();
   };
 
   if (results.length >= 1) {

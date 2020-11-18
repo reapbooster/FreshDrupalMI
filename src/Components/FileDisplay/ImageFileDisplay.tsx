@@ -23,13 +23,6 @@ const ImageFileDisplay: React.FunctionComponent = (
     height: height ?? "200px,",
   };
 
-  if (!data?.id) {
-    return (
-      <>
-        <Holder updateOnResize={"true"} {...attributes} />
-      </>
-    );
-  }
   if (style) {
     attributes["style"] = style;
   }
@@ -49,7 +42,8 @@ const ImageFileDisplay: React.FunctionComponent = (
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("MilkenImage: Data back from JSON", ajaxData);
-        setImageData(new ImageFile(ajaxData.data));
+        const DataObject = new ImageFile(ajaxData.data);
+        setImageData(DataObject);
       });
     return (
       <>

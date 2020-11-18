@@ -32,7 +32,6 @@ export class ImageStyleObject implements ImageStyleObjectInterface {
   }
 
   reduce(values) {
-    console.debug("Values reducer:", values);
     const reduced = values.reduce(this.reducer);
     Object.assign(this, reduced);
   }
