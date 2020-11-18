@@ -9,9 +9,10 @@ const v4 = new RegExp(
 );
 
 const fixtureData = new LiveDataFixture("media--video");
+const expectedIncludeString = "&include=thumbnail";
 
-test("ImageFile DataType Testing", (done) => {
-  fixtureData.getFixtureData().then((mockResponse) => {
+test("MediaVideo DataType Testing", (done) => {
+  fixtureData.getFixtureData(expectedIncludeString).then((mockResponse) => {
     for (const key in mockResponse.data) {
       const origData = mockResponse.data[key];
       const systemUnderTest = new MediaVideo(mockResponse.data[key]);
@@ -20,7 +21,7 @@ test("ImageFile DataType Testing", (done) => {
       );
       expect(systemUnderTest.id).toEqual(expect.stringMatching(v4));
       expect(systemUnderTest.getIncluded()).toEqual(
-        expect.stringMatching("&include=thumbnail")
+        expect.stringMatching(expectedIncludeString)
       );
       expect(systemUnderTest.hasData()).toEqual(true);
       if (origData.thumbnail !== undefined) {
@@ -46,6 +47,7 @@ test("ImageFile DataType Testing", (done) => {
         expect(imageFile).not.toBeUndefined();
         expect(imageFile.id).toEqual(expect.stringMatching(v4));
         expect(imageFile.type).toEqual(expect.stringContaining("file--"));
+        expect(imageFile.hasData()).toBe(true);
       }
       done();
     }

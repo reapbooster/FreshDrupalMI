@@ -1,23 +1,24 @@
 // import dependencies
 import "@testing-library/jest-dom/extend-expect";
-import MediaReport from "../DataTypes/MediaReport";
+import MediaImage from "../DataTypes/MediaImage";
 import ImageFile from "../DataTypes/ImageFile";
 import LiveDataFixture from "../Utility/LiveDataFixture";
 import { ImageStyleObject } from "../DataTypes/ImageStyleObject";
+import EntityComponentProps from "../DataTypes/EntityComponentProps";
 const v4 = new RegExp(
   /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
 );
 
-const fixtureData = new LiveDataFixture("media--report");
-const expectedIncludeString = "&include=thumbnail,field_cover,field_media_file";
+const fixtureData = new LiveDataFixture("media--image");
+const expectedIncludeString = "&include=field_media_image,thumbnail";
 
-test("MediaReport testing", (done) => {
+test("MediaImage testing", (done) => {
   fixtureData.getFixtureData(expectedIncludeString).then((mockResponse) => {
     for (const key in mockResponse.data) {
       const origData = mockResponse.data[key];
-      const systemUnderTest = new MediaReport(origData);
+      const systemUnderTest = new MediaImage(origData);
       expect(systemUnderTest.type).toEqual(
-        expect.stringMatching("media--report")
+        expect.stringMatching("media--image")
       );
       expect(systemUnderTest.id).toEqual(expect.stringMatching(v4));
       expect(systemUnderTest.getIncluded()).toEqual(
@@ -37,24 +38,17 @@ test("MediaReport testing", (done) => {
         expect(styleObject).not.toBe(null);
         expect(typeof styleObject.srcSet).toBe("string");
       }
+
       if (
-        origData.field_cover !== undefined &&
-        origData.field_cover?.data === undefined
+        origData.field_media_image !== undefined &&
+        origData.field_media_image?.data === undefined
       ) {
-        const coverImage = systemUnderTest.field_cover;
-        expect(coverImage.id).toEqual(expect.stringMatching(v4));
-        expect(coverImage.type).toEqual(expect.stringContaining("file--"));
-      }
-      if (
-        origData.field_media_file !== undefined &&
-        origData.field_media_file?.data === undefined
-      ) {
-        const documentFile = systemUnderTest.field_media_file;
-        expect(documentFile).not.toBe(null);
-        expect(documentFile).not.toBeUndefined();
-        expect(documentFile.id).toEqual(expect.stringMatching(v4));
-        expect(documentFile.type).toEqual(expect.stringContaining("file--"));
-        expect(documentFile.hasData()).toBe(true);
+        const imageFile = systemUnderTest.field_media_image;
+        expect(imageFile).not.toBe(null);
+        expect(imageFile).not.toBeUndefined();
+        expect(imageFile.id).toEqual(expect.stringMatching(v4));
+        expect(imageFile.type).toEqual(expect.stringContaining("file--"));
+        expect(imageFile.hasData()).toBe(true);
       }
     }
     done();

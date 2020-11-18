@@ -13,9 +13,11 @@ export class LiveDataFixture {
     this.bundle = bundle;
   }
 
-  async getFixtureData(): Promise<Array<EntityInterface>> {
+  async getFixtureData(include = ""): Promise<Array<EntityInterface>> {
     return fetch(
-      `${process.env.NODE_TESTING_URL}/jsonapi/${this.entityTypeId}/${this.bundle}?jsonapi_include=true`
+      `${process.env.NODE_TESTING_URL}/jsonapi/${this.entityTypeId}/${this.bundle}?jsonapi_include=true&`.concat(
+        include
+      )
     )
       .catch((err) => {
         console.error(err.message);

@@ -300,7 +300,7 @@
   },
   "devDependencies": {},
   "jest": {
-    "verbose": true,
+    "verbose": false,
     "bail": false,
     "roots": [
       "<rootDir>/src"
