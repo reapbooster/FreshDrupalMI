@@ -3,6 +3,8 @@ import MediaImage from "../../DataTypes/MediaImage";
 import Loading from "../Loading";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Holder from "react-holder";
+import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
 
 export interface MediaDisplayImageProps {
   data: MediaImage;
@@ -15,6 +17,10 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
   const DataObject = new MediaImage(data);
   const [mediaImage, setMediaImage] = useState(DataObject);
 
+  if (!mediaImage.valid()) {
+    return <div data-error={"DATA INVALID"} />;
+  }
+
   if (!mediaImage.hasData()) {
     const ecp = new EntityComponentProps(mediaImage);
     ecp
@@ -26,27 +32,11 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
       });
     return <Loading />;
   }
-  console.debug("image should have data now: ", mediaImage);
-  const attributes =
-    mediaImage.field_media_image.imageStyleObject.imageAttributes;
-  console.debug("image attributes => ", attributes);
-  switch (view_mode) {
-    case "thumbnail":
-      attributes.width = "100%";
-      attributes.height = "200px";
-      break;
 
-    case "fullsize":
-      attributes.width = "100%";
-      attributes.height = "100%";
-  }
   return (
-    <img
-      data-drupal-id={mediaImage.drupal_internal__mid}
-      data-drupal-type={mediaImage.type}
-      data-uuid={mediaImage.id}
-      {...attributes}
-    />
+    <ErrorBoundary>
+      <ImageFileDisplay data={mediaImage.getSource()} view_mode={view_mode} />
+    </ErrorBoundary>
   );
 };
 

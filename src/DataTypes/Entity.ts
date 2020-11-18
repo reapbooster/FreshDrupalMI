@@ -82,4 +82,8 @@ export default abstract class Entity implements EntityInterface {
   getIncluded() {
     return "";
   }
+
+  valid() {
+    return typeof this.id === "string" && typeof this.type === "string";
+  }
 }

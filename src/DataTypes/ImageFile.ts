@@ -28,7 +28,7 @@ export class ImageFile extends File implements ImageFileInterface {
 
   filesize: number | string;
 
-  _image_style_uri: ImageStyleObject;
+  _image_style_uri?: ImageStyleObject;
 
   meta: ImageFileMetaDataInterface;
 
@@ -37,12 +37,6 @@ export class ImageFile extends File implements ImageFileInterface {
   constructor(incoming: ImageFileInterface) {
     super(incoming);
     Object.assign(this, incoming);
-    if (
-      Array.isArray(incoming.image_style_uri) &&
-      this._image_style_uri === undefined
-    ) {
-      this.setImageStyles(incoming.image_style_uri);
-    }
   }
 
   get image_style_uri(): ImageStyleObjectInterface {

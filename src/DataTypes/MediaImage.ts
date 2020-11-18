@@ -25,14 +25,16 @@ class MediaImage extends Media implements MediaImageInterface {
   constructor(props) {
     super(props);
     Object.assign(this, props);
-    if (props.thumbnail !== undefined && this.thumbnail === undefined) {
-      this._thumbnail = new ImageFile(props.thumbnail);
-    }
-    if (
-      props._field_media_image !== undefined &&
-      this._field_media_image === undefined
-    ) {
-      this._field_media_image = new ImageFile(props._field_media_image);
+    if (props) {
+      if (props.thumbnail !== undefined && this.thumbnail === undefined) {
+        this._thumbnail = new ImageFile(props.thumbnail);
+      }
+      if (
+        props.field_media_image !== undefined &&
+        this.field_media_image === undefined
+      ) {
+        this._field_media_image = new ImageFile(props.field_media_image);
+      }
     }
   }
 
@@ -61,7 +63,11 @@ class MediaImage extends Media implements MediaImageInterface {
   }
 
   getThumbnail() {
-    return this.thumbnail;
+    return this.field_media_image?.imageStyleObject?.thumbnail;
+  }
+
+  getSource() {
+    return this._field_media_image;
   }
 }
 

@@ -26,7 +26,6 @@ const clean = require("gulp-clean");
 const jestcli = require("jest-cli");
 const jest = require("gulp-jest").default;
 
-
 const basePath = path.resolve(".");
 const themePath = path.resolve(basePath, "web/themes/custom/milken");
 const modulesPath = path.resolve(basePath, "web/modules/custom");
@@ -200,13 +199,4 @@ gulp.task(
   gulp.series(["clean", "buildTypescript", "watchComponents"])
 );
 
-gulp.task("test", function (done) {
-  return gulp.src("./src/Tests/*.test.js")
-    .pipe(jest())
-    .on("error", (err) => {
-      console.error(err.message);
-    })
-    .on("complete", () => {
-      done();
-    });
-  });
+gulp.task("test", shell.task("jest"));

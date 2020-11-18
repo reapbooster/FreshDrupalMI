@@ -18,23 +18,11 @@ const ImageFileDisplay: React.FunctionComponent = (
   props: ImageFileDisplayProps
 ) => {
   const { data, view_mode, key, style, width, height, className } = props;
-  const attributes = {
-    width: width ?? "100%",
-    height: height ?? "200px,",
-  };
-
-  if (style) {
-    attributes["style"] = style;
-  }
   const DataObject = new ImageFile(data);
-  // TODO: swap this out on View_mode change
-  const imageTagStyle = style ?? {
-    maxWidth: "320px",
-    maxHeight: "200px",
-    width: "100%",
-  };
+  if (!DataObject.valid()) {
+    return <div data-error={"DATA INVALID"} />;
+  }
   const [imageData, setImageData] = useState(DataObject);
-  console.debug("ImageFileDisplay:", imageData);
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
     ecp
@@ -50,21 +38,37 @@ const ImageFileDisplay: React.FunctionComponent = (
         <Loading />
       </>
     );
-  } else {
-    const imageStyleObject = imageData.imageStyleObject;
-    return (
-      <>
-        <img
-          data-drupal-id={imageData.id}
-          data-drupal-type={imageData.type}
-          data-uuid={imageData.id}
-          {...imageStyleObject.imageAttributes}
-          style={imageTagStyle}
-          className={className}
-        />
-      </>
-    );
   }
+
+  console.debug("Image should have data now:", imageData);
+
+  const attributes = {
+    width: width ?? "100%",
+    height: height ?? "200px,",
+  };
+
+  const imageTagStyle = style ?? {
+    maxWidth: "320px",
+    maxHeight: "200px",
+    width: "100%",
+  };
+
+  if (style) {
+    attributes["style"] = style;
+  }
+  const styleObject = imageData.imageStyleObject;
+  return (
+    <>
+      <img
+        data-drupal-id={imageData.id}
+        data-drupal-type={imageData.type}
+        data-uuid={imageData.id}
+        {...styleObject.imageAttributes}
+        style={imageTagStyle}
+        className={className}
+      />
+    </>
+  );
 };
 
 export { ImageFileDisplay as default, ImageFileDisplayProps };
