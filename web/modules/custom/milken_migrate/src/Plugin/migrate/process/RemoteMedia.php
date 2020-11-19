@@ -3,6 +3,7 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\ds\Plugin\DsField\Entity;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
@@ -52,7 +53,6 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    $toReturn = [];
     $destination_values = [];
     if (isset($value['data']) && empty($value['data'])) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
@@ -79,8 +79,7 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
       $ref->getRemoteData();
       $exists = $ref->exists();
       if ($exists instanceof EntityInterface) {
-        $destination_values[] = ['target_id' => $exists->id()];
-        $toReturn[] = $exists;
+        array_push($destination_values, $exists);
         continue;
       }
       else {
@@ -117,8 +116,10 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
                 'status' => TRUE,
                 'field_published' => TRUE,
               ]);
-            $destination_values = ['target_id' => $audio->id()];
-            $toReturn[] = $audio;
+            if ($audio instanceof EntityInterface) {
+              $audio->save();
+              array_push($destination_values, $audio);
+            }
             continue;
           }
         }
@@ -134,8 +135,7 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
         }
       }
     }
-    $row->setDestinationProperty($destination_property, $destination_values);
-    return $toReturn;
+    return $destination_values;
   }
 
   /**

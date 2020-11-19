@@ -135,3 +135,12 @@ web/modules/custom/milken_base/js/*.js
 /tmp
 /manifest.json
 /db
+/.eslintrc.json
+/INSTALL.txt
+/README.txt
+/autoload.php
+/example.gitignore
+/index.php
+/robots.txt
+/update.php
+/web.config

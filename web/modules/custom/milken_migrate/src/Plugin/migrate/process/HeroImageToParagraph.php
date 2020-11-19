@@ -188,8 +188,7 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
         $paragraph->set('field_slides', ['entity' => $slide]);
         $paragraph->isNew();
         $paragraph->save();
-        array_push($destination_value, ['entity' => $paragraph]);
-        $row->setDestinationProperty($destination_property, $destination_value);
+        array_push($destination_value, $paragraph);
         return $destination_value;
       }
     }

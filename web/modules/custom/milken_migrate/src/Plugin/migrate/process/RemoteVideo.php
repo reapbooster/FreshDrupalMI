@@ -58,7 +58,6 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
         // @todo make this work with various services
         $row->setDestinationProperty('field_embedded_service', 'youtube');
         $row->setDestinationProperty('field_embedded_id', str_replace("/embed/", "", $video_url_parsed['path']));
-        $row->setDestinationProperty($destination_property, $video_url);
         return $video_url;
       }
       return NULL;

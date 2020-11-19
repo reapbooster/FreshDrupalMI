@@ -53,7 +53,6 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    $toReturn = [];
     $destination_values = [];
     if (isset($value['data']) && empty($value['data'])) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
@@ -80,8 +79,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
       $ref->getRemoteData();
       $exists = $this->entityExixsts($ref->getEntityTypeId(), $ref->getId());
       if ($exists instanceof EntityInterface) {
-        $destination_values[] = ['target_id' => $exists->id()];
-        $toReturn[] = $exists->id();
+        array_push($destination_values, $exists->id());
       }
       else {
         try {
@@ -121,8 +119,10 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
               // @todo figure out how to link it back to the node
               'field_published' => TRUE,
             ]);
-            $destination_values = ['target_id' => $image->id()];
-            $toReturn[] = $image->id();
+            if ($image instanceof EntityInterface) {
+              $image->save();
+              array_push($destination_values, $image);
+            }
           }
         }
         catch (\Exception $e) {
@@ -137,8 +137,7 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
         }
       }
     }
-    $row->setDestinationProperty($destination_property, $destination_values);
-    return $toReturn;
+    return $destination_values;
   }
 
   /**

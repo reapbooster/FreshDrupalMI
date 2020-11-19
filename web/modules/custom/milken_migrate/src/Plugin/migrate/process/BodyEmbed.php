@@ -58,10 +58,6 @@ class BodyEmbed extends ProcessPluginBase {
     // "destination" config.
     $destination_value = $row->getDestinationProperty($this->configuration['append_to']) ?? [];
     $paragraph = $this->createBodyTextParagraph($toReturn);
-    if ($paragraph instanceof RevisionableInterface) {
-      array_unshift($destination_value, $paragraph);
-      $row->setDestinationProperty($this->configuration['append_to'], $destination_value);
-    }
     return $paragraph;
   }
 
