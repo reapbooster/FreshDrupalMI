@@ -26,7 +26,7 @@ composer -n lint
 # Check coding standards
 composer -n code-sniff
 
-yarn install
+npm install
 
 
 echo "NODE_TESTING_URL=https://live-freshdrupalmi.pantheonsite.io\n" >> .env
@@ -34,4 +34,4 @@ echo "NODE_TESTING_URL=https://live-freshdrupalmi.pantheonsite.io\n" >> .env
 export NODE_TESTING_URL=https://live-freshdrupalmi.pantheonsite.io
 
 
-yarn run test
+npm run test

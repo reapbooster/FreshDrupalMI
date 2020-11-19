@@ -119,10 +119,8 @@
     "debug": "^4.1.1",
     "dotenv": "^8.1.0",
     "dotenv-expand": "^5.1.0",
-    "drupal-gin": "file:web/themes/contrib/gin",
     "drupal-jsonapi-extractor": "^1.4.0",
     "drupal-jsonapi-params": "^1.1.11",
-    "drupal-webpack": "file:web/modules/contrib/webpack",
     "drupal_jsonapi_entities": "^0.3.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.2.0",
@@ -306,7 +304,9 @@
     "roots": [
       "<rootDir>/src"
     ],
-    "setupFiles": ["dotenv/config"],
+    "setupFiles": [
+      "dotenv/config"
+    ],
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect"
     ],
