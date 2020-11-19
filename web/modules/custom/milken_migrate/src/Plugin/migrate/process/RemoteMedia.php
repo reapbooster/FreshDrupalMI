@@ -3,7 +3,6 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\ds\Plugin\DsField\Entity;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;

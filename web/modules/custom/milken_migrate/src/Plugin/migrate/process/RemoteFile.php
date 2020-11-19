@@ -55,7 +55,6 @@ class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
     $destination_values = [];
-    $toReturn = [];
     // phpcs:disable
     $altTextProperty = $this->configuration['alt_text'] ?? $this->configuration['name'];
     $titleTextProperty = $this->configuration['title_text'] ?? $this->configuration['name'];

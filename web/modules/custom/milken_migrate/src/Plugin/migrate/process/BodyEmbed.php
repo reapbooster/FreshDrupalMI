@@ -54,11 +54,21 @@ class BodyEmbed extends ProcessPluginBase {
     if (is_string(($value))) {
       $toReturn = $value;
     }
+    $paragraph = $this->createBodyTextParagraph($toReturn);
+
     // Append to the paragraphs field of the node as expressed in the
     // "destination" config.
-    $destination_value = $row->getDestinationProperty($this->configuration['append_to']) ?? [];
-    $paragraph = $this->createBodyTextParagraph($toReturn);
-    return $paragraph;
+    if (isset($this->configuration['append_to'])) {
+      $destination_value = $row->getDestinationProperty($this->configuration['append_to']) ?? [];
+      if ($destination_value) {
+        array_push($destination_value, $paragraph);
+      }
+      else {
+        $destination_value = $paragraph
+      }
+    }
+
+    return $destination_value;
   }
 
   /**
