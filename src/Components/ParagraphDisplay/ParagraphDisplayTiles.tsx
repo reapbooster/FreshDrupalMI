@@ -71,7 +71,7 @@ export class ParagraphDisplayTiles extends React.Component<
       return (
         <Container
           fluid={data.field_view_mode == "card" ? true : false}
-          className={data.field_view_mode == "card" ? "position-relative" : ""}
+          className={data.field_view_mode == "card" ? "position-relative overflow-hidden" : ""}
         >
           <ListDisplay
             id={"tiles-list-".concat(data.id)}
