@@ -42,11 +42,9 @@ class UnixDate extends ProcessPluginBase {
     }
     if ($dt instanceof \DateTime) {
       if ($destination_property == "created" || $destination_property == "changed") {
-        $row->setDestinationProperty($destination_property, $dt->getTimestamp());
         return $dt->getTimestamp();
       }
       else {
-        $row->setDestinationProperty($destination_property, $dt->format('Y-m-d\TH:i:s'));
         return $dt->format('Y-m-d\TH:i:s');
       }
     }
