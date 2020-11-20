@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+rm -Rf .env web/sites/default/settings.local.php
+
 #
 # This script deploys the build artifact to Pantheon.
 # On the master branch the dev environment is used.

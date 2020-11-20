@@ -219,7 +219,6 @@
         "phpcompatibility/php-compatibility": "*",
         "scssphp/scssphp": "^1.0.7",
         "squizlabs/php_codesniffer": "^3.4.0",
-        "symfony/event-dispatcher": "4.3.4 as 3.4.99",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
@@ -358,8 +357,12 @@
             "allowed-packages": [
                 "drupal/core"
             ],
+            "overwrite": true,
             "locations": {
                 "web-root": "./web"
+            },
+            "file-mapping": {
+                "[web-root]/sites/default/settings.local.php": "config/settings.local.php"
             }
         },
         "patches-file": "composer.patches.json",
