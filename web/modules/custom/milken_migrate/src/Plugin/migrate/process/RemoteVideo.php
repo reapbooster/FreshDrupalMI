@@ -53,13 +53,9 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
       // $source = $row->getSource();
       if (!empty($value)) {
         $info = $embed->get($value);
-
-        // \Drupal::logger('milken_migrate')
-        // ->info(\Kint::dump($video_url));
-        // @todo make this work with various services
         $row->setDestinationProperty('field_embedded_service', $info->providerName);
-        $row->setDestinationProperty('field_embedded_id', str_replace("/embed/", "", $video_url_parsed['path']));
-        return $video_url;
+        $row->setDestinationProperty('field_embedded_id', $info->video_id);
+        return $value;
       }
       return NULL;
 
