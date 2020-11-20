@@ -15,3 +15,11 @@ rm -Rf yarn.lock package-lock.json 2> /dev/null
 
 echo "Reinstalling..."
 composer install && npm install
+
+cp -f .env.dist .env
+
+cd web/sites/default ln -s ../../../db/files .
+
+npm run build
+
+echo "grab the latest database and you should be good to go! (hint: bin/loadDatabase)"

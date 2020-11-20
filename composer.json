@@ -362,7 +362,8 @@
                 "web-root": "./web"
             },
             "file-mapping": {
-                "[web-root]/sites/default/settings.local.php": "config/settings.local.php"
+                "[web-root]/sites/default/settings.local.php": "config/settings.local.php",
+                "[web-root]/sites/default/settings.pantheon.php": "config/settings.pantheon.php"
             }
         },
         "patches-file": "composer.patches.json",
