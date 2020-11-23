@@ -12,6 +12,7 @@ const fixtureData = new LiveDataFixture("media--video");
 const expectedIncludeString = "&include=thumbnail";
 
 test("MediaVideo DataType Testing", (done) => {
+  console.info("Running Test:", process.env);
   fixtureData
     .getFixtureData(expectedIncludeString)
     .then((mockResponse) => {

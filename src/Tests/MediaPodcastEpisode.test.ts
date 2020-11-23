@@ -14,6 +14,7 @@ const expectedIncludeString =
   "&include=field_media_image,thumbnail,field_media_audio_file";
 
 test("Podcast Episode DataType Testing", (done) => {
+  console.info("Running Test:", process.env);
   fixtureData
     .getFixtureData(expectedIncludeString)
     .then((mockResponse) => {

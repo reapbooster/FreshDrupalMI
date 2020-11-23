@@ -2,6 +2,7 @@ import "@testing-library/jest-dom/extend-expect";
 import LiveDataFixture from "../Utility/LiveDataFixture";
 
 test("LiveDataFixture testing", () => {
+  console.info("Running Test:", process.env);
   ["media--image", "file--file", "node--article"].forEach((value) => {
     const liveDataFixture = new LiveDataFixture(value);
     expect(liveDataFixture).toBeInstanceOf(LiveDataFixture);

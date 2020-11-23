@@ -9,11 +9,14 @@ const v4 = new RegExp(
 );
 
 const fixtureData = new LiveDataFixture("file--file");
-const expectedINcludeString = "";
+const expectedIncludeString = "";
+
+
 
 test("ImageFile DataType Testing", (done) => {
+  console.info("Running Test:", process.env);
   fixtureData
-    .getFixtureData(expectedINcludeString)
+    .getFixtureData(expectedIncludeString)
     .then((mockResponse) => {
       for (const key in mockResponse.data) {
         const origData = mockResponse.data[key];
@@ -23,7 +26,7 @@ test("ImageFile DataType Testing", (done) => {
         );
         expect(systemUnderTest.id).toEqual(expect.stringMatching(v4));
         expect(systemUnderTest.getIncluded()).toEqual(
-          expect.stringMatching(expectedINcludeString)
+          expect.stringMatching(expectedIncludeString)
         );
         expect(systemUnderTest.hasData()).toBe(true);
         expect(systemUnderTest.constructor.name).toBe("ImageFile");

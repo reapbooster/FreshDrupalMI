@@ -12,6 +12,7 @@ const fixtureData = new LiveDataFixture("media--report");
 const expectedIncludeString = "&include=thumbnail,field_cover,field_media_file";
 
 test("MediaReport testing", (done) => {
+  console.info("Running Test:", process.env);
   fixtureData
     .getFixtureData(expectedIncludeString)
     .then((mockResponse) => {

@@ -29,6 +29,7 @@
         "drupal/adminimal_theme": "^1.5",
         "drupal/audiofield": "^1.9",
         "drupal/authorization": "^1.0",
+        "drupal/auto_entitylabel": "^3.0@beta",
         "drupal/better_normalizers": "^1.0",
         "drupal/bg_image_formatter": "^1.12",
         "drupal/block_field": "^1.0@RC",
