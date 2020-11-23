@@ -148,7 +148,7 @@ process:
     plugin: 'milken_migrate:hero_to_slide'
     source: hero_image
     title_source: hero_title
-    title_source_backup: title
+    title_source_backup: name
     link_id: uuid
     link_entity_type_id: constants/LINK_ENTITY_TYPE_ID
     link_bundle: constants/LINK_BUNDLE_ID

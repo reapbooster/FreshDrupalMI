@@ -116,16 +116,16 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
       $destination['title'] = (
       empty($source[$this->configuration['title_source']])
         ? (
-      empty($source[$this->configuration['title_source_backup']]) ?
-        $this->getRandom()->sentences(mt_rand(1, 20), TRUE) :
-        $source[$this->configuration['title_source_backup']]
-      )
+        empty($source[$this->configuration['title_source_backup']]) ?
+          $this->getRandom()->sentences(mt_rand(1, 20), TRUE) :
+          $source[$this->configuration['title_source_backup']]
+        )
         : $source[$this->configuration['title_source']]
       );
       $destination['name'] = $destination['title'];
 
       // ** Subhead is optional
-      $destination['field_subhead'] = (isset($this->configuration['subhead'])
+      $destination['field_slide_text'] = (isset($this->configuration['subhead'])
         && isset($source[$this->configuration['subhead']]))
         ? $source[$this->configuration['subhead']] : NULL;
 
