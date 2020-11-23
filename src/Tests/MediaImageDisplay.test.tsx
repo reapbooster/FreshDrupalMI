@@ -12,10 +12,9 @@ test("MediaImageDisplay basic render test", (done) => {
     .then((mockResponse) => {
       for (const key in mockResponse.data) {
         const origData = mockResponse.data[key];
-        const systemUnderTest = renderer.create(<MediaDisplayImage />, {
-          data: origData,
-          view_mode: "full",
-        });
+        const systemUnderTest = renderer.create(
+          <MediaDisplayImage data={origData} view_mode="full" />
+        );
         const tree = systemUnderTest.toJSON();
         console.log("tree", tree);
       }

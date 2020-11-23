@@ -27,10 +27,13 @@ test("MediaImage testing", (done) => {
           expect.stringMatching(expectedIncludeString)
         );
         expect(systemUnderTest.hasData()).toBe(true);
-        if (origData.thumbnail !== undefined) {
+        if (
+          origData.thumbnail !== undefined &&
+          origData.thumbnail.data === undefined
+        ) {
           expect(systemUnderTest.thumbnail).not.toBe(null);
           expect(systemUnderTest.thumbnail).not.toBe(undefined);
-          const thumbnail = systemUnderTest.getThumbnail();
+          const thumbnail = systemUnderTest.thumbnail;
           expect(thumbnail).not.toBeNull();
           expect(thumbnail.id).not.toBeUndefined();
           expect(thumbnail.type).not.toBeUndefined();

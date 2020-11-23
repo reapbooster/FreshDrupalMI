@@ -7,6 +7,7 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
+use Embed\Embed;
 
 /**
  * Filter to download video URL's improperly stored to fully-fledged entities.
@@ -47,19 +48,14 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
     if ($row->isStub()) {
       return NULL;
     }
-
+    $embed = new Embed();
     try {
       // $source = $row->getSource();
       if (!empty($value)) {
-        $video_url_parsed = parse_url($value);
-        $video_url = str_replace('https://www.youtube.com/embed/', 'https://youtu.be/', $value);
-        // \Drupal::logger('milken_migrate')
-        // ->info(\Kint::dump($video_url));
-        // @todo make this work with various services
-        $row->setDestinationProperty('field_embedded_service', 'youtube');
-        $row->setDestinationProperty('field_embedded_id', str_replace("/embed/", "", $video_url_parsed['path']));
-        $row->setDestinationProperty($destination_property, $video_url);
-        return $video_url;
+        $info = $embed->get($value);
+        $row->setDestinationProperty('field_embedded_service', $info->providerName);
+        $row->setDestinationProperty('field_embedded_id', $info->video_id);
+        return $value;
       }
       return NULL;
 

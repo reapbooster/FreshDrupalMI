@@ -10,6 +10,6 @@ schema_configuration:
     extensions: {  }
 persisted_queries_settings: {  }
 endpoint: /graphql
-debug_flag: 3
+debug: null
 caching: true
 batching: true

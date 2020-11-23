@@ -51,8 +51,7 @@ class Paragraphs extends ProcessPluginBase {
     if (isset($value['id'])) {
       $value = [$value];
     }
-    $toReturn = [];
-    $destination_value = $row->getDestinationProperty($destination_property) ?? [];
+    $toReturn = $row->getDestinationProperty($destination_property) ?? [];
     foreach ($value as $paragraph_ref) {
       $ref = new JsonAPIReference($paragraph_ref);
       if (!$ref instanceof JsonAPIReference) {
@@ -61,14 +60,7 @@ class Paragraphs extends ProcessPluginBase {
       $ref->getRemoteData();
       $paragraph = $ref->exists();
       if ($paragraph instanceof RevisionableInterface) {
-        $destination_value[] = [
-          "target_id" => $paragraph->id(),
-          "target_revision_id" => $paragraph->getRevisionId(),
-        ];
-        $toReturn[] = [
-          "target_id" => $paragraph->id(),
-          "target_revision_id" => $paragraph->getRevisionId(),
-        ];
+        $toReturn[] = $paragraph;
         continue;
       }
       else {
@@ -131,20 +123,12 @@ class Paragraphs extends ProcessPluginBase {
           \Kint::dump($e);
           exit();
         }
-        $destination_value[] = [
-          "target_id" => $paragraph->id(),
-          "target_revision_id" => $paragraph->getRevisionId(),
-        ];
-        $toReturn[] = [
-          "target_id" => $paragraph->id(),
-          "target_revision_id" => $paragraph->getRevisionId(),
-        ];
+        $toReturn[] = $paragraph;
       }
       else {
         throw new MigrateSkipProcessException("cannot create paragraph: " . print_r($ref, TRUE));
       }
     }
-    $row->setDestinationProperty($destination_property, $destination_value);
     return $toReturn;
   }
 

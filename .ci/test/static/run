@@ -25,3 +25,13 @@ composer -n lint
 
 # Check coding standards
 composer -n code-sniff
+
+npm install
+
+
+echo "NODE_TESTING_URL=https://live-freshdrupalmi.pantheonsite.io\n" >> .env
+
+export NODE_TESTING_URL=https://live-freshdrupalmi.pantheonsite.io
+
+
+npm run test

@@ -56,7 +56,7 @@ class TaxonomyByMachineName extends ProcessPluginBase {
         $term = array_shift($term);
       }
       if ($term instanceof Term) {
-        $destination_values[] = ['target_id' => $term->id()];
+        $destination_values[] = term;
       }
       else {
         $this->messenger()->addError('Taxonomy not found: ' . $value);
@@ -65,7 +65,6 @@ class TaxonomyByMachineName extends ProcessPluginBase {
     if ($single_value == TRUE) {
       $destination_values = array_shift($destination_values);
     }
-    $row->setDestinationProperty($destination_property, $destination_values);
     return $destination_values;
   }
 

@@ -40,17 +40,9 @@ class EventReference extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    $results = \Drupal::entityTypeManager()
+    return \Drupal::entityTypeManager()
       ->getStorage('event')
-      ->getQuery()
-      ->condition('field_grid_event_id', $value)
-      ->execute();
-    if (!empty($results)) {
-      return [
-        'target_id' => array_shift($results),
-      ];
-    }
-    return [];
+      ->loadByProperties(['field_grid_event_id' => $value]);
   }
 
 }
