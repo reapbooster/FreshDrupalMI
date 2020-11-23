@@ -49,8 +49,6 @@ const ImageFileDisplay: React.FunctionComponent = (
   };
 
   const imageTagStyle = style ?? {
-    maxWidth: "320px",
-    maxHeight: "200px",
     width: "100%",
   };
 
