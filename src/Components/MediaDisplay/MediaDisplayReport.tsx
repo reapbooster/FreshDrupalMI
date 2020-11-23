@@ -61,14 +61,15 @@ export const MediaDisplayReport: React.FunctionComponent = (
         data-drupal-id={reportData.drupal_internal__mid}
         data-drupal-type={reportData.type}
         data-uuid={reportData.id}
-        style={{ maxWidth: "393px" }}
+        style={{ maxWidth: "319px" }}
       >
         <CustomCardHeader>
           <ImageFileDisplay
-            data={reportData.getThumbnail()}
+            data={reportData.field_media_file}
             view_mode="thumbnail"
             className={"card-img"}
             style={{ maxWidth: "100%" }}
+            srcsetSizes="(max-width: 1000px) 200px, 400px"
           />
           <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
         </CustomCardHeader>
