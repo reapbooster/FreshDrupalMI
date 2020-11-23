@@ -60,6 +60,9 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
     $file = NULL;
+    if ($value) {
+      \Drupal::logger('milken_migrate')->debug('~~~~!!!Remote Image has value' . print_r($value, TRUE));
+    }
     if (!isset($this->configuration['source'])) {
       throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
     }

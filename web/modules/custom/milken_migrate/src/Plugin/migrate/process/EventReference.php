@@ -3,7 +3,6 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 
 /**
@@ -20,7 +19,7 @@ use Drupal\migrate\Row;
  *   id = "milken_migrate:event_reference"
  * );
  */
-class EventReference extends ProcessPluginBase {
+class EventReference extends MilkenProcessPluginBase {
 
   /**
    * Main guts of the plugin.
@@ -40,8 +39,7 @@ class EventReference extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    return \Drupal::entityTypeManager()
-      ->getStorage('event')
+    return $this->entityTypeManager
       ->loadByProperties(['field_grid_event_id' => $value]);
   }
 

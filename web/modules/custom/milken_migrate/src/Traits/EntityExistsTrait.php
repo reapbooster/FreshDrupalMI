@@ -26,7 +26,7 @@ trait EntityExistsTrait {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function entityExixsts(string $entityTypeID, string $uuid): ?EntityInterface {
-    $exists = \Drupal::entityTypeManager()
+    $exists = $this->entityTypeManager
       ->getStorage($entityTypeID)
       ->loadByProperties(['uuid' => $uuid]);
     if (count($exists)) {

@@ -116,6 +116,9 @@ source:
       type: integer
     uuid:
       type: string
+  constants:
+    LINK_ENTITY_TYPE_ID: "node"
+    LINK_BUNDLE_ID: "article"
 process:
   id: id
   title: name
@@ -141,31 +144,30 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
-  import_hero_image_to_paragraph:
-    plugin: 'milken_migrate:hero_to_para'
+  field_promo_slide:
+    plugin: 'milken_migrate:hero_to_slide'
+    source: hero_image
     title_source: hero_title
     title_source_backup: title
-    image: hero_image
     link_id: uuid
-    link_entity_type_id: node
-    link_bundle: article
-    prepend_to: field_content
-  field_centers_general:
-    plugin: 'milken_migrate:jsonapi_taxonomy'
-    vocabulary: centers
-    source: centers_tax
-  field_term_collection:
-    plugin: 'milken_migrate:jsonapi_taxonomy'
-    vocabulary: collections
-    source: term_collection_tax
-  field_term_program_initiatives:
-    plugin: 'milken_migrate:jsonapi_taxonomy'
-    vocabulary: program_initiatives
-    source: program_initiatives_tax
-  field_topics:
-    plugin: 'milken_migrate:jsonapi_taxonomy'
-    vocabulary: topics
-    source: topics_tax
+    link_entity_type_id: constants/LINK_ENTITY_TYPE_ID
+    link_bundle: constants/LINK_BUNDLE_ID
+#  field_centers_general:
+#    plugin: 'milken_migrate:jsonapi_taxonomy'
+#    vocabulary: centers
+#    source: centers_tax
+#  field_term_collection:
+#    plugin: 'milken_migrate:jsonapi_taxonomy'
+#    vocabulary: collections
+#    source: term_collection_tax
+#  field_term_program_initiatives:
+#    plugin: 'milken_migrate:jsonapi_taxonomy'
+#    vocabulary: program_initiatives
+#    source: program_initiatives_tax
+#  field_topics:
+#    plugin: 'milken_migrate:jsonapi_taxonomy'
+#    vocabulary: topics
+#    source: topics_tax
   import_body_field_to_paragraph:
     plugin: 'milken_migrate:body_embed'
     source: body_value

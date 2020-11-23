@@ -11,16 +11,14 @@ use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
-use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Filter to download image and return media reference.
  *
  * @code
- * import_hero_image_to_slide:
+ * import_hero_image_to_paragraph:
  *   plugin: milken_migrate:hero_to_para
  *   title_source: field_title_source
  *   title_source_backup: title
@@ -53,7 +51,7 @@ use Drupal\paragraphs\Entity\Paragraph;
  *   id = "milken_migrate:hero_to_para",
  * );
  */
-class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessInterface {
+class HeroImageToParagraph extends MilkenProcessPluginBase implements MigrateProcessInterface {
 
   use JsonAPIDataFetcherTrait;
 
@@ -173,10 +171,9 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
       ->debug("File has been acquired and saved.");
     // If any part of the import fails, still do the node creation.
     try {
-      $entity_type_mgr = \Drupal::getContainer()
-        ->get('entity_type.manager');
-      $slide = $entity_type_mgr->getStorage('slide')->create($destination);
-      $paragraph = Paragraph::create([
+
+      $slide = $this->entityTypeManager->getStorage('slide')->create($destination);
+      $paragraph = $this->entityTypeManager->getStorage('paragraph')->create([
         'type' => 'slide',
       ]);
       if ($slide instanceof EntityInterface && $paragraph instanceof EntityInterface) {
@@ -185,7 +182,7 @@ class HeroImageToParagraph extends ProcessPluginBase implements MigrateProcessIn
         $slide->save();
         $paragraph->set('langcode', 'en');
         $paragraph->set('field_background', 'transparent');
-        $paragraph->set('field_slides', ['entity' => $slide]);
+        $paragraph->set('field_slides', [$slide]);
         $paragraph->isNew();
         $paragraph->save();
         array_push($destination_value, $paragraph);

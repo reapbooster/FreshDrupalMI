@@ -8,7 +8,6 @@ use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\BundleTypeDataFetcher;
 use Drupal\milken_migrate\JsonAPIReference;
@@ -29,7 +28,7 @@ use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
  *   handle_multiples = true,
  * );
  */
-class RemoteFile extends ProcessPluginBase implements MigrateProcessInterface {
+class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterface {
 
   use JsonAPIDataFetcherTrait;
   use EntityExistsTrait;

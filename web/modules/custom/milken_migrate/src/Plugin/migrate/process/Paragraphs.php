@@ -5,7 +5,6 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipProcessException;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
@@ -28,7 +27,7 @@ use Drupal\entity_embed\Exception\EntityNotFoundException;
  *   handle_multiples = TRUE,
  * );
  */
-class Paragraphs extends ProcessPluginBase {
+class Paragraphs extends MilkenProcessPluginBase {
 
   use JsonAPIDataFetcherTrait;
   use EntityExistsTrait;
@@ -53,7 +52,7 @@ class Paragraphs extends ProcessPluginBase {
     }
     $toReturn = $row->getDestinationProperty($destination_property) ?? [];
     foreach ($value as $paragraph_ref) {
-      $ref = new JsonAPIReference($paragraph_ref);
+      $ref = new JsonAPIReference($paragraph_ref, $this->entityTypeManager);
       if (!$ref instanceof JsonAPIReference) {
         continue;
       }
@@ -67,7 +66,7 @@ class Paragraphs extends ProcessPluginBase {
         switch ($ref->getBundleTypeId()) {
 
           case "podcast_episode":
-            $episode = \Drupal::entityTypeManager()
+            $episode = $this->entityTypeManager
               ->getStorage('media')
               ->loadByProperties(['field_episode' => $ref->getProperty('field_episode')]);
             if (count($episode)) {
@@ -82,7 +81,7 @@ class Paragraphs extends ProcessPluginBase {
             break;
 
           case "body_content_alternative":
-            $paragraph = Paragraph::create([
+            $paragraph = $this->entityTypeManager->getStorage('paragraph')->create([
               'type' => 'body_content',
               'uuid' => $ref->getId(),
               'field_background' => "transparent",
@@ -97,7 +96,7 @@ class Paragraphs extends ProcessPluginBase {
             break;
 
           case "pull_quote":
-            $paragraph = Paragraph::create([
+            $paragraph = $this->entityTypeManager->getStorage('paragraph')->create([
               'type' => 'body_content',
               'uuid' => $ref->getId(),
               'field_background' => "transparent",

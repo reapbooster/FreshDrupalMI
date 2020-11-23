@@ -7,7 +7,7 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use Embed\Embed;
+use Embera\Embera;
 
 /**
  * Filter to download video URL's improperly stored to fully-fledged entities.
@@ -48,13 +48,21 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
     if ($row->isStub()) {
       return NULL;
     }
-    $embed = new Embed();
+    $embera = new Embera();
     try {
       // $source = $row->getSource();
       if (!empty($value)) {
-        $info = $embed->get($value);
-        $row->setDestinationProperty('field_embedded_service', $info->providerName);
-        $row->setDestinationProperty('field_embedded_id', $info->video_id);
+        $info = $embera->getUrlData([$value]);
+        if (is_array($info) && count($info)) {
+          $info = array_shift($info);
+          if (!isset($info['video_id'])) {
+            preg_match('~(?:v=|youtu\.be/|youtube\.com/embed/)([a-z0-9_\-]+)~i', (string) $value, $matches);
+            $info['video_id'] = isset($matches[1]) ? $matches[1] : $value;
+          }
+          $row->setDestinationProperty('field_embedded_service', $info['provider_name']);
+          $row->setDestinationProperty('field_embedded_id', $info['video_id']);
+        }
+
         return $value;
       }
       return NULL;

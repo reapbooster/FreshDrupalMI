@@ -5,9 +5,7 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 use Drupal\Core\Entity\RevisionableInterface;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\MigrateSkipProcessException;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Filter to download image and return media reference.
@@ -23,7 +21,7 @@ use Drupal\paragraphs\Entity\Paragraph;
  *   id = "milken_migrate:body_embed"
  * );
  */
-class BodyEmbed extends ProcessPluginBase {
+class BodyEmbed extends MilkenProcessPluginBase {
 
   /**
    * Main guts of the plugin.
@@ -64,7 +62,7 @@ class BodyEmbed extends ProcessPluginBase {
         array_push($destination_value, $paragraph);
       }
       else {
-        $destination_value = $paragraph
+        $destination_value = $paragraph;
       }
     }
 
@@ -84,7 +82,7 @@ class BodyEmbed extends ProcessPluginBase {
    */
   protected function createBodyTextParagraph($text) {
     try {
-      $paragraph = Paragraph::create(['type' => 'body_content']);
+      $paragraph = $this->entityTypeManager->getStorage('paragraph')->create(['type' => 'body_content']);
       if ($paragraph instanceof RevisionableInterface) {
         $paragraph->set('field_body', [
           'value' => $text,

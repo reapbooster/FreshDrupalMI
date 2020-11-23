@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\EventSubscriber;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\migrate\Event\MigrateEvents;
 use Drupal\migrate\Event\MigratePostRowSaveEvent;
 use Drupal\migrate\Event\MigratePreRowSaveEvent;
@@ -19,7 +20,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      MigrateEvents::PRE_ROW_SAVE => 'preRowSave',
+      // MigrateEvents::PRE_ROW_SAVE => 'preRowSave',.
       MigrateEvents::POST_ROW_SAVE => 'postRowSave',
     ];
   }
@@ -37,7 +38,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
     $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
     $message .= \Kint::dump($row->getDestination());
     \Drupal::logger('milken_migrate')
-      ->debug($message);
+      ->info($message);
     // phpcs:enable
   }
 
@@ -51,10 +52,16 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
     // phpcs:disable
     \Kint::enabled(TRUE);
     $row = $event->getRow();
-    $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
-    $message .= \Kint::dump($event->getDestinationIdValues());
+    $message = "PostSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid') . PHP_EOL;
+    $saved = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($event->getDestinationIdValues());
+    foreach ($saved as $value) {
+      if ($value instanceof EntityInterface) {
+        $message .= \Kint::dump($value->toArray());
+      }
+    }
+
     \Drupal::logger('milken_migrate')
-      ->debug($message);
+      ->info($message);
     // phpcs:enable
   }
 

@@ -203,11 +203,11 @@
         "drupal/workflow": "^1.0",
         "drush-ops/behat-drush-endpoint": "^9",
         "drush/drush": "^10",
-        "embed/embed": "^4.3",
         "enyo/dropzone": "^5.5",
         "ksubileau/color-thief-php": "^1.4",
         "league/commonmark": "^1.5",
         "mnsami/composer-custom-directory-installer": "^2.0",
+        "mpratt/embera": "~2.0",
         "npm-asset/ace-builds": "1.3.3",
         "npm-asset/blazy": "1.8.2",
         "npm-asset/bootstrap": "^4.4",
@@ -234,7 +234,7 @@
         "phpunit/phpunit": "^8"
     },
     "conflict": {
-            "drupal/drupal": "*"
+        "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -299,12 +299,24 @@
             "npm-asset-library"
         ],
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/private/scripts/quicksilver/{$name}/": [
+                "type:quicksilver-script"
+            ],
             "web/libraries/{$name}": [
                 "type:drupal-library",
                 "type:bower-asset",

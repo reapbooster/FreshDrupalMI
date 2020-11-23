@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
@@ -17,6 +18,13 @@ class JsonAPIReference {
 
   use JsonAPIDataFetcherTrait;
   use EntityExistsTrait;
+
+  /**
+   * The EntityTypeManager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
 
   /**
    * Drupal's UUID for entity object.
@@ -78,10 +86,13 @@ class JsonAPIReference {
    *
    * @param array $values
    *   Array of values to pre-populate.
+   * @param Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   Entity Type Manager.
    *
    * @throws Drupal\migrate\MigrateSkipProcessException
    */
-  public function __construct(array $values = NULL) {
+  public function __construct(array $values = NULL, EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
     \Drupal::logger(__CLASS__)
       ->debug(__CLASS__ . "::" . print_r($values, TRUE));
     if ($values == NULL || (isset($values['data']) && empty($values['data']))) {

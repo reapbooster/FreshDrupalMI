@@ -25,7 +25,7 @@ trait JsonAPIDataFetcherTrait {
    * @return null|array
    *   Returns either data or null.
    */
-  public function getRelatedRecordData(array $recordValue, Row $row) :? array {
+  public function getRelatedRecordData(array $recordValue, Row $row) : array {
     $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org");
     $relatedSourcePath .= '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
     $relatedSourcePath .= "?jsonapi_include=true";
@@ -37,7 +37,7 @@ trait JsonAPIDataFetcherTrait {
       return $responseData['data'];
     }
     else {
-      return NULL;
+      return [];
     }
   }
 
@@ -59,6 +59,7 @@ trait JsonAPIDataFetcherTrait {
       'synchronous' => TRUE,
       'connect_timeout' => 2.5,
       'timeout' => 5,
+      "debug" => FALSE,
       'query' => [
         'jsonapi_include' => TRUE,
         'uniq_id' => uniqid(),
