@@ -72,37 +72,47 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
       $sources = [$sources];
     }
     foreach ($sources as $source) {
-      if ($source == NULL) {
+      if ($source == NULL || array_key_exists('data', $source) || array_key_exists('related', $source)) {
         continue;
       }
-      $ref = new JsonAPIReference($source);
+      $ref = new JsonAPIReference($source, $this->entityTypeManager);
+
       if ($ref->getEntityTypeId() == "media") {
+        \Drupal::logger('milken_migrate')
+          ->debug("Media Enitty: Getting source of entity =>" . \Kint::dump($ref, TRUE));
         $ref->getRemoteData();
         $bundle = $ref->getBundle();
         if ($bundle instanceof BundleTypeDataFetcher) {
+
           $mediaSource = $bundle->getProperty('source_configuration')['source_field'] ?? NULL;
-          $ref = new JsonAPIReference($ref->getProperty($mediaSource));
+          $mediaSourceProperty = $ref->getProperty($mediaSource);
+          if ($mediaSourceProperty) {
+            $ref = new JsonAPIReference($mediaSourceProperty, $this->entityTypeManager);
+          }
+          else {
+            throw new MigrateException("Cannot get source property for media field:" . \Kint::dump($bundle, TRUE));
+          }
         }
         else {
           $ref = NULL;
         }
       }
       \Drupal::logger('milken_migrate')
-        ->debug("REF: " . print_r($ref, TRUE));
+        ->debug("REF: " . \Kint::dump($ref));
       // Validate ref.
       if (!$ref instanceof JsonAPIReference) {
-        return NULL;
+        return [];
       }
       $ref->getRemoteData();
 
       if ($ref->valid() === FALSE || $ref->getFilename() === NULL || $ref->getUrl() === NULL) {
         \Drupal::logger('milken_migrate')
-          ->debug("Skip Row: invalid" . print_r($ref, TRUE));
+          ->debug("Skip Row: invalid" . \Kint::dump($ref, TRUE));
         return NULL;
       }
       if (substr($ref->getFilename(), 0, 6) === "sample") {
         \Drupal::logger('milken_migrate')
-          ->debug("Skip Row Sample:" . print_r($ref, TRUE));
+          ->debug("Skip Row Sample:" . \Kint::dump($ref, TRUE));
         return NULL;
       }
       // Do the work of getting data.
@@ -113,7 +123,7 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
         $file = $ref->exists();
         if ($file instanceof EntityInterface) {
           \Drupal::logger('milken_migrate')
-            ->debug("Found image in database: " . $file->label());
+            ->debug("Found file in database: " . $file->label());
           $destination_values[] = $file;
           continue;
         }

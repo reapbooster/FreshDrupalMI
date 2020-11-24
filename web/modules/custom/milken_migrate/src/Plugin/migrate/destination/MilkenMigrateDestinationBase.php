@@ -115,7 +115,7 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
    * {@inheritdoc}
    */
   public function import(Row $row, array $old_destination_id_values = []) {
-    $this->logger->debug('Importing:' . print_r($row, TRUE));
+    $this->logger->debug('Importing:' . \Kint::dump($row, TRUE));
     $this->rollbackAction = MigrateIdMapInterface::ROLLBACK_DELETE;
     $entity = $this->getEntity($row, $old_destination_id_values);
     if (!$entity instanceof ContentEntityInterface) {
@@ -123,11 +123,11 @@ abstract class MilkenMigrateDestinationBase extends EntityContentBase {
     }
     assert($entity instanceof ContentEntityInterface, "Cannot get the entity object");
     $this->setRelatedFields($row, $entity);
-    $this->logger->debug('Related Fields set:' . print_r($row, TRUE));
+    $this->logger->debug('Related Fields set:' . \Kint::dump($row, TRUE));
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
-    $this->logger->debug('saving these values:' . print_r($entity->toArray(), TRUE));
+    $this->logger->debug('saving these values:' . \Kint::dump($entity->toArray(), TRUE));
     $ids = $this->save($entity, $old_destination_id_values);
     $map['destid1'] = $entity->id();
     $row->setIdMap($map);

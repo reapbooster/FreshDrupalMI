@@ -63,19 +63,19 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
    * {@inheritdoc}
    */
   public function import(Row $row, array $old_destination_id_values = []) {
-    $this->logger->debug('Importing:' . print_r($row, TRUE));
+    $this->logger->debug('Importing:' . \Kint::dump($row, TRUE));
     $this->rollbackAction = MigrateIdMapInterface::ROLLBACK_DELETE;
     $entity = $this->getEntity($row, $old_destination_id_values);
     if (!$entity instanceof EckEntityInterface) {
       return new MigrateException('Unable to get Event');
     }
     $this->setRelatedFields($row, $entity);
-    $this->logger->debug('Related Fields set:' . print_r($row, TRUE));
+    $this->logger->debug('Related Fields set:' . \Kint::dump($row, TRUE));
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
     $this->logger
-      ->debug('saving these values:' . print_r($entity->toArray(), TRUE));
+      ->debug('saving these values:' . \Kint::dump($entity->toArray(), TRUE));
     $ids = $this->save($entity, $old_destination_id_values);
     $map['destid1'] = $entity->id();
     $row->setIdMap($map);
@@ -124,7 +124,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       }
       $entity = $this->storage->create($row->getDestination());
       $entity->enforceIsNew();
-      $this->logger->debug('entity created:' . print_r($entity->toArray(), TRUE));
+      $this->logger->debug('entity created:' . \Kint::dump($entity->toArray(), TRUE));
     }
     return $entity;
   }
@@ -166,11 +166,11 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
 
       // If Data exists for the Event, process it.
       $list = Json::decode($response->getBody());
-      $this->logger->debug("Returned Node List " . print_r($list, TRUE));
+      $this->logger->debug("Returned Node List " . \Kint::dump($list, TRUE));
 
       if (is_array($list['data']) && count($list['data']) === 1) {
         $remoteEvent = array_shift($list['data']);
-        $this->logger->debug("Remote Event " . print_r($remoteEvent, TRUE));
+        $this->logger->debug("Remote Event " . \Kint::dump($remoteEvent, TRUE));
 
         // VENUE.
         if (is_array($remoteEvent['field_event_address'])
@@ -236,7 +236,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         // SOCIAL NETWORK LINKS.
         if (!empty($remoteEvent['field_event_live_info'])) {
           $to_set = $entity->get('field_social_network_links')->value ?? [];
-          $this->logger->debug("Social Network Links:" . print_r($to_set));
+          $this->logger->debug("Social Network Links:" . \Kint::dump($to_set));
           foreach ($remoteEvent['field_event_live_info'] as $social_link) {
             if (isset($social_link['field_url']['uri']) && trim($social_link['field_url']['uri']) !== "") {
               $to_set[] = [
@@ -252,7 +252,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
               'value' => $remoteEvent['field_event_flickr_url']['uri'],
             ];
           }
-          $this->logger->debug("field_social_network_links =>" . print_r($to_set, TRUE));
+          $this->logger->debug("field_social_network_links =>" . \Kint::dump($to_set, TRUE));
           $entity->set('field_social_network_links', $to_set);
         }
 
@@ -265,9 +265,9 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         if (boolean_value($remoteEvent['field_enable_program_details']) === TRUE) {
           $entity->field_content_tabs[] = $this->createTab($row, 'Program', $remoteEvent['field_poi_featured_content_1']);
         }
-        $this->logger->debug("Saving entity:" . print_r($entity->toArray(), TRUE));
+        $this->logger->debug("Saving entity:" . \Kint::dump($entity->toArray(), TRUE));
         $entity->save();
-        $this->logger->debug("Entity saved" . print_r($entity->toArray(), TRUE));
+        $this->logger->debug("Entity saved" . \Kint::dump($entity->toArray(), TRUE));
       }
     }
     catch (\Exception $e) {
@@ -291,14 +291,14 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
    */
   public function addMedia(array $fieldData): MediaInterface {
     $this->logger
-      ->debug("addMedia =>" . print_r($fieldData, TRUE));
+      ->debug("addMedia =>" . \Kint::dump($fieldData, TRUE));
     if (!empty($fieldData)) {
       if (!isset($fieldData['type']) && isset(reset($fieldData)['type'])) {
         $fieldData = array_shift($fieldData);
       }
     }
     $ref = new JsonAPIReference($fieldData);
-    $this->logger->debug("Add Media Ref:" . print_r($ref, TRUE));
+    $this->logger->debug("Add Media Ref:" . \Kint::dump($ref, TRUE));
     $fileHandle = $ref->getRemote();
     $fileHandle->save();
     $mediaHandle = $this->createMedia($fileHandle->label(), [
@@ -306,7 +306,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       'bundle' => 'image',
     ]);
     $mediaHandle->save();
-    $this->logger->debug("Media Created:" . print_r($mediaHandle->toArray(), TRUE));
+    $this->logger->debug("Media Created:" . \Kint::dump($mediaHandle->toArray(), TRUE));
     return $mediaHandle;
   }
 
@@ -330,7 +330,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
         ->getStorage('media')
         ->create($details);
       $media->enforceIsNew();
-      $this->logger->debug("Media Object: " . print_r($media->toArray(), TRUE));
+      $this->logger->debug("Media Object: " . \Kint::dump($media->toArray(), TRUE));
       $media->setName($name)
         ->setPublished(TRUE)
         ->save();
@@ -338,7 +338,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       return $media;
     }
     catch (\Exception $e) {
-      $this->logger->error("Cannot save media object" . print_r($details, TRUE));
+      $this->logger->error("Cannot save media object" . \Kint::dump($details, TRUE));
       throw new MigrateException("Yeah, this isn't work for me. Can we just be entityFriends?");
     }
     return NULL;
@@ -406,10 +406,10 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
           'target_id' => $result->id(),
           'target_revision_id' => $result->getRevisionId(),
         ];
-        $this->logger->debug("Paragraph Tab:" . print_r($paragraph_tab->field_tab_contents, TRUE));
+        $this->logger->debug("Paragraph Tab:" . \Kint::dump($paragraph_tab->field_tab_contents, TRUE));
       }
       else {
-        $this->logger->debug("Unmigrated Paragraph Tab:" . print_r($paragraph, TRUE));
+        $this->logger->debug("Unmigrated Paragraph Tab:" . \Kint::dump($paragraph, TRUE));
       }
       $paragraph_tab->enforceIsNew();
       // 5. Save Paragraph Tab.
@@ -434,7 +434,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
   public function getLocationRef(array $address) {
     // Does location exist?
     $address = array_filter($address);
-    $this->logger->debug("Importing address" . print_r($address, TRUE));
+    $this->logger->debug("Importing address" . \Kint::dump($address, TRUE));
     if (empty($address)) {
       return FALSE;
     }
@@ -460,7 +460,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       ]);
       $location->enforceIsNew();
       $location->save();
-      $this->logger->debug('Location Created' . print_r($location->toArray(), TRUE));
+      $this->logger->debug('Location Created' . \Kint::dump($location->toArray(), TRUE));
     }
     return ['target_id' => $location->id()];
   }

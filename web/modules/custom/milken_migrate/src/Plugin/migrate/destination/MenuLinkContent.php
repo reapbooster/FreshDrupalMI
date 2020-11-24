@@ -36,7 +36,7 @@ class MenuLinkContent extends MilkenMigrateDestinationBase implements ContainerF
    */
   public function import(Row $row, array $old_destination_id_values = []) {
     \Drupal::logger(__CLASS__)
-      ->debug('Importing:' . print_r($row, TRUE));
+      ->debug('Importing:' . \Kint::dump($row, TRUE));
     $this->rollbackAction = MigrateIdMapInterface::ROLLBACK_DELETE;
     $parenID = FALSE;
     if ($row->hasDestinationProperty('parent')) {
@@ -70,16 +70,16 @@ class MenuLinkContent extends MilkenMigrateDestinationBase implements ContainerF
         'parent' => $parenID,
       ]);
     if (!$entity instanceof MenuLinkContentInterface) {
-      throw new MigrateException('Unable to create Entity: ' . print_r($row, TRUE));
+      throw new MigrateException('Unable to create Entity: ' . \Kint::dump($row, TRUE));
     }
     assert($entity instanceof MenuLinkContentInterface, "Cannot get the entity object");
     \Drupal::logger(__CLASS__)
-      ->debug('Related Fields set:' . print_r($row, TRUE));
+      ->debug('Related Fields set:' . \Kint::dump($row, TRUE));
     if ($this->isEntityValidationRequired($entity)) {
       $this->validateEntity($entity);
     }
     \Drupal::logger(__CLASS__)
-      ->debug('saving these values:' . print_r($entity->toArray(), TRUE));
+      ->debug('saving these values:' . \Kint::dump($entity->toArray(), TRUE));
     $ids = $this->save($entity, $old_destination_id_values);
     $map['destid1'] = $entity->id();
     $row->setIdMap($map);

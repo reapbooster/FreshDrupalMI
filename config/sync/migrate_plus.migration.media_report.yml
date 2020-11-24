@@ -28,6 +28,7 @@ source:
     - field_rp_hero_image
     - field_rp_pdf_file
     - field_topics
+    - field_cover_image
   fields:
     -
       name: nid
@@ -60,7 +61,7 @@ source:
     -
       name: path
       label: 'Product price'
-      selector: /path/alias
+      selector: /path
     -
       name: created
       label: Created
@@ -123,9 +124,10 @@ source:
     uuid:
       type: string
   constants:
-    file_destination: 'public://report_covers/'
+    FILE_DESTINATION: 'public://report_covers/'
+
+
 process:
-  nid: nid
   title: name
   name: name
   uuid: uuid
@@ -136,7 +138,7 @@ process:
   uid:
     plugin: default_value
     default_value: 2
-  path/alias: path
+  path/alias: path/alias
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -153,12 +155,16 @@ process:
     plugin: 'milken_migrate:remote_image'
     source: cover_image
     media_type: report_cover
-    destination: constants/file_destination
+    destination: constants/FILE_DESTINATION
     title: name
     alt: name
   field_media_file:
     plugin: 'milken_migrate:remote_file'
     source: pdf_file
+  import_body_field_to_paragraph:
+    plugin: 'milken_migrate:body_embed'
+    source: body_value
+    append_to: field_content
 destination:
   plugin: 'entity:media'
   default_bundle: report

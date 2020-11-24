@@ -111,7 +111,7 @@ class Paragraphs extends MilkenProcessPluginBase {
 
           default:
             \Drupal::logger('milken_migrate')
-              ->alert("Cannot migrate paragraph: " . print_r($ref, TRUE));
+              ->alert("Cannot migrate paragraph: " . \Kint::dump($ref, TRUE));
         }
       }
       if ($paragraph instanceof Paragraph) {
@@ -125,7 +125,7 @@ class Paragraphs extends MilkenProcessPluginBase {
         $toReturn[] = $paragraph;
       }
       else {
-        throw new MigrateSkipProcessException("cannot create paragraph: " . print_r($ref, TRUE));
+        throw new MigrateSkipProcessException("cannot create paragraph: " . \Kint::dump($ref, TRUE));
       }
     }
     return $toReturn;

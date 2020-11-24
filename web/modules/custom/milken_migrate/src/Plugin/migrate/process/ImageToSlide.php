@@ -92,7 +92,7 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
     }
     if ($value) {
       \Drupal::logger('milken_migrate')
-        ->debug("~~~ Field has value:" . print_r($value, TRUE));
+        ->debug("~~~ Field has value:" . \Kint::dump($value, TRUE));
     }
 
     $destination_value = [];
@@ -185,7 +185,7 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
         return $slide;
       }
       else {
-        throw new MigrateException("unable to create Slide for value: ", print_r($destination, TRUE));
+        throw new MigrateException("unable to create Slide for value: ", \Kint::dump($destination, TRUE));
       }
     }
     catch (\Exception $e) {
@@ -198,7 +198,7 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
         ->error(__CLASS__ . "::IMPORT ERROR: " . $t->getMessage());
       return new MigrateSkipProcessException($t->getMessage());
     }
-    return new MigrateSkipProcessException($message ?? ("Error Occurred!: " . print_r($destination_value, TRUE)));
+    return new MigrateSkipProcessException($message ?? ("Error Occurred!: " . \Kint::dump($destination_value, TRUE)));
   }
 
   /**

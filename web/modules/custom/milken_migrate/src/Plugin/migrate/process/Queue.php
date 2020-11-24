@@ -62,7 +62,7 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
       return new MigrateException("The :class plugin is not correctly configured. :configuration",
         [
           ":class" => __CLASS__,
-          ":configuration" => print_r($this->configuration, TRUE),
+          ":configuration" => \Kint::dump($this->configuration, TRUE),
         ]);
     }
     $subqueue = \Drupal::entityTypeManager()
@@ -99,16 +99,16 @@ class Queue extends ProcessPluginBase implements MigrateProcessInterface {
       return $newSubqueue;
     }
     catch (\Exception $e) {
-      print print_r($e->getTrace());
+      print \Kint::dump($e->getTrace());
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::Exception: " . $e->getMessage());
-      throw new MigrateException($e->getMessage() . print_r($row->getDestination(), TRUE));
+      throw new MigrateException($e->getMessage() . \Kint::dump($row->getDestination(), TRUE));
     }
     catch (\Throwable $t) {
-      print print_r($t->getTrace());
+      print \Kint::dump($t->getTrace());
       \Drupal::logger('milken_migrate')
         ->error(__CLASS__ . "::Throwable: " . $t->getMessage());
-      throw new MigrateException($t->getMessage() . print_r($row->getDestination(), TRUE));
+      throw new MigrateException($t->getMessage() . \Kint::dump($row->getDestination(), TRUE));
     }
     return NULL;
   }

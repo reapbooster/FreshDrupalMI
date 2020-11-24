@@ -2,10 +2,10 @@
 
 namespace Drupal\milken_migrate\Traits;
 
+use GuzzleHttp\Client;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\Row;
-use GuzzleHttp\Client;
 
 /**
  * Supplies Json API Data Fetcher Trait.
@@ -15,23 +15,35 @@ use GuzzleHttp\Client;
 trait JsonAPIDataFetcherTrait {
 
   /**
+   * Http client so you don't have 500 threads floating out there in the ether.
+   *
+   * @var \GuzzleHttp\Client
+   */
+  protected $httpClient;
+
+  /**
    * Get data from a related JSONApi record.
    *
    * @param array $recordValue
    *   Cross Referenced Value to be retrieved.
    * @param \Drupal\migrate\Row $row
    *   Migration Row in question.
+   * @param array $options
+   *   Guzzle request options.
    *
    * @return null|array
    *   Returns either data or null.
    */
-  public function getRelatedRecordData(array $recordValue, Row $row) : array {
+  public function getRelatedRecordData(array $recordValue, Row $row, array $options = NULL) : array {
+    if ($options === NULL) {
+      $options = $this->getMigrateRequestOptions();
+    }
     $relatedSourcePath = ($row->getSource()['jsonapi_host'] ?? "https://milkeninstitute.org");
     $relatedSourcePath .= '/jsonapi/' . str_replace("--", "/", $recordValue['type']) . "/" . $recordValue['id'];
     $relatedSourcePath .= "?jsonapi_include=true";
     \Drupal::logger('milken_migrate')
       ->debug("Getting related record: {$relatedSourcePath}");
-    $response = $this->getClient()->get($relatedSourcePath);
+    $response = $this->getClient()->get($relatedSourcePath, $options);
     $responseData = json_decode($response->getBody(), TRUE);
     if (isset($responseData['data']) && !empty($responseData['data']) && isset($responseData['data']['id'])) {
       return $responseData['data'];
@@ -44,27 +56,14 @@ trait JsonAPIDataFetcherTrait {
   /**
    * Get a pre-configured client.
    *
-   * @param array $configuration
-   *   Optionally supply a configuration.
-   *
    * @return \GuzzleHttp\Client
    *   The client.
    */
-  protected function getClient(array $configuration = []): Client {
-    // @todo move this to $this->configuration.
-    return new Client([
-      'base_uri' => $configuration['jsonapi_host'] ?? "https://milkeninstitute.org",
-      "http_errors" => FALSE,
-      "allow_redirects" => FALSE,
-      'synchronous' => TRUE,
-      'connect_timeout' => 2.5,
-      'timeout' => 5,
-      "debug" => FALSE,
-      'query' => [
-        'jsonapi_include' => TRUE,
-        'uniq_id' => uniqid(),
-      ],
-    ]);
+  protected function getClient(): Client {
+    if (!$this->httpClient instanceof Client) {
+      $this->httpClient = \Drupal::httpClient();
+    }
+    return $this->httpClient;
   }
 
   /**
@@ -82,7 +81,7 @@ trait JsonAPIDataFetcherTrait {
     \Drupal::logger('milken_migrate')
       ->debug("Getting remote file: {$url}");
     try {
-      $response = $this->getClient()->get($url);
+      $response = $this->getClient()->get($url, $this->getMigrateRequestOptions());
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
         \Drupal::logger('milken_migrate')
           ->debug("Remote File success! Saving Data!");
@@ -112,6 +111,28 @@ trait JsonAPIDataFetcherTrait {
         ->error("IMPORT Throwable: " . $t->getMessage() . "::" . $url);
     }
     return NULL;
+  }
+
+  /**
+   * Default options for Guzzle Requests.
+   *
+   * @return array
+   *   Default guzzle options for jsonapi requests.
+   */
+  public function getMigrateRequestOptions(): array {
+    return [
+      'base_uri' => "https://milkeninstitute.org",
+      "http_errors" => FALSE,
+      "allow_redirects" => FALSE,
+      'synchronous' => TRUE,
+      'connect_timeout' => 2.5,
+      'timeout' => 5,
+      "debug" => FALSE,
+      'query' => [
+        'jsonapi_include' => TRUE,
+        'uniq_id' => uniqid(),
+      ],
+    ];
   }
 
 }

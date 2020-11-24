@@ -91,7 +91,7 @@ class HeroImageToParagraph extends MilkenProcessPluginBase implements MigratePro
       throw new MigrateException("The :class plugin is not correctly configured. :configuration",
         [
           ":class" => __CLASS__,
-          ":configuration" => print_r($this->configuration, TRUE),
+          ":configuration" => \Kint::dump($this->configuration, TRUE),
         ]);
     }
 
@@ -195,12 +195,12 @@ class HeroImageToParagraph extends MilkenProcessPluginBase implements MigratePro
         ->error($message);
     }
     catch (\Throwable $t) {
-      $message = $t->getMessage() . print_r($destination, TRUE);
+      $message = $t->getMessage() . \Kint::dump($destination, TRUE);
       \Drupal::logger('milken_migrate')
         ->error($message);
     }
 
-    return new MigrateSkipProcessException($message ?? ("Error Occurred!: " . print_r($destination_value, TRUE)));
+    return new MigrateSkipProcessException($message ?? ("Error Occurred!: " . \Kint::dump($destination_value, TRUE)));
   }
 
   /**
@@ -293,11 +293,11 @@ class HeroImageToParagraph extends MilkenProcessPluginBase implements MigratePro
           $image->newImage(100, 100, $dominant_color_pixel);
           $image->modulateImage(100, 100, 0);
           \Drupal::logger('milken_migrate')->debug(
-            print_r($dominant_color, TRUE) . "::" . print_r($dominant_color_array, TRUE)
+            \Kint::dump($dominant_color, TRUE) . "::" . \Kint::dump($dominant_color_array, TRUE)
           );
           $complimentary_color = ColorThief::getColor($image);
           \Drupal::logger('milken_migrate')->debug(
-            print_r($complimentary_color, TRUE)
+            \Kint::dump($complimentary_color, TRUE)
           );
           return $this->arrayToHex($complimentary_color);
         }

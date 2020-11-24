@@ -21,11 +21,11 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
    */
   public function setRelatedFields(Row $row, $entity) : EntityInterface {
     \Drupal::logger(__CLASS__)
-      ->debug('Getting Related Fields:' . print_r($row, TRUE));
+      ->debug('Getting Related Fields:' . \Kint::dump($row, TRUE));
     $entity->set('field_event', $this->getEvent($row));
     $entity->set('field_room', $this->getRoom($row));
     \Drupal::logger(__CLASS__)
-      ->debug('Related Fields updated:' . print_r($row, TRUE));
+      ->debug('Related Fields updated:' . \Kint::dump($row, TRUE));
     return $entity;
   }
 
@@ -56,7 +56,7 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
     );
     if (is_array($response['data']) && count($response['data']) >= 1 && $panelRoom = array_shift($response['data'])) {
       \Drupal::logger(__CLASS__)
-        ->debug('Getting Related Fields:' . print_r($response['data'], TRUE));
+        ->debug('Getting Related Fields:' . \Kint::dump($response['data'], TRUE));
       $entityStorage = \Drupal::getContainer()
         ->get('entity_type.manager')
         ->getStorage('rooms');
@@ -93,11 +93,11 @@ class Panel extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       ->condition('field_grid_event_id', $row->getSource()['eventid'])
       ->execute();
     \Drupal::logger(__CLASS__)
-      ->debug('Found the following values:' . print_r($results, TRUE));
+      ->debug('Found the following values:' . \Kint::dump($results, TRUE));
     if (is_array($results) && count($results) >= 1 && $resultID = array_shift($results)) {
       $entity = $entityStorage->load($resultID);
       \Drupal::logger(__CLASS__)
-        ->debug('Adding value to result set:' . print_r($resultID, TRUE));
+        ->debug('Adding value to result set:' . \Kint::dump($resultID, TRUE));
       if ($entity instanceof EntityInterface) {
         $row->setDestinationProperty('field_event', ['target_id' => $entity->id()]);
         return $entity;

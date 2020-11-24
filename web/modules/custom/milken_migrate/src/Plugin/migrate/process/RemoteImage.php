@@ -6,10 +6,8 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\milken_migrate\Traits\EntityExistsTrait;
@@ -30,7 +28,7 @@ use PHPUnit\Util\Exception;
  *   handle_multiples = TRUE,
  * );
  */
-class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
+class RemoteImage extends MilkenProcessPluginBase implements MigrateProcessInterface {
 
   use JsonAPIDataFetcherTrait;
   use EntityExistsTrait;
@@ -54,28 +52,36 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $destination_values = [];
-    if (isset($value['data']) && empty($value['data'])) {
-      throw new MigrateSkipProcessException("The referenced Entity has no data.");
+    $source = $row->getSourceProperty($this->configuration['source']);
+    if (array_key_exists('data', $source) || (is_array($source[0]) && array_key_exists('data', $source[0]))) {
+      return [];
     }
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
     $file = NULL;
     if ($value) {
-      \Drupal::logger('milken_migrate')->debug('~~~~!!!Remote Image has value' . print_r($value, TRUE));
+      \Drupal::logger('milken_migrate')->debug('~~~~!!!Remote Image has value' . \Kint::dump($value, TRUE));
     }
     if (!isset($this->configuration['source'])) {
-      throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
+      throw new Exception('RemoteImage plugin has no source property:' . \Kint::dump($this->configuration, TRUE));
     }
 
     if ($row->isStub()) {
       return NULL;
     }
-    $source = $row->getSourceProperty($this->configuration['source']);
+    \Drupal::logger('milken_migrate')
+      ->debug("Source: " . \Kint::dump($source));
+
     if (isset($source['id'])) {
       $source = [$source];
     }
     foreach ($source as $reference) {
-      $ref = new JsonAPIReference($reference);
+      \Drupal::logger('milken_migrate')
+        ->debug("Ref: " . \Kint::dump($reference));
+      if (array_key_exists('data', $reference)) {
+        continue;
+      }
+      $ref = new JsonAPIReference($reference, $this->entityTypeManager);
       if (!$ref instanceof JsonAPIReference || $ref->valid() === FALSE) {
         return $ref;
       }
@@ -102,9 +108,8 @@ class RemoteImage extends ProcessPluginBase implements MigrateProcessInterface {
               ? $this->configuration['title'] : $file->getFilename());
             $media_type = (isset($this->configuration['media_type'])
               ? $this->configuration['media_type'] : "image");
-            $entity_type_mgr = \Drupal::getContainer()
-              ->get('entity_type.manager');
-            $image = $entity_type_mgr->getStorage('media')->create([
+
+            $image = $this->entityTypeManager->getStorage('media')->create([
               'type' => $media_type,
               'uid' => 2,
               'langcode' => \Drupal::languageManager()

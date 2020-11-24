@@ -61,7 +61,7 @@ class JsonAPITaxonomy extends ProcessPluginBase {
               else {
                 $row->setDestinationProperty($destination_property, []);
                 return new MigrateSkipProcessException(
-                  "Cannot create taxonomy Term:" . print_r($relatedRecord, TRUE)
+                  "Cannot create taxonomy Term:" . \Kint::dump($relatedRecord, TRUE)
                 );
               }
             }

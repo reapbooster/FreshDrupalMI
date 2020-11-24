@@ -60,7 +60,7 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
       ->debug(__CLASS__);
     $file = NULL;
     if (!isset($this->configuration['source']) || !isset($this->configuration['default_bundle'])) {
-      throw new Exception('RemoteImage plugin has no source property:' . print_r($this->configuration, TRUE));
+      throw new Exception('RemoteImage plugin has no source property:' . \Kint::dump($this->configuration, TRUE));
     }
 
     if ($row->isStub()) {

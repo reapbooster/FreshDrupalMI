@@ -94,7 +94,7 @@ class JsonAPIReference {
   public function __construct(array $values = NULL, EntityTypeManagerInterface $entityTypeManager) {
     $this->entityTypeManager = $entityTypeManager;
     \Drupal::logger(__CLASS__)
-      ->debug(__CLASS__ . "::" . print_r($values, TRUE));
+      ->debug(__CLASS__ . "::" . \Kint::dump($values, TRUE));
     if ($values == NULL || (isset($values['data']) && empty($values['data']))) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }
@@ -186,10 +186,13 @@ class JsonAPIReference {
    * @return $this
    *   Return this object.
    */
-  public function getRemoteData() : JsonAPIReference {
+  public function getRemoteData(array $options = NULL) : JsonAPIReference {
+    if ($options === NULL) {
+      $options = $this->getMigrateRequestOptions();
+    }
     if ($this->valid()) {
       $response = $this->getClient()
-        ->get("/jsonapi/{$this->entityTypeId}/{$this->bundleTypeId}/{$this->id}");
+        ->get("/jsonapi/{$this->entityTypeId}/{$this->bundleTypeId}/{$this->id}", $options);
       if (in_array($response->getStatusCode(), [200, 201, 202])) {
         $responseData = json_decode($response->getBody(), TRUE);
         if (!empty($responseData['data'])) {

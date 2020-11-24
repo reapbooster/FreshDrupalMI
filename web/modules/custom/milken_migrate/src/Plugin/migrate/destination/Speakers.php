@@ -26,7 +26,7 @@ class Speakers extends MilkenMigrateDestinationBase {
    */
   public function setRelatedFields(Row $row, EntityInterface $entity) : EntityInterface {
     \Drupal::logger(__CLASS__)
-      ->debug('Getting Related Fields:' . print_r($row, TRUE));
+      ->debug('Getting Related Fields:' . \Kint::dump($row, TRUE));
     $entity->set('field_event', $this->getEvent($row));
     return $entity;
   }
@@ -49,10 +49,10 @@ class Speakers extends MilkenMigrateDestinationBase {
       ->condition('field_grid_event_id', $row->getSource()['eventid'])
       ->execute();
     \Drupal::logger(__CLASS__)
-      ->debug('Found the following values:' . print_r($results, TRUE));
+      ->debug('Found the following values:' . \Kint::dump($results, TRUE));
     if (is_array($results) && count($results) >= 1 && $resultID = array_shift($results)) {
       \Drupal::logger(__CLASS__)
-        ->debug('Adding value to result set:' . print_r($resultID, TRUE));
+        ->debug('Adding value to result set:' . \Kint::dump($resultID, TRUE));
       $entity = $entityStorage->load($resultID);
       if ($entity instanceof EntityInterface) {
         $toReturn = ['target_id' => $resultID];
