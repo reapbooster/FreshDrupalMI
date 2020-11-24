@@ -30,7 +30,7 @@ export const MediaDisplayReport: React.FunctionComponent = (
       });
   }
 
-  switch (view_mode){
+  switch (view_mode) {
     case "card":
       const CardWrapper = styled.div`
         min-width: 222px;
@@ -58,7 +58,10 @@ export const MediaDisplayReport: React.FunctionComponent = (
 
       console.debug("Thumbnail: ", reportData.getThumbnail());
       return (
-        <CardWrapper className="card my-5 mx-2 text-align-left flex-shrink-1" key={key}>
+        <CardWrapper
+          className="card my-5 mx-2 text-align-left flex-shrink-1"
+          key={key}
+        >
           <a
             href={reportData.path.alias}
             data-drupal-id={reportData.drupal_internal__mid}
@@ -78,7 +81,7 @@ export const MediaDisplayReport: React.FunctionComponent = (
             </CustomCardHeader>
             <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
               <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>
-                  {reportData.name}
+                {reportData.name}
               </Card.Title>
             </Card.Body>
             <Card.Footer className="bg-white border-0">
@@ -87,43 +90,43 @@ export const MediaDisplayReport: React.FunctionComponent = (
           </a>
         </CardWrapper>
       );
-    
+
     case "full":
       const HeaderWrapper = styled.div`
-        width: 100%; 
+        width: 100%;
         display: flex;
         align-items: center;
         background: var(--color-milken-blue);
         padding: 3em;
-        
-        @media ( max-width: 992px ){
+
+        @media (max-width: 992px) {
           flex-wrap: wrap-reverse;
           font-size: 0.9em;
         }
-        @media ( min-width: 1200px ){
+        @media (min-width: 1200px) {
           padding: 3em 5em;
         }
       `;
       const ReportImageWrapper = styled.div`
         flex: 1 1 25%;
         max-width: 391px;
-        @media ( max-width: 992px ){
+        @media (max-width: 992px) {
           flex-basis: 100%;
-          margin: auto; 
+          margin: auto;
         }
       `;
       const TitleWrapper = styled.div`
         color: white;
         flex: 3 0 66%;
-        
-        @media ( max-width: 992px ){
+
+        @media (max-width: 992px) {
           flex-basis: 100%;
           padding-bottom: 2em;
         }
-        @media ( min-width: 993px ){
+        @media (min-width: 993px) {
           padding-left: 3em;
         }
-        @media ( min-width: 1201px ){
+        @media (min-width: 1201px) {
           padding-left: 4em;
         }
       `;
@@ -131,25 +134,25 @@ export const MediaDisplayReport: React.FunctionComponent = (
         margin-top: 3em;
         text-align: center;
 
-        @media ( max-width: 992px ){
+        @media (max-width: 992px) {
           display: block;
         }
-        @media ( min-width: 993px ){
+        @media (min-width: 993px) {
           display: none;
         }
       `;
       const NormalButtonWrapper = styled.div`
         text-align: left;
 
-        @media ( max-width: 992px ){
+        @media (max-width: 992px) {
           display: none;
         }
-        @media ( min-width: 993px ){
+        @media (min-width: 993px) {
           display: block;
         }
       `;
       return (
-        <HeaderWrapper>       
+        <HeaderWrapper>
           <ReportImageWrapper>
             <ImageFileDisplay
               data={reportData.field_cover}
@@ -159,28 +162,32 @@ export const MediaDisplayReport: React.FunctionComponent = (
               srcsetSizes="(max-width: 1000px) 200px, 400px"
             />
             <MobileButtonWrapper>
-              <DocumentFileDisplay data={reportData.field_media_file} label="Download PDF"></DocumentFileDisplay>
+              <DocumentFileDisplay
+                data={reportData.field_media_file}
+                label="Download PDF"
+              ></DocumentFileDisplay>
             </MobileButtonWrapper>
           </ReportImageWrapper>
           <TitleWrapper>
-            <i style={{fontSize:"1.2em", fontWeight: "bold"}}>REPORT</i>
+            <i style={{ fontSize: "1.2em", fontWeight: "bold" }}>REPORT</i>
             <h1>{reportData.name}</h1>
             <NormalButtonWrapper>
-              <DocumentFileDisplay data={reportData.field_media_file} label="Download PDF"></DocumentFileDisplay>
+              <DocumentFileDisplay
+                data={reportData.field_media_file}
+                label="Download PDF"
+              ></DocumentFileDisplay>
             </NormalButtonWrapper>
-          </TitleWrapper>          
+          </TitleWrapper>
         </HeaderWrapper>
       );
 
-      default:
-        return (
-          <div>
+    default:
+      return (
+        <div>
           <h4>Don't have a component for this node/view_mode</h4>
-          </div>
-        );
-
+        </div>
+      );
   }
-  
 };
 
 export default MediaDisplayReport;
