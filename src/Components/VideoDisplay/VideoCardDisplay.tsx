@@ -42,7 +42,11 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
     <>
       <CardWrapper className="card my-5 mx-2 text-align-left flex-shrink-1">
         <a
-          href={data.path.alias}
+          href={
+            data.path.alias
+              ? data.path.alias
+              : "/media/" + data.drupal_internal__mid
+          }
           className=""
           data-drupal-id={data.drupal_internal__mid}
           data-drupal-type={data.type}
