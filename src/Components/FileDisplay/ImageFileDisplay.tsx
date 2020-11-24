@@ -18,7 +18,16 @@ interface ImageFileDisplayProps {
 const ImageFileDisplay: React.FunctionComponent = (
   props: ImageFileDisplayProps
 ) => {
-  const { data, view_mode, key, style, width, height, className, srcsetSizes } = props;
+  const {
+    data,
+    view_mode,
+    key,
+    style,
+    width,
+    height,
+    className,
+    srcsetSizes,
+  } = props;
   const DataObject = new ImageFile(data);
   if (!DataObject.valid()) {
     return <div data-error={"DATA INVALID"} />;
@@ -65,7 +74,7 @@ const ImageFileDisplay: React.FunctionComponent = (
         {...styleObject.imageAttributes}
         style={imageTagStyle}
         className={className}
-        sizes = {srcsetSizes ? srcsetSizes : ''}
+        sizes={srcsetSizes ? srcsetSizes : ""}
       />
     </>
   );
