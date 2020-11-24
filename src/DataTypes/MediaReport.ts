@@ -43,13 +43,13 @@ export class MediaReport extends Media implements MediaReportInterface {
       this._thumbnail = new ImageFile(props.thumbnail);
     }
     if (props.field_cover !== undefined && this.field_cover === undefined) {
-      this._field_cover = new ImageFile(props.field_cover);
+      this._field_cover = new DocumentFile(props.field_cover);
     }
     if (
       props.field_media_file !== undefined &&
       this.field_media_file === undefined
     ) {
-      this._field_media_file = new DocumentFile(props.field_cover);
+      this._field_media_file = new DocumentFile(props.field_media_file);
     }
   }
 
