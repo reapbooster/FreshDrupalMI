@@ -63,7 +63,11 @@ export const MediaDisplayReport: React.FunctionComponent = (
           key={key}
         >
           <a
-            href={reportData.path.alias}
+            href={
+              reportData.path.alias
+                ? reportData.path.alias
+                : "/media/" + reportData.drupal_internal__mid
+            }
             data-drupal-id={reportData.drupal_internal__mid}
             data-drupal-type={reportData.type}
             data-uuid={reportData.id}
