@@ -72,7 +72,13 @@ const ArticleCard = (props: ArticleCardProps) => {
         >
           <CustomCardHeader>
             <ErrorBoundary>
-              <h1>IMAGEDISPLAY SHOULD GO HERE</h1>
+              <ImageFileDisplay
+                data={articleData.field_promo_slide.field_background_image}
+                view_mode="thumbnail"
+                className={"card-img"}
+                style={{ maxWidth: "100%" }}
+                srcsetSizes="(max-width: 1000px) 200px, 400px"
+              />
               <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
             </ErrorBoundary>
           </CustomCardHeader>
