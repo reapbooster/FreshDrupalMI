@@ -58,6 +58,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     paddingLeft: "7em",
   };
 
+  console.debug("slideData Var", slideData);
   console.debug("background image object: ", backgroundImage);
   const Jumbotron = styled.div`
     min-height: 650px;

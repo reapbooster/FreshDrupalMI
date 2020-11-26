@@ -97,6 +97,6 @@ export default class SlideFullWidthOneColumn
   }
 
   hasData(): boolean {
-    return this.field_published !== undefined && this.field_published !== null;
+    return this.field_published !== undefined && this.field_published !== null && this.field_background_image.imageStyleObject !== null;
   }
 }
