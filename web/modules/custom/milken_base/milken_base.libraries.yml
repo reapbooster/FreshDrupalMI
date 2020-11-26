@@ -44,3 +44,8 @@ Search:
   version: 1.0
   js:
     components/Search/Search.entry.js: { source: 'components/Search/Search.entry.tsx' }
+
+ArticleDetail:
+  version: 1.0
+  js:
+    components/ArticleDetail/ArticleDetail.entry.js: { source: 'components/ArticleDetail/ArticleDetail.entry.tsx'}
