@@ -1,34 +1,22 @@
+ArticleDetail:
+  version: 1.0
+  js:
+    components/ArticleDetail/ArticleDetail.entry.js: { source: 'components/ArticleDetail/ArticleDetail.entry.tsx'}
+
+Dashboard:
+  version: 1.0
+  js:
+    components/Dashboard/Dashboard.entry.js: { source: 'components/Dashboard/Dashboard.entry.tsx' }
 
 EntityBrowser:
   version: 1.0
   js:
     components/EntityBrowser/EntityBrowser.entry.js: { source: 'components/EntityBrowser/EntityBrowser.entry.tsx' }
 
-PhilanthropyHub:
-  version: 1.0
-  js:
-    components/PhilanthropyHub/PhilanthropyHub.entry.js: { source: 'components/PhilanthropyHub/PhilanthropyHub.entry.tsx' }
-
-PodcastBrowser:
-  version: 1.0
-  js:
-    components/PodcastBrowser/PodcastBrowser.entry.js: { source: 'components/PodcastBrowser/PodcastBrowser.entry.tsx' }
-
-slide_display:
-  version: 1.0
-  js:
-    js/slide_display.js: { source: 'js/slide_display.ts' }
-
 EntityDisplay:
   version: 1.0
   js:
     components/EntityDisplay/EntityDisplay.entry.js: { source: 'components/EntityDisplay/EntityDisplay.entry.tsx' }
-
-
-Dashboard:
-  version: 1.0
-  js:
-    components/Dashboard/Dashboard.entry.js: { source: 'components/Dashboard/Dashboard.entry.tsx' }
 
 EventDetail:
   version: 1.0
@@ -40,7 +28,22 @@ MediaDetail:
   js:
     components/MediaDetail/MediaDetail.entry.js: { source: 'components/MediaDetail/MediaDetail.entry.tsx' }
 
+PhilanthropyHub:
+  version: 1.0
+  js:
+    components/PhilanthropyHub/PhilanthropyHub.entry.js: { source: 'components/PhilanthropyHub/PhilanthropyHub.entry.tsx' }
+
+PodcastBrowser:
+  version: 1.0
+  js:
+    components/PodcastBrowser/PodcastBrowser.entry.js: { source: 'components/PodcastBrowser/PodcastBrowser.entry.tsx' }
+
 Search:
   version: 1.0
   js:
     components/Search/Search.entry.js: { source: 'components/Search/Search.entry.tsx' }
+
+slide_display:
+  version: 1.0
+  js:
+    js/slide_display.js: { source: 'js/slide_display.ts' }

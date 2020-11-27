@@ -32,15 +32,6 @@ NodeDisplay:
   js:
     js/NodeDisplay.entry.js: { preprocess: 0, source: 'js/NodeDisplay.entry.tsx' }
 
-ArticleDisplay:
-  version: 1.0.0
-  footer: true
-  webpack: true
-  drupalSettings:
-    event: null
-  js:
-    js/ArticleDisplay.entry.js: { preprocess: 0, source: 'js/ArticleDisplay.entry.tsx' }
-
 image_display:
   version: 1.0.0
   header: true
