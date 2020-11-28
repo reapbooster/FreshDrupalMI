@@ -3,23 +3,17 @@ import { Col, Container, Row, Pagination } from "react-bootstrap";
 import ResultsList from "./ResultsList";
 import KeywordForm from "./KeywordForm";
 import Filters from "./Filters";
-import SearchResult from "./SearchResult";
-import {
-  FacetList,
-  FacetListInterface,
-  FacetValue,
-  FacetValueInterface,
-} from "../../DataTypes/Facet";
-import FacetListDisplay from "./FacetListDisplay";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
+import { SearchResult } from "./SearchResult";
+import { FacetList } from "../../DataTypes/Facet";
+import { ErrorBoundary } from "../../Utility/ErrorBoundary";
 import Loading from "../Loading";
 
-interface SearchResultFilterState {
+export interface SearchResultFilterState {
   entity_type_id?: Array<string> | string;
   bundle?: Array<string> | string;
 }
 
-interface SearchState {
+export interface SearchState {
   keywords: string;
   results: Array<SearchResult>;
   filters: SearchResultFilterState;
@@ -29,21 +23,24 @@ interface SearchState {
   abortController: AbortController;
 }
 
-class Search extends React.Component<any, SearchState> {
+export class Search extends React.Component<
+  Record<string, unknown>,
+  SearchState
+> {
   constructor(props) {
     super(props);
     const searchParams = new URLSearchParams(window.location.search);
     const filters = {};
     if (searchParams.has("entity_type_id")) {
-      filters["entity_type_id"] = searchParams.get("entity_type_id");
+      filters.entity_type_id = searchParams.get("entity_type_id");
     }
     if (searchParams.has("bundle")) {
-      filters["bundle"] = searchParams.get("entity_type_id");
+      filters.bundle = searchParams.get("entity_type_id");
     }
     this.state = {
       keywords: searchParams.get("keywords"),
       results: [],
-      filters: filters,
+      filters,
       loading: false,
       loaded: false,
       page: 1,
@@ -55,30 +52,31 @@ class Search extends React.Component<any, SearchState> {
   }
 
   componentDidMount() {
-    if (this.state.keywords) {
+    const { keywords } = this.state;
+    if (keywords) {
       this.getResults();
     }
   }
 
   getResults() {
-    const { keywords, page, filters } = this.state;
+    const { keywords, page, abortController } = this.state;
     const newState = { loading: true, loaded: false };
     console.debug("GetResults", keywords);
-    const { abortController } = this.state;
     const toSet = new URLSearchParams(window.location.search);
     if (keywords) {
       // If keywords are changed, reset the page to 1.
       toSet.set("keywords", keywords);
       toSet.delete("page");
-      newState["page"] = 1;
+      newState.page = 1;
     } else {
       // Page is probably being changed.
       if (toSet.has("page")) {
-        toSet.set("page", page);
+        toSet.set("page", page.toString());
       } else {
-        toSet.append("page", page);
+        toSet.append("page", page.toString());
       }
     }
+    toSet.set("_format", "json");
     this.setState(newState);
     fetch(`/api/v1.0/search?`.concat(toSet.toString()), {
       abortController,
@@ -90,24 +88,45 @@ class Search extends React.Component<any, SearchState> {
           loading: false,
         };
         if (ajaxResults) {
-          stateToSet["results"] = ajaxResults;
-          stateToSet["loaded"] = true;
+          stateToSet.results = ajaxResults;
+          stateToSet.loaded = true;
         }
         this.setState(stateToSet);
       });
   }
 
+  setFilters(filters: Array<FacetList>) {
+    console.debug("Search => set Filters => ", filters);
+    this.setState({ filters });
+  }
+
+  setCurrentActiveRequest(requestIsActive: boolean) {
+    this.setState({
+      currentActiveRequest: requestIsActive,
+    });
+  }
+
+  getQueryVariable(variable: string): string {
+    const myUrl = new URL(document.location.href);
+    return myUrl.searchParams.get(variable);
+  }
+
+  setQueryVariable(variable, value) {
+    const myUrl = new URL(document.location.href);
+    myUrl.searchParams.set(variable, value);
+    document.location.href = myUrl.toString();
+  }
+
+  searchOnSubmitHandler(values) {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("keywords", values.keywords);
+    console.log("I am changing...", searchParams);
+    window.location.search = searchParams.toString();
+  }
+
   render() {
     console.debug("Search => Index => ", this.state, this.props);
-    const {
-      filters,
-      results,
-      links,
-      currentActiveRequest,
-      loading,
-      loaded,
-      page,
-    } = this.state;
+    const { results, currentActiveRequest, loading, loaded, page } = this.state;
     if (loading) {
       return <Loading />;
     }
@@ -124,14 +143,11 @@ class Search extends React.Component<any, SearchState> {
       }
 
       return (
-        <Container fluid={true} className={"outline"}>
+        <Container fluid className="outline">
           <Row>
-            <Col lg={12} className={"py-1"}>
-              <Container
-                fluid={true}
-                className={"text-align-center mx-auto my-2"}
-              >
-                <h5 className={"display-5"}>Search the Milken Institute</h5>
+            <Col lg={12} className="py-1">
+              <Container fluid className="text-align-center mx-auto my-2">
+                <h5 className="display-5">Search the Milken Institute</h5>
                 <ErrorBoundary>
                   <KeywordForm
                     onSubmit={this.searchOnSubmitHandler}
@@ -162,38 +178,7 @@ class Search extends React.Component<any, SearchState> {
         </Container>
       );
     }
-    return (
-      <div>
-        <h5>No Data</h5>
-      </div>
-    );
-  }
-
-  setFilters(filters: Array<FacetList>) {
-    console.debug("Search => set Filters => ", filters);
-    this.setState({ filters });
-  }
-
-  setCurrentActiveRequest(requestIsActive: boolean) {
-    this.setState({
-      currentActiveRequest: requestIsActive,
-    });
-  }
-
-  searchOnSubmitHandler(values) {
-    console.log("Searching...", values);
-    this.setState({ keywords: values.keywords });
-  }
-
-  getQueryVariable(variable: string): string {
-    const myUrl = new URL(document.location.href);
-    return myUrl.searchParams.get(variable);
-  }
-
-  setQueryVariable(variable, value) {
-    const myUrl = new URL(document.location.href);
-    myUrl.searchParams.set(variable, value);
-    document.location.href = myUrl.toString();
+    return <Loading />;
   }
 }
 

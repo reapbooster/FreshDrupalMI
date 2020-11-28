@@ -125,8 +125,6 @@ source:
       type: string
   constants:
     FILE_DESTINATION: 'public://report_covers/'
-
-
 process:
   title: name
   name: name

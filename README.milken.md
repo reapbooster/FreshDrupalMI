@@ -156,3 +156,18 @@ To export content in order to have it import automatically on site build, follow
 3. When the module Milken_Migrate is enabled, it will load the content into the site automatically.
 
 4. The content will also be loaded automatically on every site build.
+
+
+# Command Line
+
+Recommended additions to your ~/.zshrc file for Mac OS:
+
+```bash
+export GITHUB_TOKEN={obtain one from your GH account}
+export CIRCLE_TOKEN={obtain from circleCI login}
+
+alias flushall="docker exec -it mi-redis redis-cli FLUSHALL"
+alias terminus=/usr/local/bin/terminus
+alias drush="docker exec -it mi-php drush $1"
+export PATH=".composer/vendor/bin:/usr/local/opt/openssl@1.1/bin:$PATH"
+```

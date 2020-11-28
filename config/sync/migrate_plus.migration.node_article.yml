@@ -117,8 +117,8 @@ source:
     uuid:
       type: string
   constants:
-    LINK_ENTITY_TYPE_ID: "node"
-    LINK_BUNDLE_ID: "article"
+    LINK_ENTITY_TYPE_ID: node
+    LINK_BUNDLE_ID: article
 process:
   id: id
   title: name

@@ -1,6 +1,6 @@
 uuid: eaf9cc42-9206-49fe-8751-dcf5a77da659
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - search_api_solr
@@ -65,9 +65,6 @@ third_party_settings:
       maxntp: 2000
       boost: false
       interestingTerms: none
-    term_modifiers:
-      slop: 3
-      fuzzy: 1
     advanced:
       index_prefix: ''
       collection: ''

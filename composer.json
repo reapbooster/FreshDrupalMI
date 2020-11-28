@@ -170,6 +170,7 @@
         "drupal/schemata": "^1.0@beta",
         "drupal/search_api": "^1",
         "drupal/search_api_attachments": "^1.0@beta",
+        "drupal/search_api_autocomplete": "^1.4",
         "drupal/search_api_solr": "^4.0.0",
         "drupal/search_api_solr_pro": "^1.1",
         "drupal/shield": "^1.2",

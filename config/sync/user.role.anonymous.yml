@@ -15,6 +15,7 @@ permissions:
   - 'issue subrequests'
   - 'search content'
   - 'use advanced search'
+  - 'use search_api_autocomplete for solr_search'
   - 'view any event entities'
   - 'view any panel entities'
   - 'view any rooms entities'

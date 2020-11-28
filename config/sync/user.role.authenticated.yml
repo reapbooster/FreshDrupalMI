@@ -50,6 +50,7 @@ permissions:
   - 'update any media'
   - 'update media'
   - 'use advanced search'
+  - 'use search_api_autocomplete for solr_search'
   - 'view all media revisions'
   - 'view any event entities'
   - 'view any missing_migration entities'

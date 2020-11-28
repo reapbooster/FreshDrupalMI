@@ -7,10 +7,9 @@
  */
 
 const browserSync = require("browser-sync").create();
-const changedInPlace = require("gulp-changed-in-place");
 const wp = require("webpack");
 const glob = require("glob");
-const webpackStream = require("webpack-stream");
+
 const env = process.env.ENV === "live" ? "prod" : "dev";
 const gulp = require("gulp");
 const shell = require("gulp-shell");
@@ -124,8 +123,8 @@ gulp.task("buildEntryFiles", (done) => {
   try {
     const webpackConfig = configurator(glob.sync("./**/*.entry.tsx", {}));
     return wp(webpackConfig, (err, stats) => {
-      if (err || stats.hasErrors()) {
-        console.error("error: ", err.message, err.fileName);
+      if (err) {
+        console.log(err.toString());
       }
       if (stats) {
         console.log("Compiled:", stats.toString());
