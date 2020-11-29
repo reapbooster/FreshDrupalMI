@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 export interface AutoCompleteOptions {
   name: string;
@@ -32,7 +31,8 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
     const userInput = e.currentTarget.value;
 
     const filteredOptions = options.filter(
-      (option) => option.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+      (option) =>
+        option.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
 
     this.setState({
@@ -64,7 +64,8 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
         this.setState({
           activeOption: 0,
           showOptions: false,
-          userInput: filteredOptions[activeOption],
+          userInput: filteredOptions[activeOption].value,
+          options: [],
         });
         handled = true;
         break;
@@ -85,6 +86,9 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
         this.setState({ activeOption: activeOption + 1 });
         handled = true;
         break;
+
+      default:
+      // Do Nothing.
     }
     if (handled) {
       e.preventDefault();
@@ -92,7 +96,7 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
   };
 
   refreshOptions() {
-    const { userInput } = state;
+    const { userInput } = this.state;
     fetch("/search_api_autocomplete/solr_search?q=".concat(userInput))
       .then((res) => res.json())
       .then((ajaxData) => {
@@ -118,25 +122,22 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
           <ul className="options">
             {filteredOptions.map((option, index) => {
               let className;
-
               if (index === activeOption) {
                 className = "option-active";
               }
 
               return (
-                <li className={className} key={option} onClick={onClick}>
-                  {option}
-                </li>
+                <>
+                  <li className={className} key={option} onClick={onClick}>
+                    {option}
+                  </li>
+                </>
               );
             })}
           </ul>
         );
       } else {
-        optionsListComponent = (
-          <div className="no-options">
-            <em>No options!</em>
-          </div>
-        );
+        optionsListComponent = <ul className="options" />;
       }
     }
 
@@ -155,13 +156,5 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
     );
   }
 }
-
-Autocomplete.propTypes = {
-  options: PropTypes.instanceOf(Array),
-};
-
-Autocomplete.defaultProps = {
-  options: [],
-};
 
 export default Autocomplete;
