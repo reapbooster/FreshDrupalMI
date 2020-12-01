@@ -34,19 +34,14 @@ export const ArticleFull = (props: ArticleFullProps) => {
   return (
     <>
       <Row id={`promo-slide-${nodeArticleData.id}`}>
-        <Container fluid>
+        <Container fluid style={{position: "relative"}}>
           <SlideDisplay
             data={nodeArticleData.field_promo_slide}
             view_mode={"full"}
           />
         </Container>
       </Row>
-      <Row>
-        <Container fluid>
-          <h1>{nodeArticleData.title}</h1>
-        </Container>
-      </Row>
-      <Row>
+      <Row className={"mt-4 pt-4"}>
         <Col md={2} sm={12} lg={2}>
           Social Media Links
         </Col>
