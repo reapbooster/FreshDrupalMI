@@ -1,10 +1,10 @@
-interface TextFieldInterface {
+export interface TextFieldInterface {
   value: string;
   format: string;
   processed: string;
 }
 
-class TextField {
+export class TextField {
   value: string;
 
   format: string;
@@ -20,4 +20,4 @@ class TextField {
   }
 }
 
-export { TextField as default, TextFieldInterface };
+export default TextField;

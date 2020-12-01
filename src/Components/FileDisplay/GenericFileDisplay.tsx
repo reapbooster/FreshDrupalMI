@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import {
-  DocumentFile,
-  DocumentFileInterface,
-} from "../../DataTypes/DocumentFile";
+import { File, FileInterface } from "../../DataTypes/File";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 
-export interface DocumentFileDisplayProps {
-  data: DocumentFileInterface;
+export interface GenericFileDisplayProps {
+  data: FileInterface;
   view_mode: string;
   label?: string;
 }
 
-export const DocumentFileDisplay = (props: DocumentFileDisplayProps) => {
+export const GenericFileDisplay = (props: GenericFileDisplayProps) => {
   const { data, label } = props;
-  const DataObject = new DocumentFile(data);
+  const DataObject = new File(data);
   const [documentData, setDocumentData] = useState(DataObject);
   if (!documentData?.hasData()) {
     const ecp = new EntityComponentProps(documentData);
@@ -22,7 +19,7 @@ export const DocumentFileDisplay = (props: DocumentFileDisplayProps) => {
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("MilkenDocument data back from JSON", ajaxData);
-        const DO = new DocumentFile(ajaxData.data);
+        const DO = new File(ajaxData.data);
         setDocumentData(DO);
       });
   }
@@ -47,4 +44,4 @@ export const DocumentFileDisplay = (props: DocumentFileDisplayProps) => {
   );
 };
 
-export default DocumentFileDisplay;
+export default GenericFileDisplay;

@@ -1,19 +1,18 @@
-import Media, { MediaInterface } from "./Media";
-import TaxonomyTerm, { TaxonomyTermInterface } from "./TaxonomyTerm";
-import Paragraph, { ParagraphInterface } from "./Paragraph";
-import ImageFile, { ImageFileInterface } from "./ImageFile";
+import { Media, MediaInterface } from "./Media";
+import { TaxonomyTerm, TaxonomyTermInterface } from "./TaxonomyTerm";
+import { ParagraphInterface } from "./Paragraph";
+import { ImageFile, ImageFileInterface } from "./ImageFile";
 import { Link, LinkInterface } from "./LinkList";
-import DocumentFile, { DocumentFileInterface } from "./DocumentFile";
-import Event, { EventInterface } from "./Event";
+import { DocumentFile, DocumentFileInterface } from "./DocumentFile";
+import { Event, EventInterface } from "./Event";
 import User, { UserInterface } from "./User";
 
 export interface MediaReportInterface extends MediaInterface {
-  thumbnail: ImageFileInterface;
   field_author: UserInterface;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;
   field_cover: ImageFileInterface;
-  field_custom_author: object;
+  field_custom_author: Record<string, any>;
   field_essay: LinkInterface;
   field_media_file: DocumentFileInterface;
   field_program_initiatives: TaxonomyTermInterface;
@@ -24,33 +23,30 @@ export interface MediaReportInterface extends MediaInterface {
 
 export class MediaReport extends Media implements MediaReportInterface {
   field_content: Array<ParagraphInterface>;
+
   field_essay: Link;
-  protected _thumbnail: ImageFile;
+
   protected _field_author: User;
+
   protected _field_centers: TaxonomyTerm;
+
   protected _field_cover: ImageFile;
+
   protected _field_custom_author: Record<string, unknown>;
+
   protected _field_media_file: DocumentFile;
+
   protected _field_program_initiatives: TaxonomyTerm;
+
   protected _field_related_event: Event;
+
   protected _field_term_collection: TaxonomyTerm;
+
   protected _field_topics: TaxonomyTerm;
 
   constructor(props) {
     super(props);
     Object.assign(props);
-    if (props.thumbnail !== undefined && this.thumbnail === undefined) {
-      this._thumbnail = new ImageFile(props.thumbnail);
-    }
-    if (props.field_cover !== undefined && this.field_cover === undefined) {
-      this._field_cover = new DocumentFile(props.field_cover);
-    }
-    if (
-      props.field_media_file !== undefined &&
-      this.field_media_file === undefined
-    ) {
-      this._field_media_file = new DocumentFile(props.field_media_file);
-    }
   }
 
   getIncluded(): string {
@@ -62,7 +58,7 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   getThumbnail(): ImageFileInterface {
-    return this._thumbnail;
+    return this.field_cover;
   }
 
   get field_author(): User {
@@ -139,13 +135,7 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   get thumbnail(): ImageFileInterface {
-    return this._thumbnail;
-  }
-
-  set thumbnail(value: ImageFileInterface) {
-    if (value.data === undefined && value !== undefined) {
-      this._thumbnail = new ImageFile(value);
-    }
+    return this.field_cover;
   }
 
   getSource() {

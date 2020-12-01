@@ -1,30 +1,26 @@
-// import dependencies
 import "@testing-library/jest-dom/extend-expect";
-import MediaImage from "../DataTypes/MediaImage";
-import ImageFile from "../DataTypes/ImageFile";
-import LiveDataFixture from "../Utility/LiveDataFixture";
-import { ImageStyleObject } from "../DataTypes/ImageStyleObject";
-import EntityComponentProps from "../DataTypes/EntityComponentProps";
-const v4 = new RegExp(
-  /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
-);
+import { expect, test } from "@jest/globals";
+import { MediaImage } from "../DataTypes/MediaImage";
+import { LiveDataFixture } from "../Utility/LiveDataFixture";
+import { v4Regex } from "../Utility/uuidv4";
 
-const fixtureData = new LiveDataFixture("media--image");
 const expectedIncludeString = "&include=field_media_image,thumbnail";
+const fixtureData = new LiveDataFixture("media--image", expectedIncludeString);
 
 test("MediaImage testing", (done) => {
   console.info("Running Test:", process.env);
-
   fixtureData
-    .getFixtureData(expectedIncludeString)
+    .getFixtureData()
     .then((mockResponse) => {
-      for (const key in mockResponse.data) {
-        const origData = mockResponse.data[key];
+      expect(Array.isArray(mockResponse.data)).toBe(true);
+      expect(mockResponse.length).not.toBe(0);
+
+      for (const origData of mockResponse.data) {
         const systemUnderTest = new MediaImage(origData);
         expect(systemUnderTest.type).toEqual(
           expect.stringMatching("media--image")
         );
-        expect(systemUnderTest.id).toEqual(expect.stringMatching(v4));
+        expect(systemUnderTest.id).toEqual(expect.stringMatching(v4Regex));
         expect(systemUnderTest.getIncluded()).toEqual(
           expect.stringMatching(expectedIncludeString)
         );
@@ -35,11 +31,11 @@ test("MediaImage testing", (done) => {
         ) {
           expect(systemUnderTest.thumbnail).not.toBe(null);
           expect(systemUnderTest.thumbnail).not.toBe(undefined);
-          const thumbnail = systemUnderTest.thumbnail;
+          const { thumbnail } = systemUnderTest;
           expect(thumbnail).not.toBeNull();
           expect(thumbnail.id).not.toBeUndefined();
           expect(thumbnail.type).not.toBeUndefined();
-          expect(thumbnail.id).toEqual(expect.stringMatching(v4));
+          expect(thumbnail.id).toEqual(expect.stringMatching(v4Regex));
           expect(thumbnail.type).toEqual(expect.stringContaining("file--"));
           const styleObject = thumbnail.imageStyleObject;
           expect(styleObject).not.toBe(null);
@@ -54,7 +50,7 @@ test("MediaImage testing", (done) => {
           const imageFile = systemUnderTest.field_media_image;
           expect(imageFile).not.toBeNull();
           expect(imageFile).not.toBeUndefined();
-          expect(imageFile.id).toEqual(expect.stringMatching(v4));
+          expect(imageFile.id).toEqual(expect.stringMatching(v4Regex));
           expect(imageFile.type).toEqual(expect.stringContaining("file--"));
           expect(imageFile.hasData()).toBe(true);
           const styleObject = imageFile.imageStyleObject;
@@ -63,8 +59,9 @@ test("MediaImage testing", (done) => {
           expect(styleObject.constructor.name).toBe("ImageStyleObject");
           expect(typeof styleObject.srcSet).toBe("string");
         }
+        return true;
       }
-    })
+    }, 10000)
     .then(() => {
       done();
     });

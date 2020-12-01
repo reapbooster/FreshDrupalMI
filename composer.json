@@ -52,6 +52,7 @@
         "drupal/consumers": "^1.11",
         "drupal/content_browser": "^1.0@alpha",
         "drupal/content_sync": "^2.1",
+        "drupal/convert_bundles": "^1.0@alpha",
         "drupal/core": "^8.9",
         "drupal/core-composer-scaffold": "^8",
         "drupal/core-recommended": "^8.8",

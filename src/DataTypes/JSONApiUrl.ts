@@ -1,21 +1,25 @@
-import { EntityInterface } from "./Entity";
-import { LinkListInterface } from "./LinkList";
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
+import { LinkListInterface } from "./LinkList";
+
+interface JSONApiUrlEntityInterface {
+  id: string;
+  type: string;
+}
 
 export interface JsonApiListResponse {
-  data: Array<EntityInterface>;
+  data: Array<JSONApiUrlEntityInterface>;
   links: LinkListInterface;
 }
 
 export interface JSONApiContentResponse {
-  data: EntityInterface;
+  data: JSONApiUrlEntityInterface;
   links: LinkListInterface;
 }
 
 export class JSONApiUrl {
   parsed: URL;
 
-  query: URLSearchParams;
+  query: DrupalJsonApiParams;
 
   constructor(incoming: string = null, searchParams: URLSearchParams = null) {
     console.log("jsonapiURL: Incoming", incoming);

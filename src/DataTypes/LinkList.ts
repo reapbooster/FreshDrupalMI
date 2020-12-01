@@ -1,7 +1,5 @@
-import JSONApiUrl from "./JSONApiUrl";
-
 export interface LinkInterface {
-  href: JSONApiUrl;
+  href: string;
   title?: string;
   uri?: string;
 }
@@ -9,29 +7,26 @@ export interface LinkInterface {
 export class Link implements LinkInterface {
   title: string;
 
-  private _href: JSONApiUrl;
+  private _href: string;
 
   constructor(incoming: LinkInterface) {
     Object.assign(this, incoming);
   }
 
-  get href(): JSONApiUrl {
+  get href(): string {
     return this._href;
   }
 
   set href(value) {
-    if (!value instanceof JSONApiUrl) {
-      value = new JSONApiUrl(value);
-    }
     this._href = value;
   }
 
   get uri(): string {
-    return this._href.toString();
+    return this._href;
   }
 
   set uri(incoming: string) {
-    this._href = new JSONApiUrl(incoming);
+    this._href = incoming;
   }
 }
 

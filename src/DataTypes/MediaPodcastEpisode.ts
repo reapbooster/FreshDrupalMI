@@ -1,13 +1,10 @@
-import { ParagraphsTypeInterface } from "./ParagraphsType";
-import Entity, { EntityInterface } from "./Entity";
-import ImageFile, { ImageFileInterface } from "./ImageFile";
-import AudioFile, { AudioFileInterface } from "./AudioFile";
-import DocumentFile, { DocumentFileInterface } from "./DocumentFile";
-import LinkList from "./LinkList";
-import TextField from "../Fields/TextField";
-import PathObject, { PathObjectInterface } from "./PathObject";
-import MediaType, { MediaTypeInterface } from "./MediaType";
-import Media, { MediaInterface } from "./Media";
+import { ImageFile, ImageFileInterface } from "./ImageFile";
+import { AudioFile, AudioFileInterface } from "./AudioFile";
+import { DocumentFile, DocumentFileInterface } from "./DocumentFile";
+import { TextField } from "../Fields/TextField";
+import { PathObject, PathObjectInterface } from "./PathObject";
+import { MediaType, MediaTypeInterface } from "./MediaType";
+import { Media, MediaInterface } from "./Media";
 
 export interface MediaPodcastServiceLinkInterface {
   key: string;
@@ -35,28 +32,38 @@ export class MediaPodcastEpisode
   extends Media
   implements MediaPodcastEpisodeInterface {
   field_photo_subject_name?: string;
+
   field_photo_subject_title?: string;
+
   parent_field_name?: string;
+
   parent_type?: string;
+
   field_body?: TextField;
+
   field_episode?: number;
+
   field_media_in_library?: boolean;
+
   field_service_links?: Array<MediaPodcastServiceLinkInterface>;
+
   field_summary?: TextField;
+
   protected _field_media_audio_file?: AudioFile;
+
   protected _field_media_image?: ImageFile;
+
   protected _field_transcript?: DocumentFile;
+
   protected _media_type?: MediaType;
+
   protected _path?: PathObject;
+
   protected _thumbnail?: ImageFile;
 
   constructor(props) {
     super(props);
     Object.assign(this, props);
-  }
-
-  getThumbnail(): ImageFileInterface {
-    return this.field_media_image;
   }
 
   getIncluded(): string {
@@ -110,15 +117,11 @@ export class MediaPodcastEpisode
   }
 
   get thumbnail(): ImageFileInterface {
-    return this._thumbnail;
-  }
-
-  set thumbnail(incoming: ImageFileInterface) {
-    this._thumbnail = new ImageFile(incoming);
+    return this.field_media_image;
   }
 
   getThumbnail() {
-    return this.thumbnail;
+    return this.field_media_image;
   }
 
   getSource() {

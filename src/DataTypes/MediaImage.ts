@@ -1,25 +1,24 @@
-import ImageFile, { ImageFileInterface } from "./ImageFile";
+import { ImageFile, ImageFileInterface } from "./ImageFile";
+import { Media, MediaInterface } from "./Media";
 
-import ImageStyleObject, {
-  ImageStyleObjectInterface,
-  HolderImageStyleObject,
-} from "./ImageStyleObject";
-import Media, { MediaInterface } from "./Media";
-
-interface MediaImageInterface extends MediaInterface {
+export interface MediaImageInterface extends MediaInterface {
   field_media_image?: ImageFileInterface;
   field_photo_subject_name?: string;
   field_photo_subject_title?: string;
   field_photo_subject_org?: string;
 }
 
-class MediaImage extends Media implements MediaImageInterface {
+export class MediaImage extends Media implements MediaImageInterface {
   field_media_in_library?: boolean;
+
   field_photo_subject_name?: string;
+
   field_photo_subject_title?: string;
+
   field_photo_subject_org?: string;
 
   protected _thumbnail?: ImageFile;
+
   protected _field_media_image?: ImageFile;
 
   constructor(props) {
@@ -60,4 +59,4 @@ class MediaImage extends Media implements MediaImageInterface {
   }
 }
 
-export { MediaImage as default, MediaImageInterface };
+export default MediaImage;

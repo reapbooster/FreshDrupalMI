@@ -1,30 +1,29 @@
-// import dependencies
+import { expect, test } from "@jest/globals";
 import "@testing-library/jest-dom/extend-expect";
-import MediaPodcastEpisode from "../DataTypes/MediaPodcastEpisode";
-
-import ImageFile from "../DataTypes/ImageFile";
-import LiveDataFixture from "../Utility/LiveDataFixture";
-import { promises } from "dns";
-const v4 = new RegExp(
-  /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
-);
-
-const fixtureData = new LiveDataFixture("media--podcast_episode");
-const expectedIncludeString =
-  "&include=field_media_image,thumbnail,field_media_audio_file";
+import { MediaPodcastEpisode } from "../DataTypes/MediaPodcastEpisode";
+import { LiveDataFixture } from "../Utility/LiveDataFixture";
+import { v4Regex } from "../Utility/uuidv4";
 
 test("Podcast Episode DataType Testing", (done) => {
-  console.info("Running Test:", process.env);
+  const expectedIncludeString =
+    "&include=field_media_image,thumbnail,field_media_audio_file";
+  const fixtureData = new LiveDataFixture(
+    "media--podcast_episode",
+    expectedIncludeString
+  );
+
   fixtureData
-    .getFixtureData(expectedIncludeString)
+    .getFixtureData()
     .then((mockResponse) => {
-      for (const key in mockResponse.data) {
-        const origData = mockResponse.data[key];
+      expect(Array.isArray(mockResponse.data)).toBe(true);
+      expect(mockResponse.length).not.toBe(0);
+
+      for (const origData of mockResponse.data) {
         const systemUnderTest = new MediaPodcastEpisode(origData);
         expect(systemUnderTest.type).toEqual(
           expect.stringMatching("media--podcast_episode")
         );
-        expect(systemUnderTest.id).toEqual(expect.stringMatching(v4));
+        expect(systemUnderTest.id).toEqual(expect.stringMatching(v4Regex));
         expect(systemUnderTest.getIncluded()).toEqual(
           expect.stringMatching(expectedIncludeString)
         );
@@ -39,7 +38,7 @@ test("Podcast Episode DataType Testing", (done) => {
           expect(thumbnail).not.toBeNull();
           expect(thumbnail.id).not.toBeUndefined();
           expect(thumbnail.type).not.toBeUndefined();
-          expect(thumbnail.id).toEqual(expect.stringMatching(v4));
+          expect(thumbnail.id).toEqual(expect.stringMatching(v4Regex));
           expect(thumbnail.type).toEqual(expect.stringContaining("file--"));
           const styleObject = thumbnail.imageStyleObject;
           expect(styleObject).not.toBe(null);
@@ -52,7 +51,7 @@ test("Podcast Episode DataType Testing", (done) => {
           const imageFile = systemUnderTest.field_media_image;
           expect(imageFile).not.toBeNull();
           expect(imageFile).not.toBeUndefined();
-          expect(imageFile.id).toEqual(expect.stringMatching(v4));
+          expect(imageFile.id).toEqual(expect.stringMatching(v4Regex));
           expect(imageFile.type).toEqual(expect.stringContaining("file--"));
           expect(imageFile.hasData()).toBe(true);
         }

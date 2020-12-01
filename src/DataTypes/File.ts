@@ -20,13 +20,19 @@ export interface FileInterface extends EntityInterface {
   getIncluded(): string;
 }
 
-export abstract class File extends Entity implements FileInterface {
+export class File extends Entity implements FileInterface {
   drupal_internal__fid: number;
+
   filemime: string;
+
   filename: string;
+
   filesize: number | string;
+
   status: boolean;
+
   uid: UserInterface;
+
   uri: FileURIInterface;
 
   constructor(props) {
@@ -35,10 +41,12 @@ export abstract class File extends Entity implements FileInterface {
   }
 
   hasData() {
-    return this.status !== undefined;
+    return this.filemime !== undefined;
   }
 
-  abstract getIncluded();
+  getIncluded() {
+    return "";
+  }
 }
 
 export default File;

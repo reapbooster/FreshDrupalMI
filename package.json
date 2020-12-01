@@ -300,7 +300,7 @@
   "devDependencies": {},
   "jest": {
     "verbose": true,
-    "bail": true,
+    "bail": false,
     "silent": false,
     "roots": [
       "<rootDir>/src"
@@ -446,7 +446,10 @@
           ]
         }
       ],
-      "react/require-default-props": "off"
+      "react/require-default-props": "off",
+      "import/no-extraneous-dependencies": "off",
+      "no-restricted-syntax": "off",
+      "guard-for-in": "off"
     }
   }
 }

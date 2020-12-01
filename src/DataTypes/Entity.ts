@@ -1,7 +1,7 @@
-import LinkList, { LinkListInterface } from "./LinkList";
-import EntityComponentProps from "../DataTypes/EntityComponentProps";
-import JSONApiUrl from "./JSONApiUrl";
 import * as PathUtility from "path";
+import LinkList, { LinkListInterface } from "./LinkList";
+import EntityComponentProps from "./EntityComponentProps";
+import JSONApiUrl from "./JSONApiUrl";
 
 export interface EntityInterface {
   changed?: string;
@@ -12,7 +12,7 @@ export interface EntityInterface {
   [x: string]: unknown;
 }
 
-export default abstract class Entity implements EntityInterface {
+export abstract class Entity implements EntityInterface {
   id: string;
 
   type: string;
@@ -22,6 +22,7 @@ export default abstract class Entity implements EntityInterface {
   private _created?: Date;
 
   private _links?: LinkList;
+
   [x: string]: unknown;
 
   constructor(incoming: EntityInterface) {
@@ -87,3 +88,5 @@ export default abstract class Entity implements EntityInterface {
     return typeof this.id === "string" && typeof this.type === "string";
   }
 }
+
+export default Entity;

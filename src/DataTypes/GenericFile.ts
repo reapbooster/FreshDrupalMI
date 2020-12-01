@@ -1,25 +1,29 @@
-import {
-  DrupalDefaultEntityInterface,
-  DrupalDefaultEntityValues,
-} from "./DrupalDefaultEntityAttributes";
+import { FileURIInterface } from "./File";
+import { Entity, EntityInterface } from "./Entity";
 
-interface GenericFileInterface extends DrupalDefaultEntityInterface {
-  uri: GenericFileUri;
+export interface GenericFileInterface extends EntityInterface {
+  uri: FileURIInterface;
   filemime: string;
   filesize: number;
 }
 
-interface GenericFileUri {
-  value: string;
-  url: string;
-}
+export class GenericFile extends Entity implements GenericFileInterface {
+  id: string;
 
-class GenericFile extends DrupalDefaultEntityValues {
-  uri: GenericFileUri;
+  type: string;
+
+  uri: FileURIInterface;
 
   filemime: string;
 
   filesize: number;
+
+  [x: string]: unknown;
+
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
 }
 
-export { GenericFile as default, GenericFileInterface, GenericFileUri };
+export default GenericFile;

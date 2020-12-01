@@ -4,7 +4,7 @@ export interface PathObjectInterface {
   langcode: string;
 }
 
-export default class PathObject implements PathObjectInterface {
+export class PathObject implements PathObjectInterface {
   alias: string;
 
   pid: number;
@@ -15,3 +15,5 @@ export default class PathObject implements PathObjectInterface {
     Object.assign(this, incoming);
   }
 }
+
+export default PathObject;

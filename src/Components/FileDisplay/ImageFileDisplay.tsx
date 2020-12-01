@@ -1,38 +1,28 @@
 import React, { useState } from "react";
 import Loading from "../Loading";
-import ImageFile, { ImageFileInterface } from "../../DataTypes/ImageFile";
+import { ImageFile, ImageFileInterface } from "../../DataTypes/ImageFile";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
-import Holder from "react-holder-component";
 
-interface ImageFileDisplayProps {
+export interface ImageFileDisplayProps {
   data: ImageFileInterface;
   view_mode: string;
   key?: number;
-  style: Record<string, any>;
+  style: Record<string, unknown>;
   width?: string;
   height?: string;
   className?: string;
   srcsetSizes?: string;
 }
 
-const ImageFileDisplay: React.FunctionComponent = (
+export const ImageFileDisplay: React.FunctionComponent = (
   props: ImageFileDisplayProps
 ) => {
-  const {
-    data,
-    view_mode,
-    key,
-    style,
-    width,
-    height,
-    className,
-    srcsetSizes,
-  } = props;
+  const { data, style, width, height, className, srcsetSizes } = props;
   const DataObject = new ImageFile(data);
-  if (!DataObject.valid()) {
-    return <div data-error={"DATA INVALID"} />;
-  }
   const [imageData, setImageData] = useState(DataObject);
+  if (!DataObject.valid()) {
+    return <div data-error="DATA INVALID" />;
+  }
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
     ecp
@@ -40,8 +30,8 @@ const ImageFileDisplay: React.FunctionComponent = (
       .then((res) => res.json())
       .then((ajaxData) => {
         console.debug("MilkenImage: Data back from JSON", ajaxData);
-        const DataObject = new ImageFile(ajaxData.data);
-        setImageData(DataObject);
+        const newDO = new ImageFile(ajaxData.data);
+        setImageData(newDO);
       });
     return (
       <>
@@ -62,7 +52,7 @@ const ImageFileDisplay: React.FunctionComponent = (
   };
 
   if (style) {
-    attributes["style"] = style;
+    attributes.style = style;
   }
   const styleObject = imageData.imageStyleObject;
   return (
@@ -74,10 +64,11 @@ const ImageFileDisplay: React.FunctionComponent = (
         {...styleObject.imageAttributes}
         style={imageTagStyle}
         className={className}
-        sizes={srcsetSizes ? srcsetSizes : ""}
+        sizes={srcsetSizes || ""}
+        alt={imageData.filename}
       />
     </>
   );
 };
 
-export { ImageFileDisplay as default, ImageFileDisplayProps };
+export default ImageFileDisplay;

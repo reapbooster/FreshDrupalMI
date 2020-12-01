@@ -1,12 +1,8 @@
-// import dependencies
+import { expect, test } from "@jest/globals";
 import "@testing-library/jest-dom/extend-expect";
-import MediaVideo from "../DataTypes/MediaVideo";
-
-import ImageFile from "../DataTypes/ImageFile";
-import LiveDataFixture from "../Utility/LiveDataFixture";
-const v4 = new RegExp(
-  /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
-);
+import { MediaVideo } from "../DataTypes/MediaVideo";
+import { LiveDataFixture } from "../Utility/LiveDataFixture";
+import { v4Regex } from "../Utility/uuidv4";
 
 const fixtureData = new LiveDataFixture("media--video");
 const expectedIncludeString = "&include=thumbnail";
@@ -16,26 +12,28 @@ test("MediaVideo DataType Testing", (done) => {
   fixtureData
     .getFixtureData(expectedIncludeString)
     .then((mockResponse) => {
-      for (const key in mockResponse.data) {
-        const origData = mockResponse.data[key];
-        const systemUnderTest = new MediaVideo(mockResponse.data[key]);
+      expect(Array.isArray(mockResponse.data)).toBe(true);
+      expect(mockResponse.length).not.toBe(0);
+
+      for (const origData of mockResponse.data) {
+        const systemUnderTest = new MediaVideo(origData);
         expect(systemUnderTest.type).toEqual(
           expect.stringMatching("media--video")
         );
-        expect(systemUnderTest.id).toEqual(expect.stringMatching(v4));
+        expect(systemUnderTest.id).toEqual(expect.stringMatching(v4Regex));
         expect(systemUnderTest.getIncluded()).toEqual(
           expect.stringMatching(expectedIncludeString)
         );
         expect(systemUnderTest.hasData()).toEqual(true);
         if (origData.thumbnail !== undefined) {
-          expect(systemUnderTest.thumbnail).not.toBeNull;
+          expect(systemUnderTest.thumbnail).not.toBe(null);
           expect(systemUnderTest.thumbnail).not.toBeUndefined();
           const thumbnail = systemUnderTest.getThumbnail();
           expect(thumbnail).not.toBeNull();
           expect(thumbnail).not.toBeUndefined();
           expect(thumbnail.id).not.toBeUndefined();
           expect(thumbnail.type).not.toBeUndefined();
-          expect(thumbnail.id).toEqual(expect.stringMatching(v4));
+          expect(thumbnail.id).toEqual(expect.stringMatching(v4Regex));
           expect(thumbnail.type).toEqual(expect.stringContaining("file--"));
           const styleObject = thumbnail.imageStyleObject;
           expect(styleObject).not.toBe(null);
@@ -48,7 +46,7 @@ test("MediaVideo DataType Testing", (done) => {
           const imageFile = systemUnderTest.field_media_file;
           expect(imageFile).not.toBeNull();
           expect(imageFile).not.toBeUndefined();
-          expect(imageFile.id).toEqual(expect.stringMatching(v4));
+          expect(imageFile.id).toEqual(expect.stringMatching(v4Regex));
           expect(imageFile.type).toEqual(expect.stringContaining("file--"));
           expect(imageFile.hasData()).toBe(true);
           const styleObject = imageFile.imageStyleObject;
