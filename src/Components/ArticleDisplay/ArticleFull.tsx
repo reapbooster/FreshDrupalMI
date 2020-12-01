@@ -34,7 +34,7 @@ export const ArticleFull = (props: ArticleFullProps) => {
   return (
     <>
       <Row id={`promo-slide-${nodeArticleData.id}`}>
-        <Container fluid style={{position: "relative"}}>
+        <Container fluid style={{ position: "relative" }}>
           <SlideDisplay
             data={nodeArticleData.field_promo_slide}
             view_mode={"full"}
