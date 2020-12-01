@@ -80,7 +80,7 @@ source:
       label: Sticky
       selector: /sticky
     -
-      name: hero_title
+      name: hero_super_title
       label: 'Hero Title'
       selector: /field_ar_hero_title
     -
@@ -147,7 +147,8 @@ process:
   field_promo_slide:
     plugin: 'milken_migrate:hero_to_slide'
     source: hero_image
-    title_source: hero_title
+    supertitle_source: hero_super_title
+    title_source: name
     title_source_backup: name
     link_id: uuid
     link_entity_type_id: constants/LINK_ENTITY_TYPE_ID
