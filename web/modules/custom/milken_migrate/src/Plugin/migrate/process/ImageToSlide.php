@@ -128,27 +128,29 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
       // ** Supertitle is also optional, Article uses it
       $destination['field_slide_text'] = (isset($this->configuration['subhead'])
         && isset($source[$this->configuration['subhead']]))
-        ? $source[$this->configuration['subhead']] 
+        ? $source[$this->configuration['subhead']]
         : (isset($this->configuration['supertitle_source'])
         && isset($source[$this->configuration['supertitle_source']])
         && isset($destination['name']))
         ? [
-            0 => [
-            "key" => "h2", 
-            "description" => '', 
+          0 => [
+            "key" => "h2",
+            "description" => '',
             "value" => $source[$this->configuration['supertitle_source']],
             "format" => "full_html",
             "processed" => $source[$this->configuration['supertitle_source']],
-            "new_entry" => ''],
-            
-            1 => [
-              "key" => "h1", 
-              "description" => '', 
-              "value" => $destination['name'],
-              "format" => "full_html",
-              "processed" => $destination['name'],
-              "new_entry" => '']
-          ]
+            "new_entry" => '',
+          ],
+
+          1 => [
+            "key" => "h1",
+            "description" => '',
+            "value" => $destination['name'],
+            "format" => "full_html",
+            "processed" => $destination['name'],
+            "new_entry" => '',
+          ],
+        ]
         : NULL;
 
       \Drupal::logger('milken_migrate')
