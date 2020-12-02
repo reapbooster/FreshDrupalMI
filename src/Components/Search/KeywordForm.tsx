@@ -31,14 +31,13 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
 
   onClick = (e) => {
     console.debug("Click", e.currentTarget.dataset.value);
-    this.setState({
-      showOptions: false,
-      userInput: e.currentTarget.dataset.value.toLowerCase(),
-    });
+    document.location.href = `/search?keywords=`.concat(
+      e.currentTarget.dataset.value.toLowerCase()
+    );
   };
 
   onFocus = (e) => {
-    console.debug("Focus", e);
+    e.currentTarget.select();
   };
 
   onBlur = (e) => {
@@ -49,8 +48,13 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
     if (e.defaultPrevented) {
       return; // Should do nothing if the default action has been cancelled
     }
-    console.debug("Code", e.key);
 
+    if (e.currentTarget.selected) {
+      this.setState({
+        userInput: "",
+      });
+    }
+    console.debug("Code", e.key);
     const { activeOption, options, showOptions, userInput } = this.state;
     let handled = false;
     switch (e.key) {
@@ -87,7 +91,13 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
         break;
 
       case "Backspace":
-        this.setState({ userInput: userInput.substr(0, userInput.length - 1) });
+        if (e.currentTarget.selected) {
+          this.setState({ userInput: "" });
+        } else {
+          this.setState({
+            userInput: userInput.substr(0, userInput.length - 1),
+          });
+        }
         handled = true;
         break;
 
