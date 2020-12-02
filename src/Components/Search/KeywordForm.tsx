@@ -17,12 +17,13 @@ export interface AutocompleteState {
 class Autocomplete extends React.Component<null, AutocompleteState> {
   constructor(props) {
     super(props);
+    const url = new URL(document.location.href);
 
     this.state = {
       activeOption: 0,
       filteredOptions: [],
       showOptions: false,
-      userInput: "",
+      userInput: url.searchParams.get("keywords"),
       options: [],
       abortController: new AbortController(),
     };
