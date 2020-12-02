@@ -17,10 +17,8 @@ export class LiveDataFixture {
     this.entityTypeId = entityTypeId;
     this.bundle = bundle;
     this.url = new JSONApiUrl(
-      this.getBaseUrl().concat(
-        `/jsonapi/${entityTypeId}/${bundle}?jsonapi_include=true&`,
-        includeString
-      )
+      this.getBaseUrl().concat(`/jsonapi/${entityTypeId}/${bundle}`),
+      new URLSearchParams("?jsonapi_include=true&".concat(includeString))
     );
   }
 

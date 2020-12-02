@@ -302,6 +302,7 @@
     "verbose": true,
     "bail": false,
     "silent": false,
+    "testTimeout": 20000,
     "roots": [
       "<rootDir>/src"
     ],
@@ -449,7 +450,8 @@
       "react/require-default-props": "off",
       "import/no-extraneous-dependencies": "off",
       "no-restricted-syntax": "off",
-      "guard-for-in": "off"
+      "guard-for-in": "off",
+      "react/no-unused-state": "warn"
     }
   }
 }

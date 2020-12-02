@@ -11,7 +11,7 @@ test("MediaImageDisplay basic render test", (done) => {
   console.info("Running Test:", process.env);
 
   fixtureData
-    .getFixtureData(expectedIncludeString)
+    .getFixtureData()
     .then((mockResponse) => {
       for (const origData of mockResponse.data) {
         expect(Array.isArray(mockResponse.data)).toBe(true);

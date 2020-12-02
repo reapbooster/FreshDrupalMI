@@ -8,6 +8,11 @@ import { v4Regex } from "../Utility/uuidv4";
 
 const expectedIncludeString = "";
 
+const fixtureData = new LiveDataFixture("file--file", expectedIncludeString);
+fixtureData.url.query.addFilter("filemime", "image/jpeg");
+console.log("fixture data", fixtureData);
+process.exit(fixtureData.url.toString());
+
 test("image/jpeg", (done) => {
   const fixtureData = new LiveDataFixture("file--file", expectedIncludeString);
   fixtureData.url.query.addFilter("filemime", "image/jpeg");

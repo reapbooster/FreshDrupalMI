@@ -38,7 +38,7 @@ export class JSONApiUrl {
   }
 
   toString(): string {
-    return this?.parsed?.toString().concat("?", this?.query?.toString());
+    return this?.parsed?.toString().concat("?", this?.query?.getQueryString());
   }
 
   clone() {

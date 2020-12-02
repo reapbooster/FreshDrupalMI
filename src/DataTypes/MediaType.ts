@@ -1,12 +1,12 @@
 import EntityType, { EntityTypeInterface } from "./EntityType";
 
-interface MediaTypeSourceConfigurationInterface {
+export interface MediaTypeSourceConfigurationInterface {
   thumbnails_directory?: string;
   providers?: Array<string>;
   source_field?: string;
 }
 
-interface MediaTypeFieldMapInterface {
+export interface MediaTypeFieldMapInterface {
   title: string;
   name: string;
   default_name: string;
@@ -17,7 +17,7 @@ interface MediaTypeFieldMapInterface {
   height: string;
 }
 
-class MediaTypeFieldMap {
+export class MediaTypeFieldMap {
   title: string;
 
   name: string;
@@ -43,7 +43,7 @@ class MediaTypeFieldMap {
   }
 }
 
-interface MediaTypeInterface extends EntityTypeInterface {
+export interface MediaTypeInterface extends EntityTypeInterface {
   source: string;
   source_configuration: MediaTypeSourceConfigurationInterface;
   field_map: MediaTypeFieldMapInterface;
@@ -51,7 +51,7 @@ interface MediaTypeInterface extends EntityTypeInterface {
   queue_thumbnail_downloads: false;
 }
 
-class MediaType extends EntityType implements MediaTypeInterface {
+export class MediaType extends EntityType implements MediaTypeInterface {
   source: string;
 
   private _source_configuration: MediaTypeSourceConfigurationInterface;
@@ -79,10 +79,4 @@ class MediaType extends EntityType implements MediaTypeInterface {
   }
 }
 
-export {
-  MediaType as default,
-  MediaTypeInterface,
-  MediaTypeSourceConfigurationInterface,
-  MediaTypeFieldMap,
-  MediaTypeFieldMapInterface,
-};
+export default MediaType;

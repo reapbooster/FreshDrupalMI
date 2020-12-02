@@ -11,6 +11,7 @@ export interface AutocompleteState {
   showOptions: boolean;
   userInput: string;
   options: Array<AutoCompleteOptions>;
+  abortController: AbortController;
 }
 
 class Autocomplete extends React.Component<null, AutocompleteState> {
@@ -23,50 +24,48 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
       showOptions: false,
       userInput: "",
       options: [],
+      abortController: new AbortController(),
     };
   }
 
-  onChange = (e) => {
-    const { options } = this.state;
-    const userInput = e.currentTarget.value;
-
-    const filteredOptions = options.filter(
-      (option) =>
-        option.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
-
-    this.setState({
-      activeOption: 0,
-      filteredOptions,
-      showOptions: true,
-      userInput: e.currentTarget.value,
-    });
+  onClick = (e) => {
+    console.debug("Click", e.currentTarget);
   };
 
-  onClick = (e) => {
-    this.setState({
-      activeOption: 0,
-      filteredOptions: [],
-      showOptions: false,
-      userInput: e.currentTarget.innerText,
-    });
+  onFocus = (e) => {
+    console.debug("Focus", e);
+  };
+
+  onBlur = (e) => {
+    console.debug("Blur", e);
   };
 
   onKeyDown = (e) => {
     if (e.defaultPrevented) {
       return; // Should do nothing if the default action has been cancelled
     }
+    console.debug("Code", e.key);
 
-    const { activeOption, filteredOptions } = this.state;
+    const {
+      activeOption,
+      filteredOptions,
+      showOptions,
+      userInput,
+    } = this.state;
     let handled = false;
-    switch (e.code) {
+    switch (e.key) {
       case "Enter":
-        this.setState({
-          activeOption: 0,
-          showOptions: false,
-          userInput: filteredOptions[activeOption].value,
-          options: [],
-        });
+        if (showOptions === true) {
+          this.setState({
+            activeOption: 0,
+            showOptions: false,
+            userInput: filteredOptions[activeOption].value,
+            options: [],
+          });
+        } else {
+          document.location.href = `/search?keywords=`.concat(userInput);
+        }
+
         handled = true;
         break;
 
@@ -87,51 +86,66 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
         handled = true;
         break;
 
+      case "Backspace":
+        this.setState({ userInput: userInput.substr(0, userInput.length - 1) });
+        handled = true;
+        break;
+
       default:
-      // Do Nothing.
+        this.setState({
+          userInput: userInput.concat(`${e.key}`),
+        });
+        this.refreshOptions();
+        handled = true;
     }
     if (handled) {
       e.preventDefault();
     }
   };
 
-  refreshOptions() {
-    const { userInput } = this.state;
-    fetch("/search_api_autocomplete/solr_search?q=".concat(userInput))
+  refreshOptions = () => {
+    const { userInput, abortController } = this.state;
+    const { signal } = abortController;
+    fetch("/search_api_autocomplete/solr_search?q=".concat(userInput), {
+      signal,
+    })
       .then((res) => res.json())
       .then((ajaxData) => {
+        console.debug("back from json", ajaxData);
         if (Array.isArray(ajaxData)) {
-          this.setState({ options: ajaxData });
+          this.setState({
+            options: ajaxData,
+            showOptions: true,
+          });
         }
       });
-  }
+  };
 
   render() {
     const {
-      onChange,
-      onClick,
+      onFocus,
       onKeyDown,
-      state: { activeOption, filteredOptions, showOptions, userInput },
+      onClick,
+      onBlur,
+      state: { activeOption, showOptions, userInput, options },
     } = this;
 
     let optionsListComponent;
 
     if (showOptions && userInput) {
-      if (filteredOptions.length) {
+      if (options.length) {
         optionsListComponent = (
-          <ul className="options">
-            {filteredOptions.map((option, index) => {
+          <ul id="milken-keyword-text-input" className="options">
+            {options.map((option, index) => {
               let className;
               if (index === activeOption) {
                 className = "option-active";
               }
 
               return (
-                <>
-                  <li className={className} key={option} onClick={onClick}>
-                    {option}
-                  </li>
-                </>
+                <li className={className} key={option.value} onClick={onClick}>
+                  {option.value}
+                </li>
               );
             })}
           </ul>
@@ -147,9 +161,14 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
           id="edit-keywords"
           name="keywords"
           type="text"
-          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onKeyDown={onKeyDown}
           value={userInput}
+          autoComplete="off"
+          autoCapitalize="off"
+          aria-autocomplete="list"
+          aria-owns="milken-keyword-text-input"
         />
         {optionsListComponent}
       </>

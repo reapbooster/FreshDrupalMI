@@ -4,13 +4,13 @@ import { MediaVideo } from "../DataTypes/MediaVideo";
 import { LiveDataFixture } from "../Utility/LiveDataFixture";
 import { v4Regex } from "../Utility/uuidv4";
 
-const fixtureData = new LiveDataFixture("media--video");
 const expectedIncludeString = "&include=thumbnail";
+const fixtureData = new LiveDataFixture("media--video", expectedIncludeString);
 
 test("MediaVideo DataType Testing", (done) => {
   console.info("Running Test:", process.env);
   fixtureData
-    .getFixtureData(expectedIncludeString)
+    .getFixtureData()
     .then((mockResponse) => {
       expect(Array.isArray(mockResponse.data)).toBe(true);
       expect(mockResponse.length).not.toBe(0);

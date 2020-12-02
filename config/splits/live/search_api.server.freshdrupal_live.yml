@@ -37,7 +37,7 @@ backend_config:
     host: milken-dev.reapbooster.com
     port: 8443
     path: /
-    core: freshdrupal_live
+    core: freshmilken_live
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10
@@ -45,6 +45,7 @@ backend_config:
     commit_within: 1000
     solr_version: ''
     http_method: AUTO
+    skip_schema_check: false
     jmx: true
     solr_install_dir: ''
   disabled_field_types: {  }
@@ -59,7 +60,7 @@ backend_config:
   index_single_documents_fallback_count: 10
   retrieve_data: false
   highlight_data: false
-  skip_schema_check: false
+  fallback_multiple: false
   server_prefix: ''
   domain: generic
   environment: default
