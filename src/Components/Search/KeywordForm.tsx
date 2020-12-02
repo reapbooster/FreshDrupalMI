@@ -29,7 +29,11 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
   }
 
   onClick = (e) => {
-    console.debug("Click", e.currentTarget);
+    console.debug("Click", e.currentTarget.dataset.value);
+    this.setState({
+      showOptions: false,
+      userInput: e.currentTarget.dataset.value.toLowerCase(),
+    });
   };
 
   onFocus = (e) => {
@@ -46,12 +50,7 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
     }
     console.debug("Code", e.key);
 
-    const {
-      activeOption,
-      filteredOptions,
-      showOptions,
-      userInput,
-    } = this.state;
+    const { activeOption, options, showOptions, userInput } = this.state;
     let handled = false;
     switch (e.key) {
       case "Enter":
@@ -59,7 +58,7 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
           this.setState({
             activeOption: 0,
             showOptions: false,
-            userInput: filteredOptions[activeOption].value,
+            userInput: options[activeOption].value,
             options: [],
           });
         } else {
@@ -78,7 +77,7 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
         break;
 
       case "ArrowDown":
-        if (activeOption - 1 === filteredOptions.length) {
+        if (activeOption - 1 === options.length) {
           return;
         }
 
@@ -143,7 +142,12 @@ class Autocomplete extends React.Component<null, AutocompleteState> {
               }
 
               return (
-                <li className={className} key={option.value} onClick={onClick}>
+                <li
+                  className={className}
+                  key={option.value}
+                  data-value={option.value}
+                  onClick={onClick}
+                >
                   {option.value}
                 </li>
               );
