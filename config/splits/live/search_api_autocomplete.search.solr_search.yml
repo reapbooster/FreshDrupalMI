@@ -1,0 +1,32 @@
+uuid: 9f5f6e87-3dab-4a86-9afb-8473e2250630
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.freshdrupal_live
+    - views.view.solr_search
+  module:
+    - views
+    - search_api_solr
+id: solr_search
+label: 'Solr Search'
+index_id: freshdrupal_live
+suggester_settings:
+  search_api_solr_terms:
+    fields: {  }
+suggester_weights:
+  search_api_solr_terms: 0
+suggester_limits:
+  search_api_solr_terms: 10
+search_settings:
+  'views:solr_search':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  autosubmit: true
+  submit_button_selector: ':submit'
+  delay: null

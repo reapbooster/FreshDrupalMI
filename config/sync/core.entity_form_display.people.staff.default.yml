@@ -1,0 +1,121 @@
+uuid: 89ae9b1f-0114-4de5-89cd-a793a51eb26b
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.staff
+    - field.field.people.staff.field_biotext
+    - field.field.people.staff.field_centers
+    - field.field.people.staff.field_email
+    - field.field.people.staff.field_event
+    - field.field.people.staff.field_first_name
+    - field.field.people.staff.field_last_name
+    - field.field.people.staff.field_pgtitle
+    - field.field.people.staff.field_photo
+    - field.field.people.staff.field_social_media
+    - field.field.people.staff.field_status
+    - image.style.thumbnail
+  module:
+    - image
+    - social_media
+id: people.staff.default
+targetEntityType: people
+bundle: staff
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_biotext:
+    weight: 13
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_centers:
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_email:
+    weight: 20
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_event:
+    weight: 17
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_first_name:
+    weight: 11
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_last_name:
+    weight: 12
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_pgtitle:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_photo:
+    weight: 18
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_social_media:
+    weight: 14
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: social_media_default
+    region: content
+  field_status:
+    weight: 19
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }
