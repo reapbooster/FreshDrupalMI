@@ -2,7 +2,7 @@ const pathUtility = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const term = require("terminal-kit").terminal;
-const WebpackManifestPlugin = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 const nameCallback = (module, chunks, cacheGroupKey) => {
   const moduleFileName = module
@@ -177,12 +177,6 @@ export function configurator(entry) {
        *   port: 3130,
        *   reloadDelay: 3000
        * }),
-       *
-       *
-       *   new WebpackManifestPlugin({
-       *     publicPath: "/",
-       *     basePath: "/",
-       *   }),
        */
     ],
     stats: {
@@ -193,7 +187,7 @@ export function configurator(entry) {
       errorDetails: true,
     },
   };
-  for (const key of entry) {
+  for (const key in entry) {
     toReturn.entry[
       pathUtility.join(
         parsedFileNames[key].relativeDirectory,
