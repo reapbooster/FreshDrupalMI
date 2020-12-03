@@ -178,11 +178,12 @@ export function configurator(entry) {
        *   reloadDelay: 3000
        * }),
        *
+       *
+       *   new WebpackManifestPlugin({
+       *     publicPath: "/",
+       *     basePath: "/",
+       *   }),
        */
-      new WebpackManifestPlugin({
-        publicPath: "/",
-        basePath: "/",
-      }),
     ],
     stats: {
       warnings: true,
@@ -192,7 +193,7 @@ export function configurator(entry) {
       errorDetails: true,
     },
   };
-  for (const key in entry) {
+  for (const key of entry) {
     toReturn.entry[
       pathUtility.join(
         parsedFileNames[key].relativeDirectory,
