@@ -39,8 +39,15 @@ class EventReference extends MilkenProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    return $this->entityTypeManager
-      ->loadByProperties(['field_grid_event_id' => $value]);
+    if (!empty($value)) {
+      $exists = $this->entityTypeManager
+        ->getStorage('event')
+        ->loadByProperties(['field_grid_event_id' => $value]);
+      if (!empty($exists)) {
+        return reset($exists);
+      }
+    }
+    return FALSE;
   }
 
 }

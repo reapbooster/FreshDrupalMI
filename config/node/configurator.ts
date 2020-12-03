@@ -1,9 +1,8 @@
-const { v4: uuidv4 } = require("uuid");
 const pathUtility = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const term = require("terminal-kit").terminal;
-const ManifestPlugin = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 const nameCallback = (module, chunks, cacheGroupKey) => {
   const moduleFileName = module
@@ -66,7 +65,7 @@ export function parsePath(incoming) {
   return {
     full: pathUtility.resolve(incoming),
     dirname: pathUtility.dirname(incoming),
-    basename: basename,
+    basename,
     relativeDirectory: pathUtility.relative(".", pathUtility.dirname(incoming)),
     libraryName: basename.replace(".entry", ""),
   };
@@ -180,7 +179,7 @@ export function configurator(entry) {
        * }),
        *
        */
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         publicPath: "/",
         basePath: "/",
       }),
