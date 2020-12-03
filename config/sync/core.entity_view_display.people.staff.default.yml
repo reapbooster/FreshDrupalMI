@@ -104,5 +104,6 @@ content:
     region: content
 hidden:
   changed: true
+  field_email: true
   langcode: true
   search_api_excerpt: true

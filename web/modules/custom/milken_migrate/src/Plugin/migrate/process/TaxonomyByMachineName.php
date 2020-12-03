@@ -39,6 +39,12 @@ class TaxonomyByMachineName extends ProcessPluginBase {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__);
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)
+    ) {
+      return NULL;
+    }
     $single_value = FALSE;
     if (!is_array($value)) {
       $value = [$value];

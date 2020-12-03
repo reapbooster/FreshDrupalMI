@@ -153,6 +153,6 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
 destination:
-  plugin: 'milken_migrate:person'
+  plugin: 'milken_migrate:people'
   default_bundle: speaker
 migration_dependencies: {  }

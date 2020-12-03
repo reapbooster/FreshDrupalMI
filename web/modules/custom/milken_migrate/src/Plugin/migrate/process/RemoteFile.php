@@ -53,14 +53,15 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)) {
+      return NULL;
+    }
     $destination_values = [];
     // phpcs:disable
     $altTextProperty = $this->configuration['alt_text'] ?? $this->configuration['name'];
     $titleTextProperty = $this->configuration['title_text'] ?? $this->configuration['name'];
     // phpcs:enable
-    if ($row->isStub()) {
-      return NULL;
-    }
+
     $sources = $row->getSourceProperty($this->configuration['source']);
     if (isset($sources['data']) && empty($sources['data'])) {
       throw new MigrateSkipRowException("Skip importing remote file: no data");

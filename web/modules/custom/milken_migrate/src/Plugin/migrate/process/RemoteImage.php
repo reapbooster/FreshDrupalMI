@@ -51,13 +51,13 @@ class RemoteImage extends MilkenProcessPluginBase implements MigrateProcessInter
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    $destination_values = [];
-    $source = $row->getSourceProperty($this->configuration['source']);
-    if (array_key_exists('data', $source) || (is_array($source[0]) && array_key_exists('data', $source[0]))) {
-      return [];
-    }
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)) {
+      return NULL;
+    }
+    $destination_values = [];
+    $source = $row->getSourceProperty($this->configuration['source']);
     $file = NULL;
     if ($value) {
       \Drupal::logger('milken_migrate')->debug('~~~~!!!Remote Image has value' . \Kint::dump($value, TRUE));
@@ -66,9 +66,6 @@ class RemoteImage extends MilkenProcessPluginBase implements MigrateProcessInter
       throw new Exception('RemoteImage plugin has no source property:' . \Kint::dump($this->configuration, TRUE));
     }
 
-    if ($row->isStub()) {
-      return NULL;
-    }
     \Drupal::logger('milken_migrate')
       ->debug("Source: " . \Kint::dump($source));
 

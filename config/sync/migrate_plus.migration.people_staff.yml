@@ -83,11 +83,11 @@ source:
       selector: /field_last_name
     -
       name: bio
-      label: "Bio text"
+      label: 'Bio text'
       selector: body/value
     -
       name: event
-      label: "Event Ref"
+      label: 'Event Ref'
       selector: field_event_reference/field_grid_event_id
   ids:
     id:
@@ -95,7 +95,14 @@ source:
     uuid:
       type: string
 process:
-  field_biotext: bio
+  uuid: uuid
+  field_biotext:
+    -
+      plugin: get
+      source: bio
+    -
+      plugin: callback
+      callable: strip_tags
   field_status: status
   field_first_name: fname
   field_last_name: lname
@@ -109,13 +116,7 @@ process:
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
-  field_centers:
-    plugin: 'milken_migrate:jsonapi_taxonomy'
-    source: center
-  field_event:
-    plugin: 'milken_migrate:event_reference'
-    source: event
 destination:
-  plugin: 'entity:people'
+  plugin: 'milken_migrate:people'
   default_bundle: staff
 migration_dependencies: {  }

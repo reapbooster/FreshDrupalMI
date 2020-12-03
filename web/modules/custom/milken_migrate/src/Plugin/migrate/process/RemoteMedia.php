@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\file\FileInterface;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
@@ -52,12 +51,13 @@ class RemoteMedia extends ProcessPluginBase implements MigrateProcessInterface {
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-    $destination_values = [];
-    if (isset($value['data']) && empty($value['data'])) {
-      throw new MigrateSkipProcessException("The referenced Entity has no data.");
-    }
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)
+    ) {
+      return NULL;
+    }
+    $destination_values = [];
     $file = NULL;
     if (!isset($this->configuration['source']) || !isset($this->configuration['default_bundle'])) {
       throw new Exception('RemoteImage plugin has no source property:' . \Kint::dump($this->configuration, TRUE));

@@ -82,14 +82,12 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
 
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    if ($row->isStub()) {
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)) {
       return NULL;
     }
     $source = $row->getSource();
     $value = $row->getSourceProperty($this->configuration['source']);
-    if (array_key_exists("data", $value)) {
-      return [];
-    }
+
     if ($value) {
       \Drupal::logger('milken_migrate')
         ->debug("~~~ Field has value:" . \Kint::dump($value, TRUE));

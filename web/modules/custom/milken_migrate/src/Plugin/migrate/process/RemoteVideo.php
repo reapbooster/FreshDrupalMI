@@ -45,7 +45,8 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    if ($row->isStub()) {
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)
+    ) {
       return NULL;
     }
     $embera = new Embera();

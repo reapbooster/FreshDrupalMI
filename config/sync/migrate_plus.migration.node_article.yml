@@ -153,22 +153,6 @@ process:
     link_id: uuid
     link_entity_type_id: constants/LINK_ENTITY_TYPE_ID
     link_bundle: constants/LINK_BUNDLE_ID
-#  field_centers_general:
-#    plugin: 'milken_migrate:jsonapi_taxonomy'
-#    vocabulary: centers
-#    source: centers_tax
-#  field_term_collection:
-#    plugin: 'milken_migrate:jsonapi_taxonomy'
-#    vocabulary: collections
-#    source: term_collection_tax
-#  field_term_program_initiatives:
-#    plugin: 'milken_migrate:jsonapi_taxonomy'
-#    vocabulary: program_initiatives
-#    source: program_initiatives_tax
-#  field_topics:
-#    plugin: 'milken_migrate:jsonapi_taxonomy'
-#    vocabulary: topics
-#    source: topics_tax
   import_body_field_to_paragraph:
     plugin: 'milken_migrate:body_embed'
     source: body_value

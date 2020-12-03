@@ -29,10 +29,8 @@ class JsonAPITaxonomy extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    if ((isset($value['data']) && empty($value['data'])) ||
-      empty($value)
-    ) {
-      return [];
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)) {
+      return NULL;
     }
     $destination_values = [];
     if (is_array($value)) {

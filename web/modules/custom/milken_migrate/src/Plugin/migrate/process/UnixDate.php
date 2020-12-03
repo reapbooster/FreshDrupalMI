@@ -27,6 +27,9 @@ class UnixDate extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
+    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)) {
+      return NULL;
+    }
     $dt = new \DateTime();
     if (!empty($value)) {
       if (substr($value, -3, 1) == ":") {
