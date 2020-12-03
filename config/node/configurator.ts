@@ -2,7 +2,7 @@ const pathUtility = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const term = require("terminal-kit").terminal;
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const WebpackManifestPlugin = require("webpack-manifest-plugin");
 
 const nameCallback = (module, chunks, cacheGroupKey) => {
   const moduleFileName = module
