@@ -25,7 +25,7 @@
     "build": "gulp build",
     "schema:fetch": "bin/getSchema",
     "schema:generate": "bin/generateCode --srcPath ./src/DataTypes/openapi3.json --destPath ./src/DataTypes --separatedFiles false",
-    "schema:codegen": "yarn run schema:fetch && yarn run schema:generate"
+    "schema:codegen": "npm run schema:fetch && npm run schema:generate"
   },
   "author": "",
   "license": "ISC",
