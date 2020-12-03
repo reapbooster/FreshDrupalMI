@@ -61,7 +61,7 @@ test("MediaImage testing", (done) => {
         }
         return true;
       }
-    }, 10000)
+    })
     .then(() => {
       done();
     });
