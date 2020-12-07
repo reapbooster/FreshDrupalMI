@@ -214,7 +214,6 @@
         "npm-asset/blazy": "1.8.2",
         "npm-asset/bootstrap": "^4.4",
         "npm-asset/dropzone": "4.3.0",
-        "npm-asset/imagesloaded": "^4.1",
         "npm-asset/masonry-layout": "^4.2",
         "npm-asset/slick-carousel": "1.8.1",
         "object-calisthenics/phpcs-calisthenics-rules": "*",

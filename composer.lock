@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b82c8181579bb5ec29d8eb342b0048a7",
+    "content-hash": "06ed8015a16548bedb6e432dd60662e7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -17627,21 +17627,6 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/get-size/-/get-size-2.0.3.tgz"
-            },
-            "type": "npm-asset",
-            "license": [
-                "MIT"
-            ]
-        },
-        {
-            "name": "npm-asset/imagesloaded",
-            "version": "4.1.4",
-            "dist": {
-                "type": "tar",
-                "url": "https://registry.npmjs.org/imagesloaded/-/imagesloaded-4.1.4.tgz"
-            },
-            "require": {
-                "npm-asset/ev-emitter": ">=1.0.0,<2.0.0"
             },
             "type": "npm-asset",
             "license": [
