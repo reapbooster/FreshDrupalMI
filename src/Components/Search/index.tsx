@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Container, Row, Pagination } from "react-bootstrap";
 import ResultsList from "./ResultsList";
-import KeywordForm from "./KeywordForm";
+import { KeywordForm } from "./KeywordForm";
 import Filters from "./Filters";
 import { SearchResult } from "./SearchResult";
 import { FacetList } from "../../DataTypes/Facet";
@@ -118,15 +118,24 @@ export class Search extends React.Component<
   }
 
   searchOnSubmitHandler(values) {
+    console.log("VALUES", values);
+    /**
+
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set("keywords", values.keywords);
     console.log("I am changing...", searchParams);
     window.location.search = searchParams.toString();
+    * */
   }
 
   render() {
     console.debug("Search => Index => ", this.state, this.props);
-    const { results, currentActiveRequest, loading, loaded, page } = this.state;
+    const {
+      searchOnSubmitHandler,
+      setFilters,
+      state: { results, loading, loaded, page },
+    } = this;
+
     if (loading) {
       return <Loading />;
     }
@@ -150,7 +159,7 @@ export class Search extends React.Component<
                 <h5 className="display-5">Search the Milken Institute</h5>
                 <ErrorBoundary>
                   <KeywordForm
-                    onSubmit={this.searchOnSubmitHandler}
+                    onSubmit={searchOnSubmitHandler}
                     keywords={keywords}
                   />
                 </ErrorBoundary>
@@ -165,12 +174,7 @@ export class Search extends React.Component<
             </Col>
             <Col lg={10} sm={11} style={{ minHeight: "300px" }}>
               <ErrorBoundary>
-                <ResultsList
-                  results={results}
-                  links
-                  currentActiveRequest={currentActiveRequest}
-                  setFilters={this.setFilters}
-                />
+                <ResultsList results={results} links setFilters={setFilters} />
               </ErrorBoundary>
               <Pagination>{paginationItems}</Pagination>
             </Col>

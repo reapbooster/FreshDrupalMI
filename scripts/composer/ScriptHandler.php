@@ -11,14 +11,27 @@ use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * Class ScriptHandler
+ *
+ * @package DrupalProject\composer
+ */
 class ScriptHandler
 {
 
+  /**
+   * @param $project_root
+   *
+   * @return string
+   */
   protected static function getDrupalRoot($project_root)
   {
     return $project_root .  '/web';
   }
 
+  /**
+   * @param \Composer\Script\Event $event
+   */
   public static function createRequiredFiles(Event $event)
   {
     $fs = new Filesystem();
@@ -32,18 +45,31 @@ class ScriptHandler
 
     // Required for unit testing
     foreach ($dirs as $dir) {
-      if (!$fs->exists($root . '/'. $dir)) {
-        $fs->mkdir($root . '/'. $dir);
-        $fs->touch($root . '/'. $dir . '/.gitkeep');
+      try {
+        if (!$fs->exists($root . '/'. $dir)) {
+          $fs->mkdir($root . '/'. $dir);
+          $fs->touch($root . '/'. $dir . '/.gitkeep');
+        }
+      } catch (\Exception $e) {
+        $event->getIO()->write($e->getMessage());
+      } catch(\Throwable $t) {
+        $event->getIO()->write($t->getMessage());
       }
     }
 
     // Create the files directory with chmod 0777
     if (!$fs->exists($root . '/sites/default/files')) {
-      $oldmask = umask(0);
-      $fs->mkdir($root . '/sites/default/files', 0777);
-      umask($oldmask);
-      $event->getIO()->write("Create a sites/default/files directory with chmod 0777");
+      try {
+        $oldmask = umask(0);
+        $fs->mkdir($root . '/sites/default/files', 0777);
+        umask($oldmask);
+        $event->getIO()->write("Create a sites/default/files directory with chmod 0777");
+      } catch (\Exception $e) {
+        $event->getIO()->write($e->getMessage());
+      } catch(\Throwable $t) {
+        $event->getIO()->write($t->getMessage());
+      }
+
     }
   }
 
@@ -52,6 +78,9 @@ class ScriptHandler
   // called when using this repository as a custom upstream, and
   // updating it with `terminus composer <site>.<env> update`. This
   // is not used in the GitHub PR workflow.
+  /**
+   *
+   */
   public static function prepareForPantheon()
   {
     // Get rid of any .git directories that Composer may have added.

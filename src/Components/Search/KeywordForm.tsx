@@ -1,194 +1,98 @@
 import React from "react";
+import Autocomplete from "react-autocomplete";
 
 export interface AutoCompleteOptions {
   name: string;
   value: string;
 }
 
+export interface AutoCompleteProps {
+  onSubmit: CallableFunction;
+  keywords: string;
+}
+
 export interface AutocompleteState {
-  activeOption: number;
-  filteredOptions: Array<AutoCompleteOptions>;
-  showOptions: boolean;
-  userInput: string;
-  options: Array<AutoCompleteOptions>;
+  value: string;
+  items: Array<AutoCompleteOptions>;
   abortController: AbortController;
 }
 
-class Autocomplete extends React.Component<null, AutocompleteState> {
+export class KeywordForm extends React.Component<
+  AutoCompleteProps,
+  AutocompleteState
+> {
   constructor(props) {
     super(props);
-    const url = new URL(document.location.href);
-
+    const { keywords } = props;
     this.state = {
-      activeOption: 0,
-      filteredOptions: [],
-      showOptions: false,
-      userInput: url.searchParams.get("keywords"),
-      options: [],
+      value: keywords,
+      items: [],
       abortController: new AbortController(),
     };
   }
 
-  onClick = (e) => {
-    console.debug("Click", e.currentTarget.dataset.value);
-    document.location.href = `/search?keywords=`.concat(
-      e.currentTarget.dataset.value.toLowerCase()
-    );
+  onInputHandler = (evt) => {
+    console.debug(evt);
+    this.setState({ value: evt.target.value });
+    this.refreshOptions(evt.target.value);
   };
 
-  onFocus = (e) => {
-    e.currentTarget.select();
+  onSelectHandler = (value, selection) => {
+    console.debug(value);
+    this.setState({ value });
   };
 
-  onBlur = (e) => {
-    console.debug("Blur", e);
-  };
-
-  onKeyDown = (e) => {
-    if (e.defaultPrevented) {
-      return; // Should do nothing if the default action has been cancelled
-    }
-
-    if (e.currentTarget.selected) {
-      this.setState({
-        userInput: "",
-      });
-    }
-    console.debug("Code", e.key);
-    const { activeOption, options, showOptions, userInput } = this.state;
-    let handled = false;
-    switch (e.key) {
-      case "Enter":
-        if (showOptions === true) {
-          this.setState({
-            activeOption: 0,
-            showOptions: false,
-            userInput: options[activeOption].value,
-            options: [],
-          });
-        } else {
-          document.location.href = `/search?keywords=`.concat(userInput);
-        }
-
-        handled = true;
-        break;
-
-      case "ArrowUp":
-        if (activeOption === 0) {
-          return;
-        }
-        this.setState({ activeOption: activeOption - 1 });
-        handled = true;
-        break;
-
-      case "ArrowDown":
-        if (activeOption - 1 === options.length) {
-          return;
-        }
-
-        this.setState({ activeOption: activeOption + 1 });
-        handled = true;
-        break;
-
-      case "Backspace":
-        if (e.currentTarget.selected) {
-          this.setState({ userInput: "" });
-        } else {
-          this.setState({
-            userInput: userInput.substr(0, userInput.length - 1),
-          });
-        }
-        handled = true;
-        break;
-
-      default:
-        this.setState({
-          userInput: userInput.concat(`${e.key}`),
-        });
-        this.refreshOptions();
-        handled = true;
-    }
-    if (handled) {
-      e.preventDefault();
-    }
-  };
-
-  refreshOptions = () => {
-    const { userInput, abortController } = this.state;
+  refreshOptions = (keyword: string = null) => {
+    const { abortController } = this.state;
     const { signal } = abortController;
-    fetch("/search_api_autocomplete/solr_search?q=".concat(userInput), {
+    fetch("/search_api_autocomplete/solr_search?q=".concat(keyword), {
       signal,
     })
       .then((res) => res.json())
       .then((ajaxData) => {
-        console.debug("back from json", ajaxData);
         if (Array.isArray(ajaxData)) {
-          this.setState({
-            options: ajaxData,
-            showOptions: true,
-          });
+          this.setState({ items: ajaxData });
         }
       });
   };
 
   render() {
-    const {
-      onFocus,
-      onKeyDown,
-      onClick,
-      onBlur,
-      state: { activeOption, showOptions, userInput, options },
-    } = this;
-
-    let optionsListComponent;
-
-    if (showOptions && userInput) {
-      if (options.length) {
-        optionsListComponent = (
-          <ul id="milken-keyword-text-input" className="options">
-            {options.map((option, index) => {
-              let className;
-              if (index === activeOption) {
-                className = "option-active";
-              }
-
-              return (
-                <li
-                  className={className}
-                  key={option.value}
-                  data-value={option.value}
-                  onClick={onClick}
-                >
-                  {option.value}
-                </li>
-              );
-            })}
-          </ul>
-        );
-      } else {
-        optionsListComponent = <ul className="options" />;
-      }
-    }
-
+    const { onSubmit } = this.props;
+    const { items, value } = this.state;
+    const { onInputHandler, onSelectHandler } = this;
     return (
-      <>
-        <input
-          id="edit-keywords"
-          name="keywords"
-          type="text"
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onKeyDown={onKeyDown}
-          value={userInput}
-          autoComplete="off"
-          autoCapitalize="off"
-          aria-autocomplete="list"
-          aria-owns="milken-keyword-text-input"
+      <form onSubmit={onSubmit} href="/search">
+        <Autocomplete
+          getItemValue={(item) => item.value}
+          items={items}
+          onSelect={onSelectHandler}
+          renderItem={(item, isHighlighted) => (
+            <div
+              style={{ background: isHighlighted ? "lightgray" : "white" }}
+              data-autocomplete-value={item.value}
+            >
+              <span dangerouslySetInnerHTML={{ __html: item.label }} />
+            </div>
+          )}
+          value={value}
+          autoHighlight
+          renderInput={(props) => {
+            return (
+              <input
+                {...props}
+                name="keywords"
+                value={value}
+                autoComplete={false}
+                autoCapitalize={false}
+                autoCorrect={false}
+                onInput={onInputHandler}
+              />
+            );
+          }}
         />
-        {optionsListComponent}
-      </>
+      </form>
     );
   }
 }
 
-export default Autocomplete;
+export default KeywordForm;
