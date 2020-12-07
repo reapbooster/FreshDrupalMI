@@ -1,160 +1,98 @@
 import React from "react";
+import Autocomplete from "react-autocomplete";
 
 export interface AutoCompleteOptions {
   name: string;
   value: string;
 }
 
-export interface AutocompleteState {
-  activeOption: number;
-  filteredOptions: Array<AutoCompleteOptions>;
-  showOptions: boolean;
-  userInput: string;
-  options: Array<AutoCompleteOptions>;
+export interface AutoCompleteProps {
+  onSubmit: CallableFunction;
+  keywords: string;
 }
 
-class Autocomplete extends React.Component<null, AutocompleteState> {
+export interface AutocompleteState {
+  value: string;
+  items: Array<AutoCompleteOptions>;
+  abortController: AbortController;
+}
+
+export class KeywordForm extends React.Component<
+  AutoCompleteProps,
+  AutocompleteState
+> {
   constructor(props) {
     super(props);
-
+    const { keywords } = props;
     this.state = {
-      activeOption: 0,
-      filteredOptions: [],
-      showOptions: false,
-      userInput: "",
-      options: [],
+      value: keywords,
+      items: [],
+      abortController: new AbortController(),
     };
   }
 
-  onChange = (e) => {
-    const { options } = this.state;
-    const userInput = e.currentTarget.value;
-
-    const filteredOptions = options.filter(
-      (option) =>
-        option.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
-
-    this.setState({
-      activeOption: 0,
-      filteredOptions,
-      showOptions: true,
-      userInput: e.currentTarget.value,
-    });
+  onInputHandler = (evt) => {
+    console.debug(evt);
+    this.setState({ value: evt.target.value });
+    this.refreshOptions(evt.target.value);
   };
 
-  onClick = (e) => {
-    this.setState({
-      activeOption: 0,
-      filteredOptions: [],
-      showOptions: false,
-      userInput: e.currentTarget.innerText,
-    });
+  onSelectHandler = (value, selection) => {
+    console.debug(value);
+    this.setState({ value });
   };
 
-  onKeyDown = (e) => {
-    if (e.defaultPrevented) {
-      return; // Should do nothing if the default action has been cancelled
-    }
-
-    const { activeOption, filteredOptions } = this.state;
-    let handled = false;
-    switch (e.code) {
-      case "Enter":
-        this.setState({
-          activeOption: 0,
-          showOptions: false,
-          userInput: filteredOptions[activeOption].value,
-          options: [],
-        });
-        handled = true;
-        break;
-
-      case "ArrowUp":
-        if (activeOption === 0) {
-          return;
-        }
-        this.setState({ activeOption: activeOption - 1 });
-        handled = true;
-        break;
-
-      case "ArrowDown":
-        if (activeOption - 1 === filteredOptions.length) {
-          return;
-        }
-
-        this.setState({ activeOption: activeOption + 1 });
-        handled = true;
-        break;
-
-      default:
-      // Do Nothing.
-    }
-    if (handled) {
-      e.preventDefault();
-    }
-  };
-
-  refreshOptions() {
-    const { userInput } = this.state;
-    fetch("/search_api_autocomplete/solr_search?q=".concat(userInput))
+  refreshOptions = (keyword: string = null) => {
+    const { abortController } = this.state;
+    const { signal } = abortController;
+    fetch("/search_api_autocomplete/solr_search?q=".concat(keyword), {
+      signal,
+    })
       .then((res) => res.json())
       .then((ajaxData) => {
         if (Array.isArray(ajaxData)) {
-          this.setState({ options: ajaxData });
+          this.setState({ items: ajaxData });
         }
       });
-  }
+  };
 
   render() {
-    const {
-      onChange,
-      onClick,
-      onKeyDown,
-      state: { activeOption, filteredOptions, showOptions, userInput },
-    } = this;
-
-    let optionsListComponent;
-
-    if (showOptions && userInput) {
-      if (filteredOptions.length) {
-        optionsListComponent = (
-          <ul className="options">
-            {filteredOptions.map((option, index) => {
-              let className;
-              if (index === activeOption) {
-                className = "option-active";
-              }
-
-              return (
-                <>
-                  <li className={className} key={option} onClick={onClick}>
-                    {option}
-                  </li>
-                </>
-              );
-            })}
-          </ul>
-        );
-      } else {
-        optionsListComponent = <ul className="options" />;
-      }
-    }
-
+    const { onSubmit } = this.props;
+    const { items, value } = this.state;
+    const { onInputHandler, onSelectHandler } = this;
     return (
-      <>
-        <input
-          id="edit-keywords"
-          name="keywords"
-          type="text"
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={userInput}
+      <form onSubmit={onSubmit} href="/search">
+        <Autocomplete
+          getItemValue={(item) => item.value}
+          items={items}
+          onSelect={onSelectHandler}
+          renderItem={(item, isHighlighted) => (
+            <div
+              style={{ background: isHighlighted ? "lightgray" : "white" }}
+              data-autocomplete-value={item.value}
+            >
+              <span dangerouslySetInnerHTML={{ __html: item.label }} />
+            </div>
+          )}
+          value={value}
+          autoHighlight
+          renderInput={(props) => {
+            return (
+              <input
+                {...props}
+                name="keywords"
+                value={value}
+                autoComplete={false}
+                autoCapitalize={false}
+                autoCorrect={false}
+                onInput={onInputHandler}
+              />
+            );
+          }}
         />
-        {optionsListComponent}
-      </>
+      </form>
     );
   }
 }
 
-export default Autocomplete;
+export default KeywordForm;
