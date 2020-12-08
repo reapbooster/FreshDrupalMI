@@ -1,20 +1,20 @@
-uuid: a5cc6990-98a2-40d3-97a1-8ad832f73f47
+uuid: cdb3bec5-c3d2-41f7-94f9-c44aa7e14556
 langcode: en
 status: true
 dependencies:
   config:
     - eck.eck_type.people.speakers
-    - field.storage.people.field_biopic
+    - field.storage.people.field_photo
   module:
     - image
-id: people.speakers.field_biopic
-field_name: field_biopic
+id: people.speakers.field_photo
+field_name: field_photo
 entity_type: people
 bundle: speakers
-label: Biopic
+label: Photo
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
