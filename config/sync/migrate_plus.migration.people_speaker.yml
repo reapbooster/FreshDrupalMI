@@ -1,4 +1,3 @@
-uuid: db6daa25-48d2-48b0-bea6-078be7dc55c0
 langcode: en
 status: true
 dependencies:
@@ -14,138 +13,102 @@ migration_tags:
   - event
   - grid
 migration_group: milken
-label: 'Speakers VIA JSON API'
+label: 'People => Speaker VIA JSON API'
 source:
   plugin: url
-  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/events'
+  urls: 'https://milkeninstitute.org/jsonapi/node/speaker'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
-  jsonapi_endpoint: /jsonapi/speakers
+  jsonapi_host: 'https://milkeninstitute.org'
+  jsonapi_endpoint: /jsonapi/node/speaker
   item_selector: data
+  jsonapi_include: true
+  included:
+    - field_sp_photo
+    - field_centers_general
+    - field_event_reference
   fields:
+    -
+      name: id
+      label: 'node ID'
+      selector: /drupal_internal__nid
+    -
+      name: uuid
+      label: 'Unique ID'
+      selector: id
+    -
+      name: name
+      label: Name/Title
+      selector: /title
+    -
+      name: path
+      label: path
+      selector: /path/alias
     -
       name: created
       label: Created
-      selector: /attributes/datecreated
+      selector: /created
     -
       name: changed
       label: Changed
-      selector: /attributes/datemodified
-    -
-      name: id
-      label: ID
-      selector: /id
-    -
-      name: name
-      label: Title/Name
-      selector: /attributes/rname
-    -
-      name: salutation
-      label: Salutation
-      selector: /attributes/salutation
-    -
-      name: fname
-      label: 'First Name'
-      selector: /attributes/spkrnm
-    -
-      name: mname
-      label: 'Middle Name'
-      selector: /attributes/mname
-    -
-      name: lname
-      label: 'Last Name'
-      selector: /attributes/lname
-    -
-      name: suffix
-      label: Suffix
-      selector: /attributes/suffix
-    -
-      name: description
-      label: Description
-      selector: /attributes/description
-    -
-      name: notes
-      label: Notes
-      selector: /attributes/notes
-    -
-      name: sortorder
-      label: 'Sort Order'
-      selector: /attributes/sortorder
-    -
-      name: eventid
-      label: 'Event IDp'
-      selector: /attributes/eventid
+      selector: /changed
     -
       name: status
       label: Status
-      selector: /attributes/status
+      selector: /status
     -
-      name: biolink
-      label: Biolink
-      selector: /attributes/biolink
+      name: photo
+      label: Photo
+      selector: /field_sp_photo
     -
-      name: biopic
-      label: Biopic
-      selector: /attributes/biopic
+      name: center
+      label: Center
+      selector: /field_centers_general
     -
-      name: biotext
-      label: Biotext
-      selector: /attributes/biotext
+      name: pftitle
+      label: Position/Title
+      selector: /field_sp_job_position/value
     -
-      name: speakertype
-      label: SpeakerType
-      selector: /attributes/speakertype
+      name: team
+      label: Team
+      selector: /field_team_tag
     -
-      name: pgid
-      label: PGID
-      selector: /attributes/pgid
+      name: fname
+      label: 'First Name'
+      selector: /field_first_name
     -
-      name: pgtitle
-      label: PGTitle
-      selector: /attributes/pgtitle
+      name: lname
+      label: 'Last Name'
+      selector: /field_last_name
     -
-      name: spkemail
-      label: 'Speaker Email'
-      selector: /attributes/spkemail
+      name: bio
+      label: 'Bio text'
+      selector: body/value
     -
-      name: twitter
-      label: Twitter
-      selector: /attributes/twitter
-    -
-      name: twitter2
-      label: Twitter2
-      selector: /attributes/twitter2
-    -
-      name: twitternotes
-      label: Twitternotes
-      selector: /attributes/twitternotes
-    -
-      name: city
-      label: City
-      selector: /attributes/city
+      name: event
+      label: 'Event Ref'
+      selector: field_event_reference/field_grid_event_id
   ids:
     id:
       type: integer
+    uuid:
+      type: string
 process:
-  name: name
-  title: name
-  field_biolink: biolink
-  field_biopic_name: biopic
-  field_biotext: biotext
-  field_city: city
-  field_description: description
-  field_first_name: fname
-  field_middle_name: mname
-  field_last_name: lname
-  field_notes: notes
-  field_pgid: pgid
-  field_pgtitle: pgtitle
-  field_salutation: salutation
-  field_sortorder: sortorder
-  field_speakertype: speakertype
-  field_spkemail: spkemail
+  uuid: uuid
+  field_biotext:
+    -
+      plugin: get
+      source: bio
+    -
+      plugin: callback
+      callable: strip_tags
   field_status: status
+  field_first_name: fname
+  field_last_name: lname
+  field_pgtitle: pftitle
+  field_photo:
+    plugin: 'milken_migrate:remote_image'
+    source: photo
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
@@ -154,5 +117,5 @@ process:
     source: changed
 destination:
   plugin: 'milken_migrate:people'
-  default_bundle: speaker
+  default_bundle: staff
 migration_dependencies: {  }
