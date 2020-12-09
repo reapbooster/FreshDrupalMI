@@ -1,4 +1,4 @@
-<?php
+<?php  // @codingStandardsIgnoreStart
 
 namespace Drupal\milken_migrate\Command;
 
@@ -40,7 +40,6 @@ class EventTitleCardCommand extends ContainerAwareCommand {
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    // phpcs:ignore
     // 1. get all events and begin loop.
     // 2. for each event: Do they have any sessions?
     // 3. if they do, separate the sessions into days.
@@ -48,9 +47,7 @@ class EventTitleCardCommand extends ContainerAwareCommand {
     // 5. create program_day paragraph for each of the days with event_id
     //    and date add to program tab.
     // 6. save event.
-    // @codingStandardsIgnoreStart
     $results = \Drupal::entityTypeManager()->getStorage('event')->getQuery()->execute();
-    // @codingStandardsIgnoreEnd
   }
 
   /**
@@ -66,7 +63,6 @@ class EventTitleCardCommand extends ContainerAwareCommand {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function getLocalForRemoteEvent(array $event): ?EntityInterface {
-    // phpcs:ignore
     $results = \Drupal::entityTypeManager()
       ->getStorage('event')
       ->loadByProperties(['field_grid_event_id' => mb_strtolower($event['field_grid_event_id'])]);

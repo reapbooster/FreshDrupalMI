@@ -1,4 +1,4 @@
-<?php
+<?php // @codingStandardsIgnoreStart
 
 namespace Drupal\milken_migrate\Commands;
 

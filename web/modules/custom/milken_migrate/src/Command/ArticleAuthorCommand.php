@@ -1,9 +1,7 @@
-<?php
-// phpcs:ignoreFile
+<?php // @codingStandardsIgnoreStart
 
 namespace Drupal\milken_migrate\Command;
 
-// phpcs:disable
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\node\NodeInterface;
@@ -16,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Drupal\Console\Annotations\DrupalCommand;
 use Drupal\Console\Core\Command\ContainerAwareCommand;
 use Drupal\Console\Core\Generator\GeneratorInterface;
-// phpcs:enable
 
 /**
  * Class MigrateMenuItemsCommand.
