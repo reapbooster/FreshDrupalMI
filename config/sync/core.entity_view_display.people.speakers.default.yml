@@ -4,14 +4,167 @@ status: true
 dependencies:
   config:
     - eck.eck_type.people.speakers
+    - field.field.people.speakers.field_biotext
+    - field.field.people.speakers.field_centers
+    - field.field.people.speakers.field_description
+    - field.field.people.speakers.field_email
+    - field.field.people.speakers.field_event
+    - field.field.people.speakers.field_first_name
+    - field.field.people.speakers.field_last_name
+    - field.field.people.speakers.field_middle_name
+    - field.field.people.speakers.field_notes
+    - field.field.people.speakers.field_pgtitle
+    - field.field.people.speakers.field_photo
+    - field.field.people.speakers.field_social_media
+    - field.field.people.speakers.field_status
   module:
     - image
-    - link
-    - options
     - social_media
 id: people.speakers.default
 targetEntityType: people
 bundle: speakers
 mode: default
 content:
+  changed:
+    type: timestamp
+    weight: 0
+    region: content
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  created:
+    label: hidden
+    type: timestamp
+    weight: 0
+    region: content
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  field_biotext:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_centers:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_description:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_email:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_event:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_first_name:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_last_name:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_middle_name:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_notes:
+    type: basic_string
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_pgtitle:
+    type: string
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_photo:
+    type: image
+    weight: 0
+    region: content
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+  field_social_media:
+    type: social_media_default
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_status:
+    type: boolean
+    weight: 0
+    region: content
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  langcode:
+    type: language
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
+  search_api_excerpt:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  field_biolink: true
+  field_biopic: true
+  field_city: true
+  field_pgid: true
+  field_salutation: true
+  field_sort_order: true
+  field_speakertype: true
+  field_spkemail: true
+  field_suffix: true

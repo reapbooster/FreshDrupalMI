@@ -1,4 +1,4 @@
-uuid: ba9bb18f-e8ad-4d20-bd27-51e475b82589
+uuid: 3b7ba36c-dd20-433c-b903-4c55180e45ba
 langcode: en
 status: true
 dependencies:
@@ -12,7 +12,7 @@ bundle: speakers
 label: Biotext
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
