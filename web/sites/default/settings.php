@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
 
 /**
@@ -93,11 +97,12 @@ $settings['twig_sandbox_whitelisted_methods'] = [
 ];
 
 $settings['http_client_config'] = [
+  "base_uri" => "https://milkeninstitute.org",
   "http_errors" => FALSE,
   'synchronous' => TRUE,
   'connect_timeout' => 2.5,
-  'timeout' => 5,
+  'timeout' => 10,
   'verify' => FALSE,
-  'debug' => FALSE,
+  'allow_redirects' => FALSE,
+  'debug' => TRUE,
 ];
-

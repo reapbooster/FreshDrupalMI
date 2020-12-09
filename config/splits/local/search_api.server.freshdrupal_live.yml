@@ -27,7 +27,7 @@ dependencies:
   module:
     - search_api_solr
 id: freshdrupal_live
-name: stovak_dev
+name: Fresh
 description: ''
 backend: search_api_solr
 backend_config:
@@ -37,7 +37,7 @@ backend_config:
     host: milken-dev.reapbooster.com
     port: 8443
     path: /
-    core: stovak_dev
+    core: freshmilken_live
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10

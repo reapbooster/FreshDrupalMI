@@ -4,6 +4,8 @@ namespace Drupal\milken_migrate\Command;
 
 use Drupal\Console\Core\Command\ContainerAwareCommand;
 use Drupal\Core\Entity\EntityInterface;
+use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -72,6 +74,45 @@ class EventTitleCardCommand extends ContainerAwareCommand {
       return reset($results);
     }
     return NULL;
+  }
+
+  /**
+   * @return \GuzzleHttp\Client
+   */
+  protected function getClient(): Client {
+    if (!$this->client) {
+      $this->cookieJar = new CookieJar();
+      $this->defaultOptions = [
+        'base_uri' => 'https://www.milkeninstitute.org',
+        'headers' => [
+          'Accept'     => 'application/json',
+        ],
+        'http_errors' => FALSE,
+        'cookies' => $this->cookieJar,
+        'allow_redirects' => TRUE,
+      ];
+      $this->client = \Drupal::httpClient();
+      $response = $this->client->post('/user/login', [
+        'form_params' => [
+
+          'form_id' => 'user_login_form',
+        ],
+        'cookies' => $this->cookieJar,
+      ]);
+      if (!in_array($response->getStatusCode(), [200, 201, 202])) {
+        throw new \Exception("Could not log into the current production server");
+      }
+      $this->sessionToken = $this->client->get('/session/token', [
+        'cookies' => $this->cookieJar,
+      ])->getBody(TRUE);
+
+      $this->defaultOptions['headers']['X-CSRF-Token'] = $this->sessionToken->toString();
+      $this->client = new Client($this->defaultOptions);
+    }
+    \Kint::enabled(TRUE);
+    \Kint::dump([$this->sessionToken, $this->cookieJar->toArray(), $this->defaultOptions, $this->client]);
+    exit();
+    return $this->client;
   }
 
 }
