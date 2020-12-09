@@ -117,5 +117,5 @@ process:
     source: changed
 destination:
   plugin: 'milken_migrate:people'
-  default_bundle: staff
+  default_bundle: speakers
 migration_dependencies: {  }

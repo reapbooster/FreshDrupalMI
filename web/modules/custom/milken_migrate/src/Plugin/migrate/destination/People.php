@@ -18,7 +18,7 @@ class People extends MilkenMigrateDestinationBase {
    * {@inheritDoc}
    */
   public function getBundle(Row $row = NULL) {
-    return "staff";
+    return $this->configuration['default_bundle'] ?? "staff";
   }
 
   /**
