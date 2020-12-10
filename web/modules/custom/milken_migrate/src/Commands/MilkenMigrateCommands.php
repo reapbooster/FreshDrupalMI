@@ -67,9 +67,6 @@ class MilkenMigrateCommands extends DrushCommands {
               throw new MigrateException("Cannot find Author: " . $author['title'] . "//" . $author['id']);
             }
             $localVersionArticle = $this->findArticleLocally($articleData);
-            if (!$localVersionArticle instanceof EntityInterface) {
-              throw new MigrateException("Cannot find Article: " . $articleData['title'] . "//" . $articleData['id']);
-            }
             if ($localVersionAuthor !== NULL && $localVersionArticle !== NULL) {
               $newParagraph = $this->newAuthorParagraph($localVersionAuthor);
               if ($newParagraph instanceof ContentEntityInterface) {
@@ -85,7 +82,7 @@ class MilkenMigrateCommands extends DrushCommands {
             }
             else {
               \Drupal::logger(__CLASS__)
-                ->debug("Article: " . $article->label() . "::" . $article->label());
+                ->debug("Article: " . $articleData['id'] . "::" . $articleData['name']);
             }
           }
         }
