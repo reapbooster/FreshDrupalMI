@@ -2,7 +2,11 @@
 
 namespace Drupal\milken_migrate\Commands;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\RevisionableContentEntityBase;
+use Drupal\migrate\MigrateException;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drush\Commands\DrushCommands;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
@@ -39,49 +43,71 @@ class MilkenMigrateCommands extends DrushCommands {
    *
    * @command milken_migrate:articleAuthor
    * @aliases mmaa
+   *
    */
   public function articleAuthor() {
     // Get First page.
     $url = '/jsonapi/node/article?include=field_ar_author';
+    $imported_records = 0;
     do {
       $page = $this->getPageOfData($url);
       foreach ($page['data'] as $articleData) {
         $authors = $articleData['field_ar_author'];
         if (isset($authors['data'])) {
-          \Drupal::logger(__CLASS__)->debug("Skipping: " . $articleData['title'] . print_r($authors));
+          \Drupal::logger(__CLASS__)->debug("Skipping: " . $articleData['title'] . print_r($authors, true));
           continue;
         }
         else {
           foreach ($authors as $author) {
-            $author = $this->findAuthorLocally($author);
-            $article = $this->findArticleLocally($articleData);
-            \Drupal::logger(__CLASS__)
-              ->debug("Author: " . $author->label() . "::" . $article->label());
-            if ($author !== NULL && $article !== NULL) {
-              $content = $article->get('field_content');
-              \Kint::dump($content);
-              exit();
-
+            if ($author['id'] == "missing") {
+              continue;
+            }
+            $localVersionAuthor = $this->findAuthorLocally($author);
+            if (!$localVersionAuthor instanceof EntityInterface) {
+              throw new MigrateException("Cannot find Author: " . $author['title'] . "//" . $author['id']);
+            }
+            $localVersionArticle = $this->findArticleLocally($articleData);
+            if (!$localVersionArticle instanceof EntityInterface) {
+              throw new MigrateException("Cannot find Article: " . $articleData['title'] . "//" . $articleData['id']);
+            }
+            if ($localVersionAuthor !== NULL && $localVersionArticle !== NULL) {
+              $newParagraph = $this->newAuthorParagraph($localVersionAuthor);
+              if ($newParagraph instanceof ContentEntityInterface) {
+                $localVersionArticle->get('field_content')->appendItem([
+                  'target_id' => $newParagraph->id(),
+                  "target_revision_id" => $newParagraph->getRevisionId()
+                ]);
+                $localVersionArticle->save();
+                $imported_records++;
+              } else {
+                throw new MigrateException("Cannot create new Paragraph");
+              }
+            }
+            else {
+              \Drupal::logger(__CLASS__)
+                ->debug("Article: " . $article->label() . "::" . $article->label());
             }
           }
         }
       }
       $url = $page['links']['next']['href'] ?? NULL;
     } while ($url !== NULL);
-    $this->logger()->success(dt('Achievement unlocked.'));
+    $this->logger()->success(dt('Article Paragraphs Created::' . $imported_records ));
   }
 
   /**
    *
    */
-  public function findAuthorLocally($authorRecord) {
+  public function findAuthorLocally($authorRecord): ?EntityInterface {
+    if (!isset($authorRecord['id']) && !is_string($authorRecord['id'])) {
+      throw new MigrateException("Cannot retried Author information without a UUID:" . print_r($authorRecord, true));
+    }
     $remoteAuthorLocalInstance = \Drupal::entityTypeManager()
       ->getStorage('people')
       ->loadByProperties(["uuid" => $authorRecord['id']]);
-    if ($remoteAuthorLocalInstance
-      && $remoteAuthorLocalInstance = array_shift($remoteAuthorLocalInstance)
-        && $remoteAuthorLocalInstance instanceof EntityInterface) {
-      return $remoteAuthorLocalInstance;
+
+    if ($remoteAuthorLocalInstance) {
+      return reset($remoteAuthorLocalInstance);
     }
     return NULL;
   }
@@ -89,14 +115,15 @@ class MilkenMigrateCommands extends DrushCommands {
   /**
    *
    */
-  public function findArticleLocally($articleRecord) {
+  public function findArticleLocally($articleRecord): ?EntityInterface {
+    if (!isset($articleRecord['id']) && !is_string($articleRecord['id'])) {
+      throw new MigrateException("Cannot retried Article information without a UUID:" . print_r($articleRecord, true));
+    }
     $remoteAuthorLocalInstance = \Drupal::entityTypeManager()
       ->getStorage('node')
       ->loadByProperties(["uuid" => $articleRecord['id']]);
-    if ($remoteAuthorLocalInstance
-      && $remoteAuthorLocalInstance = array_shift($remoteAuthorLocalInstance)
-        && $remoteAuthorLocalInstance instanceof EntityInterface) {
-      return $remoteAuthorLocalInstance;
+    if ($remoteAuthorLocalInstance) {
+      return reset($remoteAuthorLocalInstance);
     }
     return NULL;
   }
@@ -155,6 +182,29 @@ class MilkenMigrateCommands extends DrushCommands {
 
     }
     return $this->client;
+  }
+
+  protected function newAuthorParagraph(EntityInterface  $author) {
+    try {
+      $paragraph = Paragraph::create([
+        'type' => 'author',
+        'field_author' => [
+          ['target_id' => $author->id()]
+        ],
+      ]);
+      $paragraph->isNew(true);
+      $paragraph->save();
+      return $paragraph;
+    }
+    catch(\Exception $e) {
+      \Drupal::logger("milken_migrate")
+        ->error($e->getMessage());
+    }
+    catch(\Throwable $t) {
+      \Drupal::logger("milken_migrate")
+        ->error($t->getMessage());
+    }
+    return null;
   }
 
 }

@@ -191,7 +191,7 @@
         "drupal/typed_data": "^1.0@alpha",
         "drupal/uikit": "^3.14",
         "drupal/uikit_components": "^3.0",
-        "drupal/upgrade_status": "^2.7",
+        "drupal/upgrade_status": "^3",
         "drupal/uuid_url": "^1.1",
         "drupal/vbo_export": "^3.0",
         "drupal/video_embed_field": "^2.2",

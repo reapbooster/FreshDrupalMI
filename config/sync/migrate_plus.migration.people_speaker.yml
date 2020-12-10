@@ -95,6 +95,8 @@ source:
     uuid:
       type: string
 process:
+  title: name
+  name: name
   uuid: uuid
   field_biotext:
     -

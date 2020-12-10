@@ -104,5 +104,5 @@ $settings['http_client_config'] = [
   'timeout' => 10,
   'verify' => FALSE,
   'allow_redirects' => FALSE,
-  'debug' => TRUE,
+  'debug' => FALSE,
 ];

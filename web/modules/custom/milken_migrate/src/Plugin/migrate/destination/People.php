@@ -33,7 +33,8 @@ class People extends MilkenMigrateDestinationBase {
         $entity->set('field_last_name', end($title));
       }
     }
-    $this->logger->debug('Getting Related Fields:' . \Kint::dump($row, TRUE));
+    $entity->set('title', $row->getSourceProperty('name'));
+    $this->logger->debug("Saving:" . print_r($entity->toArray(), TRUE));
     $event = $row->getSourceProperty('event');
     if (!$row->isStub() && !empty($event)  && (!isset($event['data']) && !empty($event['data']))) {
       $entity->set('field_event', $this->getEvent($row));
