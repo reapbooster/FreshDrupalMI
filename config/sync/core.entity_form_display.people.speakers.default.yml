@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - eck.eck_type.people.speakers
+    - entity_browser.browser.slick_browser_file_modal
     - field.field.people.speakers.field_biotext
     - field.field.people.speakers.field_centers
     - field.field.people.speakers.field_description
@@ -17,9 +18,9 @@ dependencies:
     - field.field.people.speakers.field_photo
     - field.field.people.speakers.field_social_media
     - field.field.people.speakers.field_status
-    - image.style.thumbnail
   module:
-    - image
+    - entity_browser
+    - slick_browser
     - social_media
 id: people.speakers.default
 targetEntityType: people
@@ -117,13 +118,42 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_photo:
-    type: image_image
+    type: entity_browser_file
     weight: 0
     region: content
     settings:
-      progress_indicator: throbber
+      entity_browser: slick_browser_file_modal
+      field_widget_remove: true
+      selection_mode: selection_append
       preview_image_style: thumbnail
-    third_party_settings: {  }
+      field_widget_edit: true
+      field_widget_replace: false
+      open: false
+      view_mode: default
+    third_party_settings:
+      slick_browser:
+        style: slick
+        optionset: grid_browser_v
+        optionset_thumbnail: default
+        skin: sb-grid-w
+        skin_thumbnail: asnavfor
+        image_style: slick_browser_preview
+        thumbnail_position: ''
+        thumbnail_style: thumbnail
+        grid: null
+        grid_medium: null
+        grid_small: null
+        view_mode: default
+        override: false
+        overridables:
+          arrows: '0'
+          autoplay: '0'
+          dots: '0'
+          draggable: '0'
+          infinite: '0'
+          mouseWheel: '0'
+          randomize: '0'
+          variableWidth: '0'
   field_social_media:
     type: social_media_default
     weight: 0
@@ -144,6 +174,14 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
   field_biolink: true

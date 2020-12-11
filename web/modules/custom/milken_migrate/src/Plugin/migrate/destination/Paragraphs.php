@@ -36,7 +36,6 @@ class Paragraphs extends EntityReferenceRevisions implements ConfigurableInterfa
       $entity->save();
     }
     catch (EntityNotFoundException $e) {
-      \Kint::dump($entity->toArray());
       exit();
     }
 

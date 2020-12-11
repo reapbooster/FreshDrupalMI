@@ -16,16 +16,9 @@ suggester_settings:
   server:
     fields: {  }
   search_api_solr_terms:
-    fields:
-      - field_body
-      - field_body_1
-      - field_description
-      - field_long_description
-      - field_name
-      - field_name_short
-      - field_short_summary
+    fields: {  }
 suggester_weights:
-  server: 1
+  server: 2
   search_api_solr_terms: -1
 suggester_limits:
   server: 10

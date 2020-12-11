@@ -7,13 +7,13 @@ module:
   auto_entitylabel: 0
   better_normalizers: 0
   bg_image_formatter: 0
+  blazy: 0
   block: 0
   block_content: 0
   block_field: 0
   book: 0
   bootstrap_library: 0
   breakpoint: 0
-  business_rules: 0
   ckeditor: 0
   color_field: 0
   component: 0
@@ -23,7 +23,6 @@ module:
   config_split: 0
   consumers: 0
   content_browser: 0
-  content_sync: 0
   contextual: 0
   crop: 0
   ctools: 0
@@ -32,7 +31,6 @@ module:
   datetime: 0
   datetime_range: 0
   dblog: 0
-  dbug: 0
   decoupled_router: 0
   default_content: 0
   default_content_deploy: 0
@@ -40,7 +38,6 @@ module:
   diff: 0
   dropzonejs: 0
   dropzonejs_eb_widget: 0
-  ds_bootstrap_layouts: 0
   dynamic_page_cache: 0
   eck: 0
   editor: 0
@@ -55,7 +52,6 @@ module:
   entity_usage: 0
   entityqueue: 0
   facets: 0
-  facets_pretty_paths: 0
   facets_summary: 0
   field: 0
   field_group: 0
@@ -74,7 +70,6 @@ module:
   imagick: 0
   inline_entity_form: 0
   inline_form_errors: 0
-  jdrupal: 0
   js_entity: 0
   jsonapi: 0
   jsonapi_cross_bundles: 0
@@ -85,7 +80,6 @@ module:
   jsonapi_resources: 0
   jsonapi_schema: 0
   key_value_field: 0
-  kint: 0
   language: 0
   layout_builder: 0
   layout_builder_kit: 0
@@ -113,7 +107,6 @@ module:
   migrate_tools: 0
   milken_base: 0
   milken_migrate: 0
-  module_missing_message_fixer: 0
   node: 0
   npm: 0
   openapi: 0
@@ -144,6 +137,8 @@ module:
   serialization: 0
   settings_tray: 0
   simple_oauth: 0
+  slick: 0
+  slick_browser: 0
   social_media: 0
   subrequests: 0
   svg_image_field: 0
@@ -153,7 +148,6 @@ module:
   taxonomy_machine_name: 0
   telephone: 0
   text: 0
-  theme_switcher: 0
   token: 0
   toolbar: 0
   twig_tweak: 0

@@ -1,9 +1,31 @@
 #!/usr/bin/env bash
 
-rm -Rf `yarn cache dir` && composer clear-cache
-rm -Rf node_modules && rm -Rf vendor
-rm -Rf web/modules/contrib && rm -Rf web/themes/contrib && rm -Rf web/core
+echo "clearing composer's and NPM's cache"
 
-rm yarn.lock && rm composer.lock
+npm cache clear --force
 
-composer install-vendor-dir && yarn install
+composer clear-cache
+
+echo "removing node_modules"
+
+rm -Rfv node_modules 
+
+echo "removing  vendor dir"
+
+rm -Rfv vendor
+
+echo "removing drupal core, modules/contrib and themes/contrib folders."
+
+rm -Rfv web/modules/contrib
+
+rm -Rfv web/themes/contrib
+
+rm -Rfv web/core
+
+rm package-lock.json
+
+rm composer.lock
+
+echo "Reinstalling"
+
+composer install-vendor-dir && npm install

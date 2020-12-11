@@ -5,7 +5,6 @@ dependencies:
   config:
     - search_api.index.freshdrupal_live
   module:
-    - content_sync
     - hal
     - rest
     - schemata_json_schema

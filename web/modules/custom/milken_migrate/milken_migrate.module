@@ -10,7 +10,6 @@ use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 
-require drupal_get_path('module', 'devel') . '/kint/kint/Kint.class.php';
 
 /**
  * Implements hook_help().

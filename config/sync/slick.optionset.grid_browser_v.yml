@@ -1,0 +1,26 @@
+uuid: 23448bf6-b0df-4641-817c-a8b6f3deb1de
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - slick_browser
+_core:
+  default_config_hash: 2wN655mk6cldNvUIPq7uE6YKM1zlP3jSjBn8t4zSE7U
+id: grid_browser_v
+name: grid_browser_v
+label: 'Grid Browser: Vertical'
+weight: -5
+group: main
+skin: sb-grid
+breakpoints: 0
+optimized: true
+options:
+  options__active_tab: edit-options-settings
+  settings:
+    dots: true
+    lazyLoad: blazy
+    slidesToShow: 1
+    swipeToSlide: true
+    vertical: true
+    verticalSwiping: true
