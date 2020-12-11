@@ -8,6 +8,7 @@ export interface MediaVideoInterface extends MediaInterface {
   field_body?: BodyFieldData;
   field_centers?: Array<TaxonomyTermInterface>;
   field_embedded_id?: string;
+  field_embedded_oembed?: string;
   field_embedded_service?: string;
   field_event_reference?: EventInterface;
   field_height?: number;
@@ -28,39 +29,23 @@ export interface MediaVideoInterface extends MediaInterface {
 
 export class MediaVideo extends Media implements MediaVideoInterface {
   _thumbnail: ImageFileInterface;
-
   _field_centers: Array<TaxonomyTermInterface>;
-
   _field_event_reference?: Event;
-
   _field_program_initiatives: Array<TaxonomyTermInterface>;
-
   _field_term_collection: Array<TaxonomyTermInterface>;
-
   _field_topics: Array<TaxonomyTermInterface>;
-
   field_body: BodyFieldData;
-
   field_embedded_id: string;
-
+  field_embedded_oembed: string;
   field_embedded_service: string;
-
   field_height: number;
-
   field_media_oembed_video: string;
-
   field_speakers: object;
-
   field_subheader: string;
-
   field_thumbnail_uri: string;
-
   field_video_height: number;
-
   field_video_width: number;
-
   field_width: number;
-
   field_event_reference: EventInterface;
   field_media_image: ImageFileInterface;
   field_media_in_library: boolean;
