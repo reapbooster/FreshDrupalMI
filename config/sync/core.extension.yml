@@ -70,7 +70,6 @@ module:
   imagick: 0
   inline_entity_form: 0
   inline_form_errors: 0
-  js_entity: 0
   jsonapi: 0
   jsonapi_cross_bundles: 0
   jsonapi_extras: 0
@@ -89,7 +88,6 @@ module:
   layout_discovery: 0
   layout_paragraphs: 0
   link: 0
-  markdown: 0
   media: 0
   media_entity_browser: 0
   media_entity_browser_media_library: 0
@@ -100,10 +98,8 @@ module:
   migrate: 0
   migrate_drupal: 0
   migrate_drupal_ui: 0
-  migrate_media_handler: 0
   migrate_plus: 0
   migrate_process_skip: 0
-  migrate_queue_importer: 0
   migrate_tools: 0
   milken_base: 0
   milken_migrate: 0
@@ -128,7 +124,6 @@ module:
   redis: 0
   responsive_image: 0
   rest: 0
-  rest_export_nested: 0
   restui: 0
   schemata: 0
   schemata_json_schema: 0
@@ -155,7 +150,6 @@ module:
   update: 0
   upgrade_status: 0
   user: 0
-  uuid_url: 0
   views_aggregator: 0
   views_bootstrap: 0
   views_field_view: 0
@@ -183,7 +177,6 @@ theme:
   milken: 0
   bartik: 0
   claro: 0
-  react: 0
   gin: 0
   milken_admin: 0
 profile: minimal
