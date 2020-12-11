@@ -2,6 +2,7 @@
 
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrateProcessInterface;
@@ -62,6 +63,7 @@ class RemoteVideo extends ProcessPluginBase implements MigrateProcessInterface {
           }
           $row->setDestinationProperty('field_embedded_service', $info['provider_name']);
           $row->setDestinationProperty('field_embedded_id', $info['video_id']);
+          $row->setDestinationProperty('field_embedded_oembed', Json::encode($info));
         }
 
         return $value;
