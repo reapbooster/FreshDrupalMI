@@ -12,7 +12,6 @@ dependencies:
     - node.type.article
   module:
     - entity_reference_revisions
-    - js_entity
     - layout_builder
     - layout_builder_restrictions
     - metatag
@@ -28,9 +27,6 @@ third_party_settings:
       whitelisted_blocks: {  }
       blacklisted_blocks: {  }
     allowed_block_categories: {  }
-  js_entity:
-    render_profile: node.article.article_full
-    unique_key: node_article
 id: node.article.full
 targetEntityType: node
 bundle: article

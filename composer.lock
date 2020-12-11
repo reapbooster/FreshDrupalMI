@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db3b85507996a552ef2ce5d130d1d9a0",
+    "content-hash": "382eeddb29609d5b623be9f58d8141f4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2791,52 +2791,6 @@
             }
         },
         {
-            "name": "drupal/adminimal_admin_toolbar",
-            "version": "1.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/adminimal_admin_toolbar.git",
-                "reference": "8.x-1.11"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/adminimal_admin_toolbar-8.x-1.11.zip",
-                "reference": "8.x-1.11",
-                "shasum": "913dd21e07dd60aa20807a2e0650e11b4c15cc17"
-            },
-            "require": {
-                "drupal/admin_toolbar": "*",
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.11",
-                    "datestamp": "1588102631",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Ted Slesinski",
-                    "homepage": "https://www.drupal.org/u/energee"
-                }
-            ],
-            "description": "Adminimal styling brought to admin toolbar.",
-            "homepage": "https://www.drupal.org/project/adminimal_admin_toolbar",
-            "support": {
-                "source": "http://cgit.drupalcode.org/adminimal_admin_toolbar",
-                "issues": "https://www.drupal.org/project/issues/adminimal_admin_toolbar"
-            }
-        },
-        {
             "name": "drupal/adminimal_theme",
             "version": "1.6.0",
             "source": {
@@ -3729,50 +3683,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/component",
                 "issues": "https://drupal.org/project/issues/component"
-            }
-        },
-        {
-            "name": "drupal/config_direct_save",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/config_direct_save.git",
-                "reference": "8.x-1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/config_direct_save-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "6447e507e4050d2b90c216937eec2d2acd7d3a6b"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1591743069",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "matio89",
-                    "homepage": "https://www.drupal.org/user/2320090"
-                }
-            ],
-            "description": "This module allow you to export configuration after changes",
-            "homepage": "https://www.drupal.org/project/config_direct_save",
-            "support": {
-                "source": "https://git.drupalcode.org/project/config_direct_save"
             }
         },
         {
@@ -5634,52 +5544,6 @@
             }
         },
         {
-            "name": "drupal/ds_bootstrap_layouts",
-            "version": "dev-3.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/ds_bootstrap_layouts.git",
-                "reference": "d32294ab0fb118fd7c86561b241d836053a8e5c8"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/ds": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-3.x-dev",
-                    "datestamp": "1400090328",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "bbujisic",
-                    "homepage": "https://www.drupal.org/user/52799"
-                },
-                {
-                    "name": "markcarver",
-                    "homepage": "https://www.drupal.org/user/501638"
-                }
-            ],
-            "description": "Implementation of fantastic Twitter Bootstrap scaffolding in Display Suite",
-            "homepage": "https://www.drupal.org/project/ds_bootstrap_layouts",
-            "support": {
-                "source": "https://git.drupalcode.org/project/ds_bootstrap_layouts"
-            }
-        },
-        {
             "name": "drupal/easy_install",
             "version": "10.4.0",
             "source": {
@@ -6042,17 +5906,11 @@
         },
         {
             "name": "drupal/entity_browser",
-            "version": "2.5.0",
+            "version": "dev-2.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity_browser.git",
-                "reference": "8.x-2.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_browser-8.x-2.5.zip",
-                "reference": "8.x-2.5",
-                "shasum": "29456b961f0f90ff064601ab8a382446a8143774"
+                "reference": "6592dd240b3dc4763fde711f24fc811cf77d90e5"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -6068,12 +5926,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                },
                 "drupal": {
-                    "version": "8.x-2.5",
-                    "datestamp": "1588015429",
+                    "version": "8.x-2.5+1-dev",
+                    "datestamp": "1593345916",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -6671,114 +6532,6 @@
             }
         },
         {
-            "name": "drupal/facets_pretty_paths",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/facets_pretty_paths.git",
-                "reference": "8.x-1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/facets_pretty_paths-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "c6660cd296dd68e2f22d42337035eca65ce94ffb"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "drupal/facets": "~1",
-                "drupal/pathauto": "~1"
-            },
-            "require-dev": {
-                "composer/installers": "^1.2",
-                "cweagans/composer-patches": "~1.4",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-                "drupal-composer/drupal-scaffold": "^2.2",
-                "drupal/admin_toolbar": "^1.24",
-                "drupal/coder": "^8.3",
-                "drupal/config_installer": "~1",
-                "drupal/console": "~1",
-                "drupal/search_api": "~1.5",
-                "drush/drush": "~9",
-                "openeuropa/drupal-core-require-dev": "~8.6@rc",
-                "openeuropa/task-runner": "~1.0-beta2"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1568102885",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "composer-exit-on-patch-failure": true,
-                "enable-patching": true,
-                "installer-paths": {
-                    "build/core": [
-                        "type:drupal-core"
-                    ],
-                    "build/modules/contrib/{$name}": [
-                        "type:drupal-module"
-                    ],
-                    "build/profiles/contrib/{$name}": [
-                        "type:drupal-profile"
-                    ],
-                    "build/themes/contrib/{$name}": [
-                        "type:drupal-theme"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Drupal\\facets_pretty_paths\\": "./src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Drupal\\Tests\\facets_pretty_paths\\": "./tests/src"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "scripts": {
-                "drupal-scaffold": [
-                    "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
-                ],
-                "post-install-cmd": [
-                    "./vendor/bin/run drupal:site-setup"
-                ],
-                "post-update-cmd": [
-                    "./vendor/bin/run drupal:site-setup"
-                ]
-            },
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "All contributors",
-                    "homepage": "https://www.drupal.org/node/2625160/committers"
-                },
-                {
-                    "name": "Upchuk",
-                    "homepage": "https://www.drupal.org/user/1885838"
-                },
-                {
-                    "name": "phenaproxima",
-                    "homepage": "https://www.drupal.org/user/205645"
-                }
-            ],
-            "description": "Facets Pretty Paths module.",
-            "homepage": "https://www.drupal.org/project/facets_pretty_paths",
-            "keywords": [
-                "drupal"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/facets_pretty_paths"
-            }
-        },
-        {
             "name": "drupal/field_group",
             "version": "3.1.0",
             "source": {
@@ -7357,7 +7110,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/graphql.git",
-                "reference": "47bd0ddafc2bc6f0177ff0b3e75d64890610f086"
+                "reference": "35c14e6f6db59b4ceb229320b690059bcd0dec92"
             },
             "require": {
                 "drupal/core": "^8 || ^9",
@@ -7374,8 +7127,8 @@
                     "dev-4.x": "4.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-4.0-beta3+12-dev",
-                    "datestamp": "1606548247",
+                    "version": "8.x-4.0+0-dev",
+                    "datestamp": "1607692348",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -7747,93 +7500,6 @@
             "homepage": "https://www.drupal.org/project/inline_entity_form",
             "support": {
                 "source": "https://git.drupalcode.org/project/inline_entity_form"
-            }
-        },
-        {
-            "name": "drupal/jdrupal",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/jdrupal.git",
-                "reference": "8.x-1.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/jdrupal-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "2cb5f98fa6f7b6ddf80b764d0bee4858edbe7795"
-            },
-            "require": {
-                "drupal/core": "^8",
-                "drupal/restui": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1480950183",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "tyler.frankenstein",
-                    "homepage": "https://www.drupal.org/user/150680"
-                }
-            ],
-            "description": "The jDrupal 8 module.",
-            "homepage": "https://www.drupal.org/project/jdrupal",
-            "support": {
-                "source": "https://git.drupalcode.org/project/jdrupal"
-            }
-        },
-        {
-            "name": "drupal/js_entity",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/js_entity.git",
-                "reference": "1b6584ffcd6b57a781a30446219c2b42f2a62a31"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.x-dev",
-                    "datestamp": "1565981887",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Travis Tomka",
-                    "homepage": "https://www.drupal.org/user/718562",
-                    "email": "underoathosx@gmail.com"
-                }
-            ],
-            "description": "Provides a way to get entity data into the DOM.",
-            "homepage": "https://www.drupal.org/project/js_entity",
-            "support": {
-                "source": "https://git.drupalcode.org/project/js_entity"
             }
         },
         {
@@ -8677,67 +8343,6 @@
             }
         },
         {
-            "name": "drupal/markdown",
-            "version": "2.0.0-rc1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/markdown.git",
-                "reference": "8.x-2.0-rc1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/markdown-8.x-2.0-rc1.zip",
-                "reference": "8.x-2.0-rc1",
-                "shasum": "2c5759f7570906cfb9be95ac51b7e9e561487bc0"
-            },
-            "require": {
-                "composer/semver": "^1.0 || ^2.0",
-                "drupal/core": "^8",
-                "php": ">=5.5.9"
-            },
-            "suggest": {
-                "league/commonmark": "The PHP CommonMark parser is a robust, highly-extensible Markdown parser for PHP based on the CommonMark and Github-Flavored Markdown specifications (version 1.3.0 and higher is supported).",
-                "webuni/commonmark-attributes-extension": "The Attributes extension adds a syntax to define attributes on the various HTML elements in markdown's output."
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-2.0-rc1",
-                    "datestamp": "1589205629",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Carver (markcarver)",
-                    "homepage": "https://www.drupal.org/u/markcarver",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Gisle Hannemyr (gisle)",
-                    "homepage": "https://www.drupal.org/u/gisle",
-                    "role": "Co-Maintainer"
-                },
-                {
-                    "name": "markhalliwell",
-                    "homepage": "https://www.drupal.org/user/501638"
-                }
-            ],
-            "description": "Allows content to be submitted using Markdown, a simple plain-text syntax that is transformed into valid HTML.",
-            "homepage": "https://www.drupal.org/project/markdown",
-            "support": {
-                "source": "https://git.drupalcode.org/project/markdown",
-                "issues": "https://www.drupal.org/project/markdown"
-            }
-        },
-        {
             "name": "drupal/masquerade",
             "version": "2.0.0-beta4",
             "source": {
@@ -9121,56 +8726,6 @@
             }
         },
         {
-            "name": "drupal/migrate_media_handler",
-            "version": "dev-1.x",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/migrate_media_handler.git",
-                "reference": "29e6f0a8fe7837b8c7fd90923cebc21a4ce6a147"
-            },
-            "require": {
-                "drupal/core": "^8",
-                "drupal/migrate_plus": "^4.2 || ^5",
-                "drupal/migrate_tools": "^4.1 || ^5"
-            },
-            "suggest": {
-                "drupal/entity_embed": "Allows entities to be embedded using a text editor."
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-rc3+1-dev",
-                    "datestamp": "1590599337",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "srjosh",
-                    "homepage": "https://www.drupal.org/user/165878"
-                }
-            ],
-            "description": "Migrates Drupal 7 WYSIWYG embeds and file fields to Drupal 8 media.",
-            "homepage": "https://www.drupal.org/project/migrate_media_handler",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/migrate_media_handler",
-                "issues": "https://www.drupal.org/project/issues/migrate_media_handler"
-            }
-        },
-        {
             "name": "drupal/migrate_plus",
             "version": "5.1.0",
             "source": {
@@ -9281,54 +8836,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/migrate_process_skip",
                 "issues": "https://www.drupal.org/project/issues/migrate_process_skip"
-            }
-        },
-        {
-            "name": "drupal/migrate_queue_importer",
-            "version": "1.0.0-alpha2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/migrate_queue_importer.git",
-                "reference": "8.x-1.0-alpha2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/migrate_queue_importer-8.x-1.0-alpha2.zip",
-                "reference": "8.x-1.0-alpha2",
-                "shasum": "0fad41b7ebb7c9bcb8632aa5ee14ea5b602ea793"
-            },
-            "require": {
-                "drupal/core": "^8"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0-alpha2",
-                    "datestamp": "1576225088",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Postovan Dumitru",
-                    "homepage": "https://www.drupal.org/user/3456423"
-                },
-                {
-                    "name": "maksyml",
-                    "homepage": "https://www.drupal.org/user/3564782"
-                }
-            ],
-            "description": "Provides Queue API base functionality to import migrations.",
-            "homepage": "https://www.drupal.org/project/migrate_queue_importer",
-            "support": {
-                "source": "https://git.drupalcode.org/project/migrate_queue_importer"
             }
         },
         {
@@ -10662,54 +10169,6 @@
             "homepage": "https://www.drupal.org/project/redis",
             "support": {
                 "source": "https://git.drupalcode.org/project/redis"
-            }
-        },
-        {
-            "name": "drupal/rest_export_nested",
-            "version": "1.0.0-alpha4",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/rest_export_nested.git",
-                "reference": "8.x-1.0-alpha4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/rest_export_nested-8.x-1.0-alpha4.zip",
-                "reference": "8.x-1.0-alpha4",
-                "shasum": "5998a6b41682aa97d2475372764c00c34298d42d"
-            },
-            "require": {
-                "drupal/core": "^8"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0-alpha4",
-                    "datestamp": "1545100084",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Meenakshi.g",
-                    "homepage": "https://www.drupal.org/user/3533675"
-                },
-                {
-                    "name": "imclean",
-                    "homepage": "https://www.drupal.org/user/112588"
-                }
-            ],
-            "description": "Extends the REST Export views display to support JSON within fields.",
-            "homepage": "https://www.drupal.org/project/rest_export_nested",
-            "support": {
-                "source": "https://git.drupalcode.org/project/rest_export_nested"
             }
         },
         {
@@ -12207,54 +11666,6 @@
             "homepage": "http://drupal.org/project/upgrade_status",
             "support": {
                 "source": "https://git.drupalcode.org/project/upgrade_status"
-            }
-        },
-        {
-            "name": "drupal/uuid_url",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/uuid_url.git",
-                "reference": "8.x-1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/uuid_url-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "4d9e1b20b5e9cdd50672b2dff80c0654c81070c0"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1561483986",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "fago",
-                    "homepage": "https://www.drupal.org/user/16747"
-                },
-                {
-                    "name": "pagach",
-                    "homepage": "https://www.drupal.org/user/2607938"
-                }
-            ],
-            "description": "Creates a UUID url for entities.",
-            "homepage": "https://www.drupal.org/project/uuid_url",
-            "support": {
-                "source": "https://git.drupalcode.org/project/uuid_url"
             }
         },
         {
@@ -22836,9 +22247,9 @@
         "drupal/default_content": 20,
         "drupal/default_content_deploy": 20,
         "drupal/diff": 5,
-        "drupal/ds_bootstrap_layouts": 20,
         "drupal/eck": 15,
         "drupal/entity_block": 10,
+        "drupal/entity_browser": 20,
         "drupal/entity_import": 15,
         "drupal/entity_usage": 10,
         "drupal/entityqueue": 20,
@@ -22851,7 +22262,6 @@
         "drupal/graphql": 20,
         "drupal/image_style_warmer": 10,
         "drupal/inline_entity_form": 5,
-        "drupal/js_entity": 20,
         "drupal/jsonapi_cross_bundles": 15,
         "drupal/jsonapi_extras": 20,
         "drupal/jsonapi_resources": 10,
@@ -22866,8 +22276,6 @@
         "drupal/media_entity_browser": 15,
         "drupal/media_migration": 15,
         "drupal/media_parent_entity_link": 10,
-        "drupal/migrate_media_handler": 20,
-        "drupal/migrate_queue_importer": 15,
         "drupal/openapi": 5,
         "drupal/openapi_jsonapi": 20,
         "drupal/openapi_ui": 5,
@@ -22879,7 +22287,6 @@
         "drupal/paragraphs_inline_entity_form": 10,
         "drupal/publication_date": 10,
         "drupal/purge": 10,
-        "drupal/rest_export_nested": 15,
         "drupal/restui": 20,
         "drupal/schemata": 10,
         "drupal/search_api_attachments": 10,

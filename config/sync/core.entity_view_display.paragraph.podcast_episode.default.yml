@@ -5,12 +5,9 @@ dependencies:
   config:
     - field.field.paragraph.podcast_episode.field_episode_ref
     - paragraphs.paragraphs_type.podcast_episode
-  module:
-    - js_entity
+
 third_party_settings:
-  js_entity:
-    render_profile: paragraph.podcast_episode.podcast_episode_default
-    unique_key: paragraph_podcast_episode
+
 id: paragraph.podcast_episode.default
 targetEntityType: paragraph
 bundle: podcast_episode

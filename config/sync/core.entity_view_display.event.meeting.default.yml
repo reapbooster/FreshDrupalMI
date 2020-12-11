@@ -32,14 +32,10 @@ dependencies:
     - datetime
     - entity_reference_revisions
     - image
-    - js_entity
     - key_value_field
     - metatag
     - text
 third_party_settings:
-  js_entity:
-    render_profile: event.meeting.event
-    unique_key: event_meeting
 id: event.meeting.default
 targetEntityType: event
 bundle: meeting

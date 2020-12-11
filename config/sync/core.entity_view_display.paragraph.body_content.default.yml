@@ -9,13 +9,9 @@ dependencies:
     - field.field.paragraph.body_content.field_show_title
     - paragraphs.paragraphs_type.body_content
   module:
-    - js_entity
     - options
     - text
 third_party_settings:
-  js_entity:
-    render_profile: paragraph.body_content.paragraph_body_content
-    unique_key: paragraph_body_content
 id: paragraph.body_content.default
 targetEntityType: paragraph
 bundle: body_content
