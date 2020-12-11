@@ -10,7 +10,6 @@ use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 
-
 /**
  * Implements hook_help().
  */
