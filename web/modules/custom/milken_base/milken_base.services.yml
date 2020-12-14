@@ -1,0 +1,6 @@
+services:
+  milken_base.twig_jsonapi:
+    class: Drupal\milken_base\JSONApiTwigExtension
+    arguments: ['@module_handler', '@theme.manager']
+    tags:
+      - { name: twig.extension }

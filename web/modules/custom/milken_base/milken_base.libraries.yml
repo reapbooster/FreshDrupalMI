@@ -43,7 +43,7 @@ Search:
   js:
     components/Search/Search.entry.js: { source: 'components/Search/Search.entry.tsx' }
 
-slide_display:
+eck_entity_slide:
   version: 1.0
   js:
-    js/slide_display.js: { source: 'js/slide_display.ts' }
+    components/eck-entity-slide/eck-entity-slide.entry.js: { }

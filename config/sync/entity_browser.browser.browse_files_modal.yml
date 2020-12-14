@@ -1,4 +1,4 @@
-uuid: d66f8a35-4523-497d-b5cb-e18d7dcb8c4f
+uuid: f4122033-1b7a-4eba-8511-d4b7b38b8d88
 langcode: und
 status: true
 dependencies:
@@ -50,7 +50,7 @@ widgets:
       clientside_resize: false
       resize_width: null
       resize_height: null
-      resize_quality: 1
+      resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
       submit_text: 'Select entities'

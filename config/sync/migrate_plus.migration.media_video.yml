@@ -22,118 +22,111 @@ source:
   jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/node/video
   item_selector: data
-  jsonapi_include: true
-  included:
-    - field_event_reference
   fields:
     -
       name: id
       label: 'Node ID'
-      selector: /drupal_internal__nid
+      selector: /attributes/drupal_internal__nid
     -
       name: uuid
       label: 'Unique ID'
-      selector: /id
+      selector: id
     -
       name: name
       label: title/name
-      selector: /title
+      selector: /attributes/title
     -
       name: langcode
       label: 'Language Code'
-      selector: /langcode
+      selector: /attributes/langcode
     -
       name: body
       label: 'body array'
-      selector: /body
+      selector: /attributes/body
     -
       name: body_value
       label: 'Body Value'
-      selector: /body/value
+      selector: /attributes/body/value
     -
       name: body_format
       label: 'Body Format'
-      selector: /body/format
+      selector: /attributes/body/format
     -
       name: path
       label: 'Product price'
-      selector: /path/alias
+      selector: /attributes/path/alias
     -
       name: created
       label: Created
-      selector: /created
+      selector: /attributes/created
     -
       name: changed
       label: Changed
-      selector: /changed
+      selector: /attributes/changed
     -
       name: promote
       label: Promoted
-      selector: /promote
+      selector: /attributes/promote
     -
       name: sticky
       label: Sticky
-      selector: /sticky
+      selector: /attributes/sticky
     -
       name: video_url_array
       label: 'Video URL Array'
-      selector: /field_video_url
+      selector: /attributes/field_video_url
     -
       name: video_url
       label: 'Video URL'
-      selector: /field_video_url/uri
+      selector: /attributes/field_video_url/uri
     -
       name: topics
       label: Topics
-      selector: /field_topics
+      selector: /relationships/field_topics
     -
       name: program_initiatives
       label: 'Program Initiatives'
-      selector: /field_term_program_initiatives
+      selector: /relationships/field_term_program_initiatives
     -
       name: video_thumbnail
       label: 'Video Thumbnail'
-      selector: /field_video_thumbnail
+      selector: /relationships/field_video_thumbnail
     -
       name: path
       label: Path
-      selector: /path/alias
+      selector: /attributes/path/alias
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'
-      selector: /field_term_collection
+      selector: /relationships/field_term_collection
     -
       name: term_collection_tax_id
       label: 'Term Collection Taxonomy ID'
-      selector: /field_term_collection_id
+      selector: /relationships/field_term_collection_id
     -
       name: program_initiatives_tax
       label: 'Program Initiatives Taxonomy'
-      selector: /field_term_program_initiatives
+      selector: /relationships/field_term_program_initiatives
     -
       name: program_initiatives_tax_id
       label: 'Program Initiatives Taxonomy ID'
-      selector: /field_term_program_initiatives/id
+      selector: /relationships/field_term_program_initiatives/id
     -
       name: topics_tax
       label: 'Topics Taxonomy'
-      selector: /field_topics
-    -
-      name: event_grid_id
-      label: 'Event Grid ID'
-      selector: /event_reference/0/field_event_grid_id
+      selector: /relationships/field_topics
     -
       name: topics_tax_id
       label: 'Topics Taxonomy ID'
-      selector: /field_topics/id
+      selector: /relationships/field_topics/id
     -
       name: centers_tax
       label: 'Centers Taxonomy'
-      selector: /field_centers_general
+      selector: /relationships/field_centers_general
     -
       name: centers_tax_id
       label: 'Centers Taxonomy ID'
-      selector: /field_centers_general/id
+      selector: /relationships/field_centers_general/id
   ids:
     id:
       type: integer

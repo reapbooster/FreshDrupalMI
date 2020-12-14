@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - eck.eck_type.slide.50_50_text_on_left
-    - entity_browser.browser.slick_browser_file_modal_dz
     - field.field.slide.50_50_text_on_left.field_background_color
     - field.field.slide.50_50_text_on_left.field_background_image
     - field.field.slide.50_50_text_on_left.field_link
@@ -12,13 +11,13 @@ dependencies:
     - field.field.slide.50_50_text_on_left.field_published
     - field.field.slide.50_50_text_on_left.field_slide_text
     - field.field.slide.50_50_text_on_left.field_text_color
+    - image.style.thumbnail
   module:
     - color_field
-    - entity_browser
     - field_group
+    - image
     - key_value_field
     - link
-    - slick_browser
 third_party_settings:
   field_group:
     group_tabs:
@@ -103,39 +102,10 @@ content:
   field_background_image:
     weight: 15
     settings:
-      entity_browser: slick_browser_file_modal_dz
-      field_widget_remove: true
-      field_widget_replace: true
-      selection_mode: selection_append
+      progress_indicator: throbber
       preview_image_style: thumbnail
-      field_widget_edit: true
-      open: false
-      view_mode: default
-    third_party_settings:
-      slick_browser:
-        style: ''
-        optionset: default
-        optionset_thumbnail: ''
-        skin: ''
-        skin_thumbnail: ''
-        image_style: slick_browser_preview
-        thumbnail_position: ''
-        thumbnail_style: ''
-        grid: null
-        grid_medium: null
-        grid_small: null
-        view_mode: default
-        override: false
-        overridables:
-          arrows: '0'
-          autoplay: '0'
-          dots: '0'
-          draggable: '0'
-          infinite: '0'
-          mouseWheel: '0'
-          randomize: '0'
-          variableWidth: '0'
-    type: entity_browser_file
+    third_party_settings: {  }
+    type: image_image
     region: content
   field_link:
     weight: 17

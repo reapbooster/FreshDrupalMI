@@ -5,9 +5,6 @@ dependencies:
   config:
     - field.field.paragraph.podcast_episode.field_episode_ref
     - paragraphs.paragraphs_type.podcast_episode
-
-third_party_settings:
-
 id: paragraph.podcast_episode.default
 targetEntityType: paragraph
 bundle: podcast_episode

@@ -121,7 +121,7 @@ gulp.task("buildEntryFiles", (done) => {
   console.log("Building components.");
   const configurator = require("./config/node/configurator").default;
   try {
-    const webpackConfig = configurator(glob.sync("./**/*.entry.tsx", {}));
+    const webpackConfig = configurator(glob.sync("./**/*.entry.t*", {}));
     return wp(webpackConfig, (err, stats) => {
       if (err) {
         console.log(err.toString());
