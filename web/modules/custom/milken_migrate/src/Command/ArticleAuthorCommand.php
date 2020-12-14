@@ -92,15 +92,8 @@ class ArticleAuthorCommand extends ContainerAwareCommand {
     $articles = $this->getPageOfData('/jsonapi/node/article');
 
     foreach ($articles['data'] as $articleRef) {
-      print_r($articleRef);
-      exit();
-
-
-      }
-      else {
-        $this->getIo()
-          ->info("Skipping article: " . $articleRef['drupal_internal__nid']);
-      }
+      $this->getIo()
+        ->info("Skipping article: " . $articleRef['drupal_internal__nid']);
     }
     $this->getIo()
       ->info($this->trans('commands.generate.plugin.queue.messages.success'));

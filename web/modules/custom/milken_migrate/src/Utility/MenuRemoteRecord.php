@@ -37,10 +37,12 @@ class MenuRemoteRecord {
    *
    */
   public function __toDrupalValuesArray() {
-    'uuid' => $this->id,
-    'status' => $this->status,
-    'title' => $this->label,
-    'name' => $this->label,
+    return [
+      'uuid' => $this->id,
+      'status' => $this->status,
+      'title' => $this->label,
+      'name' => $this->label,
+    ];
   }
 
 }
