@@ -18,16 +18,85 @@ const autoprefixer = require("gulp-autoprefixer");
 const path = require("path");
 const sourcemaps = require("gulp-sourcemaps");
 const gsgc = require("gulp-sass-generate-contents");
-const print = require("gulp-print").default;
-const fs = require("fs").promises;
+const gulpPrint = require("gulp-print").default;
+const fs = require("fs");
 const Logger = require("fancy-log");
 const clean = require("gulp-clean");
-const jestcli = require("jest-cli");
-const jest = require("gulp-jest").default;
 
 const basePath = path.resolve(".");
-const themePath = path.resolve(basePath, "web/themes/custom/milken");
-const modulesPath = path.resolve(basePath, "web/modules/custom");
+
+/**
+ * This function allows imports in node-sass from the PathAliases that
+ * babel uses.
+ *
+ * @param importPath
+ * @param prev
+ * @param whenDone
+ * @return {*}
+ */
+const tildeImporter = (importPath, prev, whenDone) => {
+  const { PathAliases } = require("./config/node/PathAliases");
+  const split = importPath.split("/");
+  const filePattern = "*".concat(split[split.length - 1], ".*ss");
+  const toReturn = {
+    file: prev,
+    contents: "",
+  };
+
+  if (split[0].substr(0, 1) === "~") {
+    const relevantPath = PathAliases[split[0].substr(1)];
+    toReturn.file = glob
+      .sync(
+        importPath
+          .replace(split[0], relevantPath)
+          .replace(split[split.length - 1], filePattern)
+      )
+      .shift();
+  }
+  // I could have probably done this with regex, but ugh... regex.
+  if (split[0] === "utilities") {
+    toReturn.file = glob
+      .sync(
+        importPath
+          .replace(
+            "utilities",
+            PathAliases.Libraries.concat("/bootstrap/scss/utilities")
+          )
+          .replace(split[split.length - 1], filePattern)
+      )
+      .shift();
+  }
+
+  if (split[0] === "vendor") {
+    toReturn.file = glob
+      .sync(
+        importPath
+          .replace(
+            "vendor",
+            PathAliases.Libraries.concat("/bootstrap/scss/vendor")
+          )
+          .replace(split[split.length - 1], filePattern)
+      )
+      .shift();
+  }
+
+  if (split[0] === "mixins") {
+    toReturn.file = glob
+      .sync(
+        importPath
+          .replace(
+            "mixins",
+            PathAliases.Libraries.concat("/bootstrap/scss/mixins")
+          )
+          .replace(split[split.length - 1], filePattern)
+      )
+      .shift();
+  }
+
+  toReturn.contents = fs.readFileSync(toReturn.file).toString();
+  console.debug("RETURNING: ", toReturn.file);
+  return whenDone(toReturn);
+};
 
 const oldPath = path.resolve(
   "web/themes/custom/milken/js/drupalTranslations.js"
@@ -35,11 +104,21 @@ const oldPath = path.resolve(
 // Delete this file if exists.
 (async () => {
   try {
-    await fs.unlink(oldPath);
+    await fs.promises.unlink(oldPath);
   } catch (e) {
     // File does not exist... carry on.
   }
 })();
+
+const shellTaskErrorHandler = (err, next) => {
+  // this entire callback is optional.
+  if (err) {
+    console.error(err.message);
+    process.exit(1);
+  } else {
+    next();
+  }
+};
 
 // eslint-disable-next-line no-unused-vars.
 function typescriptCompileCallback(error, stdout, stderr) {
@@ -70,8 +149,9 @@ gulp.task(
 gulp.task("clearDrupalCache", shell.task("drush cr"));
 
 gulp.task("buildMilkenTheme", (done) => {
+  const { PathAliases } = require("./config/node/PathAliases");
   return gulp
-    .src(path.resolve(basePath, "web/themes/custom/milken/scss/*.scss"))
+    .src(PathAliases.FrontEndTheme.concat("/scss/milken.scss"))
     .pipe(sourcemaps.init())
     .on("end", (complete) => {
       console.debug("ending", complete);
@@ -84,11 +164,11 @@ gulp.task("buildMilkenTheme", (done) => {
     .pipe(
       sass({
         allowEmpty: true,
-        outputStyle: "compressed",
-        includePaths: [
-          path.resolve(basePath, "web/themes/custom/milken/scss"),
-          path.resolve(basePath, "web"),
-        ],
+        sourcemaps: process.env.NODE_ENV !== "production",
+        importer: tildeImporter,
+        outputStyle:
+          process.env.NODE_ENV === "production" ? "compressed" : "expanded",
+        includePaths: Object.values(PathAliases),
       }).on("error", (err) => {
         sass.logError(err);
         process.exit(1);
@@ -97,7 +177,7 @@ gulp.task("buildMilkenTheme", (done) => {
     .pipe(
       sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css"))
     )
-    .pipe(print())
+    .pipe(gulpPrint())
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
 
@@ -158,6 +238,7 @@ gulp.task("clean", (done) => {
         "./web/modules/custom/**/**/*.js.map",
         "./src/**/*.js",
         "./src/**/*.js.map",
+        "./config/node/*.js",
       ],
       { sourcemaps: true }
     )

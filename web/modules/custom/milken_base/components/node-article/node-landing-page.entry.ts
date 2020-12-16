@@ -1,13 +1,15 @@
-import { SlideDataFactory } from "Components/SlideDisplay";
-import { SlideInterface } from 'DataTypes/Slide';
-import { ImageFile } from 'DataTypes/ImageFile';
-const slideDisplayTemplate = document.createElement("template");
-import styles from './eck-entity-slide.scss';
 
-slideDisplayTemplate.innerHTML = `
+import styles from './node-landing-page.scss';
+import { NodeLandingPageInterface } from "DataTypes/NodeLandingPage";
+import NodeDataFactory from "Components/NodeDisplay/NodeDataFactory";
+
+const nodeLandingPageDisplayTemplate = document.createElement("template");
+
+nodeLandingPageDisplayTemplate.innerHTML = `
 <div class="card" >
     <div class="card-header"></div>
     <div class="card-body">
+      <slot name="title"></slot>
       <div class="card-title"><slot name="title"></slot></div>
     </div>
   </div>
@@ -15,21 +17,19 @@ slideDisplayTemplate.innerHTML = `
 `;
 
 customElements.define(
-  "eck-entity-slide",
-  class EckEntitySlide extends HTMLElement {
+  "node-landing-page",
+  class NodeLandingPage extends HTMLElement {
     mountPoint: HTMLElement;
-    entityData: SlideInterface;
+    entityData: NodeLandingPageInterface;
 
     constructor() {
       super();
-
       const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = SlideDataFactory(parsed.data);
+      this.entityData = NodeDataFactory(parsed.data);
       const toAppend = document.createElement('h5');
       toAppend.slot = "title";
       toAppend.textContent = this.entityData.title;
       this.appendChild(toAppend);
-      //console.debug("eck-entity-slide", this.entityData);
       const shadowRoot = this.attachShadow({ mode: "open" });
       this.mountPoint = document.createElement("div");
       shadowRoot.appendChild(this.mountPoint);
@@ -40,14 +40,12 @@ customElements.define(
         this.mountPoint.appendChild(this.nextElementSibling);
       }
 
-      const clone = slideDisplayTemplate.content.cloneNode(true);
+      const clone = nodeLandingPageDisplayTemplate.content.cloneNode(true);
       this.mountPoint.appendChild(clone);
 
     }
 
     connectedCallback = () => {
-      const BackgroundImage = new ImageFile(this.entityData.field_background_image);
-      console.log("Background Image", BackgroundImage);
       this.mountPoint.querySelector('.card').setAttribute('style', "");
     }
   }

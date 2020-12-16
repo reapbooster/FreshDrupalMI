@@ -46,4 +46,9 @@ Search:
 eck_entity_slide:
   version: 1.0
   js:
-    components/eck-entity-slide/eck-entity-slide.entry.js: { }
+    components/eck-entity-slide/eck-entity-slide.entry.js: { source: 'components/eck-entity-slide/eck-entity-slide.entry.ts' }
+
+node_landing_page:
+  version: 1.0
+  js:
+    components/eck-entity-slide/eck-entity-slide.entry.js: { source: 'components/node-landing-page/node-landing-page.entry.ts' }
