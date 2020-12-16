@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import styled from "styled-components";
-import ImageFile from "../../DataTypes/ImageFile";
-import { SlideDisplayProps } from ".";
-import SlideFullWidthOneColumn, {
+import {
+  SlideFullWidthOneColumn,
   SlideFullWidthOneColumnInterface,
-} from "../../DataTypes/SlideFullWidthOneColumn";
-import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
+} from "DataTypes/SlideFullWidthOneColumn";
+import { EntityComponentProps } from "DataTypes/EntityComponentProps";
+import { ImageFile } from "../../DataTypes/ImageFile";
+import { ErrorBoundary } from "../../Utility/ErrorBoundary";
 import Loading from "../Loading";
-import ImageStyleObject from "../../DataTypes/ImageStyleObject";
 
 export interface SlideDisplayFullWidthOneColumnProps {
   data: SlideFullWidthOneColumnInterface;
@@ -17,7 +16,7 @@ export interface SlideDisplayFullWidthOneColumnProps {
 }
 
 export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
-  props: SlideDisplayProps
+  props: SlideDisplayFullWidthOneColumnProps
 ) => {
   const { data, view_mode } = props;
   const DataObject = new SlideFullWidthOneColumn(data);
@@ -83,10 +82,10 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       textLines.push(
         <p
           key={textLines.length + 1}
-          className={slideData.field_slide_text[key]["key"]}
+          className={slideData.field_slide_text[key].key}
           style={{ color: `${slideData.field_text_color?.color}` }}
         >
-          {slideData.field_slide_text[key]["value"]}
+          {slideData.field_slide_text[key].value}
         </p>
       );
     }
@@ -112,13 +111,11 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     <>
       <ErrorBoundary>
         <Row
-          className={"align-items-center"}
+          className="align-items-center"
           style={rowStyle}
           data-view-mode={view_mode}
         >
-          <Jumbotron
-            className={"jumbotron jumbotron-fluid d-block align-items-center"}
-          >
+          <Jumbotron className="jumbotron jumbotron-fluid d-block align-items-center">
             <Container style={slideTextStyle}>{textLines}</Container>
           </Jumbotron>
         </Row>

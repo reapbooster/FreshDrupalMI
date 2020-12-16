@@ -19,7 +19,7 @@ export interface SlideHeroHalfHeightInterface extends SlideInterface {
   field_slide_text: Array<SlideKeyValueTextInterface>;
 }
 
-export class HeroHalfHeight
+export class SlideHeroHalfHeight
   extends Slide
   implements SlideHeroHalfHeightInterface {
   private _field_background_color: ColorObjectInterface;
@@ -99,7 +99,6 @@ export class HeroHalfHeight
   hasData(): boolean {
     return this.drupal_internal__id !== undefined;
   }
-
 }
 
-export default HeroHalfHeight;
+export default SlideHeroHalfHeight;

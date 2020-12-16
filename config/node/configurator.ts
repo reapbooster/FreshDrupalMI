@@ -4,9 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const term = require("terminal-kit").terminal;
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
-const nameCallback = (module, chunks, cacheGroupKey) => {
-  const moduleFileName = module
-    .identifier()
+const nameCallback = ({ identifier }, chunks, cacheGroupKey) => {
+  const moduleFileName = identifier()
     .split("/")
     .reduceRight((item) => item);
   const allChunksNames = chunks.map((item) => item.name).join("~");
@@ -57,21 +56,8 @@ const babelLoader = {
   },
 };
 
-export function parsePath(incoming) {
-  const basename = pathUtility.basename(
-    incoming,
-    pathUtility.extname(incoming)
-  );
-  return {
-    full: pathUtility.resolve(incoming),
-    dirname: pathUtility.dirname(incoming),
-    basename,
-    relativeDirectory: pathUtility.relative(".", pathUtility.dirname(incoming)),
-    libraryName: basename.replace(".entry", ""),
-  };
-}
-
 export function configurator(entry) {
+  const { PathAliases, parsePath } = require("./PathAliases");
   if (typeof entry === "string") {
     entry = [entry];
   }
@@ -120,15 +106,8 @@ export function configurator(entry) {
       // Add '.ts' and '.tsx' as resolvable extensions.
       extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
       plugins: [],
-      alias: {
-        Components: pathUtility.resolve("./src/Components"),
-        DataTypes: pathUtility.resolve("./src/DataTypes"),
-        Fields: pathUtility.resolve("./src/Fields"),
-        Utility: pathUtility.resolve("./src/Utility"),
-        bootstrap: pathUtility.resolve("./web/libraries/bootstrap"),
-      },
+      alias: PathAliases,
     },
-
     module: {
       rules: [
         {
@@ -170,6 +149,7 @@ export function configurator(entry) {
         chunkFilename: "css/[id].css",
       }),
       new webpack.ProgressPlugin(progressCallback),
+      new webpack.NoEmitOnErrorsPlugin(),
       /**
        *  new BrowserSyncWebpackPlugin({
        *   proxy: "http://localhost:8080",

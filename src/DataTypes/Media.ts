@@ -22,8 +22,11 @@ export abstract class Media
   extends RevisionableEntity
   implements MediaInterface {
   drupal_internal__mid?: string;
+
   name?: string;
+
   path?: PathObjectInterface;
+
   _bundle?: MediaType;
 
   field_filemime?: string;
@@ -42,7 +45,7 @@ export abstract class Media
   }
 
   get label(): string {
-    return this.name ?? "";
+    return this.name ?? this.title ?? "";
   }
 
   set title(incoming: string) {

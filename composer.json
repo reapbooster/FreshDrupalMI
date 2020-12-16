@@ -343,6 +343,9 @@
             "vcs-driver-options": {
                 "github-no-api": true
             }
+        },
+        "platform": {
+            "php": "7.4"
         }
     }
 }

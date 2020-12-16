@@ -1,16 +1,17 @@
-import Slide, {
+import {
+  Slide,
   SlideInterface,
   SlideKeyValueText,
   SlideKeyValueTextInterface,
 } from "./Slide";
 import ColorObject, { ColorObjectInterface } from "./ColorObject";
-import ImageFile, { ImageFileInterface } from "./ImageFile";
+import { ImageFile, ImageFileInterface } from "./ImageFile";
 import SlideType, { SlideTypeInterface } from "./SlideType";
 import { Link, LinkInterface } from "./LinkList";
 
 export interface SlideFullWidthOneColumnInterface extends SlideInterface {
   field_background_color?: ColorObjectInterface;
-  field_link?: boolean;
+  field_link?: LinkInterface;
   field_promoted: boolean;
   field_published: boolean;
   field_text_color?: ColorObjectInterface;
@@ -19,7 +20,7 @@ export interface SlideFullWidthOneColumnInterface extends SlideInterface {
   field_slide_text?: Array<SlideKeyValueTextInterface>;
 }
 
-export default class SlideFullWidthOneColumn
+export class SlideFullWidthOneColumn
   extends Slide
   implements SlideFullWidthOneColumnInterface {
   private _field_background_color: ColorObjectInterface;
@@ -41,7 +42,6 @@ export default class SlideFullWidthOneColumn
   constructor(incoming: SlideFullWidthOneColumnInterface) {
     super(incoming);
     Object.assign(this, incoming);
-    console.debug("SlideFullWidthOneColumn", this);
   }
 
   get field_background_color(): ColorObjectInterface {
@@ -97,6 +97,12 @@ export default class SlideFullWidthOneColumn
   }
 
   hasData(): boolean {
-    return this.field_published !== undefined && this.field_published !== null && this.field_background_image.imageStyleObject !== null;
+    return (
+      this.field_published !== undefined &&
+      this.field_published !== null &&
+      this.field_background_image.imageStyleObject !== null
+    );
   }
 }
+
+export default SlideFullWidthOneColumn;

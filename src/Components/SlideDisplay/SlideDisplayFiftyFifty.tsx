@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { SlideInterface } from "../../DataTypes/Slide";
-import SlideFiftyFifty from "../../DataTypes/SlideFiftyFifty";
-import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
+import { SlideInterface } from "DataTypes/Slide";
+import { SlideFiftyFifty } from "DataTypes/SlideFiftyFifty";
+import { EntityComponentProps } from "DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 
 export interface SlideDisplayFiftyFiftyProps {
@@ -29,10 +29,9 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
   }
   const leftOrRight = slideData.type.split("_").pop();
   console.log("Slide Fifty Fifty Data:", slideData);
-
   return (
     <div>
-      <h3>Slide--Fifty-Fifty - {leftOrRight}</h3>
+      <h3>Slide--Fifty-Fifty -{leftOrRight}</h3>
     </div>
   );
 };

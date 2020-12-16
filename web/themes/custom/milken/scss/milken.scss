@@ -1,67 +1,54 @@
 
-/**
- * Bootstrap includes are included from the /libraries folder
- * includes WITHOUT the prefix are included from the theme folder locally
- */
-
-
-/**
- * Font definitions from local
- *
- */
-
-@import "fonts";
-
-@import "libraries/bootstrap/scss/functions";
-
-
-/* override bootstrap variables with local shit */
-@import "variables_milken";
-
-@import "libraries/bootstrap/scss/mixins";
-@import "libraries/bootstrap/scss/root";
-@import "libraries/bootstrap/scss/reboot";
-@import "libraries/bootstrap/scss/type";
-@import "libraries/bootstrap/scss/images";
-@import "libraries/bootstrap/scss/code";
-@import "libraries/bootstrap/scss/grid";
-@import "libraries/bootstrap/scss/tables";
-/* @import "libraries/bootstrap/scss/forms"; */
-@import "libraries/bootstrap/scss/buttons";
-@import "libraries/bootstrap/scss/transitions";
-@import "libraries/bootstrap/scss/dropdown";
-@import "libraries/bootstrap/scss/button-group";
-@import "libraries/bootstrap/scss/input-group";
-@import "libraries/bootstrap/scss/custom-forms";
-@import "libraries/bootstrap/scss/nav";
-@import "libraries/bootstrap/scss/navbar";
-@import "libraries/bootstrap/scss/card";
-@import "libraries/bootstrap/scss/breadcrumb";
-@import "libraries/bootstrap/scss/pagination";
-@import "libraries/bootstrap/scss/badge";
-@import "libraries/bootstrap/scss/jumbotron";
-@import "libraries/bootstrap/scss/alert";
-@import "libraries/bootstrap/scss/progress";
-@import "libraries/bootstrap/scss/media";
-@import "libraries/bootstrap/scss/list-group";
-@import "libraries/bootstrap/scss/close";
-@import "libraries/bootstrap/scss/toasts";
-@import "libraries/bootstrap/scss/modal";
-@import "libraries/bootstrap/scss/tooltip";
-@import "libraries/bootstrap/scss/popover";
-@import "libraries/bootstrap/scss/carousel";
-@import "libraries/bootstrap/scss/spinners";
-@import "libraries/bootstrap/scss/utilities";
-@import "libraries/bootstrap/scss/print";
 
 
 
 
-@import "mixins";
-@import "common";
-@import "forms";
-@import "blocks";
-@import "header";
-@import "footer";
 
-@import "homepage";
+@import "~FrontEndTheme/scss/fonts";
+@import "~Libraries/bootstrap/scss/functions";
+@import "~FrontEndTheme/scss/variables_milken";
+@import "~Libraries/bootstrap/scss/mixins";
+@import "~Libraries/bootstrap/scss/root";
+@import "~Libraries/bootstrap/scss/reboot";
+@import "~Libraries/bootstrap/scss/type";
+@import "~Libraries/bootstrap/scss/images";
+@import "~Libraries/bootstrap/scss/code";
+@import "~Libraries/bootstrap/scss/grid";
+@import "~Libraries/bootstrap/scss/tables";
+@import "~Libraries/bootstrap/scss/forms";
+@import "~Libraries/bootstrap/scss/buttons";
+@import "~Libraries/bootstrap/scss/transitions";
+@import "~Libraries/bootstrap/scss/dropdown";
+@import "~Libraries/bootstrap/scss/button-group";
+@import "~Libraries/bootstrap/scss/input-group";
+@import "~Libraries/bootstrap/scss/custom-forms";
+@import "~Libraries/bootstrap/scss/nav";
+@import "~Libraries/bootstrap/scss/navbar";
+@import "~Libraries/bootstrap/scss/card";
+@import "~Libraries/bootstrap/scss/breadcrumb";
+@import "~Libraries/bootstrap/scss/pagination";
+@import "~Libraries/bootstrap/scss/badge";
+@import "~Libraries/bootstrap/scss/jumbotron";
+@import "~Libraries/bootstrap/scss/alert";
+@import "~Libraries/bootstrap/scss/progress";
+@import "~Libraries/bootstrap/scss/media";
+@import "~Libraries/bootstrap/scss/list-group";
+@import "~Libraries/bootstrap/scss/close";
+@import "~Libraries/bootstrap/scss/toasts";
+@import "~Libraries/bootstrap/scss/modal";
+@import "~Libraries/bootstrap/scss/tooltip";
+@import "~Libraries/bootstrap/scss/popover";
+@import "~Libraries/bootstrap/scss/carousel";
+@import "~Libraries/bootstrap/scss/spinners";
+@import "~Libraries/bootstrap/scss/utilities";
+@import "~Libraries/bootstrap/scss/print";
+
+
+@import "~FrontEndTheme/scss/mixins";
+@import "~FrontEndTheme/scss/common";
+@import "~FrontEndTheme/scss/forms";
+@import "~FrontEndTheme/scss/blocks";
+@import "~FrontEndTheme/scss/header";
+@import "~FrontEndTheme/scss/footer";
+
+@import "~FrontEndTheme/scss/homepage";
