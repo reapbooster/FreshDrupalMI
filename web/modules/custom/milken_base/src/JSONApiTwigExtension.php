@@ -125,8 +125,10 @@ class JSONApiTwigExtension extends AbstractExtension {
       }
       return $this->serialize($orig, $includes);
     }
+    // @codingStandardsIgnoreStart
     \Drupal::logger("JSONApiTwigExtension")->debug(print_r($resource, TRUE));
     return \Drupal::service('serialization.json')->encode($resource);
+    // @codingStandardsIgnoreEnd
   }
 
   /**
