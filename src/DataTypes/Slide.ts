@@ -31,10 +31,16 @@ export interface SlideInterface extends RevisionableEntityInterface {
   getBackgroundImageCss: ReturnType<string>;
 }
 
-export default abstract class Slide
+export abstract class Slide
   extends RevisionableEntity
   implements SlideInterface {
   drupal_internal__id: number;
 
-  abstract getBackgroundImageCss(): string;
+  getBackgroundImageCss(): string {
+    return this.field_background_image
+      ? `background-image: url(${this.field_background_image.imageStyleObject?.backgroundImageSet});`
+      : "";
+  }
 }
+
+export default Slide;

@@ -1,14 +1,14 @@
-import { SlideInterface } from 'DataTypes/Slide';
-import {SlideDataFactory} from "Components/SlideDisplay/SlideDataFactory";
-import { ImageFile } from 'DataTypes/ImageFile';
-import * as eckStyles from './eck-entity-slide.scss';
 
+import * as NodeArticleStyles from './node-article.scss';
+import { NodeArticle, NodeArticleInterface } from "DataTypes/NodeArticle";
 
-const slideDisplayTemplate = document.createElement("template");
-slideDisplayTemplate.innerHTML = `
+const nodeArticleTemplate = document.createElement("template");
+
+nodeArticleTemplate.innerHTML = `
 <div class="card" >
-    <div class="card-header"><slot name="bundle"></slot></div>
+    <div class="card-header"></div>
     <div class="card-body">
+      <slot name="title"></slot>
       <div class="card-title"><slot name="title"></slot></div>
     </div>
   </div>
@@ -16,20 +16,20 @@ slideDisplayTemplate.innerHTML = `
 `;
 
 customElements.define(
-  "eck-entity-slide",
-  class EckEntitySlideElement extends HTMLElement {
+  "node-article",
+  class NodeArticleElement extends HTMLElement {
     template: HTMLTemplateElement;
-    styles: string;
     mountPoint: HTMLElement;
-    entityData: SlideInterface;
+    styles: string;
+    entityData: NodeArticleInterface;
 
     constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: "open" });
       const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = SlideDataFactory(parsed.data);
-      this.styles = eckStyles.default.toString();
-      this.template = slideDisplayTemplate;
+      this.entityData = new NodeArticle(parsed.data);
+      this.styles = NodeArticleStyles.default.toString();
+      this.template = nodeArticleTemplate;
       this.addStyles(shadowRoot);
       this.applyTemplate(shadowRoot);
     }
@@ -43,17 +43,16 @@ customElements.define(
      */
     applyTemplate = (sr: ShadowRoot) => {
       // Supply the template with a value for "title" slot
-
       const toAppend = document.createElement('h5');
       toAppend.slot = "title";
-      toAppend.textContent = this.entityData.title;
+      toAppend.textContent = this.entityData.label;
       this.appendChild(toAppend);
       const bundleType = document.createElement("span");
       bundleType.slot = "bundle";
+      bundleType.className = "bundle";
       bundleType.textContent = this.entityData.constructor.name
       this.appendChild(bundleType);
-
-      // Then apply the tempalte to the shadowroot
+      // Then apply the template to the shadowroot
       this.mountPoint = document.createElement("div");
       sr.appendChild(this.mountPoint);
       const clone = this.template.content.cloneNode(true);
@@ -72,9 +71,9 @@ customElements.define(
     }
 
     connectedCallback() {
-      console.log("Connected callback", this.entityData.field_background_image);
-      const backgroundImage = `background-image: url('${this.entityData.field_background_image.imageStyleObject.medium}'); background-repeat: no-repeat; background-size: cover;`;
-      this.mountPoint.querySelector('.card').setAttribute('style', backgroundImage);
+      console.log("Connected callback", this.entityData.field_promo_slide);
+      //const backgroundImage = `background-image: url('${this.entityData.field_media_image.imageStyleObject.medium}'); background-repeat: no-repeat; background-size: cover;`;
+      //this.mountPoint.querySelector('.card').setAttribute('style', backgroundImage);
     }
   }
 );

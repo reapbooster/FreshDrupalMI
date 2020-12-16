@@ -62,7 +62,7 @@ export class ImageStyleObject implements ImageStyleObjectInterface {
   }
 
   get backgroundImageSet() {
-    return `image-set( url(${this.thumbnail}) 100w, url(${this.medium}) 220w, url(${this.large}) 480w, url(${this.fullscreen}) 1920w )`;
+    return this.thumbnail;
   }
 }
 

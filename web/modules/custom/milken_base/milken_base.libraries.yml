@@ -52,3 +52,18 @@ node_landing_page:
   version: 1.0
   js:
     components/eck-entity-slide/eck-entity-slide.entry.js: { source: 'components/node-landing-page/node-landing-page.entry.ts' }
+
+node_article:
+  version: 1.0
+  js:
+    components/node-article/node-article.entry.js: { source: 'components/node-article/node-article.entry.ts' }
+
+media_image:
+  version: 1.0
+  js:
+    components/media-image/media-image.entry.js: { source: 'components/media-image/media-image.entry.ts' }
+
+media_video:
+  version: 1.0
+  js:
+    components/media-video/media-video.entry.js: { source: 'components/media-video/media-video.entry.ts' }

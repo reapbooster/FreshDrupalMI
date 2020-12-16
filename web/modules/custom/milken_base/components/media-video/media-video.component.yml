@@ -1,6 +1,6 @@
-name: 'Node Landing Page'
-machine_name: node-landing-page
-description: 'Node Landing Page component for admin screens'
+name: 'Media Video'
+machine_name: media-video
+description: 'Media Video entry webcomponent'
 type: block
 core_version_requirement:  ^8 || ^9
 js:
@@ -26,8 +26,8 @@ form_configuration:
   tag:
     type: textfield
     title: "html tag"
-    default_value: "node-landing-page"
+    default_value: "media-video"
   attach_library:
     type: textfield
     title: "Attach Library"
-    default_value: "milken_base/node_landing_page"
+    default_value: "milken_base/media_video"

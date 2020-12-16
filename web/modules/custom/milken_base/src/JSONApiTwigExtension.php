@@ -118,11 +118,15 @@ class JSONApiTwigExtension extends AbstractExtension {
     $orig = $this->entityTypeManager
       ->getStorage($resource['entityTypeId'])
       ->load($resource['drupal_internal__id']);
-    $includes = [];
-    if (isset($resource['includes']) && is_string($resource['includes'])) {
-      $includes = explode(",", $resource['includes']);
+    if ($orig instanceof EntityInterface) {
+      $includes = [];
+      if (isset($resource['includes']) && is_string($resource['includes'])) {
+        $includes = explode(",", $resource['includes']);
+      }
+      return $this->serialize($orig, $includes);
     }
-    return $this->serialize($orig, $includes);
+    \Drupal::logger("JSONApiTwigExtension")->debug(print_r($resource, TRUE));
+    return \Drupal::service('serialization.json')->encode($resource);
   }
 
   /**
