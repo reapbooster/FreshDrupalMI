@@ -34,7 +34,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
   public function preRowSave(MigratePreRowSaveEvent $event) {
     $row = $event->getRow();
     $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
-    $message .= print_r($row->getDestination(), true);
+    $message .= print_r($row->getDestination(), TRUE);
     // @codingStandardsIgnoreStart
     \Drupal::logger('milken_migrate')
       ->info($message);
@@ -54,7 +54,7 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
     $saved = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($event->getDestinationIdValues());
     foreach ($saved as $value) {
       if ($value instanceof EntityInterface) {
-        $message .= print_r($value->toArray(), true);
+        $message .= print_r($value->toArray(), TRUE);
       }
     }
     // @codingStandardsIgnoreStart
