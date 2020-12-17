@@ -57,6 +57,7 @@
         "drupal/default_content_deploy": "1.x-dev",
         "drupal/delete_all": "^2.0",
         "drupal/devel": "^4.0",
+        "drupal/devel_kint_extras": "^1.0",
         "drupal/diff": "^1.0@RC",
         "drupal/dropzonejs": "^2.0",
         "drupal/ds": "^3.5",
@@ -180,7 +181,6 @@
         "squizlabs/php_codesniffer": "^3.4.0",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
-    "require-dev": {},
     "conflict": {
         "drupal/drupal": "*"
     },

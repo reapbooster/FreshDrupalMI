@@ -32,14 +32,14 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    *   Event object.
    */
   public function preRowSave(MigratePreRowSaveEvent $event) {
-    // phpcs:disable
     $row = $event->getRow();
-    \Kint::enabled(TRUE);
     $message = "PreSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid');
-    $message .= \Kint::dump($row->getDestination());
+    $message .= print_r($row->getDestination(), true);
+    // @codingStandardsIgnoreStart
     \Drupal::logger('milken_migrate')
       ->info($message);
-    // phpcs:enable
+    // @codingStandardsIgnoreEnd
+
   }
 
   /**
@@ -49,20 +49,19 @@ class MigrateRowSubscriber implements EventSubscriberInterface {
    *   Event object.
    */
   public function postRowSave(MigratePostRowSaveEvent $event) {
-    // phpcs:disable
-    \Kint::enabled(TRUE);
     $row = $event->getRow();
     $message = "PostSave: " . $event->getMigration()->id() . " row: " . $row->getDestinationProperty('uuid') . PHP_EOL;
     $saved = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($event->getDestinationIdValues());
     foreach ($saved as $value) {
       if ($value instanceof EntityInterface) {
-        $message .= \Kint::dump($value->toArray());
+        $message .= print_r($value->toArray(), true);
       }
     }
-
+    // @codingStandardsIgnoreStart
     \Drupal::logger('milken_migrate')
       ->info($message);
-    // phpcs:enable
+    // @codingStandardsIgnoreEnd
+
   }
 
 }
