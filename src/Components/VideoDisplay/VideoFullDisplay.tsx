@@ -8,6 +8,7 @@ import {
   faFacebookF,
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
+import moment from "moment";
 
 export interface VideoFullDisplayProps {
   data: MediaVideoInterface;
@@ -37,13 +38,15 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
     }
     & .section-content {
       order: 2;
-      @media only screen and (max-width: 1200px) {
+      @media only screen and (max-width: 1199px) {
         order: 3;
+        padding-top: 1.5em;
+
       }
     }
     & .section-tags {
       order: 3;
-      @media only screen and (max-width: 1200px) {
+      @media only screen and (max-width: 1199px) {
         order: 2;
       }
       & a {
@@ -53,10 +56,20 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
         text-decoration: none;
         background-color: #9a6397;
         font-size: 12px;
+        font-family: 'LatoWebBold';
         display: inline-block;
         line-height: 16px;
         white-space: nowrap;
+        margin: 10px 10px 10px 0;
       }
+    }
+    & .published-date {
+      font-family: LatoWebItalic;
+      font-size: 20px;
+      color: #999AA3;
+      letter-spacing: 0;
+      line-height: 30px;
+      margin-top: 0px;
     }
   `;
 
@@ -78,6 +91,8 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       font-size: 1.5em;
     }
   `;
+  
+  const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   return (
     <VideoElMainWrapper className="container-fluid">
@@ -97,18 +112,25 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
         <Row>
           <Col xs="12" lg="6" xl="1" className="section-social">
             <h5>Social</h5>
-            <FontAwesomeIcon icon={faTwitter} />
-            <FontAwesomeIcon icon={faFacebookF} />
-            <FontAwesomeIcon icon={faLinkedinIn} />
+            <a href={"https://twitter.com/intent/tweet?url=" + window.location.href +"&text=" + data.name}>
+              <FontAwesomeIcon icon={faTwitter} />
+            </a>
+            <a href={"https://www.facebook.com/share.php?u=" + window.location.href +"&quote=" + data.name}>
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+            <a href={"https://www.linkedin.com/sharing/share-offsite/?url=" + window.location.href +"&title=" + data.name}>
+              <FontAwesomeIcon icon={faLinkedinIn} />
+            </a>
           </Col>
-          <Col xs="12" xl="10" className="section-content">
+          <Col xs="12" xl="8" className="section-content">
             <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
           </Col>
-          <Col xs="12" lg="6" xl="1" className="section-tags">
+          <Col xs="12" lg="6" xl="3" className="section-tags">
             <h5>Tags</h5>
             <a href="#video-tag-one">Video Tag One</a>
             <a href="#video-tag-two">Video Tag Two</a>
             <a href="#video-tag-tree">Video Tag Three</a>
+            <div class="published-date">Published {created.format("MMMM D, YYYY")}</div>
           </Col>
         </Row>
       </Container>
