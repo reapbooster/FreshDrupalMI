@@ -8,6 +8,16 @@ footer {
     }
     a {
       letter-spacing: 1px;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 0 11px;
+      font-weight: bold;
+      font-size: 12px;
+      margin-right: 20px;
+      &:hover{
+        color: #FF6237;
+      }
     }
   }
   .footer-social {
@@ -74,9 +84,13 @@ footer {
       padding: 0;
     }
     .footer-links {
-      .region {
+      ul {
         display: flex;
         justify-content: center;
+        a {
+          padding: 0 8px;
+          margin: 0;
+        }
       }
     }
     .footer-social {
@@ -169,25 +183,18 @@ footer {
     color: $lightTitle;
     display: flex;
     justify-content: center;
-    span {
-      color: $lightTitle;
-    }
 
     li {
       float: left;
       display: inline-block;
       a {
         color: $lightTitle;
+        font-size: 1.5em;
         &:hover {
           color: $orangeButtons;
         }
-        svg {
-          width: 25px;
-          height: 25px;
-          @media (max-width: $breakpointTablet) {
-            width: 15px;
-            height: 15px;
-          }
+        @media (max-width: $breakpointTablet){
+          font-size: 1em;
         }
       }
     }
