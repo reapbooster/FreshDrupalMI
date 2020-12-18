@@ -6,7 +6,7 @@ const nodeLandingPageDisplayTemplate = document.createElement("template");
 
 nodeLandingPageDisplayTemplate.innerHTML = `
 <div class="card" >
-    <div class="card-header"></div>
+    <div class="card-header"><slot name="bundle"></slot></div>
     <div class="card-body">
       <slot name="title"></slot>
       <div class="card-title"><slot name="title"></slot></div>

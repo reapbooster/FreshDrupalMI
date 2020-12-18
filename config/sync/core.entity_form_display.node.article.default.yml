@@ -14,7 +14,7 @@ dependencies:
     - entity_browser
     - field_group
     - metatag
-    - paragraphs
+    - paragraphs_browser
     - path
     - publication_date
 third_party_settings:
@@ -52,7 +52,6 @@ third_party_settings:
       region: content
     group_tags:
       children:
-        - field_authors
         - field_topics
         - field_centers
         - field_meta_tags
@@ -75,12 +74,12 @@ third_party_settings:
       weight: 20
       format_type: tab
       format_settings:
+        description: ''
+        formatter: open
+        required_fields: true
         id: ''
         classes: ''
-        formatter: open
-        description: ''
-        required_fields: true
-      label: Text
+      label: 'Article Content'
       region: content
     group_authoring:
       children:
@@ -126,11 +125,21 @@ content:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: open
-      add_mode: dropdown
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: '0'
+      add_mode: paragraphs_browser
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: _none
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+        add_above: add_above
+      paragraphs_browser: _na
+      modal_width: 80%
+      modal_height: auto
     third_party_settings: {  }
-    type: entity_reference_paragraphs
+    type: paragraphs_browser
     region: content
   field_meta_tags:
     type: metatag_firehose
