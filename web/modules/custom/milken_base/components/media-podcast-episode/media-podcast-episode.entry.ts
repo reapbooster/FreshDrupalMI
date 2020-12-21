@@ -1,11 +1,11 @@
 
-import * as MediaImageStyles from './media-image.scss';
-import {MediaImage, MediaImageInterface} from "DataTypes/MediaImage";
+import * as MediaPodcastEpisodeStyles from './media-podcast-episode.scss';
+import { MediaPodcastEpisode, MediaPodcastEpisodeInterface } from "DataTypes/MediaPodcastEpisode";
 import {WebComponentBase} from "Utility/WebComponentBase";
 
-const mediaImageTemplate = document.createElement("template");
+const MediaPodcastEpisodeTemplate = document.createElement("template");
 
-mediaImageTemplate.innerHTML = `
+MediaPodcastEpisodeTemplate.innerHTML = `
 <div class="card" >
     <div class="card-header"><slot name="bundle"></slot></div>
     <div class="card-body">
@@ -17,23 +17,24 @@ mediaImageTemplate.innerHTML = `
 `;
 
 customElements.define(
-  "media-image",
-  class MediaImageElement extends WebComponentBase {
-    entityData: MediaImageInterface;
+  "media-podcast-episode",
+  class MediaPodcastEpisode extends WebComponentBase {
+    entityData: MediaPodcastEpisodeInterface;
 
     constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: "open" });
       const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = new MediaImage(parsed.data);
-      this.styles = MediaImageStyles.default.toString();
-      this.template = mediaImageTemplate;
+      this.entityData = new MediaPodcastEpisode(parsed.data);
+      this.styles = MediaPodcastEpisodeStyles.default.toString();
+      this.template = MediaPodcastEpisodeTemplate;
       this.addStyles(shadowRoot);
       this.applyTemplate(shadowRoot);
     }
 
-    getThumbnailUrl = (): string => {
+    getThumbnailUrl(): string {
       return this.entityData.field_media_image?.imageStyleObject.medium;
     }
+
   }
 );

@@ -4,7 +4,7 @@ import ErrorBoundary from "../../Utility/ErrorBoundary";
 import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
 import { Card } from "react-bootstrap";
 import React from "react";
-import { EventDataFactory } from "./EventFactories";
+import { EventDataFactory } from "./EventDataFactory";
 import { EventInterface } from "../../DataTypes/Event";
 
 interface EventCardDisplayProps {

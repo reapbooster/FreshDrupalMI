@@ -3,7 +3,7 @@
 {% set node_article_value =  node.toArray
   | merge({ 'entityTypeId': node.getEntityTypeId })
   | merge({ 'id': node.uuid.value })
-  | merge({ 'drupal_internal__id': node.id.value })
+  | merge({ 'drupal_internal__id': node.id })
   | merge({ 'includes': "field_promo_slide,field_promo_slide.field_background_image" })
 
 %}

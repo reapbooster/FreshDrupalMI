@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { EventDataFactory } from "./EventFactories";
+import { EventDataFactory } from "./EventDataFactory";
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import { EventHero } from "./EventHero";
 import Loading from "../Loading";

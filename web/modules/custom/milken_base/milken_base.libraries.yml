@@ -48,6 +48,11 @@ eck_entity_slide:
   js:
     components/eck-entity-slide/eck-entity-slide.entry.js: { source: 'components/eck-entity-slide/eck-entity-slide.entry.ts' }
 
+eck_entity_event:
+  version: 1.0
+  js:
+    components/eck-entity-event/eck-entity-event.entry.js: { source: 'components/eck-entity-event/eck-entity-event.entry.ts' }
+
 node_landing_page:
   version: 1.0
   js:
@@ -67,3 +72,8 @@ media_video:
   version: 1.0
   js:
     components/media-video/media-video.entry.js: { source: 'components/media-video/media-video.entry.ts' }
+
+media_podcast_episode:
+  version: 1.0
+  js:
+    components/media-podcast-episode/media-podcast-episode.entry.js: { source: 'components/media-podcast-episode/media-podcast-episode.entry.ts' }

@@ -4,6 +4,7 @@
     | merge({ 'entityTypeId': eck_entity.getEntityTypeId })
     | merge({ 'id': eck_entity.uuid.value })
     | merge({ 'drupal_internal__id': eck_entity.id.value })
+    | merge({ 'type': eck_entity.bundle })
     | merge({ 'includes': "field_background_image" })
 
 %}
