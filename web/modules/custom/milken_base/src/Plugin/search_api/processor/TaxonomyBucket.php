@@ -52,7 +52,7 @@ class TaxonomyBucket extends ProcessorPluginBase {
     $orig = $item->getOriginalObject(TRUE)->getEntity();
     if ($orig instanceof EntityInterface) {
       $referenced = $orig->referencedEntities();
-      foreach ($referenced as $key => $ref) {
+      foreach ($referenced as $ref) {
         if ($ref instanceof Term) {
           array_push($valuesToIndex, $ref->label());
         }

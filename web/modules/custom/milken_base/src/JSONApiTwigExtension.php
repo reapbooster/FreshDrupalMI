@@ -151,6 +151,8 @@ class JSONApiTwigExtension extends AbstractExtension {
    * @throws \Exception
    */
   public function serialize(EntityInterface $entity, array $includes = []) {
+    // @codingStandardsIgnoreStart
+
     try {
       $jsonapi_url = sprintf("/jsonapi/%s/%s/%s", $entity->getEntityTypeId(), $entity->bundle(), $entity->uuid());
       $query = [
@@ -180,6 +182,8 @@ class JSONApiTwigExtension extends AbstractExtension {
       \Drupal::logger(__CLASS__)->error($t->getMessage());
     }
     return NULL;
+    // @codingStandardsIgnoreEnd
+
   }
 
   /**
