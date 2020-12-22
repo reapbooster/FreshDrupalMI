@@ -23,13 +23,18 @@ customElements.define(
 
     constructor() {
       super();
-      const shadowRoot = this.attachShadow({ mode: "open" });
-      const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = SlideDataFactory(parsed.data);
-      this.styles = eckStyles.default.toString();
-      this.template = slideDisplayTemplate;
-      this.addStyles(shadowRoot);
-      this.applyTemplate(shadowRoot);
+      try {
+        const shadowRoot = this.attachShadow({ mode: "open" });
+        const parsed = JSON.parse(this.getAttribute('data-entity'));
+        this.entityData = SlideDataFactory(parsed.data);
+        this.styles = eckStyles.default.toString();
+        this.template = slideDisplayTemplate;
+        this.addStyles(shadowRoot);
+        this.applyTemplate(shadowRoot);
+      } catch(err) {
+        this.errorHandler(err);
+      }
+
     }
 
     getThumbnailUrl = (): string => {

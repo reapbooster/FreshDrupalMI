@@ -23,13 +23,17 @@ customElements.define(
 
     constructor() {
       super();
-      const shadowRoot = this.attachShadow({ mode: "open" });
-      const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = new MediaImage(parsed.data);
-      this.styles = MediaImageStyles.default.toString();
-      this.template = mediaImageTemplate;
-      this.addStyles(shadowRoot);
-      this.applyTemplate(shadowRoot);
+      try {
+        const shadowRoot = this.attachShadow({ mode: "open" });
+        const parsed = JSON.parse(this.getAttribute('data-entity'));
+        this.entityData = new MediaImage(parsed.data);
+        this.styles = MediaImageStyles.default.toString();
+        this.template = mediaImageTemplate;
+        this.addStyles(shadowRoot);
+        this.applyTemplate(shadowRoot);
+      } catch(err) {
+        this.errorHandler(err);
+      }
     }
 
     getThumbnailUrl = (): string => {

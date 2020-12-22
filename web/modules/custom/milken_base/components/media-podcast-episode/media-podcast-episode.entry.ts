@@ -24,12 +24,16 @@ customElements.define(
     constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: "open" });
-      const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = new MediaPodcastEpisode(parsed.data);
-      this.styles = MediaPodcastEpisodeStyles.default.toString();
-      this.template = MediaPodcastEpisodeTemplate;
-      this.addStyles(shadowRoot);
-      this.applyTemplate(shadowRoot);
+      try {
+        const parsed = JSON.parse(this.getAttribute('data-entity'));
+        this.entityData = new MediaPodcastEpisode(parsed.data);
+        this.styles = MediaPodcastEpisodeStyles.default.toString();
+        this.template = MediaPodcastEpisodeTemplate;
+        this.addStyles(shadowRoot);
+        this.applyTemplate(shadowRoot);
+      } catch (err) {
+        this.handleError(err);
+      }
     }
 
     getThumbnailUrl(): string {

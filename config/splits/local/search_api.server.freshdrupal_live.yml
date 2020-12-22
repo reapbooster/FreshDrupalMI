@@ -37,7 +37,7 @@ backend_config:
     host: milken-dev.reapbooster.com
     port: 8443
     path: /
-    core: freshmilken_live
+    core: stovak_dev
     timeout: 5
     index_timeout: 5
     optimize_timeout: 10

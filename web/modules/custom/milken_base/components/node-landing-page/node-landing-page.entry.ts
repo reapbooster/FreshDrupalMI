@@ -25,12 +25,17 @@ customElements.define(
     constructor() {
       super();
       const shadowRoot = this.attachShadow({mode: "open"});
-      const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = new NodeLandingPage(parsed.data);
-      this.styles = NodeLandingPageStyles.default.toString();
-      this.template = nodeLandingPageDisplayTemplate;
-      this.addStyles(shadowRoot);
-      this.applyTemplate(shadowRoot);
+      try {
+        const parsed = JSON.parse(this.getAttribute('data-entity'));
+        this.entityData = new NodeLandingPage(parsed.data);
+        this.styles = NodeLandingPageStyles.default.toString();
+        this.template = nodeLandingPageDisplayTemplate;
+        this.addStyles(shadowRoot);
+        this.applyTemplate(shadowRoot);
+      } catch(err) {
+        this.errorHandler(err);
+      }
+
     }
 
     getThumbnailUrl(): string {

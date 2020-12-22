@@ -1,7 +1,7 @@
 
 import * as MediaVideoStyles from './media-video.scss';
 import { MediaVideo, MediaVideoInterface } from "DataTypes/MediaVideo";
-import {WebComponentBase} from "Utility/WebComponentBase";
+import { WebComponentBase } from "Utility/WebComponentBase";
 
 const MediaVideoTemplate = document.createElement("template");
 
@@ -25,12 +25,17 @@ customElements.define(
     constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: "open" });
-      const parsed = JSON.parse(this.getAttribute('data-entity'));
-      this.entityData = new MediaVideo(parsed.data);
-      this.styles = MediaVideoStyles.default.toString();
-      this.template = MediaVideoTemplate;
-      this.addStyles(shadowRoot);
-      this.applyTemplate(shadowRoot);
+      try {
+        const parsed = JSON.parse(this.getAttribute('data-entity'));
+        this.entityData = new MediaVideo(parsed.data);
+        this.styles = MediaVideoStyles.default.toString();
+        this.template = MediaVideoTemplate;
+        this.addStyles(shadowRoot);
+        this.applyTemplate(shadowRoot);
+      } catch (err) {
+        this.handleError(err);
+      }
+
     }
 
     getThumbnailUrl = (): string => {

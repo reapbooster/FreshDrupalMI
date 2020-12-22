@@ -1,7 +1,7 @@
 import { EventInterface } from 'DataTypes/Event';
-import {EventDataFactory} from "Components/EventDisplay/EventDataFactory";
+import { EventDataFactory } from "Components/EventDisplay/EventDataFactory";
 import * as eckStyles from './eck-entity-event.scss';
-import {WebComponentBase} from "Utility/WebComponentBase";
+import { WebComponentBase } from "Utility/WebComponentBase";
 
 
 const eventDisplayTemplate = document.createElement("template");
@@ -23,18 +23,17 @@ customElements.define(
     constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: "open" });
-      const entityData = this.getAttribute('data-entity');
       try {
+        const entityData = this.getAttribute('data-entity');
         const parsed = JSON.parse(entityData);
         this.entityData = EventDataFactory(parsed.data);
-      } catch (e) {
-        console.error("NO ENTITY DATA:", e.message, entityData );
+        this.styles = eckStyles.default.toString();
+        this.template = eventDisplayTemplate;
+        this.addStyles(shadowRoot);
+        this.applyTemplate(shadowRoot);
+      }  catch(err) {
+        this.errorHandler(err);
       }
-
-      this.styles = eckStyles.default.toString();
-      this.template = eventDisplayTemplate;
-      this.addStyles(shadowRoot);
-      this.applyTemplate(shadowRoot);
     }
 
     getThumbnailUrl = (): string => {

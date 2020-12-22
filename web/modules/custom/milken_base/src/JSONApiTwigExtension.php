@@ -5,7 +5,6 @@ namespace Drupal\milken_base;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Url;
 use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -123,7 +122,10 @@ class JSONApiTwigExtension extends AbstractExtension {
         if (isset($resource['includes']) && is_string($resource['includes'])) {
           $includes = explode(",", $resource['includes']);
         }
-        return $this->serialize($orig, $includes);
+        $toReturn = $this->serialize($orig, $includes);
+        if ($toReturn) {
+          return $toReturn;
+        }
       }
     } catch(\Exception $e) {
       \Drupal::logger("JSONApiTwigExtension")->error($e->getMessage());
@@ -149,33 +151,35 @@ class JSONApiTwigExtension extends AbstractExtension {
    * @throws \Exception
    */
   public function serialize(EntityInterface $entity, array $includes = []) {
-    $route_options = [];
-    $resource_type = $this->resourceTypeRepository->get($entity->getEntityTypeId(), $entity->bundle());
-    if ($resource_type instanceof ResourceType) {
-      $route_name = sprintf('jsonapi.%s.individual', $resource_type->getTypeName());
+    try {
+      $jsonapi_url = sprintf("/jsonapi/%s/%s/%s", $entity->getEntityTypeId(), $entity->bundle(), $entity->uuid());
+      $query = [
+        "jsonapi_include" => TRUE,
+      ];
+      if ($includes) {
+        $query['include'] = is_array($includes) ? implode(',', $includes) : $includes;
+      }
+      $request = Request::create(
+        $jsonapi_url,
+        'GET',
+        $query,
+        $this->currentRequest->cookies->all(),
+        [],
+        $this->currentRequest->server->all()
+      );
+      if ($this->session) {
+        $request->setSession($this->session);
+      }
+      $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
+      return $response->getContent();
     }
-    $jsonapi_url = Url::fromRoute($route_name, ['entity' => $entity->uuid()], $route_options)
-      ->toString(TRUE)
-      ->getGeneratedUrl();
-    $query = [
-      "jsonapi_include" => TRUE,
-    ];
-    if ($includes) {
-      $query['include'] = is_array($includes) ? implode(',', $includes) : $includes;
+    catch (\Exception $e) {
+      \Drupal::logger(__CLASS__)->error($e->getMessage());
     }
-    $request = Request::create(
-      $jsonapi_url,
-      'GET',
-      $query,
-      $this->currentRequest->cookies->all(),
-      [],
-      $this->currentRequest->server->all()
-    );
-    if ($this->session) {
-      $request->setSession($this->session);
+    catch (\Throwable $t) {
+      \Drupal::logger(__CLASS__)->error($t->getMessage());
     }
-    $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
-    return $response->getContent();
+    return NULL;
   }
 
   /**

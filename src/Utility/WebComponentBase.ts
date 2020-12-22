@@ -7,6 +7,7 @@ export abstract class WebComponentBase extends HTMLElement {
   styles: string;
   mountPoint: HTMLElement;
   entityData: EntityInterface;
+  abstract getThumbnailUrl(): string;
 
   /**
    * Take the HTML template provided as the base fromework
@@ -33,7 +34,14 @@ export abstract class WebComponentBase extends HTMLElement {
     this.mountPoint.appendChild(clone);
   }
 
-  abstract getThumbnailUrl(): string;
+
+  errorHandler = (err: Error) => {
+    console.error("ERROR:", this.constructor.name, err.message);
+    const errorDisplay = document.createElement("span")
+    errorDisplay.innerText = err.message;
+    errorDisplay.className = "error";
+    this.shadowRoot.appendChild()
+  }
 
   /**
    * Add styles to shadow dom from css file in the components folder.

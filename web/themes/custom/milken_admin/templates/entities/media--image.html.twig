@@ -1,6 +1,6 @@
 {{ attach_library('milken_base/media_image') }}
 
-{% set media_image_value =  media.toArray
+{% set media_image_value =  []
   | merge({ 'entityTypeId': media.getEntityTypeId })
   | merge({ 'id': media.uuid.value })
   | merge({ 'drupal_internal__id': media.id })
