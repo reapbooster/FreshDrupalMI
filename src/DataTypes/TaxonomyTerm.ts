@@ -4,6 +4,8 @@ import PathObject, { PathObjectInterface } from "./PathObject";
 import Entity, { EntityInterface } from "./Entity";
 
 export interface TaxonomyTermInterface extends EntityInterface {
+  name: string;
+  machine_name: string;
   description?: string;
   drupal_internal__tid?: number;
   field_visibility?: boolean;
@@ -13,9 +15,11 @@ export interface TaxonomyTermInterface extends EntityInterface {
   path?: PathObjectInterface;
 }
 
-export class TaxonomyTerm
-  extends Entity
-  implements TaxonomyTermInterface {
+export class TaxonomyTerm extends Entity implements TaxonomyTermInterface {
+  name: string;
+
+  machine_name: string;
+
   description?: string;
 
   drupal_internal__tid?: number;
