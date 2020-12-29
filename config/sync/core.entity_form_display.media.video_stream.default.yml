@@ -3,12 +3,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video_stream.field_event_reference
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
+    - field.field.media.video_stream.field_start_finish_time
     - field.field.media.video_stream.field_thumbnail
     - image.style.thumbnail
     - media.type.video_stream
   module:
+    - datetime_range
     - image
     - media
     - path
@@ -23,6 +26,16 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_event_reference:
+    weight: 103
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_media_oembed_video:
     type: oembed_textfield
     weight: 0
@@ -40,6 +53,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_start_finish_time:
+    weight: 104
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
     region: content
   field_thumbnail:
     weight: 102

@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
+    - field.field.media.video_stream.field_event_reference
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
+    - field.field.media.video_stream.field_start_finish_time
     - field.field.media.video_stream.field_thumbnail
     - image.style.medium
     - media.type.video_stream
@@ -27,8 +29,10 @@ content:
     region: content
 hidden:
   created: true
+  field_event_reference: true
   field_media_oembed_video: true
   field_people: true
+  field_start_finish_time: true
   field_thumbnail: true
   langcode: true
   name: true

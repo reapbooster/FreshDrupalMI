@@ -1,16 +1,16 @@
-uuid: 1b9d88d0-bc23-4683-b576-c4d949c60b2e
+uuid: 1a914760-696f-43f0-b255-a57bc939429f
 langcode: en
 status: true
 dependencies:
   module:
-    - eck
     - media
-id: media.field_event_reference
-field_name: field_event_reference
-entity_type: media
+    - taxonomy
+id: taxonomy_term.field_summary_image
+field_name: field_summary_image
+entity_type: taxonomy_term
 type: entity_reference
 settings:
-  target_type: event
+  target_type: media
 module: core
 locked: false
 cardinality: 1

@@ -1,17 +1,17 @@
-uuid: 1b9d88d0-bc23-4683-b576-c4d949c60b2e
+uuid: 86b756da-33e9-42c1-8efd-a307520798c3
 langcode: en
 status: true
 dependencies:
   module:
-    - eck
+    - datetime_range
     - media
-id: media.field_event_reference
-field_name: field_event_reference
+id: media.field_start_finish_time
+field_name: field_start_finish_time
 entity_type: media
-type: entity_reference
+type: daterange
 settings:
-  target_type: event
-module: core
+  datetime_type: datetime
+module: datetime_range
 locked: false
 cardinality: 1
 translatable: true
