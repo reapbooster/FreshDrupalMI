@@ -33,11 +33,6 @@ PhilanthropyHub:
   js:
     components/PhilanthropyHub/PhilanthropyHub.entry.js: { source: 'components/PhilanthropyHub/PhilanthropyHub.entry.tsx' }
 
-PodcastBrowser:
-  version: 1.0
-  js:
-    components/PodcastBrowser/PodcastBrowser.entry.js: { source: 'components/PodcastBrowser/PodcastBrowser.entry.tsx' }
-
 Search:
   version: 1.0
   js:
@@ -73,7 +68,12 @@ media_video:
   js:
     components/media-video/media-video.entry.js: { source: 'components/media-video/media-video.entry.ts' }
 
-media_podcast_episode:
+media_report:
   version: 1.0
   js:
-    components/media-podcast-episode/media-podcast-episode.entry.js: { source: 'components/media-podcast-episode/media-podcast-episode.entry.ts' }
+    components/media-report/media-report.entry.js: { source: 'components/media-report/media-report.entry.ts' }
+
+media_sponsor_logo:
+  version: 1.0
+  js:
+    components/media-sponsor-logo/media-sponsor-logo.entry.js: { source: 'components/media-sponsor-logo/media-sponsor-logo.entry.ts' }

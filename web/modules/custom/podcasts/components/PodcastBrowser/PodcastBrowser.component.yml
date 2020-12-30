@@ -30,4 +30,4 @@ form_configuration:
   attach_library:
     type: textfield
     title: "Attach Library"
-    default_value: "milken_base/PodcastBrowser"
+    default_value: "podcasts/PodcastBrowser"

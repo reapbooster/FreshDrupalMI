@@ -1,7 +1,7 @@
 
 import * as MediaPodcastEpisodeStyles from './media-podcast-episode.scss';
 import { MediaPodcastEpisode, MediaPodcastEpisodeInterface } from "DataTypes/MediaPodcastEpisode";
-import {WebComponentBase} from "Utility/WebComponentBase";
+import { WebComponentBase } from "Utility/WebComponentBase";
 
 const MediaPodcastEpisodeTemplate = document.createElement("template");
 
