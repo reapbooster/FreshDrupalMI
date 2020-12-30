@@ -26,7 +26,7 @@ variant_settings:
         view_mode: accordion
         url: '/jsonapi/media/podcast_episode?jsonapi_include=true'
         tag: podcast-browser
-        attach_library: podcasts/PodcastBrowser
+        attach_library: milken_base/PodcastBrowser
       context_mapping: {  }
   id: block_display
   uuid: e36969b6-899a-4c91-9175-74faf83e785e

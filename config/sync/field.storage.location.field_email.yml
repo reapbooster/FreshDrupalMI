@@ -1,16 +1,14 @@
-uuid: 3594f209-2abc-414f-93fd-5a2bc66c335c
+uuid: afab73f6-a4d8-4b57-8491-6bba6451a287
 langcode: en
 status: true
 dependencies:
   module:
     - eck
-    - node
-id: node.field_location
-field_name: field_location
-entity_type: node
-type: entity_reference
-settings:
-  target_type: location
+id: location.field_email
+field_name: field_email
+entity_type: location
+type: email
+settings: {  }
 module: core
 locked: false
 cardinality: 1
