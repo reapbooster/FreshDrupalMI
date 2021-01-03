@@ -1,5 +1,5 @@
 
-import * as MediaReportStyles from './media-sponsor-logo.scss';
+import * as MediaReportStyles from './media-report.scss';
 import { MediaReport, MediaReportInterface } from "DataTypes/MediaReport";
 import { WebComponentBase } from "Utility/WebComponentBase";
 

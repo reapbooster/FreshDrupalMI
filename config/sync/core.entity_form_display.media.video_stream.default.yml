@@ -7,14 +7,77 @@ dependencies:
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
     - field.field.media.video_stream.field_start_finish_time
-    - field.field.media.video_stream.field_thumbnail
-    - image.style.thumbnail
     - media.type.video_stream
   module:
     - datetime_range
-    - image
+    - field_group
     - media
     - path
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+        - group_promotion
+        - group_authoring
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_content:
+      children:
+        - field_media_oembed_video
+        - field_start_finish_time
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Content
+    group_authoring:
+      children:
+        - langcode
+        - uid
+        - created
+        - path
+        - status
+      parent_name: group_tabs
+      weight: 30
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Authoring
+    group_promotion:
+      children:
+        - field_people
+        - field_thumbnail
+        - field_event_reference
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Promotion
 id: media.video_stream.default
 targetEntityType: media
 bundle: video_stream
@@ -60,20 +123,20 @@ content:
     third_party_settings: {  }
     type: daterange_default
     region: content
-  field_thumbnail:
-    weight: 102
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
   langcode:
     type: language_select
     weight: 2
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
@@ -98,5 +161,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  name: true
+hidden: {  }
