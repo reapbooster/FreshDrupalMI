@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - eck
     - node
-    - taxonomy
 id: node.field_location
 field_name: field_location
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: location
 module: core
 locked: false
 cardinality: 1

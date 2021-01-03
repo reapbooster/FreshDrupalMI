@@ -22,8 +22,8 @@ entity.panels.list:
   base_route: system.admin_content
   weight: 50
 
-entity.rooms.list:
-  title: Rooms
-  route_name: eck.entity.rooms.list
+entity.location.list:
+  title: Locations
+  route_name: eck.entity.location.list
   base_route: system.admin_content
   weight: 60

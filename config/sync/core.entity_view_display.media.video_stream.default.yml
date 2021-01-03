@@ -7,11 +7,9 @@ dependencies:
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
     - field.field.media.video_stream.field_start_finish_time
-    - field.field.media.video_stream.field_thumbnail
     - media.type.video_stream
   module:
     - datetime_range
-    - image
     - media
 id: media.video_stream.default
 targetEntityType: media
@@ -52,15 +50,6 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: daterange_default
-    region: content
-  field_thumbnail:
-    weight: 2
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
     region: content
 hidden:
   created: true
