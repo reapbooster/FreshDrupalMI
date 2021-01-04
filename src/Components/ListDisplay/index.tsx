@@ -8,7 +8,7 @@
 
 import React, { useRef } from "react";
 import { EntityInterface } from "../../DataTypes/Entity";
-import styled, { StyledComponent } from "styled-components";
+import styled from "styled-components";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import ListDisplayFactory from "./ListDisplayFactory";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +18,7 @@ export interface ListDisplayProps {
   id: string;
   list: Array<EntityInterface> | Promise<Array<EntityInterface>>;
   view_mode: string;
-  container?: StyledComponent<any, any>;
+  container?: JSX.Element;
 }
 
 export const ListDisplay = function (props: ListDisplayProps) {
@@ -26,6 +26,7 @@ export const ListDisplay = function (props: ListDisplayProps) {
   const ContainerComponent =
     container ??
     styled.div`
+      position: relative;
       -ms-overflow-style: none;
       scrollbar-width: none;
       &::-webkit-scrollbar {

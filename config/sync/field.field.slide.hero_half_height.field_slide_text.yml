@@ -12,11 +12,11 @@ field_name: field_slide_text
 entity_type: slide
 bundle: hero_half_height
 label: 'Slide Text'
-description: ''
+description: 'HTML Tags will be stripped from the "VALUES" below.'
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  default_format: full_html
+  default_format: plain_text
 field_type: key_value_long

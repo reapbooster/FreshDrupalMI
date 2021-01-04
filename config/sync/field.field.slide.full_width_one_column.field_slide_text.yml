@@ -12,7 +12,7 @@ field_name: field_slide_text
 entity_type: slide
 bundle: full_width_one_column
 label: 'Slide Text'
-description: ''
+description: 'HTML tags will be stripped from the "value" fields below.'
 required: false
 translatable: false
 default_value:
@@ -23,5 +23,5 @@ default_value:
     format: full_html
 default_value_callback: ''
 settings:
-  default_format: full_html
+  default_format: plain_text
 field_type: key_value_long

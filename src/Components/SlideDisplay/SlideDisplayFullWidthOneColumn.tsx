@@ -9,6 +9,7 @@ import { EntityComponentProps } from "DataTypes/EntityComponentProps";
 import { ImageFile } from "../../DataTypes/ImageFile";
 import { ErrorBoundary } from "../../Utility/ErrorBoundary";
 import Loading from "../Loading";
+import { KeyValueTextFieldDisplay } from "../../Fields/KeyValueTextFieldDisplay";
 
 export interface SlideDisplayFullWidthOneColumnProps {
   data: SlideFullWidthOneColumnInterface;
@@ -63,7 +64,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     min-height: 650px;
     width: 100%;
     background-position: center;
-    background-clip: content-box;
+    background-clip: border-box;
     background-size: cover;
     background-image: url("${backgroundImage.imageStyleObject.thumbnail}");
     @media (min-width: 400px) {
@@ -75,21 +76,15 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
   `;
 
   console.debug("Jumbotron style", Jumbotron);
+  const textLineContainer = styled.div``;
+  const textLines = (
+    <KeyValueTextFieldDisplay
+      Container={textLineContainer}
+      style={{ color: `${slideData.field_text_color?.color}` }}
+      data={slideData.field_slide_text}
+    />
+  );
 
-  const textLines = [];
-  if (slideData.field_slide_text?.length) {
-    for (const key in slideData.field_slide_text) {
-      textLines.push(
-        <p
-          key={textLines.length + 1}
-          className={slideData.field_slide_text[key].key}
-          style={{ color: `${slideData.field_text_color?.color}` }}
-        >
-          {slideData.field_slide_text[key].value}
-        </p>
-      );
-    }
-  }
   if (slideData.field_link?.title && slideData.field_link?.uri) {
     textLines.push(
       <p key={textLines.length + 1}>
