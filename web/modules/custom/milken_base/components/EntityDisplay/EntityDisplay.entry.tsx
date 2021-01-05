@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react";
+import ReactDOM from "react-dom";
 import EntityDisplay from "Components/EntityDisplay";
 
 const EntityDisplayContainer = document.querySelector("entity-display");

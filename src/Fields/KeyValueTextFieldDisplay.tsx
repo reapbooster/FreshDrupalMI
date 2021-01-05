@@ -23,6 +23,6 @@ export const KeyValueTextFieldDisplay = (
 
 KeyValueTextFieldDisplay.defaultProps = {
   data: [],
-  container: styled.div``,
+  Container: styled.div``,
   style: {},
 };

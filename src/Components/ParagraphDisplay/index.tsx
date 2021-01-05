@@ -39,11 +39,7 @@ export const ParagraphDisplay = (props: ParagraphDisplayProps) => {
         const DataObject = ParagraphDataFactory(remoteData.data);
         setParagraphData(DataObject);
       });
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   const Component = ParagraphComponentFactory(paragraphData);

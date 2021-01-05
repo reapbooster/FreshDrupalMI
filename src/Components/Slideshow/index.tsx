@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { SlideDisplay } from "../SlideDisplay";
 import { SlideInterface } from "../../DataTypes/Slide";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
 import Loading from "../Loading";
+import { KeyValueTextFieldDisplay } from "../../Fields/KeyValueTextFieldDisplay";
 export interface SlideShowProps {
   items?: Array<SlideInterface>;
   view_mode: string;
@@ -29,7 +29,21 @@ export const SlideShow = (props: SlideShowProps) => {
     backgroundColor: "#666",
     flexGrow: 1,
     flexShrink: 0,
+    textIndent: "0px",
   };
+
+  const KeyValueTextFieldDisplayContainer = styled.div`
+    margin: 1rem;
+    & > .h2 {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: white;
+    }
+    & > .h1 {
+      font-size: 1.5rem;
+      color: white;
+    }
+  `;
 
   return (
     <div className="carousel slide" data-ride="carousel" id="SlideShowCarousel">
@@ -42,8 +56,14 @@ export const SlideShow = (props: SlideShowProps) => {
               className={key === 0 ? " active" : ""}
               data-target="#SlideShowCarousel"
               data-slide-to={key}
+              title={item.title ?? "default-value"}
+              id={"indicator-".concat(item.id)}
             >
-              {item.label}
+              <KeyValueTextFieldDisplayContainer>
+                <KeyValueTextFieldDisplay
+                  data={item.field_slide_text.slice(0, 2)}
+                />
+              </KeyValueTextFieldDisplayContainer>
             </li>
           );
         })}
@@ -57,12 +77,10 @@ export const SlideShow = (props: SlideShowProps) => {
               key={key}
               id={slide.id}
             >
-              <ErrorBoundary>
-                <SlideDisplay
-                  data={slide}
-                  view_mode={props.view_mode ?? "full"}
-                />
-              </ErrorBoundary>
+              <SlideDisplay
+                data={slide}
+                view_mode={props.view_mode ?? "full"}
+              />
             </div>
           );
         })}

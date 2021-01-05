@@ -35,7 +35,8 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
       .getData(landingPageData.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
-        setLandingPageData(new NodeLandingPage(ajaxData.data));
+        const newDO = new NodeLandingPage(ajaxData.data);
+        setLandingPageData(newDO);
       });
     return (
       <>
