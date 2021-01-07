@@ -61,7 +61,7 @@ export const SlideShow = (props: SlideShowProps) => {
             >
               <KeyValueTextFieldDisplayContainer>
                 <KeyValueTextFieldDisplay
-                  data={item.field_slide_text.slice(0, 2)}
+                  data={item.field_slide_text?.slice(0, 2)}
                 />
               </KeyValueTextFieldDisplayContainer>
             </li>
