@@ -77,3 +77,8 @@ media_sponsor_logo:
   version: 1.0
   js:
     components/media-sponsor-logo/media-sponsor-logo.entry.js: { source: 'components/media-sponsor-logo/media-sponsor-logo.entry.ts' }
+
+main_navigation:
+  version: 1.0
+  js:
+    components/main-navigation/main-navigation.entry.js: { source: 'components/main-navigation/main-navigation.entry.ts' }
