@@ -17,9 +17,34 @@ customElements.define(
       const shadowroot = this.attachShadow({ mode: "open" });
       const clone = menuColumnTemplate.content.cloneNode(true);
       shadowroot.appendChild(clone);
+      const style = document.createElement("style");
+      style.innerText = MainNavigationCss.default.toString();
+      document.querySelector("head").appendChild(style);
+    }
+  }
+);
+
+customElements.define(
+  "milken-menu-main",
+  class MilkenMenuMain extends HTMLElement {
+    constructor() {
+      super();
+      this.classList.remove("d-flex");
+      this.classList.add("d-none");
       document
-        .querySelector("style")
-        .innerText.concat(MainNavigationCss.default.toString());
+        .querySelector("#menu-reveal")
+        .addEventListener("click", this.toggle.bind(this));
+    }
+
+    toggle() {
+      console.log("toggle", this);
+      if (this.classList.contains("d-flex")) {
+        this.classList.remove("d-flex");
+        this.classList.add("d-none");
+      } else {
+        this.classList.add("d-flex");
+        this.classList.remove("d-none");
+      }
     }
   }
 );

@@ -23,7 +23,7 @@
 {{ attach_library('milken_base/main_navigation') }}
 
 
-<milken-menu-{{ menu_name }} class="container d-flex">
+<milken-menu-{{ menu_name }} class="container-fluid d-flex">
   {% for key,value in items %}
     <menu-column class="col col-md-3 col-sm-12" id="menu-{{ key }}">
       <h5 slot="column-title">{{ value.title }}</h5>
