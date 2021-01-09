@@ -20,19 +20,19 @@
 #}
 
 
-{{ attach_library('milken/main_navigation') }}
+{{ attach_library('milken_base/main_navigation') }}
 
 
 <milken-menu-{{ menu_name }} class="container d-flex">
   {% for key,value in items %}
-    <menu-column class="col col-md-3 col-sm-12" id="menucito-{{ key }}">
+    <menu-column class="col col-md-3 col-sm-12" id="menu-{{ key }}">
       <h5 slot="column-title">{{ value.title }}</h5>
       <ul slot="column-content" class="menu-content">
         {% if value.below %}
           {% for itemKey,itemValue in value.below %}
-            <li data-item="{{ itemValue | json_encode }}">
+            <li>
               <h6 slot="item-title"><a href="{{ itemValue.url }}">{{ itemValue.title }}</a></h6>
-              <p slot="item-description">{{ itemValue.field_description.value }}</p>
+              <p slot="item-description">{{ itemValue.entity.toArray.description.0.value }}</p>
             </li>
           {% endfor %}
         {% endif %}
