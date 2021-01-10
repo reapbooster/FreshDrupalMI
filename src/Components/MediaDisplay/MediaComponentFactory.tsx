@@ -1,6 +1,6 @@
 import { MediaInterface } from "../../DataTypes/Media";
 import MediaDisplayImage from "./MediaDisplayImage";
-import MediaDisplayReport from "./MediaDisplayReport";
+import MediaDisplayReport from "./Report";
 import MediaDisplayPodcastEpisode from "./MediaDisplayPodcastEpisode";
 import { VideoDisplay } from "../VideoDisplay";
 
