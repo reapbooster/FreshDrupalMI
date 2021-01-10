@@ -1,0 +1,86 @@
+import styled from "styled-components";
+import moment from "moment";
+import ImageFileDisplay from "Components/FileDisplay/ImageFileDisplay";
+import { Card } from "react-bootstrap";
+import React from "react";
+import MediaReport from "DataTypes/MediaReport";
+import ErrorBoundary from "../../../Utility/ErrorBoundary";
+import ErrorDisplay from "../../../Utility/ErrorDisplay";
+
+export interface MediaReportCardDisplayProps {
+  data: MediaReport;
+  key?: number;
+}
+
+const CardWrapper = styled.div`
+  min-width: 222px;
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 grey;
+  }
+`;
+
+const CustomCardHeader = styled.div`
+  position: relative;
+`;
+
+const DateWrapper = styled.div`
+  width: 100%;
+  background: rgba(0, 0, 0, 0.53);
+  color: white;
+  text-align: right;
+  padding-right: 0.5em;
+  position: absolute;
+  bottom: 0;
+`;
+
+export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
+  const { data, key } = props;
+  if (!data.valid) {
+    return <ErrorDisplay error={new Error("DataObject is not valid")} />;
+  }
+  const created = moment(data.changed, "ddd MMM DD YYYY Z");
+
+  console.debug("Thumbnail: ", data.getThumbnail());
+  return (
+    <CardWrapper
+      className="card my-5 mx-2 text-align-left flex-shrink-1"
+      key={key}
+    >
+      <ErrorBoundary>
+        <a
+          href={
+            data.path.alias
+              ? data.path.alias
+              : "/media/" + data.drupal_internal__mid
+          }
+          data-drupal-id={data.drupal_internal__mid}
+          data-drupal-type={data.type}
+          data-uuid={data.id}
+          style={{ maxWidth: "319px" }}
+        >
+          <CustomCardHeader>
+            <ImageFileDisplay
+              data={data.field_cover}
+              view_mode="thumbnail"
+              className={"card-img"}
+              style={{ maxWidth: "100%" }}
+              srcsetSizes="(max-width: 1000px) 200px, 400px"
+            />
+            <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
+          </CustomCardHeader>
+          <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
+            <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>
+              {data.name}
+            </Card.Title>
+          </Card.Body>
+          <Card.Footer className="bg-white border-0">
+            Authors and Tags
+          </Card.Footer>
+        </a>
+      </ErrorBoundary>
+    </CardWrapper>
+  );
+};
+
+export default MediaReportCardDisplay;

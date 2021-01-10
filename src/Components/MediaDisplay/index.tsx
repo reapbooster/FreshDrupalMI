@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
-import ErrorBoundary from "../../Utility/ErrorBoundary";
 import { MediaInterface } from "../../DataTypes/Media";
 import MediaComponentFactory from "./MediaComponentFactory";
 import MediaDataFactory from "./MediaDataFactory";

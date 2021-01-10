@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Loading from "../Loading";
 import { ImageFile, ImageFileInterface } from "../../DataTypes/ImageFile";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
+import Holder from "react-holder";
+import ErrorBoundary from "../../Utility/ErrorBoundary";
+import ErrorDisplay from "../../Utility/ErrorDisplay";
 
 export interface ImageFileDisplayProps {
   data: ImageFileInterface;
@@ -14,14 +17,13 @@ export interface ImageFileDisplayProps {
   srcsetSizes?: string;
 }
 
-export const ImageFileDisplay: React.FunctionComponent = (
-  props: ImageFileDisplayProps
-) => {
+export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
+  console.debug("ImageFileDisplay", props);
   const { data, style, width, height, className, srcsetSizes } = props;
   const DataObject = new ImageFile(data);
   const [imageData, setImageData] = useState(DataObject);
-  if (!DataObject.valid()) {
-    return <div data-error="DATA INVALID" />;
+  if (!DataObject.valid) {
+    return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
@@ -57,18 +59,27 @@ export const ImageFileDisplay: React.FunctionComponent = (
   const styleObject = imageData.imageStyleObject;
   return (
     <>
-      <img
-        data-drupal-id={imageData.id}
-        data-drupal-type={imageData.type}
-        data-uuid={imageData.id}
-        {...styleObject.imageAttributes}
-        style={imageTagStyle}
-        className={className}
-        sizes={srcsetSizes || ""}
-        alt={imageData.filename}
-      />
+      <ErrorBoundary>
+        <img
+          data-drupal-id={imageData.id}
+          data-drupal-type={imageData.type}
+          data-uuid={imageData.id}
+          {...styleObject.imageAttributes}
+          style={imageTagStyle}
+          className={className}
+          sizes={srcsetSizes || ""}
+          alt={imageData.filename}
+        />
+      </ErrorBoundary>
     </>
   );
+};
+
+ImageFileDisplay.defaultProps = {
+  data: {
+    valid: false,
+  },
+  view_mode: "card",
 };
 
 export default ImageFileDisplay;

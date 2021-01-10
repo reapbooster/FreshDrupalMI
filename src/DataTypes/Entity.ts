@@ -1,6 +1,5 @@
 import * as PathUtility from "path";
 import LinkList, { LinkListInterface } from "./LinkList";
-import EntityComponentProps from "./EntityComponentProps";
 import JSONApiUrl from "./JSONApiUrl";
 
 export interface EntityInterface {
@@ -9,6 +8,7 @@ export interface EntityInterface {
   id: string;
   links?: LinkListInterface;
   type: string;
+  valid: boolean;
   [x: string]: unknown;
 }
 
@@ -64,18 +64,6 @@ export abstract class Entity implements EntityInterface {
     );
   }
 
-  refreshValues(): Promise<EntityInterface> {
-    const self = this;
-    const ecp = new EntityComponentProps(this);
-    return ecp
-      .getData(this.getIncluded())
-      .then((res) => res.json())
-      .then((ajaxData) => {
-        Object.assign(self, ajaxData.data);
-        return self;
-      });
-  }
-
   hasData() {
     return this._created !== undefined;
   }
@@ -84,9 +72,11 @@ export abstract class Entity implements EntityInterface {
     return "";
   }
 
-  valid() {
+  get valid(): boolean {
     return typeof this.id === "string" && typeof this.type === "string";
   }
+
+  set valid(value) {}
 }
 
 export default Entity;
