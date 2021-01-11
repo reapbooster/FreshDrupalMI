@@ -57,6 +57,12 @@ export class MediaImage extends Media implements MediaImageInterface {
   getSource() {
     return this._field_media_image;
   }
+
+  get valid(): boolean {
+    return typeof this.id === "string" && typeof this.type === "string";
+  }
+
+  set valid(value) {}
 }
 
 export default MediaImage;

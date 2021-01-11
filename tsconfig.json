@@ -12,6 +12,7 @@
     "listEmittedFiles": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
+    "declaration": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "jsx": "react",
