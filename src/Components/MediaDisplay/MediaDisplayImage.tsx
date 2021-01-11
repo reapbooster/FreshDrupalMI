@@ -17,7 +17,7 @@ export const MediaDisplayImage = (props: MediaDisplayImageProps) => {
   const DataObject = new MediaImage(data);
   const [mediaImage, setMediaImage] = useState(DataObject);
 
-  if (!mediaImage.valid()) {
+  if (!mediaImage.valid) {
     return <div data-error={"DATA INVALID"} />;
   }
 

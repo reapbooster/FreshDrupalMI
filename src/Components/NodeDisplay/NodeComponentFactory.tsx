@@ -1,7 +1,6 @@
-import NodeArticleDisplay from "./NodeArticleDisplay";
-import NodeLandingPageDisplay from "./NodeLandingPageDisplay";
-import NodeEventDisplay from "./NodeEventDisplay";
-import NodeOpportunityCardDisplay from "./NodeOpportunityCardDisplay";
+import { NodeArticleDisplay } from "./NodeArticleDisplay";
+import { NodeLandingPageDisplay } from "./LandingPage";
+import { NodeOpportunityCardDisplay } from "./NodeOpportunityCardDisplay";
 import { NodeDisplaySession } from "./NodeDisplaySession";
 
 /**
@@ -16,8 +15,6 @@ export const NodeComponentFactory = (incoming) => {
       return NodeArticleDisplay;
     case "node--landing_page":
       return NodeLandingPageDisplay;
-    case "node--event":
-      return NodeEventDisplay;
     case "node--opportunity":
       return NodeOpportunityCardDisplay;
     case "node--session":

@@ -46,7 +46,7 @@ export class MediaReport extends Media implements MediaReportInterface {
 
   constructor(props) {
     super(props);
-    Object.assign(props);
+    Object.assign(this, props);
   }
 
   getIncluded(): string {
