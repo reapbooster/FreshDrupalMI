@@ -19,39 +19,60 @@ export const SlideShow = (props: SlideShowProps) => {
     return <SlideDisplay data={items[0]} view_mode={view_mode} />;
   }
 
-  const slideshowIndicatorsListStyle = {
-    position: "absolute",
-    bottom: "-25px",
-  };
+  const SlideshowIndicatorsList = styled.ol`
+    margin: 0;
+    align-items: flex-end;
+    
+    & > li {
+      height: 100%;
+      display: block;
+      margin: 0px;
+      background: rgb(46, 46, 52);
+      flex-grow: 1;
+      flex-shrink: 0;
+      text-indent: 0px;
+      opacity: 1;
+      color: rgb(134, 135, 139);
+      border-left: 1px solid rgb(21, 22, 24);
+      border-right: 1px solid rgb(21, 22, 24);
+      cursor: pointer;
+      
+      &.active{
+        padding-top: 7px;
+        box-shadow: 0px -5px 15px 0px black;
+        margin-top: 5px;
+        border-color: transparent;
+        background-color: #0063ca;
+      }
 
-  const slideShowIndicatorStyle = {
-    height: "8rem",
-    backgroundColor: "#666",
-    flexGrow: 1,
-    flexShrink: 0,
-    textIndent: "0px",
-  };
+      & .h2 {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        color: white;
+        font-family: 'LatoWeb';
+        font-weight: lighter;
+      }
+        
+      & .h1 {
+        font-size: 1rem;
+        color: white;
+        font-weight: lighter;
+        font-family: 'LatoWeb';
+      }
+    }  
+  `;
 
   const KeyValueTextFieldDisplayContainer = styled.div`
     margin: 1rem;
-    & > .h2 {
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      color: white;
-    }
-    & > .h1 {
-      font-size: 1.5rem;
-      color: white;
-    }
   `;
 
   return (
     <div className="carousel slide" data-ride="carousel" id="SlideShowCarousel">
-      <ol className="carousel-indicators" style={slideshowIndicatorsListStyle}>
+      <SlideshowIndicatorsList className="carousel-indicators">
         {items.map((item, key) => {
           return (
             <li
-              style={slideShowIndicatorStyle}
               key={key}
               className={key === 0 ? " active" : ""}
               data-target="#SlideShowCarousel"
@@ -67,7 +88,7 @@ export const SlideShow = (props: SlideShowProps) => {
             </li>
           );
         })}
-      </ol>
+      </SlideshowIndicatorsList>
       <div className="carousel-inner">
         {items.map((slide: SlideInterface, key: number) => {
           console.debug("Sending to slide display...", slide);
