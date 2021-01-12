@@ -25,7 +25,7 @@ If the ```docker-compose``` command completed successfully, you can now launch a
 
 Then from inside the docker container do the following to install the drupal site:
 
-1. ```composer install && gulp```
+1. ```composer install && gulp buildMilkenTheme && gulp```
 
 2. ```terminus login --email={PANTHEON EMAIL} ----machine-token={TOKEN FROM PANTHEON}```
 
