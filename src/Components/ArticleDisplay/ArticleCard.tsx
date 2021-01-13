@@ -44,6 +44,10 @@ const ArticleCard = (props: ArticleCardProps) => {
     &:hover {
       box-shadow: 0 8px 16px 0 grey;
     }
+    & img{
+      height: 12.35vw;
+      min-height: 146px;
+    }
   `;
 
   const CustomCardHeader = styled.div`
