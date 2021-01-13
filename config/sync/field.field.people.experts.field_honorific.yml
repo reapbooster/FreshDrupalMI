@@ -1,0 +1,19 @@
+uuid: 8905430e-d51d-45a4-a2dd-535d92a37ee7
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.experts
+    - field.storage.people.field_honorific
+id: people.experts.field_honorific
+field_name: field_honorific
+entity_type: people
+bundle: experts
+label: Honorific
+description: 'Any titles or earned degrees for expert.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

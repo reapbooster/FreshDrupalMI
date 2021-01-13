@@ -1,0 +1,19 @@
+uuid: 305353d4-ba2d-4a81-816c-bf18ac2f0ec9
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.experts
+    - field.storage.people.field_middle_name
+id: people.experts.field_middle_name
+field_name: field_middle_name
+entity_type: people
+bundle: experts
+label: 'Middle Name'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

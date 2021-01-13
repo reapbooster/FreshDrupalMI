@@ -1,0 +1,29 @@
+uuid: 0f6d93a1-4615-4edb-8171-3dff3584d2ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.experts
+    - field.storage.people.field_departments
+    - taxonomy.vocabulary.department
+id: people.experts.field_departments
+field_name: field_departments
+entity_type: people
+bundle: experts
+label: Departments
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      department: department
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
