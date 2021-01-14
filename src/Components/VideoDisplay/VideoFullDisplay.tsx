@@ -9,6 +9,8 @@ import {
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
 import moment from "moment";
+import {TagsDisplay} from "../TagsDisplay"
+import {SocialDisplay} from "../SocialDisplay"
 
 export interface VideoFullDisplayProps {
   data: MediaVideoInterface;
@@ -20,7 +22,8 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
 
   console.debug("VideoFullDisplay", data);
 
-  const oEmbedObject = JSON.parse(data?.field_embedded_oembed);
+  // const oEmbedObject = JSON.parse(data?.field_embedded_oembed);
+  const oEmbedObject = {"html": "<h1 style='background: red; color: white; padding: 5em 2em;'>oEMBED HTML SHOULD GO HERE, but stupid thing needs to rollback migrations first</h1>" };
 
   const VideoElMainWrapper = styled.div`
     & .section-social {
@@ -111,26 +114,13 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
         </Row>
         <Row>
           <Col xs="12" lg="6" xl="1" className="section-social">
-            <h5>Social</h5>
-            <a href={"https://twitter.com/intent/tweet?url=" + window.location.href +"&text=" + data.name}>
-              <FontAwesomeIcon icon={faTwitter} />
-            </a>
-            <a href={"https://www.facebook.com/share.php?u=" + window.location.href +"&quote=" + data.name}>
-              <FontAwesomeIcon icon={faFacebookF} />
-            </a>
-            <a href={"https://www.linkedin.com/sharing/share-offsite/?url=" + window.location.href +"&title=" + data.name}>
-              <FontAwesomeIcon icon={faLinkedinIn} />
-            </a>
+            <SocialDisplay data={{"name": "Page Name"}}></SocialDisplay>
           </Col>
           <Col xs="12" xl="8" className="section-content">
             <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
           </Col>
           <Col xs="12" lg="6" xl="3" className="section-tags">
-            <h5>Tags</h5>
-            <a href="#video-tag-one">Video Tag One</a>
-            <a href="#video-tag-two">Video Tag Two</a>
-            <a href="#video-tag-tree">Video Tag Three</a>
-            <div class="published-date">Published {created.format("MMMM D, YYYY")}</div>
+            <TagsDisplay data={{"published_date_string": "Published on Someday 01,2020"}}></TagsDisplay>
           </Col>
         </Row>
       </Container>
