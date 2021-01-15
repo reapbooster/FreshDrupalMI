@@ -28,16 +28,6 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   const VideoElMainWrapper = styled.div`
     & .section-social {
       order: 1;
-      & svg {
-        background: #f1f4f6;
-        color: #959595;
-        font-size: 2.25em;
-        border-radius: 50%;
-        padding: 0.33em;
-        margin: 0.2em;
-        width: 1.25em !important;
-        height: 1.25em !important;
-      }
     }
     & .section-content {
       order: 2;
@@ -52,27 +42,6 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       @media only screen and (max-width: 1199px) {
         order: 2;
       }
-      & a {
-        color: #fff;
-        margin-top: 8px;
-        padding: 4px 12px;
-        text-decoration: none;
-        background-color: #9a6397;
-        font-size: 12px;
-        font-family: 'LatoWebBold';
-        display: inline-block;
-        line-height: 16px;
-        white-space: nowrap;
-        margin: 10px 10px 10px 0;
-      }
-    }
-    & .published-date {
-      font-family: LatoWebItalic;
-      font-size: 20px;
-      color: #999AA3;
-      letter-spacing: 0;
-      line-height: 30px;
-      margin-top: 0px;
     }
   `;
 
