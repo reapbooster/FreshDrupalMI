@@ -99,7 +99,7 @@ const tildeImporter = (importPath, prev, whenDone) => {
 };
 
 const oldPath = path.resolve(
-  "web/themes/custom/milken/js/drupalTranslations.js"
+  "web/themes/custom/milken/js/drupalTranslations.js",
 );
 // Delete this file if exists.
 (async () => {
@@ -151,7 +151,9 @@ gulp.task("clearDrupalCache", shell.task("drush cr"));
 gulp.task("buildMilkenTheme", (done) => {
   const { PathAliases } = require("./config/node/PathAliases");
   return gulp
-    .src(PathAliases.FrontEndTheme.concat("/scss/milken.scss"))
+    .src([ 
+      PathAliases.FrontEndTheme.concat("/scss/milken.scss"),
+    ])
     .pipe(sourcemaps.init())
     .on("end", (complete) => {
       console.debug("ending", complete);
@@ -175,7 +177,7 @@ gulp.task("buildMilkenTheme", (done) => {
       })
     )
     .pipe(
-      sourcemaps.write(path.resolve(basePath, "web/themes/custom/milken/css"))
+      sourcemaps.write(path.resolve("web/themes/custom/milken/css"))
     )
     .pipe(gulpPrint())
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));

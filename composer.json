@@ -21,7 +21,7 @@
         "bower-asset/jquery-simple-color": "^1.2",
         "bower-asset/spectrum": "^1.8",
         "composer/installers": "^1.9",
-        "cweagans/composer-patches": "^1.6",
+        "cweagans/composer-patches": "^1.7",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "drupal/address": "^1.7",
         "drupal/admin_toolbar": "^2.0",
@@ -168,12 +168,14 @@
         "mnsami/composer-custom-directory-installer": "^2.0",
         "mpratt/embera": "~2.0",
         "npm-asset/ace-builds": "1.3.3",
+        "npm-asset/bootstrap": "^4",
         "npm-asset/blazy": "1.8.2",
-        "npm-asset/bootstrap": "^4.4",
         "npm-asset/dropzone": "4.3.0",
+        "npm-asset/fontawesome": "^5",
         "npm-asset/masonry-layout": "^4.2",
         "npm-asset/slick-carousel": "1.8.1",
         "object-calisthenics/phpcs-calisthenics-rules": "*",
+        "oomphinc/composer-installers-extender": "^2.0",
         "phpcompatibility/php-compatibility": "*",
         "scssphp/scssphp": "^1.0.7",
         "squizlabs/php_codesniffer": "^3.4.0",
@@ -239,13 +241,14 @@
         ]
     },
     "extra": {
-        "phpcodesniffer-search-depth": 5,
         "installer-types": [
             "bower-asset",
             "npm-asset",
-            "library",
-            "bower-asset-library",
-            "npm-asset-library"
+            "drupal-drush",
+            "drupal-theme",
+            "drupal-profile",
+            "drupal-module",
+            "drupal-core"
         ],
         "installer-paths": {
             "web/core": [
@@ -267,34 +270,11 @@
                 "type:quicksilver-script"
             ],
             "web/libraries/{$name}": [
-                "type:drupal-library",
                 "type:bower-asset",
-                "type:npm-asset",
-                "type:bower-asset-library",
-                "type:npm-asset-library"
+                "type:npm-asset"
             ]
         },
-        "drupal-libraries": {
-            "library-directory": "web/libraries",
-            "libraries": [
-                {
-                    "name": "dropzone",
-                    "package": "npm-asset/dropzone"
-                },
-                {
-                    "name": "blazy",
-                    "package": "npm-asset/blazy"
-                },
-                {
-                    "name": "slick",
-                    "package": "npm-asset/slick-carousel"
-                },
-                {
-                    "name": "ace",
-                    "package": "npm-asset/ace-builds"
-                }
-            ]
-        },
+        "phpcodesniffer-search-depth": 5,
         "build-env": {
             "install-cms": [
                 "drush site-install standard --account-mail={account-mail} --account-name={account-name} --account-pass={account-pass} --site-mail={site-mail} --site-name={site-name} --yes"
