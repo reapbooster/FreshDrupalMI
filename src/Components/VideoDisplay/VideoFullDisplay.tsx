@@ -28,16 +28,6 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   const VideoElMainWrapper = styled.div`
     & .section-social {
       order: 1;
-      & svg {
-        background: #f1f4f6;
-        color: #959595;
-        font-size: 2.25em;
-        border-radius: 50%;
-        padding: 0.33em;
-        margin: 0.2em;
-        width: 1.25em !important;
-        height: 1.25em !important;
-      }
     }
     & .section-content {
       order: 2;
