@@ -144,3 +144,4 @@ web/modules/custom/milken_base/js/*.js
 /robots.txt
 /update.php
 /web.config
+*.d.ts

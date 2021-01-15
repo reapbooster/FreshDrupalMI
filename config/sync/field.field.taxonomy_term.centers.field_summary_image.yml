@@ -1,0 +1,31 @@
+uuid: 283478d6-b615-4ee4-959d-0d05dfcf318f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_summary_image
+    - media.type.image
+    - media.type.video
+    - taxonomy.vocabulary.centers
+id: taxonomy_term.centers.field_summary_image
+field_name: field_summary_image
+entity_type: taxonomy_term
+bundle: centers
+label: 'Summary Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      video: video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

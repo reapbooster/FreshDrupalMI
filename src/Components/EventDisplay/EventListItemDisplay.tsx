@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { EventDataFactory } from "./EventFactories";
+import { EventDataFactory } from "./EventDataFactory";
 import { EventInterface } from "../../DataTypes/Event";
 
 interface EventListItemDisplayProps {

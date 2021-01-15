@@ -5,8 +5,6 @@ namespace Drupal\milken_base;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\RevisionableInterface;
-use Drupal\Core\Url;
 use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -21,7 +19,6 @@ use Twig\TwigFilter;
  * @package Drupal\milken_base
  */
 class JSONApiTwigExtension extends AbstractExtension {
-
 
   /**
    * The HTTP kernel.
@@ -115,18 +112,27 @@ class JSONApiTwigExtension extends AbstractExtension {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function fetchFromJsonApi(array $resource, array $options = []) {
-    $orig = $this->entityTypeManager
-      ->getStorage($resource['entityTypeId'])
-      ->load($resource['drupal_internal__id']);
-    if ($orig instanceof EntityInterface) {
-      $includes = [];
-      if (isset($resource['includes']) && is_string($resource['includes'])) {
-        $includes = explode(",", $resource['includes']);
-      }
-      return $this->serialize($orig, $includes);
-    }
     // @codingStandardsIgnoreStart
-    \Drupal::logger("JSONApiTwigExtension")->debug(print_r($resource, TRUE));
+    try {
+      $orig = $this->entityTypeManager
+        ->getStorage($resource['entityTypeId'])
+        ->load($resource['drupal_internal__id']);
+      if ($orig instanceof EntityInterface) {
+        $includes = [];
+        if (isset($resource['includes']) && is_string($resource['includes'])) {
+          $includes = explode(",", $resource['includes']);
+        }
+        $toReturn = $this->serialize($orig, $includes);
+        if ($toReturn) {
+          return $toReturn;
+        }
+      }
+    } catch(\Exception $e) {
+      \Drupal::logger("JSONApiTwigExtension")->error($e->getMessage());
+    } catch(\Throwable $t) {
+      \Drupal::logger("JSONApiTwigExtension")->error($t->getMessage());
+    }
+    \Drupal::logger("JSONApiTwigExtension")->debug(print_r($resource, true));
     return \Drupal::service('serialization.json')->encode($resource);
     // @codingStandardsIgnoreEnd
   }
@@ -145,34 +151,39 @@ class JSONApiTwigExtension extends AbstractExtension {
    * @throws \Exception
    */
   public function serialize(EntityInterface $entity, array $includes = []) {
-    $resource_type = $this->resourceTypeRepository->get($entity->getEntityTypeId(), $entity->bundle());
-    $route_name = sprintf('jsonapi.%s.individual', $resource_type->getTypeName());
-    $route_options = [];
-    if ($resource_type->isVersionable() && $entity instanceof RevisionableInterface && $revision_id = $entity->getRevisionId()) {
-      $route_options['query']['resourceVersion'] = 'id:' . $revision_id;
+    // @codingStandardsIgnoreStart
+
+    try {
+      $jsonapi_url = sprintf("/jsonapi/%s/%s/%s", $entity->getEntityTypeId(), $entity->bundle(), $entity->uuid());
+      $query = [
+        "jsonapi_include" => TRUE,
+      ];
+      if ($includes) {
+        $query['include'] = is_array($includes) ? implode(',', $includes) : $includes;
+      }
+      $request = Request::create(
+        $jsonapi_url,
+        'GET',
+        $query,
+        $this->currentRequest->cookies->all(),
+        [],
+        $this->currentRequest->server->all()
+      );
+      if ($this->session) {
+        $request->setSession($this->session);
+      }
+      $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
+      return $response->getContent();
     }
-    $jsonapi_url = Url::fromRoute($route_name, ['entity' => $entity->uuid()], $route_options)
-      ->toString(TRUE)
-      ->getGeneratedUrl();
-    $query = [
-      "jsonapi_include" => TRUE,
-    ];
-    if ($includes) {
-      $query['include'] = is_array($includes) ? implode(',', $includes) : $includes;
+    catch (\Exception $e) {
+      \Drupal::logger(__CLASS__)->error($e->getMessage());
     }
-    $request = Request::create(
-      $jsonapi_url,
-      'GET',
-      $query,
-      $this->currentRequest->cookies->all(),
-      [],
-      $this->currentRequest->server->all()
-    );
-    if ($this->session) {
-      $request->setSession($this->session);
+    catch (\Throwable $t) {
+      \Drupal::logger(__CLASS__)->error($t->getMessage());
     }
-    $response = $this->httpKernel->handle($request, HttpKernelInterface::SUB_REQUEST);
-    return $response->getContent();
+    return NULL;
+    // @codingStandardsIgnoreEnd
+
   }
 
   /**

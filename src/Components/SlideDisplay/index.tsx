@@ -19,7 +19,8 @@ export interface SlideDisplayProps {
 export const SlideDisplay = (props: SlideDisplayProps) => {
   console.debug("Slide Display", props);
   const { data, view_mode } = props;
-  const [slideData, setSlideData] = useState(SlideDataFactory(data));
+  const DataObject = SlideDataFactory(data);
+  const [slideData, setSlideData] = useState(DataObject);
   if (!slideData.hasData()) {
     const ecp = new EntityComponentProps(slideData);
     ecp

@@ -30,6 +30,15 @@ module:
   datetime: 0
   datetime_range: 0
   dblog: 0
+  decoupled_kit: 0
+  decoupled_kit_block: 0
+  decoupled_kit_breadcrumb: 0
+  decoupled_kit_menu: 0
+  decoupled_kit_metatag: 0
+  decoupled_kit_object: 0
+  decoupled_kit_sitemap: 0
+  decoupled_kit_taxonomy: 0
+  decoupled_kit_webform: 0
   decoupled_router: 0
   default_content: 0
   default_content_deploy: 0
@@ -121,6 +130,7 @@ module:
   responsive_image: 0
   rest: 0
   restui: 0
+  scheduler: 0
   schemata: 0
   schemata_json_schema: 0
   search: 0

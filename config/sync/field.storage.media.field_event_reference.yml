@@ -3,17 +3,17 @@ langcode: en
 status: true
 dependencies:
   module:
+    - eck
     - media
-    - node
 id: media.field_event_reference
 field_name: field_event_reference
 entity_type: media
 type: entity_reference
 settings:
-  target_type: node
+  target_type: event
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

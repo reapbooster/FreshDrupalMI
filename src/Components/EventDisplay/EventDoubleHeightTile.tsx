@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { EventInterface } from "../../DataTypes/Event";
-import { EventDataFactory } from "./EventFactories";
+import { EventDataFactory } from "./EventDataFactory";
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 

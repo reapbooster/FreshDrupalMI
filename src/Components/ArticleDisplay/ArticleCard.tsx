@@ -8,6 +8,7 @@ import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
+import SlideDisplayImageOnly from "../SlideDisplay/SlideDisplayImageOnly";
 
 export interface ArticleCardProps {
   data: NodeArticleInterface;
@@ -43,6 +44,10 @@ const ArticleCard = (props: ArticleCardProps) => {
     &:hover {
       box-shadow: 0 8px 16px 0 grey;
     }
+    & img{
+      height: 12.35vw;
+      min-height: 146px;
+    }
   `;
 
   const CustomCardHeader = styled.div`
@@ -72,13 +77,7 @@ const ArticleCard = (props: ArticleCardProps) => {
         >
           <CustomCardHeader>
             <ErrorBoundary>
-              <ImageFileDisplay
-                data={articleData.field_promo_slide.field_background_image}
-                view_mode="thumbnail"
-                className={"card-img"}
-                style={{ maxWidth: "100%" }}
-                srcsetSizes="(max-width: 1000px) 200px, 400px"
-              />
+              <SlideDisplayImageOnly data={articleData.field_promo_slide} />
               <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
             </ErrorBoundary>
           </CustomCardHeader>

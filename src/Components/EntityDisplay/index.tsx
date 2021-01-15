@@ -4,17 +4,25 @@ import { EntityInterface } from "../../DataTypes/Entity";
 import EntityComponentFactory from "../EntityBrowser/EntityComponentFactory";
 
 export interface EntityDisplayProps {
-  data: EntityInterface;
-  view_mode: string;
+  data: EntityInterface | string;
+  viewMode?: string;
+  view_mode?: string;
   can_edit: boolean;
 }
 
 export const EntityDisplay = (props) => {
-  const { data, view_mode, can_edit } = props;
-  const Component = EntityComponentFactory(data);
+  console.log("Entity Display: ", props);
+  const { data, view_mode, viewMode, can_edit } = props;
+  const DataObject = data === data.toString() ? JSON.parse(data).data : data;
+  console.log("DataObject", DataObject);
+  const Component = EntityComponentFactory(DataObject);
   return (
     <ErrorBoundary>
-      <Component data={data} view_mode={view_mode} can_edit={can_edit} />
+      <Component
+        data={DataObject}
+        view_mode={view_mode ?? viewMode}
+        can_edit={can_edit}
+      />
     </ErrorBoundary>
   );
 };

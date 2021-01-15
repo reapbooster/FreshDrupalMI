@@ -1,7 +1,7 @@
 import PathObject, { PathObjectInterface } from "./PathObject";
 import ContentDatatype, { ContentDatatypeInterface } from "./ContentDatatype";
 
-interface NodeInterface extends ContentDatatypeInterface {
+export interface NodeInterface extends ContentDatatypeInterface {
   drupal_internal__nid: number;
   path: PathObjectInterface;
   promoted: boolean;
@@ -11,10 +11,10 @@ interface NodeInterface extends ContentDatatypeInterface {
   getIncluded(): string;
 }
 
-abstract class Node extends ContentDatatype implements NodeInterface {
+export abstract class Node extends ContentDatatype implements NodeInterface {
   drupal_internal__nid: number;
 
-  _path: PathObject;
+  private _path: PathObject;
 
   promoted: boolean;
 
@@ -33,7 +33,6 @@ abstract class Node extends ContentDatatype implements NodeInterface {
   abstract hasData(): boolean;
 
   abstract getIncluded(): string;
-
 }
 
-export { Node as default, NodeInterface };
+export default Node;

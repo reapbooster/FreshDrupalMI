@@ -33,11 +33,6 @@ PhilanthropyHub:
   js:
     components/PhilanthropyHub/PhilanthropyHub.entry.js: { source: 'components/PhilanthropyHub/PhilanthropyHub.entry.tsx' }
 
-PodcastBrowser:
-  version: 1.0
-  js:
-    components/PodcastBrowser/PodcastBrowser.entry.js: { source: 'components/PodcastBrowser/PodcastBrowser.entry.tsx' }
-
 Search:
   version: 1.0
   js:
@@ -47,6 +42,11 @@ eck_entity_slide:
   version: 1.0
   js:
     components/eck-entity-slide/eck-entity-slide.entry.js: { source: 'components/eck-entity-slide/eck-entity-slide.entry.ts' }
+
+eck_entity_event:
+  version: 1.0
+  js:
+    components/eck-entity-event/eck-entity-event.entry.js: { source: 'components/eck-entity-event/eck-entity-event.entry.ts' }
 
 node_landing_page:
   version: 1.0
@@ -67,3 +67,18 @@ media_video:
   version: 1.0
   js:
     components/media-video/media-video.entry.js: { source: 'components/media-video/media-video.entry.ts' }
+
+media_report:
+  version: 1.0
+  js:
+    components/media-report/media-report.entry.js: { source: 'components/media-report/media-report.entry.ts' }
+
+media_sponsor_logo:
+  version: 1.0
+  js:
+    components/media-sponsor-logo/media-sponsor-logo.entry.js: { source: 'components/media-sponsor-logo/media-sponsor-logo.entry.ts' }
+
+main_navigation:
+  version: 1.0
+  js:
+    components/main-navigation/main-navigation.entry.js: { source: 'components/main-navigation/main-navigation.entry.ts' }

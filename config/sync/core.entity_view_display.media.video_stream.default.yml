@@ -3,18 +3,27 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video_stream.field_event_reference
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
-    - field.field.media.video_stream.field_thumbnail
+    - field.field.media.video_stream.field_start_finish_time
     - media.type.video_stream
   module:
-    - image
+    - datetime_range
     - media
 id: media.video_stream.default
 targetEntityType: media
 bundle: video_stream
 mode: default
 content:
+  field_event_reference:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_media_oembed_video:
     type: oembed
     label: visually_hidden
@@ -32,14 +41,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_thumbnail:
-    weight: 2
+  field_start_finish_time:
+    weight: 4
     label: above
     settings:
-      image_style: ''
-      image_link: ''
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
     third_party_settings: {  }
-    type: image
+    type: daterange_default
     region: content
 hidden:
   created: true

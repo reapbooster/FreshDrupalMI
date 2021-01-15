@@ -46,11 +46,11 @@ export class MediaReport extends Media implements MediaReportInterface {
 
   constructor(props) {
     super(props);
-    Object.assign(props);
+    Object.assign(this, props);
   }
 
   getIncluded(): string {
-    return "&include=thumbnail,field_cover,field_media_file";
+    return "&include=field_cover,field_media_file";
   }
 
   hasData(): boolean {
@@ -136,6 +136,11 @@ export class MediaReport extends Media implements MediaReportInterface {
 
   get thumbnail(): ImageFileInterface {
     return this.field_cover;
+  }
+
+  set thumbnail(incoming: ImageFileInterface) {
+    // Ignore the thumnail value and use the
+    // "cover" image as thumb
   }
 
   getSource() {

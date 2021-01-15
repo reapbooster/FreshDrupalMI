@@ -10,7 +10,9 @@ export interface ParagraphSlideInterface extends ParagraphInterface {
   field_slides: Array<SlideInterface>;
 }
 
-export default class ParagraphSlide extends Paragraph implements ParagraphSlideInterface {
+export default class ParagraphSlide
+  extends Paragraph
+  implements ParagraphSlideInterface {
   _field_background_color: ColorObjectInterface;
 
   field_slides: Array<SlideInterface>;
@@ -19,6 +21,10 @@ export default class ParagraphSlide extends Paragraph implements ParagraphSlideI
     super(incoming);
     Object.assign(this, incoming);
     console.debug("ParagraphSlide constructor", this);
+  }
+
+  hasData(): boolean {
+    return this.field_slides !== undefined && Array.isArray(this.field_slides);
   }
 
   get field_background_color(): ColorObjectInterface {

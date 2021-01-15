@@ -39,19 +39,11 @@ export const ParagraphDisplay = (props: ParagraphDisplayProps) => {
         const DataObject = ParagraphDataFactory(remoteData.data);
         setParagraphData(DataObject);
       });
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   const Component = ParagraphComponentFactory(paragraphData);
-  return (
-    <ErrorBoundary key={key ?? 0}>
-      <Component data={paragraphData} view_mode={view_mode} />
-    </ErrorBoundary>
-  );
+  return <Component data={paragraphData} view_mode={view_mode} key={key} />;
 };
 
 export default ParagraphDisplay;

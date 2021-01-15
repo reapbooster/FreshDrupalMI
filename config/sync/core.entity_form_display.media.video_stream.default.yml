@@ -3,15 +3,81 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video_stream.field_event_reference
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
-    - field.field.media.video_stream.field_thumbnail
-    - image.style.thumbnail
+    - field.field.media.video_stream.field_start_finish_time
     - media.type.video_stream
   module:
-    - image
+    - datetime_range
+    - field_group
     - media
     - path
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_content
+        - group_promotion
+        - group_authoring
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Tabs
+    group_content:
+      children:
+        - field_media_oembed_video
+        - field_start_finish_time
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Content
+    group_authoring:
+      children:
+        - langcode
+        - uid
+        - created
+        - path
+        - status
+      parent_name: group_tabs
+      weight: 30
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Authoring
+    group_promotion:
+      children:
+        - field_people
+        - field_thumbnail
+        - field_event_reference
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Promotion
 id: media.video_stream.default
 targetEntityType: media
 bundle: video_stream
@@ -23,6 +89,16 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_event_reference:
+    weight: 103
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_media_oembed_video:
     type: oembed_textfield
     weight: 0
@@ -41,13 +117,11 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_thumbnail:
-    weight: 102
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+  field_start_finish_time:
+    weight: 104
+    settings: {  }
     third_party_settings: {  }
-    type: image_image
+    type: daterange_default
     region: content
   langcode:
     type: language_select
@@ -55,6 +129,14 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   path:
     type: path
@@ -79,5 +161,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  name: true
+hidden: {  }

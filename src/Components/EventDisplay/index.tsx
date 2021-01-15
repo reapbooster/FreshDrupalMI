@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
-
 import { EventInterface } from "../../DataTypes/Event";
-
-import { EventDataFactory, EventComponentFactory } from "./EventFactories";
+import { EventComponentFactory } from './EventComponentFactory';
+import { EventDataFactory } from "./EventDataFactory";
 
 /**
  * implementation of the Controller

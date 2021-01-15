@@ -28,7 +28,7 @@ export class SlideKeyValueText {
 
 export interface SlideInterface extends RevisionableEntityInterface {
   drupal_internal__id: number;
-  getBackgroundImageCss: ReturnType<string>;
+  label: string;
 }
 
 export abstract class Slide
@@ -36,10 +36,12 @@ export abstract class Slide
   implements SlideInterface {
   drupal_internal__id: number;
 
-  getBackgroundImageCss(): string {
-    return this.field_background_image
-      ? `background-image: url(${this.field_background_image.imageStyleObject?.backgroundImageSet});`
-      : "";
+  get label(): string {
+    return this.title ?? this.name;
+  }
+
+  set label(incoming: string) {
+    this.title = incoming;
   }
 }
 

@@ -1,8 +1,0 @@
-uuid: fe36da58-8d80-4b8f-b343-ef1f4d9df64f
-langcode: en
-status: true
-dependencies: {  }
-name: Location
-vid: location
-description: 'Locations where the institute operates from, mainly used in job postings.'
-weight: 0

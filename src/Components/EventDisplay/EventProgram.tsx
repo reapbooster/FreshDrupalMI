@@ -1,6 +1,6 @@
 import React from "react";
 import { EventInterface } from "../../DataTypes/Event";
-import JSONApiUrl from "./JSONApiUrl";
+import JSONApiUrl from "../../DataTypes/JSONApiUrl";
 
 export interface EventProgramProps {
   gridID: string;

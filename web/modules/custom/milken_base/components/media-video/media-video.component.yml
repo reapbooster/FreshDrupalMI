@@ -4,7 +4,7 @@ description: 'Media Video entry webcomponent'
 type: block
 core_version_requirement:  ^8 || ^9
 js:
-  'node-landing-page.entry.js': { }
+  'media-video.entry.js': { }
 cache:
   max-age: 60
 

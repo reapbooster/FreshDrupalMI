@@ -3,7 +3,7 @@
 {% set node_landing_page_value =  node.toArray
   | merge({ 'entityTypeId': node.getEntityTypeId })
   | merge({ 'id': node.uuid.value })
-  | merge({ 'drupal_internal__id': node.id.value })
+  | merge({ 'drupal_internal__id': node.id })
   | merge({ 'includes': "field_hero_image" })
 
 %}
@@ -15,5 +15,4 @@
   data-view-mode="card"
   data-entity="{{ node_landing_page_value | jsonapi }}"
 >
-
 </node-landing-page>

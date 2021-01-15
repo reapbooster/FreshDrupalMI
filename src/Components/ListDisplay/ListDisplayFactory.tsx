@@ -3,6 +3,7 @@ import ParagraphDisplay from "../ParagraphDisplay";
 import NodeDisplay from "../NodeDisplay";
 import MediaDisplay from "../MediaDisplay";
 import EventDisplay from "../EventDisplay";
+import SlideDisplay from "../SlideDisplay";
 
 export const ListDisplayFactory = (item: EntityInterface) => {
   const [entityTypeId, bundle] = item.type.split("--");
@@ -16,6 +17,8 @@ export const ListDisplayFactory = (item: EntityInterface) => {
       return MediaDisplay;
     case "event":
       return EventDisplay;
+    case "slide":
+      return SlideDisplay;
 
     default:
       console.error(`missing display component for ${entityTypeId}`);

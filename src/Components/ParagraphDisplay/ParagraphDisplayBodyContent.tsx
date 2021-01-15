@@ -4,7 +4,7 @@ import ParagraphBodyContent, {
 } from "../../DataTypes/ParagraphBodyContent";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
-import { BodyFieldDisplay } from "../../Fields/BodyField";
+import { BodyFieldDisplay } from "../../Fields/BodyFieldDisplay";
 
 export interface ParagraphDisplayBodyContentProps {
   data: ParagraphBodyContentInterface;
@@ -23,7 +23,8 @@ export const ParagraphDisplayBodyContent = (
       .getData(paragraphData.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
-        setParagraphData(new ParagraphBodyContent(ajaxData.data));
+        const newDO = new ParagraphBodyContent(ajaxData.data);
+        setParagraphData(newDO);
       });
     return <Loading />;
   }
