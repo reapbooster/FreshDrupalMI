@@ -97,16 +97,36 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
+  // TO-DO: Need to build the list of tags from multiple taxonomy vocabs
+  const tagList = [
+    {
+      tag: "Health",
+      link_uri: "/tagsURL/health"
+    },
+    {
+      tag: "Finance",
+      link_uri: "/tagsURL/finance"
+    },
+    {
+      tag: "Aging",
+      link_uri: "/tagsURL/aging"
+    },
+    {
+      tag: "Policy",
+      link_uri: "/tagsURL/policy"
+    },
+  ];
+
   return (
-    <VideoElMainWrapper className="container-fluid">
-      <Row>
+    <VideoElMainWrapper className="container-fluid p-0">
+      <Row className="no-gutters">
         <Col>
           <VideoElFrameWrapper
             dangerouslySetInnerHTML={{ __html: oEmbedObject.html }}
           />
         </Col>
       </Row>
-      <Container fluid="true" style={{ width: "90%", margin: "2em auto" }}>
+      <Container fluid={true} style={{ width: "90%", margin: "2em auto" }}>
         <Row>
           <Col>
             <VideoElTitle>{data.name}</VideoElTitle>
@@ -114,13 +134,18 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
         </Row>
         <Row>
           <Col xs="12" lg="6" xl="1" className="section-social">
-            <SocialDisplay data={{"name": "Page Name"}}></SocialDisplay>
+            <SocialDisplay data={{"name": data.name}}></SocialDisplay>
           </Col>
           <Col xs="12" xl="8" className="section-content">
             <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
           </Col>
           <Col xs="12" lg="6" xl="3" className="section-tags">
-            <TagsDisplay data={{"published_date_string": "Published on Someday 01,2020"}}></TagsDisplay>
+            <TagsDisplay data={
+              {
+                published_date_string: "Published " + created.format('MMMM D, YYYY'),
+                tagList: tagList
+              }
+            }></TagsDisplay>
           </Col>
         </Row>
       </Container>
