@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 export ENV=live
-export SITE=milken-institute
+export SITE=freshdrupalmi
 
 ## YOUR SSH KEY MUST BE REGISTERED WITH PANTHEON AND SHARED WITH THE DOCKER CONTAINER FOR THIS TO WORK
-rsync -rvlz --copy-unsafe-links --size-only --checksum --ipv4 --progress -e 'ssh -p 2222' live.3f2a3ea1-fe0b-478b-9c9f-55b30cc10325@appserver.live.3f2a3ea1-fe0b-478b-9c9f-55b30cc10325.drush.in:files/ /var/www/db/files
+rsync -rvlz --copy-unsafe-links --size-only --checksum --ipv4 --progress -e 'ssh -p 2222' live.3f2a3ea1-fe0b-478b-9c9f-55b30cc10325@appserver.live.3f2a3ea1-fe0b-478b-9c9f-55b30cc10325.drush.in:files/ `realpath db/files`
 
 rm -Rf web/sites/default/files
-ln -s /var/www/db/files /var/www/web/sites/default
+ln -s `realpath db/files` `realpath web/sites/default`
