@@ -19,8 +19,6 @@ export const SocialDisplay = (props: SocialDisplayProps) => {
   console.debug("SocialDisplay", data);
 
   const SocialWrapper = styled.div`
-  & .section-social {
-    order: 1;
     & svg {
       background: #f1f4f6;
       color: #959595;
@@ -31,14 +29,13 @@ export const SocialDisplay = (props: SocialDisplayProps) => {
       width: 1.25em !important;
       height: 1.25em !important;
     }
-  }
   `;
 
   return (
     <SocialWrapper className="container">
       <Row>
         <Col>
-            <h5>Social</h5>
+            <h5>Share</h5>
             <a href={"https://twitter.com/intent/tweet?url=" + window.location.href +"&text=" + data.name}>
               <FontAwesomeIcon icon={faTwitter} />
             </a>
@@ -49,7 +46,7 @@ export const SocialDisplay = (props: SocialDisplayProps) => {
               <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
         </Col>
-        </Row>
+      </Row>
     </SocialWrapper>
   );
 };
