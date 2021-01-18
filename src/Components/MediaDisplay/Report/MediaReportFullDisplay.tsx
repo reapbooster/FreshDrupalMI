@@ -5,6 +5,11 @@ import React from "react";
 import { MediaReportInterface } from "DataTypes/MediaReport";
 import ErrorBoundary from "../../../Utility/ErrorBoundary";
 import ErrorDisplay from "../../../Utility/ErrorDisplay";
+import { Row, Col } from "react-bootstrap";
+import {TagsDisplay} from "../../TagsDisplay";
+import {SocialDisplay} from "../../SocialDisplay";
+import ParagraphDisplayList from "../../ParagraphDisplay/ParagraphDisplayList";
+import moment from "moment";
 
 export interface MediaReportFullDisplayProps {
   data: MediaReportInterface;
@@ -71,43 +76,112 @@ const NormalButtonWrapper = styled.div`
   }
 `;
 
+const ElMainContentWrapper = styled.div`
+& .section-social {
+  order: 1;
+}
+& .section-content {
+  order: 2;
+  @media only screen and (max-width: 1199px) {
+    order: 3;
+    padding-top: 1.5em;
+
+  }
+}
+& .section-tags {
+  order: 3;
+  @media only screen and (max-width: 1199px) {
+    order: 2;
+  }
+}
+`;
+
+
 export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
   const { data, key } = props;
   if (!data.valid) {
     return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
+
+  const created = moment(data.created, "ddd MMM DD YYYY Z");
+
+  // TO-DO: Need to build the list of tags from multiple taxonomy vocabs
+  const tagList = [
+    {
+      tag: "Health",
+      link_uri: "/tagsURL/health"
+    },
+    {
+      tag: "Finance",
+      link_uri: "/tagsURL/finance"
+    },
+    {
+      tag: "Aging",
+      link_uri: "/tagsURL/aging"
+    },
+    {
+      tag: "Policy",
+      link_uri: "/tagsURL/policy"
+    },
+  ];
+
   return (
-    <HeaderWrapper key={key}>
-      <ReportImageWrapper>
-        <ImageFileDisplay
-          data={data.field_cover}
-          view_mode="thumbnail"
-          className={"card-img"}
-          style={{ maxWidth: "100%" }}
-          srcsetSizes="(max-width: 1000px) 200px, 400px"
-        />
-        <MobileButtonWrapper>
-          <ErrorBoundary>
-            <DocumentFileDisplay
-              data={data.field_media_file}
-              label="Download PDF"
-            ></DocumentFileDisplay>
-          </ErrorBoundary>
-        </MobileButtonWrapper>
-      </ReportImageWrapper>
-      <TitleWrapper>
-        <i style={{ fontSize: "1.2em", fontWeight: "bold" }}>REPORT</i>
-        <h1>{data.name}</h1>
-        <NormalButtonWrapper>
-          <ErrorBoundary>
-            <DocumentFileDisplay
-              data={data.field_media_file}
-              label="Download PDF"
-            ></DocumentFileDisplay>
-          </ErrorBoundary>
-        </NormalButtonWrapper>
-      </TitleWrapper>
-    </HeaderWrapper>
+    <>
+      <HeaderWrapper key={key}>
+        <ReportImageWrapper>
+          <ImageFileDisplay
+            data={data.field_cover}
+            view_mode="thumbnail"
+            className={"card-img"}
+            style={{ maxWidth: "100%" }}
+            srcsetSizes="(max-width: 1000px) 200px, 400px"
+          />
+          <MobileButtonWrapper>
+            <ErrorBoundary>
+              <DocumentFileDisplay
+                data={data.field_media_file}
+                label="Download PDF"
+              ></DocumentFileDisplay>
+            </ErrorBoundary>
+          </MobileButtonWrapper>
+        </ReportImageWrapper>
+        <TitleWrapper>
+          <i style={{ fontSize: "1.2em", fontWeight: "bold" }}>REPORT</i>
+          <h1>{data.name}</h1>
+          <NormalButtonWrapper>
+            <ErrorBoundary>
+              <DocumentFileDisplay
+                data={data.field_media_file}
+                label="Download PDF"
+              ></DocumentFileDisplay>
+            </ErrorBoundary>
+          </NormalButtonWrapper>
+        </TitleWrapper>
+      </HeaderWrapper>
+      <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
+          <Row>
+            <Col xs="12" lg="6" xl="1" className="section-social">
+              <SocialDisplay data={{"name": data.name}}></SocialDisplay>
+            </Col>
+            <Col xs="12" xl="8" className="section-content">
+              <ErrorBoundary>
+                <ParagraphDisplayList
+                  list={data.field_content}
+                  view_mode="full"
+                />
+              </ErrorBoundary>
+            </Col>
+            <Col xs="12" lg="6" xl="3" className="section-tags">
+              <TagsDisplay data={
+                {
+                  published_date_string: "Published " + created.format('MMMM D, YYYY'),
+                  tagList: tagList
+                }
+              }></TagsDisplay>
+            </Col>
+          </Row>
+        </ElMainContentWrapper>
+    </>
   );
 };
 
