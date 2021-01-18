@@ -1,13 +1,7 @@
 import React from "react";
 import { MediaVideoInterface } from "../../DataTypes/MediaVideo";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTwitter,
-  faFacebookF,
-  faLinkedinIn,
-} from "@fortawesome/free-brands-svg-icons";
 import moment from "moment";
 import {TagsDisplay} from "../TagsDisplay"
 import {SocialDisplay} from "../SocialDisplay"
@@ -22,16 +16,52 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
 
   console.debug("VideoFullDisplay", data);
 
-  // const oEmbedObject = JSON.parse(data?.field_embedded_oembed);
-  const oEmbedObject = {"html": "<h1 style='background: red; color: white; padding: 5em 2em;'>oEMBED HTML SHOULD GO HERE, but stupid thing needs to rollback migrations first</h1>" };
+  const oEmbedObject = JSON.parse(data?.field_embedded_oembed);
+  
+  console.debug("oEmbedObject", oEmbedObject);
 
   const VideoElMainWrapper = styled.div`
+  `;
+
+  const VideoElFrameWrapper = styled.div`
+    background: #27262c;
+    width: 100%;
+
+    @media only screen and (max-width: 767.98px) {
+      padding-top: 55.25%;
+    }
+
+    & > iframe {
+      display: block;
+      margin: auto;
+
+      @media only screen and (max-width: 767.98px) {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      @media only screen and (min-width: 768px) {
+        width: 600px;
+        height: 339px;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        width: 700px;
+        height: 452px;
+      }
+    }
+  `;
+
+  const ElMainContentWrapper = styled.div`
     & .section-social {
       order: 1;
     }
     & .section-content {
       order: 2;
-      @media only screen and (max-width: 1199px) {
+      @media only screen and (max-width: 1199.98px) {
         order: 3;
         padding-top: 1.5em;
 
@@ -39,27 +69,17 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
     }
     & .section-tags {
       order: 3;
-      @media only screen and (max-width: 1199px) {
+      @media only screen and (max-width: 1199.98px) {
         order: 2;
       }
     }
   `;
 
-  const VideoElFrameWrapper = styled.div`
-    background: #27262c;
-    width: 100%;
-
-    & > iframe {
-      display: block;
-      margin: auto;
-    }
-  `;
-
-  const VideoElTitle = styled.h1`
+  const ElTitle = styled.h1`
     font-size: 2em;
     padding-bottom: 1em;
 
-    @media only screen and (max-width: 1200px) {
+    @media only screen and (max-width: 1199.98px) {
       font-size: 1.5em;
     }
   `;
@@ -95,29 +115,31 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
           />
         </Col>
       </Row>
-      <Container fluid={true} style={{ width: "90%", margin: "2em auto" }}>
-        <Row>
-          <Col>
-            <VideoElTitle>{data.name}</VideoElTitle>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="12" lg="6" xl="1" className="section-social">
-            <SocialDisplay data={{"name": data.name}}></SocialDisplay>
-          </Col>
-          <Col xs="12" xl="8" className="section-content">
-            <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
-          </Col>
-          <Col xs="12" lg="6" xl="3" className="section-tags">
-            <TagsDisplay data={
-              {
-                published_date_string: "Published " + created.format('MMMM D, YYYY'),
-                tagList: tagList
-              }
-            }></TagsDisplay>
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
+          <Row>
+            <Col>
+              <ElTitle>{data.name}</ElTitle>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs="12" lg="6" xl="1" className="section-social">
+              <SocialDisplay data={{"name": data.name}}></SocialDisplay>
+            </Col>
+            <Col xs="12" xl="8" className="section-content">
+              <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
+            </Col>
+            <Col xs="12" lg="6" xl="3" className="section-tags">
+              <TagsDisplay data={
+                {
+                  published_date_string: "Published " + created.format('MMMM D, YYYY'),
+                  tagList: tagList
+                }
+              }></TagsDisplay>
+            </Col>
+          </Row>
+        </ElMainContentWrapper>
+      </Row>
     </VideoElMainWrapper>
   );
 };
