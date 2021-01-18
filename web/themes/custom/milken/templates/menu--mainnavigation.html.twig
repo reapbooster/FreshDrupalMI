@@ -23,20 +23,22 @@
 {{ attach_library('milken_base/main_navigation') }}
 
 
-<milken-menu-{{ menu_name }} class="container-fluid d-flex">
-  {% for key,value in items %}
-    <menu-column class="col col-md-3 col-sm-12" id="menu-{{ key }}">
-      <h5 slot="column-title">{{ value.title }}</h5>
-      <ul slot="column-content" class="menu-content">
-        {% if value.below %}
-          {% for itemKey,itemValue in value.below %}
-            <li>
-              <h6 slot="item-title"><a href="{{ itemValue.url }}">{{ itemValue.title }}</a></h6>
-              <p slot="item-description">{{ itemValue.entity.toArray.description.0.value }}</p>
-            </li>
-          {% endfor %}
-        {% endif %}
-      </ul>
-    </menu-column>
-  {% endfor %}
+<milken-menu-{{ menu_name }} class="container-fluid d-flex invisible">
+  <div class="row">
+    {% for key,value in items %}
+      <menu-column class="col-md-3 col-xs-12" id="menu-{{ key }}">
+        <h5 slot="column-title">{{ value.title }}</h5>
+        <ul slot="column-content" class="menu-content">
+          {% if value.below %}
+            {% for itemKey,itemValue in value.below %}
+              <li>
+                <h6 slot="item-title"><a href="{{ itemValue.url }}">{{ itemValue.title }}</a></h6>
+                <p slot="item-description">{{ itemValue.entity.toArray.description.0.value }}</p>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </menu-column>
+    {% endfor %}
+  </div>
 </milken-main-{{ menu_name }}>

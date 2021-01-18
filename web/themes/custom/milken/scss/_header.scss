@@ -190,7 +190,7 @@
   padding: 0 20px;
   width: 100%;
   overflow:hidden;
-  z-index: 60;
+  z-index: 999;
   background-color: white;
   -webkit-box-shadow: 0 1px 4px 0 #d7dbdd;
   -moz-box-shadow: 0 1px 4px 0 #d7dbdd;
@@ -202,12 +202,6 @@
     min-width: 150px;
     max-width: 280px;
     width: 100%;
-  }
-
-
-  #navbar-search.form-inline {
-
-
   }
 
 }
@@ -320,4 +314,24 @@ header .hamburguer-menu::after, header .hamburguer-menu-centers:after {
 .search-api-autocomplete-search .ui-menu-item-wrapper.ui-state-active .search-api-autocomplete-suggestion{
   background:transparent;
   color:inherit;
+}
+
+#menu-reveal {
+  text-decoration: none;
+  min-width: 1em;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#menu-reveal::after {
+  content: "Menu";
+  margin: 3px 0 0 6px;
+  font-weight: normal;
+  font-family: "LatoWebBlack";
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+
+#menu-reveal::before {
+  min-width: 1em;
 }

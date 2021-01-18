@@ -1,11 +1,20 @@
 @import "~FrontEndTheme/scss/variables_milken";
 
 milken-menu-main {
-  position: absolute;
-  z-index: 9999;
+  position: fixed;
+  z-index: 99;
   left: 0px;
-  top: 0vh;
+  top: 78px;
   display:none;
+  transition: all 0.5s ease-in-out;
+
+  &.hide-menu {
+    display: unset;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-3em);
+  }
+  
   menu-column {
     background-color: $backgroundLight;
     padding: 20px;
