@@ -6,6 +6,7 @@ dependencies:
     - field.field.media.video.field_body
     - field.field.media.video.field_centers
     - field.field.media.video.field_embedded_id
+    - field.field.media.video.field_embedded_oembed
     - field.field.media.video.field_embedded_service
     - field.field.media.video.field_event_reference
     - field.field.media.video.field_height
@@ -153,6 +154,21 @@ third_party_settings:
                 type: entity_reference_label
             additional: {  }
             weight: 6
+          2c56407f-1340-4b4b-8354-9490ab2040ac:
+            uuid: 2c56407f-1340-4b4b-8354-9490ab2040ac
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_embedded_oembed'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: basic_string
+            additional: {  }
+            weight: 7
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -165,6 +181,13 @@ targetEntityType: media
 bundle: video
 mode: default
 content:
+  field_embedded_oembed:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_height:
     weight: 2
     label: above
