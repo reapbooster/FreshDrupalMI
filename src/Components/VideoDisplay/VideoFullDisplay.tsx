@@ -1,14 +1,10 @@
 import React from "react";
 import { MediaVideoInterface } from "../../DataTypes/MediaVideo";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTwitter,
-  faFacebookF,
-  faLinkedinIn,
-} from "@fortawesome/free-brands-svg-icons";
 import moment from "moment";
+import {TagsDisplay} from "../TagsDisplay"
+import {SocialDisplay} from "../SocialDisplay"
 
 export interface VideoFullDisplayProps {
   data: MediaVideoInterface;
@@ -21,24 +17,51 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   console.debug("VideoFullDisplay", data);
 
   const oEmbedObject = JSON.parse(data?.field_embedded_oembed);
+  
+  console.debug("oEmbedObject", oEmbedObject);
 
   const VideoElMainWrapper = styled.div`
+  `;
+
+  const VideoElFrameWrapper = styled.div`
+    background: #27262c;
+    width: 100%;
+
+    @media only screen and (max-width: 767.98px) {
+      padding-top: 55.25%;
+    }
+
+    & > iframe {
+      display: block;
+      margin: auto;
+
+      @media only screen and (max-width: 767.98px) {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      @media only screen and (min-width: 768px) {
+        width: 600px;
+        height: 339px;
+      }
+
+      @media only screen and (min-width: 1200px) {
+        width: 700px;
+        height: 452px;
+      }
+    }
+  `;
+
+  const ElMainContentWrapper = styled.div`
     & .section-social {
       order: 1;
-      & svg {
-        background: #f1f4f6;
-        color: #959595;
-        font-size: 2.25em;
-        border-radius: 50%;
-        padding: 0.33em;
-        margin: 0.2em;
-        width: 1.25em !important;
-        height: 1.25em !important;
-      }
     }
     & .section-content {
       order: 2;
-      @media only screen and (max-width: 1199px) {
+      @media only screen and (max-width: 1199.98px) {
         order: 3;
         padding-top: 1.5em;
 
@@ -46,94 +69,77 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
     }
     & .section-tags {
       order: 3;
-      @media only screen and (max-width: 1199px) {
+      @media only screen and (max-width: 1199.98px) {
         order: 2;
       }
-      & a {
-        color: #fff;
-        margin-top: 8px;
-        padding: 4px 12px;
-        text-decoration: none;
-        background-color: #9a6397;
-        font-size: 12px;
-        font-family: 'LatoWebBold';
-        display: inline-block;
-        line-height: 16px;
-        white-space: nowrap;
-        margin: 10px 10px 10px 0;
-      }
-    }
-    & .published-date {
-      font-family: LatoWebItalic;
-      font-size: 20px;
-      color: #999AA3;
-      letter-spacing: 0;
-      line-height: 30px;
-      margin-top: 0px;
     }
   `;
 
-  const VideoElFrameWrapper = styled.div`
-    background: #27262c;
-    width: 100%;
-
-    & > iframe {
-      display: block;
-      margin: auto;
-    }
-  `;
-
-  const VideoElTitle = styled.h1`
+  const ElTitle = styled.h1`
     font-size: 2em;
     padding-bottom: 1em;
 
-    @media only screen and (max-width: 1200px) {
+    @media only screen and (max-width: 1199.98px) {
       font-size: 1.5em;
     }
   `;
   
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
+  // TO-DO: Need to build the list of tags from multiple taxonomy vocabs
+  const tagList = [
+    {
+      tag: "Health",
+      link_uri: "/tagsURL/health"
+    },
+    {
+      tag: "Finance",
+      link_uri: "/tagsURL/finance"
+    },
+    {
+      tag: "Aging",
+      link_uri: "/tagsURL/aging"
+    },
+    {
+      tag: "Policy",
+      link_uri: "/tagsURL/policy"
+    },
+  ];
+
   return (
-    <VideoElMainWrapper className="container-fluid">
-      <Row>
+    <VideoElMainWrapper className="container-fluid p-0">
+      <Row className="no-gutters">
         <Col>
           <VideoElFrameWrapper
             dangerouslySetInnerHTML={{ __html: oEmbedObject.html }}
           />
         </Col>
       </Row>
-      <Container fluid="true" style={{ width: "90%", margin: "2em auto" }}>
-        <Row>
-          <Col>
-            <VideoElTitle>{data.name}</VideoElTitle>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="12" lg="6" xl="1" className="section-social">
-            <h5>Social</h5>
-            <a href={"https://twitter.com/intent/tweet?url=" + window.location.href +"&text=" + data.name}>
-              <FontAwesomeIcon icon={faTwitter} />
-            </a>
-            <a href={"https://www.facebook.com/share.php?u=" + window.location.href +"&quote=" + data.name}>
-              <FontAwesomeIcon icon={faFacebookF} />
-            </a>
-            <a href={"https://www.linkedin.com/sharing/share-offsite/?url=" + window.location.href +"&title=" + data.name}>
-              <FontAwesomeIcon icon={faLinkedinIn} />
-            </a>
-          </Col>
-          <Col xs="12" xl="8" className="section-content">
-            <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
-          </Col>
-          <Col xs="12" lg="6" xl="3" className="section-tags">
-            <h5>Tags</h5>
-            <a href="#video-tag-one">Video Tag One</a>
-            <a href="#video-tag-two">Video Tag Two</a>
-            <a href="#video-tag-tree">Video Tag Three</a>
-            <div class="published-date">Published {created.format("MMMM D, YYYY")}</div>
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
+          <Row>
+            <Col>
+              <ElTitle>{data.name}</ElTitle>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs="12" lg="6" xl="1" className="section-social">
+              <SocialDisplay data={{"name": data.name}}></SocialDisplay>
+            </Col>
+            <Col xs="12" xl="8" className="section-content">
+              <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
+            </Col>
+            <Col xs="12" lg="6" xl="3" className="section-tags">
+              <TagsDisplay data={
+                {
+                  published_date_string: "Published " + created.format('MMMM D, YYYY'),
+                  tagList: tagList
+                }
+              }></TagsDisplay>
+            </Col>
+          </Row>
+        </ElMainContentWrapper>
+      </Row>
     </VideoElMainWrapper>
   );
 };
