@@ -1,7 +1,7 @@
 import ContentDatatype, { ContentDatatypeInterface } from "./ContentDatatype";
 import TextField from "../Fields/TextField";
 import { EventInterface } from "./Event";
-import { PeopleInterface } from "./People";
+import { PeopleInterface } from "./People/People";
 
 export interface NodeSessionFieldStartEndInterface {
   value: string;

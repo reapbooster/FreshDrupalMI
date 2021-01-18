@@ -6,9 +6,11 @@ dependencies:
     - eck.eck_type.people.staff
     - field.field.people.staff.field_biotext
     - field.field.people.staff.field_centers
+    - field.field.people.staff.field_email
     - field.field.people.staff.field_event
     - field.field.people.staff.field_first_name
     - field.field.people.staff.field_last_name
+    - field.field.people.staff.field_middle_name
     - field.field.people.staff.field_pgtitle
     - field.field.people.staff.field_photo
     - field.field.people.staff.field_social_media
@@ -68,6 +70,13 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
+  field_middle_name:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_pgtitle:
     weight: 5
     label: above
@@ -102,6 +111,14 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
+  title:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
 hidden:
   changed: true
   field_email: true

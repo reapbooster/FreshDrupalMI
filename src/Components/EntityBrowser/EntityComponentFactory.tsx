@@ -6,6 +6,7 @@ import SlideDisplay from "../SlideDisplay";
 import FileDisplay from "../FileDisplay";
 import { EntityInterface } from "../../DataTypes/Entity";
 import { SearchResult, SearchResultProps } from "../Search/SearchResult";
+import {PeopleDisplay} from "../PeopleDisplay";
 
 export const EntityComponentFactory = (
   source: EntityInterface | SearchResultProps
@@ -23,6 +24,8 @@ export const EntityComponentFactory = (
         return SlideDisplay;
       case "file":
         return FileDisplay;
+      case "people":
+        return PeopleDisplay;
       default:
         console.error("Cannot determine Component Class", source);
         throw new Error(

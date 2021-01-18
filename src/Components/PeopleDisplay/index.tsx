@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Staff, StaffInterface } from "../../DataTypes/Staff";
+import DataTypePeopleFactory from '../../DataTypes/People/Factory'
 import EntityComponentProps from "../../DataTypes/EntityComponentProps";
 import { SocialMediaLinkInterface } from "../../Fields/SocialMediaLink";
 import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
+import {PeopleInterface} from "../../DataTypes/People";
 
 export interface PeopleDisplayProps {
-  data: StaffInterface;
+  data: PeopleInterface;
   key?: string;
   view_mode: string;
 }
@@ -13,7 +14,7 @@ export interface PeopleDisplayProps {
 // TODO: support more than one bundle of people. Currently only supports "staff".
 export const PeopleDisplay = (props: PeopleDisplayProps) => {
   const { data, key, view_mode } = props;
-  const DataObject = new Staff(data);
+  const DataObject = DataTypePeopleFactory(data);
   const [staffData, staffSetData] = useState(DataObject);
   if (!DataObject.hasData()) {
     const ecp = new EntityComponentProps(DataObject);
@@ -21,7 +22,7 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
       .getData(DataObject.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
-        const newDO = new Staff(ajaxData.data);
+        const newDO = DataTypePeopleFactory(ajaxData.data);
         staffSetData(newDO);
       });
   }

@@ -3,7 +3,7 @@ import Event, { EventInterface } from "./Event";
 import DateIntervalField, {
   DateIntervalFieldInterface,
 } from "../Fields/DateIntervalField";
-import People, { PeopleInterface } from "./People";
+import People, { PeopleInterface } from "./People/index";
 import { ImageFile, ImageFileInterface } from "./ImageFile";
 
 export interface MediaVideoStreamInterface extends MediaInterface {
@@ -74,6 +74,10 @@ export class MediaVideoStream
 
   set field_media_oembed_video(value: string) {
     this._field_media_oembed_video = value;
+  }
+
+  getIncluded(): string {
+    return "&include=field_thumbnail,field_people";
   }
 }
 

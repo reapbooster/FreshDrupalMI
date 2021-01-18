@@ -82,3 +82,8 @@ main_navigation:
   version: 1.0
   js:
     components/main-navigation/main-navigation.entry.js: { source: 'components/main-navigation/main-navigation.entry.ts' }
+
+people:
+  version: 1.0
+  js:
+    components/people/people.entry.js: { source: 'components/people/people.entry.tsx' }

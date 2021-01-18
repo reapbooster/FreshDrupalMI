@@ -10,6 +10,7 @@ dependencies:
     - field.field.people.staff.field_event
     - field.field.people.staff.field_first_name
     - field.field.people.staff.field_last_name
+    - field.field.people.staff.field_middle_name
     - field.field.people.staff.field_pgtitle
     - field.field.people.staff.field_photo
     - field.field.people.staff.field_social_media
@@ -17,6 +18,7 @@ dependencies:
     - image.style.thumbnail
   module:
     - image
+    - path
     - social_media
 id: people.staff.default
 targetEntityType: people
@@ -81,6 +83,14 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_middle_name:
+    weight: 31
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_pgtitle:
     weight: 15
     settings:
@@ -117,5 +127,19 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden: {  }
