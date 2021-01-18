@@ -18,7 +18,7 @@ export function MediaComponentFactory(incoming: MediaInterface) {
       return MediaDisplayImage;
     case "media--report":
       return MediaDisplayReport;
-    case "media--podcast":
+    case "media--podcast_episode":
       return MediaDisplayPodcastEpisode;
     default:
       console.error("cannot find component", incoming);
