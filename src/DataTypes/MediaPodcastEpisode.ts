@@ -120,6 +120,12 @@ export class MediaPodcastEpisode
     return this.field_media_image;
   }
 
+  set thumbnail(value: ImageFileInterface) {
+    this.field_media_image = new ImageFile(value);
+  }
+
+
+
   getThumbnail() {
     return this.field_media_image;
   }
