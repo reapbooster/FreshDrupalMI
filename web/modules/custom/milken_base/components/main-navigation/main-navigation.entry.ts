@@ -9,6 +9,7 @@ menuColumnTemplate.innerHTML = `
   </div>
 `;
 
+
 customElements.define(
   "menu-column",
   class MenuColumn extends HTMLElement {
@@ -24,27 +25,33 @@ customElements.define(
   }
 );
 
+
 customElements.define(
   "milken-menu-main",
   class MilkenMenuMain extends HTMLElement {
     constructor() {
       super();
       this.classList.remove("d-flex");
-      this.classList.add("d-none");
+      this.classList.add("hide-menu");
       document
         .querySelector("#menu-reveal")
         .addEventListener("click", this.toggle.bind(this));
+        
     }
 
     toggle() {
       console.log("toggle", this);
+      if (this.classList.contains("invisible")) {
+        this.classList.remove("invisible");
+      }
       if (this.classList.contains("d-flex")) {
         this.classList.remove("d-flex");
-        this.classList.add("d-none");
+        this.classList.add("hide-menu");
       } else {
         this.classList.add("d-flex");
-        this.classList.remove("d-none");
+        this.classList.remove("hide-menu");
       }
+      document.querySelector("#menu-reveal").classList.toggle("fa-times");
     }
   }
 );
