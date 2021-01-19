@@ -1,10 +1,8 @@
 /**
  * @file
- * Eslint no-console: "error" . */
-
-/**
- * @file
+ * Eslint no-console: "error"
  */
+
 
 const browserSync = require("browser-sync").create();
 const wp = require("webpack");
@@ -151,7 +149,7 @@ gulp.task("clearDrupalCache", shell.task("drush cr"));
 gulp.task("buildMilkenTheme", (done) => {
   const { PathAliases } = require("./config/node/PathAliases");
   return gulp
-    .src([ 
+    .src([
       PathAliases.FrontEndTheme.concat("/scss/milken.scss"),
     ])
     .pipe(sourcemaps.init())
@@ -183,10 +181,21 @@ gulp.task("buildMilkenTheme", (done) => {
     .pipe(gulp.dest(path.resolve(basePath, "web/themes/custom/milken/css")));
 });
 
+
+gulp.task("buildBootstrapCss", (done) => {
+  if (fs.existsSync('web/libraries/bootstrap/dist/css')) {
+    return shell.task("cp -R web/libraries/bootstrap/dist/* web/libraries/bootstrap", {
+      cwd: basePath,
+    });
+  }
+  done();
+});
+
+
 gulp.task(
   "buildGinTheme",
   gulp.series([
-    shell.task("yarn install && yarn build", {
+    shell.task("npm install && npm build", {
       cwd: path.resolve(basePath, "web/themes/contrib/gin"),
     }),
     shell.task("cp -R web/themes/contrib/gin/dist/* web/themes/contrib/gin", {
@@ -229,6 +238,7 @@ gulp.task(
     "buildDrupalCore",
     "buildGinTheme",
     "buildMilkenTheme",
+    "buildBootstrapCss"
   ])
 );
 
