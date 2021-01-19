@@ -228,6 +228,7 @@
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "post-install-cmd": [
+            "cp -R web/libraries/bootstrap/dist/* web/libraries/bootstrap",
             "@drupal-scaffold",
             "@install-codestandards",
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"

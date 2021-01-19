@@ -182,20 +182,10 @@ gulp.task("buildMilkenTheme", (done) => {
 });
 
 
-gulp.task("buildBootstrapCss", (done) => {
-  if (fs.existsSync('web/libraries/bootstrap/dist/css')) {
-    return shell.task("cp -R web/libraries/bootstrap/dist/* web/libraries/bootstrap", {
-      cwd: basePath,
-    });
-  }
-  done();
-});
-
-
 gulp.task(
   "buildGinTheme",
   gulp.series([
-    shell.task("npm install && npm build", {
+    shell.task("npm install && npm run build", {
       cwd: path.resolve(basePath, "web/themes/contrib/gin"),
     }),
     shell.task("cp -R web/themes/contrib/gin/dist/* web/themes/contrib/gin", {
@@ -237,8 +227,7 @@ gulp.task(
     "buildTypescript",
     "buildDrupalCore",
     "buildGinTheme",
-    "buildMilkenTheme",
-    "buildBootstrapCss"
+    "buildMilkenTheme"
   ])
 );
 
