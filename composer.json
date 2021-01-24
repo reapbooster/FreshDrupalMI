@@ -198,10 +198,12 @@
             "php -d memory_limit=-1 drush upgrade_status:analyze --all"
         ],
         "update-vendor-dir": [
+            "cd web/libraries/bootstrap/dist && cp -R * ..",
             "php -d memory_limit=-1 `which composer` update -W --optimize-autoloader --prefer-dist",
             "vendor/bin/phpcs --config-set installed_paths web/modules/contrib/coder/coder_sniffer"
         ],
         "install-vendor-dir": [
+            "cd web/libraries/bootstrap/dist && cp -R * ..",
             "php -d memory_limit=-1 `which composer` install --optimize-autoloader --prefer-dist",
             "vendor/bin/phpcs --config-set installed_paths web/modules/contrib/coder/coder_sniffer"
         ],

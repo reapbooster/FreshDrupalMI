@@ -23,7 +23,7 @@ services:
 
   php:
     container_name: mi-php
-    image: milken/php-dev:composer2
+    image: milken/php-dev:latest
     expose:
       - "9000"
     ports:

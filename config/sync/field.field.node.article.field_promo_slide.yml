@@ -3,14 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - eck.eck_type.slide.50_50_text_on_left
+    - eck.eck_type.slide.50_50_text_on_right
     - eck.eck_type.slide.full_width_one_column
+    - eck.eck_type.slide.hero_half_height
     - field.storage.node.field_promo_slide
     - node.type.article
 id: node.article.field_promo_slide
 field_name: field_promo_slide
 entity_type: node
 bundle: article
-label: promo_slide
+label: 'Promo Slide'
 description: ''
 required: false
 translatable: false
@@ -20,9 +23,13 @@ settings:
   handler: 'default:slide'
   handler_settings:
     target_bundles:
+      50_50_text_on_left: 50_50_text_on_left
+      50_50_text_on_right: 50_50_text_on_right
       full_width_one_column: full_width_one_column
+      hero_half_height: hero_half_height
     sort:
       field: _none
+      direction: ASC
     auto_create: true
     auto_create_bundle: full_width_one_column
 field_type: entity_reference
