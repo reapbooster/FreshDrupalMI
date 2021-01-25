@@ -6,9 +6,11 @@ dependencies:
     - entity_browser.browser.slide_entity_browser
     - field.field.node.article.field_centers
     - field.field.node.article.field_content
+    - field.field.node.article.field_event
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_summary
+    - field.field.node.article.field_terms
     - field.field.node.article.field_topics
     - node.type.article
   module:
@@ -143,6 +145,16 @@ content:
     third_party_settings: {  }
     type: paragraphs_browser
     region: content
+  field_event:
+    weight: 128
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_meta_tags:
     type: metatag_firehose
     weight: 8
@@ -181,6 +193,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_terms:
+    weight: 127
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_topics:
     type: entity_reference_autocomplete

@@ -19,12 +19,12 @@ use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
  * @code
  * import_hero_image_to_slide:
  *   plugin: milken_migrate:hero_to_slide
- *   title_source: field_title_source
- *   title_source_backup: title
- *   image: secondary source of title if first one is null
- *   link_id: uuid
- *   link_entity_type_id: node
- *   link_bundle: report
+ *   plugin: 'milken_migrate:hero_to_slide'
+ *     slide_text:
+ *       - hero_title
+ *       - short_description
+ *     slide_image: hero_image
+ *     slide_name: name
  * @endcode
  *
  * Title Source:
@@ -108,51 +108,6 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
       \Drupal::logger('milken_migrate')
         ->debug("DESTINATION SO FAR: " . \Kint::dump($destination));
 
-      // ** Title cannot be empty.
-      // Try "title_source", then "title_source_backup".
-      // If all else fails, generate a random title.
-      $destination['title'] = (
-      empty($source[$this->configuration['title_source']])
-        ? (
-        empty($source[$this->configuration['title_source_backup']]) ?
-          $this->getRandom()->sentences(mt_rand(1, 20), TRUE) :
-          $source[$this->configuration['title_source_backup']]
-        )
-        : $source[$this->configuration['title_source']]
-      );
-      $destination['name'] = $destination['title'];
-
-      // ** Subhead is optional
-      // ** Supertitle is also optional, Article uses it
-      $destination['field_slide_text'] = (isset($this->configuration['subhead'])
-        && isset($source[$this->configuration['subhead']]))
-        ? $source[$this->configuration['subhead']]
-        : (isset($this->configuration['supertitle_source'])
-        && isset($source[$this->configuration['supertitle_source']])
-        && isset($destination['name']))
-        ? [
-          0 => [
-            "key" => "h2",
-            "description" => '',
-            "value" => $source[$this->configuration['supertitle_source']],
-            "format" => "full_html",
-            "processed" => $source[$this->configuration['supertitle_source']],
-            "new_entry" => '',
-          ],
-
-          1 => [
-            "key" => "h1",
-            "description" => '',
-            "value" => $destination['name'],
-            "format" => "full_html",
-            "processed" => $destination['name'],
-            "new_entry" => '',
-          ],
-        ]
-        : NULL;
-
-      \Drupal::logger('milken_migrate')
-        ->debug("Destination so far: " . \Kint::dump($destination, TRUE));
 
       $exists = $this->entityTypeManager->getStorage('file')
         ->loadByProperties(['uuid' => $value['id']]);

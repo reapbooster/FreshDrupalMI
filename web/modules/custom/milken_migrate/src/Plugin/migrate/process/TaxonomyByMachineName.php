@@ -16,7 +16,7 @@ use Drupal\taxonomy\Entity\Term;
  *   handle_multiples=true,
  * )
  */
-class TaxonomyByMachineName extends ProcessPluginBase {
+class TaxonomyByMachineName extends MilkenProcessPluginBase {
 
   use JsonAPIDataFetcherTrait;
 
@@ -51,21 +51,21 @@ class TaxonomyByMachineName extends ProcessPluginBase {
       $single_value = TRUE;
     }
     $destination_values = [];
+    $taxonomyStorage = $this->entityTypeManager->getStorage('taxonomy_term');
     foreach ($value as $relatedRecord) {
-      $term = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadByProperties([
-          'machine_name' => str_replace("-", "_", $relatedRecord),
-          'vid' => $this->configuration['vocabulary'],
-        ]);
+      $term = [];
+      if (isset($this->configuration['vocabulary'])) {
+        $properties['vid'] = $this->configuration['vocabulary'];
+      }
+      $properties['machine_name'] = is_array($relatedRecord) ?
+        $relatedRecord['machine_name'] :
+        str_replace("-", "_", $relatedRecord);
+
+      if (!empty($properties["machine_name"])) {
+        $term = $taxonomyStorage->loadByProperties($properties);
+      }
       if (count($term)) {
-        $term = array_shift($term);
-      }
-      if ($term instanceof Term) {
-        $destination_values[] = term;
-      }
-      else {
-        $this->messenger()->addError('Taxonomy not found: ' . $value);
+        $destination_values = array_merge($destination_values, $term);
       }
     }
     if ($single_value == TRUE) {

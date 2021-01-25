@@ -48,18 +48,6 @@ source:
       label: 'Language Code'
       selector: /langcode
     -
-      name: body
-      label: 'body array'
-      selector: /body
-    -
-      name: body_value
-      label: 'Body Value'
-      selector: /body/value
-    -
-      name: body_format
-      label: 'Body Format'
-      selector: /body/format
-    -
       name: path
       label: 'Product price'
       selector: /path/alias
@@ -80,7 +68,51 @@ source:
       label: Sticky
       selector: /sticky
     -
-      name: hero_super_title
+      name: external_link
+      label: 'External Link'
+      selector: /field_ar_link
+    -
+      name: author
+      label: Author
+      selector: /field_ar_author
+    -
+      name: body
+      label: 'body array'
+      selector: /body
+    -
+      name: body_value
+      label: 'Body Value'
+      selector: /body/value
+    -
+      name: body_format
+      label: 'Body Format'
+      selector: /body/format
+    -
+      name: centers_tax
+      label: 'Centers Taxonomy'
+      selector: /field_centers_general
+    -
+      name: term_collection_tax
+      label: 'Term Collection Taxonomy'
+      selector: /field_term_collection
+    -
+      name: alt_content
+      label: 'Alt Content'
+      selector: /field_ar_content
+    -
+      name: custom_author_text
+      label: 'Custom Author Text'
+      selector: /field_custom_author_text
+    -
+      name: event_reference
+      label: 'Event Ref'
+      selector: /field_event_reference
+    -
+      name: short_description
+      label: 'Short description'
+      selector: /field_short_description
+    -
+      name: hero_title
       label: 'Hero Title'
       selector: /field_ar_hero_title
     -
@@ -88,17 +120,13 @@ source:
       label: 'Hero Image'
       selector: /field_ar_hero_image
     -
+      name: meta_tags
+      label: 'Meta Tags'
+      selector: /field_meta_tags
+    -
       name: pdf_file
       label: 'Pdf File'
       selector: /field_ar_pdf_file
-    -
-      name: alt_content
-      label: 'Alt Content'
-      selector: /field_ar_content
-    -
-      name: term_collection_tax
-      label: 'Term Collection Taxonomy'
-      selector: /field_term_collection
     -
       name: program_initiatives_tax
       label: 'Program Initiatives Taxonomy'
@@ -107,10 +135,6 @@ source:
       name: topics_tax
       label: 'Topics Taxonomy'
       selector: /field_topics
-    -
-      name: centers_tax
-      label: 'Centers Taxonomy'
-      selector: /field_centers_general
   ids:
     id:
       type: integer
@@ -131,28 +155,42 @@ process:
   status:
     plugin: default_value
     default_value: true
-  uid:
-    plugin: default_value
-    default_value: 2
-  field_content:
-    plugin: 'milken_migrate:paragraphs'
-    source: alt_content
-  path/alias: path
   created:
     plugin: 'milken_migrate:unix_date'
     source: created
   changed:
     plugin: 'milken_migrate:unix_date'
     source: changed
+  uid:
+    plugin: default_value
+    default_value: 2
+  path/alias: path
+  field_content:
+    plugin: 'milken_migrate:paragraphs'
+    source: alt_content
   field_promo_slide:
     plugin: 'milken_migrate:hero_to_slide'
-    source: hero_image
-    supertitle_source: hero_super_title
-    title_source: name
-    title_source_backup: name
-    link_id: uuid
-    link_entity_type_id: constants/LINK_ENTITY_TYPE_ID
-    link_bundle: constants/LINK_BUNDLE_ID
+    slide_text:
+      - hero_title
+      - short_description
+    slide_image: hero_image
+    slide_name: name
+  field_meta_tags: field_meta_tags
+  field_topics:
+    plugin: milken_migrate:taxonomy_by_name
+    source: topics_tax
+    vocabulary: topics
+  field_centers:
+    plugin: milken_migrate:taxonomy_by_name
+    source: centers_tax
+    vocabulary: centers
+  field_terms:
+    plugin: milken_migrate:taxonomy_by_name
+    source: term_collection_tax
+    vocabulary: milken_tags
+  field_event:
+    plugin: milken_migrate:event_reference
+    source: field_event_reference
   import_body_field_to_paragraph:
     plugin: 'milken_migrate:body_embed'
     source: body_value
