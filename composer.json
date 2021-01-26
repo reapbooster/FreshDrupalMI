@@ -175,6 +175,7 @@
         "npm-asset/fontawesome": "^5",
         "npm-asset/masonry-layout": "^4.2",
         "npm-asset/slick-carousel": "1.8.1",
+        "npm-asset/imagesloaded": "^4",
         "object-calisthenics/phpcs-calisthenics-rules": "*",
         "oomphinc/composer-installers-extender": "^2.0",
         "phpcompatibility/php-compatibility": "*",
