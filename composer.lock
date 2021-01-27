@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f73f9316351bd77b02c1bf2c0645e592",
+    "content-hash": "d96e68a10bd5c3416d63c50ebcd5fe50",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.172.0",
+            "version": "3.172.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "5a5e66c4d54c392042820703eeb8a6bd3d222924"
+                "reference": "28a0929598be6e9e0b652091712068d37acd9d0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5a5e66c4d54c392042820703eeb8a6bd3d222924",
-                "reference": "5a5e66c4d54c392042820703eeb8a6bd3d222924",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28a0929598be6e9e0b652091712068d37acd9d0a",
+                "reference": "28a0929598be6e9e0b652091712068d37acd9d0a",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.172.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.172.1"
             },
-            "time": "2021-01-22T19:21:38+00:00"
+            "time": "2021-01-26T19:11:49+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -7347,6 +7347,59 @@
             }
         },
         {
+            "name": "drupal/jsonapi_search_api",
+            "version": "1.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/jsonapi_search_api.git",
+                "reference": "8.x-1.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_search_api-8.x-1.0-rc2.zip",
+                "reference": "8.x-1.0-rc2",
+                "shasum": "c36fa23790a61999830717442508f1bafa4ae9fe"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/jsonapi_resources": "^1.0@beta",
+                "drupal/search_api": "^1.0"
+            },
+            "require-dev": {
+                "drupal/facets": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-rc2",
+                    "datestamp": "1605116431",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                }
+            ],
+            "description": "Exposes Search API indexes over JSON:API Resources.",
+            "homepage": "https://www.drupal.org/project/jsonapi_search_api",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/jsonapi_search_api",
+                "issues": "https://www.drupal.org/project/issues/jsonapi_search_api"
+            }
+        },
+        {
             "name": "drupal/key_value_field",
             "version": "1.2.0",
             "source": {
@@ -13776,16 +13829,16 @@
         },
         {
             "name": "markbaker/matrix",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MarkBaker/PHPMatrix.git",
-                "reference": "35a2d1a919a1de732402f694925168c53c17c838"
+                "reference": "361c0f545c3172ee26c3d596a0aa03f0cef65e6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MarkBaker/PHPMatrix/zipball/35a2d1a919a1de732402f694925168c53c17c838",
-                "reference": "35a2d1a919a1de732402f694925168c53c17c838",
+                "url": "https://api.github.com/repos/MarkBaker/PHPMatrix/zipball/361c0f545c3172ee26c3d596a0aa03f0cef65e6a",
+                "reference": "361c0f545c3172ee26c3d596a0aa03f0cef65e6a",
                 "shasum": ""
             },
             "require": {
@@ -13844,9 +13897,9 @@
             ],
             "support": {
                 "issues": "https://github.com/MarkBaker/PHPMatrix/issues",
-                "source": "https://github.com/MarkBaker/PHPMatrix/tree/2.1.1"
+                "source": "https://github.com/MarkBaker/PHPMatrix/tree/2.1.2"
             },
-            "time": "2021-01-21T13:53:09+00:00"
+            "time": "2021-01-23T16:37:31+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -19029,6 +19082,7 @@
         "drupal/jsonapi_image_styles": 10,
         "drupal/jsonapi_resources": 20,
         "drupal/jsonapi_schema": 10,
+        "drupal/jsonapi_search_api": 5,
         "drupal/layout_builder_styles": 10,
         "drupal/layout_builder_tabs": 10,
         "drupal/layout_library": 10,
