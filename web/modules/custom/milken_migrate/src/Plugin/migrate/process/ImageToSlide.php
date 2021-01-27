@@ -108,7 +108,6 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
       \Drupal::logger('milken_migrate')
         ->debug("DESTINATION SO FAR: " . \Kint::dump($destination));
 
-
       $exists = $this->entityTypeManager->getStorage('file')
         ->loadByProperties(['uuid' => $value['id']]);
 

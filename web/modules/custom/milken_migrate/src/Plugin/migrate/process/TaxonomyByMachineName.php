@@ -3,10 +3,8 @@
 namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\migrate\MigrateExecutableInterface;
-use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
-use Drupal\taxonomy\Entity\Term;
 
 /**
  * This plugin gets a taxonomy term and returns the ID in a jsonAPI Migration.
