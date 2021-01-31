@@ -7,11 +7,11 @@ import Staff from './Staff';
 export const DataTypePeopleFactory  = (props: PeopleInterface) => {
 
   switch(props.type) {
-    case "staff":
+    case "people--staff":
       return new Staff(props);
-    case "experts":
+    case "people--experts":
       return new Experts(props);
-    case "speakers":
+    case "people--speakers":
       return new Speakers(props);
     default:
       throw new Error("No People type defined for: ".concat(props.type));

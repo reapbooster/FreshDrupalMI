@@ -39,10 +39,12 @@ export const ArticleFull = (props: ArticleFullProps) => {
     }
     & .section-content {
       order: 2;
+      & .embedded-entity img {
+        max-width: 100%;
+      }
       @media only screen and (max-width: 1199px) {
         order: 3;
         padding-top: 1.5em;
-
       }
     }
     & .section-tags {
@@ -98,11 +100,11 @@ export const ArticleFull = (props: ArticleFullProps) => {
       </Row>
       <Row>
         <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
-          <Row>
+          {/* <Row>
             <Col>
               <ElTitle>{nodeArticleData.title}</ElTitle>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col xs="12" lg="6" xl="1" className="section-social">
               <SocialDisplay data={{"name": nodeArticleData.title}}></SocialDisplay>

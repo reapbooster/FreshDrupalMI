@@ -110,7 +110,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
           style={rowStyle}
           data-view-mode={view_mode}
         >
-          <Jumbotron className="jumbotron jumbotron-fluid d-block align-items-center">
+          <Jumbotron className="jumbotron jumbotron-fluid d-block align-items-center m-0 p-0">
             <Container style={slideTextStyle}>{textLines}</Container>
           </Jumbotron>
         </Row>

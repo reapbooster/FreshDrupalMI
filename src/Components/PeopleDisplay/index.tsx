@@ -26,7 +26,7 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
         staffSetData(newDO);
       });
   }
-  console.debug("Component should have data by now:", staffData);
+  console.debug("PeopleDisplay: Component should have data by now:", staffData);
   return (
     <div>
       <h1>People Display</h1>
@@ -39,8 +39,8 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
       <h5>field_pgtitle</h5>
       <p>{staffData.field_pgtitle}</p>
       <h5>field_social_media</h5>
-      <p>
-        {staffData.field_social_media.length
+      {/* <p>
+        {staffData.field_social_media?.length
           ? staffData.field_social_media.map(
               (item: SocialMediaLinkInterface, key: number) => {
                 return (
@@ -58,13 +58,15 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
               }
             )
           : "Field has no value"}
-      </p>
+      </p> */}
       <h5>Field Event</h5>
-      <p>{staffData.field_event}</p>
+      {/* <p>{staffData.field_event}</p> */}
       <h5>Field Photo</h5>
       <p>
-        <ImageFileDisplay data={staffData.field_photo} view_mode="thumbnail" />
+        {/* <ImageFileDisplay data={staffData.field_photo} view_mode="thumbnail" /> */}
       </p>
     </div>
   );
 };
+
+export default PeopleDisplay;

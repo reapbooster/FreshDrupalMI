@@ -4,6 +4,7 @@ import NodeDisplay from "../NodeDisplay";
 import MediaDisplay from "../MediaDisplay";
 import EventDisplay from "../EventDisplay";
 import SlideDisplay from "../SlideDisplay";
+import PeopleDisplay from "../PeopleDisplay";
 
 export const ListDisplayFactory = (item: EntityInterface) => {
   const [entityTypeId, bundle] = item.type.split("--");
@@ -19,6 +20,8 @@ export const ListDisplayFactory = (item: EntityInterface) => {
       return EventDisplay;
     case "slide":
       return SlideDisplay;
+    case "people":
+      return PeopleDisplay;
 
     default:
       console.error(`missing display component for ${entityTypeId}`);
