@@ -9,7 +9,6 @@ dependencies:
     - node
     - search_api
     - milken_base
-    - paragraphs
   config:
     - field.storage.event.field_campaign_name
     - field.storage.event.field_description
@@ -17,17 +16,16 @@ dependencies:
     - field.storage.event.field_name_short
     - field.storage.event.field_related_media
     - field.storage.media.field_body
+    - field.storage.media.field_content
     - field.storage.media.field_episode
     - field.storage.media.field_event_reference
     - field.storage.media.field_media_file
     - field.storage.media.field_photo_subject_name
     - field.storage.media.field_photo_subject_title
     - field.storage.media.field_summary
+    - field.storage.node.field_content
     - field.storage.node.field_long_description
     - field.storage.node.field_short_summary
-    - field.storage.paragraph.field_body
-    - field.storage.paragraph.field_name
-    - field.storage.paragraph.field_title
     - search_api.server.freshdrupal_live
 third_party_settings:
   search_api_solr:
@@ -93,12 +91,17 @@ field_settings:
         - field.storage.media.field_body
   field_body_1:
     label: body
-    datasource_id: 'entity:paragraph'
+    datasource_id: 'entity:media'
     property_path: field_body
     type: text
     dependencies:
       config:
-        - field.storage.paragraph.field_body
+        - field.storage.media.field_body
+  field_body_2:
+    label: 'Reverse reference: <em class="placeholder">Paragraph</em> using <em class="placeholder">Content Refs</em> » body'
+    datasource_id: 'entity:node'
+    property_path: 'search_api_reverse_entity_references_paragraph__field_content_refs:field_body'
+    type: text
   field_campaign_name:
     label: 'Campaign Name'
     datasource_id: 'entity:event'
@@ -107,7 +110,31 @@ field_settings:
     dependencies:
       config:
         - field.storage.event.field_campaign_name
+  field_content:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: field_content
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_content
+  field_content_1:
+    label: Content
+    datasource_id: 'entity:media'
+    property_path: field_content
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_content
   field_description:
+    label: Description
+    datasource_id: 'entity:event'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.event.field_description
+  field_description_1:
     label: Description
     datasource_id: 'entity:event'
     property_path: field_description
@@ -160,15 +187,15 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_media_file
-  field_name:
-    label: Name
-    datasource_id: 'entity:paragraph'
-    property_path: field_name
+  field_name_short:
+    label: 'Name Short'
+    datasource_id: 'entity:event'
+    property_path: field_name_short
     type: text
     dependencies:
       config:
-        - field.storage.paragraph.field_name
-  field_name_short:
+        - field.storage.event.field_name_short
+  field_name_short_1:
     label: 'Name Short'
     datasource_id: 'entity:event'
     property_path: field_name_short
@@ -216,14 +243,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_summary
-  field_title:
-    label: Title
-    datasource_id: 'entity:paragraph'
-    property_path: field_title
-    type: string
-    dependencies:
-      config:
-        - field.storage.paragraph.field_title
   field_title_1:
     label: 'Reverse reference: <em class="placeholder">Paragraph</em> using <em class="placeholder">Event References</em> » Title'
     datasource_id: 'entity:event'
@@ -270,6 +289,22 @@ field_settings:
     dependencies:
       module:
         - eck
+  title_2:
+    label: Title
+    datasource_id: 'entity:event'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - eck
+  title_3:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - node
   url:
     label: URI
     property_path: search_api_url
@@ -302,14 +337,7 @@ datasource_settings:
     languages:
       default: true
       selected: {  }
-  'entity:paragraph':
-    bundles:
-      default: true
-      selected: {  }
-    languages:
-      default: true
-      selected: {  }
-  'entity:slide':
+  'entity:people':
     bundles:
       default: true
       selected: {  }
@@ -365,17 +393,14 @@ processor_settings:
       - bundle
       - entity_type_id
       - field_body
-      - field_body_1
       - field_campaign_name
       - field_description
       - field_long_description
-      - field_name
       - field_name_short
       - field_photo_subject_name
       - field_photo_subject_title
       - field_short_summary
       - field_summary
-      - field_title
       - field_title_1
       - name
       - parent_type
