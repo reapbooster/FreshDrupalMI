@@ -22,11 +22,17 @@ source:
   jsonapi_host: 'https://milkeninstitute.org'
   jsonapi_endpoint: /jsonapi/node/video
   item_selector: data
+  jsonapi_include: true
+  included:
+    - field_term_collection
+    - field_topics
+    - field_centers_general
+    - field_term_program_initiatives
   fields:
     -
       name: id
       label: 'Node ID'
-      selector: /attributes/drupal_internal__nid
+      selector: /drupal_internal__nid
     -
       name: uuid
       label: 'Unique ID'
@@ -34,99 +40,84 @@ source:
     -
       name: name
       label: title/name
-      selector: /attributes/title
+      selector: /title
     -
       name: langcode
       label: 'Language Code'
-      selector: /attributes/langcode
+      selector: /langcode
     -
       name: body
       label: 'body array'
-      selector: /attributes/body
+      selector: /body
     -
       name: body_value
       label: 'Body Value'
-      selector: /attributes/body/value
+      selector: /body/value
     -
       name: body_format
       label: 'Body Format'
-      selector: /attributes/body/format
+      selector: /body/format
     -
       name: path
       label: 'Product price'
-      selector: /attributes/path/alias
+      selector: /path/alias
     -
       name: created
       label: Created
-      selector: /attributes/created
+      selector: /created
     -
       name: changed
       label: Changed
-      selector: /attributes/changed
+      selector: /changed
     -
       name: promote
       label: Promoted
-      selector: /attributes/promote
+      selector: /promote
     -
       name: sticky
       label: Sticky
-      selector: /attributes/sticky
+      selector: /sticky
     -
       name: video_url_array
       label: 'Video URL Array'
-      selector: /attributes/field_video_url
+      selector: /field_video_url
     -
       name: video_url
       label: 'Video URL'
-      selector: /attributes/field_video_url/uri
+      selector: /field_video_url/uri
     -
       name: topics
       label: Topics
-      selector: /relationships/field_topics
+      selector: /field_topics
     -
       name: program_initiatives
       label: 'Program Initiatives'
-      selector: /relationships/field_term_program_initiatives
+      selector: /field_term_program_initiatives
     -
       name: video_thumbnail
       label: 'Video Thumbnail'
-      selector: /relationships/field_video_thumbnail
+      selector: /field_video_thumbnail
     -
       name: path
       label: Path
-      selector: /attributes/path/alias
+      selector: /path/alias
     -
       name: term_collection_tax
       label: 'Term Collection Taxonomy'
-      selector: /relationships/field_term_collection
-    -
-      name: term_collection_tax_id
-      label: 'Term Collection Taxonomy ID'
-      selector: /relationships/field_term_collection_id
+      selector: /field_term_collection
     -
       name: program_initiatives_tax
       label: 'Program Initiatives Taxonomy'
-      selector: /relationships/field_term_program_initiatives
-    -
-      name: program_initiatives_tax_id
-      label: 'Program Initiatives Taxonomy ID'
-      selector: /relationships/field_term_program_initiatives/id
+      selector: /field_term_program_initiatives
     -
       name: topics_tax
       label: 'Topics Taxonomy'
-      selector: /relationships/field_topics
-    -
-      name: topics_tax_id
-      label: 'Topics Taxonomy ID'
-      selector: /relationships/field_topics/id
+      selector: /field_topics
     -
       name: centers_tax
       label: 'Centers Taxonomy'
-      selector: /relationships/field_centers_general
-    -
-      name: centers_tax_id
-      label: 'Centers Taxonomy ID'
-      selector: /relationships/field_centers_general/id
+      selector: /field_centers_general
+
   ids:
     id:
       type: integer
@@ -162,9 +153,24 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
   field_media_oembed_video:
-    -
-      plugin: 'milken_migrate:remote_video'
-      source: video_url
+    plugin: 'milken_migrate:remote_video'
+    source: video_url
+  field_topics:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: topics_tax
+    vocabulary: topics
+  field_centers:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: centers_tax
+    vocabulary: centers
+  field_term_collection:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: term_collection_tax
+    vocabulary: milken_tags
+  field_program_initiatives:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: program_initiatives_tax
+    vocabulary: program_initiatives
 destination:
   plugin: 'entity:media'
   default_bundle: video

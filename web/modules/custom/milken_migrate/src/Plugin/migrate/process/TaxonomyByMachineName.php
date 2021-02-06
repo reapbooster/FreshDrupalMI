@@ -4,6 +4,7 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
+use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 
 /**
@@ -39,7 +40,10 @@ class TaxonomyByMachineName extends MilkenProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)
+    if (
+      $row->isStub() ||
+      (array_key_exists('data', $value) && empty($value['data'])) ||
+      empty($value)
     ) {
       return NULL;
     }
@@ -48,28 +52,102 @@ class TaxonomyByMachineName extends MilkenProcessPluginBase {
       $value = [$value];
       $single_value = TRUE;
     }
+
     $destination_values = [];
-    $taxonomyStorage = $this->entityTypeManager->getStorage('taxonomy_term');
     foreach ($value as $relatedRecord) {
       $term = [];
-      if (isset($this->configuration['vocabulary'])) {
-        $properties['vid'] = $this->configuration['vocabulary'];
+      if (!isset($relatedRecord['vid'])) {
+        $ref = new JsonAPIReference($relatedRecord, $this->entityTypeManager);
+        $remote = $ref->getRemoteData([
+          'debug' => TRUE,
+          'query' => [
+            'jsonapi_include' => TRUE,
+          ],
+        ]);
+        print_r($remote);
+        exit();
       }
-      $properties['machine_name'] = is_array($relatedRecord) ?
+      $termName = is_array($relatedRecord) ?
         $relatedRecord['machine_name'] :
         str_replace("-", "_", $relatedRecord);
 
-      if (!empty($properties["machine_name"])) {
-        $term = $taxonomyStorage->loadByProperties($properties);
+      if ($termName) {
+        $term = $this->findExistingTerm($termName);
+      }
+      if (!count($term) && is_array($relatedRecord)) {
+        $term = $this->createTerm($relatedRecord);
       }
       if (count($term)) {
         $destination_values = array_merge($destination_values, $term);
       }
     }
-    if ($single_value == TRUE) {
+    if (count($destination_values) === 1 || $single_value === TRUE) {
       $destination_values = array_shift($destination_values);
     }
+    \Drupal::logger('milken_migrate')
+      ->debug(__CLASS__ . "::" . print_r($destination_values, TRUE));
     return $destination_values;
+  }
+
+  /**
+   * Find taxonomy term by name.
+   *
+   * @param string $term_name
+   *   Term Machine Name.
+   *
+   * @return array
+   *   Array of TaxonomyTerms.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function findExistingTerm(string $term_name): array {
+    \Drupal::logger('milken_migrate')
+      ->debug("Searching For:" . $this->configuration['vocabulary'] . "::" . $term_name);
+    $taxonomyStorage = $this->entityTypeManager->getStorage('taxonomy_term');
+    $properties = [];
+    if (!empty($this->configuration['vocabulary'])) {
+      $properties['vid'] = $this->configuration['vocabulary'];
+    }
+    if (!empty($term_name)) {
+      $properties['machine_name'] = $term_name;
+      return $taxonomyStorage->loadByProperties($properties);
+    }
+    return [];
+  }
+
+  /**
+   * Create new Taxonomy Term from termdata.
+   *
+   * @param array $termData
+   *   Data from remote taxonomy term.
+   *
+   * @return array
+   *   Array of Taxonomy Terms that meet the criterion.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function createTerm(array $termData) {
+    try {
+      \Drupal::logger('milken_migrate')
+        ->debug("Searching For:" . $this->configuration['vocabulary'] . "::" . print_r($termData, TRUE));
+      $termData['vid'] = $this->configuration['vocabulary'];
+      return [
+        $this->entityTypeManager
+          ->getStorage('taxonomy_term')
+          ->create($termData),
+      ];
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('milken_migrate')
+        ->error($e->getMessage());
+    }
+    catch (\Throwable $t) {
+      \Drupal::logger('milken_migrate')
+        ->error($t->getMessage());
+    }
+    return [];
   }
 
 }
