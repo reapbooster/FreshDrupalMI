@@ -91,10 +91,10 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
     // Get slide text from configured fields.
     if (isset($this->configuration['slide_text'])) {
       $slide_text = $this->getSlideText($this->configuration['slide_text'], $row);
-      // $slide_text = $this->configuration['slide_text'];
+      //$slide_text = $this->configuration['slide_text'];
       \Drupal::logger('milken_migrate')->debug("~$~ SlideText") . \Kint::dump($slide_text);
       \Drupal::logger('milken_migrate')->debug("~$~ Source") . \Kint::dump($this->configuration['source']);
-      \Drupal::logger('milken_migrate')->debug("~$~ SourceGetProperty") . \Kint::dump($row->getSourceProperty($this->configuration['source']));
+      \Drupal::logger('milken_migrate')->debug("~$~ SourceGetProperty") . \Kint::dump( $row->getSourceProperty($this->configuration['source']));
     }
     // If there's no content to make a slide, move along.
     if ($row->isStub() || (empty($value) && count($slide_text) === 0)) {
@@ -119,6 +119,7 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
         $exists = $this->entityTypeManager->getStorage('file')
           ->loadByProperties(['uuid' => 'ffffffff-ffff-ffff-ffff-000000000001']);
       }
+
 
       // ** Background Image is dependent on the download process
       // Should this fail, the catch loops will log the error.
