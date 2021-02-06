@@ -79,8 +79,6 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
       $ref = new JsonAPIReference($source, $this->entityTypeManager);
 
       if ($ref->getEntityTypeId() == "media") {
-        \Drupal::logger('milken_migrate')
-          ->debug("Media Enitty: Getting source of entity =>" . \Kint::dump($ref, TRUE));
         $ref->getRemoteData();
         $bundle = $ref->getBundle();
         if ($bundle instanceof BundleTypeDataFetcher) {
@@ -91,7 +89,7 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
             $ref = new JsonAPIReference($mediaSourceProperty, $this->entityTypeManager);
           }
           else {
-            throw new MigrateException("Cannot get source property for media field:" . \Kint::dump($bundle, TRUE));
+            throw new MigrateException("Cannot get source property for media field:" . \Kint::dump($bundle));
           }
         }
         else {
@@ -99,7 +97,7 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
         }
       }
       \Drupal::logger('milken_migrate')
-        ->debug("REF: " . \Kint::dump($ref));
+        ->debug("REF: " . print_r($ref, TRUE));
       // Validate ref.
       if (!$ref instanceof JsonAPIReference) {
         return [];
@@ -107,24 +105,15 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
       $ref->getRemoteData();
 
       if ($ref->valid() === FALSE || $ref->getFilename() === NULL || $ref->getUrl() === NULL) {
-        \Drupal::logger('milken_migrate')
-          ->debug("Skip Row: invalid" . \Kint::dump($ref, TRUE));
         return NULL;
       }
       if (substr($ref->getFilename(), 0, 6) === "sample") {
-        \Drupal::logger('milken_migrate')
-          ->debug("Skip Row Sample:" . \Kint::dump($ref, TRUE));
         return NULL;
       }
-      // Do the work of getting data.
-      \Drupal::logger('milken_migrate')
-        ->debug("Importing... {$ref->getEntityTypeId()}::{$ref->getBundle()}::{$ref->getId()}");
 
       try {
         $file = $ref->exists();
         if ($file instanceof EntityInterface) {
-          \Drupal::logger('milken_migrate')
-            ->debug("Found file in database: " . $file->label());
           $destination_values[] = $file;
           continue;
         }

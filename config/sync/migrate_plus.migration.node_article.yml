@@ -170,26 +170,26 @@ process:
     source: alt_content
   field_promo_slide:
     plugin: 'milken_migrate:hero_to_slide'
+    source: hero_image
     slide_text:
       - hero_title
       - short_description
-    slide_image: hero_image
     slide_name: name
   field_meta_tags: field_meta_tags
   field_topics:
-    plugin: milken_migrate:taxonomy_by_name
+    plugin: 'milken_migrate:taxonomy_by_name'
     source: topics_tax
     vocabulary: topics
   field_centers:
-    plugin: milken_migrate:taxonomy_by_name
+    plugin: 'milken_migrate:taxonomy_by_name'
     source: centers_tax
     vocabulary: centers
   field_terms:
-    plugin: milken_migrate:taxonomy_by_name
+    plugin: 'milken_migrate:taxonomy_by_name'
     source: term_collection_tax
     vocabulary: milken_tags
   field_event:
-    plugin: milken_migrate:event_reference
+    plugin: 'milken_migrate:event_reference'
     source: field_event_reference
   import_body_field_to_paragraph:
     plugin: 'milken_migrate:body_embed'

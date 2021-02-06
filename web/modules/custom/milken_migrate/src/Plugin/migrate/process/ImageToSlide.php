@@ -48,6 +48,7 @@ use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
  *
  * @MigrateProcessPlugin(
  *   id = "milken_migrate:hero_to_slide",
+ *   handle_multiples = TRUE,
  * );
  */
 class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInterface {
@@ -79,21 +80,22 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
    * @throws \Drupal\migrate\MigrateException
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
-
     \Drupal::logger('milken_migrate')
       ->debug(__CLASS__);
-    if ($row->isStub() || (isset($value['data']) && empty($value['data'])) || empty($value)) {
-      return NULL;
-    }
-    $source = $row->getSource();
-    $value = $row->getSourceProperty($this->configuration['source']);
-
-    if ($value) {
-      \Drupal::logger('milken_migrate')
-        ->debug("~~~ Field has value:" . \Kint::dump($value, TRUE));
-    }
-
     $destination_value = [];
+    // If there's a data property make the value the data property.
+    if (array_key_exists('data', $value)) {
+      $value = $value['data'];
+    }
+    $slide_text = [];
+    // Get slide text from configured fields.
+    if (isset($this->configuration['slide_text'])) {
+      $slide_text = $this->getSlideText($this->configuration['slide_text'], $row);
+    }
+    // If there's no content to make a slide, move along.
+    if ($row->isStub() || (empty($value) && count($slide_text) === 0)) {
+      return $destination_value;
+    }
 
     try {
       $destination = [
@@ -105,15 +107,14 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
         'field_published' => TRUE,
       ];
 
-      \Drupal::logger('milken_migrate')
-        ->debug("DESTINATION SO FAR: " . \Kint::dump($destination));
-
-      $exists = $this->entityTypeManager->getStorage('file')
-        ->loadByProperties(['uuid' => $value['id']]);
+      if (isset($value['id'])) {
+        $exists = $this->entityTypeManager->getStorage('file')
+          ->loadByProperties(['uuid' => $value['id']]);
+      }
 
       // ** Background Image is dependent on the download process
       // Should this fail, the catch loops will log the error.
-      if (is_array($exists) && count($exists)) {
+      if ($exists) {
         $file = array_shift($exists);
         if ($file instanceof FileInterface) {
           \Drupal::logger('milken_migrate')
@@ -134,20 +135,14 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
       if ($file instanceof FileInterface) {
         $destination['field_background_image'] = ['target_id' => $file->id()];
       }
-      else {
-        throw new MigrateException("File is empty.");
-      }
       $destination['field_text_color'] = ['color' => "#000000"];
       $destination['field_text_color'] = ['color' => "#dfdfdf"];
-      // ** LINK content object to which this slide is linked.
-      if (isset($this->configuration['should_be_link_id_but_im_temporarily_disabling'])) {
-        $destination['field_link'] = [
-          'url' => "/node/" . $source[$this->configuration['link_id']],
-          "title" => "click here",
-        ];
+      if (count($slide_text)) {
+        $destination['field_slide_text'] = $slide_text;
       }
+
       \Drupal::logger('milken_migrate')
-        ->debug('Creating Slide with data: ' . \Kint::dump($destination));
+        ->debug("DESTINATION SO FAR: " . print_r($destination, TRUE));
       $slide = $this->entityTypeManager->getStorage('slide')
         ->create($destination);
 
@@ -155,10 +150,10 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
         $slide->set('langcode', 'en');
         $slide->isNew();
         $slide->save();
-        \Drupal::logger('milken_migrate')
-          ->debug('Destination Value: ' . \Kint::dump($slide->toArray()));
         // RETURN the slide as the reference.
-        return $slide;
+        \Drupal::logger('milken_migrate')
+          ->debug(__CLASS__ . "::" . print_r($slide->toArray(), TRUE));
+        return [$slide];
       }
       else {
         throw new MigrateException("unable to create Slide for value: ", \Kint::dump($destination, TRUE));
@@ -175,6 +170,33 @@ class ImageToSlide extends MilkenProcessPluginBase implements MigrateProcessInte
       return new MigrateSkipProcessException($t->getMessage());
     }
     return new MigrateSkipProcessException($message ?? ("Error Occurred!: " . \Kint::dump($destination_value, TRUE)));
+  }
+
+  /**
+   * Extract the Slide text from the $row object.
+   *
+   * @param array $slideTextProperties
+   *   Properties from which to extract data from the row.
+   * @param \Drupal\migrate\Row $row
+   *   Row data.
+   *
+   * @return array
+   *   Return an array that can be saved as a Key=>Value text field.
+   */
+  public function getSlideText(array $slideTextProperties, Row $row) {
+    $toReturn = [];
+    $headline = 1;
+    foreach ($slideTextProperties as $property) {
+      $text = trim($row->getSourceProperty($property));
+      if (!empty($text)) {
+        $toReturn[] = [
+          'key' => "h{$headline}",
+          'value' => $row->getSourceProperty($property),
+        ];
+        $headline++;
+      }
+    }
+    return $toReturn;
   }
 
   /**

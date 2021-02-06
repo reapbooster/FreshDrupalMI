@@ -94,7 +94,7 @@ class JsonAPIReference {
   public function __construct(array $values = NULL, EntityTypeManagerInterface $entityTypeManager) {
     $this->entityTypeManager = $entityTypeManager;
     \Drupal::logger(__CLASS__)
-      ->debug(__CLASS__ . "::" . \Kint::dump($values, TRUE));
+      ->debug(__CLASS__ . "::" . print_r($values, TRUE));
     if ($values == NULL || (isset($values['data']) && empty($values['data']))) {
       throw new MigrateSkipProcessException("The referenced Entity has no data.");
     }
