@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.173.3",
+            "version": "3.173.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b805c50f0338180e7328c7ad5bcb0aceae11a75a"
+                "reference": "45a5150c35ab4ee5e4eb05332179a094476d1dd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b805c50f0338180e7328c7ad5bcb0aceae11a75a",
-                "reference": "b805c50f0338180e7328c7ad5bcb0aceae11a75a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/45a5150c35ab4ee5e4eb05332179a094476d1dd5",
+                "reference": "45a5150c35ab4ee5e4eb05332179a094476d1dd5",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.173.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.173.5"
             },
-            "time": "2021-02-04T21:45:53+00:00"
+            "time": "2021-02-08T19:13:12+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -9594,12 +9594,20 @@
                     "homepage": "https://www.drupal.org/u/jansete"
                 },
                 {
+                    "name": "cmlara",
+                    "homepage": "https://www.drupal.org/user/1790054"
+                },
+                {
                     "name": "jansete",
                     "homepage": "https://www.drupal.org/user/1358146"
                 },
                 {
                     "name": "naveenvalecha",
                     "homepage": "https://www.drupal.org/user/2665733"
+                },
+                {
+                    "name": "ram4nd",
+                    "homepage": "https://www.drupal.org/user/601534"
                 }
             ],
             "description": "Adds an Amazon Simple Storage Service-based remote file system to Drupal.",
@@ -12054,16 +12062,16 @@
         },
         {
             "name": "enyo/dropzone",
-            "version": "v5.7.3",
+            "version": "v5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dropzone/dropzone-packagist.git",
-                "reference": "7c40871566b9fe67648a441178a5b36c6ad7a5d9"
+                "reference": "7c644087d5567e8284cf295351d983c4cd1398e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dropzone/dropzone-packagist/zipball/7c40871566b9fe67648a441178a5b36c6ad7a5d9",
-                "reference": "7c40871566b9fe67648a441178a5b36c6ad7a5d9",
+                "url": "https://api.github.com/repos/dropzone/dropzone-packagist/zipball/7c644087d5567e8284cf295351d983c4cd1398e4",
+                "reference": "7c644087d5567e8284cf295351d983c4cd1398e4",
                 "shasum": ""
             },
             "type": "library",
@@ -12075,7 +12083,7 @@
                 {
                     "name": "Matias Meno",
                     "email": "m@tias.me",
-                    "homepage": "http://www.matiasmeno.com"
+                    "homepage": "http://www.yesmeno.com"
                 }
             ],
             "description": "Handles drag and drop of files for you.",
@@ -12088,9 +12096,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dropzone/dropzone-packagist/issues",
-                "source": "https://github.com/dropzone/dropzone-packagist/tree/v5.7.3"
+                "source": "https://github.com/dropzone/dropzone-packagist/tree/v5.7.5"
             },
-            "time": "2021-02-05T16:58:34+00:00"
+            "time": "2021-02-08T13:38:05+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
