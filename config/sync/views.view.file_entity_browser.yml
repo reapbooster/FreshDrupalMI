@@ -10,6 +10,7 @@ dependencies:
     - file
     - file_browser
     - user
+    - views_bootstrap
 _core:
   default_config_hash: aGweW6beukkg8MZxMA4YXAe0gs2ys44-ByigC7ak3rY
 id: file_entity_browser
@@ -73,11 +74,16 @@ display:
             offset_label: Offset
           quantity: 9
       style:
-        type: default
+        type: views_bootstrap_grid
         options:
           grouping: {  }
-          row_class: grid-item
+          row_class: ''
           default_row_class: true
+          col_xs: col-12
+          col_sm: col-sm-6
+          col_md: col-md-4
+          col_lg: col-lg-3
+          col_xl: col-xl-2
       row:
         type: fields
         options:

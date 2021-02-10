@@ -6,6 +6,7 @@ dependencies:
     - eck.eck_type.slide.full_width_one_column
     - field.field.slide.full_width_one_column.field_background_color
     - field.field.slide.full_width_one_column.field_background_image
+    - field.field.slide.full_width_one_column.field_is_hero_image
     - field.field.slide.full_width_one_column.field_link
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
@@ -58,6 +59,16 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
+  field_is_hero_image:
+    weight: 14
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_link:
     weight: 5

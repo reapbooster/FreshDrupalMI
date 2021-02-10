@@ -7,6 +7,7 @@ dependencies:
     - eck.eck_type.slide.full_width_one_column
     - field.field.slide.full_width_one_column.field_background_color
     - field.field.slide.full_width_one_column.field_background_image
+    - field.field.slide.full_width_one_column.field_is_hero_image
     - field.field.slide.full_width_one_column.field_link
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
@@ -151,4 +152,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_is_hero_image: true

@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - eck.eck_type.slide.50_50_text_on_right
-    - entity_browser.browser.media_entity_browser_media_library
+    - entity_browser.browser.browse_files
     - field.field.slide.50_50_text_on_right.field_background_color
     - field.field.slide.50_50_text_on_right.field_background_image
     - field.field.slide.50_50_text_on_right.field_link
@@ -36,9 +36,9 @@ third_party_settings:
       region: content
     group_text:
       children:
+        - field_link
         - field_text_color
         - field_slide_text
-        - field_link
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -52,10 +52,10 @@ third_party_settings:
       region: content
     group_background:
       children:
-        - field_background_color
         - field_background_image
+        - field_background_color
       parent_name: group_tabs
-      weight: 21
+      weight: 22
       format_type: tab
       format_settings:
         id: ''
@@ -94,21 +94,21 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_background_color:
-    weight: 13
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     type: color_field_widget_html5
     region: content
   field_background_image:
-    weight: 15
+    weight: 21
     settings:
-      entity_browser: media_entity_browser_media_library
+      entity_browser: browse_files
       field_widget_remove: true
       field_widget_replace: true
+      open: true
       selection_mode: selection_append
       preview_image_style: thumbnail
       field_widget_edit: true
-      open: false
       view_mode: default
     third_party_settings: {  }
     type: entity_browser_file
@@ -136,7 +136,7 @@ content:
     type: boolean_checkbox
     region: content
   field_slide_text:
-    weight: 16
+    weight: 19
     settings:
       key_size: 60
       key_label: Key
@@ -152,7 +152,7 @@ content:
     type: key_value_textarea
     region: content
   field_text_color:
-    weight: 14
+    weight: 18
     settings: {  }
     third_party_settings: {  }
     type: color_field_widget_html5
