@@ -50,18 +50,26 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     padding: 0,
   };
 
-  const slideTextStyle = {
+  const isHeroImage = (slideData.field_is_hero_image === undefined || slideData.field_is_hero_image === true)? true : false;
+
+  const slideTextStyle = (isHeroImage)?
+  {
     top: "50%",
     transform: "translateY(-50%)",
     display: "block",
     position: "absolute",
     paddingLeft: "7em",
+  }
+  :
+  {
+    paddingTop: "5em",
+    paddingBottom: "5em",
   };
 
   console.debug("slideData Var", slideData);
   console.debug("background image object: ", backgroundImage);
   const Jumbotron = styled.div`
-    min-height: 650px;
+    min-height: ${(isHeroImage)? "650px" : ""};
     width: 100%;
     background-position: center;
     background-clip: border-box;
@@ -85,19 +93,25 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     />
   );
 
-  if (slideData.field_link?.title && slideData.field_link?.uri) {
-    textLines.push(
-      <p key={textLines.length + 1}>
-        <a
-          href={`${slideData.field_link?.uri || "#"}`}
-          className="btn btn-primary btn-lg"
-          style={{ color: `${slideData.field_text_color?.color} || #000000` }}
-        >
-          {data.field_link?.title || "#"}
-        </a>
-      </p>
-    );
-  }
+
+  const slideLink = (slideData.field_link?.title && slideData.field_link?.uri) ? (
+    <a
+    href={`${slideData.field_link?.uri || "#"}`}
+    style={{
+      background: "var(--color-milken-orange)",
+      color: "white",
+      fontWeight: "bold",
+      letterSpacing: "0.1em",
+      padding: "1em",
+      textDecoration: "none",
+      textTransform: "uppercase",
+    }}
+  >
+    {`${slideData.field_link?.title || "View More"}`}
+  </a>
+  )
+  :
+  '';
 
   console.debug(textLines);
 
@@ -111,7 +125,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
           data-view-mode={view_mode}
         >
           <Jumbotron className="jumbotron jumbotron-fluid d-block align-items-center m-0 p-0">
-            <Container style={slideTextStyle}>{textLines}</Container>
+            <Container style={slideTextStyle}>{textLines}{slideLink}</Container>
           </Jumbotron>
         </Row>
       </ErrorBoundary>
