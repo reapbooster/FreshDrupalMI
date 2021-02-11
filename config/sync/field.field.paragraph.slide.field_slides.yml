@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - eck.eck_type.slide.50_50_text_on_left
+    - eck.eck_type.slide.50_50_text_on_right
     - eck.eck_type.slide.full_width_one_column
     - field.storage.paragraph.field_slides
     - paragraphs.paragraphs_type.slide
@@ -20,9 +22,12 @@ settings:
   handler: 'default:slide'
   handler_settings:
     target_bundles:
+      50_50_text_on_left: 50_50_text_on_left
+      50_50_text_on_right: 50_50_text_on_right
       full_width_one_column: full_width_one_column
     sort:
       field: _none
+      direction: ASC
     auto_create: true
     auto_create_bundle: full_width_one_column
 field_type: entity_reference
