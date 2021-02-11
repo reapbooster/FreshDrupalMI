@@ -23,9 +23,12 @@ const ParagraphDisplayStats: React.FunctionComponent = (
   return (
     <Col lg={12}>
       <Container py={"2rem"}>
-        <Blockquote
-          dangerouslySetInnerHTML={{ __html: data.field_stat_1_description }}
-        ></Blockquote>
+        <center><h1>{data.admin_title}</h1></center>
+        <Blockquote>
+          <h1>{data.field_stat_1_h_symbol}{data.field_stat_1_h_number}</h1>
+          <h2>{data.field_stat_1_h_subscript}</h2>
+          <p>{data.field_stat_1_description}</p>
+        </Blockquote>
       </Container>
     </Col>
   );

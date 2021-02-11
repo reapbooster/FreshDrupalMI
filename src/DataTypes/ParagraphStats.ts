@@ -1,6 +1,7 @@
 import Paragraph, { ParagraphInterface } from './Paragraph';
 
 export interface ParagraphStatsInterface extends ParagraphInterface {
+  admin_title: string;
   field_stat_1_description: string;
   field_stat_1_h_number: string;
   field_stat_1_h_subscript: string;
@@ -18,7 +19,8 @@ export interface ParagraphStatsInterface extends ParagraphInterface {
 export default class ParagraphStats
   extends Paragraph
   implements ParagraphStatsInterface {
-      
+    
+  admin_title: string;
   field_stat_1_description: string;
   field_stat_1_h_number: string;
   field_stat_1_h_subscript: string;
