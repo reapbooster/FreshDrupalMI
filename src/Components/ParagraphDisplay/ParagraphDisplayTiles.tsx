@@ -73,6 +73,11 @@ export class ParagraphDisplayTiles extends React.Component<
           fluid={data.field_view_mode == "card" ? true : false}
           className={data.field_view_mode == "card" ? "position-relative overflow-hidden" : ""}
         >
+          <div class="row">
+            <div class="col">
+              <h2>{data.field_title}</h2>
+            </div>
+          </div>
           <ListDisplay
             id={"tiles-list-".concat(data.id)}
             list={data.tiles}

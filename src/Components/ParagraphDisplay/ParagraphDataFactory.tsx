@@ -13,6 +13,7 @@ import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
 import ParagraphSlide from "../../DataTypes/ParagraphSlide";
 import ParagraphPodcastEpisode from "../../DataTypes/ParagraphPodcastEpisode";
 import ParagraphProgramDay from "../../DataTypes/ParagraphProgramDay";
+import ParagraphStats from "../../DataTypes/ParagraphStats";
 /**
  * Create the DataModel
  *
@@ -47,6 +48,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphSlide(incoming);
     case "paragraph--slide_tiles":
       return new ParagraphSlideTiles(incoming);
+    case "paragraph--stats":
+      return new ParagraphStats(incoming);
     case "paragraph--program_day":
       return new ParagraphProgramDay(incoming);
 
