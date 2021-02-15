@@ -12,6 +12,7 @@ dependencies:
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
     - field.field.slide.full_width_one_column.field_slide_text
+    - field.field.slide.full_width_one_column.field_text_centered
     - field.field.slide.full_width_one_column.field_text_color
     - image.style.fullscreen
   module:
@@ -147,3 +148,4 @@ content:
     third_party_settings: {  }
 hidden:
   field_is_hero_image: true
+  field_text_centered: true

@@ -13,7 +13,7 @@ entity_type: slide
 bundle: full_width_one_column
 label: 'Background Image'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

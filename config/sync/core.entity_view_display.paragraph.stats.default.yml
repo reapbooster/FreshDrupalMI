@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.stats.field_section_header
+    - field.field.paragraph.stats.field_section_subheader
     - field.field.paragraph.stats.field_stat_1_description
     - field.field.paragraph.stats.field_stat_1_h_number
     - field.field.paragraph.stats.field_stat_1_h_subscript
@@ -21,6 +23,22 @@ targetEntityType: paragraph
 bundle: stats
 mode: default
 content:
+  field_section_header:
+    weight: 12
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_section_subheader:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_stat_1_description:
     weight: 3
     label: above

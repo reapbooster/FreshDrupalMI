@@ -19,7 +19,7 @@ mode: default
 content:
   admin_title:
     type: string_textfield
-    weight: -10
+    weight: 0
     region: content
     settings:
       size: 60
@@ -27,12 +27,12 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 0
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_background_color:
-    weight: -6
+    weight: 4
     settings:
       placeholder_color: ''
       placeholder_opacity: ''
@@ -41,7 +41,7 @@ content:
     region: content
   field_media_refs:
     type: entity_browser_entity_reference
-    weight: -8
+    weight: 3
     settings:
       entity_browser: media_entity_browser
       field_widget_display: label
@@ -54,7 +54,7 @@ content:
     third_party_settings: {  }
     region: content
   field_title:
-    weight: -9
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -62,14 +62,14 @@ content:
     type: string_textfield
     region: content
   field_view_mode:
-    weight: -7
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   status:
     type: boolean_checkbox
-    weight: 0
+    weight: 5
     region: content
     settings:
       display_label: true

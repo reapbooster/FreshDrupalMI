@@ -79,7 +79,7 @@ export const ListDisplay = function (props: ListDisplayProps) {
         props.view_mode == "tile"
           ? "d-flex flex-wrap justify-content-center"
           : props.view_mode == "card"
-          ? "d-flex justify-content-lg-center justify-content-xs-start overflow-auto"
+          ? "d-flex justify-content-lg-start justify-content-xs-start overflow-auto"
           : ""
       }`}
       ref={refListDisplay}

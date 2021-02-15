@@ -4,6 +4,8 @@ status: false
 dependencies:
   config:
     - core.entity_form_mode.paragraph.tabs
+    - field.field.paragraph.stats.field_section_header
+    - field.field.paragraph.stats.field_section_subheader
     - field.field.paragraph.stats.field_stat_1_description
     - field.field.paragraph.stats.field_stat_1_h_number
     - field.field.paragraph.stats.field_stat_1_h_subscript
@@ -128,4 +130,6 @@ content:
     region: content
 hidden:
   created: true
+  field_section_header: true
+  field_section_subheader: true
   status: true

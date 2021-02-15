@@ -12,6 +12,7 @@ dependencies:
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
     - field.field.slide.full_width_one_column.field_slide_text
+    - field.field.slide.full_width_one_column.field_text_centered
     - field.field.slide.full_width_one_column.field_text_color
   module:
     - color_field
@@ -37,9 +38,11 @@ third_party_settings:
       region: content
     group_text:
       children:
-        - field_link
+        - field_is_hero_image
+        - field_text_centered
         - field_text_color
         - field_slide_text
+        - field_link
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -53,11 +56,10 @@ third_party_settings:
       region: content
     group_background:
       children:
-        - field_is_hero_image
         - field_background_image
         - field_background_color
       parent_name: group_tabs
-      weight: 21
+      weight: 22
       format_type: tab
       format_settings:
         id: ''
@@ -96,7 +98,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_background_color:
-    weight: 24
+    weight: 25
     settings: {  }
     third_party_settings: {  }
     type: color_field_widget_html5
@@ -123,7 +125,7 @@ content:
     type: boolean_checkbox
     region: content
   field_link:
-    weight: 23
+    weight: 26
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -159,6 +161,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: key_value_textarea
+    region: content
+  field_text_centered:
+    weight: 23
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_text_color:
     weight: 24

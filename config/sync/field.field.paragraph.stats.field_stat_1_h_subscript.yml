@@ -11,7 +11,7 @@ entity_type: paragraph
 bundle: stats
 label: 'Stat 1 Header Subscript'
 description: 'Short subscript text to show after the first stat number value.'
-required: true
+required: false
 translatable: false
 default_value:
   -

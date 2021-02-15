@@ -73,13 +73,13 @@ filters:
   filter_html_image_secure:
     id: filter_html_image_secure
     provider: filter
-    status: false
+    status: true
     weight: -41
     settings: {  }
   filter_url:
     id: filter_url
     provider: filter
-    status: false
+    status: true
     weight: -42
     settings:
       filter_url_length: 72
@@ -90,6 +90,10 @@ filters:
     weight: 100
     settings:
       default_view_mode: default
+      allowed_media_types:
+        image: image
+        report: report
+        video: video
       allowed_view_modes:
         default: default
         full: full
@@ -98,10 +102,3 @@ filters:
         medium: medium
         small: small
         token: token
-      allowed_media_types:
-        audio: audio
-        document: document
-        hero_image: hero_image
-        image: image
-        report: report
-        video: video

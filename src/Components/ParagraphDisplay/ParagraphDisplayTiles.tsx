@@ -71,11 +71,11 @@ export class ParagraphDisplayTiles extends React.Component<
       return (
         <Container
           fluid={data.field_view_mode == "card" ? true : false}
-          className={data.field_view_mode == "card" ? "position-relative overflow-hidden" : ""}
+          className={data.field_view_mode == "card" ? "position-relative overflow-hidden my-5" : "my-5"}
         >
           <div class="row">
             <div class="col">
-              <h2>{data.field_title}</h2>
+              <h2 style={{fontFamily: "LatoWebBlack", fontSize: "1.5em", fontWeight: "bold"}}>{data.field_title}</h2>
             </div>
           </div>
           <ListDisplay

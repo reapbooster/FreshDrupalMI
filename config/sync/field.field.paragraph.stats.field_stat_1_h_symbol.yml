@@ -11,7 +11,7 @@ entity_type: paragraph
 bundle: stats
 label: 'Stat 1 Header Symbol'
 description: 'Very short text to show before the first stat number value.'
-required: true
+required: false
 translatable: false
 default_value:
   -

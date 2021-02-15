@@ -11,6 +11,7 @@ dependencies:
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
     - field.field.slide.full_width_one_column.field_slide_text
+    - field.field.slide.full_width_one_column.field_text_centered
     - field.field.slide.full_width_one_column.field_text_color
   module:
     - color_field
@@ -109,6 +110,16 @@ content:
       value_only: false
     third_party_settings: {  }
     type: key_value
+    region: content
+  field_text_centered:
+    weight: 15
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_text_color:
     weight: 6

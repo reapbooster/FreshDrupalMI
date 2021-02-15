@@ -31,15 +31,7 @@ export const DocumentFileDisplay = (props: DocumentFileDisplayProps) => {
     <>
       <a
         href={documentData.uri.url}
-        style={{
-          background: "var(--color-milken-orange)",
-          color: "white",
-          fontWeight: "bold",
-          letterSpacing: "0.1em",
-          padding: "1em",
-          textDecoration: "none",
-          textTransform: "uppercase",
-        }}
+        className="btn-milken-orange"
       >
         {label || documentData.filename}
       </a>

@@ -6,6 +6,7 @@ dependencies:
     - eck.eck_type.slide.50_50_text_on_left
     - eck.eck_type.slide.50_50_text_on_right
     - eck.eck_type.slide.full_width_one_column
+    - eck.eck_type.slide.hero_half_height
     - field.storage.paragraph.field_slides
     - paragraphs.paragraphs_type.slide
 id: paragraph.slide.field_slides
@@ -25,6 +26,7 @@ settings:
       50_50_text_on_left: 50_50_text_on_left
       50_50_text_on_right: 50_50_text_on_right
       full_width_one_column: full_width_one_column
+      hero_half_height: hero_half_height
     sort:
       field: _none
       direction: ASC

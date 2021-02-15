@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container } from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 import * as DataObject from "../../DataTypes/ParagraphStats";
 import styled from "styled-components";
 
@@ -12,25 +12,89 @@ const ParagraphDisplayStats: React.FunctionComponent = (
   props: ParagraphDisplayStatsProps
 ) => {
   const { data } = props;
-  // Example styled component
-  const Blockquote = styled.blockquote`
-    text-align: right;
-    background-color: red;
-  `;
 
   console.debug("ParagraphDisplayStats: Data ", data);
 
+  const statData = [
+    {
+      symbol: data.field_stat_1_h_symbol, 
+      number: data.field_stat_1_h_number, 
+      subscript: data.field_stat_1_h_subscript,
+      description: data.field_stat_1_description
+    }
+  ];
+
+  if ( data.field_stat_2_h_number !== null ){
+
+    statData.push({
+      symbol: data.field_stat_2_h_symbol, 
+      number: data.field_stat_2_h_number, 
+      subscript: data.field_stat_2_h_subscript,
+      description: data.field_stat_2_description
+    });
+  }
+  
+  if ( data.field_stat_3_h_number !== null ){
+
+    statData.push({
+      symbol: data.field_stat_3_h_symbol, 
+      number: data.field_stat_3_h_number, 
+      subscript: data.field_stat_3_h_subscript,
+      description: data.field_stat_3_description
+    });
+  }
+
+  const StatsContainer = styled.div`
+  
+    @media screen and (min-width: 1200px){
+      font-size: 1.25em;
+    }
+
+    & .stats-stat h1 {
+      color: var(--color-milken-blue);
+      font-family: LatoWebLight;
+      font-size: 4em;
+
+      & sub {
+        font-size: 0.33em;
+      }
+    }
+  `;
+
   return (
-    <Col lg={12}>
-      <Container py={"2rem"}>
-        <center><h1>{data.admin_title}</h1></center>
-        <Blockquote>
-          <h1>{data.field_stat_1_h_symbol}{data.field_stat_1_h_number}</h1>
-          <h2>{data.field_stat_1_h_subscript}</h2>
-          <p>{data.field_stat_1_description}</p>
-        </Blockquote>
-      </Container>
-    </Col>
+    <StatsContainer className="container py-5">
+      {
+        (typeof(data.field_section_header) === "string") ? 
+          <Row>
+            <Col className="stats-header text-align-center pb-5">
+              <h1 className="font-weight-bold">
+                {data.field_section_header}
+              </h1>
+              <h4 className="text-muted">
+                {data.field_section_subheader}
+              </h4>
+            </Col>
+          </Row>
+        :''
+      }
+      <Row>
+        {
+          statData.map((item, key) => {
+            return (
+              <Col className="stats-stat">
+                <h1 className="text-align-center">
+                  {item.symbol}{item.number}<sub>{item.subscript}</sub>
+                </h1>
+                <p className="text-align-center text-muted">
+                  {item.description}
+                </p>
+              </Col>
+            );
+            
+          })
+        }
+      </Row>
+    </StatsContainer>
   );
 };
 

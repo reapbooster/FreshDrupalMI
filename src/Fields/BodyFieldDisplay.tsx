@@ -11,7 +11,13 @@ export const BodyFieldDisplay = (props: BodyFieldProps) => {
   const articleText = Array.isArray(data)
     ? data?.map((fieldData: BodyFieldInterface) => fieldData.processed).join()
     : data.processed;
-  return <article dangerouslySetInnerHTML={{ __html: articleText }} />;
+  return (
+    <div className="container py-5">
+      <div className="row py-4">
+        <div className="col" dangerouslySetInnerHTML={{ __html: articleText }} />
+      </div>
+    </div>
+  );
 };
 
 export default BodyFieldDisplay;
