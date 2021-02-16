@@ -40,7 +40,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
 
   return (
     <>
-      <CardWrapper className="card my-5 mx-2 text-align-left flex-shrink-1">
+      <CardWrapper className="card my-4 mx-2 text-align-left flex-shrink-1">
         <a
           href={
             data.path.alias

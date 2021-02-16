@@ -5,7 +5,12 @@ dependencies:
   config:
     - field.storage.node.field_content
     - node.type.landing_page
-    - paragraphs.paragraphs_type.unmigrated_paragraph
+    - paragraphs.paragraphs_type.body_content
+    - paragraphs.paragraphs_type.content_tiles
+    - paragraphs.paragraphs_type.media_tiles
+    - paragraphs.paragraphs_type.pull_quote
+    - paragraphs.paragraphs_type.slide
+    - paragraphs.paragraphs_type.stats
   module:
     - entity_reference_revisions
     - paragraph_blocks
@@ -25,9 +30,14 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
+    negate: 0
     target_bundles:
-      unmigrated_paragraph: unmigrated_paragraph
+      body_content: body_content
+      pull_quote: pull_quote
+      content_tiles: content_tiles
+      media_tiles: media_tiles
+      slide: slide
+      stats: stats
     target_bundles_drag_drop:
       author:
         weight: 13
@@ -36,11 +46,11 @@ settings:
         weight: 14
         enabled: false
       body_content:
+        enabled: true
         weight: 3
-        enabled: false
       content_tiles:
+        enabled: true
         weight: 16
-        enabled: false
       event_tiles:
         weight: 17
         enabled: false
@@ -48,21 +58,33 @@ settings:
         weight: 18
         enabled: false
       media_tiles:
+        enabled: true
         weight: 19
+      paragraph_tab:
+        weight: 24
         enabled: false
       podcast_episode:
         weight: 20
         enabled: false
+      program_day:
+        weight: 26
+        enabled: false
       pull_quote:
+        enabled: true
         weight: 4
-        enabled: false
       slide:
+        enabled: true
         weight: 22
-        enabled: false
       slide_tiles:
         weight: 23
         enabled: false
-      unmigrated_paragraph:
+      stats:
         enabled: true
+        weight: 30
+      tiles_taxonomy:
+        weight: 31
+        enabled: false
+      unmigrated_paragraph:
         weight: 24
+        enabled: false
 field_type: entity_reference_revisions

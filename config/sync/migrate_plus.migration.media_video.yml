@@ -117,7 +117,6 @@ source:
       name: centers_tax
       label: 'Centers Taxonomy'
       selector: /field_centers_general
-
   ids:
     id:
       type: integer
@@ -155,22 +154,6 @@ process:
   field_media_oembed_video:
     plugin: 'milken_migrate:remote_video'
     source: video_url
-  field_topics:
-    plugin: 'milken_migrate:taxonomy_by_name'
-    source: topics_tax
-    vocabulary: topics
-  field_centers:
-    plugin: 'milken_migrate:taxonomy_by_name'
-    source: centers_tax
-    vocabulary: centers
-  field_term_collection:
-    plugin: 'milken_migrate:taxonomy_by_name'
-    source: term_collection_tax
-    vocabulary: milken_tags
-  field_program_initiatives:
-    plugin: 'milken_migrate:taxonomy_by_name'
-    source: program_initiatives_tax
-    vocabulary: program_initiatives
 destination:
   plugin: 'entity:media'
   default_bundle: video

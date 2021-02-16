@@ -15,8 +15,16 @@ settings:
         -
           name: Formatting
           items:
+            - Styles
             - Bold
+            - Underline
+            - Strike
             - Italic
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+            - Format
         -
           name: Links
           items:
@@ -30,18 +38,24 @@ settings:
         -
           name: Media
           items:
-            - media_entity_embed
             - Blockquote
-            - DrupalImage
+            - DrupalFontAwesome
+            - DrupalMediaLibrary
         -
           name: Tools
           items:
+            - Undo
+            - Redo
+            - HorizontalRule
+            - Paste
+            - PasteText
             - Source
+            - Maximize
   plugins:
-    stylescombo:
-      styles: ''
     language:
       language_list: un
+    stylescombo:
+      styles: ''
 image_upload:
   status: true
   scheme: public

@@ -26,10 +26,24 @@ export const ParagraphDisplayBodyContent = (
         const newDO = new ParagraphBodyContent(ajaxData.data);
         setParagraphData(newDO);
       });
+      
+    console.debug("Fetching ParagraphBodyContent Data", paragraphData);
+
     return <Loading />;
   }
+
+  const fontColor = (
+    paragraphData.field_background === "#0065CC" ||
+    paragraphData.field_background === "#FF6237" || 
+    paragraphData.field_background === "#666" ||
+    paragraphData.field_background === "#000") ? 
+    'white' :
+    'black';
+    
   return (
-    <BodyFieldDisplay data={paragraphData.field_body} view_mode={view_mode} />
+    <section style={{backgroundColor: paragraphData.field_background, color: fontColor, }}>
+      <BodyFieldDisplay data={paragraphData.field_body} />
+    </section>
   );
 };
 

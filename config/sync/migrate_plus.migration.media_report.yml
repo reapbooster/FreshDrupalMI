@@ -146,9 +146,6 @@ process:
   field_content:
     plugin: 'milken_migrate:paragraphs'
     source: field_rp_content
-  field_topics:
-    plugin: 'milken_migrate:jsonapi_taxonomy'
-    source: field_topics
   field_cover:
     plugin: 'milken_migrate:remote_image'
     source: cover_image

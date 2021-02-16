@@ -112,23 +112,23 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
   field_actions:
-    plugin: 'milken_migrate:toxonomy_by_name'
+    plugin: 'milken_migrate:taxonomy_by_name'
     vocabulary: ph_actions
     source: actions
   field_focus:
-    plugin: 'milken_migrate:toxonomy_by_name'
+    plugin: 'milken_migrate:taxonomy_by_name'
     vocabulary: ph_focus
     source: focus
   field_region:
-    plugin: 'milken_migrate:toxonomy_by_name'
+    plugin: 'milken_migrate:taxonomy_by_name'
     vocabulary: ph_region
     source: region
   field_terms:
-    plugin: 'milken_migrate:toxonomy_by_name'
+    plugin: 'milken_migrate:taxonomy_by_name'
     vocabulary: ph_terms
     source: terms
   field_hub:
-    plugin: 'milken_migrate:toxonomy_by_name'
+    plugin: 'milken_migrate:taxonomy_by_name'
     vocabulary: ph_hub
     source: defaults/hub
   field_url/uri: url/0/uri

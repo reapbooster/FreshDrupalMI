@@ -7,6 +7,7 @@ import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
 import ParagraphDisplayTiles from "./ParagraphDisplayTiles";
 import { ParagraphDisplayPodcastEpisode } from "./ParagraphDisplayPodcastEpisode";
 import ParagraphDisplayProgramDay from "./ParagraphDisplayProgramDay";
+import ParagraphDisplayStats from "./ParagraphDisplayStats"
 
 /**
  * Create the View Component
@@ -28,6 +29,8 @@ export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
       return ParagraphDisplayPullQuote;
     case "paragraph--slide":
       return ParagraphDisplaySlide;
+    case "paragraph--stats":
+      return ParagraphDisplayStats;
     case "paragraph--program_day":
       return ParagraphDisplayProgramDay;
     case "paragraph--content_tiles":

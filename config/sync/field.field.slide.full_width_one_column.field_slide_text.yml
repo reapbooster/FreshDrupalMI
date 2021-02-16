@@ -17,11 +17,11 @@ required: false
 translatable: false
 default_value:
   -
-    key: display-1
+    key: h1
     description: ''
     value: "<p>Now is the time for all good men to come to the aid of their country</p>\r\n"
     format: full_html
 default_value_callback: ''
 settings:
-  default_format: plain_text
+  default_format: full_html
 field_type: key_value_long

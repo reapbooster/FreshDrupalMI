@@ -66,7 +66,7 @@ const ArticleCard = (props: ArticleCardProps) => {
 
   return (
     <>
-      <CardWrapper className="card my-5 mx-2 text-align-left flex-shrink-1">
+      <CardWrapper className="card my-4 mx-2 text-align-left flex-shrink-1">
         <a
           href={articleData.path.alias}
           className=""

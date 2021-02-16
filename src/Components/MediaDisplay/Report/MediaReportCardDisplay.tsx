@@ -44,7 +44,7 @@ export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
   console.debug("Thumbnail: ", data.getThumbnail());
   return (
     <CardWrapper
-      className="card my-5 mx-2 text-align-left flex-shrink-1"
+      className="card my-4 mx-2 text-align-left flex-shrink-1"
       key={key}
     >
       <ErrorBoundary>

@@ -17,14 +17,14 @@ mode: default
 content:
   admin_title:
     type: string_textfield
-    weight: -10
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   field_background_color:
-    weight: -6
+    weight: 4
     settings:
       placeholder_color: ''
       placeholder_opacity: ''
@@ -32,7 +32,7 @@ content:
     type: color_field_widget_default
     region: content
   field_content_refs:
-    weight: -9
+    weight: 3
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -42,7 +42,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_title:
-    weight: -7
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -50,7 +50,7 @@ content:
     type: string_textfield
     region: content
   field_view_mode:
-    weight: -8
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select

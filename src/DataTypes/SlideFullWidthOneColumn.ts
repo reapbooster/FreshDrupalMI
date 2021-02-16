@@ -16,6 +16,7 @@ export interface SlideFullWidthOneColumnInterface extends SlideInterface {
   field_published: boolean;
   field_text_color?: ColorObjectInterface;
   slide_type: SlideTypeInterface;
+  field_is_hero_image?: boolean;
   field_background_image?: ImageFileInterface;
   field_slide_text?: Array<SlideKeyValueTextInterface>;
 }
@@ -24,6 +25,8 @@ export class SlideFullWidthOneColumn
   extends Slide
   implements SlideFullWidthOneColumnInterface {
   private _field_background_color: ColorObjectInterface;
+
+  private _field_is_hero_image: boolean;
 
   private _field_background_image: ImageFile;
 
@@ -50,6 +53,14 @@ export class SlideFullWidthOneColumn
 
   set field_background_color(value: ColorObjectInterface) {
     this._field_background_color = new ColorObject(value);
+  }
+
+  get field_is_hero_image() {
+    return this._field_is_hero_image;
+  }
+
+  set field_is_hero_image(value: boolean) {
+    this._field_is_hero_image = ( value === null || value === true ) ? true : false;
   }
 
   get field_background_image(): ImageFileInterface {

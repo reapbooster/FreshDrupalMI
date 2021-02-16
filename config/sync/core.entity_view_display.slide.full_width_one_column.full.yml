@@ -7,10 +7,12 @@ dependencies:
     - eck.eck_type.slide.full_width_one_column
     - field.field.slide.full_width_one_column.field_background_color
     - field.field.slide.full_width_one_column.field_background_image
+    - field.field.slide.full_width_one_column.field_is_hero_image
     - field.field.slide.full_width_one_column.field_link
     - field.field.slide.full_width_one_column.field_promoted
     - field.field.slide.full_width_one_column.field_published
     - field.field.slide.full_width_one_column.field_slide_text
+    - field.field.slide.full_width_one_column.field_text_centered
     - field.field.slide.full_width_one_column.field_text_color
     - image.style.fullscreen
   module:
@@ -144,4 +146,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_is_hero_image: true
+  field_text_centered: true

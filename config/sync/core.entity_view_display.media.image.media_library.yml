@@ -53,7 +53,7 @@ content:
   thumbnail:
     type: image
     weight: 5
-    label: hidden
+    label: above
     settings:
       image_style: thumbnail
       image_link: ''
