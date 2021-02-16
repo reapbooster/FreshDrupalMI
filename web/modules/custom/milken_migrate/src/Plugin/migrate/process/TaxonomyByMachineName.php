@@ -4,7 +4,6 @@ namespace Drupal\milken_migrate\Plugin\migrate\process;
 
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
-use Drupal\milken_migrate\JsonAPIReference;
 use Drupal\milken_migrate\Traits\JsonAPIDataFetcherTrait;
 
 /**
@@ -56,17 +55,6 @@ class TaxonomyByMachineName extends MilkenProcessPluginBase {
     $destination_values = [];
     foreach ($value as $relatedRecord) {
       $term = [];
-      if (!isset($relatedRecord['vid'])) {
-        $ref = new JsonAPIReference($relatedRecord, $this->entityTypeManager);
-        $remote = $ref->getRemoteData([
-          'debug' => TRUE,
-          'query' => [
-            'jsonapi_include' => TRUE,
-          ],
-        ]);
-        print_r($remote);
-        exit();
-      }
       $termName = is_array($relatedRecord) ?
         $relatedRecord['machine_name'] :
         str_replace("-", "_", $relatedRecord);
