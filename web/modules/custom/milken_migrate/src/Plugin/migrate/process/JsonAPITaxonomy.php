@@ -37,10 +37,10 @@ class JsonAPITaxonomy extends ProcessPluginBase {
         foreach ($value as $relatedRecord) {
           if (isset($relatedRecord['id']) && $relatedRecord['id'] != "missing") {
             // phpcs:ignore
-            [
-              NULL,
-              $vocabulary,
-            ] = explode("--", $relatedRecord['type']);
+            // [
+            //   NULL,
+            //   $vocabulary,
+            // ] = explode("--", $relatedRecord['type']);
             $properties['uuid'] = $relatedRecord['id'];
             // If the VOCABULARY value is not set, use the value
             // from the remote site.
