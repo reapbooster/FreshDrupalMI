@@ -18,6 +18,17 @@ const CardWrapper = styled.div`
   &:hover {
     box-shadow: 0 8px 16px 0 grey;
   }
+
+  & a {
+    max-width: 319px;
+    color: #35363C;
+    text-decoration: none;
+
+    & .h5 {
+      font-weight: bold;
+    }
+  }
+
 `;
 
 const CustomCardHeader = styled.div`
@@ -57,7 +68,6 @@ export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
           data-drupal-id={data.drupal_internal__mid}
           data-drupal-type={data.type}
           data-uuid={data.id}
-          style={{ maxWidth: "319px" }}
         >
           <CustomCardHeader>
             <ImageFileDisplay

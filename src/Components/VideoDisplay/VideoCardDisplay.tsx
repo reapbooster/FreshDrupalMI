@@ -22,6 +22,16 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
     &:hover {
       box-shadow: 0 8px 16px 0 grey;
     }
+
+    & a {
+      max-width: 393px;
+      color: #35363C;
+      text-decoration: none;
+
+      & .h5 {
+        font-weight: bold;
+      }
+    }
   `;
 
   const CustomCardHeader = styled.div`
@@ -47,11 +57,9 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
               ? data.path.alias
               : "/media/" + data.drupal_internal__mid
           }
-          className=""
           data-drupal-id={data.drupal_internal__mid}
           data-drupal-type={data.type}
           data-uuid={data.id}
-          style={{ maxWidth: "393px" }}
         >
           <CustomCardHeader>
             <ErrorBoundary>

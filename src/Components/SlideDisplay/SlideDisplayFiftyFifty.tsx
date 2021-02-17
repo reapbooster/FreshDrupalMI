@@ -53,7 +53,12 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
     & .p {
       font-size: 1.25em;
       font-family: 'LatoWeb';
-      color: dimgray !important;
+      color:  ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
+    }
+
+    & .li {
+      display: list-item;
+      margin-left: 1em;
     }
 
     & a {

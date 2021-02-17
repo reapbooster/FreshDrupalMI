@@ -82,8 +82,21 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       background-image: url("${backgroundImage.uri.url}");
     }
 
-    .p {
-      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'unset'}
+    & .h1 {
+      font-size: 3em;
+      font-family: 'LatoWebBlack';
+    }
+
+    & .h2 {
+      font-family: 'LatoWebItalic';
+      text-transform: uppercase;
+      font-size: 1.25em;
+    }
+
+    & .p {
+      font-size: 1.5em;
+      margin-bottom: 1em;
+      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
     }
   `;
 

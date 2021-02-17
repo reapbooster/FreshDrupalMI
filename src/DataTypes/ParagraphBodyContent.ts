@@ -4,6 +4,7 @@ import Paragraph, { ParagraphInterface } from "./Paragraph";
 
 interface ParagraphBodyContentInterface extends ParagraphInterface {
   field_background?: string | ColorObjectInterface;
+  field_background_image?: any;
   field_body?: BodyFieldInterface;
   field_num_text_columns: number;
 }
@@ -12,6 +13,7 @@ class ParagraphBodyContent
   extends Paragraph
   implements ParagraphBodyContentInterface {
   _field_background?: string | ColorObject;
+  field_background_image?: any;
   _field_body?: BodyFieldProps;
   field_num_text_columns: number;
 
@@ -47,7 +49,7 @@ class ParagraphBodyContent
   }
 
   getIncluded(): string {
-    return "";
+    return "&include=field_background_image";
   }
 }
 

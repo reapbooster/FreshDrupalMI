@@ -44,6 +44,17 @@ const ArticleCard = (props: ArticleCardProps) => {
     &:hover {
       box-shadow: 0 8px 16px 0 grey;
     }
+
+    & a {
+      max-width: 393px;
+      color: #35363C;
+      text-decoration: none;
+
+      & .h5 {
+        font-weight: bold;
+      }
+    }
+
     & img{
       height: 12.35vw;
       min-height: 146px;
@@ -69,11 +80,9 @@ const ArticleCard = (props: ArticleCardProps) => {
       <CardWrapper className="card my-4 mx-2 text-align-left flex-shrink-1">
         <a
           href={articleData.path.alias}
-          className=""
           data-drupal-id={articleData.drupal_internal__nid}
           data-drupal-type={articleData.type}
           data-uuid={articleData.id}
-          style={{ maxWidth: "393px" }}
         >
           <CustomCardHeader>
             <ErrorBoundary>

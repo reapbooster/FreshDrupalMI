@@ -5,6 +5,8 @@ import ParagraphBodyContent, {
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import Loading from "../Loading";
 import { BodyFieldDisplay } from "../../Fields/BodyFieldDisplay";
+import styled from "styled-components";
+import { ImageFile } from "../../DataTypes/ImageFile";
 
 export interface ParagraphDisplayBodyContentProps {
   data: ParagraphBodyContentInterface;
@@ -31,6 +33,18 @@ export const ParagraphDisplayBodyContent = (
 
     return <Loading />;
   }
+  
+  const backgroundImageObject =
+    paragraphData.field_background_image instanceof ImageFile
+      ? paragraphData.field_background_image
+      : (paragraphData.field_background_image !== null)
+      ? new ImageFile(paragraphData.field_background_image)
+      : null;
+
+  const backgroundImageStyle = 
+    (backgroundImageObject.imageStyleObject?.large !== null)
+    ? 'url(' + backgroundImageObject.imageStyleObject?.large + ')'
+    : 'none';
 
   const fontColor = (
     paragraphData.field_background === "#0065CC" ||
@@ -39,11 +53,35 @@ export const ParagraphDisplayBodyContent = (
     paragraphData.field_background === "#000") ? 
     'white' :
     'black';
+
+  const WrapperSection = styled.section`
+    background-color: ${paragraphData.field_background};
+    background-image: ${backgroundImageStyle};
+    background-size: cover;
+    background-position: center center;
+    color: ${fontColor};
+
+    & h1 {
+      font-size: 3em;
+    }
+
+    & h2 {
+      font-family: 'LatoWebBlack';
+      font-size: 2.25rem;  
+      margin-top: 1em;    
+    }
+
+    & p {
+      font-size: 1.25em;
+      margin: 0 0 1em 0;
+      color: ${(fontColor === "black")?'dimgray':'white'}
+    }
+  `;
     
   return (
-    <section style={{backgroundColor: paragraphData.field_background, color: fontColor, }}>
+    <WrapperSection>
       <BodyFieldDisplay data={paragraphData.field_body} />
-    </section>
+    </WrapperSection>
   );
 };
 
