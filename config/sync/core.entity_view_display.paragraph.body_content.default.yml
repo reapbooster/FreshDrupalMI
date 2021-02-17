@@ -4,11 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.body_content.field_background
+    - field.field.paragraph.body_content.field_background_image
     - field.field.paragraph.body_content.field_body
     - field.field.paragraph.body_content.field_num_text_columns
     - field.field.paragraph.body_content.field_show_title
     - paragraphs.paragraphs_type.body_content
   module:
+    - image
     - options
     - text
 id: paragraph.body_content.default
@@ -22,6 +24,15 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  field_background_image:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
     region: content
   field_body:
     weight: 0

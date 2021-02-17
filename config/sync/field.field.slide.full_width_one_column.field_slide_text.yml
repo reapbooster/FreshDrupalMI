@@ -19,9 +19,9 @@ default_value:
   -
     key: h1
     description: ''
-    value: "<p>Now is the time for all good men to come to the aid of their country</p>\r\n"
-    format: full_html
+    value: "Now is the time for all good men to come to the aid of their country\r\n"
+    format: rich_text
 default_value_callback: ''
 settings:
-  default_format: full_html
+  default_format: plain_text
 field_type: key_value_long

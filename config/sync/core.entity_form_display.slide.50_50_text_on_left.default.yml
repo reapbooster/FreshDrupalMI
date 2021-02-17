@@ -36,9 +36,9 @@ third_party_settings:
       region: content
     group_text:
       children:
+        - field_link
         - field_text_color
         - field_slide_text
-        - field_link
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -136,7 +136,7 @@ content:
     type: boolean_checkbox
     region: content
   field_slide_text:
-    weight: 16
+    weight: 19
     settings:
       key_size: 60
       key_label: Key
@@ -152,7 +152,7 @@ content:
     type: key_value_textarea
     region: content
   field_text_color:
-    weight: 14
+    weight: 18
     settings: {  }
     third_party_settings: {  }
     type: color_field_widget_html5

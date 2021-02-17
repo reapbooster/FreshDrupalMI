@@ -38,6 +38,7 @@ permissions:
   - 'revert landing_page revisions'
   - 'schedule publishing of nodes'
   - 'use text format full_html'
+  - 'use text format rich_text'
   - 'view landing_page revisions'
   - 'view own unpublished content'
   - 'view scheduled content'

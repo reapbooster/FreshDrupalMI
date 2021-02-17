@@ -40,9 +40,9 @@ third_party_settings:
       children:
         - field_is_hero_image
         - field_text_centered
+        - field_link
         - field_text_color
         - field_slide_text
-        - field_link
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -125,7 +125,7 @@ content:
     type: boolean_checkbox
     region: content
   field_link:
-    weight: 26
+    weight: 24
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -147,7 +147,7 @@ content:
     type: boolean_checkbox
     region: content
   field_slide_text:
-    weight: 25
+    weight: 26
     settings:
       key_size: 60
       key_label: Key
@@ -170,7 +170,7 @@ content:
     type: boolean_checkbox
     region: content
   field_text_color:
-    weight: 24
+    weight: 25
     settings: {  }
     third_party_settings: {  }
     type: color_field_widget_html5
