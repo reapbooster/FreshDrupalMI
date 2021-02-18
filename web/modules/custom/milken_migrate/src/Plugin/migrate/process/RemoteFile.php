@@ -96,9 +96,9 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
           $ref = NULL;
         }
       }
-      // \Drupal::logger('milken_migrate')
-      //  ->debug("REF: " . print_r($ref, TRUE));
-      // Validate ref.
+      /* \Drupal::logger('milken_migrate')
+       ->debug("REF: " . print_r($ref, TRUE));
+      Validate ref. */
       if (!$ref instanceof JsonAPIReference) {
         return [];
       }
