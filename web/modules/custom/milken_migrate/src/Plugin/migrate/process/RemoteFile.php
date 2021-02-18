@@ -96,7 +96,7 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
           $ref = NULL;
         }
       }
-      
+
       if (!$ref instanceof JsonAPIReference) {
         return [];
       }
