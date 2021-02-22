@@ -39,15 +39,16 @@ const ArticleCard = (props: ArticleCardProps) => {
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`
-    min-width: 222px;
+    border-radius: 0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition: box-shadow 250ms;
 
     &:hover {
-      box-shadow: 0 8px 16px 0 grey;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
     }
 
     & a {
-      max-width: 393px;
-      color: #35363C;
+      color: #35363c;
       text-decoration: none;
 
       & .h5 {
@@ -55,7 +56,7 @@ const ArticleCard = (props: ArticleCardProps) => {
       }
     }
 
-    & img{
+    & img {
       height: 12.35vw;
       min-height: 146px;
     }
@@ -76,8 +77,8 @@ const ArticleCard = (props: ArticleCardProps) => {
   `;
 
   return (
-    <>
-      <CardWrapper className="card my-4 mx-2 text-align-left flex-shrink-1">
+    <div className="col-sm-6 col-lg-3">
+      <CardWrapper className="card text-align-left mx-1 mt-1 mb-4">
         <a
           href={articleData.path.alias}
           data-drupal-id={articleData.drupal_internal__nid}
@@ -91,7 +92,13 @@ const ArticleCard = (props: ArticleCardProps) => {
             </ErrorBoundary>
           </CustomCardHeader>
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
-            <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>
+            <Card.Title
+              style={{
+                fontSize: "1.2em",
+                fontWeight: "bold",
+                marginBottom: "0",
+              }}
+            >
               {articleData.title}
             </Card.Title>
           </Card.Body>
@@ -100,7 +107,7 @@ const ArticleCard = (props: ArticleCardProps) => {
           </Card.Footer>
         </a>
       </CardWrapper>
-    </>
+    </div>
   );
 };
 
