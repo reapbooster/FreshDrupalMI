@@ -199,6 +199,7 @@ export class ParagraphTilesSponsors
   implements ParagraphTilesInterface {
   field_sponsors: Array<MediaInterface>;
   field_section_subheader: string;
+  field_display_size: string;
 
   constructor(props) {
     super(props);

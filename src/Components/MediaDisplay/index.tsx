@@ -15,12 +15,13 @@ export interface MediaDisplayProps {
   key?: number;
   data: MediaInterface;
   view_mode: string;
+  display_size?: string;
 }
 
 export const MediaDisplay: React.FunctionComponent = (
   props: MediaDisplayProps
 ) => {
-  const { key, data, view_mode } = props;
+  const { key, data, view_mode, display_size } = props;
   const DataObject = MediaDataFactory(data);
   const [mediaData, setMediaData] = useState(DataObject);
   console.debug("MediaDisplay", props, mediaData);
@@ -42,7 +43,7 @@ export const MediaDisplay: React.FunctionComponent = (
   }
   const Component = MediaComponentFactory(mediaData);
   console.debug("get MediaDisplayComponent", Component);
-  return <Component key={key} data={mediaData} view_mode={view_mode} />;
+  return <Component key={key} data={mediaData} view_mode={view_mode} display_size={display_size} />;
 };
 
 export default MediaDisplay;

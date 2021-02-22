@@ -10,6 +10,7 @@ import ErrorDisplay from "../../../Utility/ErrorDisplay";
 export interface MediaSponsorTileDisplayProps {
   data: MediaSponsorLogo;
   key?: number;
+  display_size?: string;
 }
 
 const CardWrapper = styled.div`
@@ -46,7 +47,7 @@ const DateWrapper = styled.div`
 `;
 
 export const MediaSponsorTileDisplay = (props: MediaSponsorTileDisplayProps) => {
-  const { data, key } = props;
+  const { data, key, display_size } = props;
   if (!data.valid) {
     return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
@@ -75,6 +76,7 @@ export const MediaSponsorTileDisplay = (props: MediaSponsorTileDisplayProps) => 
               style={{ maxWidth: "100%" }}
               srcsetSizes="(max-width: 1000px) 200px, 400px"
             />
+            {display_size}
           </CustomCardHeader>
         </a>
       </ErrorBoundary>

@@ -19,10 +19,11 @@ export interface ListDisplayProps {
   list: Array<EntityInterface> | Promise<Array<EntityInterface>>;
   view_mode: string;
   container?: JSX.Element;
+  display_size?: string;
 }
 
 export const ListDisplay = function (props: ListDisplayProps) {
-  const { id, list, view_mode, container } = props;
+  const { id, list, view_mode, container, display_size } = props;
 
   const ContainerComponent =
     container ??
@@ -91,7 +92,7 @@ export const ListDisplay = function (props: ListDisplayProps) {
         const Component = ListDisplayFactory(item);
         return (
           <ErrorBoundary key={key}>
-            <Component data={item} view_mode={view_mode} key={key} />
+            <Component data={item} view_mode={view_mode} key={key} display_size={display_size} />
           </ErrorBoundary>
         );
       })}

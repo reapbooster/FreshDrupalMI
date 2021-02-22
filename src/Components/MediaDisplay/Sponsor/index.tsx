@@ -10,12 +10,13 @@ export interface MediaDisplaySponsorProps {
   data: MediaSponsorLogoInterface;
   view_mode: string;
   key: number;
+  display_size?: string;
 }
 
 export const MediaDisplaySponsor: React.FunctionComponent = (
   props: MediaDisplaySponsorProps
 ) => {
-  const { data, view_mode, key } = props;
+  const { data, view_mode, key, display_size } = props;
   const DataObject = data instanceof MediaSponsorLogo ? data : new MediaSponsorLogo(data);
   const [sponsorData, setSponsorData] = useState(DataObject);
   if (!DataObject.valid) {
@@ -39,8 +40,7 @@ export const MediaDisplaySponsor: React.FunctionComponent = (
     case "full":
       return <MediaSponsorFullDisplay data={sponsorData} key={key} />;
     case "tile":
-      return <MediaSponsorTileDisplay data={sponsorData} key={key} />;
-
+      return <MediaSponsorTileDisplay data={sponsorData} key={key} display_size={display_size} />;
     default:
       return (
         <div>

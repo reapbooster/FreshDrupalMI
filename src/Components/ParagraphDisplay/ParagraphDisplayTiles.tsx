@@ -78,8 +78,8 @@ export class ParagraphDisplayTiles extends React.Component<
           fluid={data.field_view_mode == "card" ? true : false}
           className={containerClassNames}
         >
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <h2
                 style={{
                   fontFamily: "LatoWebBlack",
@@ -95,6 +95,7 @@ export class ParagraphDisplayTiles extends React.Component<
             id={"tiles-list-".concat(data.id)}
             list={data.tiles}
             view_mode={data.field_view_mode}
+            display_size={data.field_display_size}
           />
         </Container>
       );
