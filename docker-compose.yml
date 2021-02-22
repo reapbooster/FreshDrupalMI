@@ -1,5 +1,5 @@
 # Use this docker-compose file to host the site locally
-version: '3.7'
+version: "3.7"
 services:
   nginx:
     container_name: mi
@@ -23,7 +23,7 @@ services:
 
   php:
     container_name: mi-php
-    image: milken/php-dev:latest
+    image: milken/php-dev:composer2
     expose:
       - "9000"
     ports:
@@ -50,11 +50,11 @@ services:
     container_name: mi-mysql
     image: milken/mysql-dev
     #volumes:
-     # - './db:/var/lib/mysql'
+    # - './db:/var/lib/mysql'
     expose:
-      - '3306'
+      - "3306"
     ports:
-      - '33067:3306'
+      - "33067:3306"
     env_file:
       - .env
 
@@ -62,7 +62,7 @@ services:
     container_name: mi-redis
     image: redis
     expose:
-      - '6379'
+      - "6379"
 
 #  grid:
 #    image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu

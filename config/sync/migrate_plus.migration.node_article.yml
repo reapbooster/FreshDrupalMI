@@ -170,30 +170,42 @@ process:
     source: alt_content
   slide_supertitle:
     -
-      plugin: default_value
+      plugin: default_value 
       source: hero_title
-      default_value: Article
+      default_value: 'Article'
   field_promo_slide:
     plugin: 'milken_migrate:hero_to_slide'
-    source: hero_image
-    sourcee:
+    source: hero_image 
+    sourcee: 
       -
         plugin: default_value
         source: hero_image
-        default_value:
+        default_value: 
           -
             plugin: migration_lookup
             migration: default_files
-            source: ffffffff-ffff-ffff-ffff-000000000001
+            source: 'ffffffff-ffff-ffff-ffff-000000000001'
     slide_text:
       -
         key: h3
         value: hero_title
-      -
+      - 
         key: h1
         value: name
     slide_name: name
   field_meta_tags: field_meta_tags
+  field_topics:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: topics_tax
+    vocabulary: topics
+  field_centers:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: centers_tax
+    vocabulary: centers
+  field_terms:
+    plugin: 'milken_migrate:taxonomy_by_name'
+    source: term_collection_tax
+    vocabulary: milken_tags
   field_event:
     plugin: 'milken_migrate:event_reference'
     source: field_event_reference
