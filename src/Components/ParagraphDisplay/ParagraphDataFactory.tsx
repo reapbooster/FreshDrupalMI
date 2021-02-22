@@ -8,6 +8,7 @@ import {
   ParagraphEventTiles,
   ParagraphMediaTiles,
   ParagraphSlideTiles,
+  ParagraphTilesSponsors,
 } from "../../DataTypes/ParagraphTiles";
 import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
 import ParagraphSlide from "../../DataTypes/ParagraphSlide";
@@ -42,6 +43,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphMediaTiles(incoming);
     case "paragraph--podcast_episode":
       return new ParagraphPodcastEpisode(incoming);
+    case "paragraph--program_day":
+      return new ParagraphProgramDay(incoming);
     case "paragraph--pull_quote":
       return new ParagraphPullQuote(incoming);
     case "paragraph--slide":
@@ -50,8 +53,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphSlideTiles(incoming);
     case "paragraph--stats":
       return new ParagraphStats(incoming);
-    case "paragraph--program_day":
-      return new ParagraphProgramDay(incoming);
+    case "paragraph--tiles_sponsors":
+      return new ParagraphTilesSponsors(incoming);
 
     default:
       console.error("Cannot determine Data Class", incoming);

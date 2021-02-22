@@ -38,6 +38,7 @@ export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
     case "paragraph--event_tiles":
     case "paragraph--media_tiles":
     case "paragraph--slide_tiles":
+    case "paragraph--tiles_sponsors":
       return ParagraphDisplayTiles;
 
     default:

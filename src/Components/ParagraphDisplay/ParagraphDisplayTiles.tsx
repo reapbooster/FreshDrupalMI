@@ -68,13 +68,19 @@ export class ParagraphDisplayTiles extends React.Component<
       );
     }
     if (loaded) {
+      let containerClassNames = (data.field_view_mode == "card") 
+        ? "position-relative overflow-hidden py-5" 
+        : (data.field_view_mode == "tile") 
+        ? "text-center py-5"
+        : "py-5";
       return (
         <Container
           fluid={data.field_view_mode == "card" ? true : false}
-          className={data.field_view_mode == "card" ? "position-relative overflow-hidden my-5" : "my-5"}
+          className={containerClassNames}
+          style={data.field_view_mode == "card" ? {backgroundColor: '#e2e7ea'} : {}}
         >
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <h2 style={{fontFamily: "LatoWebBlack", fontSize: "1.5em", fontWeight: "bold"}}>{data.field_title}</h2>
             </div>
           </div>

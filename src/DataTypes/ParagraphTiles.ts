@@ -190,3 +190,31 @@ export class ParagraphSlideTiles
     return super.getIncluded().concat(",field_slide_refs");
   }
 }
+
+/**
+ * Paragraph Media Tiles
+ */
+export class ParagraphTilesSponsors
+  extends ParagraphTiles
+  implements ParagraphTilesInterface {
+  field_sponsors: Array<MediaInterface>;
+  field_section_subheader: string;
+
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+
+  get tiles(): Array<MediaInterface> {
+    console.debug("Paragraph Tiles Sponsors", this);
+    return this.field_sponsors;
+  }
+
+  set tiles(incoming: Array<MediaInterface>) {
+    this.field_sponsors = incoming;
+  }
+
+  getIncluded(): string {
+    return super.getIncluded().concat(",field_sponsors");
+  }
+}
