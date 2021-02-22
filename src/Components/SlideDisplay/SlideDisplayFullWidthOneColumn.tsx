@@ -83,7 +83,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     }
 
     & .h1 {
-      font-size: 3em;
+      font-size: 2.25em;
       font-family: 'LatoWebBlack';
     }
 
@@ -96,7 +96,9 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     & .p {
       font-size: 1.5em;
       margin-bottom: 1em;
-      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
+      color: ${(slideData.field_text_color?.color === "#000000")
+        ?'dimgray !important'
+        :slideData.field_text_color?.color + ' !important'};
     }
   `;
 

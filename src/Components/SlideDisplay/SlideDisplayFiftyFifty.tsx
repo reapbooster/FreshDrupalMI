@@ -61,11 +61,6 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
       margin-left: 1em;
     }
 
-    & a {
-      font-size: 0.9em;
-      font-family: 'LatoWebBlack';
-      margin-top: 2em;
-    }
   `;
 
   const colStyleText = {
