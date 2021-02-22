@@ -23,6 +23,7 @@ export interface ListDisplayProps {
 
 export const ListDisplay = function (props: ListDisplayProps) {
   const { id, list, view_mode, container } = props;
+
   const ContainerComponent =
     container ??
     styled.div`
@@ -79,7 +80,7 @@ export const ListDisplay = function (props: ListDisplayProps) {
         props.view_mode == "tile"
           ? "d-flex flex-wrap justify-content-center"
           : props.view_mode == "card"
-          ? "d-flex justify-content-lg-start justify-content-xs-start overflow-auto"
+          ? "row no-gutters"
           : ""
       }`}
       ref={refListDisplay}
@@ -95,13 +96,13 @@ export const ListDisplay = function (props: ListDisplayProps) {
         );
       })}
 
-      {props.view_mode == "card" ? (
+      {/* props.view_mode == "card" ? (
         <ArrowWrapper className={"d-lg-none my-a"} onClick={onArrowRightClick}>
           <ArrowRight>
             <FontAwesomeIcon icon={faAngleRight}></FontAwesomeIcon>
           </ArrowRight>
         </ArrowWrapper>
-      ) : null}
+      ) : null */}
     </ContainerComponent>
   );
 };
