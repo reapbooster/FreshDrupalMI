@@ -80,7 +80,7 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
 
       if ($ref->getEntityTypeId() == "media") {
         $ref->getRemoteData();
-        $bundle = $ref->getBundle();
+        $bundle = $ref->getBundle($this->entityTypeManager);
         if ($bundle instanceof BundleTypeDataFetcher) {
 
           $mediaSource = $bundle->getProperty('source_configuration')['source_field'] ?? NULL;

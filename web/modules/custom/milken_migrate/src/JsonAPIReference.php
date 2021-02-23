@@ -272,9 +272,9 @@ class JsonAPIReference {
    * @return string
    *   String value of the Bundle ID.
    */
-  public function getBundle(): ?BundleTypeDataFetcher {
+  public function getBundle($entityTypeManager = NULL): ?BundleTypeDataFetcher {
     if (is_array($this->bundle)) {
-      $this->bundle = new BundleTypeDataFetcher($this->bundle);
+      $this->bundle = new BundleTypeDataFetcher($this->bundle, $entityTypeManager);
       $this->bundle->getRemoteData();
     }
     return $this->bundle;
