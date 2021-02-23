@@ -13,74 +13,56 @@ export interface MediaSponsorTileDisplayProps {
   display_size?: string;
 }
 
-const CardWrapper = styled.div`
-  min-width: 222px;
+const SponsorTileWrapper = styled.div`
+  transition: box-shadow ease-in 250ms;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 
   &:hover {
-    box-shadow: 0 8px 16px 0 grey;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
-  & a {
-    max-width: 319px;
-    color: #35363C;
-    text-decoration: none;
-
-    & .h5 {
-      font-weight: bold;
-    }
+  &.sponsor-image-medium img.card-img {
+    max-width: 500px !important;
   }
 
+  &.sponsor-image-medium img.card-img {
+    max-width: 420px !important;
+  }
 `;
 
-const CustomCardHeader = styled.div`
-  position: relative;
-`;
-
-const DateWrapper = styled.div`
-  width: 100%;
-  background: rgba(0, 0, 0, 0.53);
-  color: white;
-  text-align: right;
-  padding-right: 0.5em;
-  position: absolute;
-  bottom: 0;
-`;
-
-export const MediaSponsorTileDisplay = (props: MediaSponsorTileDisplayProps) => {
+export const MediaSponsorTileDisplay = (
+  props: MediaSponsorTileDisplayProps
+) => {
   const { data, key, display_size } = props;
+  console.log(data);
   if (!data.valid) {
     return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
 
+  let tileClass = "col-sm-6 col-md-3 sponsor-image-small";
+
+  switch (display_size) {
+    case "large": {
+      tileClass = `col-md-6 sponsor-image-large`;
+      break;
+    }
+    case "medium": {
+      tileClass = `col-sm-8 col-md-5 sponsor-image-medium`;
+    }
+  }
+
   return (
-    <CardWrapper
-      className="card my-4 mx-2 text-align-left flex-shrink-1"
-      key={key}
-    >
+    <SponsorTileWrapper className={`${tileClass}`} key={key}>
       <ErrorBoundary>
-        <a
-          href={
-            data.path.alias
-              ? data.path.alias
-              : "/media/" + data.drupal_internal__mid
-          }
-          data-drupal-id={data.drupal_internal__mid}
-          data-drupal-type={data.type}
-          data-uuid={data.id}
-        >
-          <CustomCardHeader>
-            <ImageFileDisplay
-              data={data.field_media_image}
-              view_mode="large"
-              className={"card-img"}
-              style={{ maxWidth: "100%" }}
-              srcsetSizes="(max-width: 1000px) 200px, 400px"
-            />
-            {display_size}
-          </CustomCardHeader>
-        </a>
+        <ImageFileDisplay
+          data={data.field_media_image}
+          view_mode="large"
+          className={"card-img p-3"}
+          style={{ maxWidth: "100%" }}
+          srcsetSizes="(max-width: 1000px) 200px, 400px"
+        />
       </ErrorBoundary>
-    </CardWrapper>
+    </SponsorTileWrapper>
   );
 };
 
