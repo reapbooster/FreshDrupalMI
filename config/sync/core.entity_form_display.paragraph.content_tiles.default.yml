@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_content
     - field.field.paragraph.content_tiles.field_background_color
     - field.field.paragraph.content_tiles.field_content_refs
     - field.field.paragraph.content_tiles.field_title
@@ -10,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.content_tiles
   module:
     - color_field
+    - entity_browser
 id: paragraph.content_tiles.default
 targetEntityType: paragraph
 bundle: content_tiles
@@ -34,12 +36,16 @@ content:
   field_content_refs:
     weight: 3
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      entity_browser: browse_content
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: entity_browser_entity_reference
     region: content
   field_title:
     weight: 1

@@ -83,6 +83,9 @@ source:
       name: podcast_image
       label: 'Podcast Image'
       selector: field_podcast_image
+  constants:
+    title_prefix: 'Ep. '
+    title_separator: ': '
   ids:
     paragraph_id:
       type: integer
@@ -124,8 +127,8 @@ process:
   field_media_image:
     plugin: 'milken_migrate:remote_file'
     source: podcast_image
-    alt_text: podcast_image_alt_text
-    title_text: podcast_image_title_text
+    alt_text: summary/value
+    title_text: summary/value
   field_transcript:
     plugin: 'milken_migrate:remote_file'
     source: transcript
@@ -136,6 +139,13 @@ process:
   field_body/format:
     plugin: default_value
     default_value: full_html
+  name:
+    plugin: concat
+    source: 
+      - constants/title_prefix
+      - episode
+      - constants/title_separator
+      - summary/value
 destination:
   plugin: 'entity:media'
   default_bundle: podcast_episode

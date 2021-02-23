@@ -869,7 +869,7 @@ display:
           entity_field: uid
           plugin_id: user_name
       sorts: {  }
-      title: Content
+      title: ContentLandingPageExport
       empty:
         area_text_custom:
           id: area_text_custom
@@ -910,14 +910,16 @@ display:
       tags: {  }
   page_1:
     display_options:
-      path: contentlandingpageexport
+      path: content/landingpage/export
       menu:
-        type: 'default tab'
+        type: none
         title: Content
         description: ''
-        menu_name: admin
+        expanded: false
+        parent: ''
         weight: -10
-        context: ''
+        context: '0'
+        menu_name: admin
       tab_options:
         type: normal
         title: Content

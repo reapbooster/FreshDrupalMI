@@ -11,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.pull_quote
     - paragraphs.paragraphs_type.slide
     - paragraphs.paragraphs_type.stats
+    - paragraphs.paragraphs_type.tiles_sponsors
   module:
     - entity_reference_revisions
     - paragraph_blocks
@@ -38,6 +39,7 @@ settings:
       media_tiles: media_tiles
       slide: slide
       stats: stats
+      tiles_sponsors: tiles_sponsors
     target_bundles_drag_drop:
       author:
         weight: 13
@@ -81,6 +83,9 @@ settings:
       stats:
         enabled: true
         weight: 30
+      tiles_sponsors:
+        enabled: true
+        weight: 32
       tiles_taxonomy:
         weight: 31
         enabled: false
