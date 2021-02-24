@@ -1,7 +1,52 @@
 # Milken Institute Website Rebuild 2.0 #
 
-
 ## Installation ##
+1. Clone this repo. Always make sure your branch is up to date with master.
+
+2. Run the following within the newly cloned repo directory.
+
+3. ```cp .env.dist .env```
+
+4. ```cp config/settings.local.php web/sites/default```
+
+5. ```docker-compose pull && docker-compose up -d```
+
+6. Wait for docker-compose to finish, then run the following:
+
+7. ```docker exec -it mi-php bash```
+
+8. If the container name is different, find the PHP container by running this:
+
+9. ```docker ps -a```
+
+10. After 'docker exec' runs successfully, you should now have a shell inside the PHP container. Run this within it:
+
+11. ```composer install && composer install-vendor-dir && npm install && gulp && gulp buildMilkenTheme && drush cr```
+
+12. Download the latest DB, if you place it into the directory 'db' it will be visible within the container.
+
+13. Load it from within the PHP docker container by running: 
+
+14. ```pv BACKUP_DB_FILE_NAME | gunzip | mysql -u root --password=drupal -h mysql  drupal8```
+
+15. Download the latest public files archive and extract all the contents of the files dir into db/files/
+
+16. ```tar -xzvf FILES_ARCHIVE_NAME.tar.gz```
+
+17. After files are extracted, run the following to map them to the correct location:
+
+18. ```rm -rf web/sites/default/files/```
+
+19. ```ln -s /var/www/db/files /var/www/web/sites/default```
+
+20. ```chown -R www-data:www-data /var/www/db/files```
+
+21. ```drush cr```
+
+22. Site should be up now. Point your browser to https://localhost:8080/
+
+
+## Old Installation Method ##
 
 1. Login to Pantheon.
 
