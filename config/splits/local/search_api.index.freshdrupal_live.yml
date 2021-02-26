@@ -17,16 +17,28 @@ dependencies:
     - field.storage.event.field_related_media
     - field.storage.media.field_body
     - field.storage.media.field_content
-    - field.storage.media.field_episode
     - field.storage.media.field_event_reference
     - field.storage.media.field_media_file
-    - field.storage.media.field_photo_subject_name
-    - field.storage.media.field_photo_subject_title
-    - field.storage.media.field_summary
+    - field.storage.node.field_body
+    - field.storage.node.field_centers
     - field.storage.node.field_content
+    - field.storage.node.field_hero_image
     - field.storage.node.field_long_description
+    - field.storage.node.field_promo_slide
+    - field.storage.slide.field_background_image
     - field.storage.node.field_short_summary
+    - field.storage.people.field_biotext
+    - field.storage.people.field_departments
+    - field.storage.people.field_description
+    - field.storage.people.field_email
+    - field.storage.people.field_first_name
+    - field.storage.people.field_last_name
+    - field.storage.people.field_middle_name
+    - field.storage.people.field_notes
+    - field.storage.people.field_photo
     - search_api.server.freshdrupal_live
+    - core.entity_view_mode.media.full
+    - core.entity_view_mode.node.full
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -76,11 +88,30 @@ field_settings:
   bundle:
     label: Bundle
     property_path: search_api_bundle
-    type: string
+    type: text
   entity_type_id:
     label: EntityTypeId
     property_path: search_api_entity_type_id
-    type: string
+    type: text
+  field_background_image:
+    label: 'Promo Slide » Slide » Background Image'
+    datasource_id: 'entity:node'
+    property_path: 'field_promo_slide:entity:field_background_image'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_promo_slide
+        - field.storage.slide.field_background_image
+      module:
+        - eck
+  field_biotext:
+    label: Biotext
+    datasource_id: 'entity:people'
+    property_path: field_biotext
+    type: text
+    dependencies:
+      config:
+        - field.storage.people.field_biotext
   field_body:
     label: body
     datasource_id: 'entity:media'
@@ -102,14 +133,38 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'search_api_reverse_entity_references_paragraph__field_content_refs:field_body'
     type: text
+  field_body_3:
+    label: body
+    datasource_id: 'entity:media'
+    property_path: field_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_body
+  field_body_4:
+    label: body
+    datasource_id: 'entity:node'
+    property_path: field_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_body
   field_campaign_name:
     label: 'Campaign Name'
     datasource_id: 'entity:event'
     property_path: field_campaign_name
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.event.field_campaign_name
+  field_centers:
+    label: Centers
+    datasource_id: 'entity:node'
+    property_path: field_centers
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_centers
   field_content:
     label: Content
     datasource_id: 'entity:node'
@@ -126,6 +181,30 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_content
+  field_content_2:
+    label: Content
+    datasource_id: 'entity:media'
+    property_path: field_content
+    type: integer
+    dependencies:
+      config:
+        - field.storage.media.field_content
+  field_content_3:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: field_content
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_content
+  field_departments:
+    label: Departments
+    datasource_id: 'entity:people'
+    property_path: field_departments
+    type: integer
+    dependencies:
+      config:
+        - field.storage.people.field_departments
   field_description:
     label: Description
     datasource_id: 'entity:event'
@@ -142,14 +221,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.event.field_description
-  field_episode:
-    label: Episode
-    datasource_id: 'entity:media'
-    property_path: field_episode
-    type: integer
+  field_description_2:
+    label: Description
+    datasource_id: 'entity:people'
+    property_path: field_description
+    type: text
     dependencies:
       config:
-        - field.storage.media.field_episode
+        - field.storage.people.field_description
+  field_email:
+    label: email
+    datasource_id: 'entity:people'
+    property_path: field_email
+    type: string
+    dependencies:
+      config:
+        - field.storage.people.field_email
   field_event_date:
     label: 'Event Date'
     datasource_id: 'entity:event'
@@ -171,7 +258,39 @@ field_settings:
     datasource_id: 'entity:event'
     property_path: 'search_api_reverse_entity_references_paragraph__field_event_references:field_event_references'
     type: integer
+  field_first_name:
+    label: 'First Name'
+    datasource_id: 'entity:people'
+    property_path: field_first_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.people.field_first_name
+  field_hero_image:
+    label: 'Hero Image'
+    datasource_id: 'entity:node'
+    property_path: field_hero_image
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_hero_image
+  field_last_name:
+    label: 'Last Name'
+    datasource_id: 'entity:people'
+    property_path: field_last_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.people.field_last_name
   field_long_description:
+    label: 'Long Description'
+    datasource_id: 'entity:node'
+    property_path: field_long_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_long_description
+  field_long_description_1:
     label: 'Long Description'
     datasource_id: 'entity:node'
     property_path: field_long_description
@@ -187,6 +306,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_media_file
+  field_middle_name:
+    label: 'Middle Name'
+    datasource_id: 'entity:people'
+    property_path: field_middle_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.people.field_middle_name
   field_name_short:
     label: 'Name Short'
     datasource_id: 'entity:event'
@@ -203,22 +330,30 @@ field_settings:
     dependencies:
       config:
         - field.storage.event.field_name_short
-  field_photo_subject_name:
-    label: 'Photo Subject Name'
-    datasource_id: 'entity:media'
-    property_path: field_photo_subject_name
-    type: string
+  field_notes:
+    label: Notes
+    datasource_id: 'entity:people'
+    property_path: field_notes
+    type: text
     dependencies:
       config:
-        - field.storage.media.field_photo_subject_name
-  field_photo_subject_title:
-    label: 'Photo Subject Title'
-    datasource_id: 'entity:media'
-    property_path: field_photo_subject_title
-    type: string
+        - field.storage.people.field_notes
+  field_photo:
+    label: Photo
+    datasource_id: 'entity:people'
+    property_path: field_photo
+    type: integer
     dependencies:
       config:
-        - field.storage.media.field_photo_subject_title
+        - field.storage.people.field_photo
+  field_promo_slide:
+    label: 'Promo Slide'
+    datasource_id: 'entity:node'
+    property_path: field_promo_slide
+    type: integer
+    dependencies:
+      config:
+        - field.storage.node.field_promo_slide
   field_related_media:
     label: 'Related Media'
     datasource_id: 'entity:event'
@@ -235,28 +370,28 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_short_summary
-  field_summary:
-    label: Summary
-    datasource_id: 'entity:media'
-    property_path: field_summary
-    type: string
-    dependencies:
-      config:
-        - field.storage.media.field_summary
   field_title_1:
     label: 'Reverse reference: <em class="placeholder">Paragraph</em> using <em class="placeholder">Event References</em> » Title'
     datasource_id: 'entity:event'
     property_path: 'search_api_reverse_entity_references_paragraph__field_event_references:field_title'
-    type: string
+    type: text
   jsonapi_type:
     label: Type
     property_path: search_api_jsonapi_type
-    type: string
+    type: text
   label:
     label: Label
     property_path: search_api_label
-    type: string
+    type: text
   name:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
+    type: text
+    dependencies:
+      module:
+        - media
+  name_1:
     label: Name
     datasource_id: 'entity:media'
     property_path: name
@@ -268,16 +403,41 @@ field_settings:
     label: 'Reverse reference: <em class="placeholder">Paragraph</em> using <em class="placeholder">Event References</em> » Parent type'
     datasource_id: 'entity:event'
     property_path: 'search_api_reverse_entity_references_paragraph__field_event_references:parent_type'
-    type: string
+    type: text
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        anonymous: anonymous
+      view_mode:
+        'entity:event':
+          conference: default
+          meeting: default
+          summit: default
+        'entity:media':
+          report: full
+          video: full
+        'entity:node':
+          article: full
+          career: full
+          landing_page: full
+          opportunity: full
+          session: full
+        'entity:people':
+          experts: default
+          speakers: default
+          staff: default
   taxonomy:
     label: Taxonomy
     property_path: search_api_taxonomy
-    type: string
+    type: text
   title:
     label: Title
     datasource_id: 'entity:node'
     property_path: title
-    type: string
+    type: text
     dependencies:
       module:
         - node
@@ -285,7 +445,7 @@ field_settings:
     label: Title
     datasource_id: 'entity:event'
     property_path: title
-    type: string
+    type: text
     dependencies:
       module:
         - eck
@@ -293,28 +453,36 @@ field_settings:
     label: Title
     datasource_id: 'entity:event'
     property_path: title
+    type: text
+    dependencies:
+      module:
+        - eck
+  title_5:
+    label: Title
+    datasource_id: 'entity:people'
+    property_path: title
     type: string
     dependencies:
       module:
         - eck
-  title_3:
-    label: Title
+  type:
+    label: 'Content type'
     datasource_id: 'entity:node'
-    property_path: title
-    type: string
+    property_path: type
+    type: text
     dependencies:
       module:
         - node
   url:
     label: URI
     property_path: search_api_url
-    type: string
+    type: text
     configuration:
       absolute: false
   uuid:
     label: UUID
     property_path: search_api_uuid
-    type: string
+    type: text
 datasource_settings:
   'entity:event':
     bundles:
@@ -325,8 +493,10 @@ datasource_settings:
       selected: {  }
   'entity:media':
     bundles:
-      default: true
-      selected: {  }
+      default: false
+      selected:
+        - report
+        - video
     languages:
       default: true
       selected: {  }
@@ -339,8 +509,11 @@ datasource_settings:
       selected: {  }
   'entity:people':
     bundles:
-      default: true
-      selected: {  }
+      default: false
+      selected:
+        - experts
+        - speakers
+        - staff
     languages:
       default: true
       selected: {  }
@@ -397,10 +570,7 @@ processor_settings:
       - field_description
       - field_long_description
       - field_name_short
-      - field_photo_subject_name
-      - field_photo_subject_title
       - field_short_summary
-      - field_summary
       - field_title_1
       - name
       - parent_type
