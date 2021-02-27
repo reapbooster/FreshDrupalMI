@@ -11,6 +11,7 @@ dependencies:
     - field.field.media.podcast_episode.field_media_image
     - field.field.media.podcast_episode.field_media_in_library
     - field.field.media.podcast_episode.field_meta_tags
+    - field.field.media.podcast_episode.field_people
     - field.field.media.podcast_episode.field_service_links
     - field.field.media.podcast_episode.field_summary
     - field.field.media.podcast_episode.field_transcript
@@ -30,12 +31,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_body:
-    weight: 111
+    weight: 17
     settings:
       rows: 9
       summary_rows: 3
@@ -45,14 +46,14 @@ content:
     type: text_textarea_with_summary
     region: content
   field_episode:
-    weight: 108
+    weight: 14
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_filemime:
-    weight: 104
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -60,7 +61,7 @@ content:
     type: string_textfield
     region: content
   field_filesize:
-    weight: 106
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -68,14 +69,14 @@ content:
     type: string_textfield
     region: content
   field_media_audio_file:
-    weight: 0
+    weight: 3
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
   field_media_image:
-    weight: 101
+    weight: 9
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -83,21 +84,31 @@ content:
     type: image_image
     region: content
   field_media_in_library:
-    weight: 105
+    weight: 12
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_meta_tags:
-    weight: 103
+    weight: 10
     settings:
       sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
+  field_people:
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_service_links:
-    weight: 110
+    weight: 16
     settings:
       key_size: 60
       key_label: Key
@@ -113,7 +124,7 @@ content:
     type: key_value_textfield
     region: content
   field_summary:
-    weight: 109
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -122,21 +133,21 @@ content:
     region: content
   field_transcript:
     type: file_generic
-    weight: 0
+    weight: 2
     region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 4
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -144,7 +155,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -152,7 +163,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 100
+    weight: 8
     region: content
     third_party_settings: {  }
   uid:
