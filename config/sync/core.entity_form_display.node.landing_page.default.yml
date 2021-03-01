@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.landing_page.field_content
     - field.field.node.landing_page.field_hero_image
     - field.field.node.landing_page.field_meta_tags
+    - field.field.node.landing_page.field_tile_label
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
   module:
@@ -22,7 +23,7 @@ third_party_settings:
         - group_content
         - group_publishing
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: tabs
       region: content
       format_settings:
@@ -101,7 +102,7 @@ content:
     region: content
   field_hero_image:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -115,6 +116,14 @@ content:
     region: content
     settings:
       sidebar: true
+    third_party_settings: {  }
+  field_tile_label:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -144,7 +153,7 @@ content:
     third_party_settings: {  }
   published_at:
     type: publication_date_timestamp
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -152,7 +161,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 0
+    weight: 2
     region: content
     third_party_settings: {  }
   sticky:
@@ -164,7 +173,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 1
+    weight: 0
     region: content
     settings:
       size: 60

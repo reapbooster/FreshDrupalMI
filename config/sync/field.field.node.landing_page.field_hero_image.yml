@@ -10,7 +10,7 @@ id: node.landing_page.field_hero_image
 field_name: field_hero_image
 entity_type: node
 bundle: landing_page
-label: 'Hero Image'
+label: 'Tile Thumbnail'
 description: ''
 required: false
 translatable: true
@@ -25,5 +25,5 @@ settings:
       field: name
       direction: ASC
     auto_create: false
-    auto_create_bundle: null
+    auto_create_bundle: ''
 field_type: entity_reference
