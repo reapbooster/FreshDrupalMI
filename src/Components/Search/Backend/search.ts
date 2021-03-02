@@ -14,7 +14,7 @@ const fetchSuggestions = async (params) => {
 
 const fetchSearchResults = async (params) => {
   try {
-    params._format = "json";
+    // params._format = "json";
 
     const response = await fetch(
       `/api/v1.0/search?` + new URLSearchParams(params)
@@ -45,9 +45,7 @@ const fetchTypes = async () => {
 
 const fetchTopics = async () => {
   try {
-    const response = await fetch(
-      `/jsonapi/taxonomy_term/milken_tags?_format=json`
-    );
+    const response = await fetch(`/jsonapi/taxonomy_term/milken_tags`);
 
     return await response.json();
   } catch (err) {
@@ -57,7 +55,7 @@ const fetchTopics = async () => {
 
 const fetchCenters = async () => {
   try {
-    const response = await fetch(`/jsonapi/taxonomy_term/centers?_format=json`);
+    const response = await fetch(`/jsonapi/taxonomy_term/centers`);
     return await response.json();
   } catch (err) {
     return err;
@@ -66,7 +64,7 @@ const fetchCenters = async () => {
 
 const fetchCentersData = async () => {
   try {
-    const response = await fetch(`/jsonapi/centers_data?_format=json`);
+    const response = await fetch(`/jsonapi/centers_data`);
     return await response.json();
   } catch (err) {
     return err;

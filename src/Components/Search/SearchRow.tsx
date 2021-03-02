@@ -79,4 +79,4 @@ SearchRow.propTypes = {
   title: PropTypes.string,
 };
 
-export default ContentRow;
+export default SearchRow;

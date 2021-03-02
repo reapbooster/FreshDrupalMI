@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import Select from "react-select";
 import classnames from "classnames";
 import { FaThLarge, FaList } from "react-icons/fa";
 import { sortOptions, perpageOptions } from "./Backend/static";
@@ -33,49 +35,53 @@ const ToolbarButton = styled.button`
   }
 `;
 
-export default function SearchToolbar({
-  sortby,
-  perpage,
-  grid,
-  onSortbyChange,
-  onPerpageChange,
-  onViewChange,
-}) {
+export default function SearchToolbar(props) {
+  const {
+    sortby,
+    perpage,
+    viewMode,
+    setSortby,
+    setPerpage,
+    setViewMode,
+  } = props;
+
   return (
     <div id="toolbar" className="d-flex justify-content-end my-4">
       <div className="d-inline mx-3">
         <label htmlFor="sortby">Sort by:</label>
-        <CustomSelect>
-          <select
-            name="sortby"
-            className="custom-select"
-            value={sortby}
-            onChange={(e) => onSortbyChange(e.target.value)}
-          >
-            {sortOptions.map((item, index) => (
-              <option key={index} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </CustomSelect>
+        {sortby}
+        {perpage}
+
+        <select
+          name="sortby"
+          className="custom-select"
+          options={sortOptions}
+          value={sortby}
+          onChange={setSortby}
+        >
+          {sortOptions.map((item, index) => (
+            <option key={index} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="d-inline mx-3">
         <label htmlFor="perpage">Results per page:</label>
-        <CustomSelect>
-          <select
-            name="perpage"
-            className="custom-select"
-            value={perpage}
-            onChange={(e) => onPerpageChange(e.target.value)}
-          >
-            {perpageOptions.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </CustomSelect>
+
+        <select
+          name="perpage"
+          className="custom-select"
+          onChange={setPerpage}
+          options={perpageOptions}
+          value={perpage}
+        >
+          {perpageOptions.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="d-flex mx-3">
         <ToolbarButton
@@ -83,9 +89,9 @@ export default function SearchToolbar({
             "view-btn",
             " justify-content-center",
             "align-items-center",
-            { disabled: !grid }
+            { disabled: viewMode == "list" }
           )}
-          onClick={() => onViewChange("grid")}
+          onClick={() => setViewMode("grid")}
         >
           <FaThLarge />
         </ToolbarButton>
@@ -94,9 +100,9 @@ export default function SearchToolbar({
             "view-btn",
             " justify-content-center",
             "align-items-center",
-            { disabled: grid }
+            { disabled: viewMode != "list" }
           )}
-          onClick={() => onViewChange("list")}
+          onClick={() => setViewMode("list")}
         >
           <FaList />
         </ToolbarButton>
@@ -106,10 +112,10 @@ export default function SearchToolbar({
 }
 
 SearchToolbar.propTypes = {
-  grid: PropTypes.any,
-  onPerpageChange: PropTypes.func,
-  onSortbyChange: PropTypes.func,
-  onViewChange: PropTypes.func,
+  viewMode: PropTypes.any,
+  setViewMode: PropTypes.func,
   perpage: PropTypes.any,
+  setPerpage: PropTypes.func,
   sortby: PropTypes.any,
+  setSortby: PropTypes.func,
 };

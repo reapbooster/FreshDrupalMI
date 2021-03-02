@@ -4,13 +4,17 @@ import { useQueryState } from "use-location-state";
 import { Collapse } from "react-bootstrap";
 import Select, { components } from "react-select";
 import { AiOutlineSearch } from "react-icons/ai";
+
 import styled from "styled-components";
 
 import { Button, CustomSelect } from "../Shared/Styles";
 
 import SearchFilter from "./SearchFilter";
 import SearchToolbar from "./SearchToolbar";
-import SearchContent from "./SearchContent";
+import SearchResults from "./SearchResults";
+
+const throttle = require("lodash/throttle"),
+  debounce = require("lodash/debounce");
 
 import { contentAPI, staticData } from "./Backend";
 import {
@@ -19,75 +23,113 @@ import {
   containerClass,
 } from "./Search.config";
 
+import { sortOptions, perpageOptions } from "./Backend/static";
+
 const FilterToggleButton = styled(Button)`
   width: 100%;
   height: 100%;
 `;
 
-const throttle = require("lodash/throttle"),
-  debounce = require("lodash/debounce");
+function getCurrentLocation() {
+  return {
+    pathname: window.location.pathname,
+    search: window.location.search,
+    hash: window.location.hash.replace("#"),
+  };
+}
+
+function getHashParams() {
+  var hash = window.location.hash.substring(1);
+  var params = {};
+  hash.split("&").map((hk) => {
+    let temp = hk.split("=");
+    params[temp[0]] = temp[1];
+  });
+  return params;
+}
 
 export default function Search() {
-  // State objects
+  const searchParams = new URLSearchParams(window.location.search);
+
   const [suggestions, setSuggestions] = useState([]);
   const [query, setQuery] = useQueryState("keywords", ""); // The actual url parameter as state
   const [queryInputValue, setQueryInputValue] = useState(); // Buffer for what's typed
   const [menuOpen, setMenuOpen] = useState();
-  const [viewMode, setViewMode] = useQueryState("view", "");
 
-  // Buffer of values has to be state so it works two-way
-  // const [sortby, setSortby] = useState(staticData.sortOptions[0]);
-  // const [perpage, setPerpage] = useState(staticData.perpageOptions[0]);
-  //
-  // const [types, setTypes] = useState([]);
-  // const [topics, setTopics] = useState([]);
-  // const [centers, setCenters] = useState([]);
-  // const [date, setDate] = useState();
-  //
-  // const { dateOptions, typeOptions } = staticData;
-  // const [topicOptions, setTopicOptions] = useState([]);
-  // const [centerOptions, setCenterOptions] = useState([]);
-  //
-  // const [contents, setContents] = useState([]);
-  //
+  // URL-State parameters
+  const [sortby, setSortby] = useQueryState("sortby", false);
+  const [perpage, setPerpage] = useQueryState("perpage", false);
+  const [type, setType] = useQueryState("type", []);
+  const [topics, setTopics] = useQueryState("topics", []);
+  const [centers, setCenters] = useQueryState("centers", []);
+  const [date, setDate] = useQueryState("date", false);
+  const [viewMode, setViewMode] = useQueryState("view", "grid");
 
-  //
-  // console.log(searchParams);
-  //
-  // const filterFields = {
-  //   type: {
-  //     setter: setTypes,
-  //     options: typeOptions,
-  //   },
-  //   centers: {
-  //     setter: setCenters,
-  //     options: centerOptions,
-  //   },
-  //   topics: {
-  //     setter: setTopics,
-  //     options: topicOptions,
-  //   },
-  //   date: {
-  //     setter: setDate,
-  //     options: dateOptions,
-  //   },
-  //   sortby: {
-  //     setter: setSortby,
-  //     single: true,
-  //   },
-  //   perpage: {
-  //     setter: setPerpage,
-  //     single: true,
-  //   },
-  // };
-  //
-  // useEffect(() => {
-  //   getTopics();
-  //   getCenters();
-  //   setQuery(router.query.keywords);
-  //   setQueryInput(router.query.keywords);
-  // }, [router.query]);
-  //
+  const { dateOptions, typeOptions } = staticData;
+  const [topicOptions, setTopicOptions] = useState([]);
+  const [centerOptions, setCenterOptions] = useState([]);
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  const filterFields = {
+    type: {
+      setter: setType,
+      options: typeOptions,
+      multiple: true,
+    },
+    centers: {
+      setter: setCenters,
+      options: centerOptions,
+      multiple: true,
+    },
+    topics: {
+      setter: setTopics,
+      options: topicOptions,
+      multiple: true,
+    },
+    date: {
+      setter: setDate,
+      options: dateOptions,
+    },
+    sortby: {
+      setter: setSortby,
+      options: sortOptions,
+    },
+    perpage: {
+      setter: setPerpage,
+      options: perpageOptions,
+    },
+  };
+
+  const filterState = {
+    type,
+    centers,
+    topics,
+    date,
+    sortby,
+    perpage,
+  };
+
+  useEffect(() => {
+    console.log("useEffect, normal");
+    getTopics();
+    getCenters();
+    locationChanged();
+  }, []);
+
+  const locationChanged = () => {
+    console.log("locationChanged");
+    const keywords = getHashParams()?.keywords;
+    if (keywords) {
+      setQuery(keywords);
+      setQueryInputValue(keywords);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("hashchange", locationChanged, false);
+    return () => window.removeEventListener("hashchange", locationChanged);
+  }, [getCurrentLocation()]);
 
   // Throttle/Debounce as User Types
   let throttled = {};
@@ -133,12 +175,10 @@ export default function Search() {
     // }
   }, [queryInputValue]);
 
-  //
-  // useEffect(() => {
-  //   setFilterStates();
-  //   getFilteredContents(router.query);
-  // }, [typeOptions, topicOptions, centerOptions, dateOptions]);
-  //
+  useEffect(() => {
+    console.log("filter state changed", filterState);
+  }, [type, topics, centers, date, sortby, perpage]);
+
   // // Helper to make option array
   // const makeOptions = (options) => {
   //   return options.map((option) => {
@@ -153,46 +193,36 @@ export default function Search() {
   //   });
   // };
 
-  // Capitalize helper
-  const capitalize = (s) => {
-    if (typeof s !== "string") return "";
-    return s.charAt(0).toUpperCase() + s.slice(1);
+  const makeOptions = (items) => {
+    return items.map((o) => {
+      return {
+        value: o?.attributes?.machine_name ?? o?.id,
+        label: o?.attributes?.name ?? "",
+      };
+    });
   };
 
-  const getFilteredContents = async (params) => {
+  const getSearchResults = async (params) => {
     if (!Object.entries(params).length) {
       return;
     }
     let res = await contentAPI.fetchSearchResults(params);
-    if (res.status === 200) {
-      console.log(res.data.data);
-      setContents(res.data.data);
-    } else {
-      console.log("error", res);
-    }
+    setSearchResults(makeOptions(res?.data));
   };
 
-  // const getTopics = async () => {
-  //   let res = await contentAPI.fetchTopics();
-  //   if (res.status === 200) {
-  //     setTopicOptions(makeOptions(res.data.data));
-  //   } else {
-  //     console.log("error", res);
-  //   }
-  // };
-  //
-  // const getCenters = async () => {
-  //   let res = await contentAPI.fetchCenters();
-  //   if (res.status === 200) {
-  //     setCenterOptions(makeOptions(res.data.data));
-  //   } else {
-  //     console.log("error", res);
-  //   }
-  // };
-
-  const handleViewChange = (mode) => {
-    setView(mode);
+  const getTopics = async () => {
+    let res = await contentAPI.fetchTopics();
+    const options = setTopicOptions(makeOptions(res?.data));
   };
+
+  const getCenters = async () => {
+    let res = await contentAPI.fetchCenters();
+    setCenterOptions(makeOptions(res?.data));
+  };
+
+  // const handleViewChange = (mode) => {
+  //   setView(mode);
+  // };
 
   // const handleSortbyChange = (value) => {
   //   setSortBy(value);
@@ -202,11 +232,16 @@ export default function Search() {
   //   setPerpage(value);
   // };
   //
-  // const handleApplyFilter = () => {
-  //   let params = router.query;
+  // const handleApplyFilter = (filterState) => {
+  //   let params = {
+  //     ...getHashParams(),
+  //     ...filterState,
+  //   };
   //
-  //   let typesArray = types?.map((type) => {
-  //     return type.value;
+  //   console.log(params);
+  //
+  //   let typesArray = type?.map((t) => {
+  //     return t.value;
   //   });
   //   let topicsArray = topics?.map((topic) => topic.value);
   //   let centersArray = centers?.map((center) => center.value);
@@ -237,35 +272,31 @@ export default function Search() {
   //     params.perpage = perpage;
   //   }
   //
-  //   delete params._format;
-  //
   //   const qs = Object.keys(params)
   //     .map((key) => `${key}=${params[key]}`)
   //     .join("&");
   //
-  //   router.push("?" + qs, undefined, { shallow: true });
+  //   window.location.replace("#" + qs);
   //
-  //   getFilteredContents(params);
+  //   // getSearchResults(params);
   // };
-  //
-  // const handleResetFilter = () => {
-  //   setTypes([]);
-  //   setTopics([]);
-  //   setCenters([]);
-  //   setDate(dateOptions[0]);
-  //
-  //   const params = {
-  //     keywords: router.query.keywords ?? "",
-  //   };
-  //
-  //   const qs = Object.keys(params)
-  //     .map((key) => `${key}=${params[key]}`)
-  //     .join("&");
-  //
-  //   router.push("?" + qs, undefined, { shallow: true });
-  //
-  //   getFilteredContents(qs);
-  // };
+
+  const handleResetFilter = () => {
+    setTypes([]);
+    setTopics([]);
+    setCenters([]);
+    setDate(false);
+
+    // const params = {
+    //   keywords: new URL(window.location.hash.replace("#", "?")).search,
+    // };
+    //
+    // const qs = Object.keys(params)
+    //   .map((key) => `${key}=${params[key]}`)
+    //   .join("&");
+    //
+    // router.push("?" + qs);
+  };
   //
   // const setFilterStates = async () => {
   //   console.log("Set Filter State", router.query);
@@ -379,34 +410,22 @@ export default function Search() {
       </div>
 
       <div className={containerClass}>
-        {viewMode}
-        {/* <SearchToolbar
+        <SearchToolbar
           sortby={sortby}
           perpage={perpage}
-          onSortbyChange={handleSortbyChange}
-          onPerpageChange={handlePerpageChange}
-          grid={grid}
-          onViewChange={handleViewChange}
+          viewMode={viewMode}
+          setSortby={setSortby}
+          setPerpage={setPerpage}
+          setViewMode={setViewMode}
         />
         <SearchFilter
-          typeOptions={typeOptions}
-          centerOptions={centerOptions}
-          topicOptions={topicOptions}
-          dateOptions={dateOptions}
-          setTypes={setTypes}
-          setCenters={setCenters}
-          setTopics={setTopics}
-          setDate={setDate}
-          types={types}
-          centers={centers}
-          topics={topics}
-          date={date}
-          onApplyFilter={handleApplyFilter}
+          filterFields={filterFields}
+          filterState={filterState}
           onResetFilter={handleResetFilter}
           open={menuOpen}
         />
 
-        <SearchContent isGrid={grid} contents={contents} /> */}
+        <SearchResults isGrid={viewMode == ""} contents={searchResults} />
       </div>
     </div>
   );

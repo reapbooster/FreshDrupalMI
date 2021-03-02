@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
-import ContentCard from "./SearchCard";
-import ContentRow from "./SearchRow";
+import SearchCard from "./SearchCard";
+import SearchRow from "./SearchRow";
 
-export default function SearchContent(props) {
+export default function SearchResults(props) {
   function renderCardView(contents) {
     return (
       <div className="row">
@@ -56,7 +56,7 @@ export default function SearchContent(props) {
   }
 }
 
-SearchContent.propTypes = {
+SearchResults.propTypes = {
   contents: PropTypes.array,
   isGrid: PropTypes.bool,
 };

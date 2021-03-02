@@ -6,27 +6,64 @@ import { Button, CustomSelect } from "../Shared/Styles";
 
 export default function SearchFilter(props) {
   const {
-    types,
-    setTypes,
-    typeOptions,
-
-    centers,
-    setCenters,
-    centerOptions,
-
-    topics,
-    setTopics,
-    topicOptions,
-
-    date,
-    setDate,
-    dateOptions,
-
-    onApplyFilter,
     onResetFilter,
+    onApplyFilter,
 
     open,
+
+    filterFields,
+    filterState,
   } = props;
+
+  const [filterBuffer, setFilterBuffer] = useState({ ...filterState });
+
+  const readFieldValues = (optionType) => {
+    return filterBuffer[optionType];
+  };
+
+  const readFieldOptions = (optionType) => {
+    const options = filterFields[optionType].options;
+    return options;
+  };
+
+  const readFieldTerms = (optionType) => {
+    const options = readFieldOptions(optionType);
+    const activeValues = readFieldValues(optionType);
+
+    if (!activeValues) return;
+
+    if (filterFields[optionType]?.multiple == true) {
+      return options.filter(({ value }) => activeValues.includes(value));
+    } else {
+      return options.filter(({ value }) => value == activeValues);
+    }
+  };
+
+  const setFilterParameter = (optionType, values, multiple = true) => {
+    let filterStateSnapshot = filterBuffer;
+
+    console.log("setFilterParameter", optionType, values);
+
+    if (!values) {
+      return;
+    }
+
+    if (multiple == true) {
+      filterStateSnapshot[optionType] = values.map((o) => {
+        return o.value;
+      });
+    } else {
+      filterStateSnapshot[optionType] = values?.value;
+    }
+
+    setFilterBuffer({ ...filterStateSnapshot });
+  };
+
+  const handleApplyFilters = () => {
+    for (const field in filterBuffer) {
+      filterFields[field].setter(filterBuffer[field]);
+    }
+  };
 
   function renderFilters() {
     return (
@@ -36,10 +73,13 @@ export default function SearchFilter(props) {
             <CustomSelect>
               <Select
                 isMulti
-                value={types}
+                closeMenuOnSelect={false}
+                value={readFieldTerms("type")}
                 placeholder={"Content Types"}
-                options={typeOptions}
-                onChange={(o) => setTypes(o)}
+                options={readFieldOptions("type")}
+                getOptionLabel={({ label }) => label}
+                getOptionValue={({ value }) => value}
+                onChange={(t) => setFilterParameter("type", t)}
               />
             </CustomSelect>
           </div>
@@ -47,10 +87,13 @@ export default function SearchFilter(props) {
             <CustomSelect>
               <Select
                 isMulti
-                value={centers}
+                closeMenuOnSelect={false}
+                value={readFieldTerms("centers")}
                 placeholder={"Centers and Programs"}
-                options={centerOptions}
-                onChange={(o) => setCenters(o)}
+                options={readFieldOptions("centers")}
+                getOptionLabel={({ label }) => label}
+                getOptionValue={({ value }) => value}
+                onChange={(t) => setFilterParameter("centers", t)}
               />
             </CustomSelect>
           </div>
@@ -58,10 +101,13 @@ export default function SearchFilter(props) {
             <CustomSelect>
               <Select
                 isMulti
+                closeMenuOnSelect={false}
                 placeholder={"Topics"}
-                value={topics}
-                options={topicOptions}
-                onChange={(o) => setTopics(o)}
+                value={readFieldTerms("topics")}
+                options={readFieldOptions("topics")}
+                getOptionLabel={({ label }) => label}
+                getOptionValue={({ value }) => value}
+                onChange={(t) => setFilterParameter("topics", t)}
               />
             </CustomSelect>
           </div>
@@ -69,9 +115,11 @@ export default function SearchFilter(props) {
             <CustomSelect>
               <Select
                 placeholder={"Refine by Date"}
-                value={date}
-                options={dateOptions}
-                onChange={(o) => setDate(o)}
+                value={readFieldTerms("date")}
+                options={readFieldOptions("date")}
+                getOptionLabel={({ label }) => label}
+                getOptionValue={({ value }) => value}
+                onChange={(o) => setFilterParameter("date", o, false)}
               />
             </CustomSelect>
           </div>
@@ -79,7 +127,10 @@ export default function SearchFilter(props) {
         <div className="row">
           <div className="col-12">
             <div className=" d-flex justify-content-end">
-              <Button className="btn btn-orange mr-3" onClick={onApplyFilter}>
+              <Button
+                className="btn btn-orange mr-3"
+                onClick={handleApplyFilters}
+              >
                 Apply Filters
               </Button>
               <Button className="btn-text" onClick={onResetFilter}>
@@ -100,24 +151,9 @@ export default function SearchFilter(props) {
 }
 
 SearchFilter.propTypes = {
-  centerOptions: PropTypes.array,
-  centers: PropTypes.array,
-  setCenters: PropTypes.func,
-
-  dateOptions: PropTypes.array,
-  date: PropTypes.array,
-  setDate: PropTypes.func,
-
-  topicOptions: PropTypes.array,
-  topics: PropTypes.array,
-  setTopics: PropTypes.func,
-
-  typeOptions: PropTypes.array,
-  types: PropTypes.array,
-  setTypes: PropTypes.func,
-
+  filterFields: PropTypes.object,
+  filterState: PropTypes.object,
   onApplyFilter: PropTypes.func,
   onResetFilter: PropTypes.func,
-
   open: PropTypes.bool,
 };
