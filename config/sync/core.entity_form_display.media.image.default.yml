@@ -34,16 +34,18 @@ third_party_settings:
       region: content
     group_content:
       children:
+        - status
+        - name
+        - field_media_in_library
+        - field_photo_subject_name
+        - field_photo_subject_title
+        - field_media_image
         - field_filemime
         - field_filesize
         - field_height
         - field_width
-        - field_media_image
-        - field_photo_subject_name
-        - field_photo_subject_title
-        - field_media_in_library
       parent_name: group_tabs
-      weight: 20
+      weight: 2
       format_type: tab
       format_settings:
         id: ''
@@ -60,7 +62,7 @@ third_party_settings:
         - created
         - path
       parent_name: group_tabs
-      weight: 20
+      weight: 3
       format_type: tab
       format_settings:
         id: ''
@@ -82,7 +84,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_filemime:
-    weight: 101
+    weight: 6
     settings:
       size: 60
       placeholder: ''
@@ -90,7 +92,7 @@ content:
     type: string_textfield
     region: content
   field_filesize:
-    weight: 102
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -98,14 +100,14 @@ content:
     type: string_textfield
     region: content
   field_height:
-    weight: 103
+    weight: 8
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_media_image:
-    weight: 105
+    weight: 5
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -113,14 +115,14 @@ content:
     type: image_image
     region: content
   field_media_in_library:
-    weight: 108
+    weight: 2
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_photo_subject_name:
-    weight: 106
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -128,7 +130,7 @@ content:
     type: string_textfield
     region: content
   field_photo_subject_title:
-    weight: 107
+    weight: 4
     settings:
       size: 60
       placeholder: ''
@@ -136,7 +138,7 @@ content:
     type: string_textfield
     region: content
   field_width:
-    weight: 104
+    weight: 9
     settings:
       placeholder: ''
     third_party_settings: {  }

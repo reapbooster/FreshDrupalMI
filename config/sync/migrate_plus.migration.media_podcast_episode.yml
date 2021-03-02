@@ -141,7 +141,7 @@ process:
     default_value: full_html
   name:
     plugin: concat
-    source: 
+    source:
       - constants/title_prefix
       - episode
       - constants/title_separator
