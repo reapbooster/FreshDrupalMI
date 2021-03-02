@@ -4,10 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.article.field_centers
+    - field.field.node.article.field_collections
     - field.field.node.article.field_content
     - field.field.node.article.field_event
+    - field.field.node.article.field_events
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
+    - field.field.node.article.field_region
     - field.field.node.article.field_summary
     - field.field.node.article.field_terms
     - field.field.node.article.field_topics
@@ -57,6 +60,11 @@ third_party_settings:
         - field_topics
         - field_centers
         - field_meta_tags
+        - field_terms
+        - field_collections
+        - field_events
+        - field_region
+        - field_event
       parent_name: group_settings
       weight: 124
       format_type: tab
@@ -122,6 +130,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_collections:
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_content:
     weight: 2
     settings:
@@ -145,7 +163,17 @@ content:
     type: paragraphs_browser
     region: content
   field_event:
-    weight: 128
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_events:
+    weight: 6
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -156,7 +184,7 @@ content:
     region: content
   field_meta_tags:
     type: metatag_firehose
-    weight: 8
+    weight: 3
     region: content
     settings:
       sidebar: true
@@ -188,6 +216,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_region:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_summary:
     weight: 126
     settings:
@@ -197,7 +235,7 @@ content:
     type: string_textarea
     region: content
   field_terms:
-    weight: 127
+    weight: 4
     settings:
       match_operator: CONTAINS
       match_limit: 10
