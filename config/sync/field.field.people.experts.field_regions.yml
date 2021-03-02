@@ -1,0 +1,29 @@
+uuid: 4cfa000b-0919-4a9c-8a20-dbbfcc2a1788
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.experts
+    - field.storage.people.field_regions
+    - taxonomy.vocabulary.region
+id: people.experts.field_regions
+field_name: field_regions
+entity_type: people
+bundle: experts
+label: Regions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      region: region
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
