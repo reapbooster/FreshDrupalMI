@@ -49,9 +49,6 @@ export default function SearchToolbar(props) {
     <div id="toolbar" className="d-flex justify-content-end my-4">
       <div className="d-inline mx-3">
         <label htmlFor="sortby">Sort by:</label>
-        {sortby}
-        {perpage}
-
         <select
           name="sortby"
           className="custom-select"
