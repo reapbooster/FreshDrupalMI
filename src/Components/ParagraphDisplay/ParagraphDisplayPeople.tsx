@@ -41,7 +41,11 @@ const ParagraphDisplayPeople: React.FunctionComponent = (
   }
 
   const PeopleContainer = styled.div`
-  
+    background-color: #e3e8eb;
+
+    & a:hover{
+      background-color: #FFFFFF;
+    }
     @media screen and (min-width: 1200px){
       font-size: 1.25em;
     }

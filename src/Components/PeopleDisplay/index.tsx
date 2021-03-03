@@ -30,7 +30,11 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
   switch(view_mode) {
     case 'card':
       return (
-        <div className="col-sm-6 col-md-4 col-lg-3 p-4 text-center" style={{fontSize: '0.75em'}}>
+        <a 
+          className="col-sm-6 col-md-4 col-lg-3 p-4 text-center text-decoration-none text-dark" 
+          style={{fontSize: '0.75em', transition: 'all 0.5s ease'}}
+          href={staffData.path.alias}
+        >
           <ImageFileDisplay
             data={staffData.field_photo[0]}
             view_mode="large"
@@ -40,7 +44,7 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
           />
           <p className="font-weight-bold m-0 mt-3">{staffData.field_first_name} {staffData.field_last_name}</p>
           <p style={{color: 'dimgray'}}>{staffData.field_pgtitle}</p>
-        </div>
+        </a>
       );
 
     default:

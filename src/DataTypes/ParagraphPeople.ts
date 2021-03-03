@@ -57,7 +57,8 @@ export default class ParagraphPeople
 
     apiParams
       .addInclude(['field_photo'])
-      .addGroup('tag-group', 'AND');
+      .addGroup('tag-group', 'AND')
+      .addSort('field_last_name');
 
     if (filterCenters != null){
       apiParams.addFilter('field_centers.id', filterCenters, '=', 'tag-group');
