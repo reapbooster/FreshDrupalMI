@@ -52,9 +52,9 @@ export default function SearchToolbar(props) {
         <select
           name="sortby"
           className="custom-select"
-          options={sortOptions}
           value={sortby}
-          onChange={setSortby}
+          options={sortOptions}
+          onChange={(e) => setSortby(e.target.value)}
         >
           {sortOptions.map((item, index) => (
             <option key={index} value={item.value}>
@@ -65,13 +65,12 @@ export default function SearchToolbar(props) {
       </div>
       <div className="d-inline mx-3">
         <label htmlFor="perpage">Results per page:</label>
-
         <select
           name="perpage"
           className="custom-select"
-          onChange={setPerpage}
-          options={perpageOptions}
           value={perpage}
+          options={perpageOptions}
+          onChange={(e) => setPerpage(e.target.value)}
         >
           {perpageOptions.map((item, index) => (
             <option key={index} value={item}>

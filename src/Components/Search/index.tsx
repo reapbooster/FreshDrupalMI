@@ -57,12 +57,12 @@ export default function Search() {
   const [menuOpen, setMenuOpen] = useState();
 
   // URL-State parameters
-  const [sortby, setSortby] = useQueryState("sortby", false);
-  const [perpage, setPerpage] = useQueryState("perpage", false);
+  const [sortby, setSortby] = useQueryState("sortby", "");
+  const [perpage, setPerpage] = useQueryState("perpage", 20);
   const [type, setType] = useQueryState("type", []);
   const [topics, setTopics] = useQueryState("topics", []);
   const [centers, setCenters] = useQueryState("centers", []);
-  const [date, setDate] = useQueryState("date", false);
+  const [date, setDate] = useQueryState("date", "");
   const [viewMode, setViewMode] = useQueryState("view", "grid");
 
   const { dateOptions, typeOptions } = staticData;
@@ -117,14 +117,14 @@ export default function Search() {
     locationChanged();
   }, []);
 
-  const locationChanged = () => {
+  const locationChanged = debounce(() => {
     console.log("locationChanged");
     const keywords = getHashParams()?.keywords;
     if (keywords) {
       setQuery(keywords);
       setQueryInputValue(keywords);
     }
-  };
+  });
 
   useEffect(() => {
     window.addEventListener("hashchange", locationChanged, false);
@@ -175,9 +175,9 @@ export default function Search() {
     // }
   }, [queryInputValue]);
 
-  useEffect(() => {
-    console.log("filter state changed", filterState);
-  }, [type, topics, centers, date, sortby, perpage]);
+  // useEffect(() => {
+  //   console.log("filter state changed", filterState);
+  // }, [type, topics, centers, date, sortby, perpage]);
 
   // // Helper to make option array
   // const makeOptions = (options) => {
