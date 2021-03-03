@@ -10,10 +10,11 @@ import {
   ParagraphSlideTiles,
   ParagraphTilesSponsors,
 } from "../../DataTypes/ParagraphTiles";
-import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
-import ParagraphSlide from "../../DataTypes/ParagraphSlide";
+import ParagraphPeople from "../../DataTypes/ParagraphPeople";
 import ParagraphPodcastEpisode from "../../DataTypes/ParagraphPodcastEpisode";
 import ParagraphProgramDay from "../../DataTypes/ParagraphProgramDay";
+import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
+import ParagraphSlide from "../../DataTypes/ParagraphSlide";
 import ParagraphStats from "../../DataTypes/ParagraphStats";
 /**
  * Create the DataModel
@@ -41,6 +42,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphEntityQueueTiles(incoming);
     case "paragraph--media_tiles":
       return new ParagraphMediaTiles(incoming);
+    case "paragraph--people":
+      return new ParagraphPeople(incoming);
     case "paragraph--podcast_episode":
       return new ParagraphPodcastEpisode(incoming);
     case "paragraph--program_day":
