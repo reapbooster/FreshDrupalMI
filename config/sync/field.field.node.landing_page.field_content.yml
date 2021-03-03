@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.body_content
     - paragraphs.paragraphs_type.content_tiles
     - paragraphs.paragraphs_type.media_tiles
+    - paragraphs.paragraphs_type.people
     - paragraphs.paragraphs_type.pull_quote
     - paragraphs.paragraphs_type.slide
     - paragraphs.paragraphs_type.stats
@@ -38,6 +39,7 @@ settings:
       content_tiles: content_tiles
       media_tiles: media_tiles
       slide: slide
+      people: people
       stats: stats
       tiles_sponsors: tiles_sponsors
     target_bundles_drag_drop:
@@ -65,6 +67,9 @@ settings:
       paragraph_tab:
         weight: 24
         enabled: false
+      people:
+        enabled: true
+        weight: 27
       podcast_episode:
         weight: 20
         enabled: false
