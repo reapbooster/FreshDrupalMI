@@ -46,20 +46,28 @@ TextEllipsis.propTypes = {
   text: PropTypes.string,
 };
 
-function SearchCard({ image, type, title, text }) {
+function SearchCard(props) {
+  const { image, type, title, text, link } = props;
+
   // TODO: Conditional image output, clean type (when available from backend)
   const renderImage = image ? (
-    <div className="content-image-wrapper">
-      <img alt="content" src={image} className="card-image" />
-      {type ? <span>{type}</span> : ""}
+    <div
+      className="content-image-wrapper"
+      style={{
+        "background-image": `url(${image})`,
+        "background-size": "cover",
+        height: "300px",
+      }}
+    >
+      {!!type ? <span>{type}</span> : ""}
     </div>
   ) : (
-    ""
+    false
   );
 
   return (
     <div className="content-card card d-flex flex-column">
-      {renderImage}
+      <a href={link}>{renderImage}</a>
       <div className="content-text-wrapper">
         <h5>{title}</h5>
         {text && text.length > MAX_LENGTH_LIMIT ? (
@@ -78,6 +86,7 @@ SearchCard.propTypes = {
   image: PropTypes.string,
   text: PropTypes.string,
   title: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default SearchCard;

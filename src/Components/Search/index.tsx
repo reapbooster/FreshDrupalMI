@@ -116,14 +116,19 @@ export default function Search() {
     locationChanged();
   }, []);
 
-  const locationChanged = debounce(() => {
-    console.log("locationChanged");
-    const keywords = getHashParams()?.keywords;
-    if (keywords) {
-      setQuery(keywords);
-      setQueryInputValue(keywords);
-    }
-  });
+  const locationChanged = debounce(
+    () => {
+      console.log("locationChanged");
+      const keywords = getHashParams()?.keywords;
+      if (keywords) {
+        setQuery(keywords);
+        setQueryInputValue(keywords);
+      }
+      fetchSearchResults();
+    },
+    250,
+    { trailing: true }
+  );
 
   useEffect(() => {
     window.addEventListener("hashchange", locationChanged, false);
@@ -196,6 +201,8 @@ export default function Search() {
   // };
 
   const makeOptions = (items) => {
+    if (!items) return;
+
     return items.map((o) => {
       return {
         value: o?.attributes?.machine_name ?? o?.id,
@@ -204,12 +211,14 @@ export default function Search() {
     });
   };
 
-  const getSearchResults = async (params) => {
-    if (!Object.entries(params).length) {
+  const fetchSearchResults = async () => {
+    const params = getHashParams();
+    if (!params || Object.entries(params).length === 0) {
       return;
     }
     let res = await contentAPI.fetchSearchResults(params);
-    setSearchResults(makeOptions(res?.data));
+    console.log(res);
+    setSearchResults(res);
   };
 
   const getTopics = async () => {
@@ -221,22 +230,6 @@ export default function Search() {
     let res = await contentAPI.fetchCenters();
     setCenterOptions(makeOptions(res?.data));
   };
-
-  // const handleResetFilter = () => {
-  //   setType([]);
-  //   setTopics([]);
-  //   setCenters([]);
-  //   setDate(false);
-  //
-  //   setFilterState({
-  //     type,
-  //     centers,
-  //     topics,
-  //     date,
-  //     sortby,
-  //     perpage,
-  //   });
-  // };
 
   //
   // Autosuggest & methods
@@ -256,7 +249,7 @@ export default function Search() {
   };
 
   const handleAutosuggestQueryChange = (selection) => {
-    console.log("Handle query change from selection", selection);
+    // console.log("Handle query change from selection", selection);
     if (selection?.label) {
       handleAutosuggestCascade(selection.label);
     }
@@ -339,7 +332,7 @@ export default function Search() {
           open={menuOpen}
         />
 
-        <SearchResults isGrid={viewMode == ""} contents={searchResults} />
+        <SearchResults isGrid={viewMode != "list"} contents={searchResults} />
       </div>
     </div>
   );

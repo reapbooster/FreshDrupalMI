@@ -10,9 +10,9 @@ export const typeOptions = [
 
 export const dateOptions = [
   { value: false, label: "Any" },
-  { value: "month", label: "Within the last month" },
-  { value: "6month", label: "Within the six last month" },
-  { value: "year", label: "Within the last year" },
+  { value: "1_month", label: "Within the last month" },
+  { value: "6_month", label: "Within the six last month" },
+  { value: "1_year", label: "Within the last year" },
 ];
 
 export const sortOptions = [

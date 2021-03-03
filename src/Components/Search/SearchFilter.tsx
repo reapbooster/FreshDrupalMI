@@ -5,14 +5,7 @@ import Select from "react-select";
 import { Button, CustomSelect } from "../Shared/Styles";
 
 export default function SearchFilter(props) {
-  const {
-    onApplyFilter,
-
-    open,
-
-    filterFields,
-    filterState,
-  } = props;
+  const { filterFields, filterState, open } = props;
 
   const [filterBuffer, setFilterBuffer] = useState({ ...filterState });
 
@@ -63,13 +56,16 @@ export default function SearchFilter(props) {
   };
 
   const handleResetFilters = () => {
-    let newBuffer = {};
+    let newBuffer = { ...filterBuffer };
 
-    for (const field in filterBuffer) {
-      filterFields[field].setter(null);
-      newBuffer[field] = [];
+    for (const field in filterFields) {
+      console.log("buffer", field);
+      if (["type", "topics", "centers", "date"].includes(field)) {
+        newBuffer[field] = null;
+      }
     }
-    setFilterBuffer(newBuffer);
+    setFilterBuffer({ ...newBuffer });
+    handleApplyFilters();
   };
 
   function renderFilters() {
@@ -164,7 +160,6 @@ export default function SearchFilter(props) {
 SearchFilter.propTypes = {
   filterFields: PropTypes.object,
   filterState: PropTypes.object,
-  onApplyFilter: PropTypes.func,
   onResetFilter: PropTypes.func,
   open: PropTypes.bool,
 };

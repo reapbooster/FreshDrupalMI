@@ -1,3 +1,6 @@
+import { DrupalJsonApiParams } from "drupal-jsonapi-params";
+import moment from "moment";
+
 const fetchSuggestions = async (params) => {
   try {
     params._format = "json";
@@ -14,12 +17,35 @@ const fetchSuggestions = async (params) => {
 
 const fetchSearchResults = async (params) => {
   try {
-    // params._format = "json";
+    console.log("params api, raw", params);
+
+    if (!params?.keywords) {
+      return;
+    }
+
+    const apiParams = new DrupalJsonApiParams();
+
+    if (params?.perpage) {
+      apiParams.addPageLimit(params?.perpage);
+    }
+
+    if (params?.date) {
+      const parsedDate = params?.date.split("_");
+      const date = moment().subtract(...parsedDate);
+      apiParams.addFilter("created", date.format("YYYY-MM-DD"), ">=");
+    }
+
+    // const urlencodedQueryString = apiParams.getQueryString();
+    const queryString = apiParams.getQueryString({ encode: false });
+    // console.log("query string", queryString, urlencodedQueryString);
 
     const response = await fetch(
-      `/api/v1.0/search?` + new URLSearchParams(params)
+      `/api/v1.0/search?_format=json&keywords=${params?.keywords}&` +
+        queryString
     );
-    return await response.json();
+    const data = await response.json();
+    // console.log(data);
+    return data;
   } catch (err) {
     return err;
   }

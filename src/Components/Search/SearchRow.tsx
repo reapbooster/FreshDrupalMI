@@ -48,10 +48,10 @@ TextEllipsis.propTypes = {
 
 function SearchRow({ image, type, title, text }) {
   return (
-    <div className="content-row d-flex w-100 p-3">
-      <div className="row">
+    <div class="card mb-1">
+      <div className="row d-flex">
         <div className="col-lg-9 col-sm-6">
-          <div className="content-text-wrapper">
+          <div className="content-text-wrapper px-4 py-4">
             <h5>{title}</h5>
             {text && text.length > MAX_LENGTH_LIMIT ? (
               <TextEllipsis text={text} />
@@ -61,8 +61,14 @@ function SearchRow({ image, type, title, text }) {
           </div>
         </div>
         <div className="col-lg-3 col-sm-6">
-          <div className="content-image-wrapper">
-            <img alt="content" src={image} className="card-image" />
+          <div
+            className="content-image-wrapper"
+            style={{
+              "background-image": `url(${image})`,
+              "background-size": "cover",
+              height: "300px",
+            }}
+          >
             <span>{type}</span>
           </div>
         </div>

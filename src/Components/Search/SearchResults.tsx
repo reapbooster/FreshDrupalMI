@@ -4,21 +4,28 @@ import SearchCard from "./SearchCard";
 import SearchRow from "./SearchRow";
 
 export default function SearchResults(props) {
+  const itemProps = (content) => {
+    return {
+      id: content?.uuid,
+      image:
+        content?.field_photo ??
+        content?.field_thumbnail_uri ??
+        content.field_title_card_image ??
+        content?.field_cover ??
+        "https://placehold.it/800x600",
+      type: content?.entity_type_id,
+      title: content?.label ?? content?.title,
+      text: content?.search_api_excerpt,
+      link: content?.url,
+    };
+  };
+
   function renderCardView(contents) {
     return (
       <div className="row">
         {contents.map((content, index) => (
           <div key={index} className="col-lg-3 col-sm-6 col-xs-12 mb-5">
-            <SearchCard
-              id={content?.attributes.uuid}
-              image={
-                content?.attributes?.path?.alias ??
-                "https://placehold.it/800x600"
-              }
-              type={content?.type.split("--")[0].toUpperCase()}
-              title={content?.attributes.title}
-              text={content?.search_api_excerpt}
-            />
+            <SearchCard {...itemProps(content)} />
           </div>
         ))}
       </div>
@@ -30,13 +37,7 @@ export default function SearchResults(props) {
       <div className="d-flex flex-column">
         {contents.map((content, index) => (
           <div key={index}>
-            <SearchRow
-              id={content?.attributes.uuid}
-              image={content?.attributes?.path?.alias}
-              type={content?.attributes.type}
-              title={content?.attributes.title}
-              text={content?.search_api_excerpt}
-            />
+            <SearchRow {...itemProps(content)} />
           </div>
         ))}
       </div>
@@ -45,7 +46,7 @@ export default function SearchResults(props) {
 
   if (props.contents?.length > 0) {
     return (
-      <div className="d-flex">
+      <div className="search-results container">
         {props.isGrid
           ? renderCardView(props.contents)
           : renderListView(props.contents)}
