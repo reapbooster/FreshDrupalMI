@@ -6,7 +6,6 @@ import { Button, CustomSelect } from "../Shared/Styles";
 
 export default function SearchFilter(props) {
   const {
-    onResetFilter,
     onApplyFilter,
 
     open,
@@ -45,10 +44,8 @@ export default function SearchFilter(props) {
     console.log("setFilterParameter", optionType, values);
 
     if (!values) {
-      return;
-    }
-
-    if (multiple == true) {
+      filterStateSnapshot[optionType] = false;
+    } else if (multiple == true) {
       filterStateSnapshot[optionType] = values.map((o) => {
         return o.value;
       });
@@ -63,6 +60,16 @@ export default function SearchFilter(props) {
     for (const field in filterBuffer) {
       filterFields[field].setter(filterBuffer[field]);
     }
+  };
+
+  const handleResetFilters = () => {
+    let newBuffer = {};
+
+    for (const field in filterBuffer) {
+      filterFields[field].setter(null);
+      newBuffer[field] = [];
+    }
+    setFilterBuffer(newBuffer);
   };
 
   function renderFilters() {
@@ -80,6 +87,7 @@ export default function SearchFilter(props) {
                 getOptionLabel={({ label }) => label}
                 getOptionValue={({ value }) => value}
                 onChange={(t) => setFilterParameter("type", t)}
+                keys={filterState.type}
               />
             </CustomSelect>
           </div>
@@ -94,6 +102,7 @@ export default function SearchFilter(props) {
                 getOptionLabel={({ label }) => label}
                 getOptionValue={({ value }) => value}
                 onChange={(t) => setFilterParameter("centers", t)}
+                keys={filterState.centers}
               />
             </CustomSelect>
           </div>
@@ -108,6 +117,7 @@ export default function SearchFilter(props) {
                 getOptionLabel={({ label }) => label}
                 getOptionValue={({ value }) => value}
                 onChange={(t) => setFilterParameter("topics", t)}
+                keys={filterState.topics}
               />
             </CustomSelect>
           </div>
@@ -120,6 +130,7 @@ export default function SearchFilter(props) {
                 getOptionLabel={({ label }) => label}
                 getOptionValue={({ value }) => value}
                 onChange={(o) => setFilterParameter("date", o, false)}
+                keys={filterState.date}
               />
             </CustomSelect>
           </div>
@@ -133,7 +144,7 @@ export default function SearchFilter(props) {
               >
                 Apply Filters
               </Button>
-              <Button className="btn-text" onClick={onResetFilter}>
+              <Button className="btn-text" onClick={handleResetFilters}>
                 Reset All Filters
               </Button>
             </div>

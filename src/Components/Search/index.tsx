@@ -68,8 +68,16 @@ export default function Search() {
   const { dateOptions, typeOptions } = staticData;
   const [topicOptions, setTopicOptions] = useState([]);
   const [centerOptions, setCenterOptions] = useState([]);
-
   const [searchResults, setSearchResults] = useState([]);
+
+  const [filterState, setFilterState] = useState({
+    type,
+    centers,
+    topics,
+    date,
+    sortby,
+    perpage,
+  });
 
   const filterFields = {
     type: {
@@ -99,15 +107,6 @@ export default function Search() {
       setter: setPerpage,
       options: perpageOptions,
     },
-  };
-
-  const filterState = {
-    type,
-    centers,
-    topics,
-    date,
-    sortby,
-    perpage,
   };
 
   useEffect(() => {
@@ -153,27 +152,30 @@ export default function Search() {
     }
   };
 
-  useEffect(() => {
-    // TODO: Debounce/Throttle this
+  useEffect(
+    debounce(() => {
+      // TODO: Debounce/Throttle this
 
-    if (
-      !!!queryInputValue ||
-      queryInputValue?.length < minAutosuggestCharacters
-    ) {
-      setSuggestions([]);
-      return;
-    }
+      if (
+        !!!queryInputValue ||
+        queryInputValue?.length < minAutosuggestCharacters
+      ) {
+        setSuggestions([]);
+        return;
+      }
 
-    // typeof throttled?.cancel === "function" && throttled.cancel();
+      // typeof throttled?.cancel === "function" && throttled.cancel();
 
-    getSuggestions();
+      getSuggestions();
 
-    // if (queryInputValue?.length < 5) {
-    //   throttled = throttle(cfn, 500);
-    // } else {
-    //   throttled = debounce(cfn, 500);
-    // }
-  }, [queryInputValue]);
+      // if (queryInputValue?.length < 5) {
+      //   throttled = throttle(cfn, 500);
+      // } else {
+      //   throttled = debounce(cfn, 500);
+      // }
+    }, 250),
+    [queryInputValue]
+  );
 
   // useEffect(() => {
   //   console.log("filter state changed", filterState);
@@ -220,107 +222,20 @@ export default function Search() {
     setCenterOptions(makeOptions(res?.data));
   };
 
-  // const handleViewChange = (mode) => {
-  //   setView(mode);
-  // };
-
-  // const handleSortbyChange = (value) => {
-  //   setSortBy(value);
-  // };
+  // const handleResetFilter = () => {
+  //   setType([]);
+  //   setTopics([]);
+  //   setCenters([]);
+  //   setDate(false);
   //
-  // const handlePerpageChange = (value) => {
-  //   setPerpage(value);
-  // };
-  //
-  // const handleApplyFilter = (filterState) => {
-  //   let params = {
-  //     ...getHashParams(),
-  //     ...filterState,
-  //   };
-  //
-  //   console.log(params);
-  //
-  //   let typesArray = type?.map((t) => {
-  //     return t.value;
+  //   setFilterState({
+  //     type,
+  //     centers,
+  //     topics,
+  //     date,
+  //     sortby,
+  //     perpage,
   //   });
-  //   let topicsArray = topics?.map((topic) => topic.value);
-  //   let centersArray = centers?.map((center) => center.value);
-  //
-  //   typesArray?.length ? (params.type = typesArray) : delete params.type;
-  //   delete params.types;
-  //
-  //   topicsArray?.length ? (params.topics = topicsArray) : delete params.topics;
-  //   centersArray?.length
-  //     ? (params.centers = centersArray)
-  //     : delete params.centers;
-  //
-  //   if (!date?.value || date.value == "default") {
-  //     delete params.date;
-  //   } else {
-  //     params.date = date.value;
-  //   }
-  //
-  //   if (!sortby || sortby == "default") {
-  //     delete params.sortby;
-  //   } else {
-  //     params.perpage = perpage;
-  //   }
-  //
-  //   if (!perpage || perpage == 20) {
-  //     delete params.perpage;
-  //   } else {
-  //     params.perpage = perpage;
-  //   }
-  //
-  //   const qs = Object.keys(params)
-  //     .map((key) => `${key}=${params[key]}`)
-  //     .join("&");
-  //
-  //   window.location.replace("#" + qs);
-  //
-  //   // getSearchResults(params);
-  // };
-
-  const handleResetFilter = () => {
-    setTypes([]);
-    setTopics([]);
-    setCenters([]);
-    setDate(false);
-
-    // const params = {
-    //   keywords: new URL(window.location.hash.replace("#", "?")).search,
-    // };
-    //
-    // const qs = Object.keys(params)
-    //   .map((key) => `${key}=${params[key]}`)
-    //   .join("&");
-    //
-    // router.push("?" + qs);
-  };
-  //
-  // const setFilterStates = async () => {
-  //   console.log("Set Filter State", router.query);
-  //
-  //   for (const key in router.query) {
-  //     const values = router.query[key].split(",");
-  //
-  //     if (values.length == 0) {
-  //       continue;
-  //     }
-  //
-  //     if (filterFields?.hasOwnProperty(key)) {
-  //       if (filterFields[key]?.single) {
-  //         filterFields[key].setter(values[0]);
-  //       } else {
-  //         let valueArray = filterFields[key].options.filter((e) => {
-  //           if (values.includes(e.value)) {
-  //             return e;
-  //           }
-  //         });
-  //         filterFields[key].setter(valueArray);
-  //       }
-  //     }
-  //   }
   // };
 
   //
@@ -421,7 +336,6 @@ export default function Search() {
         <SearchFilter
           filterFields={filterFields}
           filterState={filterState}
-          onResetFilter={handleResetFilter}
           open={menuOpen}
         />
 
