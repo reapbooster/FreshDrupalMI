@@ -82,6 +82,10 @@ export class ParagraphDisplayTiles extends React.Component<
         ? '#f0f3f5'
         : '#FFFFFF';
 
+      let elSubheader = (data.field_section_subheader !== undefined && data.field_section_subheader !== null)
+        ? <p>{data.field_section_subheader}</p>
+        : '';
+
       return (
         <section
           style={{backgroundColor: containerBackgroundColor}}
@@ -101,6 +105,7 @@ export class ParagraphDisplayTiles extends React.Component<
                 >
                   {data.field_title}
                 </h2>
+                {elSubheader}
               </div>
             </div>
             <ListDisplay

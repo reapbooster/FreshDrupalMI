@@ -9,6 +9,7 @@ import ParagraphDisplayPullQuote from "./ParagraphDisplayPullQuote";
 import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
 import ParagraphDisplayStats from "./ParagraphDisplayStats"
 import ParagraphDisplayTiles from "./ParagraphDisplayTiles";
+import ParagraphDisplayTilesSocial from "./ParagraphDisplayTilesSocial";
 
 /**
  * Create the View Component
@@ -43,6 +44,8 @@ export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
     case "paragraph--slide_tiles":
     case "paragraph--tiles_sponsors":
       return ParagraphDisplayTiles;
+    case "paragraph--tiles_social":
+      return ParagraphDisplayTilesSocial;
 
     default:
       console.error(`missing config for ${incoming.type}`);

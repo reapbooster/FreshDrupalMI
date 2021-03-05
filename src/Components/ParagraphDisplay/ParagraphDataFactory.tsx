@@ -8,6 +8,7 @@ import {
   ParagraphEventTiles,
   ParagraphMediaTiles,
   ParagraphSlideTiles,
+  ParagraphTilesSocial,
   ParagraphTilesSponsors,
 } from "../../DataTypes/ParagraphTiles";
 import ParagraphPeople from "../../DataTypes/ParagraphPeople";
@@ -56,6 +57,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphSlideTiles(incoming);
     case "paragraph--stats":
       return new ParagraphStats(incoming);
+    case "paragraph--tiles_social":
+      return new ParagraphTilesSocial(incoming);
     case "paragraph--tiles_sponsors":
       return new ParagraphTilesSponsors(incoming);
 
