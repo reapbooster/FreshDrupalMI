@@ -18,7 +18,7 @@ const SponsorTileWrapper = styled.div`
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 
   &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    // box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   &.sponsor-image-medium img.card-img {
