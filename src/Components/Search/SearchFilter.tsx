@@ -71,7 +71,7 @@ export default function SearchFilter(props) {
   function renderFilters() {
     return (
       <div>
-        <div className="row my-4">
+        <div className="row mt-2 my-4">
           <div className=" col-sm-6 col-lg-3">
             <CustomSelect>
               <Select
@@ -131,7 +131,7 @@ export default function SearchFilter(props) {
             </CustomSelect>
           </div>
         </div>
-        <div className="row">
+        <div className="row mb-4">
           <div className="col-12">
             <div className=" d-flex justify-content-end">
               <Button

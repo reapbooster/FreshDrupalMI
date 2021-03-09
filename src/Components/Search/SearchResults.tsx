@@ -16,6 +16,7 @@ export default function SearchResults(props) {
       type: content?.entity_type_id,
       title: content?.label ?? content?.title,
       text: content?.search_api_excerpt,
+      // text: "",
       link: content?.url,
     };
   };

@@ -64,12 +64,12 @@ function SearchRow({ image, type, title, text }) {
           <div
             className="content-image-wrapper"
             style={{
-              "background-image": `url(${image})`,
-              "background-size": "cover",
+              backgroundImage: `url(${image})`,
+              backgroundSize: "cover",
               height: "300px",
             }}
           >
-            <span>{type}</span>
+            {!!type && type != "node" ? <span>{type}</span> : ""}
           </div>
         </div>
       </div>

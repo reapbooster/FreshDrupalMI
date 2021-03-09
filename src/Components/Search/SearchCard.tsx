@@ -51,14 +51,8 @@ function SearchCard(props) {
 
   // TODO: Conditional image output, clean type (when available from backend)
   const renderImage = image ? (
-    <div
-      className="content-image-wrapper"
-      style={{
-        "background-image": `url(${image})`,
-        "background-size": "cover",
-        height: "300px",
-      }}
-    >
+    <div className="content-image-wrapper">
+      <img alt="content" src={image} className="card-image" />
       {!!type ? <span>{type}</span> : ""}
     </div>
   ) : (
@@ -69,7 +63,9 @@ function SearchCard(props) {
     <div className="content-card card d-flex flex-column">
       <a href={link}>{renderImage}</a>
       <div className="content-text-wrapper">
-        <h5>{title}</h5>
+        <h5>
+          <a href={link}>{title}</a>
+        </h5>
         {text && text.length > MAX_LENGTH_LIMIT ? (
           <TextEllipsis text={text} />
         ) : (

@@ -7,11 +7,62 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 import styled from "styled-components";
 
-import { Button, CustomSelect } from "../Shared/Styles";
+import { Button, CustomSelect, theme } from "../Shared/Styles";
 
 import SearchFilter from "./SearchFilter";
 import SearchToolbar from "./SearchToolbar";
 import SearchResults from "./SearchResults";
+
+const SearchWrapper = styled.div`
+  .btn,
+  .card,
+  select {
+    border-radius: 0;
+  }
+
+  .content-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .content-image-wrapper {
+      position: relative;
+      img {
+        width: 100%;
+        object-fit: cover;
+        object-position: 0 25%;
+        height: 200px;
+      }
+      span {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 8px 16px;
+        background: ${theme.colors.secondary};
+        color: white;
+      }
+    }
+    .content-text-wrapper {
+      padding: 20px;
+    }
+
+    h5 a {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+
+  #filter-collapse {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    background: #ffffff;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  }
+`;
 
 const throttle = require("lodash/throttle"),
   debounce = require("lodash/debounce");
@@ -279,7 +330,7 @@ export default function Search() {
   };
 
   return (
-    <div id="search-content" className="my-3">
+    <SearchWrapper id="search-content" className="my-3">
       <div className={containerClass}>
         <div className="row">
           <div className="col-md-8 col-lg-9">
@@ -334,7 +385,7 @@ export default function Search() {
 
         <SearchResults isGrid={viewMode != "list"} contents={searchResults} />
       </div>
-    </div>
+    </SearchWrapper>
   );
 }
 
