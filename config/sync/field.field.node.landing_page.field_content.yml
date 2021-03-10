@@ -12,6 +12,7 @@ dependencies:
     - paragraphs.paragraphs_type.pull_quote
     - paragraphs.paragraphs_type.slide
     - paragraphs.paragraphs_type.stats
+    - paragraphs.paragraphs_type.tiles_social
     - paragraphs.paragraphs_type.tiles_sponsors
   module:
     - entity_reference_revisions
@@ -35,66 +36,70 @@ settings:
     negate: 0
     target_bundles:
       body_content: body_content
+      people: people
       pull_quote: pull_quote
       content_tiles: content_tiles
       media_tiles: media_tiles
-      slide: slide
-      people: people
-      stats: stats
+      tiles_social: tiles_social
       tiles_sponsors: tiles_sponsors
+      slide: slide
+      stats: stats
     target_bundles_drag_drop:
       author:
-        weight: 13
+        weight: -30
         enabled: false
       block:
-        weight: 14
+        weight: -29
         enabled: false
       body_content:
         enabled: true
-        weight: 3
+        weight: -39
       content_tiles:
         enabled: true
-        weight: 16
+        weight: -36
       event_tiles:
-        weight: 17
+        weight: -28
         enabled: false
       items_from_an_entityqueue:
-        weight: 18
+        weight: -27
         enabled: false
       media_tiles:
         enabled: true
-        weight: 19
+        weight: -35
       paragraph_tab:
-        weight: 24
+        weight: -24
         enabled: false
       people:
         enabled: true
-        weight: 27
+        weight: -38
       podcast_episode:
-        weight: 20
+        weight: -26
         enabled: false
       program_day:
-        weight: 26
+        weight: -22
         enabled: false
       pull_quote:
         enabled: true
-        weight: 4
+        weight: -37
       slide:
         enabled: true
-        weight: 22
+        weight: -32
       slide_tiles:
-        weight: 23
+        weight: -25
         enabled: false
       stats:
         enabled: true
-        weight: 30
+        weight: -31
+      tiles_social:
+        enabled: true
+        weight: -34
       tiles_sponsors:
         enabled: true
-        weight: 32
+        weight: -33
       tiles_taxonomy:
-        weight: 31
+        weight: -21
         enabled: false
       unmigrated_paragraph:
-        weight: 24
+        weight: -23
         enabled: false
 field_type: entity_reference_revisions
