@@ -40,10 +40,13 @@ customElements.define(
       console.log("toggle", this);
       if (this.classList.contains("d-flex")) {
         this.classList.remove("d-flex");
-        this.classList.add("d-none");
+        document.querySelector("#menu-reveal").classList.remove("is-active");
+        document.querySelector("body").classList.remove("navbar-active");
       } else {
         this.classList.add("d-flex");
         this.classList.remove("d-none");
+        document.querySelector("#menu-reveal").classList.add("is-active");
+        document.querySelector("body").classList.add("navbar-active");
       }
     }
   }
