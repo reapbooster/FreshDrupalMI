@@ -23,6 +23,7 @@
     "test": "jest",
     "dev": "gulp watch",
     "build": "gulp build",
+    "sass": "gulp themeBuild",
     "schema:fetch": "bin/getSchema",
     "schema:generate": "bin/generateCode --srcPath ./src/DataTypes/openapi3.json --destPath ./src/DataTypes --separatedFiles false",
     "schema:codegen": "yarn run schema:fetch && yarn run schema:generate"

@@ -18,8 +18,8 @@
       {{ drupal_block('system_branding_block') }}
     </div>
     <div class="col text-right">
-      <div class="row">
-        <div class="col-10">
+      <div class="d-flex">
+        <div class="col-9 col-sm-10 d-none d-sm-block">
           {% set currenturl = url('<current>')  %}
 
           {% if '/search' in currenturl|render|render %}
@@ -42,8 +42,13 @@
             </form>
           {%  endif %}
         </div>
-        <div class="col text-right">
-          <a id="menu-reveal" href="#" class="fas fa-bars fa-lg">&nbsp;</a>
+
+        <div class="col text-right px-0">
+          <div class="hamburger hamburger--squeeze js-hamburger" id="menu-reveal">
+            <div class="hamburger-box">
+              <div class="hamburger-inner"></div>
+            </div>
+          </div>
         </div>
       </div>
 

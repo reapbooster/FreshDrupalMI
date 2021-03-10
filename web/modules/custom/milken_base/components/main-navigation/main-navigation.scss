@@ -1,19 +1,27 @@
 @import "~FrontEndTheme/scss/variables_milken";
 
 milken-menu-main {
-  position: absolute;
-  z-index: 9999;
-  left: 0px;
-  top: 6vh;
+  position: fixed;
+  z-index: 998;
+  left: 0;
+  right: 0;
+  top: 74px;
   display:none;
+  background-color: $backgroundLight;
+
+  &.d-flex {
+    bottom: 0;
+  }
+
   menu-column {
-    background-color: $backgroundLight;
-    padding: 20px;
-    min-height: 100vh;
+    padding: 15px;
+
+    @media (min-width: ($breakpointTablet)) {
+      padding: 30px 0 30px 30px !important;
+    }
+
     @media (max-width: ($breakpointTablet)) {
-      height: 100%;
-      overflow-y: scroll;
-      top: 2px;
+
       position: relative;
     }
 
@@ -25,9 +33,9 @@ milken-menu-main {
         font-size: 20px;
       }
     }
-    .right-column {
-      padding-top: 5px;
-    }
+    // .right-column {
+    //   padding-top: 5px;
+    // }
     ul {
 
       list-style: none;

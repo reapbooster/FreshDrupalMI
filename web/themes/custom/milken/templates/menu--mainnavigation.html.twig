@@ -23,9 +23,9 @@
 {{ attach_library('milken_base/main_navigation') }}
 
 
-<milken-menu-{{ menu_name }} class="container-fluid d-flex">
+<milken-menu-{{ menu_name }} class="d-flex">
   {% for key,value in items %}
-    <menu-column class="col col-md-3 col-sm-12" id="menu-{{ key }}">
+    <menu-column class="col-12 col-lg-3 col-md-6" id="menu-{{ key }}">
       <h5 slot="column-title">{{ value.title }}</h5>
       <ul slot="column-content" class="menu-content">
         {% if value.below %}

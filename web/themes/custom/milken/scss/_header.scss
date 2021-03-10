@@ -184,30 +184,56 @@
 #page > header {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   max-height: 100vh;
-  height: 64px;
-  display: table;
-  padding: 0 20px;
-  width: 100%;
-  overflow:hidden;
-  z-index: 60;
+  // height: 64px;
+  // display: table;
+  // padding: 0 20px;
+  // width: 100%;
+  // overflow: hidden;
+  z-index: 999;
   background-color: white;
-  -webkit-box-shadow: 0 1px 4px 0 #d7dbdd;
-  -moz-box-shadow: 0 1px 4px 0 #d7dbdd;
-  box-shadow: 0 1px 4px 0 #d7dbdd;
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
 
   h1 { display:none; }
 
   img#site-logo {
-    min-width: 150px;
-    max-width: 280px;
-    width: 100%;
+    height: 65px;
+    object-fit: contain;
+    max-width: 55vw;
+    padding: 3px;
   }
 
+  .navbar {
+    padding: 0;
+  }
 
-  #navbar-search.form-inline {
+  input#navbar-search-input-keywords {
+    padding-left: 55px;
+    border-radius: 0 !important;
+    background: #ebeff2;
+  }
 
+  .input-group-prepend {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
 
+    .input-group-text {
+      background: transparent;
+      border: 0;
+    }
+
+    a {
+      color: #404040;
+      font-size: 24px;
+      text-decoration: none;
+    }
   }
 
 }
@@ -320,4 +346,28 @@ header .hamburguer-menu::after, header .hamburguer-menu-centers:after {
 .search-api-autocomplete-search .ui-menu-item-wrapper.ui-state-active .search-api-autocomplete-suggestion{
   background:transparent;
   color:inherit;
+}
+
+/* NAVBAR STYLES */
+
+navbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 999;
+
+    h2 {
+      display: none;
+    }
+
+}
+
+body.navbar-active  {
+  navbar {
+    bottom: 0;
+    overflow-y: scroll;
+  }
+
+  overflow: hidden;
+  height: 0;
 }
