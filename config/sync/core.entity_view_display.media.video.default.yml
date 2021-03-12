@@ -5,16 +5,20 @@ dependencies:
   config:
     - field.field.media.video.field_body
     - field.field.media.video.field_centers
+    - field.field.media.video.field_collections
     - field.field.media.video.field_embedded_id
     - field.field.media.video.field_embedded_oembed
     - field.field.media.video.field_embedded_service
     - field.field.media.video.field_event_reference
+    - field.field.media.video.field_events
     - field.field.media.video.field_height
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
     - field.field.media.video.field_people
     - field.field.media.video.field_program_initiatives
+    - field.field.media.video.field_regions
     - field.field.media.video.field_subheader
+    - field.field.media.video.field_tags
     - field.field.media.video.field_term_collection
     - field.field.media.video.field_thumbnail_uri
     - field.field.media.video.field_topics
@@ -169,6 +173,70 @@ third_party_settings:
                 type: basic_string
             additional: {  }
             weight: 7
+          9a2954d6-8f33-41be-ac04-e6058ade3d37:
+            uuid: 9a2954d6-8f33-41be-ac04-e6058ade3d37
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_tags'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 8
+          b73fff8b-2710-4550-9c0b-af583907ddcf:
+            uuid: b73fff8b-2710-4550-9c0b-af583907ddcf
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_events'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 9
+          dc9e5042-f291-4630-8bbe-359886e5704d:
+            uuid: dc9e5042-f291-4630-8bbe-359886e5704d
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_regions'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 10
+          34032789-60a6-4ab1-ad4d-3af7774326c2:
+            uuid: 34032789-60a6-4ab1-ad4d-3af7774326c2
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_collections'
+              formatter:
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+                type: entity_reference_label
+            additional: {  }
+            weight: 11
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -181,12 +249,28 @@ targetEntityType: media
 bundle: video
 mode: default
 content:
+  field_collections:
+    weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_embedded_oembed:
     weight: 7
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_events:
+    weight: 9
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_height:
     weight: 2
@@ -208,6 +292,22 @@ content:
     region: content
   field_people:
     weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_regions:
+    weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_tags:
+    weight: 8
     label: above
     settings:
       link: true

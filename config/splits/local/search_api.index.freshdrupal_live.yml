@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - search_api_solr
+    - taxonomy
+    - taxonomy_machine_name
     - eck
     - media
     - node
@@ -11,11 +13,13 @@ dependencies:
     - milken_base
   config:
     - field.storage.event.field_campaign_name
+    - field.storage.event.field_centers
     - field.storage.event.field_description
     - field.storage.event.field_event_date
     - field.storage.event.field_name_short
     - field.storage.event.field_related_media
     - field.storage.media.field_body
+    - field.storage.media.field_centers
     - field.storage.media.field_content
     - field.storage.media.field_event_reference
     - field.storage.media.field_media_file
@@ -24,10 +28,12 @@ dependencies:
     - field.storage.node.field_content
     - field.storage.node.field_hero_image
     - field.storage.node.field_long_description
+    - field.storage.node.field_page_type
     - field.storage.node.field_promo_slide
     - field.storage.slide.field_background_image
     - field.storage.node.field_short_summary
     - field.storage.people.field_biotext
+    - field.storage.people.field_centers
     - field.storage.people.field_departments
     - field.storage.people.field_description
     - field.storage.people.field_email
@@ -85,6 +91,49 @@ name: freshdrupal_live
 description: ''
 read_only: false
 field_settings:
+  aggregated_field_centers:
+    label: 'Aggregated field Centers'
+    property_path: aggregated_field
+    type: text
+    configuration:
+      type: union
+      fields:
+        - 'entity:event/field_centers'
+        - 'entity:media/field_centers'
+        - 'entity:node/field_centers'
+        - 'entity:people/field_centers'
+  aggregated_field_published:
+    label: 'Aggregated field Published'
+    property_path: aggregated_field
+    type: date
+    configuration:
+      type: union
+      fields:
+        - 'entity:event/created'
+        - 'entity:media/created'
+        - 'entity:node/published_at'
+        - 'entity:people/created'
+  aggregated_field_topics:
+    label: 'Aggregated field Topics'
+    property_path: aggregated_field
+    type: text
+    configuration:
+      type: union
+      fields:
+        - 'entity:event/field_topics'
+        - 'entity:media/field_topics'
+        - 'entity:node/field_topics'
+        - 'entity:people/field_topics'
+  aggregated_field_type:
+    label: 'Aggregated field Type'
+    property_path: aggregated_field
+    type: text
+    configuration:
+      type: union
+      fields:
+        - 'entity:node/field_page_type'
+        - search_api_bundle
+        - search_api_jsonapi_type
   bundle:
     label: Bundle
     property_path: search_api_bundle
@@ -161,10 +210,34 @@ field_settings:
     label: Centers
     datasource_id: 'entity:node'
     property_path: field_centers
-    type: integer
+    type: text
     dependencies:
       config:
         - field.storage.node.field_centers
+  field_centers_1:
+    label: Centers
+    datasource_id: 'entity:event'
+    property_path: field_centers
+    type: text
+    dependencies:
+      config:
+        - field.storage.event.field_centers
+  field_centers_2:
+    label: Centers
+    datasource_id: 'entity:media'
+    property_path: field_centers
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_centers
+  field_centers_4:
+    label: Centers
+    datasource_id: 'entity:people'
+    property_path: field_centers
+    type: text
+    dependencies:
+      config:
+        - field.storage.people.field_centers
   field_content:
     label: Content
     datasource_id: 'entity:node'
@@ -338,6 +411,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.people.field_notes
+  field_page_type:
+    label: 'Page Type'
+    datasource_id: 'entity:node'
+    property_path: field_page_type
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_page_type
   field_photo:
     label: Photo
     datasource_id: 'entity:people'
@@ -383,6 +464,28 @@ field_settings:
     label: Label
     property_path: search_api_label
     type: text
+  machine_name:
+    label: 'Centers » Taxonomy term » Machine name'
+    datasource_id: 'entity:event'
+    property_path: 'field_centers:entity:machine_name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.event.field_centers
+      module:
+        - taxonomy
+        - taxonomy_machine_name
+  machine_name_1:
+    label: 'Centers » Taxonomy term » Machine name'
+    datasource_id: 'entity:node'
+    property_path: 'field_centers:entity:machine_name'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_centers
+      module:
+        - taxonomy
+        - taxonomy_machine_name
   name:
     label: Name
     datasource_id: 'entity:media'
@@ -432,7 +535,7 @@ field_settings:
   taxonomy:
     label: Taxonomy
     property_path: search_api_taxonomy
-    type: text
+    type: string
   title:
     label: Title
     datasource_id: 'entity:node'

@@ -1,17 +1,30 @@
-uuid: 86077e44-b095-4e5c-82cc-1839593c3e09
+uuid: 8812d1e1-1352-4b0f-ad31-19a9c0dd12db
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - taxonomy
+    - options
 id: node.field_page_type
 field_name: field_page_type
 entity_type: node
-type: entity_reference
+type: list_string
 settings:
-  target_type: taxonomy_term
-module: core
+  allowed_values:
+    -
+      value: centers
+      label: Centers
+    -
+      value: events
+      label: Events
+    -
+      value: podcasts
+      label: Podcasts
+    -
+      value: programs
+      label: Programs
+  allowed_values_function: ''
+module: options
 locked: false
 cardinality: 1
 translatable: true

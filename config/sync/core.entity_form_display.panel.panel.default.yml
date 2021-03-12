@@ -4,17 +4,23 @@ status: true
 dependencies:
   config:
     - eck.eck_type.panel.panel
+    - field.field.panel.panel.field_centers
+    - field.field.panel.panel.field_collections
     - field.field.panel.panel.field_date
     - field.field.panel.panel.field_description
     - field.field.panel.panel.field_event
+    - field.field.panel.panel.field_events
     - field.field.panel.panel.field_grid_event_id
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
     - field.field.panel.panel.field_private
+    - field.field.panel.panel.field_regions
     - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
     - field.field.panel.panel.field_sponsor
     - field.field.panel.panel.field_summary
+    - field.field.panel.panel.field_tags
+    - field.field.panel.panel.field_topics
     - field.field.panel.panel.field_tracks
     - field.field.panel.panel.field_why
   module:
@@ -103,6 +109,26 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_centers:
+    weight: 28
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_collections:
+    weight: 29
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_date:
     weight: 12
     settings: {  }
@@ -127,6 +153,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_events:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_grid_event_id:
     weight: 14
     settings:
@@ -157,6 +193,16 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_regions:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_room:
     weight: 21
@@ -191,6 +237,26 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_tags:
+    weight: 24
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 25
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_tracks:
     weight: 22

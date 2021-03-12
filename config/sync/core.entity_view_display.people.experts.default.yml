@@ -4,16 +4,21 @@ status: true
 dependencies:
   config:
     - eck.eck_type.people.experts
+    - field.field.people.experts.field_centers
+    - field.field.people.experts.field_collections
     - field.field.people.experts.field_departments
     - field.field.people.experts.field_description
+    - field.field.people.experts.field_events
     - field.field.people.experts.field_first_name
     - field.field.people.experts.field_honorific
     - field.field.people.experts.field_last_name
     - field.field.people.experts.field_middle_name
     - field.field.people.experts.field_pgtitle
     - field.field.people.experts.field_photo
+    - field.field.people.experts.field_regions
     - field.field.people.experts.field_social_media
     - field.field.people.experts.field_tags
+    - field.field.people.experts.field_topics
   module:
     - image
     - social_media
@@ -42,6 +47,22 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
+  field_centers:
+    weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_collections:
+    weight: 15
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_departments:
     weight: 4
     label: above
@@ -56,6 +77,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_events:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_first_name:
     weight: 1
@@ -103,6 +132,14 @@ content:
     third_party_settings: {  }
     type: image
     region: content
+  field_regions:
+    weight: 14
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_social_media:
     weight: 7
     label: above
@@ -112,6 +149,14 @@ content:
     region: content
   field_tags:
     weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_topics:
+    weight: 13
     label: above
     settings:
       link: true

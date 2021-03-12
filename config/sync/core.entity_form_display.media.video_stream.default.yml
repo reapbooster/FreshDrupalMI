@@ -3,10 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.video_stream.field_centers
+    - field.field.media.video_stream.field_collections
     - field.field.media.video_stream.field_event_reference
+    - field.field.media.video_stream.field_events
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
+    - field.field.media.video_stream.field_regions
     - field.field.media.video_stream.field_start_finish_time
+    - field.field.media.video_stream.field_tags
+    - field.field.media.video_stream.field_topics
     - media.type.video_stream
   module:
     - datetime_range
@@ -20,8 +26,9 @@ third_party_settings:
         - group_content
         - group_promotion
         - group_authoring
+        - group_taxonomy
       parent_name: ''
-      weight: 20
+      weight: 1
       format_type: tabs
       region: content
       format_settings:
@@ -52,7 +59,7 @@ third_party_settings:
         - path
         - status
       parent_name: group_tabs
-      weight: 30
+      weight: 22
       format_type: tab
       region: content
       format_settings:
@@ -65,10 +72,9 @@ third_party_settings:
     group_promotion:
       children:
         - field_people
-        - field_thumbnail
         - field_event_reference
       parent_name: group_tabs
-      weight: 20
+      weight: 21
       format_type: tab
       region: content
       format_settings:
@@ -78,6 +84,25 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Promotion
+    group_taxonomy:
+      children:
+        - field_tags
+        - field_topics
+        - field_events
+        - field_regions
+        - field_collections
+        - field_centers
+      parent_name: group_tabs
+      weight: 23
+      format_type: tab
+      region: hidden
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Taxonomy
 id: media.video_stream.default
 targetEntityType: media
 bundle: video_stream
@@ -89,8 +114,38 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_centers:
+    weight: 8
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_collections:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_event_reference:
     weight: 103
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_events:
+    weight: 5
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -117,11 +172,41 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_regions:
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_start_finish_time:
     weight: 104
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_tags:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

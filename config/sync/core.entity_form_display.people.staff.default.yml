@@ -6,15 +6,20 @@ dependencies:
     - eck.eck_type.people.staff
     - field.field.people.staff.field_biotext
     - field.field.people.staff.field_centers
+    - field.field.people.staff.field_collections
     - field.field.people.staff.field_email
     - field.field.people.staff.field_event
+    - field.field.people.staff.field_events
     - field.field.people.staff.field_first_name
     - field.field.people.staff.field_last_name
     - field.field.people.staff.field_middle_name
     - field.field.people.staff.field_pgtitle
     - field.field.people.staff.field_photo
+    - field.field.people.staff.field_regions
     - field.field.people.staff.field_social_media
     - field.field.people.staff.field_status
+    - field.field.people.staff.field_tags
+    - field.field.people.staff.field_topics
     - image.style.thumbnail
   module:
     - image
@@ -49,6 +54,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_collections:
+    weight: 36
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_email:
     weight: 20
     settings:
@@ -59,6 +74,16 @@ content:
     region: content
   field_event:
     weight: 17
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_events:
+    weight: 34
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -107,6 +132,16 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_regions:
+    weight: 35
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_social_media:
     weight: 14
     settings:
@@ -120,6 +155,26 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_tags:
+    weight: 32
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 33
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select

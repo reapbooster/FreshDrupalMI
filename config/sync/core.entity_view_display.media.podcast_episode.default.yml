@@ -4,7 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.media.podcast_episode.field_body
+    - field.field.media.podcast_episode.field_centers
+    - field.field.media.podcast_episode.field_collections
     - field.field.media.podcast_episode.field_episode
+    - field.field.media.podcast_episode.field_events
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
     - field.field.media.podcast_episode.field_media_audio_file
@@ -12,8 +15,11 @@ dependencies:
     - field.field.media.podcast_episode.field_media_in_library
     - field.field.media.podcast_episode.field_meta_tags
     - field.field.media.podcast_episode.field_people
+    - field.field.media.podcast_episode.field_regions
     - field.field.media.podcast_episode.field_service_links
     - field.field.media.podcast_episode.field_summary
+    - field.field.media.podcast_episode.field_tags
+    - field.field.media.podcast_episode.field_topics
     - field.field.media.podcast_episode.field_transcript
     - media.type.podcast_episode
   module:
@@ -34,6 +40,22 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
+  field_centers:
+    weight: 17
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_collections:
+    weight: 16
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_episode:
     weight: 8
     label: above
@@ -42,6 +64,14 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_integer
+    region: content
+  field_events:
+    weight: 14
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_filemime:
     weight: 4
@@ -96,8 +126,8 @@ content:
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
-  field_people:
-    weight: 12
+  field_regions:
+    weight: 15
     label: above
     settings:
       link: true
@@ -119,8 +149,25 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
+  field_tags:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_topics:
+    weight: 13
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
 hidden:
   created: true
+  field_people: true
   field_transcript: true
   langcode: true
   name: true
