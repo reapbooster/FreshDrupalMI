@@ -1,0 +1,8 @@
+uuid: d84fb575-9fbd-40be-af1d-64d524dabd98
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event Tabs'
+vid: event_tabs
+description: ''
+weight: 0

@@ -1,0 +1,29 @@
+uuid: a9dbb88b-8a24-4833-b582-bfe8263bc80a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_tab
+    - node.type.landing_page
+    - taxonomy.vocabulary.event_tabs
+id: node.landing_page.field_event_tab
+field_name: field_event_tab
+entity_type: node
+bundle: landing_page
+label: 'Event Tab'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      event_tabs: event_tabs
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

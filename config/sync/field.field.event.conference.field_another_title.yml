@@ -1,0 +1,19 @@
+uuid: 195990a7-ad70-47c4-b2b1-b47a896b9f60
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.event.conference
+    - field.storage.event.field_another_title
+id: event.conference.field_another_title
+field_name: field_another_title
+entity_type: event
+bundle: conference
+label: 'Another Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
