@@ -12,7 +12,7 @@ id: people.staff.field_event
 field_name: field_event
 entity_type: people
 bundle: staff
-label: event
+label: Event
 description: ''
 required: false
 translatable: true
@@ -27,6 +27,7 @@ settings:
       summit: summit
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: conference
 field_type: entity_reference

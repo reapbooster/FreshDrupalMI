@@ -8,10 +8,10 @@ import { EntitySubqueueInterface } from "./EntitySubqueue";
 import { SlideInterface } from "./Slide";
 
 export interface ParagraphTilesInterface extends ParagraphInterface {
-  tiles: Array<EntityInterface>;
-  field_title: string;
-  field_view_mode: string;
-  field_background_color: ColorObjectInterface;
+  tiles?: Array<EntityInterface>;
+  field_title?: string;
+  field_view_mode?: string;
+  field_background_color?: ColorObjectInterface;
 }
 
 /**
@@ -192,7 +192,21 @@ export class ParagraphSlideTiles
 }
 
 /**
- * Paragraph Media Tiles
+ * Paragraph Social Tiles
+ */
+export class ParagraphTilesSocial
+  extends ParagraphTiles
+  implements ParagraphTilesInterface {
+  field_icon_link: Array<any>;
+
+  constructor(props) {
+    super(props);
+    Object.assign(this, props);
+  }
+}
+
+/**
+ * Paragraph Sponsor Tiles
  */
 export class ParagraphTilesSponsors
   extends ParagraphTiles

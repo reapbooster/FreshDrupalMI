@@ -5,10 +5,13 @@ dependencies:
   config:
     - core.entity_view_mode.node.large_tile
     - field.field.node.article.field_centers
+    - field.field.node.article.field_collections
     - field.field.node.article.field_content
     - field.field.node.article.field_event
+    - field.field.node.article.field_events
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
+    - field.field.node.article.field_region
     - field.field.node.article.field_summary
     - field.field.node.article.field_terms
     - field.field.node.article.field_topics
@@ -32,11 +35,14 @@ mode: large_tile
 content: {  }
 hidden:
   field_centers: true
+  field_collections: true
   field_content: true
   field_event: true
+  field_events: true
   field_meta_tags: true
   field_promo_slide: true
   field_promotional_slide: true
+  field_region: true
   field_summary: true
   field_terms: true
   field_topics: true

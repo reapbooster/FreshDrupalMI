@@ -4,18 +4,25 @@ status: true
 dependencies:
   config:
     - field.field.node.opportunity.field_actions
+    - field.field.node.opportunity.field_centers
+    - field.field.node.opportunity.field_collections
+    - field.field.node.opportunity.field_events
     - field.field.node.opportunity.field_focus
     - field.field.node.opportunity.field_hub
     - field.field.node.opportunity.field_long_description
     - field.field.node.opportunity.field_region
     - field.field.node.opportunity.field_short_summary
+    - field.field.node.opportunity.field_tags
     - field.field.node.opportunity.field_terms
+    - field.field.node.opportunity.field_topics
     - field.field.node.opportunity.field_url
     - node.type.opportunity
   module:
     - field_group
     - link
     - path
+    - publication_date
+    - scheduler
     - text
 third_party_settings:
   field_group:
@@ -50,7 +57,6 @@ third_party_settings:
       label: Content
     group_publishing:
       children:
-        - field_url
         - langcode
         - uid
         - created
@@ -58,8 +64,9 @@ third_party_settings:
         - sticky
         - path
         - status
+        - field_url
       parent_name: group_tabs
-      weight: 25
+      weight: 22
       format_type: tab
       region: content
       format_settings:
@@ -75,8 +82,13 @@ third_party_settings:
         - field_actions
         - field_focus
         - field_terms
+        - field_tags
+        - field_events
+        - field_collections
+        - field_topics
+        - field_centers
       parent_name: group_tabs
-      weight: 20
+      weight: 21
       format_type: tab
       region: content
       format_settings:
@@ -93,7 +105,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -103,6 +115,36 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_centers:
+    type: entity_reference_autocomplete
+    weight: 131
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_collections:
+    type: entity_reference_autocomplete
+    weight: 129
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_events:
+    type: entity_reference_autocomplete
+    weight: 128
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_focus:
     weight: 125
     settings: {  }
@@ -141,14 +183,34 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 127
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_terms:
     weight: 126
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_topics:
+    type: entity_reference_autocomplete
+    weight: 130
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_url:
-    weight: 126
+    weight: 14
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -164,7 +226,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -172,21 +234,33 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 10
     region: content
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  published_at:
+    type: publication_date_timestamp
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 13
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 11
     region: content
     third_party_settings: {  }
   title:
@@ -199,12 +273,18 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

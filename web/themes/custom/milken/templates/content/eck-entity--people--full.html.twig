@@ -1,0 +1,24 @@
+{{ attach_library('milken_base/people') }}
+
+<people-detail
+    {{ attributes }}
+    {{ content_attributes }}
+    data-drupal-selector="drupal-people-json"
+    data-type="{{ eck_entity.getEntityTypeId }}--{{ eck_entity.bundle }}"
+    data-entity-type-id="{{ eck_entity.getEntityTypeId }}"
+    data-bundle="{{ eck_entity.bundle }}"
+    data-id="{{ eck_entity.uuid.value }}"
+    data-drupal-internal-id="{{ eck_entity.id.value }}"
+    data-view-mode="full"
+    data-can-edit="{{ user.hasPermission('edit-any-event-entities') }}"
+    data-first-name="{{ eck_entity.get('field_first_name').value }}"
+    data-middle-name="{{ eck_entity.get('field_middle_name').value }}"
+    data-last-name="{{ eck_entity.get('field_last_name').value }}"
+    data-biotext="{{ eck_entity.get('field_biotext').value }}"
+    data-last-name="{{ eck_entity.get('field_last_name').value }}"
+    data-last-name="{{ eck_entity.get('field_last_name').value }}"
+    data-last-name="{{ eck_entity.get('field_last_name').value }}"
+>
+
+</people-detail>
+
