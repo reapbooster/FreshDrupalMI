@@ -1,6 +1,6 @@
-{{ attach_library('milken_base/people') }}
+{{ attach_library('milken_base/PeopleDetail') }}
 
-<people-detail
+<people-display
     {{ attributes }}
     {{ content_attributes }}
     data-drupal-selector="drupal-people-json"
@@ -20,5 +20,5 @@
     data-last-name="{{ eck_entity.get('field_last_name').value }}"
 >
 
-</people-detail>
+</people-display>
 
