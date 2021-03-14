@@ -3,6 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.media.image.field_collections
+    - field.field.media.image.field_events
+    - field.field.media.image.field_field_centers
     - field.field.media.image.field_filemime
     - field.field.media.image.field_filesize
     - field.field.media.image.field_height
@@ -10,6 +13,9 @@ dependencies:
     - field.field.media.image.field_media_in_library
     - field.field.media.image.field_photo_subject_name
     - field.field.media.image.field_photo_subject_title
+    - field.field.media.image.field_regions
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_topics
     - field.field.media.image.field_width
     - image.style.thumbnail
     - media.type.image
@@ -23,8 +29,9 @@ third_party_settings:
       children:
         - group_content
         - group_authoring
+        - group_taxonomy
       parent_name: ''
-      weight: 20
+      weight: 2
       format_type: tabs
       format_settings:
         direction: horizontal
@@ -34,18 +41,16 @@ third_party_settings:
       region: content
     group_content:
       children:
-        - status
-        - name
-        - field_media_in_library
-        - field_photo_subject_name
-        - field_photo_subject_title
-        - field_media_image
         - field_filemime
         - field_filesize
         - field_height
         - field_width
+        - field_media_image
+        - field_photo_subject_name
+        - field_photo_subject_title
+        - field_media_in_library
       parent_name: group_tabs
-      weight: 2
+      weight: 20
       format_type: tab
       format_settings:
         id: ''
@@ -62,7 +67,7 @@ third_party_settings:
         - created
         - path
       parent_name: group_tabs
-      weight: 3
+      weight: 21
       format_type: tab
       format_settings:
         id: ''
@@ -72,6 +77,25 @@ third_party_settings:
         required_fields: true
       label: Authoring
       region: content
+    group_taxonomy:
+      children:
+        - field_topics
+        - field_tags
+        - field_events
+        - field_regions
+        - field_collections
+        - field_field_centers
+      parent_name: group_tabs
+      weight: 22
+      format_type: tab
+      region: hidden
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Taxonomy
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -83,8 +107,38 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_collections:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_events:
+    weight: 25
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_field_centers:
+    weight: 28
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_filemime:
-    weight: 6
+    weight: 101
     settings:
       size: 60
       placeholder: ''
@@ -92,7 +146,7 @@ content:
     type: string_textfield
     region: content
   field_filesize:
-    weight: 7
+    weight: 102
     settings:
       size: 60
       placeholder: ''
@@ -100,14 +154,14 @@ content:
     type: string_textfield
     region: content
   field_height:
-    weight: 8
+    weight: 103
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_media_image:
-    weight: 5
+    weight: 105
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -115,14 +169,14 @@ content:
     type: image_image
     region: content
   field_media_in_library:
-    weight: 2
+    weight: 108
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_photo_subject_name:
-    weight: 3
+    weight: 106
     settings:
       size: 60
       placeholder: ''
@@ -130,15 +184,45 @@ content:
     type: string_textfield
     region: content
   field_photo_subject_title:
-    weight: 4
+    weight: 107
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_regions:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags:
+    weight: 24
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 23
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_width:
-    weight: 9
+    weight: 104
     settings:
       placeholder: ''
     third_party_settings: {  }

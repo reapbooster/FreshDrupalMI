@@ -11,14 +11,18 @@ dependencies:
     - field.field.event.conference.field_campaign_owner
     - field.field.event.conference.field_campaign_type
     - field.field.event.conference.field_campaign_type_public
+    - field.field.event.conference.field_centers
+    - field.field.event.conference.field_collections
     - field.field.event.conference.field_content_tabs
     - field.field.event.conference.field_description
     - field.field.event.conference.field_event_date
+    - field.field.event.conference.field_events
     - field.field.event.conference.field_grid_event_id
     - field.field.event.conference.field_hero_image
     - field.field.event.conference.field_meta_tags
     - field.field.event.conference.field_name_short
     - field.field.event.conference.field_published
+    - field.field.event.conference.field_regions
     - field.field.event.conference.field_registration_deadline
     - field.field.event.conference.field_related_media
     - field.field.event.conference.field_sequential_id
@@ -26,7 +30,9 @@ dependencies:
     - field.field.event.conference.field_speakers
     - field.field.event.conference.field_sponsors
     - field.field.event.conference.field_streaming_now
+    - field.field.event.conference.field_tags
     - field.field.event.conference.field_title_card_image
+    - field.field.event.conference.field_topics
     - field.field.event.conference.field_tracks
     - field.field.event.conference.field_venue
     - image.style.thumbnail
@@ -392,6 +398,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_centers: true
+  field_collections: true
+  field_events: true
+  field_regions: true
   field_related_media: true
   field_sponsors: true
   field_streaming_now: true
+  field_tags: true
+  field_topics: true

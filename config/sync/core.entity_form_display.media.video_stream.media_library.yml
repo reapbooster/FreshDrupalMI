@@ -4,10 +4,16 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
+    - field.field.media.video_stream.field_centers
+    - field.field.media.video_stream.field_collections
     - field.field.media.video_stream.field_event_reference
+    - field.field.media.video_stream.field_events
     - field.field.media.video_stream.field_media_oembed_video
     - field.field.media.video_stream.field_people
+    - field.field.media.video_stream.field_regions
     - field.field.media.video_stream.field_start_finish_time
+    - field.field.media.video_stream.field_tags
+    - field.field.media.video_stream.field_topics
     - media.type.video_stream
   module:
     - datetime_range
@@ -161,4 +167,10 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_centers: true
+  field_collections: true
+  field_events: true
+  field_regions: true
+  field_tags: true
+  field_topics: true

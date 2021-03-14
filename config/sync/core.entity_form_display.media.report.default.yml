@@ -5,16 +5,20 @@ dependencies:
   config:
     - field.field.media.report.field_author
     - field.field.media.report.field_centers
+    - field.field.media.report.field_collections
     - field.field.media.report.field_content
     - field.field.media.report.field_cover
     - field.field.media.report.field_custom_author
     - field.field.media.report.field_essay
+    - field.field.media.report.field_events
     - field.field.media.report.field_filemime
     - field.field.media.report.field_filesize
     - field.field.media.report.field_media_file
     - field.field.media.report.field_meta_tags
     - field.field.media.report.field_program_initiatives
+    - field.field.media.report.field_regions
     - field.field.media.report.field_related_event
+    - field.field.media.report.field_tags
     - field.field.media.report.field_term_collection
     - field.field.media.report.field_topics
     - image.style.thumbnail
@@ -90,6 +94,10 @@ third_party_settings:
         - field_term_collection
         - field_topics
         - field_program_initiatives
+        - field_tags
+        - field_events
+        - field_regions
+        - field_collections
       parent_name: group_tabs
       weight: 20
       format_type: tab
@@ -142,6 +150,16 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_collections:
+    weight: 109
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_content:
     type: paragraphs
     weight: 0
@@ -184,6 +202,16 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  field_events:
+    weight: 107
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_filemime:
     weight: 112
     settings:
@@ -215,7 +243,17 @@ content:
     type: metatag_firehose
     region: content
   field_program_initiatives:
-    weight: 111
+    weight: 105
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_regions:
+    weight: 108
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -226,6 +264,16 @@ content:
     region: content
   field_related_event:
     weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags:
+    weight: 106
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -245,7 +293,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_topics:
-    weight: 108
+    weight: 104
     settings:
       match_operator: CONTAINS
       match_limit: 10

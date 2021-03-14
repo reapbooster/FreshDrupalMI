@@ -6,20 +6,26 @@ dependencies:
     - eck.eck_type.people.speakers
     - field.field.people.speakers.field_biotext
     - field.field.people.speakers.field_centers
+    - field.field.people.speakers.field_collections
     - field.field.people.speakers.field_description
     - field.field.people.speakers.field_email
     - field.field.people.speakers.field_event
+    - field.field.people.speakers.field_events
     - field.field.people.speakers.field_first_name
     - field.field.people.speakers.field_last_name
     - field.field.people.speakers.field_middle_name
     - field.field.people.speakers.field_notes
     - field.field.people.speakers.field_pgtitle
     - field.field.people.speakers.field_photo
+    - field.field.people.speakers.field_regions
     - field.field.people.speakers.field_social_media
     - field.field.people.speakers.field_status
+    - field.field.people.speakers.field_tags
+    - field.field.people.speakers.field_topics
     - image.style.thumbnail
   module:
     - image
+    - path
     - social_media
 id: people.speakers.default
 targetEntityType: people
@@ -50,6 +56,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_collections:
+    weight: 35
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_description:
     type: string_textarea
     weight: 0
@@ -76,6 +92,16 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_events:
+    weight: 33
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_first_name:
     type: string_textarea
     weight: 0
@@ -124,6 +150,16 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
+  field_regions:
+    weight: 34
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_social_media:
     type: social_media_default
     weight: 0
@@ -138,6 +174,26 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_tags:
+    weight: 31
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 32
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   langcode:
     type: language_select
     weight: 2

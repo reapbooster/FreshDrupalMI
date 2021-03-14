@@ -4,16 +4,21 @@ status: true
 dependencies:
   config:
     - eck.eck_type.people.experts
+    - field.field.people.experts.field_centers
+    - field.field.people.experts.field_collections
     - field.field.people.experts.field_departments
     - field.field.people.experts.field_description
+    - field.field.people.experts.field_events
     - field.field.people.experts.field_first_name
     - field.field.people.experts.field_honorific
     - field.field.people.experts.field_last_name
     - field.field.people.experts.field_middle_name
     - field.field.people.experts.field_pgtitle
     - field.field.people.experts.field_photo
+    - field.field.people.experts.field_regions
     - field.field.people.experts.field_social_media
     - field.field.people.experts.field_tags
+    - field.field.people.experts.field_topics
     - image.style.thumbnail
   module:
     - field_group
@@ -99,6 +104,26 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_centers:
+    weight: 23
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_collections:
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_departments:
     weight: 7
     settings:
@@ -116,6 +141,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_events:
+    weight: 24
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_first_name:
     weight: 3
@@ -165,6 +200,16 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_regions:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_social_media:
     weight: 9
     settings:
@@ -174,6 +219,16 @@ content:
     region: content
   field_tags:
     weight: 8
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 25
     settings:
       match_operator: CONTAINS
       match_limit: 10

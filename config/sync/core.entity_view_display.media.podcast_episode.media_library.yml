@@ -5,7 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.media.media_library
     - field.field.media.podcast_episode.field_body
+    - field.field.media.podcast_episode.field_centers
+    - field.field.media.podcast_episode.field_collections
     - field.field.media.podcast_episode.field_episode
+    - field.field.media.podcast_episode.field_events
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
     - field.field.media.podcast_episode.field_media_audio_file
@@ -13,8 +16,11 @@ dependencies:
     - field.field.media.podcast_episode.field_media_in_library
     - field.field.media.podcast_episode.field_meta_tags
     - field.field.media.podcast_episode.field_people
+    - field.field.media.podcast_episode.field_regions
     - field.field.media.podcast_episode.field_service_links
     - field.field.media.podcast_episode.field_summary
+    - field.field.media.podcast_episode.field_tags
+    - field.field.media.podcast_episode.field_topics
     - field.field.media.podcast_episode.field_transcript
     - image.style.medium
     - media.type.podcast_episode
@@ -37,7 +43,10 @@ content:
 hidden:
   created: true
   field_body: true
+  field_centers: true
+  field_collections: true
   field_episode: true
+  field_events: true
   field_filemime: true
   field_filesize: true
   field_media_audio_file: true
@@ -45,8 +54,11 @@ hidden:
   field_media_in_library: true
   field_meta_tags: true
   field_people: true
+  field_regions: true
   field_service_links: true
   field_summary: true
+  field_tags: true
+  field_topics: true
   field_transcript: true
   langcode: true
   name: true
