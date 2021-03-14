@@ -1,0 +1,21 @@
+uuid: 26827347-6bca-47c9-984f-a4ec2680a4ec
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_biolink
+field_name: field_biolink
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

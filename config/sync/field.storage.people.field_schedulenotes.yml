@@ -1,0 +1,21 @@
+uuid: 0c3a0c39-9698-4833-a4be-dbae2609e8b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_schedulenotes
+field_name: field_schedulenotes
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -18,7 +18,7 @@ const SponsorTileWrapper = styled.div`
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 
   &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    // box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
   &.sponsor-image-medium img.card-img {
@@ -56,7 +56,7 @@ export const MediaSponsorTileDisplay = (
       <ErrorBoundary>
         <ImageFileDisplay
           data={data.field_media_image}
-          view_mode="large"
+          view_mode="fullscreen"
           className={"card-img p-3"}
           style={{ maxWidth: "100%" }}
           srcsetSizes="(max-width: 1000px) 200px, 400px"

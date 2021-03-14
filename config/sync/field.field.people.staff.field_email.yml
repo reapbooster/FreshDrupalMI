@@ -9,7 +9,7 @@ id: people.staff.field_email
 field_name: field_email
 entity_type: people
 bundle: staff
-label: email
+label: E-mail
 description: ''
 required: false
 translatable: false

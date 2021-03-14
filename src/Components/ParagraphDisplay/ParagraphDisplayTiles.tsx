@@ -73,31 +73,49 @@ export class ParagraphDisplayTiles extends React.Component<
         : (data.field_view_mode == "tile") 
         ? "text-center py-5"
         : "py-5";
+
+      let containerBackgroundColor = ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" )
+        ? '#e2e7ea'
+        : ( data.field_view_mode == "card" && data.type == "paragraph--content_tiles" )
+        ? '#e2e7ea'
+        : ( data.field_view_mode == "tile" && data.type == "paragraph--content_tiles" )
+        ? '#f0f3f5'
+        : '#FFFFFF';
+
+      let elSubheader = (data.field_section_subheader !== undefined && data.field_section_subheader !== null)
+        ? <p>{data.field_section_subheader}</p>
+        : '';
+
       return (
-        <Container
-          fluid={data.field_view_mode == "card" ? true : false}
-          className={containerClassNames}
+        <section
+          style={{backgroundColor: containerBackgroundColor}}
         >
-          <div className="row">
-            <div className="col">
-              <h2
-                style={{
-                  fontFamily: "LatoWebBlack",
-                  fontSize: "1.5em",
-                  fontWeight: "bold",
-                }}
-              >
-                {data.field_title}
-              </h2>
+          <Container
+            fluid={data.field_view_mode == "card" ? true : false}
+            className={containerClassNames}
+          >
+            <div className="row">
+              <div className="col">
+                <h2
+                  style={{
+                    fontFamily: "LatoWebBlack",
+                    fontSize: "1.5em",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {data.field_title}
+                </h2>
+                {elSubheader}
+              </div>
             </div>
-          </div>
-          <ListDisplay
-            id={"tiles-list-".concat(data.id)}
-            list={data.tiles}
-            view_mode={data.field_view_mode}
-            display_size={data.field_display_size}
-          />
-        </Container>
+            <ListDisplay
+              id={"tiles-list-".concat(data.id)}
+              list={data.tiles}
+              view_mode={data.field_view_mode}
+              display_size={data.field_display_size}
+            />
+          </Container>
+        </section>
       );
     }
     return <div />;

@@ -1,0 +1,21 @@
+uuid: 1e45726d-e8c7-4d74-a5c2-991c25251232
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_recphotodate
+field_name: field_recphotodate
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

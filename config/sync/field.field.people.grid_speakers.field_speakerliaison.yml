@@ -1,0 +1,19 @@
+uuid: 6a03f82f-55b5-4abe-8181-e8dc9119e05d
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_speakerliaison
+id: people.grid_speakers.field_speakerliaison
+field_name: field_speakerliaison
+entity_type: people
+bundle: grid_speakers
+label: speakerliaison
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

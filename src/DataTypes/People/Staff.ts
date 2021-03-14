@@ -8,6 +8,7 @@ import People, {PeopleInterface} from "./index";
 export interface StaffInterface extends PeopleInterface {
   field_biotext: string;
   field_centers: Array<TaxonomyTermInterface>;
+  field_teams: Array<TaxonomyTermInterface>;
   field_description: string;
   field_email: string;
   field_event: EventInterface;
@@ -25,6 +26,7 @@ export interface StaffInterface extends PeopleInterface {
 export class Staff extends People implements StaffInterface {
   field_biotext: string;
   field_centers: Array<TaxonomyTermInterface>;
+  field_teams: Array<TaxonomyTermInterface>;
   field_description: string;
   field_email: string;
   field_event: EventInterface;
@@ -43,7 +45,7 @@ export class Staff extends People implements StaffInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_photo,field_event,field_centers";
+    return "&include=field_photo,field_event,field_centers,field_teams";
   }
 }
 

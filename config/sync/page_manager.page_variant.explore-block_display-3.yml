@@ -5,7 +5,6 @@ dependencies:
   config:
     - page_manager.page.explore
   module:
-    - component
     - system
 id: explore-block_display-3
 label: Podcasts

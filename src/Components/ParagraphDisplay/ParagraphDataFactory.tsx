@@ -8,12 +8,14 @@ import {
   ParagraphEventTiles,
   ParagraphMediaTiles,
   ParagraphSlideTiles,
+  ParagraphTilesSocial,
   ParagraphTilesSponsors,
 } from "../../DataTypes/ParagraphTiles";
-import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
-import ParagraphSlide from "../../DataTypes/ParagraphSlide";
+import ParagraphPeople from "../../DataTypes/ParagraphPeople";
 import ParagraphPodcastEpisode from "../../DataTypes/ParagraphPodcastEpisode";
 import ParagraphProgramDay from "../../DataTypes/ParagraphProgramDay";
+import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
+import ParagraphSlide from "../../DataTypes/ParagraphSlide";
 import ParagraphStats from "../../DataTypes/ParagraphStats";
 /**
  * Create the DataModel
@@ -41,6 +43,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphEntityQueueTiles(incoming);
     case "paragraph--media_tiles":
       return new ParagraphMediaTiles(incoming);
+    case "paragraph--people":
+      return new ParagraphPeople(incoming);
     case "paragraph--podcast_episode":
       return new ParagraphPodcastEpisode(incoming);
     case "paragraph--program_day":
@@ -53,6 +57,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphSlideTiles(incoming);
     case "paragraph--stats":
       return new ParagraphStats(incoming);
+    case "paragraph--tiles_social":
+      return new ParagraphTilesSocial(incoming);
     case "paragraph--tiles_sponsors":
       return new ParagraphTilesSponsors(incoming);
 

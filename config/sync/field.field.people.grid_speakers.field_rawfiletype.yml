@@ -1,0 +1,19 @@
+uuid: 6b45bfe1-4115-471e-8298-779b4c1d6467
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_rawfiletype
+id: people.grid_speakers.field_rawfiletype
+field_name: field_rawfiletype
+entity_type: people
+bundle: grid_speakers
+label: rawfiletype
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

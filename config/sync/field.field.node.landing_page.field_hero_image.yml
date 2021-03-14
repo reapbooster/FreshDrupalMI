@@ -6,6 +6,8 @@ dependencies:
     - field.storage.node.field_hero_image
     - media.type.image
     - node.type.landing_page
+  content:
+    - 'media:image:d6208026-94cc-420e-8bbd-45ad71a32776'
 id: node.landing_page.field_hero_image
 field_name: field_hero_image
 entity_type: node
@@ -14,7 +16,9 @@ label: 'Tile Thumbnail'
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    target_uuid: d6208026-94cc-420e-8bbd-45ad71a32776
 default_value_callback: ''
 settings:
   handler: 'default:media'

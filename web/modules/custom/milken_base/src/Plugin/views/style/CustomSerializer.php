@@ -49,7 +49,10 @@ class CustomSerializer extends Serializer {
     $items_per_page = $pager->getItemsPerPage();
     $total_items = $pager->getTotalItems();
     $total_pages = 0;
-    if(!in_array($class, ['Drupal\views\Plugin\views\pager\None', 'Drupal\views\Plugin\views\pager\Some'])){
+    if (!in_array($class, [
+      'Drupal\views\Plugin\views\pager\None',
+      'Drupal\views\Plugin\views\pager\Some',
+    ])) {
       $total_pages = $pager->getPagerTotal();
     }
 
