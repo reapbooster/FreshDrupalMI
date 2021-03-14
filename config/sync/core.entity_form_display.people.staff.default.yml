@@ -167,8 +167,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_topics:
-    weight: 33
   field_teams:
     weight: 8
     settings:
@@ -178,6 +176,9 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_topics:
+    weight: 33
     region: content
   langcode:
     type: language_select
