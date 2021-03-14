@@ -40,6 +40,14 @@ export class Person extends People implements PersonInterface {
     Object.assign(this, props);
   }
 
+  hasData() : boolean {
+    return (
+      this.field_first_name !== undefined && typeof(this.field_first_name) === "string" ||
+      this.field_middle_name !== undefined && typeof(this.field_middle_name) === "string" ||
+      this.field_last_name !== undefined && typeof(this.field_last_name) === "string"
+    )
+  }
+
   getIncluded(): string {
     return "&include=field_photo,field_event,field_centers";
   }

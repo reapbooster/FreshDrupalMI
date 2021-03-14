@@ -9,6 +9,7 @@ import styled from "styled-components";
 import moment from "moment";
 import {TagsDisplay} from "../TagsDisplay"
 import {SocialDisplay} from "../SocialDisplay"
+import Loading from "../Loading";
 
 export interface PeopleDisplayProps {
   data: PeopleInterface;
@@ -20,17 +21,27 @@ export interface PeopleDisplayProps {
 export const PeopleDisplay = (props: PeopleDisplayProps) => {
   const { data, key, view_mode } = props;
   const DataObject = DataTypePeopleFactory(data);
-  const [staffData, staffSetData] = useState(DataObject);
-  if (!DataObject.hasData()) {
+  const [staffData, setStaffData] = useState(DataObject);
+  const [fetchRan, setFetchData] = useState(false);
+
+  if (!staffData.hasData() || !fetchRan) {
     const ecp = new EntityComponentProps(DataObject);
     ecp
       .getData(DataObject.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
         const newDO = DataTypePeopleFactory(ajaxData.data);
-        staffSetData(newDO);
+        setStaffData(newDO);
+        setFetchData(true);
       });
   }
+
+  if (!staffData.hasData()) {
+    return <Loading />;
+  }
+  
+  console.debug("PeopleDisplay: staffData.hasData()", staffData.hasData());
+
   console.debug("PeopleDisplay: Component should have data by now:", staffData);
   switch(view_mode) {
     case 'card':
@@ -159,13 +170,7 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
                   <h5>Field Event</h5>
                   {/* <p>{staffData.field_event}</p> */}
                   <h5>Field Photo</h5>
-                  <p>
-                    {/* <ImageFileDisplay
-                      data={staffData.field_photo[0]}
-                      view_mode="large"
-                      srcsetSizes="(max-width: 1000px) 200px, 400px"
-                    /> */}
-                  </p>
+                  {staffData?.field_photo[0]?.uri?.url}
                 </Col>
                 <Col xs="12" lg="6" xl="3" className="section-tags">
                 </Col>
