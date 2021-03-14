@@ -1,0 +1,9 @@
+uuid: bfb47ae5-f145-49c3-9031-fd41dab2a94d
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.people
+type: grid_speakers
+name: 'Grid Speakers'
+description: ''

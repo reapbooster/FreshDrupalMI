@@ -1,0 +1,21 @@
+uuid: 30bf5679-7e78-4f3b-a6c5-8a346a4f64b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_invitationwhom
+field_name: field_invitationwhom
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

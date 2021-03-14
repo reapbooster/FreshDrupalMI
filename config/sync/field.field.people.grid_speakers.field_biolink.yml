@@ -1,0 +1,19 @@
+uuid: e31c0f8d-e8c3-44ab-9504-b67267202100
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_biolink
+id: people.grid_speakers.field_biolink
+field_name: field_biolink
+entity_type: people
+bundle: grid_speakers
+label: BioLink
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
