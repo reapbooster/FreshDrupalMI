@@ -59,7 +59,7 @@
     "@fortawesome/pro-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@google-web-components/google-youtube": "^3.0.1",
-    "@openapi-contrib/json-schema-to-openapi-schema": "^1.2.0",
+    "@openapi-contrib/json-schema-to-openapi-schema": "^1.2.1",
     "@rjsf/bootstrap-4": "^2.4.0",
     "@rjsf/core": "^2.4.0",
     "@smarthtmlelements/smart-elements": "^6.2.0",
