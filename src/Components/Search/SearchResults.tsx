@@ -27,7 +27,10 @@ export default function SearchResults(props) {
     return (
       <div className="row">
         {contents.map((content, index) => (
-          <div key={index} className="col-lg-3 col-sm-6 col-xs-12 mb-5">
+          <div
+            key={index}
+            className="col-lg-2 col-md-3 col-sm-6 col-xs-12 mb-5"
+          >
             <SearchCard {...itemProps(content)} />
           </div>
         ))}
@@ -49,7 +52,7 @@ export default function SearchResults(props) {
 
   if (props.contents?.length > 0) {
     return (
-      <div className="search-results container">
+      <div className="search-results container-fluid">
         {props.isGrid
           ? renderCardView(props.contents)
           : renderListView(props.contents)}
