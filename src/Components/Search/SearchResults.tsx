@@ -4,6 +4,8 @@ import SearchCard from "./SearchCard";
 import SearchRow from "./SearchRow";
 
 export default function SearchResults(props) {
+  const { queryString } = props;
+
   const itemProps = (content) => {
     return {
       id: content?.uuid,
@@ -51,6 +53,8 @@ export default function SearchResults(props) {
         {props.isGrid
           ? renderCardView(props.contents)
           : renderListView(props.contents)}
+
+        {queryString}
       </div>
     );
   } else {
@@ -61,4 +65,5 @@ export default function SearchResults(props) {
 SearchResults.propTypes = {
   contents: PropTypes.array,
   isGrid: PropTypes.bool,
+  queryString: PropTypes.string,
 };

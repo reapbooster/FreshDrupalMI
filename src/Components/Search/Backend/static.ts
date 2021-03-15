@@ -9,14 +9,14 @@ export const typeOptions = [
 ];
 
 export const dateOptions = [
-  { value: false, label: "Any" },
+  { value: "", label: "Any" },
   { value: "1_month", label: "Within the last month" },
   { value: "6_month", label: "Within the six last month" },
   { value: "1_year", label: "Within the last year" },
 ];
 
 export const sortOptions = [
-  { value: false, label: "Relevance" },
+  { value: "", label: "Relevance" },
   { value: "created", label: "Date" },
   { value: "title", label: "Name" },
   { value: "type", label: "Type" },
