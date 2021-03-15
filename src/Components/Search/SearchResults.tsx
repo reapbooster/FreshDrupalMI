@@ -20,6 +20,7 @@ export default function SearchResults(props) {
       text: content?.search_api_excerpt,
       // text: "",
       link: content?.url,
+      published: content?.aggregated_field_published ?? content?.published,
     };
   };
 
@@ -57,7 +58,7 @@ export default function SearchResults(props) {
           ? renderCardView(props.contents)
           : renderListView(props.contents)}
 
-        {queryString}
+        {/* TODO: PAGINATION from queryString */}
       </div>
     );
   } else {

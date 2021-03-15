@@ -11,7 +11,7 @@ export const typeOptions = [
 export const dateOptions = [
   { value: "", label: "Any" },
   { value: "1_month", label: "Within the last month" },
-  { value: "6_month", label: "Within the six last month" },
+  { value: "6_month", label: "Within the last 6 months" },
   { value: "1_year", label: "Within the last year" },
 ];
 
