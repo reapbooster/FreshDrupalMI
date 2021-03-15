@@ -3,16 +3,21 @@
     "description": "Main site development repo",
     "type": "project",
     "license": "MIT",
-    "repositories": [
-        {
+    "repositories": {
+        "search_api_pantheon": {
+            "canonical": true,
+            "type": "vcs",
+            "url": "git@github.com:pantheon-systems/search_api_pantheon.git"
+        },
+        "0": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         },
-        {
+        "1": {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ],
+    },
     "require": {
         "php": ">=7.4",
         "ext-json": "*",
@@ -91,7 +96,7 @@
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jsonapi_extras": "3.x-dev",
         "drupal/jsonapi_hypermedia": "^1.6",
-        "drupal/jsonapi_image_styles": "^2.0@beta",
+        "drupal/jsonapi_image_styles": "^2.0",
         "drupal/jsonapi_include": "^1.2",
         "drupal/jsonapi_resources": "dev-1.x",
         "drupal/jsonapi_schema": "^1.0@beta",
