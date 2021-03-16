@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Collapse } from "react-bootstrap";
-
 import { theme } from "../Shared/Styles";
 
 import styled from "styled-components";

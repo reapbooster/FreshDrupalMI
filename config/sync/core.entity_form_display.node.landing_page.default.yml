@@ -105,13 +105,13 @@ content:
     third_party_settings: {  }
   field_centers:
     type: options_select
-    weight: 3
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_collections:
     type: options_select
-    weight: 4
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -139,7 +139,7 @@ content:
     region: content
   field_events:
     type: options_select
-    weight: 6
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -162,13 +162,13 @@ content:
     third_party_settings: {  }
   field_page_type:
     type: options_select
-    weight: 2
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_region:
     type: options_select
-    weight: 5
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -182,7 +182,7 @@ content:
     third_party_settings: {  }
   field_topics:
     type: options_select
-    weight: 7
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }

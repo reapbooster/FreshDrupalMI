@@ -1,0 +1,21 @@
+uuid: 67478f1c-718f-45cc-a2f2-902717dc5e39
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_primarytrack
+field_name: field_primarytrack
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

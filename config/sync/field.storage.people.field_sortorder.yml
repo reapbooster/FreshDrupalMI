@@ -1,0 +1,21 @@
+uuid: 4b0dd880-7f32-4ff4-84d8-e683af01f93a
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_sortorder
+field_name: field_sortorder
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

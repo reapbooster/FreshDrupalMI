@@ -1,0 +1,19 @@
+uuid: 0394e284-5ba3-4c44-8ff0-3e8c4ee20d40
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_contactid
+id: people.grid_speakers.field_contactid
+field_name: field_contactid
+entity_type: people
+bundle: grid_speakers
+label: contactid
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

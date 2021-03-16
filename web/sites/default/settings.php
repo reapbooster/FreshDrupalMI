@@ -103,6 +103,6 @@ $settings['http_client_config'] = [
   'connect_timeout' => 2.5,
   'timeout' => 10,
   'verify' => FALSE,
-  'allow_redirects' => FALSE,
+  'allow_redirects' => TRUE,
   'debug' => FALSE,
 ];

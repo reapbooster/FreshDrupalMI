@@ -6,15 +6,20 @@ dependencies:
     - eck.eck_type.people.staff
     - field.field.people.staff.field_biotext
     - field.field.people.staff.field_centers
+    - field.field.people.staff.field_collections
     - field.field.people.staff.field_email
     - field.field.people.staff.field_event
+    - field.field.people.staff.field_events
     - field.field.people.staff.field_first_name
     - field.field.people.staff.field_last_name
     - field.field.people.staff.field_middle_name
     - field.field.people.staff.field_pgtitle
     - field.field.people.staff.field_photo
+    - field.field.people.staff.field_regions
     - field.field.people.staff.field_social_media
     - field.field.people.staff.field_status
+    - field.field.people.staff.field_tags
+    - field.field.people.staff.field_topics
     - field.field.people.staff.field_teams
   module:
     - image
@@ -49,8 +54,24 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_collections:
+    weight: 15
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_event:
     weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_events:
+    weight: 13
     label: above
     settings:
       link: true
@@ -95,6 +116,14 @@ content:
     third_party_settings: {  }
     type: image
     region: content
+  field_regions:
+    weight: 14
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_social_media:
     weight: 4
     label: above
@@ -112,8 +141,24 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
+  field_tags:
+    weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_teams:
     weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_topics:
+    weight: 12
     label: above
     settings:
       link: true
