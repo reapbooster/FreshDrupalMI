@@ -1,22 +1,32 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Collapse } from "react-bootstrap";
+import { theme } from "../Shared/Styles";
+
+import styled from "styled-components";
 
 const MAX_LENGTH_LIMIT = 100;
+
+const ViewMoreButton = styled.button`
+  border: 0;
+  background: none;
+  padding: 5px;
+  color: ${theme.colors.secondary};
+`;
 
 function TextEllipsis({ text }) {
   const [showmore, setShowmore] = useState(false);
 
   const renderViewMoreButton = () => {
     return (
-      <button
-        className="btn btn-primary d-block mt-3"
+      <ViewMoreButton
+        className="mt-1"
         onClick={() => setShowmore(!showmore)}
         aria-controls="text-collapse"
         aria-expanded={showmore}
       >
-        {showmore ? "View Less" : "View More"}
-      </button>
+        {showmore ? "- Read Less" : "+ Read More"}
+      </ViewMoreButton>
     );
   };
 

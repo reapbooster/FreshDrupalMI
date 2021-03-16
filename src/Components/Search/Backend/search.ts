@@ -1,6 +1,11 @@
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import moment from "moment";
 
+const apiPath = "http://localhost:3001";
+
+// Value cache
+let centers, topics;
+
 const fetchSuggestions = async (params) => {
   try {
     params._format = "json";
