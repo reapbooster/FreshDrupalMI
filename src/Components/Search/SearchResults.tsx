@@ -5,7 +5,6 @@ import SearchRow from "./SearchRow";
 
 export default function SearchResults(props) {
   const { queryString } = props;
-
   const itemProps = (content) => {
     return {
       id: content?.uuid,

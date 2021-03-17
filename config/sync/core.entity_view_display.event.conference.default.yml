@@ -10,14 +10,18 @@ dependencies:
     - field.field.event.conference.field_campaign_owner
     - field.field.event.conference.field_campaign_type
     - field.field.event.conference.field_campaign_type_public
+    - field.field.event.conference.field_centers
+    - field.field.event.conference.field_collections
     - field.field.event.conference.field_content_tabs
     - field.field.event.conference.field_description
     - field.field.event.conference.field_event_date
+    - field.field.event.conference.field_events
     - field.field.event.conference.field_grid_event_id
     - field.field.event.conference.field_hero_image
     - field.field.event.conference.field_meta_tags
     - field.field.event.conference.field_name_short
     - field.field.event.conference.field_published
+    - field.field.event.conference.field_regions
     - field.field.event.conference.field_registration_deadline
     - field.field.event.conference.field_related_media
     - field.field.event.conference.field_sequential_id
@@ -25,7 +29,9 @@ dependencies:
     - field.field.event.conference.field_speakers
     - field.field.event.conference.field_sponsors
     - field.field.event.conference.field_streaming_now
+    - field.field.event.conference.field_tags
     - field.field.event.conference.field_title_card_image
+    - field.field.event.conference.field_topics
     - field.field.event.conference.field_tracks
     - field.field.event.conference.field_venue
   module:
@@ -97,6 +103,22 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_centers:
+    weight: 36
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_collections:
+    weight: 35
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_content_tabs:
     type: entity_reference_revisions_entity_view
     weight: 25
@@ -121,6 +143,14 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_events:
+    weight: 33
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_grid_event_id:
     weight: 1
@@ -162,6 +192,14 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
+  field_regions:
+    weight: 34
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_registration_deadline:
     weight: 14
@@ -222,6 +260,14 @@ content:
       link: false
     third_party_settings: {  }
     region: content
+  field_tags:
+    weight: 31
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_title_card_image:
     weight: 20
     label: above
@@ -230,6 +276,14 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
+  field_topics:
+    weight: 32
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_tracks:
     weight: 16

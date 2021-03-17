@@ -1,14 +1,16 @@
-uuid: b5d9b29f-8c06-4e4e-83d5-2206d36b7369
+uuid: 4b0dd880-7f32-4ff4-84d8-e683af01f93a
 langcode: en
 status: true
 dependencies:
   module:
     - eck
-id: panel.field_why
-field_name: field_why
-entity_type: panel
-type: string_long
+id: people.field_sortorder
+field_name: field_sortorder
+entity_type: people
+type: string
 settings:
+  max_length: 255
+  is_ascii: false
   case_sensitive: false
 module: core
 locked: false

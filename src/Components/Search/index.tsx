@@ -284,7 +284,6 @@ export default function Search() {
   //
   // Autosuggest & methods
   //
-
   // Pressing Enter
   const handleAutosuggestKeypress = (e) => {
     if (e.keyCode == 13) {

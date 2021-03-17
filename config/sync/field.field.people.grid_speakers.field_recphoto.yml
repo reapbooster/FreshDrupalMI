@@ -1,0 +1,19 @@
+uuid: d3214beb-7839-44d1-bc35-c5411b5cdc68
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_recphoto
+id: people.grid_speakers.field_recphoto
+field_name: field_recphoto
+entity_type: people
+bundle: grid_speakers
+label: recphoto
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

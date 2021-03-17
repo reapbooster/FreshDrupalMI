@@ -7,7 +7,6 @@ dependencies:
     - field.storage.media.field_cover
     - field.storage.media.field_thumbnail_uri
     - field.storage.node.field_hero_image
-    - field.storage.node.field_page_type
     - field.storage.people.field_photo
     - field.storage.slide.field_background_image
     - search_api.index.freshdrupal_live
@@ -1190,120 +1189,6 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
-        field_page_type:
-          id: field_page_type
-          table: search_api_index_freshdrupal_live
-          field: field_page_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api_entity
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            display_methods:
-              centers:
-                display_method: label
-                view_mode: default
-              collections:
-                display_method: label
-              department:
-                display_method: label
-              events:
-                display_method: label
-              milken_tags:
-                display_method: label
-              page_type:
-                display_method: label
-              ph_actions:
-                display_method: label
-                view_mode: default
-              ph_focus:
-                display_method: label
-                view_mode: default
-              ph_hub:
-                display_method: label
-                view_mode: default
-              ph_region:
-                display_method: label
-                view_mode: default
-              ph_terms:
-                display_method: label
-                view_mode: default
-              program_initiatives:
-                display_method: label
-              projects:
-                display_method: label
-              region:
-                display_method: label
-              seniority:
-                display_method: label
-              teams:
-                display_method: label
-                view_mode: default
-              topics:
-                display_method: label
-              tracks:
-                display_method: label
-          plugin_id: search_api_field
         aggregated_field_topics:
           id: aggregated_field_topics
           table: search_api_index_freshdrupal_live
@@ -1361,6 +1246,59 @@ display:
           id: aggregated_field_published
           table: search_api_index_freshdrupal_live
           field: aggregated_field_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          link_to_item: false
+          use_highlighting: false
+          multi_type: separator
+          multi_separator: ', '
+          plugin_id: search_api
+        aggregated_field_type:
+          id: aggregated_field_type
+          table: search_api_index_freshdrupal_live
+          field: aggregated_field_type
           relationship: none
           group_type: group
           admin_label: ''
@@ -1491,6 +1429,18 @@ display:
           expose:
             label: Label
           plugin_id: search_api
+        aggregated_field_published:
+          id: aggregated_field_published
+          table: search_api_index_freshdrupal_live
+          field: aggregated_field_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: true
+          expose:
+            label: Published
+          plugin_id: search_api
       header: {  }
       footer: {  }
       empty: {  }
@@ -1598,6 +1548,39 @@ display:
           break_phrase: true
           not: false
           plugin_id: search_api
+        aggregated_field_type:
+          id: aggregated_field_type
+          table: search_api_index_freshdrupal_live
+          field: aggregated_field_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: query_parameter
+          default_argument_options:
+            query_param: type
+            fallback: ' '
+            multiple: or
+          default_argument_skip_url: false
+          summary_options: {  }
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: true
+          not: false
+          plugin_id: search_api
       display_extenders: {  }
       title: 'Solr Search'
       filter_groups:
@@ -1621,7 +1604,6 @@ display:
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
         - 'config:field.storage.node.field_hero_image'
-        - 'config:field.storage.node.field_page_type'
         - 'config:field.storage.people.field_photo'
         - 'config:field.storage.slide.field_background_image'
         - 'config:search_api.index.freshdrupal_live'
@@ -1636,7 +1618,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 5
+          items_per_page: 50
           offset: 0
           id: 0
           total_pages: null
@@ -1708,7 +1690,6 @@ display:
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
         - 'config:field.storage.node.field_hero_image'
-        - 'config:field.storage.node.field_page_type'
         - 'config:field.storage.people.field_photo'
         - 'config:field.storage.slide.field_background_image'
         - 'config:search_api.index.freshdrupal_live'

@@ -1,0 +1,19 @@
+uuid: 416de7da-fd7c-48be-88c5-b328f75d81c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_devorganization
+id: people.grid_speakers.field_devorganization
+field_name: field_devorganization
+entity_type: people
+bundle: grid_speakers
+label: devorganization
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

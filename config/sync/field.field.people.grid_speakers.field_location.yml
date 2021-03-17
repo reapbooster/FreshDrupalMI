@@ -1,0 +1,19 @@
+uuid: 24c1bb38-ee21-4bb2-a34e-915013fafeaa
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_location
+id: people.grid_speakers.field_location
+field_name: field_location
+entity_type: people
+bundle: grid_speakers
+label: location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

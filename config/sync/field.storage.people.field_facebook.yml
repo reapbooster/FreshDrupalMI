@@ -1,0 +1,21 @@
+uuid: 14bf1410-752b-4f10-a3ea-244fbd8d9b94
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: people.field_facebook
+field_name: field_facebook
+entity_type: people
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

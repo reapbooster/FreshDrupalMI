@@ -28,6 +28,11 @@ MediaDetail:
   js:
     components/MediaDetail/MediaDetail.entry.js: { source: 'components/MediaDetail/MediaDetail.entry.tsx' }
 
+PeopleDetail:
+  version: 1.0
+  js:
+    components/PeopleDetail/PeopleDetail.entry.js: { source: 'components/PeopleDetail/PeopleDetail.entry.tsx' }
+
 PhilanthropyHub:
   version: 1.0
   js:

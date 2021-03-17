@@ -10,12 +10,8 @@ use Drupal\migrate\Row;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\media\Entity\Media;
-use Drupal\file\Entity\File;
-use GuzzleHttp\ClientInterface;
-use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Serialization\Json;
-
 
 /**
  * Implements hook_help().
@@ -60,70 +56,75 @@ function milken_migrate_cron() {
   return milken_migrate_cron_run_migrations();
 }
 
+/**
+ * Custom function to pull thumbnails from oEmbed service.
+ */
 function milken_migrate_update_video() {
-  
+
   $result = \Drupal::entityQuery("media")
     ->condition('bundle', 'video')
     // ->condition('uid', 1, '<>')
     ->execute();
   $i = 0;
-    
 
   foreach ($result as $id) {
-    $valid = false;
+    $valid = FALSE;
     $video = Media::load($id);
     $url = $video->get('field_media_oembed_video')->getValue();
     $pos = strpos($url[0]['value'], 'https://www.youtube.com/embed/');
     $uri = 'na';
-    if ($pos === false) {
-      
-    }else{
-        $uri = str_replace("https://www.youtube.com/embed/", "https://www.youtube.com/watch?v=", $url[0]['value']);
-        
-        try {
-          $client = \Drupal::httpClient();
-          $request = $client->get('https://www.youtube.com/oembed?url='.$uri);
-          list($format) = $request->getHeader('Content-Type');
-          $content = (string) $request->getBody();
-          if (strstr($format, 'text/xml') || strstr($format, 'application/xml')) {
-            if(!$this->parseResourceXml($content, $uri)){
-              $valid = false;
-            } else {
-              $valid = true;
-            }
+    if ($pos === FALSE) {
+
+    }
+    else {
+      $uri = str_replace("https://www.youtube.com/embed/", "https://www.youtube.com/watch?v=", $url[0]['value']);
+
+      try {
+        $client = \Drupal::httpClient();
+        $request = $client->get('https://www.youtube.com/oembed?url=' . $uri);
+        list($format) = $request->getHeader('Content-Type');
+        $content = (string) $request->getBody();
+        if (strstr($format, 'text/xml') || strstr($format, 'application/xml')) {
+          if (!$this->parseResourceXml($content, $uri)) {
+            $valid = FALSE;
           }
-          elseif (strstr($format, 'text/javascript') || strstr($format, 'application/json')) {
-            if(!Json::decode($content)){
-              $valid = false;
-            } else {
-              $valid = true;
-            }
-          }
-          // If the response is neither XML nor JSON, we are in bat country.
           else {
-            echo 'The fetched resource did not have a valid Content-Type header.';
-            $valid = false;
+            $valid = TRUE;
           }
         }
-        catch (RequestException $e) {
-          echo 'Could not retrieve the oEmbed resource.';
+        elseif (strstr($format, 'text/javascript') || strstr($format, 'application/json')) {
+          if (!Json::decode($content)) {
+            $valid = FALSE;
+          }
+          else {
+            $valid = TRUE;
+          }
         }
-        $video->set('field_media_oembed_video', $uri);
+        // If the response is neither XML nor JSON, we are in bat country.
+        else {
+          echo 'The fetched resource did not have a valid Content-Type header.';
+          $valid = FALSE;
+        }
       }
-    
+      catch (RequestException $e) {
+        echo 'Could not retrieve the oEmbed resource.';
+      }
+      $video->set('field_media_oembed_video', $uri);
+    }
 
     $video->set('uid', 1);
-    if( $valid) {
-        $video->save(); 
-    } else {
+    if ($valid) {
+      $video->save();
+    }
+    else {
       echo $id;
       echo " ";
       echo $url[0]['value'];
       echo "\n";
     }
-    
-      $i++;
-   // }
+
+    $i++;
+    // }
   }
   echo $i;
 }

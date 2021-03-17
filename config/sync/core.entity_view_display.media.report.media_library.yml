@@ -6,15 +6,20 @@ dependencies:
     - core.entity_view_mode.media.media_library
     - field.field.media.report.field_author
     - field.field.media.report.field_centers
+    - field.field.media.report.field_collections
+    - field.field.media.report.field_content
     - field.field.media.report.field_cover
     - field.field.media.report.field_custom_author
     - field.field.media.report.field_essay
+    - field.field.media.report.field_events
     - field.field.media.report.field_filemime
     - field.field.media.report.field_filesize
     - field.field.media.report.field_media_file
     - field.field.media.report.field_meta_tags
     - field.field.media.report.field_program_initiatives
+    - field.field.media.report.field_regions
     - field.field.media.report.field_related_event
+    - field.field.media.report.field_tags
     - field.field.media.report.field_term_collection
     - field.field.media.report.field_topics
     - image.style.medium
@@ -40,16 +45,20 @@ hidden:
   field_author: true
   field_body: true
   field_centers: true
+  field_collections: true
   field_content: true
   field_cover: true
   field_custom_author: true
   field_essay: true
+  field_events: true
   field_filemime: true
   field_filesize: true
   field_media_file: true
   field_meta_tags: true
   field_program_initiatives: true
+  field_regions: true
   field_related_event: true
+  field_tags: true
   field_term_collection: true
   field_topics: true
   langcode: true

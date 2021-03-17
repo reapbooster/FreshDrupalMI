@@ -1,0 +1,19 @@
+uuid: 21a647e7-2089-437c-8deb-980b13267871
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.people.grid_speakers
+    - field.storage.people.field_connections
+id: people.grid_speakers.field_connections
+field_name: field_connections
+entity_type: people
+bundle: grid_speakers
+label: connections
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
