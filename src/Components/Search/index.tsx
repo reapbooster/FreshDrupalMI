@@ -94,7 +94,7 @@ function getHashParams() {
   var params = {};
   hash.split("&").map((hk) => {
     let temp = hk.split("=");
-    params[temp[0]] = temp[1];
+    params[temp[0]] = decodeURIComponent(temp[1].replace(/\+/g, "%20"));
   });
   return params;
 }
@@ -169,10 +169,10 @@ export default function Search() {
 
   const locationChanged = debounce(
     () => {
-      console.log("locationChanged");
       const keywords = getHashParams()?.keywords;
+      console.log("locationChanged", query, keywords);
       if (keywords) {
-        setQuery(keywords);
+        // setQuery(keywords);
         setQueryInputValue(keywords);
       }
       fetchSearchResults();
@@ -268,8 +268,7 @@ export default function Search() {
       return;
     }
     let res = await contentAPI.fetchSearchResults(params);
-    console.log(res);
-    setSearchResults(res);
+    setSearchResults(res.rows);
   };
 
   const getTopics = async () => {
@@ -285,7 +284,6 @@ export default function Search() {
   //
   // Autosuggest & methods
   //
-
   // Pressing Enter
   const handleAutosuggestKeypress = (e) => {
     if (e.keyCode == 13) {
@@ -306,9 +304,13 @@ export default function Search() {
     }
   };
 
+  const selectRef = React.createRef();
+
   // Necessary to
   const handleAutosuggestInputChange = (inputValue, { action }) => {
     // console.log("setValue", inputValue, action);
+
+    selectRef.current.select.getNextFocusedOption = () => false;
 
     if (action === "input-change") {
       setQueryInputValue(inputValue);
@@ -336,6 +338,7 @@ export default function Search() {
           <div className="col-md-8 col-lg-9">
             <CustomSelect>
               <Select
+                ref={selectRef}
                 value={false}
                 inputValue={queryInputValue}
                 components={{
@@ -383,7 +386,11 @@ export default function Search() {
           open={menuOpen}
         />
 
-        <SearchResults isGrid={viewMode != "list"} contents={searchResults} />
+        <SearchResults
+          isGrid={viewMode != "list"}
+          contents={searchResults}
+          queryString={query}
+        />
       </div>
     </SearchWrapper>
   );
