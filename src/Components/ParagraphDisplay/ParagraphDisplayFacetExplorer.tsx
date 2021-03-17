@@ -68,11 +68,15 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
           apiParams.addSort('title');
         }
 
-        requestURL = 
-          '/jsonapi/node/article?jsonapi_include=true&' 
-          + apiParams.getQueryString()
-          // Use pageOffset for pagination, it skips a number of records. meta.count has the total number
-          + '&page[offset]=' + (pageOffset !== null) ? pageOffset : 0;
+        // Use pageOffset for pagination, it skips a number of records. meta.count has the total number
+        requestURL = '/jsonapi/node/article?jsonapi_include=true&' 
+          + apiParams.getQueryString();
+          
+        if (pageOffset !== null && pageOffset > 0) {
+          requestURL += '&page[offset]=' + pageOffset?.toString;
+        }
+
+        console.debug("ParagraphDisplayFacetExplorer: requestURL ", requestURL);
       break;
       
     default:
