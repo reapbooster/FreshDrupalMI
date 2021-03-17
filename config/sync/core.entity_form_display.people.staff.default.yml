@@ -18,14 +18,16 @@ dependencies:
     - field.field.people.staff.field_regions
     - field.field.people.staff.field_social_media
     - field.field.people.staff.field_status
+    - field.field.people.staff.field_summary
     - field.field.people.staff.field_tags
-    - field.field.people.staff.field_topics
     - field.field.people.staff.field_teams
+    - field.field.people.staff.field_topics
     - image.style.thumbnail
   module:
     - image
     - path
     - social_media
+    - text
 id: people.staff.default
 targetEntityType: people
 bundle: staff
@@ -156,6 +158,14 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_summary:
+    weight: 37
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
     region: content
   field_tags:
     weight: 32
