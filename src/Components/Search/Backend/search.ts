@@ -45,15 +45,16 @@ const fetchSearchResults = async (params) => {
           sortBy = "label";
           sortOrder = "ASC";
           break;
-        case "published":
+        case "date":
           sortBy = "aggregated_field_published";
           sortOrder = "DESC";
           break;
       }
-      params.sort_by = sortBy;
-      params.sort_order = sortOrder;
       delete params.sortby;
     }
+
+    params.sort_by = sortBy;
+    params.sort_order = sortOrder;
 
     if (params?.date) {
       const parsedDate = params?.date.split("_"),
@@ -101,7 +102,7 @@ const fetchSearchResults = async (params) => {
 const getEntityId = (list, machineName) => {
   console.log(list, machineName);
   let item = list.find((t) => t.attributes.machine_name === machineName);
-  return item?.id;
+  return item?.attributes?.drupal_internal__tid;
 };
 
 const fetchTopics = async () => {

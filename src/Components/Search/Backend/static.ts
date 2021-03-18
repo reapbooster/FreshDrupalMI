@@ -18,7 +18,7 @@ export const dateOptions = [
 
 export const sortOptions = [
   { value: null, label: "Relevance" },
-  { value: "created", label: "Date" },
+  { value: "date", label: "Date" },
   { value: "title", label: "Name" },
   // TODO: Post-launch
   // { value: "type", label: "Type" },
