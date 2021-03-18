@@ -20,7 +20,8 @@ export const sortOptions = [
   { value: null, label: "Relevance" },
   { value: "created", label: "Date" },
   { value: "title", label: "Name" },
-  { value: "type", label: "Type" },
+  // TODO: Post-launch
+  // { value: "type", label: "Type" },
 ];
 
 export const perpageOptions = [20, 40, 60];
