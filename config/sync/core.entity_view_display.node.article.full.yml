@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
+    - field.field.node.article.field_authors
     - field.field.node.article.field_centers
     - field.field.node.article.field_collections
     - field.field.node.article.field_content
@@ -94,6 +95,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_authors: true
   field_collections: true
   field_event: true
   field_events: true
