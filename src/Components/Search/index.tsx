@@ -109,7 +109,7 @@ export default function Search() {
 
   // URL-State parameters
   const [sortby, setSortby] = useQueryState("sortby", "");
-  const [perpage, setPerpage] = useQueryState("perpage", 20);
+  const [perpage, setPerpage] = useQueryState("items_per_page", 12);
   const [type, setType] = useQueryState("type", "");
   const [topics, setTopics] = useQueryState("topics", "");
   const [centers, setCenters] = useQueryState("centers", "");
