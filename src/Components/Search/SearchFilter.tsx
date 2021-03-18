@@ -37,11 +37,13 @@ export default function SearchFilter(props) {
     console.log("setFilterParameter", optionType, values);
 
     if (!values) {
-      filterStateSnapshot[optionType] = false;
+      filterStateSnapshot[optionType] = "";
     } else if (multiple == true) {
-      filterStateSnapshot[optionType] = values.map((o) => {
-        return o.value;
-      });
+      filterStateSnapshot[optionType] = values
+        .map((o) => {
+          return o.value;
+        })
+        .join("+");
     } else {
       filterStateSnapshot[optionType] = values?.value;
     }
@@ -61,6 +63,7 @@ export default function SearchFilter(props) {
     for (const field in filterFields) {
       console.log("buffer", field);
       if (["type", "topics", "centers", "date"].includes(field)) {
+        delete newBuffer[field];
         newBuffer[field] = null;
       }
     }
