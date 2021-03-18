@@ -24,4 +24,4 @@ export const sortOptions = [
   // { value: "type", label: "Type" },
 ];
 
-export const perpageOptions = [20, 40, 60];
+export const perpageOptions = [12, 24, 48];

@@ -273,12 +273,12 @@ export default function Search() {
 
   const getTopics = async () => {
     let res = await contentAPI.fetchTopics();
-    const options = setTopicOptions(makeOptions(res?.data));
+    const options = setTopicOptions(makeOptions(res));
   };
 
   const getCenters = async () => {
     let res = await contentAPI.fetchCenters();
-    setCenterOptions(makeOptions(res?.data));
+    setCenterOptions(makeOptions(res));
   };
 
   //
@@ -332,7 +332,7 @@ export default function Search() {
   };
 
   return (
-    <SearchWrapper id="search-content" className="my-3">
+    <SearchWrapper id="search-content" className="py-3">
       <div className={containerClass}>
         <div className="row">
           <div className="col-md-8 col-lg-9">
