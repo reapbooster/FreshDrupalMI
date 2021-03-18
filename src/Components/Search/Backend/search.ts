@@ -4,7 +4,7 @@ import moment from "moment";
 // TODO: Conditional
 const apiPath = window.location.host.includes("localhost")
   ? "http://localhost:3001"
-  : "/";
+  : "";
 
 // Value cache
 let centers, topics;
