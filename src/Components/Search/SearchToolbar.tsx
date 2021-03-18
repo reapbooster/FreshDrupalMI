@@ -63,7 +63,7 @@ export default function SearchToolbar(props) {
           ))}
         </select>
       </div>
-      <div className="d-inline mx-3">
+      {/* <div className="d-inline mx-3">
         <label htmlFor="perpage">Results per page:</label>
         <select
           name="perpage"
@@ -78,7 +78,7 @@ export default function SearchToolbar(props) {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
       <div className="d-flex mx-3">
         <ToolbarButton
           className={classnames(

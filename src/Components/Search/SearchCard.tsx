@@ -16,6 +16,12 @@ const ViewMoreButton = styled.button`
   color: ${theme.colors.secondary};
 `;
 
+const SearchCardWrapper = styled.div`
+  .search-excerpt strong {
+    background: yellow;
+  }
+`;
+
 const tooltipText = "Click or tap to open";
 
 function TextEllipsis({ text }) {
@@ -75,7 +81,7 @@ function SearchCard(props) {
   );
 
   return (
-    <div className="content-card card d-flex flex-column">
+    <SearchCardWrapper className="content-card card d-flex flex-column">
       <a href={link} alt={tooltipText} target="_blank">
         {renderImage}
       </a>
@@ -85,15 +91,17 @@ function SearchCard(props) {
             {title}
           </a>
         </h5>
-        {text && text.length > MAX_LENGTH_LIMIT ? (
-          <TextEllipsis text={text} />
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: text }}></div>
-        )}
+        <div className="search-excerpt">
+          {text && text.length > MAX_LENGTH_LIMIT ? (
+            <TextEllipsis text={text} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: text }}></div>
+          )}
+        </div>
 
         <small class="d-block mt-4">{publishedDate}</small>
       </div>
-    </div>
+    </SearchCardWrapper>
   );
 }
 
