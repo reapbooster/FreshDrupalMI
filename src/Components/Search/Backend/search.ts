@@ -32,6 +32,7 @@ const fetchSearchResults = async (params) => {
     }
 
     params._format = "json";
+    if (!params?.items_per_page) params.items_per_page = 12;
 
     // TODO: Pagination
 
