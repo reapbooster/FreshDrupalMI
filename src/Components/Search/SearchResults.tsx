@@ -8,17 +8,25 @@ export default function SearchResults(props) {
   const itemProps = (content) => {
     return {
       id: content?.uuid,
-      image:
-        content?.field_photo ??
-        content?.field_thumbnail_uri ??
-        content.field_title_card_image ??
-        content?.field_cover ??
-        "https://placehold.it/800x600",
-      type: content?.entity_type_id,
+      image: Object.keys(content)
+        .map((key) =>
+          [
+            "field_photo",
+            "field_thumbnail_uri",
+            "field_background_image",
+            "field_title_card_image",
+            "field_cover",
+          ].includes(key) && content[key]
+            ? content[key].replace("public://", "/sites/default/files/")
+            : false
+        )
+        .filter(Boolean),
+      type: content?.bundle,
       title: content?.label ?? content?.title,
       text: content?.search_api_excerpt,
       // text: "",
       link: content?.url,
+      published: content?.aggregated_field_published ?? content?.published,
     };
   };
 
@@ -56,7 +64,7 @@ export default function SearchResults(props) {
           ? renderCardView(props.contents)
           : renderListView(props.contents)}
 
-        {queryString}
+        {/* TODO: PAGINATION from queryString */}
       </div>
     );
   } else {
@@ -65,7 +73,7 @@ export default function SearchResults(props) {
 }
 
 SearchResults.propTypes = {
-  contents: PropTypes.array,
+  contents: PropTypes.any,
   isGrid: PropTypes.bool,
   queryString: PropTypes.string,
 };

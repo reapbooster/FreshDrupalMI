@@ -110,9 +110,9 @@ export default function Search() {
   // URL-State parameters
   const [sortby, setSortby] = useQueryState("sortby", "");
   const [perpage, setPerpage] = useQueryState("perpage", 20);
-  const [type, setType] = useQueryState("type", []);
-  const [topics, setTopics] = useQueryState("topics", []);
-  const [centers, setCenters] = useQueryState("centers", []);
+  const [type, setType] = useQueryState("type", "");
+  const [topics, setTopics] = useQueryState("topics", "");
+  const [centers, setCenters] = useQueryState("centers", "");
   const [date, setDate] = useQueryState("date", "");
   const [viewMode, setViewMode] = useQueryState("view", "grid");
 
@@ -388,7 +388,7 @@ export default function Search() {
 
         <SearchResults
           isGrid={viewMode != "list"}
-          contents={searchResults}
+          contents={searchResults ?? []}
           queryString={query}
         />
       </div>
