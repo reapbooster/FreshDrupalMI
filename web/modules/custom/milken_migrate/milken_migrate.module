@@ -12,6 +12,7 @@ use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\media\Entity\Media;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Serialization\Json;
+use Drupal\milken_migrate\Controller\MilkenMigrateController;
 
 /**
  * Implements hook_help().
@@ -127,4 +128,25 @@ function milken_migrate_update_video() {
     // }
   }
   echo $i;
+}
+
+function milken_migrate_content_update() {
+  $csv_source = drupal_get_path('module', 'milken_migrate') . '/assets/content.csv';
+  $num_lines = (int)`wc -l $csv_source`;
+  $migrate = new MilkenMigrateController;
+  if (($fp = fopen($csv_source, "r")) !== FALSE) {
+    while(($data = fgetcsv($fp, null, ",", "|",)) !== FALSE) {
+      if(strcasecmp($data[0], 'Article') == 0) {
+        //update article
+        $result = $migrate->update_articles($data);
+      } else if(strcasecmp($data[0], 'Video') == 0) {
+        //update Video
+      } else if(strcasecmp($data[0], 'Report') == 0) {
+        //update report
+      } else {
+        //skip
+      }
+    }
+  }
+    
 }
