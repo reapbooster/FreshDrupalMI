@@ -140,9 +140,12 @@ function milken_migrate_content_update() {
         //update article
         $result = $migrate->update_articles($data);
       } else if(strcasecmp($data[0], 'Video') == 0) {
-        //update Video
+        print 'Video';
+        print "\n";
+        $result = $migrate->update_media($data);
       } else if(strcasecmp($data[0], 'Report') == 0) {
-        //update report
+         print 'Report'; print "\n";
+        $result = $migrate->update_media($data);
       } else {
         //skip
       }

@@ -81,12 +81,6 @@ class MilkenMigrateController extends ControllerBase
           }
       }
     
-      $path_alias = \Drupal\path_alias\Entity\PathAlias::create([
-        'path' => '/node/'.$nid,
-        'alias' => $data[1],
-      ]);
-      $path_alias->save();
-    
       //collections
       if($data[5] <> '') {
       $collections = explode(":", $data[5]);
@@ -153,7 +147,128 @@ class MilkenMigrateController extends ControllerBase
   }
   
 
-  public function update_media() {
+  public function update_media($data) {
+    
+    $media = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties(['uuid' => $data[9]]);
+    $mid =  key($media);
+    if (is_numeric($mid)) {
+      print $mid;
+      print "\n";
+      $media = \Drupal::entityTypeManager()->getStorage('media')->load($mid);
+      
+      //tags vid=milken_tags $data[4]
+      if($data[4] <> '') {
+      $tags = explode(":", $data[4]);
+        foreach($tags as $index => $tag) {
+            $tid = $this->get_term_from_name(str_replace(";", ",", $tag), 'milken_tags');
+            if($tid) {
+              print $index;
+              print "\n";
+              if($index == 0) {
+                $media->set('field_tags', ['target_id' => $tid]);
+              } else {
+                $media->get('field_tags')->appendItem([
+                  'target_id' => $tid,
+                ]);
+              }
+            }
+          }
+      }
+    
+      //centers
+      if($data[2] <> '') {
+      $centers = explode(":", $data[2]);
+        foreach($centers as $index => $center) {
+            $tid = $this->get_term_from_name(str_replace(";", ",", $center), 'centers');
+            if($tid) {
+              if($index == 0) {
+                $media->set('field_centers', ['target_id' => $tid]);
+              } else {
+                $media->get('field_centers')->appendItem([
+                  'target_id' => $tid,
+                ]);
+              }
+            }
+          }
+      }
+    
+      //topics
+      if($data[3] <> '') {
+      $topics = explode(":", $data[3]);
+        foreach($topics as $index => $topic) {
+            $tid = $this->get_term_from_name(str_replace(";", ",", $topic), 'topics');
+            if($tid) {
+              if($index == 0) {
+                $media->set('field_topics', ['target_id' => $tid]);
+              } else {
+                $media->get('field_topics')->appendItem([
+                  'target_id' => $tid,
+                ]);
+              }
+            }
+          }
+      }
+    
+      //collections
+      if($data[5] <> '') {
+      $collections = explode(":", $data[5]);
+        foreach($collections as $index => $collection) {
+            $tid = $this->get_term_from_name(str_replace(";", ",", $collection), 'collections');
+            if($tid) {
+              if($index == 0) {
+                $media->set('field_collections', ['target_id' => $tid]);
+              } else {
+                $media->get('field_collections')->appendItem([
+                  'target_id' => $tid,
+                ]);
+              }
+            }
+          }
+      }
+    
+      //events
+      if($data[6] <> '') {
+      $events = explode(":", $data[6]);
+        foreach($events as $index => $event) {
+            $tid = $this->get_term_from_name(str_replace(";", ",", $event), 'events');
+            if($tid) {
+              if($index == 0) {
+                $media->set('field_events', ['target_id' => $tid]);
+              } else {
+                $media->get('field_events')->appendItem([
+                  'target_id' => $tid,
+                ]);
+              }
+            }
+          }
+      }
+    
+      //regions
+      if($data[7] <> '') {
+      $regions = explode(":", $data[7]);
+        foreach($regions as $index => $region) {
+            $tid = $this->get_term_from_name(str_replace(";", ",", $region), 'region');
+            if($tid) {
+              if($index == 0) {
+                $media->set('field_regions', ['target_id' => $tid]);
+              } else {
+                $media->get('field_regions')->appendItem([
+                  'target_id' => $tid,
+                ]);
+              }
+            }
+          }
+      }
+    
+      $media->save();
+      
+      $path_alias = \Drupal\path_alias\Entity\PathAlias::create([
+        'path' => '/media/'.$mid,
+        'alias' => $data[1],
+      ]);
+      $path_alias->save();
+      
+    }
     
   }
   
