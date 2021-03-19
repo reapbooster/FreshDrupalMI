@@ -138,6 +138,8 @@ function milken_migrate_content_update() {
     while(($data = fgetcsv($fp, null, ",", "|",)) !== FALSE) {
       if(strcasecmp($data[0], 'Article') == 0) {
         //update article
+        print 'Article;
+        print "\n";
         $result = $migrate->update_articles($data);
       } else if(strcasecmp($data[0], 'Video') == 0) {
         print 'Video';
