@@ -16,17 +16,24 @@ class MilkenMigrateController extends ControllerBase {
    */
   public function update_articles($data) {
 
-    $node_ar = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['uuid' => $data[9]]);
+    $node_ar = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['uuid' => $data[10]]);
     $nid = key($node_ar);
-    if (is_numeric($nid)) {
+    $must_delete = (strcasecmp($data[9], 'delete') == 0) ? true : false;
+    if (is_numeric($nid) && $must_delete ){
+      // If node is marked for deletion
+      $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+      $node->delete($node);
+      print " ITEM $nid HAS BEEN DELETED";
+    } else if (is_numeric($nid) && !$must_delete ) {
+      // If node should only be updated 
       // $node = Node::load($nid);
       print ', nid: ' . $nid;
       $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
-      // Tags vid=milken_tags $data[4].
-      if ($data[4] <> '') {
-        $tags = explode(":", $data[4]);
+      // Tags vid=milken_tags $data[5].
+      if ($data[5] <> '') {
+        $tags = explode("%comma%", $data[5]);
         foreach ($tags as $index => $tag) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $tag), 'milken_tags');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $tag)), 'milken_tags');
           if ($tid) {
             print  ', tag#: ' . $index;
             if ($index == 0) {
@@ -42,10 +49,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Centers.
-      if ($data[2] <> '') {
-        $centers = explode(":", $data[2]);
+      if ($data[3] <> '') {
+        $centers = explode("%comma%", $data[3]);
         foreach ($centers as $index => $center) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $center), 'centers');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $center)), 'centers');
           if ($tid) {
             print  ', center#: ' . $index;
             if ($index == 0) {
@@ -61,10 +68,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Topics.
-      if ($data[3] <> '') {
-        $topics = explode(":", $data[3]);
+      if ($data[4] <> '') {
+        $topics = explode("%comma%", $data[4]);
         foreach ($topics as $index => $topic) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $topic), 'topics');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $topic)), 'topics');
           if ($tid) {
             print  ', topic#: ' . $index;
             if ($index == 0) {
@@ -80,10 +87,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Collections.
-      if ($data[5] <> '') {
-        $collections = explode(":", $data[5]);
+      if ($data[6] <> '') {
+        $collections = explode("%comma%", $data[6]);
         foreach ($collections as $index => $collection) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $collection), 'collections');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $collection)), 'collections');
           if ($tid) {
             print  ', collection#: ' . $index;
             if ($index == 0) {
@@ -99,10 +106,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Events.
-      if ($data[6] <> '') {
-        $events = explode(":", $data[6]);
+      if ($data[7] <> '') {
+        $events = explode("%comma%", $data[7]);
         foreach ($events as $index => $event) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $event), 'events');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $event)), 'events');
           if ($tid) {
             print  ', event#: ' . $index;
             if ($index == 0) {
@@ -118,10 +125,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Regions.
-      if ($data[7] <> '') {
-        $regions = explode(":", $data[7]);
+      if ($data[8] <> '') {
+        $regions = explode("%comma%", $data[8]);
         foreach ($regions as $index => $region) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $region), 'region');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $region)), 'region');
           if ($tid) {
             print  ', region#: ' . $index;
             if ($index == 0) {
@@ -145,7 +152,7 @@ class MilkenMigrateController extends ControllerBase {
       $path_alias->save();
       print " END OF " . $nid;
     } else {
-      print " NOT FOUND: " . implode("; ", $data);
+      print " NODE ITEM NOT FOUND: " . implode("; ", $data);
     }
 
   }
@@ -155,17 +162,24 @@ class MilkenMigrateController extends ControllerBase {
    */
   public function update_media($data) {
 
-    $media = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties(['uuid' => $data[9]]);
+    $media = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties(['uuid' => $data[10]]);
     $mid = key($media);
-    if (is_numeric($mid)) {
-      print ', mid: ' . $nid;
+    $must_delete = (strcasecmp($data[9], 'delete') == 0) ? true : false;
+    if (is_numeric($mid) && $must_delete ){
+      // If media is marked for deletion
+      $media = \Drupal::entityTypeManager()->getStorage('media')->load($mid);
+      $media->delete($media);
+      print " ITEM $mid HAS BEEN DELETED";
+    } else if (is_numeric($mid) && !$must_delete ) {
+      // If media should only be updated 
+      print ', mid: ' . $mid;
       $media = \Drupal::entityTypeManager()->getStorage('media')->load($mid);
 
-      // Tags vid=milken_tags $data[4].
-      if ($data[4] <> '') {
-        $tags = explode(":", $data[4]);
+      // Tags vid=milken_tags $data[5].
+      if ($data[5] <> '') {
+        $tags = explode("%comma%", $data[5]);
         foreach ($tags as $index => $tag) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $tag), 'milken_tags');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $tag)), 'milken_tags');
           if ($tid) {
             print  ', tag#: ' . $index;
             if ($index == 0) {
@@ -181,10 +195,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Centers.
-      if ($data[2] <> '') {
-        $centers = explode(":", $data[2]);
+      if ($data[3] <> '') {
+        $centers = explode("%comma%", $data[3]);
         foreach ($centers as $index => $center) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $center), 'centers');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $center)), 'centers');
           if ($tid) {
             print  ', center#: ' . $index;
             if ($index == 0) {
@@ -200,10 +214,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Topics.
-      if ($data[3] <> '') {
-        $topics = explode(":", $data[3]);
+      if ($data[4] <> '') {
+        $topics = explode("%comma%", $data[4]);
         foreach ($topics as $index => $topic) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $topic), 'topics');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $topic)), 'topics');
           if ($tid) {
             print  ', topic#: ' . $index;
             if ($index == 0) {
@@ -219,10 +233,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Collections.
-      if ($data[5] <> '') {
-        $collections = explode(":", $data[5]);
+      if ($data[6] <> '') {
+        $collections = explode("%comma%", $data[6]);
         foreach ($collections as $index => $collection) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $collection), 'collections');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $collection)), 'collections');
           if ($tid) {
             print  ', collection#: ' . $index;
             if ($index == 0) {
@@ -238,10 +252,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Events.
-      if ($data[6] <> '') {
-        $events = explode(":", $data[6]);
+      if ($data[7] <> '') {
+        $events = explode("%comma%", $data[7]);
         foreach ($events as $index => $event) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $event), 'events');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $event)), 'events');
           if ($tid) {
             print  ', event#: ' . $index;
             if ($index == 0) {
@@ -257,10 +271,10 @@ class MilkenMigrateController extends ControllerBase {
       }
 
       // Regions.
-      if ($data[7] <> '') {
-        $regions = explode(":", $data[7]);
+      if ($data[8] <> '') {
+        $regions = explode("%comma%", $data[8]);
         foreach ($regions as $index => $region) {
-          $tid = $this->get_term_from_name(str_replace(";", ",", $region), 'region');
+          $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $region)), 'region');
           if ($tid) {
             print  ', region#: ' . $index;
             if ($index == 0) {
@@ -284,7 +298,7 @@ class MilkenMigrateController extends ControllerBase {
       $path_alias->save();
       print " END OF " . $mid;
     } else {
-      print " NOT FOUND: " . implode("; ", $data);
+      print " MEDIA ITEM NOT FOUND: " . implode("; ", $data);
     }
 
   }
@@ -308,7 +322,7 @@ class MilkenMigrateController extends ControllerBase {
       return $term->id();
     }
     else {
-      print " TERM NOT FOUND: " . $term_name;
+      print " TERM NOT FOUND: " . $term_name . " IN " . $vid;
       $term = Term::create([
         'name' => $term_name,
         'vid' => $vid,

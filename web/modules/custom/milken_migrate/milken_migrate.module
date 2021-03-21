@@ -134,7 +134,7 @@ function milken_migrate_update_video() {
  * Custom function to bulk tag Articles, Reports and Videos.
  */
 function milken_migrate_content_update() {
-  $csv_source = drupal_get_path('module', 'milken_migrate') . '/assets/content.csv';
+  $csv_source = drupal_get_path('module', 'milken_migrate') . '/assets/bulk-tagging.csv';
 
   $num_lines = (int) `wc -l $csv_source`;
   print 'Total Records to Update: ' . $num_lines;
