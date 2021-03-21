@@ -23,13 +23,15 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
   console.debug("ParagraphDisplayFacetExplorer: Data from Props ", data);
 
   const [fetchRan, setFetchRan] = useState(false);
+  const [sortOptions, setSortOptions] = useState([{value: "created", label: "By Date"},{value: "title", label: "By Title"}]);
   const [contentList, setContentList] = useState(null);
   const [topicsList, setTopicsList] = useState(null);
   const [centersList, setCentersList] = useState(null);
   const [pageCount, setPageCount] = useState(1);
   const [pageItemOffset, setPageItemOffset] = useState(0);
-  const [filterTopics, setFilterTopics] = useState([]);
+  const [filterSort, setFilterSort] = useState([]);
   const [filterCenters, setFilterCenters] = useState([]);
+  const [filterTopics, setFilterTopics] = useState([]);
 
   const filterCollections = data.field_collections?.data !== null ? data.field_collections?.name : null;
   const filterTeams = data.field_teams?.data !== null ? data.field_teams?.name : null;
@@ -45,7 +47,16 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
   // Build request URL and URL parameters
   switch(data.field_facet_content_type){
     case 'article':
-      apiParams.addSort('created');
+
+      // Set Sort filter
+      if ( !!filterSort && filterSort?.length !== 0 &&  !!filterSort.value) {
+        apiParams.addSort(filterSort.value);
+        console.debug("FilterSort was used: ", filterSort)
+      } else {
+        console.debug("FilterSort was not used: ", filterSort)
+        apiParams.addSort('created');
+      }
+
       apiParams.addPageLimit(field_items_per_page); // Later, change to data.field_items_per_page
           
         if( filterCollections !== null ) {
@@ -69,10 +80,6 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
           apiParams.addFilter('field_centers.name', filterCenters, 'IN');
         }
         
-        // Use this to sort by title
-        if ( "sort by title" && false) {
-          apiParams.addSort('title');
-        }
 
         // Use pageItemOffset for pagination, it skips a number of records. meta.count has the total number
         requestURL = '/jsonapi/node/article?jsonapi_include=true&' 
@@ -149,6 +156,12 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
     console.debug("ParagraphDisplayFacetExplorer page.selected", page.selected);
     setFetchRan(false);
   }
+  
+  const selectSort = (t) => {
+    setFilterSort(t);
+    setFetchRan(false);
+    console.debug("FilterSort: ", t)
+  }
 
   const selectTopics = (t) => {
     setFilterTopics(t);
@@ -180,6 +193,12 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       color: #999;
       font-size: 14px;
     }
+    & .pagination-wrapper {
+
+      & li {
+        padding: 0.25em 0.75em;
+      }
+    }
   `;
 
   const CustomSelect = styled.div`
@@ -192,34 +211,26 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       border-color: lightgray;
     }
   `;
-  
-  // const Pagination = styled.div`
-  //   & .pagination {
-  //     display: flex;
-  //     padding-left: 0;
-  //     list-style: none;
-  //   }
-  //   & .pagination > li {
-  //     display: inline;
-  //   }
-  //   & .pagination>li>a {
-  //     position: relative;
-  //     float: left;
-  //     padding: 6px 12px;
-  //     line-height: 1.42857143;
-  //     border: 1px solid #ddd;
-  //   }
-  //   & .pagination .active > a, & .pagination .active > a:hover {
-  //     background: #eee;
-  //     border-color: #dddddd;
-  //   }
-  // `;
 
   return (
     <div>
       <FacetExplorerContainer className="container-fluid py-5">
         <Row>
           <Col lg={3}>
+            <div className="filter-area">
+              <CustomSelect>
+                <Select
+                  isMulti
+                  closeMenuOnSelect={true}
+                  defaultValue={filterSort}
+                  placeholder={"Sort order"}
+                  options={sortOptions}
+                  getOptionLabel={({ label }) => label}
+                  getOptionValue={({ value }) => value}
+                  onChange={selectSort}
+                />
+              </CustomSelect>
+            </div>
             <div className="filter-area">
               <CustomSelect>
                 <Select
@@ -231,8 +242,6 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
                   getOptionLabel={({ label }) => label}
                   getOptionValue={({ value }) => value}
                   onChange={selectTopics}
-                  // onChange={(t) => setFilterParameter("topics", t)}
-                  // keys={filterState.topics}
                 />
               </CustomSelect>
             </div>
@@ -247,8 +256,6 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
                   getOptionLabel={({ label }) => label}
                   getOptionValue={({ value }) => value}
                   onChange={selectCenters}
-                //  onChange={(t) => setFilterParameter("topics", t)}
-                //  keys={filterState.topics}
                 />
               </CustomSelect>
             </div>
@@ -257,7 +264,9 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
             </div>
           </Col>
           <Col lg={9}>
-
+            <Row>
+              {requestURL}
+            </Row> 
             <Row>
               <ListDisplay
                 id={"content-list-".concat(data.id)}
@@ -265,28 +274,12 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
                 view_mode={data.field_view_mode}
               />
             </Row>
-            {/* <Row>
-              {data.field_items_per_page}
-            </Row>
-            <Row>
-              {data.field_facet_content_type}
-            </Row>
-            <Row>
-              {filterCollections}
-            </Row>
-            <Row>
-              {filterTeams}
-            </Row> */}
-            <Row>
-              {requestURL}
-            </Row> 
           </Col>
-        </Row>
-      </FacetExplorerContainer>
-      <Row>
-        <Col lg={3}></Col>
-        <Col lg={9}>
-          <div className="newsroom-paginate">
+        </Row> 
+      </FacetExplorerContainer>  
+      <Container>
+        <Row className="justify-content-center pagination-wrapper">
+          <Col>
             <ReactPaginate
                 previousLabel={'Previous'}
                 nextLabel={'Next'}
@@ -299,11 +292,10 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
                 containerClassName={'pagination'}
                 subContainerClassName={'pages pagination'}
                 activeClassName={'active'}
-              />               
-          </div>
-            
-        </Col>
-      </Row>      
+              />
+          </Col>
+        </Row>   
+      </Container>
     </div>
 
   );
