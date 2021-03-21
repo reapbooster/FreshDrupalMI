@@ -82,7 +82,7 @@ class MilkenMigrateCommands extends DrushCommands {
         }
         foreach ($page['data'] as $articleData) {
           $articleData = new RemoteRecord($articleData);
-          if ($articleData->valid() && $localCopy = $articleData->getLocalVersion($destinationEntityField)) {
+          if ($articleData->valid() && $localCopy = $articleData->getLocalVersion($destinationEntityTypeId)) {
             $fieldData = $articleData->getField($sourceField);
             if (!is_array($fieldData)) {
               $fieldData = [$fieldData];
