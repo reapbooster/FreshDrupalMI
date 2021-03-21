@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.article.field_region
     - field.field.node.article.field_summary
     - field.field.node.article.field_tags
-    - field.field.node.article.field_terms
     - field.field.node.article.field_topics
     - node.type.article
   module:
@@ -248,16 +247,6 @@ content:
     region: content
   field_tags:
     weight: 127
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_terms:
-    weight: 4
     settings:
       match_operator: CONTAINS
       match_limit: 10
