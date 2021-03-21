@@ -69,12 +69,13 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
       `;
 
       const HeroWrapper = styled.div`
-        background: #0065CC;
+        background: var(--color-milken-blue);
         width: 100%;
         & .nameTitle {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
+          padding: 0;
         }
 
         @media only screen and (max-width: 767.98px) {
@@ -103,20 +104,27 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
       `;
 
       const NameTitle = styled.div`
-        color: white;
+        color: #fff;
         width: 450px;
-        margin-left: 220px;
+        margin: 0px 106px 0 113px;
+        padding: 40px 20px 37px 20px;
+
+        & a {
+          color: var(--color-milken-orange);
+          letter-spacing: 2px;
+          font-family: 'LatoWebBlack';
+          text-transform: uppercase;
+          font-size: 0.9em;
+        }
 
         & h1 {
           font-family: 'LatoWebBlack';
-          font-size: 2.75rem;
-          font-weight: bold;
-          margin-bottom: 20px;
-          
+          font-size: 3rem;
+          margin: 27px 0 18px;
         }
         
         & h5 {
-          font-size: 1.8rem;
+          font-size: 1.8em;
         }
       `;
 
