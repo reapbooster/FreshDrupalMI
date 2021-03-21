@@ -15,6 +15,7 @@ dependencies:
     - field.field.event.meeting.field_content_tabs
     - field.field.event.meeting.field_description
     - field.field.event.meeting.field_event_date
+    - field.field.event.meeting.field_event_type
     - field.field.event.meeting.field_events
     - field.field.event.meeting.field_grid_event_id
     - field.field.event.meeting.field_hero_image
@@ -143,6 +144,14 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_event_type:
+    weight: 35
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_events:
     weight: 32
