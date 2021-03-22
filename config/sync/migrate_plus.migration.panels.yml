@@ -41,13 +41,33 @@ source:
       label: 'body array'
       selector: /attributes/description
     -
+      name: pdate
+      label: 'Panel Date String'
+      selector: /attributes/pdate
+    -
       name: ptime
       label: 'Panel Start Time'
       selector: /attributes/ptime
     -
+      name: pday
+      label: 'Panel Start Time Period'
+      selector: /attributes/pday
+    -
       name: etime
       label: 'Panel End Time'
       selector: /attributes/etime
+    -
+      name: epday
+      label: 'Panel End Time Period'
+      selector: /attributes/epday
+    -
+      name: publish
+      lable: Publish
+      selector: /attributes/publish
+    -
+      name: private
+      label: Private
+      selector: /attributes/private
     -
       name: starttimed
       label: 'Start Time'
@@ -61,21 +81,13 @@ source:
       label: 'Printed Program'
       selector: /attributes/printedprogram
     -
-      name: private
-      label: Private
-      selector: /attributes/private
-    -
-      name: publish
-      lable: Publish
-      selector: /attributes/publish
+      name: pfinal
+      lable: 'Program Is Final'
+      selector: /attributes/pfinal
   ids:
     pid:
       type: integer
 process:
-  field_panel_id: pid
-  field_event:
-    plugin: 'milken_migrate:event_reference'
-    source: eventid
   field_panel_title:
     -
       plugin: skip_on_empty
@@ -84,12 +96,21 @@ process:
     -
       plugin: get
       source: name
+  field_panel_id: pid
   field_description/value: description
   field_description/format:
     plugin: default_value
     default_value: full_html
+  field_panel_date_string: pdate
   field_panel_start_time: ptime
+  field_panel_start_time_period: pday
   field_panel_end_time: etime
+  field_panel_end_time_period: epday
+  field_event:
+    plugin: 'milken_migrate:event_reference'
+    source: eventid
+  field_publish: publish
+  field_private: private
   field_date/value:
     plugin: 'milken_migrate:unix_date'
     source: starttimed
@@ -97,15 +118,10 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: endtimed
   field_printed_program: printedprogram
+  field_program_is_final: pfinal
   langcode:
     plugin: default_value
     default_value: en
-  field_summary/value: summary
-  field_summary/format:
-    plugin: default_value
-    default_value: full_html
-  field_private: private
-  field_publish: publish
 destination:
   plugin: 'entity:panel'
   default_bundle: panel
