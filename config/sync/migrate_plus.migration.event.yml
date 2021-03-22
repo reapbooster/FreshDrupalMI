@@ -12,9 +12,8 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags:
   - event
-  - grid
 migration_group: milken
-label: 'Event VIA JSON API'
+label: 'Event VIA JSON API - Creates any Dependencies'
 source:
   plugin: url
   urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/events/'
