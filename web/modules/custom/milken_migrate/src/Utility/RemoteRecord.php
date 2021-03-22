@@ -43,8 +43,8 @@ class RemoteRecord extends DrupalBaseRemoteRecord {
     try {
       $response = \Drupal::httpClient()->get($url);
       $responseArray = json_decode($response->getBody(), true);
-      if (isset($responseArray['data']) && is_array($responseArray['data'])) {
-
+      if (isset($responseArray['data']) && empty($responseArray['data'])) {
+        return null;
       }
       return new static(json_decode($string, true));
     } catch(\Exception $e) {

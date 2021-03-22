@@ -3,6 +3,8 @@
 
 namespace Drupal\milken_migrate\Utility;
 
+use Drupal\facets\Exception\Exception;
+
 /**
  *
  */
@@ -11,17 +13,17 @@ abstract class DrupalBaseRemoteRecord {
   /**
    * @var string
    */
-  protected string $entityTypeId;
+  protected ?string $entityTypeId = null;
 
   /**
    * @var string
    */
-  protected string $bundleId;
+  protected ?string $bundleId = null;
 
   /**
    * @var string
    */
-  protected string $id;
+  protected ?string $id = null;
 
   /**
    * @var array
@@ -58,16 +60,26 @@ abstract class DrupalBaseRemoteRecord {
    *
    * @param $keyValues
    */
-  function __construct($keyValues) {
+  function __construct(array $keyValues) {
+    isset($keyValues["id"]) ? $this->setId($keyValues["id"]) : new \Exception('No ID in remote record values');
+    isset($keyValues["type"]) ? $this->setType($keyValues["type"]) : new \Exception('no TYPE value in remote record key=> values');
     foreach ($keyValues as $key => $value) {
       $funcName = "set" . ucfirst($key);
       if (method_exists($this, $funcName)) {
         call_user_func_array([$this, $funcName], [$value]);
       }
       else {
-        array_push($this->otherFields[$key] = $value);
+        $this->otherFields[$key] = $value;
       }
     }
+  }
+
+  public function __set($name, $value) {
+    $this->{$name} = $value;
+  }
+
+  public function __get($name) {
+    return $this->{$name};
   }
 
   /**
@@ -77,7 +89,7 @@ abstract class DrupalBaseRemoteRecord {
    */
   public function valid(): bool {
     return (
-      strlen($this->getType() >== 2) &&
+      \strlen($this->getType()) >= 2 &&
       $this->getId() &&
       (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $this->getId()) === 1)
     );
@@ -89,7 +101,7 @@ abstract class DrupalBaseRemoteRecord {
    * @return string
    */
   public function getType(): string {
-    return sprintf("%s_%s", $this->entityTypeId, $this->bundleId);
+    return sprintf("%s--%s", $this->entityTypeId, $this->bundleId);
   }
 
   /**
@@ -98,9 +110,7 @@ abstract class DrupalBaseRemoteRecord {
    * @param string $type
    */
   public function setType(string $type): void {
-    [$entityTypeId, $bundleId] = explode("_", $type);
-    $this->entityTypeId = $entityTypeId;
-    $this->bundleId = $bundleId;
+    [$this->entityTypeId, $this->bundleId] = explode("--", $type);
   }
 
   /**
@@ -200,7 +210,6 @@ abstract class DrupalBaseRemoteRecord {
   public function setDescription(string $description): void {
     $this->description = $description;
   }
-
 
 
 }
