@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.small_tile
+    - field.field.node.article.field_authors
     - field.field.node.article.field_centers
     - field.field.node.article.field_collections
     - field.field.node.article.field_content
@@ -30,6 +31,7 @@ bundle: article
 mode: small_tile
 content: {  }
 hidden:
+  field_authors: true
   field_centers: true
   field_collections: true
   field_content: true

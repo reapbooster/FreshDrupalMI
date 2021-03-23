@@ -4,44 +4,44 @@ status: true
 dependencies:
   module:
     - search_api_solr
+    - eck
     - taxonomy
     - taxonomy_machine_name
-    - eck
     - media
     - node
     - search_api
     - milken_base
   config:
-    - field.storage.event.field_campaign_name
-    - field.storage.event.field_centers
-    - field.storage.event.field_description
-    - field.storage.event.field_event_date
-    - field.storage.event.field_name_short
-    - field.storage.event.field_related_media
-    - field.storage.media.field_body
-    - field.storage.media.field_centers
-    - field.storage.media.field_content
-    - field.storage.media.field_event_reference
-    - field.storage.media.field_media_file
-    - field.storage.node.field_body
-    - field.storage.node.field_centers
-    - field.storage.node.field_content
-    - field.storage.node.field_hero_image
-    - field.storage.node.field_long_description
-    - field.storage.node.field_page_type
     - field.storage.node.field_promo_slide
     - field.storage.slide.field_background_image
-    - field.storage.node.field_short_summary
     - field.storage.people.field_biotext
+    - field.storage.media.field_body
+    - field.storage.node.field_body
+    - field.storage.event.field_campaign_name
+    - field.storage.node.field_centers
+    - field.storage.event.field_centers
+    - field.storage.media.field_centers
     - field.storage.people.field_centers
+    - field.storage.node.field_content
+    - field.storage.media.field_content
     - field.storage.people.field_departments
+    - field.storage.event.field_description
     - field.storage.people.field_description
     - field.storage.people.field_email
+    - field.storage.event.field_event_date
+    - field.storage.media.field_event_reference
     - field.storage.people.field_first_name
+    - field.storage.node.field_hero_image
     - field.storage.people.field_last_name
+    - field.storage.node.field_long_description
+    - field.storage.media.field_media_file
     - field.storage.people.field_middle_name
+    - field.storage.event.field_name_short
     - field.storage.people.field_notes
+    - field.storage.node.field_page_type
     - field.storage.people.field_photo
+    - field.storage.event.field_related_media
+    - field.storage.node.field_short_summary
     - search_api.server.freshdrupal_live
     - core.entity_view_mode.media.full
     - core.entity_view_mode.node.full
@@ -634,13 +634,8 @@ processor_settings:
       - field_campaign_name
       - field_description
       - field_long_description
-      - field_name
       - field_name_short
-      - field_photo_subject_name
-      - field_photo_subject_title
       - field_short_summary
-      - field_summary
-      - field_title
       - field_title_1
       - name
       - parent_type
@@ -658,7 +653,20 @@ processor_settings:
     highlight_partial: false
     excerpt: true
     excerpt_length: 256
-    exclude_fields: {  }
+    exclude_fields:
+      - bundle
+      - entity_type_id
+      - field_name_short
+      - field_name_short_1
+      - field_page_type
+      - jsonapi_type
+      - label
+      - title
+      - title_1
+      - title_2
+      - type
+      - url
+      - uuid
     prefix: '<strong>'
     suffix: '</strong>'
     weights:

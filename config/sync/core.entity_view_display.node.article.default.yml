@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.article.field_authors
     - field.field.node.article.field_centers
     - field.field.node.article.field_collections
     - field.field.node.article.field_content
@@ -36,6 +37,14 @@ targetEntityType: node
 bundle: article
 mode: default
 content:
+  field_authors:
+    weight: 110
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_collections:
     weight: 106
     label: above
