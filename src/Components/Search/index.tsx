@@ -160,6 +160,10 @@ export default function Search() {
     },
   };
 
+  if(window.location.href.includes("?")) {
+    window.location.href = window.location.href.replace("?", "#");
+  }
+
   useEffect(() => {
     console.log("useEffect, normal");
     getTopics();
