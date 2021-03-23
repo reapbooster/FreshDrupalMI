@@ -1,4 +1,3 @@
-import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import moment from "moment";
 
 // TODO: Conditional
