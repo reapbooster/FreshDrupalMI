@@ -136,7 +136,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
 
   const slideLink = (slideData.field_link?.title && slideData.field_link?.uri) ? (
     <a
-      href={`${slideData.field_link?.uri.replace('internal:','') || "#"}`}
+      href={`${slideData.field_link?.uri.replace('internal:','').replace('entity:','') || "#"}`}
       className="btn-milken-orange"
     >
       {`${slideData.field_link?.title || "View More"}`}
