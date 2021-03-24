@@ -460,7 +460,7 @@ body.navbar-active  {
 
   milken-menu-main,
   menu-column {
-    display: block !important;
+    display: flex;
   }
 
   @media (max-width: ($breakpointTablet)) {
@@ -468,5 +468,10 @@ body.navbar-active  {
     bottom: 0;
     overflow-y: scroll;
     top: 0;
+
+    milken-menu-main,
+    menu-column {
+      display: block !important;
+    }
   }
 }

@@ -3,7 +3,12 @@ import { useQueryState } from "use-location-state";
 
 import { Collapse } from "react-bootstrap";
 import Select, { components } from "react-select";
-import { AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+} from "react-icons/ai";
+import ReactPaginate from "react-paginate";
 
 import styled from "styled-components";
 
@@ -12,12 +17,24 @@ import { Button, CustomSelect, theme } from "../Shared/Styles";
 import SearchFilter from "./SearchFilter";
 import SearchToolbar from "./SearchToolbar";
 import SearchResults from "./SearchResults";
+import SimplePagination from "../Shared/SimplePagination";
 
 const SearchWrapper = styled.div`
   .btn,
   .card,
   select {
     border-radius: 0;
+  }
+
+  .search--toolbars {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 250;
+  }
+
+  .search--results {
+    padding-top: 220px;
   }
 
   .content-card {
@@ -56,11 +73,11 @@ const SearchWrapper = styled.div`
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 5;
-    background: #ffffff;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    background: #fff;
+
+    &.show {
+      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    }
   }
 `;
 
@@ -109,7 +126,8 @@ export default function Search() {
 
   // URL-State parameters
   const [sortby, setSortby] = useQueryState("sortby", "");
-  const [perpage, setPerpage] = useQueryState("perpage", 20);
+  const [perpage, setPerpage] = useQueryState("items_per_page", 12);
+  const [pageNumber, setPageNumber] = useQueryState("page", 0);
   const [type, setType] = useQueryState("type", "");
   const [topics, setTopics] = useQueryState("topics", "");
   const [centers, setCenters] = useQueryState("centers", "");
@@ -120,6 +138,7 @@ export default function Search() {
   const [topicOptions, setTopicOptions] = useState([]);
   const [centerOptions, setCenterOptions] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [pager, setPager] = useState([]);
 
   const [filterState, setFilterState] = useState({
     type,
@@ -159,6 +178,10 @@ export default function Search() {
       options: perpageOptions,
     },
   };
+
+  if (window.location.href.includes("?")) {
+    window.location.href = window.location.href.replace("?", "#");
+  }
 
   useEffect(() => {
     console.log("useEffect, normal");
@@ -269,16 +292,17 @@ export default function Search() {
     }
     let res = await contentAPI.fetchSearchResults(params);
     setSearchResults(res.rows);
+    setPager(res.pager);
   };
 
   const getTopics = async () => {
     let res = await contentAPI.fetchTopics();
-    const options = setTopicOptions(makeOptions(res?.data));
+    const options = setTopicOptions(makeOptions(res));
   };
 
   const getCenters = async () => {
     let res = await contentAPI.fetchCenters();
-    setCenterOptions(makeOptions(res?.data));
+    setCenterOptions(makeOptions(res));
   };
 
   //
@@ -331,66 +355,100 @@ export default function Search() {
     );
   };
 
+  const pageLinkClass = "page-link",
+    pageItemClass = "page-item";
+
   return (
-    <SearchWrapper id="search-content" className="my-3">
-      <div className={containerClass}>
-        <div className="row">
-          <div className="col-md-8 col-lg-9">
-            <CustomSelect>
-              <Select
-                ref={selectRef}
-                value={false}
-                inputValue={queryInputValue}
-                components={{
-                  DropdownIndicator: DropdownIndicator,
-                  IndicatorSeparator: () => null,
-                }}
-                blurInputOnSelect={false}
-                closeMenuOnSelect={false}
-                onInputChange={handleAutosuggestInputChange}
-                onChange={handleAutosuggestQueryChange}
-                placeholder={"Search"}
-                noOptionsMessage={() => null}
-                options={suggestions}
-                defaultOptions={[]}
-                indicatorsSeparator={false}
-                onKeyDown={handleAutosuggestKeypress}
-              />
-            </CustomSelect>
-          </div>
-          <div className="col-md">
-            <FilterToggleButton
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="btn btn-orange"
-              aria-controls="filter-collapse"
-              aria-expanded={menuOpen}
-            >
-              {menuOpen ? "Hide advanced filters" : "Show advanced filters"}
-            </FilterToggleButton>
+    <SearchWrapper id="search-content" className="py-3">
+      <div className="search--toolbars">
+        <div className={`${containerClass} search--autosuggest`}>
+          <div className="row">
+            <div className="col-md-8 col-lg-9">
+              <CustomSelect>
+                <Select
+                  ref={selectRef}
+                  value={false}
+                  inputValue={queryInputValue}
+                  components={{
+                    DropdownIndicator: DropdownIndicator,
+                    IndicatorSeparator: () => null,
+                  }}
+                  blurInputOnSelect={false}
+                  closeMenuOnSelect={false}
+                  onInputChange={handleAutosuggestInputChange}
+                  onChange={handleAutosuggestQueryChange}
+                  placeholder={"Search"}
+                  noOptionsMessage={() => null}
+                  options={suggestions}
+                  defaultOptions={[]}
+                  indicatorsSeparator={false}
+                  onKeyDown={handleAutosuggestKeypress}
+                />
+              </CustomSelect>
+            </div>
+            <div className="col-md">
+              <FilterToggleButton
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="btn btn-orange"
+                aria-controls="filter-collapse"
+                aria-expanded={menuOpen}
+              >
+                {menuOpen ? "Hide advanced filters" : "Show advanced filters"}
+              </FilterToggleButton>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={containerClass}>
-        <SearchToolbar
-          sortby={sortby}
-          perpage={perpage}
-          viewMode={viewMode}
-          setSortby={setSortby}
-          setPerpage={setPerpage}
-          setViewMode={setViewMode}
-        />
+        <div className={containerClass}>
+          <SearchToolbar
+            sortby={sortby}
+            perpage={perpage}
+            viewMode={viewMode}
+            setSortby={setSortby}
+            setPerpage={setPerpage}
+            setViewMode={setViewMode}
+          />
+        </div>
+
         <SearchFilter
           filterFields={filterFields}
           filterState={filterState}
           open={menuOpen}
         />
+      </div>
 
-        <SearchResults
-          isGrid={viewMode != "list"}
-          contents={searchResults ?? []}
-          queryString={query}
-        />
+      <div className={`${containerClass} search--results`}>
+        {searchResults && (
+          <SearchResults
+            isGrid={viewMode != "list"}
+            contents={searchResults ?? []}
+            queryString={query}
+          />
+        )}
+
+        {pager && pager?.total_pages > 0 && (
+          <ReactPaginate
+            previousLabel={<span class="fa fa-chevron-left"></span>}
+            nextLabel={<span class="fa fa-chevron-right"></span>}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={pager?.total_pages}
+            forcePage={pageNumber ?? 0}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={(p) => setPageNumber(p.selected)}
+            containerClassName={"pagination"}
+            pageClassName={pageItemClass}
+            nextClassName={pageItemClass}
+            previousClassName={pageItemClass}
+            breakClassName={pageItemClass}
+            pageLinkClassName={pageLinkClass}
+            nextLinkClassName={pageLinkClass}
+            previousLinkClassName={pageLinkClass}
+            breakLinkClassName={pageLinkClass}
+            activeClassName={"active"}
+          />
+        )}
       </div>
     </SearchWrapper>
   );
