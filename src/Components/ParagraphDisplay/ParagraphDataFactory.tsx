@@ -2,6 +2,8 @@ import Paragraph, { ParagraphInterface } from "../../DataTypes/Paragraph";
 import ParagraphAuthor from "../../DataTypes/ParagraphAuthor";
 import ParagraphBlock from "../../DataTypes/ParagraphBlock";
 import ParagraphBodyContent from "../../DataTypes/ParagraphBodyContent";
+import ParagraphEventDisplay from "../../DataTypes/ParagraphEventDisplay";
+import ParagraphFacetExplorer from "../../DataTypes/ParagraphFacetExplorer";
 import ParagraphLinkBar from "../../DataTypes/ParagraphLinkBar";
 import {
   ParagraphContentTiles,
@@ -18,7 +20,6 @@ import ParagraphProgramDay from "../../DataTypes/ParagraphProgramDay";
 import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
 import ParagraphSlide from "../../DataTypes/ParagraphSlide";
 import ParagraphStats from "../../DataTypes/ParagraphStats";
-import ParagraphFacetExplorer from "../../DataTypes/ParagraphFacetExplorer";
 /**
  * Create the DataModel
  *
@@ -39,6 +40,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphBodyContent(incoming);
     case "paragraph--content_tiles":
       return new ParagraphContentTiles(incoming);
+    case "paragraph--event_display":
+      return new ParagraphEventDisplay(incoming);
     case "paragraph--event_tiles":
       return new ParagraphEventTiles(incoming);
     case "paragraph--facet_explorer":
