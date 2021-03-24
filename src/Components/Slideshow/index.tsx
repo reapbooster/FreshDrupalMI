@@ -108,10 +108,14 @@ export const SlideShow = (props: SlideShowProps) => {
       }
         
       & .h1 {
-        font-size: 1rem;
+        font-size: 1em;
         color: white;
         font-weight: lighter;
         font-family: 'LatoWeb';
+        
+        @media only screen and (max-width: 1200px) {
+          font-size: 0.8em;
+        }
       }
     }  
   `;
