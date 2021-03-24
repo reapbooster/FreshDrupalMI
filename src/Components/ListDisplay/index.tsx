@@ -79,10 +79,10 @@ export const ListDisplay = function (props: ListDisplayProps) {
       id={"list-".concat(id)}
       className={`${
         props.view_mode == "tile"
-          ? "d-flex flex-wrap justify-content-center"
+          ? "list-display-component d-flex flex-wrap justify-content-center"
           : props.view_mode == "card"
-          ? "row no-gutters"
-          : ""
+          ? "list-display-component row no-gutters"
+          : "list-display-component"
       }`}
       ref={refListDisplay}
       style={{ scrollBehavior: "smooth" }}

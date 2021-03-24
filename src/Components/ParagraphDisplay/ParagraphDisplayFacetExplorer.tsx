@@ -54,7 +54,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
         console.debug("FilterSort was used: ", filterSort)
       } else {
         console.debug("FilterSort was not used: ", filterSort)
-        apiParams.addSort('created');
+        apiParams.addSort('created', 'DESC');
       }
 
       apiParams.addPageLimit(field_items_per_page); // Later, change to data.field_items_per_page

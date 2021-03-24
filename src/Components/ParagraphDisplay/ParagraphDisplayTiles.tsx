@@ -6,6 +6,14 @@ import Loading from "../Loading";
 import ParagraphDataFactory from "./ParagraphDataFactory";
 import ListDisplay from "../ListDisplay";
 import Paragraph, { ParagraphInterface } from "../../DataTypes/Paragraph";
+import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faTwitter,
+  faFacebookF,
+  faLinkedinIn,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
 
 export interface ParagraphDisplayTilesProps {
   data: ParagraphTilesInterface;
@@ -85,27 +93,47 @@ export class ParagraphDisplayTiles extends React.Component<
       let elSubheader = (data.field_section_subheader !== undefined && data.field_section_subheader !== null)
         ? <p>{data.field_section_subheader}</p>
         : '';
+        
+      const SectionWrapper = styled.section`
+        & .list-display-component {
+          & a {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+          }
+          & .col-sm-6, .col-lg-3 {
+            display: flex;
+          }
+        }
+      `;
 
       return (
-        <section
+        <SectionWrapper
           style={{backgroundColor: containerBackgroundColor}}
         >
           <Container
             fluid={data.field_view_mode == "card" ? true : false}
             className={containerClassNames}
           >
-            <div className="row">
-              <div className="col">
+            <div className="row"
+              style={{
+                margin: "0 -10px 20px",
+              }}
+            >
+              <div className="col d-flex justify-content-between align-items-center">
                 <h2
                   style={{
                     fontFamily: "LatoWebBlack",
                     fontSize: "1.5em",
                     fontWeight: "bold",
+                    marginBottom: "0",
                   }}
                 >
+                  <FontAwesomeIcon icon={faFacebookF} className="mr-2"/>
                   {data.field_title}
                 </h2>
                 {elSubheader}
+                <a className="btn-milken-orange mt-0">Button</a>
               </div>
             </div>
             <ListDisplay
@@ -115,7 +143,7 @@ export class ParagraphDisplayTiles extends React.Component<
               display_size={data.field_display_size}
             />
           </Container>
-        </section>
+        </SectionWrapper>
       );
     }
     return <div />;
