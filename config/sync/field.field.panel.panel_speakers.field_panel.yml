@@ -1,0 +1,29 @@
+uuid: a1103b2c-c0a9-457e-8a0f-224ffc227b60
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.panel.panel
+    - eck.eck_type.panel.panel_speakers
+    - field.storage.panel.field_panel
+id: panel.panel_speakers.field_panel
+field_name: field_panel
+entity_type: panel
+bundle: panel_speakers
+label: Panel
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:panel'
+  handler_settings:
+    target_bundles:
+      panel: panel
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

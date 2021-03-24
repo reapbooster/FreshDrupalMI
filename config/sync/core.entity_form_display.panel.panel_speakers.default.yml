@@ -67,4 +67,7 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_event: true
+  field_panel: true
+  field_speaker: true

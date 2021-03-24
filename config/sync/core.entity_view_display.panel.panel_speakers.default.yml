@@ -65,5 +65,8 @@ content:
     third_party_settings: {  }
 hidden:
   changed: true
+  field_event: true
+  field_panel: true
+  field_speaker: true
   langcode: true
   search_api_excerpt: true

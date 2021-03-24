@@ -234,6 +234,7 @@ display:
           must_not_be: false
           plugin_id: 'null'
       display_extenders: {  }
+      title: '{{ title }}'
     cache_metadata:
       max-age: -1
       contexts:

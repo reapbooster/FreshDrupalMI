@@ -327,6 +327,14 @@ source:
     id:
       type: integer
 process:
+  id: id
+  title:
+    plugin: concat
+    source:
+      - spkrnm
+      - mname
+      - lname
+    delimiter: ' '
   field_attendeeid: id
   field_biolink: biolink
   field_biopic: biopic
@@ -399,6 +407,6 @@ process:
   field_whosuggested: whosuggested
   field_womensreport: womensreport
 destination:
-  plugin: 'milken_migrate:people'
+  plugin: 'entity:people'
   default_bundle: grid_speakers
 migration_dependencies: {  }

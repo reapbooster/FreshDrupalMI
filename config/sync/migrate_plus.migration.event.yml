@@ -107,49 +107,10 @@ source:
     grid_event_id:
       type: string
 process:
-  field_sequential_id:
-    plugin: skip_on_empty
-    source: sequentialID
-    message: 'Field field_name is missing'
-    method: row
-  type:
-    -
-      plugin: skip_on_value
-      not_equals: true
-      method: row
-      source: type
-      value:
-        - GC
-        - Summit
-        - finLabs
-        - mia
-        - P4C
-  title:
-    -
-      plugin: get
-      source:
-        - name
-        - nameshort
-        - description
-    -
-      plugin: callback
-      callable: array_filter
-    -
-      plugin: callback
-      callable: current
-  name:
-    -
-      plugin: get
-      source:
-        - name
-        - nameshort
-        - description
-    -
-      plugin: callback
-      callable: array_filter
-    -
-      plugin: callback
-      callable: current
+  id: id
+  field_sequential_id: sequentialID
+  title: name
+  name: name
   langcode:
     plugin: default_value
     default_value: en
@@ -175,7 +136,7 @@ process:
   field_name_short: nameshort
   field_speakers: speakers
   field_venue: venue
-  field_event_date:
+  field_event_date/value:
     plugin: 'milken_migrate:unix_date'
     source: eventdate
   created:
@@ -185,9 +146,17 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: changed
 destination:
-  plugin: 'milken_migrate:event'
+  plugin: 'entity:event'
   default_bundle: conference
-  ids:
-    id:
-      type: integer
+  overwrite_properties:
+    - title
+    - field_sequential_id
+    - field_grid_event_id
+    - status
+    - field_description/value
+    - field_blurb
+    - field_name_short
+    - field_speakers
+    - field_venue
+    - field_event_date/value
 migration_dependencies: {  }

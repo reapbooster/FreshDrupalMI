@@ -35,14 +35,28 @@ source:
       name: speaker_id
       label: 'Speaker ID'
       selector: /attributes/speaker_id
+  constants:
+    title_label_separator_panel: Panel_ID
+    title_label_separator_speaker: Speaker_ID
   ids:
     id:
       type: integer
 process:
-  field_panel_speaker: id
+  id: id
+  title:
+    plugin: concat
+    source:
+      - constants/title_label_separator_panel
+      - panel_id
+      - constants/title_label_separator_speaker
+      - speaker_id
+    delimiter: ' : '
+  field_panel_speaker_id: id
   field_panel_id: panel_id
   field_speaker_id: speaker_id
+  field_panel/target_id: panel_id
+  field_speaker/target_id: speaker_id
 destination:
-  plugin: 'milken_migrate:people'
-  default_bundle: grid_speakers
+  plugin: 'entity:panel'
+  default_bundle: panel_speakers
 migration_dependencies: {  }

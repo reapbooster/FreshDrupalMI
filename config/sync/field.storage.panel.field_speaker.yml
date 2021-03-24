@@ -1,0 +1,19 @@
+uuid: 9f7b8c48-dfe2-4233-a742-269658c4f424
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: panel.field_speaker
+field_name: field_speaker
+entity_type: panel
+type: entity_reference
+settings:
+  target_type: people
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

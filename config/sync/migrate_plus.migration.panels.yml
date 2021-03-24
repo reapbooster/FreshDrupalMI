@@ -88,6 +88,8 @@ source:
     pid:
       type: integer
 process:
+  id: pid
+  title: name
   field_panel_title:
     -
       plugin: skip_on_empty
