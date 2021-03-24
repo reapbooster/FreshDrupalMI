@@ -9,11 +9,13 @@ import Paragraph, { ParagraphInterface } from "../../DataTypes/Paragraph";
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faTwitter,
-  faFacebookF,
-  faLinkedinIn,
-  faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
+  faPlayCircle,
+  faBook,
+  faPodcast,
+  faNewspaper,
+  faVideo,
+  faExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 export interface ParagraphDisplayTilesProps {
   data: ParagraphTilesInterface;
@@ -107,6 +109,21 @@ export class ParagraphDisplayTiles extends React.Component<
         }
       `;
 
+      let titleIcon = 
+      ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--video_stream" )
+      ? faVideo
+      : ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--video" )
+      ? faPlayCircle
+      : ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--report" )
+      ? faBook 
+      : ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--podcast_episode" )
+      ? faPodcast
+      : ( data.field_view_mode == "card" && data.type == "paragraph--content_tiles" && data.tiles[0].type === "node--landing_page" )
+      ? faNewspaper
+      : ( data.field_view_mode == "card" && data.type == "paragraph--content_tiles" && data.tiles[0].type === "node--article" )
+      ? faNewspaper
+      : faExclamation;
+
       return (
         <SectionWrapper
           style={{backgroundColor: containerBackgroundColor}}
@@ -115,7 +132,8 @@ export class ParagraphDisplayTiles extends React.Component<
             fluid={data.field_view_mode == "card" ? true : false}
             className={containerClassNames}
           >
-            <div className="row"
+            <div 
+              className={data.field_view_mode == "tile" ? "d-none" : "row"}
               style={{
                 margin: "0 -10px 20px",
               }}
@@ -129,7 +147,7 @@ export class ParagraphDisplayTiles extends React.Component<
                     marginBottom: "0",
                   }}
                 >
-                  <FontAwesomeIcon icon={faFacebookF} className="mr-2"/>
+                  <FontAwesomeIcon icon={titleIcon} className="mr-2"/>
                   {data.field_title}
                 </h2>
                 {elSubheader}
