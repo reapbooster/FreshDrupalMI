@@ -23,6 +23,7 @@ dependencies:
     - field.field.panel.panel.field_regions
     - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
+    - field.field.panel.panel.field_speakers
     - field.field.panel.panel.field_sponsor
     - field.field.panel.panel.field_summary
     - field.field.panel.panel.field_tags
@@ -272,6 +273,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_speakers:
+    weight: 36
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_sponsor:
     weight: 15
