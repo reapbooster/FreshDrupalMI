@@ -610,6 +610,14 @@ datasource_settings:
     languages:
       default: true
       selected: {  }
+  'entity:panel':
+    bundles:
+      default: false
+      selected:
+        - panel
+    languages:
+      default: true
+      selected: {  }
   'entity:people':
     bundles:
       default: false

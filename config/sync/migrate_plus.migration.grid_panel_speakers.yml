@@ -57,6 +57,6 @@ process:
   field_panel/target_id: panel_id
   field_speaker/target_id: speaker_id
 destination:
-  plugin: 'entity:panel'
-  default_bundle: panel_speakers
+  plugin: 'entity:grid_join_panel_speaker'
+  default_bundle: join_table
 migration_dependencies: {  }
