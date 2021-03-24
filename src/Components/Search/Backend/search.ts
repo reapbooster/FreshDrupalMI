@@ -1,4 +1,3 @@
-import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import moment from "moment";
 
 // TODO: Conditional
@@ -32,77 +31,89 @@ const fetchSearchResults = async (params) => {
     }
 
     params._format = "json";
-
-    // api/v1.0/search?_format=json&keywords=covid
-    // Sort
-    // &sort_by=search_api_relevance&sort_order=DESC
-    // Sort by date, relevance, name, ***type (does not exist yet)
-    // http://docker.milkeninstitute.org:8080/admin/structure/views/view/solr_search
-    // Search: Relevance (Exposed)
-    // Index freshdrupal_live: Label (Exposed)
-    // Index freshdrupal_live: Aggregated field Published (Exposed)
-
-    // date &aggregated_field_published_op=between&aggregated_field_published[min]=2021-01-01&aggregated_field_published[max]=2021-01-03
-    // type (type=)
-    // field_centers
-    // field_topics
-
-    // http://docker.milkeninstitute.org:8080/api/v1.0/search?_format=json&field_centers=211
+    if (!params?.items_per_page) params.items_per_page = 12;
 
     // TODO: Pagination
 
-    if (params?.perpage) {
-      // apiParams.addPageLimit(params?.perpage);
+    let sortBy = "search_api_relevance",
+      sortOrder = "DESC";
+
+    if (params?.sortby) {
+      switch (params.sortby) {
+        case "title":
+          sortBy = "label";
+          sortOrder = "ASC";
+          break;
+        case "date":
+          sortBy = "aggregated_field_published";
+          sortOrder = "DESC";
+          break;
+      }
+      delete params.sortby;
     }
+
+    params.sort_by = sortBy;
+    params.sort_order = sortOrder;
 
     if (params?.date) {
-      const parsedDate = params?.date.split("_");
-      const date = moment().subtract(...parsedDate);
-      // apiParams.addFilter("created", date.format("YYYY-MM-DD"), ">=");
+      const parsedDate = params?.date.split("_"),
+        date = moment().subtract(...parsedDate),
+        today = moment();
+
+      params.aggregated_field_published_op = "between";
+      params["aggregated_field_published[min]"] = date.format("YYYY-MM-DD");
+      params["aggregated_field_published[max]"] = today.format("YYYY-MM-DD");
+
+      delete params.date;
     }
 
-    // const urlencodedQueryString = apiParams.getQueryString();
-    // const queryString = apiParams.getQueryString({ encode: false });
-    // console.log("query string", queryString, urlencodedQueryString);
+    if (params?.topics) {
+      let passedTopics = params.topics.split("+");
+      let topicIds = passedTopics.map((t) => getEntityId(topics, t));
+      params.field_topics = topicIds.join("+");
 
-    console.log("fetching");
+      delete params.topics;
+    }
+
+    if (params?.centers) {
+      let passedCenters = params.centers.split("+");
+      let centerIds = passedCenters.map((t) => getEntityId(centers, t));
+      params.field_centers = centerIds.join("+");
+
+      delete params.centers;
+    }
+
+    console.log("fetching", params);
 
     const response = await fetch(
-      `${apiPath}/api/v1.0/search?` + new URLSearchParams(params).toString()
+      `${apiPath}/api/v1.0/search?` +
+        decodeURIComponent(new URLSearchParams(params).toString())
     );
     const data = await response.json();
     // console.log(data);
     return data;
   } catch (err) {
+    console.log(err);
     return err;
   }
 };
 
-const fetchTypes = async () => {
-  return new Promise((resolve) => {
-    resolve([
-      "Articles",
-      "Centers",
-      "People",
-      "Podcast",
-      "Programs",
-      "Reports",
-    ]);
-  });
-  // try {
-  //     return await axios.get(`/types`);
-  // } catch (err) {
-  //     return err;
-  // }
+const getEntityId = (list, machineName) => {
+  console.log(list, machineName);
+  let item = list.find((t) => t.attributes.machine_name === machineName);
+  return item?.attributes?.drupal_internal__tid;
 };
 
 const fetchTopics = async () => {
   try {
-    const response = await fetch(
-      `${apiPath}/jsonapi/taxonomy_term/milken_tags`
-    );
-
-    return await response.json();
+    if (!topics) {
+      const response = await fetch(
+        `${apiPath}/jsonapi/taxonomy_term/milken_tags`
+      );
+      let result = await response.json();
+      topics = result.data;
+    }
+    return topics;
   } catch (err) {
     return err;
   }
@@ -110,8 +121,12 @@ const fetchTopics = async () => {
 
 const fetchCenters = async () => {
   try {
-    const response = await fetch(`${apiPath}/jsonapi/taxonomy_term/centers`);
-    return await response.json();
+    if (!centers) {
+      const response = await fetch(`${apiPath}/jsonapi/taxonomy_term/centers`);
+      let result = await response.json();
+      centers = result.data;
+    }
+    return centers;
   } catch (err) {
     return err;
   }
@@ -128,7 +143,6 @@ const fetchCenters = async () => {
 
 export {
   fetchSearchResults,
-  fetchTypes,
   fetchTopics,
   fetchCenters,
   // fetchCentersData,

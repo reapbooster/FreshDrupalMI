@@ -18,10 +18,10 @@ export const dateOptions = [
 
 export const sortOptions = [
   { value: null, label: "Relevance" },
-  { value: "created", label: "Date" },
+  { value: "date", label: "Date" },
   { value: "title", label: "Name" },
   // TODO: Post-launch
   // { value: "type", label: "Type" },
 ];
 
-export const perpageOptions = [20, 40, 60];
+export const perpageOptions = [12, 24, 48];
