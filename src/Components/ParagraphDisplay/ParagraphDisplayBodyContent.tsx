@@ -63,6 +63,7 @@ export const ParagraphDisplayBodyContent = (
 
     & h1 {
       font-size: 3em;
+      font-family: 'LatoWebBlack';
     }
 
     & h2 {
