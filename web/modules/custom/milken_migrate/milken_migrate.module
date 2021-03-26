@@ -12,6 +12,7 @@ use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\media\Entity\Media;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Serialization\Json;
+use Drupal\milken_migrate\Controller\MilkenMigrateController;
 
 /**
  * Implements hook_help().
@@ -127,6 +128,41 @@ function milken_migrate_update_video() {
     // }
   }
   echo $i;
+}
+
+/**
+ * Custom function to bulk tag Articles, Reports and Videos.
+ */
+function milken_migrate_content_update() {
+  $csv_source = drupal_get_path('module', 'milken_migrate') . '/assets/bulk-tagging.csv';
+
+  $num_lines = (int) `wc -l $csv_source`;
+  print 'Total Records to Update: ' . $num_lines;
+  $current_line = 0;
+  $migrate = new MilkenMigrateController();
+  if (($fp = fopen($csv_source, "r")) !== FALSE) {
+    while (($data = fgetcsv($fp, NULL, ",", "|",)) !== FALSE){
+      $current_line++;
+      print "\n";
+      print 'Current record: ' . $current_line;
+      if (strcasecmp($data[0], 'Article') == 0) {
+        // Update Articles
+        print ', type: Article';
+        $result = $migrate->update_articles($data);
+      } else if(strcasecmp($data[0], 'Video') == 0) {
+        // Update Videos
+        print ', type: Video';
+        $result = $migrate->update_media($data);
+      } else if(strcasecmp($data[0], 'Report') == 0) {
+        // Update Reports
+        print ', type: Report'; 
+        $result = $migrate->update_media($data);
+      } else {
+        //skip
+      }
+    }
+  }
+    
 }
 
 /**

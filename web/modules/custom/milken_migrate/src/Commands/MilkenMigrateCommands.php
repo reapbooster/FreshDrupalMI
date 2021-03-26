@@ -2,14 +2,14 @@
 
 namespace Drupal\milken_migrate\Commands;
 
-use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\RevisionableContentEntityBase;
-use Drupal\migrate\MigrateException;
-use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\milken_migrate\Utility\RemoteRecord;
 use Drush\Commands\DrushCommands;
+use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Cookie\CookieJar;
+use Throwable;
 
 /**
  * A Drush commandfile.
@@ -27,102 +27,112 @@ class MilkenMigrateCommands extends DrushCommands {
   /**
    * @var \GuzzleHttp\Client
    */
-  protected $client;
-  /**
-   * @var GuzzleHttp\Cookie\CookieJar
-   */
-  protected $cookieJar;
-
-  protected $defaultOptions = [];
+  protected Client $client;
 
   /**
-   * Update articles with Author information.
-   *
-   * @usage milken_migrate-commandName foo
-   *   Usage description
-   *
-   * @command milken_migrate:articleAuthor
-   * @aliases mmaa
-   *
+   * @var array
    */
-  public function articleAuthor() {
-    // Get First page.
-    $url = '/jsonapi/node/article?include=field_ar_author';
+  protected array $defaultOptions = [];
+
+  /**
+   * Update local articles with remote Author information.
+   *
+   * @usage drush milken_migrate:author_relations
+   *   'https://www.milkeninstitute.org/jsonapi/node/article?include=field_ar_author'
+   *   field_ar_author node field_authors -v
+   *
+   * @description  Grab a list of articles, get their
+   *   author and update local version of the article with the local version of
+   *   the author.
+   *
+   * @command milken_migrate:author_relations
+   * @aliases mmar
+   *
+   * @param string $sourceUrl
+   *  Url from which to obtain a list of source Entities.
+   * @param string $sourceField
+   *  String field name on the source object.
+   * @param string $destinationEntityTypeId
+   *  String EntityTypeId where the author will be updated.
+   * @param string $destinationEntityField
+   *  String name of the field to be updated.
+   */
+  public function migrateAuthorRelations(
+    string $sourceUrl,
+    string $sourceField,
+    string $destinationEntityTypeId,
+    string $destinationEntityField
+  ) {
+    $destinationEntityStorage = Drupal::entityTypeManager()
+      ->getStorage($destinationEntityTypeId);
+    $field_config_ids = Drupal::entityQuery('field_config')
+      ->accessCheck(FALSE)
+      ->condition('field_type', 'entity_reference')
+      ->condition('field_name', $destinationEntityField)
+      ->condition('entity_type', $destinationEntityTypeId)
+      ->condition('status', 1)
+      ->execute();
+    if (is_array($field_config_ids) && $fc_id = array_shift($field_config_ids)) {
+      $field_config = Drupal::entityTypeManager()
+        ->getStorage('field_config')
+        ->load($fc_id);
+      if ($field_config instanceof FieldConfig) {
+        $settings = $field_config->getSettings();
+        $referencedEntity = isset($settings['handler']) ? str_replace("default:", "", $settings['handler']) : null;
+      }
+    }
+
+    if (!is_string($referencedEntity) || empty($referencedEntity) || $referencedEntity === null) {
+      throw new Exception("Cannot determine referenced entity type. It's not apparent from the field config which entity will be referenced.");
+    }
+
     $imported_records = 0;
+    $url = $sourceUrl;
     do {
-      $page = $this->getPageOfData($url);
-      foreach ($page['data'] as $articleData) {
-        $authors = $articleData['field_ar_author'];
-        if (isset($authors['data'])) {
-          \Drupal::logger(__CLASS__)->debug("Skipping: " . $articleData['title'] . print_r($authors, true));
-          continue;
-        }
-        else {
-          foreach ($authors as $author) {
-            if ($author['id'] == "missing") {
-              continue;
+      try {
+        $page = $this->getPageOfData($url);
+        foreach ($page['data'] as $articleData) {
+          $articleData = new RemoteRecord($articleData);
+          if ($articleData->valid() && $localCopy = $articleData->getLocalVersion($destinationEntityTypeId)) {
+            // Is there a valid value to replace?
+            $fieldData = $articleData->getField($sourceField);
+            if (isset($fieldData['data']) && empty($fieldData['data'])) {
+              // field has not been initialized on original data database
+              $fieldData = [];
             }
-            $localVersionAuthor = $this->findAuthorLocally($author);
-            if (!$localVersionAuthor instanceof EntityInterface) {
-              throw new MigrateException("Cannot find Author: " . $author['title'] . "//" . $author['id']);
+            // Ensure sane data.
+            if (!is_array($fieldData) && !empty($fieldData)) {
+              $fieldData = [$fieldData];
             }
-            $localVersionArticle = $this->findArticleLocally($articleData);
-            if ($localVersionAuthor !== NULL && $localVersionArticle !== NULL) {
-              $newParagraph = $this->newAuthorParagraph($localVersionAuthor);
-              if ($newParagraph instanceof ContentEntityInterface) {
-                $localVersionArticle->get('field_content')->appendItem([
-                  'target_id' => $newParagraph->id(),
-                  "target_revision_id" => $newParagraph->getRevisionId()
-                ]);
-                $localVersionArticle->save();
-                $imported_records++;
-              } else {
-                throw new MigrateException("Cannot create new Paragraph");
+            foreach ($fieldData as $record) {
+              $record = new RemoteRecord($record);
+              // if it's a valid record, get local copy of the UUID match.
+              $localCopyOfAuthor = $record->valid() ? $record->getLocalVersion($referencedEntity) : NULL;
+              // If this is true, we are a go for replacement.
+              if ($localCopyOfAuthor instanceof EntityInterface) {
+                $localCopy->{$destinationEntityField}[] = $localCopyOfAuthor;
+                $localCopy->save();
+                $this->logger()
+                  ->success(dt('Article Author Migrated::' . print_r($localCopy->toArray()[$destinationEntityField], TRUE)));
+                continue;
               }
             }
-            else {
-              \Drupal::logger(__CLASS__)
-                ->debug("Article: " . $articleData['id'] . "::" . $articleData['name']);
-            }
+            $this->logger()
+              ->info('Skipped: ' . $localCopy->label());
           }
         }
+      } catch (Exception $e) {
+        Drupal::logger('milken_migrate')
+          ->error($e->__toString());
+        exit(1);
+      } catch (Throwable $t) {
+        Drupal::logger('milken_migrate')
+          ->critical(sprintf("THROWABLE Line %d: %s", $t->getLine(), $t->getMessage()));
+        print_r($t->__toString());
+        exit(1);
       }
       $url = $page['links']['next']['href'] ?? NULL;
     } while ($url !== NULL);
-    $this->logger()->success(dt('Article Paragraphs Created::' . $imported_records ));
-  }
-
-  /**
-   *
-   */
-  public function findAuthorLocally($authorRecord): ?EntityInterface {
-    if (!isset($authorRecord['id']) && !is_string($authorRecord['id'])) {
-      throw new MigrateException("Cannot retried Author information without a UUID:" . print_r($authorRecord, true));
-    }
-    $remoteAuthorLocalInstance = \Drupal::entityTypeManager()
-      ->getStorage('people')
-      ->loadByProperties(["uuid" => $authorRecord['id']]);
-
-    if ($remoteAuthorLocalInstance) {
-      return reset($remoteAuthorLocalInstance);
-    }
-    return NULL;
-  }
-
-  /**
-   *
-   */
-  public function findArticleLocally($articleRecord): ?EntityInterface {
-    if (!isset($articleRecord['id']) && !is_string($articleRecord['id'])) {
-      throw new MigrateException("Cannot retried Article information without a UUID:" . print_r($articleRecord, true));
-    }
-    $remoteAuthorLocalInstance = \Drupal::entityTypeManager()
-      ->getStorage('node')
-      ->loadByProperties(["uuid" => $articleRecord['id']]);
-    if ($remoteAuthorLocalInstance) {
-      return reset($remoteAuthorLocalInstance);
-    }
-    return NULL;
   }
 
   /**
@@ -134,9 +144,10 @@ class MilkenMigrateCommands extends DrushCommands {
     $parsed = parse_url($url);
     parse_str($parsed['query'] ?? "", $query);
     $query['jsonapi_include'] = TRUE;
-    $response = $this->getClient()->get($parsed['path'], array_merge($this->defaultOptions, [
-      'query' => $query,
-    ]));
+    $response = Drupal::httpClient()
+      ->get($parsed['path'], array_merge($this->defaultOptions, [
+        'query' => $query,
+      ]));
     if (in_array($response->getStatusCode(), [200, 201, 202])) {
       return json_decode($response->getBody(), TRUE);
     }
@@ -144,64 +155,5 @@ class MilkenMigrateCommands extends DrushCommands {
     exit(-1);
   }
 
-  /**
-   * @return \GuzzleHttp\Client
-   */
-  protected function getClient(): Client {
-    if (!$this->client) {
-      $this->cookieJar = new CookieJar();
-      $this->client = \Drupal::httpClient();
-      $this->defaultOptions = $this->client->getConfig();
-
-      /**
-       * @code
-       * $client = \Drupal::httpClient();
-       * $clientClass = get_class($client);
-       * $this->defaultOptions = $client->getConfig();
-       * $response = $client->post('/user/login', [
-       * 'form_params' => [
-       * 'form_id' => 'user_login_form',
-       * ],
-       * 'cookies' => $this->cookieJar,
-       * ]);
-       *
-       * if (!in_array($response->getStatusCode(), [200, 201, 202])) {
-       * throw new \Exception("Could not log into the current production server");
-       * }
-       *
-       * $this->sessionToken = (string) $client->get('/session/token', [
-       * 'cookies' => $this->cookieJar,
-       * ])->getBody(TRUE);
-       * $this->defaultOptions['headers']['X-CSRF-Token'] = $this->sessionToken;
-       * $this->client = new $clientClass($this->defaultOptions);
-       * @code
-       */
-
-    }
-    return $this->client;
-  }
-
-  protected function newAuthorParagraph(EntityInterface  $author) {
-    try {
-      $paragraph = Paragraph::create([
-        'type' => 'author',
-        'field_author' => [
-          ['target_id' => $author->id()]
-        ],
-      ]);
-      $paragraph->isNew(true);
-      $paragraph->save();
-      return $paragraph;
-    }
-    catch(\Exception $e) {
-      \Drupal::logger("milken_migrate")
-        ->error($e->getMessage());
-    }
-    catch(\Throwable $t) {
-      \Drupal::logger("milken_migrate")
-        ->error($t->getMessage());
-    }
-    return null;
-  }
 
 }
