@@ -58,7 +58,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       transform: "translateY(-50%)",
       display: "block",
       position: "absolute",
-      paddingLeft: "7em",
+      paddingLeft: "7.5vw",
     }
     :
     {
@@ -74,11 +74,8 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
     background-position: center;
     background-clip: border-box;
     background-size: cover;
-    background-image: url("${backgroundImage.imageStyleObject.thumbnail}");
-    @media (min-width: 400px) {
-      background-image: url("${backgroundImage.imageStyleObject.medium}");
-    }
-    @media (min-width: 720px) {
+    background-image: url("${backgroundImage.imageStyleObject.fullscreen}");
+    @media (min-width: 1200px) {
       background-image: url("${backgroundImage.uri.url}");
     }
 
@@ -92,6 +89,30 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       text-transform: uppercase;
       font-size: 1.25em;
     }
+
+    & .slide-text .h1 {
+      @media (max-width: 768px) {
+        font-size: 1.9em;
+      }
+      @media (max-width: 576px) {
+        font-size: 1.6em;
+      }
+    }
+
+    & .slide-text div {
+      @media (max-width: 768px) {
+        font-size: 1.5em;
+      }
+      @media (max-width: 576px) {
+        font-size: 1.3em;
+      }
+    }
+
+    // & .slide-text {
+    //   @media (max-width: 768px) {
+    //     padding-left: 8vw !important;
+    //   }
+    // }
 
     & .p {
       font-size: 1.5em;
@@ -115,7 +136,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
 
   const slideLink = (slideData.field_link?.title && slideData.field_link?.uri) ? (
     <a
-      href={`${slideData.field_link?.uri || "#"}`}
+      href={`${slideData.field_link?.uri.replace('internal:','').replace('entity:','') || "#"}`}
       className="btn-milken-orange"
     >
       {`${slideData.field_link?.title || "View More"}`}
@@ -138,7 +159,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
           <Jumbotron className="jumbotron jumbotron-fluid d-block align-items-center m-0 p-0">
             <Container
               style={slideTextStyle}
-              className={(slideData.field_text_centered === true) ? 'text-center' : ''}
+              className={(slideData.field_text_centered === true) ? 'slide-text text-center' : 'slide-text'}
             >{textLines}{slideLink}</Container>
           </Jumbotron>
         </Row>

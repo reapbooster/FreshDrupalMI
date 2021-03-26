@@ -137,16 +137,17 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       case "finLabs":
       case "mia":
       case "p4c":
-        return "meeting";
+        // return "meeting";
 
       case "summit":
-        return "summit";
+        // return "summit";
 
       case "gc":
+      default: 
         return "conference";
 
-      default:
-        return NULL;
+      // default:
+      //   return NULL;
     }
   }
 
@@ -159,7 +160,7 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       // Query the live site and get data for the event.
       $gridID = strtolower($row->getSourceProperty('id'));
       $this->logger->debug("Grid ID: " . $gridID);
-      $url = "https://milkeninstitute.org/jsonapi/node/event?jsonapi_include=true&filter[field_grid_event_id]={$gridID}";
+      $url = "https://milkeninstitute.org/jsonapi/node/event?jsonapi_include=true&filter[field_grid_event_id]=DISABLED{$gridID}";
       $url .= "&include=field_event_header_image,field_event_video_still,field_event_image,field_event_live_info,";
       $url .= "field_event_live_info.field_social_network,field_event_summary_image";
       $response = \Drupal::httpClient()->get($url);

@@ -6,20 +6,22 @@ export const typeOptions = [
   { value: "podcast", label: "Podcast" },
   { value: "program", label: "Programs" },
   { value: "report", label: "Reports" },
+  { value: "video", label: "Videos" },
 ];
 
 export const dateOptions = [
-  { value: false, label: "Any" },
+  { value: null, label: "Any" },
   { value: "1_month", label: "Within the last month" },
-  { value: "6_month", label: "Within the six last month" },
+  { value: "6_month", label: "Within the last 6 months" },
   { value: "1_year", label: "Within the last year" },
 ];
 
 export const sortOptions = [
-  { value: false, label: "Relevance" },
-  { value: "created", label: "Date" },
+  { value: null, label: "Relevance" },
+  { value: "date", label: "Date" },
   { value: "title", label: "Name" },
-  { value: "type", label: "Type" },
+  // TODO: Post-launch
+  // { value: "type", label: "Type" },
 ];
 
-export const perpageOptions = [20, 40, 60];
+export const perpageOptions = [12, 24, 48];

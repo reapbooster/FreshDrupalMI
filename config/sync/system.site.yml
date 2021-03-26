@@ -4,8 +4,8 @@ mail: admin@themi.org
 slogan: ''
 page:
   403: ''
-  404: ''
-  front: /home
+  404: /node/18181
+  front: /node/17939
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en

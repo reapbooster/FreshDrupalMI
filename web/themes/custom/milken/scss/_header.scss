@@ -186,7 +186,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 250;
   background-color: white;
   -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
   -moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.2);
@@ -352,7 +352,7 @@ navbar {
     top: 74px;
     bottom: 0;
     overflow-y: scroll;
-    z-index: 998;
+    z-index: 200;
     background-color: $backgroundLight;
 
     h2 {
@@ -460,7 +460,7 @@ body.navbar-active  {
 
   milken-menu-main,
   menu-column {
-    display: block !important;
+    display: flex;
   }
 
   @media (max-width: ($breakpointTablet)) {
@@ -468,5 +468,10 @@ body.navbar-active  {
     bottom: 0;
     overflow-y: scroll;
     top: 0;
+
+    milken-menu-main,
+    menu-column {
+      display: block !important;
+    }
   }
 }

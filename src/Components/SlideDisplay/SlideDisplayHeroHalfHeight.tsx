@@ -47,7 +47,7 @@ export const SlideDisplayHeroHalfHeight: React.FunctionComponent = (
       transform: "translateY(-50%)",
       display: "block",
       position: "absolute",
-      paddingLeft: "7em",
+      paddingLeft: "7.5vw",
     }
     :
     {
@@ -70,6 +70,18 @@ export const SlideDisplayHeroHalfHeight: React.FunctionComponent = (
     @media (min-width: 720px) {
       background-image: url("${backgroundImage.uri.url}");
     }
+
+    & .text-slide .h1 {
+      @media (max-width: 576px) {
+        font-size: 2em;
+      }
+    }
+
+    & .text-slide div {
+      @media (max-width: 576px) {
+        font-size: 1.3em;
+      }
+    }
   `;
 
   console.debug("Jumbotron style", Jumbotron);
@@ -85,7 +97,7 @@ export const SlideDisplayHeroHalfHeight: React.FunctionComponent = (
 
   const slideLink = (slideData.field_link?.title && slideData.field_link?.uri) ? (
     <a
-      href={`${slideData.field_link?.uri || "#"}`}
+      href={`${slideData.field_link?.uri.replace('internal:','').replace('entity:','') || "#"}`}
       className="btn-milken-orange"
     >
       {`${slideData.field_link?.title || "View More"}`}
@@ -108,7 +120,7 @@ export const SlideDisplayHeroHalfHeight: React.FunctionComponent = (
           <Jumbotron className="jumbotron jumbotron-fluid d-block align-items-center m-0 p-0">
             <Container
               style={slideTextStyle}
-              className={(slideData.field_text_centered === true) ? 'text-center' : ''}
+              className={(slideData.field_text_centered === true) ? 'text-slide text-center' : 'text-slide'}
             >{textLines}{slideLink}</Container>
           </Jumbotron>
         </Row>

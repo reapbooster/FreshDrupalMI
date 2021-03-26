@@ -2,6 +2,9 @@ import Paragraph, { ParagraphInterface } from "../../DataTypes/Paragraph";
 import ParagraphAuthor from "../../DataTypes/ParagraphAuthor";
 import ParagraphBlock from "../../DataTypes/ParagraphBlock";
 import ParagraphBodyContent from "../../DataTypes/ParagraphBodyContent";
+import ParagraphEventDisplay from "../../DataTypes/ParagraphEventDisplay";
+import ParagraphFacetExplorer from "../../DataTypes/ParagraphFacetExplorer";
+import ParagraphLinkBar from "../../DataTypes/ParagraphLinkBar";
 import {
   ParagraphContentTiles,
   ParagraphEntityQueueTiles,
@@ -37,10 +40,16 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphBodyContent(incoming);
     case "paragraph--content_tiles":
       return new ParagraphContentTiles(incoming);
+    case "paragraph--event_display":
+      return new ParagraphEventDisplay(incoming);
     case "paragraph--event_tiles":
       return new ParagraphEventTiles(incoming);
+    case "paragraph--facet_explorer":
+      return new ParagraphFacetExplorer(incoming);
     case "paragraph--items_from_an_entityqueue":
       return new ParagraphEntityQueueTiles(incoming);
+    case "paragraph--link_bar":
+      return new ParagraphLinkBar(incoming);
     case "paragraph--media_tiles":
       return new ParagraphMediaTiles(incoming);
     case "paragraph--people":

@@ -41,19 +41,38 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
 
   const textLeftOrRight = slideData.type.split("_").pop();
   const colOrder = (textLeftOrRight === "left") ? "align-items-center align-items-stretch flex-row-reverse" : "align-items-center align-items-stretch";
-
+  
   const textLineContainer = styled.div``;
+
+  const SlideContainer = styled.div`
+    & .slide-text-column {
+      background-color: ${slideData.field_background_color?.color};
+      margin: 0;
+      padding: 3em 2em;
+      min-height: 24em;
+      height: 33vw;
+    }
+  `;
 
   const WrapperSlideText = styled.div`
     & .h1 {
       font-size: 2.25em;
       font-family: 'LatoWebBlack';
+      @media (max-width: 1200px) {
+        font-size: 1.6em;
+      }
+      @media (max-width: 768px) {
+        font-size: 2.25em;
+      }
+      @media (max-width: 576px) {
+        font-size: 1.6em;
+      }
     }
 
     & .p {
       font-size: 1.25em;
       font-family: 'LatoWeb';
-      color:  ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
+      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
     }
 
     & .li {
@@ -62,14 +81,6 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
     }
 
   `;
-
-  const colStyleText = {
-    backgroundColor: `${slideData.field_background_color?.color}`,
-    margin: 0,
-    padding: '3em 2em',
-    minHeight: '24em',
-    height: '33vw',
-  };
 
   const colStyleImage = {
     backgroundColor: `${slideData.field_background_color?.color}`,
@@ -92,7 +103,7 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
 
   const slideLink = (slideData.field_link?.title && slideData.field_link?.uri) ? (
     <a
-      href={`${slideData.field_link?.uri.replace('internal:','') || "#"}`}
+      href={`${slideData.field_link?.uri.replace('internal:','').replace('entity:','') || "#"}`}
       className="btn-milken-orange"
     >
       {`${slideData.field_link?.title || "View More"}`}
@@ -106,20 +117,18 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
   return (
     <>
       <ErrorBoundary>
-        <Container fluid>
+        <SlideContainer className="container-fluid">
           <Row className={colOrder} data-view-mode={view_mode} >
             <Col md={6} className="align-items-stretch" style={colStyleImage} >
             </Col>
-            <Col md={6} className="d-flex justify-content-center align-items-center" style={colStyleText} >
+            <Col md={6} className="d-flex justify-content-center align-items-center slide-text-column"  >
               <WrapperSlideText>
                 {textLines}
                 {slideLink}
               </WrapperSlideText>
-              
             </Col>
           </Row>
-        </Container>
-
+        </SlideContainer>
       </ErrorBoundary>
     </>
   );
