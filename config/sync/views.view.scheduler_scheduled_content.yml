@@ -933,7 +933,7 @@ display:
           entity_field: unpublish_on
           plugin_id: date
       sorts: {  }
-      title: 'Scheduled Content'
+      title: 'Admin Scheduled Content'
       header: {  }
       footer: {  }
       empty:

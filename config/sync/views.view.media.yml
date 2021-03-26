@@ -849,7 +849,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Media
+      title: 'Admin Media'
       header: {  }
       footer: {  }
       empty:

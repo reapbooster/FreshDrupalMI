@@ -608,7 +608,7 @@ display:
             operator_id: uid_op
             label: 'Authored by'
             description: ''
-            use_operator: true
+            use_operator: false
             operator: uid_op
             operator_limit_selection: true
             operator_list:
@@ -647,7 +647,7 @@ display:
           entity_field: uid
           plugin_id: user_name
       sorts: {  }
-      title: Content
+      title: 'Admin Content'
       empty:
         area_text_custom:
           id: area_text_custom

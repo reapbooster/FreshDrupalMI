@@ -660,7 +660,7 @@ display:
           entity_field: type
           plugin_id: bundle
       sorts: {  }
-      title: 'People from ECK'
+      title: 'Admin People from ECK'
       header: {  }
       footer: {  }
       empty: {  }

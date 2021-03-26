@@ -16,7 +16,7 @@ field_name: field_tab_content
 entity_type: paragraph
 bundle: paragraph_tab
 label: 'Tab Content'
-description: ''
+description: 'Group content in order to show it conditionally i.e. based on URL path'
 required: false
 translatable: false
 default_value: {  }
@@ -29,45 +29,69 @@ settings:
       paragraph_tab: paragraph_tab
     target_bundles_drag_drop:
       author:
-        weight: 15
+        weight: -43
         enabled: false
       block:
-        weight: 16
+        weight: -42
         enabled: false
       body_content:
-        weight: 17
+        weight: -41
         enabled: false
       content_tiles:
-        weight: 18
+        weight: -40
+        enabled: false
+      event_display:
+        weight: -45
         enabled: false
       event_tiles:
-        weight: 19
+        weight: -39
+        enabled: false
+      facet_explorer:
+        weight: -29
         enabled: false
       items_from_an_entityqueue:
-        weight: 20
+        weight: -38
+        enabled: false
+      link_bar:
+        weight: -28
         enabled: false
       media_tiles:
-        weight: 21
+        weight: -37
         enabled: false
       paragraph_tab:
         enabled: true
-        weight: 22
+        weight: -36
+      people:
+        weight: -44
+        enabled: false
       podcast_episode:
-        weight: 23
+        weight: -35
+        enabled: false
+      program_day:
+        weight: -27
         enabled: false
       pull_quote:
-        weight: 24
+        weight: -34
         enabled: false
       slide:
-        weight: 25
+        weight: -33
         enabled: false
       slide_tiles:
-        weight: 26
+        weight: -32
+        enabled: false
+      stats:
+        weight: -26
+        enabled: false
+      tiles_social:
+        weight: -25
+        enabled: false
+      tiles_sponsors:
+        weight: -24
         enabled: false
       tiles_taxonomy:
-        weight: 27
+        weight: -31
         enabled: false
       unmigrated_paragraph:
-        weight: 28
+        weight: -30
         enabled: false
 field_type: entity_reference_revisions

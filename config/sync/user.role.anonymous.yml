@@ -17,6 +17,8 @@ permissions:
   - 'use advanced search'
   - 'use search_api_autocomplete for solr_search'
   - 'view any event entities'
+  - 'view any grid_join_panel_speaker entities'
+  - 'view any grid_speakers entities'
   - 'view any location entities'
   - 'view any panel entities'
   - 'view any people entities'
