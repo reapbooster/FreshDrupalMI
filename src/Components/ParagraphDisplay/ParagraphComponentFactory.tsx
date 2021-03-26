@@ -11,6 +11,7 @@ import ParagraphDisplayProgramDay from "./ParagraphDisplayProgramDay";
 import ParagraphDisplayPullQuote from "./ParagraphDisplayPullQuote";
 import ParagraphDisplaySlide from "./ParagraphDisplaySlide";
 import ParagraphDisplayStats from "./ParagraphDisplayStats"
+import ParagraphTabsDisplay from "../ParagraphTabsDisplay";
 import ParagraphDisplayTiles from "./ParagraphDisplayTiles";
 import ParagraphDisplayTilesSocial from "./ParagraphDisplayTilesSocial";
 
@@ -46,6 +47,8 @@ export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
       return ParagraphDisplaySlide;
     case "paragraph--stats":
       return ParagraphDisplayStats;
+    case "paragraph--paragraph_tab":
+      return ParagraphTabsDisplay;
     case "paragraph--content_tiles":
     case "paragraph--event_tiles":
     case "paragraph--items_from_an_entityqueue":
