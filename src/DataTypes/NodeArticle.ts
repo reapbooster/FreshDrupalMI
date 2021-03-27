@@ -6,7 +6,7 @@ import { EntityInterface } from "./Entity";
 import { UserInterface } from "./User";
 
 export interface NodeArticleInterface extends NodeInterface {
-  field_authors: UserInterface;
+  field_authors: Array<any>;
   field_centers: TaxonomyTermInterface;
   field_collections?: Array<any>;
   field_content: Array<ParagraphInterface>;
@@ -18,7 +18,7 @@ export interface NodeArticleInterface extends NodeInterface {
 }
 
 export class NodeArticle extends Node implements NodeArticleInterface {
-  field_authors: object | undefined;
+  field_authors: Array<any>;
   field_collections?: Array<any>;
   field_region?: Array<any>;
   field_tags?: Array<any>;
@@ -42,7 +42,7 @@ export class NodeArticle extends Node implements NodeArticleInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_promo_slide,field_tags,field_topics,field_collections,field_region";
+    return "&include=field_promo_slide,field_tags,field_topics,field_collections,field_region,field_authors";
   }
 
   getItems(): Array<EntityInterface> {

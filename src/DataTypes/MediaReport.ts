@@ -9,6 +9,7 @@ import User, { UserInterface } from "./User";
 
 export interface MediaReportInterface extends MediaInterface {
   field_author: UserInterface;
+  field_authors: Array<any>;
   field_collections?: Array<any>;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;
@@ -25,6 +26,7 @@ export interface MediaReportInterface extends MediaInterface {
 }
 
 export class MediaReport extends Media implements MediaReportInterface {
+  field_authors: Array<any>;
   field_collections?: Array<any>;
   field_content: Array<ParagraphInterface>;
   field_essay: Link;
@@ -56,7 +58,7 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_cover,field_media_file,field_tags,field_topics,field_collections,field_regions";
+    return "&include=field_cover,field_media_file,field_tags,field_topics,field_collections,field_regions,field_authors";
   }
 
   hasData(): boolean {

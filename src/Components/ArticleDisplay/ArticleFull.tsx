@@ -8,6 +8,7 @@ import Loading from "../Loading";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import styled from "styled-components";
 import moment from "moment";
+import AuthorsDisplay from "../AuthorsDisplay";
 import {TagsDisplay} from "../TagsDisplay";
 import {SocialDisplay} from "../SocialDisplay";
 
@@ -99,6 +100,14 @@ export const ArticleFull = (props: ArticleFullProps) => {
 
   //TODO: get a default slide if field_promo_slide is empty
 
+  let authorList = [
+    {
+      name: 'Some Famous Author',
+      image: 'https://milkeninstitute.org/sites/default/files/Hunter%2C%20John%20%281%29.jpg',
+      link: '/staff/milken-michael',
+    }
+  ];
+
   return (
     <>
       <Row id={`promo-slide-${nodeArticleData.id}`}>
@@ -129,6 +138,7 @@ export const ArticleFull = (props: ArticleFullProps) => {
               </ErrorBoundary>
             </Col>
             <Col xs="12" lg="6" xl="3" className="section-tags">
+              <AuthorsDisplay data={{authorList: authorList}} />
               <TagsDisplay data={
                 {
                   published_date_string: "Published " + created.format('MMMM D, YYYY'),
