@@ -41,6 +41,7 @@ export class ParagraphTabsDisplay extends React.Component<ParagraphTabInterface>
    * @return { boolean } Rendered Element.
    */
    shouldRender(validPaths: string) {
+    if(validPaths === null || validPaths === undefined){throw new Error("Paragraph Tab: Admin Title is empty. I don't know what to render!");}
     let shouldRender = false;
     let currentPath = window.location.pathname;
     let validPathList = validPaths.split(';');

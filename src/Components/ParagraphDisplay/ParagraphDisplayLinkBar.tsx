@@ -12,6 +12,13 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
 ) => {
   const { data } = props;
 
+  // Redirect /events/xxxxx to /events/xxxxx/overview for Events Pages with a LinkBar
+  let validUrlSegmentList = window.location.pathname.split('/').filter((item)=>{if(item.trim() !== '')return item;});
+  if(validUrlSegmentList.length === 2 && validUrlSegmentList[0] === 'events'){
+    location.assign('/' + validUrlSegmentList[0] + '/' + validUrlSegmentList[1] + '/overview');
+  }
+
+
   console.debug("ParagraphDisplayLinkBar: Data ", data);
 
   const LinkBarContainer = styled.div`
