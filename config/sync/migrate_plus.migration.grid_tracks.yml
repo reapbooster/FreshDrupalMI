@@ -25,7 +25,7 @@ source:
   fields:
     -
       name: id
-      lablel: ID
+      label: ID
       selector: /id
     -
       name: trackname
@@ -64,4 +64,4 @@ process:
 destination:
   plugin: 'entity:grid_tracks'
   default_bundle: tracks
-migration_dependencies: null
+migration_dependencies: {  }

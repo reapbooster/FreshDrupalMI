@@ -10,7 +10,7 @@ dependencies:
     - eck
     - views_bulk_operations
 id: events_admin
-label: 'Events Admin'
+label: 'Admin Events'
 module: views
 description: ''
 tag: ''
@@ -80,12 +80,21 @@ display:
           summary: ''
           description: ''
           columns:
+            id: id
             title: title
             type: type
             field_event_date: field_event_date
             field_grid_event_id: field_grid_event_id
             operations: operations
+            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
           info:
+            id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
               sortable: true
               default_sort_order: asc
@@ -119,7 +128,12 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          default: field_event_date
+            views_bulk_operations_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: id
           empty_table: false
       row:
         type: fields

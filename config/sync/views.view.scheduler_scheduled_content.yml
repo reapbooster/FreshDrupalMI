@@ -9,7 +9,7 @@ dependencies:
 _core:
   default_config_hash: 72DaOXTPi--s-2ge-SRzJzYnqnoD2SAKPkUKXOvpxlU
 id: scheduler_scheduled_content
-label: 'Scheduled content'
+label: 'Admin Scheduled Content'
 module: views
 description: 'Find and manage scheduled content.'
 tag: ''

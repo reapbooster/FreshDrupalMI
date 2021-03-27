@@ -8,7 +8,7 @@ dependencies:
 _core:
   default_config_hash: P7F4DFe8BL31DRVqsvS-ix9KZZqvvaPjZ7zEvGo9yNM
 id: content
-label: Content
+label: 'Admin Content'
 module: node
 description: 'Find and manage content.'
 tag: default

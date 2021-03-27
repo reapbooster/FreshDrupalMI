@@ -6,7 +6,7 @@ dependencies:
     - eck
     - views_bulk_operations
 id: people_from_eck
-label: 'People from ECK'
+label: 'Admin People from ECK'
 module: views
 description: ''
 tag: ''

@@ -12,7 +12,7 @@ dependencies:
     - eck
     - entity_browser
 id: slides
-label: Slides
+label: 'Admin Slide'
 module: views
 description: ''
 tag: ''
@@ -660,6 +660,7 @@ display:
         filters: true
         filter_groups: true
         fields: false
+        title: false
       fields:
         rendered_entity:
           id: rendered_entity
@@ -763,6 +764,7 @@ display:
           destination: false
           entity_type: slide
           plugin_id: entity_operations
+      title: 'Admin Slide'
     cache_metadata:
       max-age: -1
       contexts:

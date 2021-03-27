@@ -6,7 +6,7 @@ dependencies:
     - eck
     - views_bulk_operations
 id: panels
-label: Panels
+label: 'Admin Panels'
 module: views
 description: ''
 tag: ''

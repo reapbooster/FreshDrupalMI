@@ -321,7 +321,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_tracks:
-    weight: 22
+    weight: 37
     settings:
       match_operator: CONTAINS
       match_limit: 10

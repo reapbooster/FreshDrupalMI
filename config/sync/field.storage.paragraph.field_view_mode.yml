@@ -18,6 +18,9 @@ settings:
       value: card
       label: Card
     -
+      value: card-large
+      label: 'Event Card'
+    -
       value: tile
       label: Tile
     -
