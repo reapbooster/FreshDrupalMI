@@ -1,9 +1,0 @@
-uuid: bebaca88-61fe-4589-8f5c-1d7d3caff088
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.grid_tracks
-type: track
-name: Track
-description: ''
