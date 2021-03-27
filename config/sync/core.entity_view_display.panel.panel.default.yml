@@ -13,10 +13,12 @@ dependencies:
     - field.field.panel.panel.field_grid_event_id
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
+    - field.field.panel.panel.field_panel_date_string
     - field.field.panel.panel.field_panel_end_time
     - field.field.panel.panel.field_panel_id
     - field.field.panel.panel.field_panel_start_time
     - field.field.panel.panel.field_panel_title
+    - field.field.panel.panel.field_pfinal
     - field.field.panel.panel.field_printed_program
     - field.field.panel.panel.field_private
     - field.field.panel.panel.field_publish
@@ -117,6 +119,14 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
+  field_panel_date_string:
+    weight: 29
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_panel_end_time:
     weight: 23
     label: above
@@ -148,6 +158,16 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_pfinal:
+    weight: 28
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_printed_program:
     weight: 24

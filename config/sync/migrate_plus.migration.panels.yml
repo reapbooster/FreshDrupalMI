@@ -98,6 +98,7 @@ process:
     -
       plugin: get
       source: name
+  field_grid_event_id: eventid
   field_panel_id: pid
   field_description/value: description
   field_description/format:
@@ -120,7 +121,7 @@ process:
     plugin: 'milken_migrate:unix_date'
     source: endtimed
   field_printed_program: printedprogram
-  field_program_is_final: pfinal
+  pfinal: pfinal
   langcode:
     plugin: default_value
     default_value: en

@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
-    - field.field.media.report.field_author
+    - field.field.media.report.field_authors
     - field.field.media.report.field_centers
     - field.field.media.report.field_collections
     - field.field.media.report.field_content
@@ -38,7 +38,7 @@ content:
     region: content
 hidden:
   created: true
-  field_author: true
+  field_authors: true
   field_body: true
   field_centers: true
   field_collections: true

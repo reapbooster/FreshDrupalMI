@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.report.field_author
+    - field.field.media.report.field_authors
     - field.field.media.report.field_centers
     - field.field.media.report.field_collections
     - field.field.media.report.field_content
@@ -120,8 +120,8 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_author:
-    weight: 109
+  field_authors:
+    weight: 114
     settings:
       match_operator: CONTAINS
       match_limit: 10
