@@ -124,9 +124,17 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
         }
         
         & h5 {
-          font-size: 1.8em;
+          font-size: 1.7em;
         }
       `;
+
+      let teamList = [];
+
+      staffData.field_teams.map(
+        (item) => {
+          teamList.push({link_uri: '', tag: item.name});
+        }
+      )
 
       return (
         <PersonElMainWrapper className="container-fluid p-0">
@@ -142,7 +150,7 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
                     </NameTitle>
                   </Col>
                   <Col lg="6">
-                    <img src="https://milkeninstitute.org/sites/default/files/Hunter%2C%20John%20%281%29.jpg" />
+                    <img src={staffData?.field_photo[0]?.uri?.url} />
                   </Col>
                 </Row>
               </HeroWrapper>
@@ -155,36 +163,15 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
                   <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
                 </Col>
                 <Col xs="12" xl="8" className="section-content">
-                  <h1>People Display</h1>
-                  <h5>field_biotext</h5>
                   <p>{staffData.field_biotext}</p>
-                  <h5>field_social_media</h5>
-                  {/* <p>
-                    {staffData.field_social_media?.length
-                      ? staffData.field_social_media.map(
-                          (item: SocialMediaLinkInterface, key: number) => {
-                            return (
-                              <div key={key}>
-                                <h5>
-                                  Network:
-                                  {item.key}
-                                </h5>
-                                <p>
-                                  Hande:
-                                  {item.value}
-                                </p>
-                              </div>
-                            );
-                          }
-                        )
-                      : "Field has no value"}
-                  </p> */}
-                  <h5>Field Event</h5>
-                  {/* <p>{staffData.field_event}</p> */}
-                  <h5>Field Photo</h5>
-                  {staffData?.field_photo[0]?.uri?.url}
                 </Col>
                 <Col xs="12" lg="6" xl="3" className="section-tags">
+                  <TagsDisplay data={
+                    {
+                      published_date_string: "",
+                      tagList: teamList
+                    }
+                  }></TagsDisplay>
                 </Col>
               </Row>
             </ElMainContentWrapper>
