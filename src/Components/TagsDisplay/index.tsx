@@ -14,7 +14,7 @@ export const TagsDisplay = (props: TagsDisplayProps) => {
 
   const TagsWrapper = styled.div`
     & a {
-      color: #fff;
+      color: #fff !important;
       margin-top: 8px;
       padding: 4px 12px;
       text-decoration: none;
@@ -43,9 +43,14 @@ export const TagsDisplay = (props: TagsDisplayProps) => {
         <Col>
             <h5>Tags</h5>
             {data.tagList.map( (item: any, key: number) => {
+
+              let linkElement = (item.link_uri === '') 
+              ? <a key={key}>{item.tag}</a> 
+              : <a href={item.link_uri} key={key}>{item.tag}</a>;
+
               return (
                 <ErrorBoundary key={key}>
-                  <a href={item.link_uri} key={key}>{item.tag}</a>
+                  {linkElement}
                 </ErrorBoundary>
                 
               );
