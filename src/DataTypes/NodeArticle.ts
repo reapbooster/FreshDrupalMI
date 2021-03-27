@@ -8,13 +8,21 @@ import { UserInterface } from "./User";
 export interface NodeArticleInterface extends NodeInterface {
   field_authors: UserInterface;
   field_centers: TaxonomyTermInterface;
+  field_collections?: Array<any>;
   field_content: Array<ParagraphInterface>;
   field_promo_slide?: SlideInterface;
-  field_topics: TaxonomyTermInterface;
+  field_region?: Array<any>;
+  field_tags?: Array<any>;
+  field_topics?: Array<any>;
+  // field_topics: TaxonomyTermInterface;
 }
 
 export class NodeArticle extends Node implements NodeArticleInterface {
   field_authors: object | undefined;
+  field_collections?: Array<any>;
+  field_region?: Array<any>;
+  field_tags?: Array<any>;
+  field_topics?: Array<any>;
 
   private _field_centers: TaxonomyTermInterface;
 
@@ -22,7 +30,7 @@ export class NodeArticle extends Node implements NodeArticleInterface {
 
   private _field_promo_slide?: Slide | undefined;
 
-  private _field_topics: TaxonomyTermInterface;
+  // private _field_topics: TaxonomyTermInterface;
 
   constructor(props) {
     super(props);
@@ -34,7 +42,7 @@ export class NodeArticle extends Node implements NodeArticleInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_promo_slide";
+    return "&include=field_promo_slide,field_tags,field_topics,field_collections,field_region";
   }
 
   getItems(): Array<EntityInterface> {
@@ -71,13 +79,13 @@ export class NodeArticle extends Node implements NodeArticleInterface {
     }
   }
 
-  get field_topics(): TaxonomyTermInterface | undefined {
-    return this._field_topics;
-  }
+  // get field_topics(): TaxonomyTermInterface | undefined {
+  //   return this._field_topics;
+  // }
 
-  set field_topics(value: TaxonomyTermInterface) {
-    this._field_topics = new TaxonomyTerm(value);
-  }
+  // set field_topics(value: TaxonomyTermInterface) {
+  //   this._field_topics = new TaxonomyTerm(value);
+  // }
 }
 
 export default NodeArticle;

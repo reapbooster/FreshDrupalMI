@@ -9,6 +9,7 @@ import User, { UserInterface } from "./User";
 
 export interface MediaReportInterface extends MediaInterface {
   field_author: UserInterface;
+  field_collections?: Array<any>;
   field_centers: TaxonomyTermInterface;
   field_content: Array<ParagraphInterface>;
   field_cover: ImageFileInterface;
@@ -16,15 +17,20 @@ export interface MediaReportInterface extends MediaInterface {
   field_essay: LinkInterface;
   field_media_file: DocumentFileInterface;
   field_program_initiatives: TaxonomyTermInterface;
+  field_regions?: Array<any>;
   field_related_event: EventInterface;
   field_term_collection: TaxonomyTermInterface;
-  field_topics: TaxonomyTermInterface;
+  field_tags?: Array<any>;
+  field_topics?: Array<any>;
 }
 
 export class MediaReport extends Media implements MediaReportInterface {
+  field_collections?: Array<any>;
   field_content: Array<ParagraphInterface>;
-
   field_essay: Link;
+  field_regions?: Array<any>;
+  field_tags?: Array<any>;
+  field_topics?: Array<any>;
 
   protected _field_author: User;
 
@@ -42,7 +48,7 @@ export class MediaReport extends Media implements MediaReportInterface {
 
   protected _field_term_collection: TaxonomyTerm;
 
-  protected _field_topics: TaxonomyTerm;
+  // protected _field_topics: TaxonomyTerm;
 
   constructor(props) {
     super(props);
@@ -50,7 +56,7 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_cover,field_media_file";
+    return "&include=field_cover,field_media_file,field_tags,field_topics,field_collections,field_regions";
   }
 
   hasData(): boolean {
@@ -126,13 +132,13 @@ export class MediaReport extends Media implements MediaReportInterface {
     this._field_term_collection = value;
   }
 
-  get field_topics(): TaxonomyTerm {
-    return this._field_topics;
-  }
+  // get field_topics(): TaxonomyTerm {
+  //   return this._field_topics;
+  // }
 
-  set field_topics(value: TaxonomyTerm) {
-    this._field_topics = value;
-  }
+  // set field_topics(value: TaxonomyTerm) {
+  //   this._field_topics = value;
+  // }
 
   get thumbnail(): ImageFileInterface {
     return this.field_cover;
