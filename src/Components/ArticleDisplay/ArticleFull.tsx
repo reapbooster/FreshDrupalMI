@@ -66,25 +66,36 @@ export const ArticleFull = (props: ArticleFullProps) => {
 
   const created = moment(nodeArticleData.created, "ddd MMM DD YYYY Z");
 
-  // TO-DO: Need to build the list of tags from multiple taxonomy vocabs
-  const tagList = [
-    {
-      tag: "Health",
-      link_uri: "/tagsURL/health"
-    },
-    {
-      tag: "Finance",
-      link_uri: "/tagsURL/finance"
-    },
-    {
-      tag: "Aging",
-      link_uri: "/tagsURL/aging"
-    },
-    {
-      tag: "Policy",
-      link_uri: "/tagsURL/policy"
-    },
-  ];
+  let tagList = [];
+
+  if (nodeArticleData.field_tags.length !== undefined && nodeArticleData.field_tags.length > 0) {
+    nodeArticleData.field_tags.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
+  if (nodeArticleData.field_topics.length !== undefined && nodeArticleData.field_topics.length > 0) {
+    nodeArticleData.field_topics.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
+  if (nodeArticleData.field_region.length !== undefined && nodeArticleData.field_region.length > 0) {
+    nodeArticleData.field_region.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
+  if (nodeArticleData.field_collections.length !== undefined && nodeArticleData.field_collections.length > 0) {
+    nodeArticleData.field_collections.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
 
   //TODO: get a default slide if field_promo_slide is empty
 

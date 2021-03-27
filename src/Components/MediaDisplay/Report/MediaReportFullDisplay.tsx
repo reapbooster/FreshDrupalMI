@@ -105,25 +105,36 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
 
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
-  // TO-DO: Need to build the list of tags from multiple taxonomy vocabs
-  const tagList = [
-    {
-      tag: "Health",
-      link_uri: "/tagsURL/health"
-    },
-    {
-      tag: "Finance",
-      link_uri: "/tagsURL/finance"
-    },
-    {
-      tag: "Aging",
-      link_uri: "/tagsURL/aging"
-    },
-    {
-      tag: "Policy",
-      link_uri: "/tagsURL/policy"
-    },
-  ];
+  let tagList = [];
+
+  if (data.field_tags.length !== undefined && data.field_tags.length > 0) {
+    data.field_tags.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
+  if (data.field_topics.length !== undefined && data.field_topics.length > 0) {
+    data.field_topics.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
+  if (data.field_regions.length !== undefined && data.field_regions > 0) {
+    data.field_regions.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
+  if (data.field_collections.length !== undefined && data.field_collections.length > 0) {
+    data.field_collections.map(
+      (item) => {
+        tagList.push({link_uri: '', tag: item.name});
+      }
+    )
+  }
 
   return (
     <>
