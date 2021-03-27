@@ -77,6 +77,40 @@ export const ParagraphDisplayBodyContent = (
       margin: 0 0 1em 0;
       color: ${(fontColor === "black")?'dimgray':'white'}
     }
+
+    & .container {
+      padding: 0 !important;
+    }
+
+    & .row {
+      display: block;
+    }
+
+    & blockquote {
+      float: right;
+      width: 50%;
+      border: none;
+      color: #35363c;
+      font-size: 1.5em;
+      line-height: 1.25em;
+      font-style: normal;
+      position: relative;
+      text-align: left;
+      font-family: LatoWebBold;
+      margin: 50px 0px 50px 60px;
+      background-color: #fff;
+      box-shadow: 0 0 26px 0 rgb(50 50 50 / 10%);
+      padding: 20px; 
+
+      @media (max-width: 767.98px){
+        font-size: 1.25em;
+        float: none;
+        margin: 0 !important;
+        width: 94%;
+      }
+    }
+
+    
   `;
     
   return (

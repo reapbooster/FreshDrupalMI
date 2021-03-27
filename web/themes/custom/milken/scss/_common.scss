@@ -60,3 +60,29 @@ body {
     box-shadow: 0 0 12px rgba(0,0,0,0.25), 0 2px 3px rgba(0,0,0,0.10);
   }
 }
+
+blockquote {
+  &::before {
+    display: inline-block;
+    content: "\201C";
+    position: absolute;
+    color: var(--color-milken-blue);
+    font-weight: normal;
+    vertical-align: bottom;
+    font-size: 2em;
+    left: -0.2em;
+    top: 0.1em;
+  }
+
+  &::after {
+    display: inline-block;
+    content: "\201D";
+    position: absolute;
+    color: var(--color-milken-blue);
+    font-weight: normal;
+    font-size: 2em;
+    bottom: -0.5em;
+    right: -0.2em;
+  }
+}
+
