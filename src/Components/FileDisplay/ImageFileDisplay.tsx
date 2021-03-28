@@ -10,7 +10,7 @@ export interface ImageFileDisplayProps {
   data: ImageFileInterface;
   view_mode: string;
   key?: number;
-  style: Record<string, unknown>;
+  style?: Record<string, unknown>;
   width?: string;
   height?: string;
   className?: string;
@@ -19,7 +19,7 @@ export interface ImageFileDisplayProps {
 
 export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
   console.debug("ImageFileDisplay", props);
-  const { data, style, width, height, className, srcsetSizes } = props;
+  const { data, view_mode, style, width, height, className, srcsetSizes } = props;
   const DataObject = new ImageFile(data);
   const [imageData, setImageData] = useState(DataObject);
   if (!DataObject.valid) {
@@ -57,19 +57,39 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
     attributes.style = style;
   }
   const styleObject = imageData.imageStyleObject;
+  
+  let imageElement = 
+  (view_mode === 'medium-raw')
+  ? (
+  <img
+    src={imageData.image_style_uri.medium}
+    alt={imageData.filename}
+  />
+)
+: (view_mode === 'thumbnail-raw')
+? (
+<img
+  src={imageData.image_style_uri.thumbnail}
+  alt={imageData.filename}
+/>
+)
+:(
+  <img
+    data-drupal-id={imageData.id}
+    data-drupal-type={imageData.type}
+    data-uuid={imageData.id}
+    {...styleObject.imageAttributes}
+    sizes={srcsetSizes || ""}
+    style={imageTagStyle}
+    className={className}
+    alt={imageData.filename}
+  />
+)
+
   return (
     <>
       <ErrorBoundary>
-        <img
-          data-drupal-id={imageData.id}
-          data-drupal-type={imageData.type}
-          data-uuid={imageData.id}
-          {...styleObject.imageAttributes}
-          style={imageTagStyle}
-          className={className}
-          sizes={srcsetSizes || ""}
-          alt={imageData.filename}
-        />
+        {imageElement}
       </ErrorBoundary>
     </>
   );

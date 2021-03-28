@@ -6,9 +6,10 @@ import { EntityComponentProps } from "DataTypes/EntityComponentProps";
 import MediaDisplayImage from "MediaDisplay/MediaDisplayImage";
 import Loading from "Components/Loading";
 import styled from "styled-components";
-import NodeDisplayLandingPageTile from "./NodeDisplayLandingPageTile";
-import NodeDisplayLandingPageFull from "./NodeDisplayLandingPageFull";
 import ErrorDisplay from "Utility/ErrorDisplay";
+import NodeDisplayLandingPageCardLarge from "./NodeDisplayLandingPageCardLarge";
+import NodeDisplayLandingPageFull from "./NodeDisplayLandingPageFull";
+import NodeDisplayLandingPageTile from "./NodeDisplayLandingPageTile";
 
 export interface NodeLandingPageDisplayProps {
   data: NodeLandingPageInterface;
@@ -52,6 +53,8 @@ export const NodeLandingPageDisplay = (props: NodeLandingPageDisplayProps) => {
       );
     case "tile":
       return <NodeDisplayLandingPageTile data={landingPageData} key={key} />;
+    case "card-large":
+      return <NodeDisplayLandingPageCardLarge data={landingPageData} key={key} />;
     default:
       return (
         <ErrorDisplay

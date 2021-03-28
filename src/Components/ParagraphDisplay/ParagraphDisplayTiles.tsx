@@ -97,6 +97,15 @@ export class ParagraphDisplayTiles extends React.Component<
         : '';
         
       const SectionWrapper = styled.section`
+        background-color: ${containerBackgroundColor}
+
+        & h2 {
+          font-family: LatoWebBlack,
+          font-fize: 1.5em,
+          font-weight: bold,
+          margin-bottom: 0,
+        }
+
         & .list-display-component {
           & a {
             display: flex;
@@ -124,42 +133,43 @@ export class ParagraphDisplayTiles extends React.Component<
       ? faNewspaper
       : faExclamation;
 
+      let headerSection = (data.field_view_mode == "tile") 
+        ? ''
+        : (data.field_view_mode == "card-large")
+        ? (
+            <div className="col-sm-12 col-md-2 col-lg-3">
+              <h2> {data.field_title} </h2>
+              {elSubheader}
+            </div>
+          )
+        : (
+          <div className="row" style={{ margin: "0 -10px 20px", }} >
+            <div className="col d-flex justify-content-between align-items-center">
+              <h2>
+                <FontAwesomeIcon icon={titleIcon} className="mr-2"/>
+                {data.field_title}
+              </h2>
+              {elSubheader}
+              <a className="btn-milken-orange mt-0">Button</a>
+            </div>
+          </div>
+          );
+
       return (
-        <SectionWrapper
-          style={{backgroundColor: containerBackgroundColor}}
-        >
+        <SectionWrapper>
           <Container
-            fluid={data.field_view_mode == "card" ? true : false}
+            fluid={data.field_view_mode == "card" || data.field_view_mode == "card-large" ? true : false}
             className={containerClassNames}
           >
-            <div 
-              className={data.field_view_mode == "tile" ? "d-none" : "row"}
-              style={{
-                margin: "0 -10px 20px",
-              }}
-            >
-              <div className="col d-flex justify-content-between align-items-center">
-                <h2
-                  style={{
-                    fontFamily: "LatoWebBlack",
-                    fontSize: "1.5em",
-                    fontWeight: "bold",
-                    marginBottom: "0",
-                  }}
-                >
-                  <FontAwesomeIcon icon={titleIcon} className="mr-2"/>
-                  {data.field_title}
-                </h2>
-                {elSubheader}
-                <a className="btn-milken-orange mt-0">Button</a>
-              </div>
+            <div className={data.field_view_mode == "card-large" ? 'row' : ''}>
+              {headerSection}
+              <ListDisplay
+                id={"tiles-list-".concat(data.id)}
+                list={data.tiles}
+                view_mode={data.field_view_mode}
+                display_size={data.field_display_size}
+              />
             </div>
-            <ListDisplay
-              id={"tiles-list-".concat(data.id)}
-              list={data.tiles}
-              view_mode={data.field_view_mode}
-              display_size={data.field_display_size}
-            />
           </Container>
         </SectionWrapper>
       );
