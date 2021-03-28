@@ -141,28 +141,31 @@ function milken_migrate_content_update() {
   $current_line = 0;
   $migrate = new MilkenMigrateController();
   if (($fp = fopen($csv_source, "r")) !== FALSE) {
-    while (($data = fgetcsv($fp, NULL, ",", "|",)) !== FALSE){
+    while (($data = fgetcsv($fp, NULL, ",", "|",)) !== FALSE) {
       $current_line++;
       print "\n";
       print 'Current record: ' . $current_line;
       if (strcasecmp($data[0], 'Article') == 0) {
-        // Update Articles
+        // Update Articles.
         print ', type: Article';
-        $result = $migrate->update_articles($data);
-      } else if(strcasecmp($data[0], 'Video') == 0) {
-        // Update Videos
+        $migrate->update_articles($data);
+      }
+      elseif (strcasecmp($data[0], 'Video') == 0) {
+        // Update Videos.
         print ', type: Video';
-        $result = $migrate->update_media($data);
-      } else if(strcasecmp($data[0], 'Report') == 0) {
-        // Update Reports
-        print ', type: Report'; 
-        $result = $migrate->update_media($data);
-      } else {
-        //skip
+        $migrate->update_media($data);
+      }
+      elseif (strcasecmp($data[0], 'Report') == 0) {
+        // Update Reports.
+        print ', type: Report';
+        $migrate->update_media($data);
+      }
+      else {
+        // Skip.
       }
     }
   }
-    
+  return $result;
 }
 
 /**
@@ -170,43 +173,31 @@ function milken_migrate_content_update() {
  */
 function milken_migrate_update_grid_join_panel_speaker() {
 
-  
   $results = \Drupal::entityTypeManager()->getStorage('grid_join_panel_speaker')->loadByProperties(['type' => 'join_table']);
-  $i = 0;
-  // print_r($results);
   foreach ($results as $key => $item) {
-    
-  // $panel_record = \Drupal::entityTypeManager()->getStorage('panel')->load(653);
-  // $panel_record_event_value = $panel_record->get('field_event')->getValue();
-  // $panel_record_event_value_target_id = $panel_record_event_value[0]['target_id'];
-  // print($panel_record_event_value_target_id);
-
     print('Current Panel_Speakers Record: ' . $key . '; ');
 
-    // Get value of grid_join_panel_speaker.field_panel_id
     $field_panel_id_value = $item->get('field_panel_id')->getValue()[0]['value'];
 
-    if($field_panel_id_value == null) {
+    if ($field_panel_id_value == NULL) {
       print('NULL ITEM FOUND field_panel_id_value in ' . $key);
       continue;
     }
-    
-    // Load the Panel by ID 
-    print('field_panel_id_value: ' . $field_panel_id_value . '; ');
-    $panel_record = \Drupal::entityTypeManager()->getStorage('panel')->load((int)$field_panel_id_value);
-    // $panel_record = \Drupal::entityTypeManager()->getStorage('panel')->loadByProperties(['type' => 'panel', 'id' => $field_panel_id_value]);
 
-    if($panel_record == null) {
+    // Load the Panel by ID.
+    print('field_panel_id_value: ' . $field_panel_id_value . '; ');
+    $panel_record = \Drupal::entityTypeManager()->getStorage('panel')->load((int) $field_panel_id_value);
+    if ($panel_record == NULL) {
       print('NULL ITEM FOUND panel_record in ' . $key);
       continue;
     }
 
-    // Get event_id from Panel
-    print('panel_record: ' . gettype($panel_record) . '; '); 
+    // Get event_id from Panel.
+    print('panel_record: ' . gettype($panel_record) . '; ');
     $event_id = $panel_record->get('field_event')->getValue()[0]['target_id'];
     print('event_id: ' . $event_id . '; ');
 
-    // Load current Panel_Speakers entity
+    // Load current Panel_Speakers entity.
     $grid_join_panel_speaker_rw = \Drupal::entityTypeManager()->getStorage('grid_join_panel_speaker')->load($key);
     $grid_join_panel_speaker_rw->set('field_event', ['target_id' => $event_id]);
     $grid_join_panel_speaker_rw->save();
@@ -219,49 +210,50 @@ function milken_migrate_update_grid_join_panel_speaker() {
  */
 function milken_migrate_update_grid_panel() {
 
-  
-  // Get all Panel records
+  // Get all Panel records.
   $panels = \Drupal::entityTypeManager()->getStorage('panel')->loadByProperties(['type' => 'panel']);
-  $i = 0;
-
   foreach ($panels as $key => $item) {
-    
+
     $array_speaker_ids = [];
 
     print('Current Panel Record: ' . $key . "\n");
 
-    // Get Panel_Speaker Records by Panel ID
-    $array_panel_speakers = \Drupal::entityTypeManager()->getStorage('grid_join_panel_speaker')->loadByProperties(['type' => 'join_table','field_panel_id' => $key]);
-    if($array_panel_speakers == null) {
+    // Get Panel_Speaker Records by Panel ID.
+    $array_panel_speakers = \Drupal::entityTypeManager()
+      ->getStorage('grid_join_panel_speaker')
+      ->loadByProperties(['type' => 'join_table', 'field_panel_id' => $key]);
+    if ($array_panel_speakers == NULL) {
       print('NULL returned getting Panel_Speaker records by Panel ID: ' . $key);
       continue;
-    } else {
-      foreach($array_panel_speakers as $panel_speaker_key => $panel_speaker_value){
-        // Get and loop grid_join_panel_speaker.field_speaker_id
+    }
+    else {
+      foreach ($array_panel_speakers as $panel_speaker_value) {
+        // Get and loop grid_join_panel_speaker.field_speaker_id.
         $panel_speaker_field_speaker_id_values = $panel_speaker_value->get('field_speaker_id')->getValue();
-        if($panel_speaker_field_speaker_id_values == null) {
+        if ($panel_speaker_field_speaker_id_values == NULL) {
           print('NULL returned by field_speaker_id in Panel ID: ' . $key);
           continue;
-        } else {
-          foreach ($panel_speaker_field_speaker_id_values as $speaker_key => $speaker_value){
+        }
+        else {
+          foreach ($panel_speaker_field_speaker_id_values as $speaker_value) {
             array_push($array_speaker_ids, ['target_id' => $speaker_value['value']]);
           }
         }
       }
     }
-    
-    // Load the Panel by ID and check if null
-    $panel_record_rw = \Drupal::entityTypeManager()->getStorage('panel')->load((int)$key);
-    if($panel_record_rw == null) {
+
+    // Load the Panel by ID and check if null.
+    $panel_record_rw = \Drupal::entityTypeManager()->getStorage('panel')->load((int) $key);
+    if ($panel_record_rw == NULL) {
       print('NULL returned when loading Panel by ID: ' . $key);
       continue;
     }
 
-    // Save updated Panel record
+    // Save updated Panel record.
     $panel_record_rw->set('field_speakers', $array_speaker_ids);
     $panel_record_rw->save();
     print_r($array_speaker_ids);
     print('End of Loop Iteration, Panel ID: ' . $key . "; \n");
-    // Thank you come again
+    // Thank you come again.
   }
 }

@@ -137,17 +137,12 @@ class Event extends MilkenMigrateDestinationBase implements ContainerFactoryPlug
       case "finLabs":
       case "mia":
       case "p4c":
-        // return "meeting";
-
+        // Return "meeting";.
       case "summit":
-        // return "summit";
-
+        // Return "summit";.
       case "gc":
-      default: 
+      default:
         return "conference";
-
-      // default:
-      //   return NULL;
     }
   }
 

@@ -101,7 +101,7 @@ class Paragraphs extends MilkenProcessPluginBase {
               'field_background' => "transparent",
               'langcode' => 'en',
               'field_body' => [
-                'value' => '<blockquote>'.$ref->field_body_quote.'</blockquote>',
+                'value' => '<blockquote>' . $ref->field_body_quote . '</blockquote>',
                 'format' => 'full_html',
               ],
             ]);
