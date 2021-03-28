@@ -180,6 +180,7 @@
         "npm-asset/dropzone": "^4",
         "npm-asset/fontawesome": "^5",
         "npm-asset/imagesloaded": "^4",
+        "npm-asset/masonry": "^0.0.2",
         "npm-asset/masonry-layout": "^4.2",
         "npm-asset/slick-carousel": "1.8.1",
         "object-calisthenics/phpcs-calisthenics-rules": "*",
