@@ -58,7 +58,7 @@ export class MediaReport extends Media implements MediaReportInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_cover,field_media_file,field_tags,field_topics,field_collections,field_regions,field_authors";
+    return "&include=field_cover,field_media_file,field_tags,field_topics,field_collections,field_regions,field_authors.field_photo";
   }
 
   hasData(): boolean {

@@ -100,13 +100,20 @@ export const ArticleFull = (props: ArticleFullProps) => {
 
   //TODO: get a default slide if field_promo_slide is empty
 
-  let authorList = [
-    {
-      name: 'Some Famous Author',
-      image: 'https://milkeninstitute.org/sites/default/files/Hunter%2C%20John%20%281%29.jpg',
-      link: '/staff/milken-michael',
-    }
-  ];
+  let authorList = [];
+
+  if (nodeArticleData.field_authors.length !== undefined && nodeArticleData.field_authors.length > 0) {
+    nodeArticleData.field_authors.map(
+      (item) => {
+        authorList.push({ 
+          photo: item.field_photo[0],
+          name: item.field_first_name + " " + item.field_last_name, 
+          pgtitle: item.field_pgtitle, 
+          link: "/people/" + item.drupal_internal__id,
+        });
+      }
+    )
+  }
 
   return (
     <>
