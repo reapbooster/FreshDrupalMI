@@ -1,4 +1,5 @@
-<?php
+<?php   // @codingStandardsIgnoreFile
+
 
 namespace Drupal\milken_migrate\Controller;
 
@@ -7,25 +8,38 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\taxonomy\Entity\Term;
 
 /**
+ * Class Milken Migrate Controller.
  *
+ * @package Drupal\milken_migrate\Controller
  */
 class MilkenMigrateController extends ControllerBase {
 
   /**
+   * Updater for Media.
    *
+   * @param array $data
+   *   Incoming Data.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function update_articles($data) {
-
-    $node_ar = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['uuid' => $data[10]]);
+  public function update_articles(array $data) {
+    $node_ar = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties(['uuid' => $data[10]]);
     $nid = key($node_ar);
-    $must_delete = (strcasecmp($data[9], 'delete') == 0) ? true : false;
-    if (is_numeric($nid) && $must_delete ){
-      // If node is marked for deletion
-      $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+    $must_delete = (strcasecmp($data[9], 'delete') == 0) ? TRUE : FALSE;
+    if (is_numeric($nid) && $must_delete) {
+      // If node is marked for deletion.
+      $node = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->load($nid);
       $node->delete($node);
       print " ITEM $nid HAS BEEN DELETED";
-    } else if (is_numeric($nid) && !$must_delete ) {
-      // If node should only be updated 
+    }
+    elseif (is_numeric($nid) && !$must_delete) {
+      // If node should only be updated
       // $node = Node::load($nid);
       print ', nid: ' . $nid;
       $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
@@ -35,7 +49,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($tags as $index => $tag) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $tag)), 'milken_tags');
           if ($tid) {
-            print  ', tag#: ' . $index;
+            print ', tag#: ' . $index;
             if ($index == 0) {
               $node->set('field_tags', ['target_id' => $tid]);
             }
@@ -54,7 +68,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($centers as $index => $center) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $center)), 'centers');
           if ($tid) {
-            print  ', center#: ' . $index;
+            print ', center#: ' . $index;
             if ($index == 0) {
               $node->set('field_centers', ['target_id' => $tid]);
             }
@@ -73,7 +87,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($topics as $index => $topic) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $topic)), 'topics');
           if ($tid) {
-            print  ', topic#: ' . $index;
+            print ', topic#: ' . $index;
             if ($index == 0) {
               $node->set('field_topics', ['target_id' => $tid]);
             }
@@ -92,7 +106,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($collections as $index => $collection) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $collection)), 'collections');
           if ($tid) {
-            print  ', collection#: ' . $index;
+            print ', collection#: ' . $index;
             if ($index == 0) {
               $node->set('field_collections', ['target_id' => $tid]);
             }
@@ -111,7 +125,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($events as $index => $event) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $event)), 'events');
           if ($tid) {
-            print  ', event#: ' . $index;
+            print ', event#: ' . $index;
             if ($index == 0) {
               $node->set('field_events', ['target_id' => $tid]);
             }
@@ -130,7 +144,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($regions as $index => $region) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $region)), 'region');
           if ($tid) {
-            print  ', region#: ' . $index;
+            print ', region#: ' . $index;
             if ($index == 0) {
               $node->set('field_region', ['target_id' => $tid]);
             }
@@ -142,36 +156,42 @@ class MilkenMigrateController extends ControllerBase {
           }
         }
       }
-
       $node->save();
-
       $path_alias = PathAlias::create([
         'path' => '/node/' . $nid,
         'alias' => $data[1],
       ]);
       $path_alias->save();
       print " END OF " . $nid;
-    } else {
+    }
+    else {
       print " NODE ITEM NOT FOUND: " . implode("; ", $data);
     }
-
   }
 
   /**
+   * Updater for Media.
    *
+   * @param array $data
+   *   Incoming data.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function update_media($data) {
+  public function update_media(array $data) {
 
     $media = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties(['uuid' => $data[10]]);
     $mid = key($media);
-    $must_delete = (strcasecmp($data[9], 'delete') == 0) ? true : false;
-    if (is_numeric($mid) && $must_delete ){
-      // If media is marked for deletion
+    $must_delete = (strcasecmp($data[9], 'delete') == 0) ? TRUE : FALSE;
+    if (is_numeric($mid) && $must_delete) {
+      // If media is marked for deletion.
       $media = \Drupal::entityTypeManager()->getStorage('media')->load($mid);
       $media->delete($media);
       print " ITEM $mid HAS BEEN DELETED";
-    } else if (is_numeric($mid) && !$must_delete ) {
-      // If media should only be updated 
+    }
+    elseif (is_numeric($mid) && !$must_delete) {
+      // If media should only be updated.
       print ', mid: ' . $mid;
       $media = \Drupal::entityTypeManager()->getStorage('media')->load($mid);
 
@@ -181,7 +201,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($tags as $index => $tag) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $tag)), 'milken_tags');
           if ($tid) {
-            print  ', tag#: ' . $index;
+            print ', tag#: ' . $index;
             if ($index == 0) {
               $media->set('field_tags', ['target_id' => $tid]);
             }
@@ -200,7 +220,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($centers as $index => $center) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $center)), 'centers');
           if ($tid) {
-            print  ', center#: ' . $index;
+            print ', center#: ' . $index;
             if ($index == 0) {
               $media->set('field_centers', ['target_id' => $tid]);
             }
@@ -219,7 +239,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($topics as $index => $topic) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $topic)), 'topics');
           if ($tid) {
-            print  ', topic#: ' . $index;
+            print ', topic#: ' . $index;
             if ($index == 0) {
               $media->set('field_topics', ['target_id' => $tid]);
             }
@@ -238,7 +258,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($collections as $index => $collection) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $collection)), 'collections');
           if ($tid) {
-            print  ', collection#: ' . $index;
+            print ', collection#: ' . $index;
             if ($index == 0) {
               $media->set('field_collections', ['target_id' => $tid]);
             }
@@ -257,7 +277,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($events as $index => $event) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $event)), 'events');
           if ($tid) {
-            print  ', event#: ' . $index;
+            print ', event#: ' . $index;
             if ($index == 0) {
               $media->set('field_events', ['target_id' => $tid]);
             }
@@ -276,7 +296,7 @@ class MilkenMigrateController extends ControllerBase {
         foreach ($regions as $index => $region) {
           $tid = $this->get_term_from_name(trim(str_replace("%tag-comma%", ",", $region)), 'region');
           if ($tid) {
-            print  ', region#: ' . $index;
+            print ', region#: ' . $index;
             if ($index == 0) {
               $media->set('field_regions', ['target_id' => $tid]);
             }
@@ -297,7 +317,8 @@ class MilkenMigrateController extends ControllerBase {
       ]);
       $path_alias->save();
       print " END OF " . $mid;
-    } else {
+    }
+    else {
       print " MEDIA ITEM NOT FOUND: " . implode("; ", $data);
     }
 
@@ -306,15 +327,17 @@ class MilkenMigrateController extends ControllerBase {
   /**
    * Helper function to dynamically get the tid from the term_name.
    *
-   * @param $term_name
-   *   Term name
-   * @param $vocabulary_name
-   *   Name of the vocabulary to search the term in
+   * @param string $term_name
+   *   Term name.
+   * @param int $vid
+   *   Name of the vocabulary to search the term in.
    *
-   * @return \Drupal\taxonomy\Entity\Term id of the found term or else FALSE
+   * @return \Drupal\taxonomy\Entity\Term
+   *   Id of the found term or else FALSE.
    */
-  private function get_term_from_name($term_name, $vid) {
-    $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
+  private function get_term_from_name(string $term_name, int $vid) {
+    $term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
       ->loadByProperties(['name' => $term_name, 'vid' => $vid]);
     $term = reset($term);
 
