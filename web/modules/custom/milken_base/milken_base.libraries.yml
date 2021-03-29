@@ -92,3 +92,8 @@ people:
   version: 1.0
   js:
     components/people/people.entry.js: { source: 'components/people/people.entry.tsx' }
+
+extra.admin:
+  css:
+    theme:
+      css/extra.admin.css: {}
