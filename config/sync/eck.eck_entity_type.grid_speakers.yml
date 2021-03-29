@@ -4,7 +4,7 @@ status: true
 dependencies: {  }
 id: grid_speakers
 label: 'Grid Speakers'
-created: false
-changed: false
+created: true
+changed: true
 uid: false
 title: true

@@ -1,16 +1,16 @@
-uuid: e6822c22-f3a7-4a41-9081-65d1559e5345
+uuid: d2b77bde-bdef-42d0-80f3-7bbf116624ef
 langcode: en
 status: true
 dependencies:
   module:
     - eck
     - views_bulk_operations
-id: panels
-label: 'Admin Panels'
+id: admin_grid_tracks
+label: 'Admin Grid Tracks'
 module: views
 description: ''
 tag: ''
-base_table: panel_field_data
+base_table: grid_tracks_field_data
 base_field: id
 display:
   default:
@@ -66,77 +66,12 @@ display:
           quantity: 9
       style:
         type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            id: id
-            title: title
-            type: type
-            changed: changed
-            counter: counter
-            operations: operations
-            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
-          info:
-            id:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            type:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            changed:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            counter:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            operations:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            views_bulk_operations_bulk_form:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: changed
-          empty_table: false
       row:
         type: fields
       fields:
         id:
           id: id
-          table: panel_field_data
+          table: grid_tracks_field_data
           field: id
           relationship: none
           group_type: group
@@ -174,7 +109,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -197,13 +132,16 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: panel
+          entity_type: grid_tracks
           entity_field: id
           plugin_id: field
         title:
-          id: title
-          table: panel_field_data
+          table: grid_tracks_field_data
           field: title
+          id: title
+          entity_type: null
+          entity_field: title
+          plugin_id: field
           relationship: none
           group_type: group
           admin_label: ''
@@ -250,8 +188,7 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings:
-            link_to_entity: false
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -262,77 +199,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: null
-          entity_field: title
-          plugin_id: field
-        type:
-          id: type
-          table: panel_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Type/Bundle
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: panel
-          entity_field: type
-          plugin_id: field
         changed:
           id: changed
-          table: panel_field_data
+          table: grid_tracks_field_data
           field: changed
           relationship: none
           group_type: group
@@ -381,7 +250,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: short
+            date_format: medium
             custom_date_format: ''
             timezone: ''
           group_column: value
@@ -394,7 +263,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: panel
+          entity_type: grid_tracks
           entity_field: changed
           plugin_id: field
         counter:
@@ -437,7 +306,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -449,7 +318,7 @@ display:
           plugin_id: counter
         operations:
           id: operations
-          table: panel
+          table: grid_tracks
           field: operations
           relationship: none
           group_type: group
@@ -487,7 +356,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -496,7 +365,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: false
-          entity_type: panel
+          entity_type: grid_tracks
           plugin_id: entity_operations
         views_bulk_operations_bulk_form:
           id: views_bulk_operations_bulk_form
@@ -538,7 +407,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -549,172 +418,16 @@ display:
           batch: true
           batch_size: 10
           form_step: true
-          buttons: true
+          buttons: false
           clear_on_exposed: true
           action_title: Action
           selected_actions:
             -
               action_id: views_bulk_operations_delete_entity
           plugin_id: views_bulk_operations_bulk_form
-      filters:
-        title:
-          id: title
-          table: panel_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Title
-            description: ''
-            use_operator: false
-            operator: title_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_creator: '0'
-              editors: '0'
-              staff_creator: '0'
-              staff_reviewer: '0'
-              team_creator: '0'
-              team_reviewer: '0'
-              sponsor_page_creator: '0'
-              sponsor_page_reviewer: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: panel
-          entity_field: title
-          plugin_id: string
-        type:
-          id: type
-          table: panel_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: type_op
-            label: Type
-            description: ''
-            use_operator: false
-            operator: type_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: type
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_creator: '0'
-              editors: '0'
-              staff_creator: '0'
-              staff_reviewer: '0'
-              team_creator: '0'
-              team_reviewer: '0'
-              sponsor_page_creator: '0'
-              sponsor_page_reviewer: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: panel
-          entity_field: type
-          plugin_id: bundle
-        field_event_target_id:
-          id: field_event_target_id
-          table: panel__field_event
-          field: field_event_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_event_target_id_op
-            label: 'Event (field_event)'
-            description: ''
-            use_operator: false
-            operator: field_event_target_id_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: field_event_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_creator: '0'
-              editors: '0'
-              staff_creator: '0'
-              staff_reviewer: '0'
-              team_creator: '0'
-              team_reviewer: '0'
-              sponsor_page_creator: '0'
-              sponsor_page_reviewer: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: numeric
+      filters: {  }
       sorts: {  }
-      title: 'Admin Panels'
+      title: 'Admin Grid Tracks'
       header: {  }
       footer: {  }
       empty: {  }
@@ -726,7 +439,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
       tags: {  }
   page_1:
@@ -736,12 +448,11 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/content/panel
+      path: admin/content/grid_tracks
     cache_metadata:
       max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
       tags: {  }
