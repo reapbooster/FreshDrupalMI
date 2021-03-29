@@ -64,6 +64,8 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
   <img
     src={imageData.image_style_uri.medium}
     alt={imageData.filename}
+    style={imageTagStyle}
+    className={className}
   />
 )
 : (view_mode === 'thumbnail-raw')
@@ -71,6 +73,8 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
 <img
   src={imageData.image_style_uri.thumbnail}
   alt={imageData.filename}
+  style={imageTagStyle}
+  className={className}
 />
 )
 :(

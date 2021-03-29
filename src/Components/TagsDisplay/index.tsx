@@ -37,29 +37,32 @@ export const TagsDisplay = (props: TagsDisplayProps) => {
     }
   `;
 
-  return (
-    <TagsWrapper className="container">
-      <Row>
-        <Col>
+  if (data.tagList.length !== undefined && data.tagList.length > 0) {
+    return (
+      <TagsWrapper className="container">
+        <Row>
+          <Col>
             <h5>Tags</h5>
-            {data.tagList.map( (item: any, key: number) => {
+            {data.tagList.map((item: any, key: number) => {
 
-              let linkElement = (item.link_uri === '') 
-              ? <a key={key}>{item.tag}</a> 
-              : <a href={item.link_uri} key={key}>{item.tag}</a>;
+              let linkElement = (item.link_uri === '')
+                ? <a key={key}>{item.tag}</a>
+                : <a href={item.link_uri} key={key}>{item.tag}</a>;
 
               return (
                 <ErrorBoundary key={key}>
                   {linkElement}
                 </ErrorBoundary>
-                
               );
             })}
             <div className="published-date">{data.published_date_string}</div>
-        </Col>
+          </Col>
         </Row>
-    </TagsWrapper>
-  );
+      </TagsWrapper>
+    );
+  } else {
+    return '';
+  }
 };
 
 export default TagsDisplay;

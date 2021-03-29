@@ -6,6 +6,7 @@ import { MediaReportInterface } from "DataTypes/MediaReport";
 import ErrorBoundary from "../../../Utility/ErrorBoundary";
 import ErrorDisplay from "../../../Utility/ErrorDisplay";
 import { Row, Col } from "react-bootstrap";
+import AuthorsDisplay from "../../AuthorsDisplay";
 import {TagsDisplay} from "../../TagsDisplay";
 import {SocialDisplay} from "../../SocialDisplay";
 import ParagraphDisplayList from "../../ParagraphDisplay/ParagraphDisplayList";
@@ -136,6 +137,21 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
     )
   }
 
+  let authorList = [];
+
+  if (data.field_authors.length !== undefined && data.field_authors.length > 0) {
+    data.field_authors.map(
+      (item) => {
+        authorList.push({ 
+          photo: item.field_photo[0],
+          name: item.field_first_name + " " + item.field_last_name, 
+          pgtitle: item.field_pgtitle, 
+          link: "/people/" + item.drupal_internal__id,
+        });
+      }
+    )
+  }
+
   return (
     <>
       <HeaderWrapper key={key}>
@@ -183,6 +199,7 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
               </ErrorBoundary>
             </Col>
             <Col xs="12" lg="6" xl="3" className="section-tags">
+              <AuthorsDisplay data={{authorList: authorList}} />
               <TagsDisplay data={
                 {
                   published_date_string: "Published " + created.format('MMMM D, YYYY'),

@@ -124,17 +124,18 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
         }
         
         & h5 {
-          font-size: 1.7em;
+          font-size: 1.5em;
         }
       `;
 
       let teamList = [];
-
-      staffData.field_teams.map(
-        (item) => {
-          teamList.push({link_uri: '', tag: item.name});
-        }
-      )
+      if (staffData.field_teams.length !== undefined && staffData.field_teams.length > 0) {
+        staffData.field_teams.map(
+          (item) => {
+            teamList.push({link_uri: '', tag: item.name});
+          }
+        );
+      }
 
       return (
         <PersonElMainWrapper className="container-fluid p-0">
