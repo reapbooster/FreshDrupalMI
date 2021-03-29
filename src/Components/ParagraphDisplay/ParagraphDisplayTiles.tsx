@@ -80,8 +80,10 @@ export class ParagraphDisplayTiles extends React.Component<
     if (loaded) {
       let containerClassNames = (data.field_view_mode == "card") 
         ? "position-relative overflow-hidden py-5" 
+        : (data.field_view_mode == "card-large") 
+        ? "py-5 tiles-card-large"
         : (data.field_view_mode == "tile") 
-        ? "text-center py-5"
+        ? "text-center pb-5"
         : "py-5";
 
       let containerBackgroundColor = ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" )
@@ -97,13 +99,18 @@ export class ParagraphDisplayTiles extends React.Component<
         : '';
         
       const SectionWrapper = styled.section`
-        background-color: ${containerBackgroundColor}
+        background-color: ${containerBackgroundColor};
+
+        & .tiles-card-large {
+          max-width: 1600px;
+        }
 
         & h2 {
-          font-family: LatoWebBlack,
-          font-fize: 1.5em,
-          font-weight: bold,
-          margin-bottom: 0,
+          font-family: LatoWebBlack;
+          font-size: 1.5em;
+          font-weight: bold;
+          margin-bottom: 0;
+          padding-top: 1em;
         }
 
         & .list-display-component {

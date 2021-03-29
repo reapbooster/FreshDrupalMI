@@ -8,19 +8,28 @@ import MediaDisplayImage from "Components/MediaDisplay/MediaDisplayImage";
 import NodeLandingPage from "DataTypes/NodeLandingPage";
 
 const CardOuter = styled.a`
-  padding: 1em !important;
-  width: 100%;
-  cursor: pointer;
-  text-decoration: none;
+  padding: 1em;
 
-  &:hover {
-    box-shadow: 0 8px 16px 0 grey;
+  & :hover {
     text-decoration: none;
   }
-  &:hover .card-title {
+
+  & .card-container {
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    position: relative;
+  }
+
+  & .card-container:hover {
+    box-shadow: 0 8px 16px 0 grey;
+  }
+
+  & .card-container:hover .card-title {
     color: var(--color-milken-orange) !important;
   }
-  &:hover .card-body div {
+  & .card-container:hover .card-body div {
     display: unset;
   }
 `;
@@ -56,33 +65,35 @@ export const NodeDisplayLandingPageCardLarge = (
       key={key}
       className="card border-0 col-sm-12 col-md-4"
     >
-      <Card.Title
-        className="text-center text-uppercase py-3 mb-0 border"
-        style={{ fontSize: "1.0em", color: "var(--color-milken-blue)" }}
-      >
-        {data.title}
-      </Card.Title>
-      <Card.Body style={{ padding: 0 }}>
-        <ErrorBoundary>
-          <MediaDisplayImage
-            data={data.field_hero_image}
-            view_mode={"medium-raw"}
-          />
-        </ErrorBoundary>
-        <CardLinkBox>
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            style={{
-              float: "right",
-              color: "white",
-              backgroundColor: "var(--color-milken-orange)",
-              padding: ".5em",
-              width: "3em",
-              height: "3em",
-            }}
-          />
-        </CardLinkBox>
-      </Card.Body>
+      <div className="card-container">
+        <Card.Body style={{ padding: 0 }}>
+          <ErrorBoundary>
+            <MediaDisplayImage
+              data={data.field_hero_image}
+              view_mode={"medium-raw"}
+            />
+          </ErrorBoundary>
+          <CardLinkBox>
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              style={{
+                float: "right",
+                color: "white",
+                backgroundColor: "var(--color-milken-orange)",
+                padding: ".5em",
+                width: "3em",
+                height: "2.98em",
+              }}
+            />
+          </CardLinkBox>
+        </Card.Body>
+        <Card.Title
+          className="text-uppercase py-3 mb-0 mx-2 font-weight-bold"
+          style={{ fontSize: "1.0em", color: "#111" }}
+        >
+          {data.title}
+        </Card.Title>
+      </div>
     </CardOuter>
   );
 };
