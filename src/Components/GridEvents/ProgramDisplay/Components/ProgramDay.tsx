@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
+
 import ProgramDaySession from "./ProgramDaySession";
 import ProgramDayHeader from "./ProgramDayHeader";
-import NodeSession, { NodeSessionInterface } from "../../DataTypes/NodeSession";
-import moment from "moment";
+import NodeSession, {
+  NodeSessionInterface,
+} from "../../../DataTypes/NodeSession";
 
 interface ProgramDayProps {
   date: string;
@@ -15,7 +18,6 @@ interface ProgramDayProps {
 }
 
 const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
-  // terms, tracks,
   const { date, open, terms, tracks, viewMode, panels, getSpeakerById } = props;
 
   const [opened, setOpened] = useState<boolean>(!!open);
