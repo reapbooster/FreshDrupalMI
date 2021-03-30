@@ -42,6 +42,28 @@ const GridEventsSpeakers: React.FunctionComponent = (
       text-align: center; 
     }
 
+    .letter-anchor-links {
+      position: relative;
+      width: 100%;
+      height: 1em;
+
+      & div {
+        width: 100%;
+      }
+
+      & .hidden-link-div {
+        width: 100%;
+        height: 5em;
+        position: absolute;
+        background: red;
+        top: -5em;
+        display: block;
+        z-index: -5;
+      }
+
+
+    }
+
     & a {
       font-size: 0.75em; 
       transition: 'all 0.5s ease';
@@ -56,15 +78,32 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
   `;
 
-  return (
-    <MainContainer className="container py-5">
-      <Row>
-        This is the Grid Speakers Full component for Grid ID: {grid_id}
-      </Row>
-      <Row>
-        {
-          fetchedData.map((item, key) => {
+  const alphabetArray = "abcdefghijklmnopqrstuvwxyz".split("");
+  let matchingLetters = [];
+  let groupedSpeakers = fetchedData.reduce((r, e) => {
+    let group = e.field_last_name[0].toUpperCase();
+    if(!r[group]) {
+      r[group] = {group, children: [e]}
+      matchingLetters.push(group);
+    } else {
+      r[group].children.push(e);
+    }
+    return r;
+  }, {})
+  console.debug("SPEAKERS GROUPED: ", groupedSpeakers);
 
+  let speakersHTML = [];
+  for( const speakerGroup in groupedSpeakers ) {
+    speakersHTML.push(
+      <>
+        <div className="letter-anchor-links">
+          <div name={speakerGroup} id={speakerGroup} className="hidden-link-div"></div>
+          <div>
+            <h1>{speakerGroup}</h1>
+          </div>
+        </div>
+        {
+          groupedSpeakers[speakerGroup]?.children?.map((item, key) => {
             let imagePath = (item.field_biopic == null || item.field_biopic == 'null' )
               ? '/sites/default/files/styles/large/public/Missing%20Photo_0.jpg'
               : 'https://grid.milkeninstitute.org/events/speakers/' + item.field_biopic;
@@ -76,6 +115,22 @@ const GridEventsSpeakers: React.FunctionComponent = (
                 <p className="">{item.field_description}</p>
               </a>
             );
+          })
+        }
+      </>
+    );
+
+  }
+
+  return (
+    <MainContainer className="container py-5">
+      <Row>
+        This is the Grid Speakers Full component for Grid ID: {grid_id}
+      </Row>
+      <Row>
+        {
+          speakersHTML.map((item, key) => {
+            return ( item );
           })
         }
         
