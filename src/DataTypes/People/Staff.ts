@@ -45,7 +45,7 @@ export class Staff extends People implements StaffInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_photo,field_event,field_centers,field_teams";
+    return "&include=field_centers,field_event,field_photo,field_regions,field_tags,field_teams";
   }
 }
 
