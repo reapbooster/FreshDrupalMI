@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { EventInterface } from "../../DataTypes/Event";
 import FilterDates from "./FilterDates";
 import FilterTracks from "./FilterTracks";
 import FormatSelect from "./FormatSelect";
 import _ from "lodash";
 import moment from "moment";
 import ProgramDay from "./ProgramDay";
-import { getEventData } from "../../api/index.js";
-import NodeProgramDay from "../../DataTypes/NodeProgramDay";
+import { getEventData } from "./api/index.js";
+import NodeProgramDay from "./DataTypes/NodeProgramDay";
 import SearchBar from "./SearchBar";
-import "./event.scss";
 
 const formatOptions = [
   "Session name only",
@@ -32,15 +30,17 @@ let dataCache = {
   },
 };
 
-const EVENT_ID = "gc20";
-
-export interface EventProgramProps {
-  gridID: string;
-  data: EventInterface;
-  event_id: string;
+interface ProgramDisplayProps {
+  gridId: string;
 }
 
-export const EventProgram = (props: EventProgramProps) => {
+const ProgramDisplay: React.FC<ProgramDisplayProps> = (
+  props: ProgramDisplayProps
+) => {
+  const { gridId } = props;
+
+  if (!gridId) return <div>No event id</div>;
+
   const [format, setFormat] = useState<number>(0); // TODO: use-location-state
 
   const [panels, setPanels] = useState([]);
@@ -131,7 +131,7 @@ export const EventProgram = (props: EventProgramProps) => {
 
   // @ts-ignore
   const fetchPanels = async () => {
-    let res = await getEventData(EVENT_ID);
+    let res = await getEventData(gridId);
     console.log("eventData", res);
     if (!res) {
       return;
@@ -309,7 +309,7 @@ export const EventProgram = (props: EventProgramProps) => {
   };
 
   const handleClickAllTracks = () => {
-    if (tracksOptions) {
+    if (tracksOptions.length) {
       setTracks(tracksOptions.map((e) => e.id));
     }
   };
@@ -336,7 +336,7 @@ export const EventProgram = (props: EventProgramProps) => {
   // };
 
   return (
-    <div id="events">
+    <div id="events-program" className="py-4">
       <Container>
         <Row className="my-3">
           <Col sm={5} md={3}>
@@ -418,4 +418,4 @@ export const EventProgram = (props: EventProgramProps) => {
   );
 };
 
-export default EventDisplay;
+export default ProgramDisplay;

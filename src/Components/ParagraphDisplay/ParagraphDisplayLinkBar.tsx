@@ -13,41 +13,50 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
   const { data } = props;
 
   // Redirect /events/xxxxx to /events/xxxxx/overview for Events Pages with a LinkBar
-  let validUrlSegmentList = window.location.pathname.split('/').filter((item)=>{if(item.trim() !== '')return item;});
-  if(validUrlSegmentList.length === 2 && validUrlSegmentList[0] === 'events'){
-    location.assign('/' + validUrlSegmentList[0] + '/' + validUrlSegmentList[1] + '/overview');
+  let validUrlSegmentList = window.location.pathname
+    .split("/")
+    .filter((item) => {
+      if (item.trim() !== "") return item;
+    });
+  if (validUrlSegmentList.length === 2 && validUrlSegmentList[0] === "events") {
+    location.assign(
+      "/" + validUrlSegmentList[0] + "/" + validUrlSegmentList[1] + "/overview"
+    );
   }
-
 
   console.debug("ParagraphDisplayLinkBar: Data ", data);
 
   const LinkBarContainer = styled.div`
-    background-color: #27262C;
+    background-color: #27262c;
     font-family: LatoWebBold;
 
     & a {
-      color: #FFF;
+      color: #fff;
       text-decoration: none;
       & h2 {
-        font-size: 0.7em;
+        font-size: 1.2em;
+        @media (min-width: 1000px) {
+          font-size: 0.9em;
+        }
         padding: 2.75em 0 !important;
       }
     }
 
     & .active {
-      background-color: #07060A;
+      background-color: #07060a;
     }
 
     & .row:hover .active {
-      background-color: #27262C;
+      background-color: #27262c;
     }
 
-    & .col:hover, .active:hover {
-      background-color: #07060A !important;
-      transition: background-color .5s;
+    & .col:hover,
+    .active:hover {
+      background-color: #07060a !important;
+      transition: background-color 0.5s;
     }
-  
-    @media screen and (min-width: 1200px){
+
+    @media screen and (min-width: 1200px) {
       font-size: 1.25em;
     }
   `;
@@ -55,24 +64,18 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
   return (
     <LinkBarContainer className="container-fluid">
       <Row>
-        {
-          data.field_links.map((item, key) => {
-            item.uri = item.uri.replace("internal:", "");
-            let activeLinkClass = (window.location.pathname == item.uri) ? "active" : "";
-            return (
-              <Col className={activeLinkClass}>
-                <a
-                  data-link-uri={item.uri}
-                  href={item.uri}
-                >
-                  <h2 className="text-center text-uppercase m-0">
-                    {item.title}
-                  </h2>
-                </a>
-              </Col>
-            );
-          })
-        }
+        {data.field_links.map((item, key) => {
+          item.uri = item.uri.replace("internal:", "");
+          let activeLinkClass =
+            window.location.pathname == item.uri ? "active" : "";
+          return (
+            <Col className={activeLinkClass}>
+              <a data-link-uri={item.uri} href={item.uri}>
+                <h2 className="text-center text-uppercase m-0">{item.title}</h2>
+              </a>
+            </Col>
+          );
+        })}
       </Row>
     </LinkBarContainer>
   );
