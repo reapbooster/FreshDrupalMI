@@ -35,12 +35,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 15
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
   field_biotext:
-    weight: 12
+    weight: 9
     settings:
       rows: 5
       placeholder: ''
@@ -48,7 +48,7 @@ content:
     type: string_textarea
     region: content
   field_centers:
-    weight: 9
+    weight: 11
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -58,7 +58,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_collections:
-    weight: 36
+    weight: 16
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -68,7 +68,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_email:
-    weight: 6
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -76,7 +76,7 @@ content:
     type: email_default
     region: content
   field_event:
-    weight: 10
+    weight: 18
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -86,7 +86,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_events:
-    weight: 34
+    weight: 17
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -96,7 +96,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_first_name:
-    weight: 2
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
@@ -112,7 +112,7 @@ content:
     type: string_textarea
     region: content
   field_middle_name:
-    weight: 3
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -120,7 +120,7 @@ content:
     type: string_textarea
     region: content
   field_pgtitle:
-    weight: 4
+    weight: 6
     settings:
       size: 60
       placeholder: ''
@@ -128,7 +128,7 @@ content:
     type: string_textfield
     region: content
   field_photo:
-    weight: 11
+    weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -136,7 +136,7 @@ content:
     type: image_image
     region: content
   field_regions:
-    weight: 35
+    weight: 14
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -146,7 +146,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_social_media:
-    weight: 7
+    weight: 10
     settings:
       display_label: true
     third_party_settings: {  }
@@ -160,7 +160,7 @@ content:
     type: boolean_checkbox
     region: content
   field_summary:
-    weight: 37
+    weight: 8
     settings:
       size: 60
       placeholder: ''
@@ -168,7 +168,7 @@ content:
     type: text_textfield
     region: content
   field_tags:
-    weight: 32
+    weight: 13
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -178,7 +178,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_teams:
-    weight: 8
+    weight: 12
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -188,18 +188,21 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_topics:
-    weight: 33
+    weight: 15
     region: content
+    type: options_buttons
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 14
+    weight: 20
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 13
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
