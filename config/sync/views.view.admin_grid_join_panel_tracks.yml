@@ -1,16 +1,16 @@
-uuid: d2b77bde-bdef-42d0-80f3-7bbf116624ef
+uuid: deb9e3dd-20c8-4a17-af98-361181a4d768
 langcode: en
 status: true
 dependencies:
   module:
     - eck
     - views_bulk_operations
-id: admin_grid_tracks
-label: 'Admin Grid Tracks'
+id: admin_grid_join_panel_tracks
+label: 'Admin Grid Join Panel Tracks'
 module: views
 description: ''
 tag: ''
-base_table: grid_tracks_field_data
+base_table: grid_join_panel_track_field_data
 base_field: id
 display:
   default:
@@ -78,7 +78,6 @@ display:
           columns:
             id: id
             title: title
-            changed: changed
             counter: counter
             operations: operations
             views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
@@ -91,13 +90,6 @@ display:
               empty_column: false
               responsive: ''
             title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            changed:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -128,7 +120,7 @@ display:
       fields:
         id:
           id: id
-          table: grid_tracks_field_data
+          table: grid_join_panel_track_field_data
           field: id
           relationship: none
           group_type: group
@@ -189,11 +181,11 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: grid_tracks
+          entity_type: grid_join_panel_track
           entity_field: id
           plugin_id: field
         title:
-          table: grid_tracks_field_data
+          table: grid_join_panel_track_field_data
           field: title
           id: title
           entity_type: null
@@ -256,73 +248,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        changed:
-          id: changed
-          table: grid_tracks_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Changed
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: medium
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: grid_tracks
-          entity_field: changed
-          plugin_id: field
         counter:
           id: counter
           table: views
@@ -375,7 +300,7 @@ display:
           plugin_id: counter
         operations:
           id: operations
-          table: grid_tracks
+          table: grid_join_panel_track
           field: operations
           relationship: none
           group_type: group
@@ -422,7 +347,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: false
-          entity_type: grid_tracks
+          entity_type: grid_join_panel_track
           plugin_id: entity_operations
         views_bulk_operations_bulk_form:
           id: views_bulk_operations_bulk_form
@@ -485,7 +410,7 @@ display:
       filters:
         id:
           id: id
-          table: grid_tracks_field_data
+          table: grid_join_panel_track_field_data
           field: id
           relationship: none
           group_type: group
@@ -536,12 +461,12 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: grid_tracks
+          entity_type: grid_join_panel_track
           entity_field: id
           plugin_id: numeric
         title:
           id: title
-          table: grid_tracks_field_data
+          table: grid_join_panel_track_field_data
           field: title
           relationship: none
           group_type: group
@@ -587,29 +512,32 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: grid_tracks
+          entity_type: grid_join_panel_track
           entity_field: title
           plugin_id: string
-        field_event_id_value:
-          id: field_event_id_value
-          table: grid_tracks__field_event_id
-          field: field_event_id_value
+        field_panel_id_value:
+          id: field_panel_id_value
+          table: grid_join_panel_track__field_panel_id
+          field: field_panel_id_value
           relationship: none
           group_type: group
           admin_label: ''
           operator: '='
-          value: ''
+          value:
+            min: ''
+            max: ''
+            value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_event_id_value_op
-            label: 'Event Id'
+            operator_id: field_panel_id_value_op
+            label: 'Panel ID'
             description: ''
             use_operator: false
-            operator: field_event_id_value_op
+            operator: field_panel_id_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_event_id_value
+            identifier: field_panel_id_value
             required: false
             remember: false
             multiple: false
@@ -626,6 +554,8 @@ display:
               sponsor_page_creator: '0'
               sponsor_page_reviewer: '0'
             placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -638,10 +568,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: string
+          plugin_id: numeric
         field_track_id_value:
           id: field_track_id_value
-          table: grid_tracks__field_track_id
+          table: grid_join_panel_track__field_track_id
           field: field_track_id_value
           relationship: none
           group_type: group
@@ -655,7 +585,7 @@ display:
           exposed: true
           expose:
             operator_id: field_track_id_value_op
-            label: 'Track Id'
+            label: 'Track ID'
             description: ''
             use_operator: false
             operator: field_track_id_value_op
@@ -694,7 +624,7 @@ display:
             group_items: {  }
           plugin_id: numeric
       sorts: {  }
-      title: 'Admin Grid Tracks'
+      title: 'Admin Grid Join Panel Tracks'
       header: {  }
       footer: {  }
       empty: {  }
@@ -720,7 +650,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: admin/content/grid_tracks
+      path: admin/content/grid_join_panel_track
     cache_metadata:
       max-age: 0
       contexts:
