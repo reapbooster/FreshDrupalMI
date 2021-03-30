@@ -2,6 +2,8 @@ import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import * as DataObject from "../../DataTypes/ParagraphEventDisplay";
 import styled from "styled-components";
+import GridEventsSpeakers from "../GridEvents/GridEventsSpeakers";
+import GridEventsProgram from "../GridEvents/GridEventsProgram";
 
 interface ParagraphDisplayEventDisplayProps {
   data: DataObject.default;
@@ -26,6 +28,11 @@ const ParagraphDisplayEventDisplay: React.FunctionComponent = (
 
   `;
 
+  let activeTabFromURL = (window.location.pathname.split('/').slice(-1).pop().toLowerCase());
+  let activeComponent = (activeTabFromURL === 'speakers') 
+    ? <GridEventsSpeakers grid_id={data.field_grid_event_id} view_mode="card" />
+    : <GridEventsProgram grid_id={data.field_grid_event_id} view_mode="accordion" />;
+
   return (
     <MainContainer className="container py-5">
       <Row>
@@ -36,6 +43,9 @@ const ParagraphDisplayEventDisplay: React.FunctionComponent = (
       </Row>
       <Row>
         This is the Grid ID: {data.field_grid_event_id}
+      </Row>
+      <Row>
+        {activeComponent}
       </Row>
     </MainContainer>
   );
