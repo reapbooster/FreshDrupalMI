@@ -16,7 +16,11 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
 
   console.debug("VideoFullDisplay", data);
 
-  const oEmbedObject = JSON.parse(data?.field_embedded_oembed);
+  const oEmbedObject = (data.field_embedded_oembed != null) 
+  ? JSON.parse(data?.field_embedded_oembed)
+  : {
+    "html":'<iframe width="200" height="113" src="https://www.youtube.com/embed/' + data?.field_embedded_id + '?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+  };
   
   console.debug("oEmbedObject", oEmbedObject);
 
@@ -122,7 +126,7 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       <Row className="no-gutters">
         <Col>
           <VideoElFrameWrapper
-            dangerouslySetInnerHTML={{ __html: oEmbedObject.html }}
+            dangerouslySetInnerHTML={{ __html: oEmbedObject?.html }}
           />
         </Col>
       </Row>
