@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { EventInterface } from "../../DataTypes/Event";
-import FilterDates from "./FilterDates";
-import FilterTracks from "./FilterTracks";
-import FormatSelect from "./FormatSelect";
 import _ from "lodash";
 import moment from "moment";
-import ProgramDay from "./ProgramDay";
-import { getEventData } from "../../api/index.js";
-import NodeProgramDay from "../../DataTypes/NodeProgramDay";
-import SearchBar from "./SearchBar";
-import "./event.scss";
+
+import FilterDates from "./Components/FilterDates";
+import FilterTracks from "./Components/FilterTracks";
+import FormatSelect from "./Components/FormatSelect";
+import ProgramDay from "./Components/ProgramDay";
+import NodeProgramDay from "./DataTypes/NodeProgramDay";
+import SearchBar from "./Components/SearchBar";
+
+import htmlDecode from "../../../Utility/Functions.ts";
+import { getEventData } from "./api/index.js";
 
 const formatOptions = [
   "Session name only",
@@ -32,15 +33,17 @@ let dataCache = {
   },
 };
 
-const EVENT_ID = "gc20";
-
-export interface EventProgramProps {
-  gridID: string;
-  data: EventInterface;
-  event_id: string;
+interface ProgramDisplayProps {
+  gridId: string;
 }
 
-export const EventProgram = (props: EventProgramProps) => {
+const ProgramDisplay: React.FC<ProgramDisplayProps> = (
+  props: ProgramDisplayProps
+) => {
+  const { gridId } = props;
+
+  if (!gridId) return <div>No event id</div>;
+
   const [format, setFormat] = useState<number>(0); // TODO: use-location-state
 
   const [panels, setPanels] = useState([]);
@@ -91,48 +94,10 @@ export const EventProgram = (props: EventProgramProps) => {
     setGroupedPanels(_.sortBy(groupedPanelsTemp, (e) => e.date));
   }, [panels]);
 
-  // TODO: Dates options
-  // useEffect(() => {
-  //     setDates(datesOptions);
-  // }, [datesOptions]);
-
-  // TODO: Tracks
-  // useEffect(() => {
-  //     let countArr: any[] = [];
-  //     tracksOptions.map((track) => {
-  //         countArr.push({
-  //             track: track,
-  //             count: sessions.filter((item) => item.field_tracks.indexOf(track) > -1).length
-  //         });
-  //     });
-  //     console.log('setCountTracks', sessions, countArr);
-  //     setCountTracks(countArr);
-  // }, [tracksOptions, sessions]);
-  //
-  // useEffect(() => {
-  //     setTracks(tracksOptions);
-  // }, [tracksOptions]);
-
-  // TODO: Term filtering
-  // useEffect(() => {
-  //     console.log('terms', terms, terms.length);
-  //     if (terms.length > 0) {
-  //         let arr = sessionsArray.filter(
-  //             (session) =>
-  //                 terms.findIndex((term) => session.field_long_description.indexOf(term) > -1) >
-  //                 -1
-  //         );
-  //         console.log('sessions array filtered by terms', arr);
-  //         setSessions(arr);
-  //     } else {
-  //         setSessions(sessionsArray);
-  //     }
-  // }, [terms]);
-
   // @ts-ignore
   const fetchPanels = async () => {
-    let res = await getEventData(EVENT_ID);
-    console.log("eventData", res);
+    let res = await getEventData(gridId);
+    console.debug("eventData", res);
     if (!res) {
       return;
     }
@@ -152,6 +117,7 @@ export const EventProgram = (props: EventProgramProps) => {
     });
     res.tracks.map((track: any) => {
       // @ts-ignore
+      track.title = htmlDecode(track.title);
       dataCache.tracks[track.id] = track;
     });
   };
@@ -186,7 +152,7 @@ export const EventProgram = (props: EventProgramProps) => {
               terms.map((term) => {
                 score += panelData.indexOf(term.toLowerCase()) != -1 ? 1 : 0;
               });
-              console.log("score", score, terms.length);
+              console.debug("match score", score, terms.length);
               return score == terms.length;
             }) ?? [];
       }
@@ -198,7 +164,6 @@ export const EventProgram = (props: EventProgramProps) => {
             .filter((panel) => {
               // NOTE: Change below from > 0 to tracks.length if match all is required
               if (panel.field_tracks.length > 0) {
-                console.log(tracks);
                 let panelTrackMatch =
                   _.intersection(
                     panel.field_tracks
@@ -206,7 +171,6 @@ export const EventProgram = (props: EventProgramProps) => {
                       .map((e: string) => parseInt(e)),
                     tracks.map((e: string) => parseInt(e))
                   ).length > 0;
-                console.log(panelTrackMatch);
                 return panelTrackMatch;
               }
             }) ?? [];
@@ -297,7 +261,7 @@ export const EventProgram = (props: EventProgramProps) => {
    * Track filter handler
    */
   const handleClickTrack = (track: any) => {
-    console.log(track);
+    console.debug("clicked", track);
     let array = [...tracks];
     let index = array.indexOf(track.id);
     if (index > -1) {
@@ -309,7 +273,7 @@ export const EventProgram = (props: EventProgramProps) => {
   };
 
   const handleClickAllTracks = () => {
-    if (tracksOptions) {
+    if (tracksOptions.length) {
       setTracks(tracksOptions.map((e) => e.id));
     }
   };
@@ -318,25 +282,8 @@ export const EventProgram = (props: EventProgramProps) => {
     setTracks([]);
   };
 
-  // const handleSessionsLoad = (daySessions: any[]) => {
-  //     let arr = sessionsArray.concat(daySessions);
-  //     sessionsArray = arr;
-  //     console.log('handleSessionsLoad', sessionsArray);
-  //     // setSessions(sessionsArray);
-  //
-  //     let tracksArr: any = [];
-  //     sessionsArray.map((session) => {
-  //         session.field_tracks.map((track: string) => {
-  //             if (tracksArr.indexOf(track) < 0) {
-  //                 tracksArr.push(track);
-  //             }
-  //         });
-  //     });
-  //     setTracksOptions(tracksArr);
-  // };
-
   return (
-    <div id="events">
+    <div id="events-program" className="py-4">
       <Container>
         <Row className="my-3">
           <Col sm={5} md={3}>
@@ -418,4 +365,4 @@ export const EventProgram = (props: EventProgramProps) => {
   );
 };
 
-export default EventDisplay;
+export default ProgramDisplay;

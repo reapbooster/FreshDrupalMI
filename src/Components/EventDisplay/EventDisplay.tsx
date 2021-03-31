@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { EventInterface } from "../../DataTypes/Event";
 import FilterDates from "./FilterDates";
 import FilterTracks from "./FilterTracks";
 import FormatSelect from "./FormatSelect";
@@ -34,13 +33,13 @@ let dataCache = {
 
 const EVENT_ID = "gc20";
 
-export interface EventProgramProps {
-  gridID: string;
-  data: EventInterface;
+interface EventDisplayProps {
   event_id: string;
 }
 
-export const EventProgram = (props: EventProgramProps) => {
+const EventDisplay: React.FC<EventDisplayProps> = (
+  props: EventDisplayProps
+) => {
   const [format, setFormat] = useState<number>(0); // TODO: use-location-state
 
   const [panels, setPanels] = useState([]);
