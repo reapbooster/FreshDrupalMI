@@ -11,7 +11,7 @@ import NodeProgramDay from "./DataTypes/NodeProgramDay";
 import SearchBar from "./Components/SearchBar";
 
 import htmlDecode from "../../../Utility/Functions.ts";
-import { getEventData } from "./api/index.js";
+import { getEventData } from "./api/index";
 
 const formatOptions = [
   "Session name only",
