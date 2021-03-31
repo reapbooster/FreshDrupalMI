@@ -10,6 +10,8 @@ import moment from "moment";
 import { TagsDisplay } from "../TagsDisplay"
 import { SocialDisplay } from "../SocialDisplay"
 import Loading from "../Loading";
+import PeopleRowDisplay from "./PeopleRowDisplay";
+import PeopleFullDisplay from "./PeopleFullDisplay";
 
 export interface PeopleDisplayProps {
   data: PeopleInterface;
@@ -62,123 +64,17 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
           <p style={{ color: 'dimgray' }}>{staffData.field_pgtitle}</p>
         </a>
       );
-
-    default:
-
-      const PersonElMainWrapper = styled.div`
-      `;
-
-      const HeroWrapper = styled.div`
-        background: var(--color-milken-blue);
-        width: 100%;
-        & .nameTitle {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          padding: 0;
-        }
-
-        @media only screen and (max-width: 767.98px) {
-          padding-top: 55.25%;
-        }
-      `;
-
-      const ElMainContentWrapper = styled.div`
-        & .section-social {
-          order: 1;
-        }
-        & .section-content {
-          order: 2;
-          @media only screen and (max-width: 1199.98px) {
-            order: 3;
-            padding-top: 1.5em;
-    
-          }
-        }
-        & .section-tags {
-          order: 3;
-          @media only screen and (max-width: 1199.98px) {
-            order: 2;
-          }
-        }
-      `;
-
-      const NameTitle = styled.div`
-        color: #fff;
-        width: 450px;
-        margin: 0px 106px 0 113px;
-        padding: 40px 20px 37px 20px;
-
-        & a {
-          color: var(--color-milken-orange);
-          letter-spacing: 2px;
-          font-family: 'LatoWebBlack';
-          text-transform: uppercase;
-          font-size: 0.9em;
-        }
-
-        & h1 {
-          font-family: 'LatoWebBlack';
-          font-size: 3rem;
-          margin: 27px 0 18px;
-        }
-        
-        & h5 {
-          font-size: 1.5em;
-        }
-      `;
-
-      let teamList = [];
-      if (staffData.field_teams.length !== undefined && staffData.field_teams.length > 0) {
-        staffData.field_teams.map(
-          (item) => {
-            teamList.push({link_uri: '', tag: item.name});
-          }
-        );
-      }
-
+    case 'row':
       return (
-        <PersonElMainWrapper className="container-fluid p-0">
-          <Row className="no-gutters">
-            <Col>
-              <HeroWrapper>
-                <Row>
-                  <Col lg="6" className="nameTitle">
-                    <NameTitle>
-                      <a href="#" onClick={() => { history.back() }}>&lt; Back to previous page</a>
-                      <h1>{staffData.field_first_name} {staffData.field_last_name}</h1>
-                      <h5>{staffData.field_pgtitle}</h5>
-                    </NameTitle>
-                  </Col>
-                  <Col lg="6">
-                    <img src={staffData?.field_photo[0]?.uri?.url} />
-                  </Col>
-                </Row>
-              </HeroWrapper>
-            </Col>
-          </Row>
-          <Row>
-            <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
-              <Row>
-                <Col xs="12" lg="6" xl="1" className="section-social">
-                  <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
-                </Col>
-                <Col xs="12" xl="8" className="section-content">
-                  <p>{staffData.field_biotext}</p>
-                </Col>
-                <Col xs="12" lg="6" xl="3" className="section-tags">
-                  <TagsDisplay data={
-                    {
-                      published_date_string: "",
-                      tagList: teamList
-                    }
-                  }></TagsDisplay>
-                </Col>
-              </Row>
-            </ElMainContentWrapper>
-          </Row>
-        </PersonElMainWrapper>
+        <PeopleRowDisplay data={staffData} />
       );
+
+    case 'full':
+    default:
+      return (
+        <PeopleFullDisplay data={staffData} />
+      );
+
   }
 };
 

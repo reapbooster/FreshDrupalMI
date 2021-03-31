@@ -5,15 +5,19 @@ dependencies:
   config:
     - field.storage.panel.field_date
     - field.storage.panel.field_description
+    - field.storage.panel.field_epday
     - field.storage.panel.field_panel_date_string
     - field.storage.panel.field_panel_end_time
     - field.storage.panel.field_panel_start_time
+    - field.storage.panel.field_pday
+    - field.storage.panel.field_speaker_roles
     - field.storage.panel.field_speakers
     - field.storage.panel.field_tracks
   module:
     - datetime
     - datetime_range
     - eck
+    - key_value_field
     - rest
     - serialization
     - text
@@ -149,6 +153,70 @@ display:
           entity_type: panel
           entity_field: id
           plugin_id: field
+        title:
+          table: panel_field_data
+          field: title
+          id: title
+          entity_type: null
+          entity_field: title
+          plugin_id: field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_date:
           id: field_date
           table: panel__field_date
@@ -339,6 +407,69 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_pday:
+          id: field_pday
+          table: panel__field_pday
+          field: field_pday
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         field_panel_end_time:
           id: field_panel_end_time
           table: panel__field_panel_end_time
@@ -402,13 +533,10 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        title:
-          table: panel_field_data
-          field: title
-          id: title
-          entity_type: null
-          entity_field: title
-          plugin_id: field
+        field_epday:
+          id: field_epday
+          table: panel__field_epday
+          field: field_epday
           relationship: none
           group_type: group
           admin_label: ''
@@ -445,7 +573,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -455,7 +583,8 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings: {  }
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -466,6 +595,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
         field_description:
           id: field_description
           table: panel__field_description
@@ -588,6 +718,69 @@ display:
           delta_first_last: false
           multi_type: separator
           separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_speaker_roles:
+          id: field_speaker_roles
+          table: panel__field_speaker_roles
+          field: field_speaker_roles
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '''{{ field_speaker_roles__key }}'': ''{{ field_speaker_roles__value }}'''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: true
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: true
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: key_value
+          settings:
+            value_only: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ']|['
           field_api_classes: false
           plugin_id: field
         field_tracks:
@@ -767,9 +960,12 @@ display:
       tags:
         - 'config:field.storage.panel.field_date'
         - 'config:field.storage.panel.field_description'
+        - 'config:field.storage.panel.field_epday'
         - 'config:field.storage.panel.field_panel_date_string'
         - 'config:field.storage.panel.field_panel_end_time'
         - 'config:field.storage.panel.field_panel_start_time'
+        - 'config:field.storage.panel.field_pday'
+        - 'config:field.storage.panel.field_speaker_roles'
         - 'config:field.storage.panel.field_speakers'
         - 'config:field.storage.panel.field_tracks'
   rest_export_1:
@@ -825,8 +1021,11 @@ display:
       tags:
         - 'config:field.storage.panel.field_date'
         - 'config:field.storage.panel.field_description'
+        - 'config:field.storage.panel.field_epday'
         - 'config:field.storage.panel.field_panel_date_string'
         - 'config:field.storage.panel.field_panel_end_time'
         - 'config:field.storage.panel.field_panel_start_time'
+        - 'config:field.storage.panel.field_pday'
+        - 'config:field.storage.panel.field_speaker_roles'
         - 'config:field.storage.panel.field_speakers'
         - 'config:field.storage.panel.field_tracks'

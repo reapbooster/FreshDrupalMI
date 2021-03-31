@@ -8,6 +8,7 @@ dependencies:
     - field.field.grid_join_panel_speaker.join_table.field_panel
     - field.field.grid_join_panel_speaker.join_table.field_panel_id
     - field.field.grid_join_panel_speaker.join_table.field_panel_speaker_id
+    - field.field.grid_join_panel_speaker.join_table.field_role
     - field.field.grid_join_panel_speaker.join_table.field_speaker
     - field.field.grid_join_panel_speaker.join_table.field_speaker_id
 id: grid_join_panel_speaker.join_table.default
@@ -45,6 +46,14 @@ content:
     region: content
   field_panel_speaker_id:
     weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_role:
+    weight: 9
     settings:
       size: 60
       placeholder: ''

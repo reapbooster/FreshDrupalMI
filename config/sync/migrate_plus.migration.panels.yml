@@ -106,9 +106,9 @@ process:
     default_value: full_html
   field_panel_date_string: pdate
   field_panel_start_time: ptime
-  field_panel_start_time_period: pday
+  field_pday: pday
   field_panel_end_time: etime
-  field_panel_end_time_period: epday
+  field_epday: epday
   field_event:
     plugin: 'milken_migrate:event_reference'
     source: eventid
