@@ -58,9 +58,9 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
       & .hidden-link-div {
         width: 100%;
-        height: 5em;
+        height: 1px;
         position: absolute;
-        top: -7em;
+        top: -4em;
         display: block;
         z-index: -5;
       }
@@ -86,7 +86,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
         min-width: 1em;
         border-bottom: 3px solid transparent;
 
-        & .disabled {
+        &.disabled {
           color: #CCC !important;
           border: none !important;
         }
