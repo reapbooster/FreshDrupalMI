@@ -12,7 +12,7 @@ field_name: field_date
 entity_type: panel
 bundle: panel
 label: Date
-description: ''
+description: 'Used only for sorting. Grid data has incorrect timezones on this field. '
 required: false
 translatable: false
 default_value: {  }

@@ -8,6 +8,7 @@ dependencies:
     - field.field.panel.panel.field_collections
     - field.field.panel.panel.field_date
     - field.field.panel.panel.field_description
+    - field.field.panel.panel.field_epday
     - field.field.panel.panel.field_event
     - field.field.panel.panel.field_events
     - field.field.panel.panel.field_grid_event_id
@@ -18,6 +19,7 @@ dependencies:
     - field.field.panel.panel.field_panel_id
     - field.field.panel.panel.field_panel_start_time
     - field.field.panel.panel.field_panel_title
+    - field.field.panel.panel.field_pday
     - field.field.panel.panel.field_pfinal
     - field.field.panel.panel.field_printed_program
     - field.field.panel.panel.field_private
@@ -25,6 +27,7 @@ dependencies:
     - field.field.panel.panel.field_regions
     - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
+    - field.field.panel.panel.field_speaker_roles
     - field.field.panel.panel.field_speakers
     - field.field.panel.panel.field_sponsor
     - field.field.panel.panel.field_summary
@@ -34,12 +37,15 @@ dependencies:
   module:
     - datetime_range
     - field_group
+    - key_value_field
     - link
     - text
 third_party_settings:
   field_group:
     group_tabs:
       children:
+        - group_visibility
+        - group_dates
         - group_content
         - group_authoring
         - group_event
@@ -59,15 +65,15 @@ third_party_settings:
         - field_panel_alt_text
         - field_summary
       parent_name: group_tabs
-      weight: 20
+      weight: 22
       format_type: tab
       region: content
       format_settings:
+        description: ''
+        formatter: closed
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
-        formatter: open
-        required_fields: true
       label: Content
     group_authoring:
       children:
@@ -76,7 +82,7 @@ third_party_settings:
         - created
         - field_private
       parent_name: group_tabs
-      weight: 21
+      weight: 23
       format_type: tab
       region: content
       format_settings:
@@ -88,15 +94,18 @@ third_party_settings:
       label: Authoring
     group_event:
       children:
+        - field_grid_event_id
         - field_event
+        - field_panel_id
         - field_sess
         - field_speakers
+        - field_speaker_roles
         - field_tracks
         - field_sponsor
         - field_links
         - field_room
       parent_name: group_tabs
-      weight: 22
+      weight: 24
       format_type: tab
       region: content
       format_settings:
@@ -115,7 +124,7 @@ third_party_settings:
         - field_tags
         - field_topics
       parent_name: group_tabs
-      weight: 23
+      weight: 25
       format_type: tab
       region: content
       format_settings:
@@ -125,6 +134,41 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Tags
+    group_visibility:
+      children:
+        - field_publish
+        - field_printed_program
+        - field_pfinal
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: Visibility
+    group_dates:
+      children:
+        - field_date
+        - field_panel_date_string
+        - field_panel_start_time
+        - field_pday
+        - field_panel_end_time
+        - field_epday
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Dates
 id: panel.panel.default
 targetEntityType: panel
 bundle: panel
@@ -170,9 +214,17 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  field_epday:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_event:
     type: entity_reference_autocomplete
-    weight: 0
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -199,7 +251,7 @@ content:
     type: string_textfield
     region: content
   field_links:
-    weight: 5
+    weight: 10
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -215,7 +267,7 @@ content:
     type: string_textarea
     region: content
   field_panel_date_string:
-    weight: 25
+    weight: 5
     settings:
       size: 60
       placeholder: ''
@@ -223,7 +275,7 @@ content:
     type: string_textfield
     region: content
   field_panel_end_time:
-    weight: 14
+    weight: 8
     settings:
       size: 60
       placeholder: ''
@@ -231,7 +283,7 @@ content:
     type: string_textfield
     region: content
   field_panel_id:
-    weight: 3
+    weight: 4
     settings:
       size: 60
       placeholder: ''
@@ -254,15 +306,23 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_pday:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_pfinal:
-    weight: 24
+    weight: 18
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_printed_program:
-    weight: 15
+    weight: 17
     settings:
       display_label: true
     third_party_settings: {  }
@@ -293,7 +353,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_room:
-    weight: 6
+    weight: 11
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -303,15 +363,31 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_sess:
-    weight: 1
+    weight: 5
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_speaker_roles:
+    weight: 7
+    settings:
+      key_size: 60
+      key_label: Key
+      key_placeholder: ''
+      value_label: Value
+      description_enabled: true
+      description_label: Description
+      description_rows: 5
+      description_placeholder: ''
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: key_value_textfield
+    region: content
   field_speakers:
-    weight: 2
+    weight: 6
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -321,7 +397,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_sponsor:
-    weight: 4
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -357,7 +433,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_tracks:
-    weight: 3
+    weight: 8
     settings:
       match_operator: CONTAINS
       match_limit: 10
