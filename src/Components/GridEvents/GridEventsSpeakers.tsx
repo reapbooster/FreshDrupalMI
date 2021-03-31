@@ -37,31 +37,33 @@ const GridEventsSpeakers: React.FunctionComponent = (
   }
 
   const MainContainer = styled.div`
-  
-    .container {
-      text-align: center; 
+    & .container {
+      text-align: center;
     }
 
     .letter-anchor-links {
       position: relative;
       width: 100%;
-      height: 1em;
-
-      & div {
-        width: 100%;
+      padding: 1.5rem;
+      
+      & .section-letter {
+        & h2 {
+          font-family: 'LatoWeb';
+          font-weight: bold;
+          margin: 0;
+          padding-bottom: 1em;
+          border-bottom: 2px solid lightgray;
+        }
       }
 
       & .hidden-link-div {
         width: 100%;
         height: 5em;
         position: absolute;
-        background: red;
-        top: -5em;
+        top: -7em;
         display: block;
         z-index: -5;
       }
-
-
     }
 
     & a {
@@ -76,9 +78,36 @@ const GridEventsSpeakers: React.FunctionComponent = (
       font-size: 1.25em;
     }
 
+    & .alphabetLinks {
+      & a {
+        color: #444;
+        font-size: 1.3em;
+        font-family: 'LatoWebHeavy';
+        min-width: 1em;
+        border-bottom: 3px solid transparent;
+
+        & .disabled {
+          color: #CCC !important;
+          border: none !important;
+        }
+
+        & :hover :not(.disabled), &.active {
+          color: #0066cc;
+          border-bottom: 3px solid #0066cc;
+        }
+      }
+    }
   `;
 
-  const alphabetArray = "abcdefghijklmnopqrstuvwxyz".split("");
+  const handleActiveLink = (clickedLink) => {
+    document
+      .querySelectorAll(".alphabetLinks a")
+      .forEach(allLinks => allLinks.classList.remove('active'));
+
+    clickedLink.currentTarget.classList.add('active');
+  }
+
+  const alphabetArray = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
   let matchingLetters = [];
   let groupedSpeakers = fetchedData.reduce((r, e) => {
     let group = e.field_last_name[0].toUpperCase();
@@ -98,7 +127,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
       <>
         <div className="letter-anchor-links">
           <div name={speakerGroup} id={speakerGroup} className="hidden-link-div"></div>
-          <div>
+          <div className="section-letter">
             <h1>{speakerGroup}</h1>
           </div>
         </div>
@@ -124,16 +153,33 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
   return (
     <MainContainer className="container py-5">
-      <Row>
-        This is the Grid Speakers Full component for Grid ID: {grid_id}
+      <Row className="alphabetLinks d-flex flex-wrap justify-content-center py-4">
+        { 
+          alphabetArray.map((item, key) => {
+            let linkClassNames = "mx-2 pt-2 text-center text-decoration-none"; 
+            linkClassNames += matchingLetters.includes(item) 
+              ? ' enabled' 
+              : ' disabled';
+            let linkValue = matchingLetters.includes(item) ? "#" + item : null;
+            
+            return ( 
+              <a 
+                className={linkClassNames} 
+                href={linkValue}
+                onClick={handleActiveLink} 
+              >
+                {item}
+              </a> 
+            );
+          })
+        }
       </Row>
       <Row>
-        {
+        { 
           speakersHTML.map((item, key) => {
             return ( item );
           })
-        }
-        
+        }   
       </Row>
     </MainContainer>
   );
