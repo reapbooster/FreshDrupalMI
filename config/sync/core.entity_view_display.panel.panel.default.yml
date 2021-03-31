@@ -8,6 +8,7 @@ dependencies:
     - field.field.panel.panel.field_collections
     - field.field.panel.panel.field_date
     - field.field.panel.panel.field_description
+    - field.field.panel.panel.field_epday
     - field.field.panel.panel.field_event
     - field.field.panel.panel.field_events
     - field.field.panel.panel.field_grid_event_id
@@ -18,6 +19,7 @@ dependencies:
     - field.field.panel.panel.field_panel_id
     - field.field.panel.panel.field_panel_start_time
     - field.field.panel.panel.field_panel_title
+    - field.field.panel.panel.field_pday
     - field.field.panel.panel.field_pfinal
     - field.field.panel.panel.field_printed_program
     - field.field.panel.panel.field_private
@@ -25,6 +27,7 @@ dependencies:
     - field.field.panel.panel.field_regions
     - field.field.panel.panel.field_room
     - field.field.panel.panel.field_sess
+    - field.field.panel.panel.field_speaker_roles
     - field.field.panel.panel.field_speakers
     - field.field.panel.panel.field_sponsor
     - field.field.panel.panel.field_summary
@@ -33,6 +36,7 @@ dependencies:
     - field.field.panel.panel.field_tracks
   module:
     - datetime_range
+    - key_value_field
     - link
     - text
     - user
@@ -83,6 +87,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_epday:
+    weight: 32
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_events:
     weight: 16
@@ -159,6 +171,14 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_pday:
+    weight: 31
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_pfinal:
     weight: 28
     label: above
@@ -222,6 +242,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_speaker_roles:
+    weight: 30
+    label: above
+    settings:
+      value_only: false
+    third_party_settings: {  }
+    type: key_value
     region: content
   field_speakers:
     weight: 26

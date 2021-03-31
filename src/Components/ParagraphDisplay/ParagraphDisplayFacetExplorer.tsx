@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import * as DataObject from "../../DataTypes/ParagraphFacetExplorer";
 import styled from "styled-components";
-import {DrupalJsonApiParams} from 'drupal-jsonapi-params';
+import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import Staff from "../../DataTypes/People/Staff";
 import NodeArticle from "../../DataTypes/NodeArticle";
 import ListDisplay from "../ListDisplay";
 import { Collapse } from "react-bootstrap";
 import Select from "react-select";
-import ReactPaginate  from 'react-paginate';
+import ReactPaginate from 'react-paginate';
+import TeamDisplay from '../TeamDisplay';
 
 
 interface ParagraphDisplayFacetExplorerProps {
@@ -23,7 +24,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
   console.debug("ParagraphDisplayFacetExplorer: Data from Props ", data);
 
   const [fetchRan, setFetchRan] = useState(false);
-  const [sortOptions, setSortOptions] = useState([{value: "created", label: "By Date"},{value: "title", label: "By Title"}]);
+  const [sortOptions, setSortOptions] = useState([{ value: "created", label: "By Date" }, { value: "title", label: "By Title" }]);
   const [contentList, setContentList] = useState(null);
   const [topicsList, setTopicsList] = useState(null);
   const [centersList, setCentersList] = useState(null);
@@ -43,13 +44,13 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
   let CentersListObject = [];
   let requestURL = '';
   let resultsCount = null;
-  let field_items_per_page = 2
+  let field_items_per_page = data.field_items_per_page
   // Build request URL and URL parameters
-  switch(data.field_facet_content_type){
+  switch (data.field_facet_content_type) {
     case 'article':
 
       // Set Sort filter
-      if ( !!filterSort && filterSort?.length !== 0 &&  !!filterSort.value) {
+      if (!!filterSort && filterSort?.length !== 0 && !!filterSort.value) {
         apiParams.addSort(filterSort.value);
         console.debug("FilterSort was used: ", filterSort)
       } else {
@@ -58,95 +59,135 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       }
 
       apiParams.addPageLimit(field_items_per_page); // Later, change to data.field_items_per_page
-          
-        if( filterCollections !== null ) {
-          apiParams.addFilter('field_collections.name', filterCollections);
-        }
 
-        if( filterTeams !== null ) {
-          apiParams.addFilter('field_teams.name', filterTeams);
-        }
+      if (filterCollections !== null) {
+        apiParams.addFilter('field_collections.name', filterCollections);
+      }
 
-        // Use this to show content tagged with selected Topics
-        if ( filterTopics !== null && filterTopics.length > 0 ) {
+      if (filterTeams !== null) {
+        apiParams.addFilter('field_teams.name', filterTeams);
+      }
+
+      // Use this to show content tagged with selected Topics
+      if (filterTopics !== null && filterTopics.length > 0) {
         // if ( "Include only selected Topics" && false ) {
-          // apiParams.addFilter('field_topics.name', ['Array Of','Topics'], 'IN');
-          apiParams.addFilter('field_topics.name', filterTopics, 'IN');
-        }
+        // apiParams.addFilter('field_topics.name', ['Array Of','Topics'], 'IN');
+        apiParams.addFilter('field_topics.name', filterTopics, 'IN');
+      }
 
-        // Use this to show content tagged with selected Centers
-        // if ( "Include only selected Centers" && false ) {
-        if ( filterCenters !== null && filterCenters.length > 0 ) {
-          apiParams.addFilter('field_centers.name', filterCenters, 'IN');
-        }
-        
+      // Use this to show content tagged with selected Centers
+      // if ( "Include only selected Centers" && false ) {
+      if (filterCenters !== null && filterCenters.length > 0) {
+        apiParams.addFilter('field_centers.name', filterCenters, 'IN');
+      }
 
-        // Use pageItemOffset for pagination, it skips a number of records. meta.count has the total number
-        requestURL = '/jsonapi/node/article?jsonapi_include=true&' 
-          + apiParams.getQueryString();
-          
-        if (pageItemOffset !== null) {
-          requestURL += '&page[offset]=' + pageItemOffset?.toString();
-        }
 
-        console.debug("ParagraphDisplayFacetExplorer: requestURL ", requestURL);
+      // Use pageItemOffset for pagination, it skips a number of records. meta.count has the total number
+      requestURL = '/jsonapi/node/article?jsonapi_include=true&'
+        + apiParams.getQueryString();
+
+      if (pageItemOffset !== null) {
+        requestURL += '&page[offset]=' + pageItemOffset?.toString();
+      }
+
+      console.debug("ParagraphDisplayFacetExplorer: requestURL ", requestURL);
       break;
-      
+
+    case 'staff':
+
+      // Set Sort filter
+      if (!!filterSort && filterSort?.length !== 0 && !!filterSort.value) {
+        apiParams.addSort(filterSort.value);
+        console.debug("FilterSort was used: ", filterSort)
+      } else {
+        console.debug("FilterSort was not used: ", filterSort)
+        apiParams.addSort('field_last_name', 'ASC');
+      }
+
+      apiParams.addPageLimit(field_items_per_page); // Later, change to data.field_items_per_page
+
+      if (filterCollections !== null) {
+        apiParams.addFilter('field_collections.name', filterCollections);
+      }
+
+      if (filterTeams !== null) {
+        apiParams.addFilter('field_teams.name', filterTeams);
+      }
+
+      if (filterTopics !== null && filterTopics.length > 0) {
+        apiParams.addFilter('field_topics.name', filterTopics, 'IN');
+      }
+
+      if (filterCenters !== null && filterCenters.length > 0) {
+        apiParams.addFilter('field_centers.name', filterCenters, 'IN');
+      }
+
+      // Use pageItemOffset for pagination, it skips a number of records. meta.count has the total number
+      requestURL = '/jsonapi/people/staff?jsonapi_include=true&'
+        + apiParams.getQueryString();
+
+      if (pageItemOffset !== null) {
+        requestURL += '&page[offset]=' + pageItemOffset?.toString();
+      }
+
+      console.debug("ParagraphDisplayFacetExplorer: requestURL ", requestURL);
+      break;
+  
     default:
       console.error("No content type specified for Facet Explorer");
       throw new Error("No content type specified for Facet Explorer");
   }
 
   // Fetch Content and Taxonomy Tag Lists
-  if(!fetchRan) {
+  if (!fetchRan) {
     setFetchRan(true);
 
     // Fetch Main Content 
     fetch(requestURL)
-    .then((res) => res.json())
-    .then((incoming) => {
-      resultsCount = incoming.meta.count;
-      setPageCount(Math.ceil(resultsCount/field_items_per_page));
-      incoming.data.map(
-        contentItem => {
-          if( data.field_facet_content_type === 'article' ) {
-            ContentListObject.push(new NodeArticle(contentItem));
+      .then((res) => res.json())
+      .then((incoming) => {
+        resultsCount = incoming.meta.count;
+        setPageCount(Math.ceil(resultsCount / field_items_per_page));
+        incoming.data.map(
+          contentItem => {
+            if (data.field_facet_content_type === 'article') {
+              ContentListObject.push(new NodeArticle(contentItem));
+            }
+            if (data.field_facet_content_type === 'staff') {
+              ContentListObject.push(new Staff(contentItem));
+            }
           }
-          if( data.field_facet_content_type === 'staff' ) {
-            ContentListObject.push(new Staff(contentItem));
-          }
-        }
-      )
-      setContentList(ContentListObject);
-      console.debug("ParagraphDisplayFacetExplorer: contentList ", contentList);
-    });
-    
+        )
+        setContentList(ContentListObject);
+        console.debug("ParagraphDisplayFacetExplorer: contentList ", contentList);
+      });
+
     // Fetch List of Topics for filter list
-    if(topicsList === null){
+    if (topicsList === null) {
       fetch('/jsonapi/taxonomy_term/topics?jsonapi_include=true')
-      .then((res) => res.json())
-      .then((incoming) => {
-        incoming.data.map(
-          contentItem => {
-            TopicsListObject.push({ value: contentItem.name, label: contentItem.name });
-          }
-        )
-        setTopicsList(TopicsListObject);
-      });
+        .then((res) => res.json())
+        .then((incoming) => {
+          incoming.data.map(
+            contentItem => {
+              TopicsListObject.push({ value: contentItem.name, label: contentItem.name });
+            }
+          )
+          setTopicsList(TopicsListObject);
+        });
     }
-    
+
     // Fetch List of Centers for filter list
-    if(centersList === null){
+    if (centersList === null) {
       fetch('/jsonapi/taxonomy_term/centers?jsonapi_include=true')
-      .then((res) => res.json())
-      .then((incoming) => {
-        incoming.data.map(
-          contentItem => {
-            CentersListObject.push({ value: contentItem.name, label: contentItem.name });
-          }
-        )
-        setCentersList(CentersListObject);
-      });
+        .then((res) => res.json())
+        .then((incoming) => {
+          incoming.data.map(
+            contentItem => {
+              CentersListObject.push({ value: contentItem.name, label: contentItem.name });
+            }
+          )
+          setCentersList(CentersListObject);
+        });
     }
   }
 
@@ -156,7 +197,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
     console.debug("ParagraphDisplayFacetExplorer page.selected", page.selected);
     setFetchRan(false);
   }
-  
+
   const selectSort = (t) => {
     setFilterSort(t);
     setFetchRan(false);
@@ -174,6 +215,8 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
   }
 
   const FacetExplorerContainer = styled.div`
+    max-width: 1500px !important; 
+
     & .filter-area {
       margin-bottom:30px;
     }
@@ -193,12 +236,15 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       color: #999;
       font-size: 14px;
     }
-    & .pagination-wrapper {
 
-      & li {
-        padding: 0.25em 0.75em;
+    & .list-display-component > div {
+      display: flex;
+      & a {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
       }
-    }
+    } 
   `;
 
   const CustomSelect = styled.div`
@@ -260,13 +306,10 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
               </CustomSelect>
             </div>
             <div className="filter-area sidebar-content">
-              <div dangerouslySetInnerHTML={{__html: data.field_sidebar_content?.value}} />
+              <div dangerouslySetInnerHTML={{ __html: data.field_sidebar_content?.value }} />
             </div>
           </Col>
           <Col lg={9}>
-            <Row>
-              {requestURL}
-            </Row> 
             <Row>
               <ListDisplay
                 id={"content-list-".concat(data.id)}
@@ -275,27 +318,27 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
               />
             </Row>
           </Col>
-        </Row> 
-      </FacetExplorerContainer>  
-      <Container>
-        <Row className="justify-content-center pagination-wrapper">
+        </Row>
+      </FacetExplorerContainer>
+      <div className="container mb-5 py-4">
+        <Row className="pagination-wrapper">
           <Col>
             <ReactPaginate
-                previousLabel={'Previous'}
-                nextLabel={'Next'}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                pageCount={pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={field_items_per_page}
-                onPageChange={handlePageClick}
-                containerClassName={'pagination'}
-                subContainerClassName={'pages pagination'}
-                activeClassName={'active'}
-              />
+              previousLabel={'Previous'}
+              nextLabel={'Next'}
+              breakLabel={'...'}
+              breakClassName={'break-me'}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={4}
+              onPageChange={handlePageClick}
+              containerClassName={'pagination justify-content-center m-0 react-paginate'}
+              subContainerClassName={'pages pagination'}
+              activeClassName={'active'}
+            />
           </Col>
-        </Row>   
-      </Container>
+        </Row>
+      </div>
     </div>
 
   );

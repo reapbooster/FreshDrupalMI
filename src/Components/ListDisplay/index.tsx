@@ -87,6 +87,8 @@ export const ListDisplay = function (props: ListDisplayProps) {
           ? "list-display-component row no-gutters justify-content-evenly"
           : props.view_mode == "card-large"
           ? "col d-flex justify-content-around flex-wrap"
+          : props.view_mode == "row"
+          ? ""
           : "list-display-component"
       }`}
       ref={refListDisplay}

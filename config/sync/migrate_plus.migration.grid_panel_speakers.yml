@@ -35,6 +35,10 @@ source:
       name: speaker_id
       label: 'Speaker ID'
       selector: /attributes/speaker_id
+    -
+      name: role
+      label: 'Speaker Role'
+      selector: /attributes/role
   constants:
     title_label_separator_panel: Panel_ID
     title_label_separator_speaker: Speaker_ID
@@ -53,6 +57,7 @@ process:
     delimiter: ' : '
   field_panel_speaker_id: id
   field_panel_id: panel_id
+  field_role: role
   field_speaker_id: speaker_id
   field_panel/target_id: panel_id
   field_speaker/target_id: speaker_id

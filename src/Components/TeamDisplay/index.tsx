@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import PersonCardDisplay from './PersonCardDisplay';
+import PersonRowDisplay from './PersonRowDisplay';
 import { Col, Row, Container } from "react-bootstrap";
 
 var example = require('./example.json');
@@ -34,7 +34,7 @@ const TeamDisplay = () => {
   }
   return (
     data.map((team, index) => (
-      <div className={"pt-4"} key={index}>
+      <div className={"col-lg-12"} key={index}>
         <div className="section">
           <Container>
             <h1>{team.group}</h1>
@@ -43,8 +43,8 @@ const TeamDisplay = () => {
         <Container>
           <Row>
             {team.children.map((person, index1) => (
-              <Col lg={3} md={4} sm={6} xs={12} key={index1}>
-                <PersonCardDisplay team={person}/>
+              <Col lg={12} md={12} sm={12} xs={12} key={index1}>
+                <PersonRowDisplay team={person}/>
               </Col>
             ))}
           </Row>

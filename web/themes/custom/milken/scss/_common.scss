@@ -86,3 +86,18 @@ blockquote {
   }
 }
 
+
+.react-paginate {
+  color: #bdbdbf;
+  & li a {
+    padding: 0 1em;
+    outline: none;
+    @media (max-width: $breakpointPhone) {
+      padding: 0 0.35em;
+    }
+  }
+  & li.active, li:hover {
+    color: #3d3e44;
+  }
+
+}
