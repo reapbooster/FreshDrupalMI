@@ -97,7 +97,59 @@ const GridEventsSpeakers: React.FunctionComponent = (
         }
       }
     }
+
+    #jump_to {
+      height: 40px;
+      width: 40px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #252525;
+      z-index: 1000;
+      color: #fff;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      transition: .3s ease;
+      cursor: pointer;
+
+      &.header_scroll {
+        display: flex;
+      }
+
+      &:hover {
+        background-color: #FF6633;
+      }
+
+      & a {
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+        text-decoration: none!important;
+
+        & i {
+          margin-top: 0.15em;
+        }
+    }
+    }
   `;
+
+  function scrollTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  document.querySelector("html").style.scrollBehavior='smooth';
+  window.addEventListener("scroll", function () {
+      if (window.scrollY > 1) {
+          document.querySelector('#jump_to').classList.add('header_scroll');
+      }
+      else {
+          document.querySelector('#jump_to').classList.remove('header_scroll');
+      }
+  });
 
   const handleActiveLink = (clickedLink) => {
     document
@@ -157,6 +209,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
   return (
     <MainContainer className="container py-5">
+      <div id="jump_to" onClick={scrollTop}><a><i className="fas fa-chevron-up"></i></a></div>
       <Row className="alphabetLinks d-flex flex-wrap justify-content-center py-4">
         { 
           alphabetArray.map((item, key) => {
