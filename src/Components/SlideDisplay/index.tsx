@@ -13,12 +13,13 @@ import Loading from "../Loading";
  */
 export interface SlideDisplayProps {
   data?: SlideInterface;
+  total_slides?: number;
   view_mode?: string;
 }
 
 export const SlideDisplay = (props: SlideDisplayProps) => {
   console.debug("Slide Display", props);
-  const { data, view_mode } = props;
+  const { data, total_slides, view_mode } = props;
   const DataObject = SlideDataFactory(data);
   const [slideData, setSlideData] = useState(DataObject);
   if (!slideData.hasData()) {
@@ -37,7 +38,7 @@ export const SlideDisplay = (props: SlideDisplayProps) => {
 
   return (
     <ErrorBoundary>
-      <Component data={slideData} view_mode={view_mode ?? "full"} />
+      <Component data={slideData} total_slides={total_slides} view_mode={view_mode ?? "full"} />
     </ErrorBoundary>
   );
 };

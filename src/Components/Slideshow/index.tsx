@@ -158,6 +158,7 @@ export const SlideShow = (props: SlideShowProps) => {
             >
               <SlideDisplay
                 data={slide}
+                total_slides={items.length}
                 view_mode={props.view_mode ?? "full"}
               />
             </div>
