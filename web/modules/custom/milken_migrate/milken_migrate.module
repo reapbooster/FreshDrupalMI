@@ -180,6 +180,7 @@ function milken_migrate_update_grid_join_panel_speaker() {
 
 /**
  * Custom function to link Speaker records to a Panel.
+ * Usage: drush php:eval 'milken_migrate_update_grid_panel(10)'
  */
 function milken_migrate_update_grid_panel($max_iterations = 0) {
 
@@ -199,29 +200,37 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
     
     $array_speaker_ids = [];
     $array_speaker_ids_string = '';
-    $array_panel_speakers = null;
+    $array_panel_speakers_entities = null;
+
+    $array_speaker_roles = [];
     
     $array_track_ids = [];
     $array_track_ids_string = '';
-    $array_panel_track = null;
+    $array_panel_tracks_entities = null;
 
     print('Current Panel Record: ' . $key . "\n");
 
     // BEGIN Speaker Reference Linking Block
     // Get Panel_Speaker Records by Panel ID
-    $array_panel_speakers = \Drupal::entityTypeManager()->getStorage('grid_join_panel_speaker')->loadByProperties(['type' => 'join_table','field_panel_id' => $key]);
-    if($array_panel_speakers == null) {
+    $array_panel_speakers_entities = \Drupal::entityTypeManager()->getStorage('grid_join_panel_speaker')->loadByProperties(['type' => 'join_table','field_panel_id' => $key]);
+    if($array_panel_speakers_entities == null) {
       print('No Panel_Speaker entries for Panel: ' . $key) . "\n";
       // Don't skip this loop iteration because it will skip adding Tracks
       // continue;
     } else {
-      foreach($array_panel_speakers as $panel_speaker_key => $panel_speaker_value){
+      foreach($array_panel_speakers_entities as $panel_speaker_key => $panel_speaker_entity){
         // Reset all variables
         $panel_speaker_field_speaker_id_values = null; 
         $grid_speaker_record = null;
+        $speaker_role = null;
 
         // Get and loop grid_join_panel_speaker.field_speaker_id
-        $panel_speaker_field_speaker_id_values = $panel_speaker_value->get('field_speaker_id')->getValue();
+        $panel_speaker_field_speaker_id_values = $panel_speaker_entity->get('field_speaker_id')->getValue();
+
+        // Also need field_role from Panel_Speaker for Speaker Role
+        $panel_speaker_field_role_values = $panel_speaker_entity->get('field_role')->getValue(); 
+
+
         if($panel_speaker_field_speaker_id_values == null) {
           print('NULL field_speaker_id for Panel_Speaker: ' . $panel_speaker_key . ' at Panel ID: ' . $key . "\n");
           continue;
@@ -235,7 +244,14 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
             } else {
               array_push($array_speaker_ids, ['target_id' => $speaker_value['value']]);
               $array_speaker_ids_string .= $speaker_value['value'] . ',';
-              // print('Added Speaker ID:' . $speaker_value['value'] . ' to the speaker_ids array for Panel ID: ' . $key);
+              
+              if($panel_speaker_field_role_values == null) {
+                print('NULL field_role for Panel_Speaker: ' . $panel_speaker_key . ' at Panel ID: ' . $key . "\n");
+              } else {
+                $speaker_role = $panel_speaker_field_role_values[0]['value'];
+                array_push($array_speaker_roles, [ 'key' => $speaker_value['value'], 'value' => $speaker_role, 'description' => '' ]);
+                print($speaker_role . ' is the value of field_role for Panel_Speaker: ' . $panel_speaker_key . ' at Panel ID: ' . $key . "\n");
+              }
             }            
           }
         }
@@ -245,19 +261,19 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
 
     // BEGIN Track Reference Linking Block
     // Get Panel_Track Records by Panel ID
-    $array_panel_tracks = \Drupal::entityTypeManager()->getStorage('grid_join_panel_track')->loadByProperties(['type' => 'join_table','field_panel_id' => $key]);
-    if($array_panel_tracks == null) {
+    $array_panel_tracks_entities = \Drupal::entityTypeManager()->getStorage('grid_join_panel_track')->loadByProperties(['type' => 'join_table','field_panel_id' => $key]);
+    if($array_panel_tracks_entities == null) {
       print('No Panel_Track entries for Panel: ' . $key) . "\n";
       // Don't skip this loop iteration because it will skip adding Tracks
       // continue;
     } else {
-      foreach($array_panel_tracks as $panel_track_key => $panel_track_value){
+      foreach($array_panel_tracks_entities as $panel_track_key => $panel_track_entity){
         // Reset all variables
         $panel_track_field_track_id_values = null; 
         $grid_track_record = null;
 
         // Get and loop grid_join_panel_track.field_track_id
-        $panel_track_field_track_id_values = $panel_track_value->get('field_track_id')->getValue();
+        $panel_track_field_track_id_values = $panel_track_entity->get('field_track_id')->getValue();
         if($panel_track_field_track_id_values == null) {
           print('NULL field_track_id for Panel_Track: ' . $panel_track_key . ' at Panel ID: ' . $key . "\n");
           continue;
@@ -271,7 +287,6 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
             } else {
               array_push($array_track_ids, ['target_id' => $track_value['value']]);
               $array_track_ids_string .= $track_value['value'] . ',';
-              // print('Added Track ID:' . $track_value['value'] . ' to the track_ids array for Panel ID: ' . $key);
             }            
           }
         }
@@ -280,7 +295,7 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
     // END Track Reference Linking Block
 
     // If panel_speakers and panel_tracks BOTH returned NULL, skip updating and log warning
-    if($array_panel_speakers == null && $array_panel_tracks == null) {
+    if($array_panel_speakers_entities == null && $array_panel_tracks_entities == null) {
       print('No records found on BOTH Join tables for Panel ID: ' . $key . "\n");
       continue;
     }
@@ -291,9 +306,11 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
       print('Could not load Panel ID: ' . $key . " for Read-Write \n");
       continue;
     }
-
+    
     // Set Speaker values
     $panel_record_rw->set('field_speakers', $array_speaker_ids);
+    // Set Speaker  => Role values
+    $panel_record_rw->set('field_speaker_roles', $array_speaker_roles);
     // Set Track values
     $panel_record_rw->set('field_tracks', $array_track_ids);
     // Save updated Panel record
