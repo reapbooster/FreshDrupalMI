@@ -58,9 +58,9 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
       & .hidden-link-div {
         width: 100%;
-        height: 1px;
+        height: 5em;
         position: absolute;
-        top: -4em;
+        top: -7em;
         display: block;
         z-index: -5;
       }
@@ -88,10 +88,10 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
         &.disabled {
           color: #CCC !important;
-          border: none !important;
+          border-bottom: 3px solid transparent !important;
         }
 
-        & :hover :not(.disabled), &.active {
+        &.active, :hover :not(.disabled) {
           color: #0066cc;
           border-bottom: 3px solid #0066cc;
         }
@@ -138,10 +138,14 @@ const GridEventsSpeakers: React.FunctionComponent = (
               : 'https://grid.milkeninstitute.org/events/speakers/' + item.field_biopic;
 
             return (
-              <a className="col-sm-6 col-md-4 col-lg-3 p-4 text-center text-decoration-none text-dark" >
+              <a 
+                className="col-sm-6 col-md-4 col-lg-3 p-4 text-center text-decoration-none text-dark"
+                href={`/events/${grid_id}/speakers/${item.id}`}  
+              >
                 <img src={imagePath} />
                 <p className="font-weight-bold m-0 mt-3">{item.field_first_name} {item.field_last_name}</p>
-                <p className="">{item.field_description}</p>
+                <p dangerouslySetInnerHTML={{__html: item.field_description}} />
+                {/* <p className="">{item.field_description}</p> */}
               </a>
             );
           })
