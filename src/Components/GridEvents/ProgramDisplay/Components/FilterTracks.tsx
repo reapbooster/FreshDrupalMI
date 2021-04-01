@@ -24,6 +24,10 @@ const FilterTracks: React.FC<FilterTracksProps> = (
     onClickNoneTracks,
   } = props;
 
+  if (!tracksOptions?.length) {
+    return "";
+  }
+
   const [expanded, setExpanded] = useState(false);
 
   const isSelected = (track: any) => {
@@ -31,14 +35,17 @@ const FilterTracks: React.FC<FilterTracksProps> = (
   };
 
   const renderOptionRow = (key: number, track: any) => {
+    const title = track?.title;
     return (
       <div key={key} className="filter-row">
         <SelectBox
           selected={isSelected(track)}
           onClick={() => onClickTrack(track)}
         />
-        <div className="d-flex flex-grow-1 justify-content-between">
-          {track.title}
+        <div
+          className="d-flex flex-grow-1 justify-content-between"
+          dangerouslySetInnerHTML={{ __html: title }}
+        >
           {/* TODO: Count
                         <span>
                             {countTracks &&

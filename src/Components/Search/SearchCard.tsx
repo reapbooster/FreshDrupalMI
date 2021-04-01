@@ -68,13 +68,18 @@ TextEllipsis.propTypes = {
 
 function SearchCard(props) {
   const { image, type, title, text, link, published } = props;
+
   const publishedDate = moment.unix(published).format("ll");
 
   // TODO: Conditional image output, clean type (when available from backend)
   const renderImage = image ? (
     <div className="content-image-wrapper">
       <img alt="content" src={image} className="card-image" />
-      {!!type ? <span class="text-uppercase">{type}</span> : ""}
+      {!!type && type != "landing_page" ? (
+        <span class="text-uppercase">{type}</span>
+      ) : (
+        ""
+      )}
     </div>
   ) : (
     false
@@ -87,9 +92,12 @@ function SearchCard(props) {
       </a>
       <div className="content-text-wrapper">
         <h5>
-          <a href={link} alt={tooltipText} target="_blank">
-            {title}
-          </a>
+          <a
+            href={link}
+            alt={tooltipText}
+            target="_blank"
+            dangerouslySetInnerHTML={{ __html: title }}
+          ></a>
         </h5>
         <div className="search-excerpt">
           {text && text.length > MAX_LENGTH_LIMIT ? (
