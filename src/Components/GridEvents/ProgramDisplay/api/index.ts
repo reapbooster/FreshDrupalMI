@@ -1,8 +1,10 @@
 // @ts-nocheck
 import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 
-const API_URL =
-  process.env.NODE_ENV === "production" ? `/` : "http://localhost:3001";
+const API_URL = 
+  window.location.hostname.includes("milkeninstitute.org") 
+  ? "" 
+  : "http://localhost:3001/";
 
 // @ts-ignore
 export const getEventData = async (id) => {
