@@ -74,7 +74,11 @@ function SearchCard(props) {
   const renderImage = image ? (
     <div className="content-image-wrapper">
       <img alt="content" src={image} className="card-image" />
-      {!!type ? <span class="text-uppercase">{type}</span> : ""}
+      {!!type && type != "landing_page" ? (
+        <span class="text-uppercase">{type}</span>
+      ) : (
+        ""
+      )}
     </div>
   ) : (
     false
