@@ -6,6 +6,8 @@ dependencies:
     - field.storage.media.field_topics
     - media.type.podcast_episode
     - taxonomy.vocabulary.topics
+  content:
+    - 'taxonomy_term:topics:74573486-a08f-48b7-902e-13d0bff9f690'
 id: media.podcast_episode.field_topics
 field_name: field_topics
 entity_type: media
@@ -14,7 +16,9 @@ label: Topics
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    target_uuid: 74573486-a08f-48b7-902e-13d0bff9f690
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'

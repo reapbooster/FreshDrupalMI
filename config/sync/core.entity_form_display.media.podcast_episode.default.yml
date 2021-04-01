@@ -15,6 +15,7 @@ dependencies:
     - field.field.media.podcast_episode.field_media_in_library
     - field.field.media.podcast_episode.field_meta_tags
     - field.field.media.podcast_episode.field_people
+    - field.field.media.podcast_episode.field_promo_image
     - field.field.media.podcast_episode.field_regions
     - field.field.media.podcast_episode.field_service_links
     - field.field.media.podcast_episode.field_summary
@@ -24,12 +25,93 @@ dependencies:
     - image.style.thumbnail
     - media.type.podcast_episode
   module:
+    - field_group
     - file
     - image
     - key_value_field
+    - media_library
     - metatag
     - path
     - text
+third_party_settings:
+  field_group:
+    group_settings:
+      children:
+        - group_content
+        - group_tags
+        - group_promotion
+      parent_name: ''
+      weight: 23
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Settings
+    group_content:
+      children:
+        - field_promo_image
+        - field_episode
+        - field_summary
+        - field_body
+        - field_media_image
+        - field_media_audio_file
+        - field_transcript
+        - field_service_links
+        - field_filemime
+        - field_filesize
+      parent_name: group_settings
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Content
+    group_tags:
+      children:
+        - field_topics
+        - field_tags
+        - field_centers
+        - field_regions
+        - field_collections
+        - field_events
+        - field_meta_tags
+      parent_name: group_settings
+      weight: 22
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Tags
+    group_promotion:
+      children:
+        - status
+        - field_media_in_library
+        - field_people
+        - uid
+        - created
+        - path
+        - langcode
+      parent_name: group_settings
+      weight: 23
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Promotion
 id: media.podcast_episode.default
 targetEntityType: media
 bundle: podcast_episode
@@ -37,12 +119,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 31
     region: content
     settings: {  }
     third_party_settings: {  }
   field_body:
-    weight: 111
+    weight: 37
     settings:
       rows: 9
       summary_rows: 3
@@ -52,7 +134,7 @@ content:
     type: text_textarea_with_summary
     region: content
   field_centers:
-    weight: 117
+    weight: 22
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -62,7 +144,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_collections:
-    weight: 116
+    weight: 24
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -72,14 +154,14 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_episode:
-    weight: 108
+    weight: 35
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_events:
-    weight: 114
+    weight: 25
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -89,7 +171,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_filemime:
-    weight: 104
+    weight: 42
     settings:
       size: 60
       placeholder: ''
@@ -97,7 +179,7 @@ content:
     type: string_textfield
     region: content
   field_filesize:
-    weight: 106
+    weight: 43
     settings:
       size: 60
       placeholder: ''
@@ -105,14 +187,14 @@ content:
     type: string_textfield
     region: content
   field_media_audio_file:
-    weight: 0
+    weight: 39
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
   field_media_image:
-    weight: 101
+    weight: 38
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -120,21 +202,38 @@ content:
     type: image_image
     region: content
   field_media_in_library:
-    weight: 105
+    weight: 28
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_meta_tags:
-    weight: 103
+    weight: 26
     settings:
       sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
+  field_people:
+    type: entity_reference_autocomplete
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_promo_image:
+    type: media_library_widget
+    weight: 34
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+    region: content
   field_regions:
-    weight: 115
+    weight: 23
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -144,7 +243,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_service_links:
-    weight: 110
+    weight: 41
     settings:
       key_size: 60
       key_label: Key
@@ -160,7 +259,7 @@ content:
     type: key_value_textfield
     region: content
   field_summary:
-    weight: 109
+    weight: 36
     settings:
       size: 60
       placeholder: ''
@@ -168,7 +267,7 @@ content:
     type: text_textfield
     region: content
   field_tags:
-    weight: 112
+    weight: 21
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -178,7 +277,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_topics:
-    weight: 113
+    weight: 20
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -189,21 +288,21 @@ content:
     region: content
   field_transcript:
     type: file_generic
-    weight: 0
+    weight: 40
     region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 33
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -211,7 +310,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 32
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -219,12 +318,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 100
+    weight: 27
     region: content
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 30
     settings:
       match_operator: CONTAINS
       size: 60
@@ -232,5 +331,4 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden:
-  field_people: true
+hidden: {  }
