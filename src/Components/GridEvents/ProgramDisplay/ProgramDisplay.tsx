@@ -146,13 +146,25 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
           filteredPanels
             // @ts-ignore
             .filter((panel) => {
-              const panelData = Object.values(panel).join(" ").toLowerCase();
+              let panelData = Object.values(panel).join(" ");
+              panelData += panel.field_speakers
+                .split(",")
+                .map((e) => {
+                  let speaker = dataCache.getSpeakerById(parseInt(e));
+                  return speaker?.title;
+                })
+                .join(" ");
+
+              console.log(panelData);
 
               let score = 0;
               terms.map((term) => {
-                score += panelData.indexOf(term.toLowerCase()) != -1 ? 1 : 0;
+                score +=
+                  panelData.toLowerCase().indexOf(term.toLowerCase()) != -1
+                    ? 1
+                    : 0;
               });
-              console.debug("match score", score, terms.length);
+              // console.debug("match score", score, terms.length);
               return score == terms.length;
             }) ?? [];
       }
@@ -162,8 +174,8 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
           filteredPanels
             // @ts-ignore
             .filter((panel) => {
-              // NOTE: Change below from > 0 to tracks.length if match all is required
               if (panel.field_tracks.length > 0) {
+                // NOTE: Change below from > 0 to tracks.length if match all is required
                 let panelTrackMatch =
                   _.intersection(
                     panel.field_tracks
@@ -171,6 +183,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
                       .map((e: string) => parseInt(e)),
                     tracks.map((e: string) => parseInt(e))
                   ).length > 0;
+
                 return panelTrackMatch;
               }
             }) ?? [];
@@ -352,7 +365,11 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
                         panels={item?.filteredPanels}
                         getSpeakerById={dataCache.getSpeakerById}
                         date={item?.date}
-                        open={groupedPanels.length == 1 && index == 0}
+                        open={
+                          item?.filteredPanels.length < 5 ||
+                          groupedPanels.length == 1 ||
+                          index == 0
+                        }
                       />
                     </div>
                   );

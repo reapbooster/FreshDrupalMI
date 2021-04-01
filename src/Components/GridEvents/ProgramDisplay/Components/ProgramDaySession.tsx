@@ -89,6 +89,10 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
       return _(speakerRoles)
         .groupBy("role")
         .map((speakers, role) => {
+          if (role == "Cancelled") {
+            return false;
+          }
+
           let weight = role.charCodeAt(0);
 
           if (role == "Moderator") {
@@ -101,6 +105,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
             mrole: role,
           };
         })
+        .filter(Boolean)
         .orderBy("weight")
         .map(({ speakers, mrole }) => {
           let suffix = "";
