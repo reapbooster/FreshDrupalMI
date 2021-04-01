@@ -190,6 +190,12 @@ export default function Search() {
     locationChanged();
   }, []);
 
+  useEffect(() => {
+    if (pageNumber > 0) {
+      setPageNumber(0);
+    }
+  }, [query, sortby, perpage, type, topics, centers, date]);
+
   const locationChanged = debounce(
     () => {
       const keywords = getHashParams()?.keywords;
@@ -256,24 +262,6 @@ export default function Search() {
     [queryInputValue]
   );
 
-  // useEffect(() => {
-  //   console.log("filter state changed", filterState);
-  // }, [type, topics, centers, date, sortby, perpage]);
-
-  // // Helper to make option array
-  // const makeOptions = (options) => {
-  //   return options.map((option) => {
-  //     if (typeof option === "string") {
-  //       return { label: option, value: option };
-  //     } else {
-  //       return {
-  //         value: option?.attributes?.machine_name,
-  //         label: option?.attributes?.name,
-  //       };
-  //     }
-  //   });
-  // };
-
   const makeOptions = (items) => {
     if (!items) return;
 
@@ -322,7 +310,6 @@ export default function Search() {
   };
 
   const handleAutosuggestQueryChange = (selection) => {
-    // console.log("Handle query change from selection", selection);
     if (selection?.label) {
       handleAutosuggestCascade(selection.label);
     }
@@ -330,17 +317,13 @@ export default function Search() {
 
   const selectRef = React.createRef();
 
-  // Necessary to
+  // Necessary to prevent auto-selexting first select item
   const handleAutosuggestInputChange = (inputValue, { action }) => {
-    // console.log("setValue", inputValue, action);
-
     selectRef.current.select.getNextFocusedOption = () => false;
 
     if (action === "input-change") {
       setQueryInputValue(inputValue);
     }
-    // if (action === "set-value") {
-    // }
   };
 
   // Search React-Select
@@ -363,7 +346,12 @@ export default function Search() {
       <div className="search--toolbars">
         <div className={`${containerClass} search--autosuggest`}>
           <div className="row">
-            <div className="col-md-8 col-lg-9">
+            <div className="col-md-3 col-lg-2 col-xl-2 text-right py-2">
+              {pager && pager?.total_items > 0
+                ? `${pager?.total_items} results for:`
+                : ""}
+            </div>
+            <div className="col-md-9 col-lg-7 col-xl-8">
               <CustomSelect>
                 <Select
                   ref={selectRef}
