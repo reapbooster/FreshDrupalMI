@@ -116,7 +116,7 @@ process:
       key: key
       description: description
       value: value
-  field_media_in_ligrary:
+  field_media_in_library:
     plugin: default_value
     default_value: true
   field_summary/value: summary/value
