@@ -346,7 +346,12 @@ export default function Search() {
       <div className="search--toolbars">
         <div className={`${containerClass} search--autosuggest`}>
           <div className="row">
-            <div className="col-md-8 col-lg-9">
+            <div className="col-md-3 col-lg-2 col-xl-2 text-right py-2">
+              {pager && pager?.total_items > 0
+                ? `${pager?.total_items} results for:`
+                : ""}
+            </div>
+            <div className="col-md-9 col-lg-7 col-xl-8">
               <CustomSelect>
                 <Select
                   ref={selectRef}
