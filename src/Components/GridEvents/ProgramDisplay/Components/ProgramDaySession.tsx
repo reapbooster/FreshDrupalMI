@@ -44,32 +44,80 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     <p dangerouslySetInnerHTML={{ __html: session?.field_description }} />
   );
 
+  const renderSpeakerGroup = (speakers: array) => {
+    return _(speakers)
+      .map((s) => getSpeakerById(s.id))
+      .sortBy((s) => s?.first_name)
+      .map((speakerData: any, index: number) => {
+        const profile: any = {
+          title: speakerData?.title,
+          avatar: speakerData?.field_biopic
+            ? `https://grid.milkeninstitute.org/events/speakers/${speakerData.field_biopic}`
+            : SPEAKER_PIC_DEFAULT,
+          link: `/grid_speakers/${speakerData?.id}`,
+          job: speakerData?.field_description ?? "",
+        };
+        return <ProfileSummary key={index} profile={profile} />;
+      })
+      .filter(Boolean)
+      .value();
+  };
+
   const renderSpeakers = (session: any) => {
     if (session?.field_speakers && session?.field_speakers.length > 0) {
       const speakerIds = session.field_speakers
         .split(",")
         .map((id: any) => parseInt(id));
+
+      // Return when empty
       if (speakerIds?.length < 1) {
         return;
       }
 
-      return _.sortBy(speakerIds, (speaker: any) => {
-        return speaker.field_first_name;
-      })
-        .map((speakerId: number, index: number) => {
-          let speakerData = getSpeakerById(speakerId);
+      // Decode cuneiform dates :)
+      const speakerRoles = session?.field_speaker_roles
+        .split("]|[")
+        .map((r) => {
+          let role = r.replace(/[^a-zA-Z0-9:]+/g, "").split(":");
 
-          const profile: any = {
-            title: speakerData?.title,
-            avatar: speakerData?.field_biopic
-              ? `https://grid.milkeninstitute.org/events/speakers/${speakerData.field_biopic}`
-              : SPEAKER_PIC_DEFAULT,
-            link: `/grid_speakers/${speakerData?.id}`,
-            job: speakerData?.field_description ?? "",
+          return {
+            id: role[0],
+            role: role[1],
           };
+        });
 
-          return <ProfileSummary key={index} profile={profile} />;
+      return _(speakerRoles)
+        .groupBy("role")
+        .map((speakers, role) => {
+          let weight = role.charCodeAt(0);
+
+          if (role == "Moderator") {
+            weight = 0;
+          }
+
+          return {
+            speakers: speakers,
+            weight: weight,
+            mrole: role,
+          };
         })
+        .orderBy("weight")
+        .map(({ speakers, mrole }) => {
+          let suffix = "";
+          if (["Speaker", "Moderator"].includes(mrole) && speakers.length > 1) {
+            suffix = "s";
+          }
+          return (
+            <div className="speaker-role-group" key={mrole}>
+              <h5>
+                {mrole}
+                {suffix}
+              </h5>
+              {renderSpeakerGroup(speakers)}
+            </div>
+          );
+        })
+        .value()
         .filter(Boolean);
     }
   };
@@ -94,22 +142,6 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
           <div id="session-collapse-content">
             {summary}
             {renderSpeakers(session)}
-
-            {/*<h5>Moderator</h5>
-                        <ProfileSummary profile={session?.field_moderator} />
-                        <h5>Speakers</h5> */}
-
-            {/*<h6>Tracks</h6>
-                        {/* <p>
-                            {session.field_tracks &&
-                                session.field_tracks.map((track: any, index: number) =>
-                                    index < session.field_tracks.length - 1 ? (
-                                        <>{track} | </>
-                                    ) : (
-                                        <>{track}</>
-                                    )
-                                )}
-                        </p> */}
           </div>
         </Collapse>
       </>
@@ -134,16 +166,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         </div>
         {summary}
         <Collapse in={expanded}>
-          <div id="session-collapse-content">
-            {renderSpeakers(session)}
-            {/* <h5>Moderator</h5>
-                        <ProfileSummary profile={session.field_moderator} />
-                        <h5>Speakers</h5>
-                        {session.field_speakers &&
-                            session.field_speakers.map((speaker, index) => (
-                                <ProfileSummary key={index} profile={speaker} />
-                            ))} */}
-          </div>
+          <div id="session-collapse-content">{renderSpeakers(session)}</div>
         </Collapse>
       </>
     );
@@ -153,10 +176,6 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     return (
       <>
         {titleNode}
-
-        {/* <h5>Moderator</h5>
-                <ProfileSummary profile={session.field_moderator} />
-                <h5>Speakers</h5> */}
         <p
           dangerouslySetInnerHTML={{ __html: session?.field_description }}
           className="mb-4"

@@ -178,7 +178,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
         filteredPanels = [];
       }
 
-      console.log("filter diff", filteredPanels.length, item.panels.length);
+      // console.debug("filter diff", filteredPanels.length, item.panels.length);
 
       item.filteredPanels = filteredPanels;
       return item;
