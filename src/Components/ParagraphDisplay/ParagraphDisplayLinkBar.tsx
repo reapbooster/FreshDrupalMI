@@ -35,10 +35,10 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
       text-decoration: none;
       & h2 {
         font-size: 1.2em;
-        @media (min-width: 1000px) {
+        padding: 2.25em 0 !important;
+        @media (max-width: 992px) {
           font-size: 0.9em;
         }
-        padding: 2.75em 0 !important;
       }
     }
 
