@@ -10,7 +10,6 @@ import ProgramDay from "./Components/ProgramDay";
 import NodeProgramDay from "./DataTypes/NodeProgramDay";
 import SearchBar from "./Components/SearchBar";
 
-import htmlDecode from "../../../Utility/Functions.ts";
 import { getEventData } from "./api/index";
 
 const formatOptions = [
@@ -117,7 +116,6 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
     });
     res.tracks.map((track: any) => {
       // @ts-ignore
-      track.title = htmlDecode(track.title);
       dataCache.tracks[track.id] = track;
     });
   };
