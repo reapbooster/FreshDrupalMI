@@ -64,6 +64,14 @@ export const ParagraphDisplayBodyContent = (
     & h1 {
       font-size: 3em;
       font-family: 'LatoWebBlack';
+
+      @media (max-width: 991.98px){
+        font-size: 2em;
+      }
+      
+      @media (max-width: 575.98px){
+        font-size: 1.5em;
+      }
     }
 
     & h2 {
