@@ -24,6 +24,13 @@ const GridEventsProgram: React.FunctionComponent = (
 ) => {
   const { grid_id, view_mode } = props;
 
+  let elJumbotron = document.querySelector(".jumbotron"); 
+  if (!!elJumbotron) {
+    elJumbotron.style.minHeight='unset';
+    elJumbotron?.querySelector('.slide-text').classList.remove('hero-tall');
+    elJumbotron?.querySelector('.slide-text').classList.add('hero-short');
+  }
+  
   return (
     <MainContainer id="events">
       <ProgramDisplay gridId={grid_id} />

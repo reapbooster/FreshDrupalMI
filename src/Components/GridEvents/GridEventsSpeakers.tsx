@@ -16,6 +16,13 @@ const GridEventsSpeakers: React.FunctionComponent = (
   const [fetchRan, setFetchRan] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
   
+  let elJumbotron = document.querySelector(".jumbotron"); 
+  if (!!elJumbotron) {
+    elJumbotron.style.minHeight='unset';
+    elJumbotron?.querySelector('.slide-text').classList.remove('hero-tall');
+    elJumbotron?.querySelector('.slide-text').classList.add('hero-short');
+  }
+    
   // Fetch Content and Taxonomy Tag Lists
   if(!fetchRan) {
     setFetchRan(true);
