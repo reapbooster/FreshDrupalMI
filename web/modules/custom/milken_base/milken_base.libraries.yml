@@ -23,6 +23,10 @@ EventDetail:
   js:
     components/EventDetail/EventDetail.entry.js: { source: 'components/EventDetail/EventDetail.entry.tsx' }
 
+GridSpeakerDetail:
+  version: 1.0
+  js: 
+    components/GridSpeakerDetail/GridSpeakerDetail.entry.js: { source: 'components/GridSpeakerDetail/GridSpeakerDetail.entry.tsx' }
 MediaDetail:
   version: 1.0
   js:
