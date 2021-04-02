@@ -5,7 +5,6 @@ import { Collapse } from "react-bootstrap";
 import _ from "lodash";
 
 import { NodeSessionInterface } from "../../../DataTypes/NodeSession";
-import htmlDecode from "../../../../Utility/Functions.ts";
 
 interface ProgramDaySessionProps {
   session: any;
@@ -37,7 +36,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const titleNode = (
-    <h5 dangerouslySetInnerHTML={{ __html: htmlDecode(session.title) }}></h5>
+    <h5 dangerouslySetInnerHTML={{ __html: session?.title }}></h5>
   );
 
   const summary = (
