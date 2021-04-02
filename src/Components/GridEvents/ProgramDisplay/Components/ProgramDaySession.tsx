@@ -36,7 +36,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const titleNode = (
-    <h5 dangerouslySetInnerHTML={{ __html: session.title }}></h5>
+    <h5 dangerouslySetInnerHTML={{ __html: session?.title }}></h5>
   );
 
   const summary = (

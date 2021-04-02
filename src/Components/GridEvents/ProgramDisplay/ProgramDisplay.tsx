@@ -106,15 +106,16 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
     setTracksOptions(res.tracks);
     setTracks(res.tracks.map((t: any) => t?.id));
 
-    res.panels.map((panel: any) => {
+    res?.panels.map((panel: any) => {
       // @ts-ignore
       dataCache.panels[panel.id] = panel;
     });
-    res.speakers.map((speaker: any) => {
+    res?.speakers.map((speaker: any) => {
       // @ts-ignore
       dataCache.speakers[speaker.id] = speaker;
     });
-    res.tracks.map((track: any) => {
+
+    res?.tracks.map((track: any) => {
       // @ts-ignore
       dataCache.tracks[track.id] = track;
     });
@@ -167,29 +168,27 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
             }) ?? [];
       }
 
-      if (tracks.length > 0) {
-        filteredPanels =
-          filteredPanels
-            // @ts-ignore
-            .filter((panel) => {
-              if (panel.field_tracks.length > 0) {
-                // NOTE: Change below from > 0 to tracks.length if match all is required
-                let panelTrackMatch =
-                  _.intersection(
-                    panel.field_tracks
-                      .split(",")
-                      .map((e: string) => parseInt(e)),
-                    tracks.map((e: string) => parseInt(e))
-                  ).length > 0;
+      if (tracks.length > 0 && tracksOptions.length > 0) {
+        if (tracks.length < tracksOptions.length) {
+          filteredPanels =
+            filteredPanels
+              // @ts-ignore
+              .filter((panel) => {
+                if (panel.field_tracks.length > 0) {
+                  // NOTE: Change below from > 0 to tracks.length if match all is required
+                  let panelTrackMatch =
+                    _.intersection(
+                      panel.field_tracks
+                        .split(",")
+                        .map((e: string) => parseInt(e)),
+                      tracks.map((e: string) => parseInt(e))
+                    ).length > 0;
 
-                return panelTrackMatch;
-              }
-            }) ?? [];
-      } else {
-        filteredPanels = [];
+                  return panelTrackMatch;
+                }
+              }) ?? [];
+        }
       }
-
-      // console.debug("filter diff", filteredPanels.length, item.panels.length);
 
       item.filteredPanels = filteredPanels;
       return item;
@@ -312,11 +311,11 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
               onChange={handleFormatChange}
             />
           </Col>
-          <Col sm={6} md={3}>
+          {/* TODO: Post-launch <Col sm={6} md={3}>
             <button className="btn btn-warning" onClick={handlePrintPage}>
               PRINT THIS FORMAT
             </button>
-          </Col>
+          </Col> */}
         </Row>
         <SearchBar
           term={term}
