@@ -69,7 +69,7 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
           let activeLinkClass =
             window.location.pathname == item.uri ? "active" : "";
           return (
-            <Col className={activeLinkClass}>
+            <Col xs={12} sm={3} className={activeLinkClass}>
               <a data-link-uri={item.uri} href={item.uri}>
                 <h2 className="text-center text-uppercase m-0">{item.title}</h2>
               </a>
