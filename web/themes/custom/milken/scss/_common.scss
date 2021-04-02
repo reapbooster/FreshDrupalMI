@@ -41,6 +41,46 @@ body {
   cursor: pointer;
 }
 
+// Scroll to Top Button
+#scroll_to_top {
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #252525;
+  z-index: 1000;
+  color: #fff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  transition: .3s ease;
+  cursor: pointer;
+
+  &.header_scroll {
+    display: flex;
+  }
+
+  &:hover {
+    background-color: #FF6633;
+  }
+
+  & a {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none!important;
+
+    & i {
+      display: block;
+      margin-top: 0.15em;
+    }
+  }
+}
+
 .btn-milken-orange {
   background: var(--color-milken-orange);
   color: white;
