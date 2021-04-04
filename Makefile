@@ -20,7 +20,7 @@ build-php-composer:
 	$(shell composer install-vendor-dir)
 
 build-node-webpack:
-	$(shell gulp run build)
+	$(shell npm install npm run build) > /dev/null
 
 run-mysql-from-backup:
 
@@ -36,7 +36,7 @@ run-mysql-from-backup:
 
 
 
-	@[ -f "db/${BACKUP_FILE_NAME}" ]& && rm "db/${BACKUP_FILE_NAME}"
+	@[ -f "db/${BACKUP_FILE_NAME}" ] && rm "db/${BACKUP_FILE_NAME}"
 	terminus backup:get ${LIVE_SITE} --element=database --yes --to=db/${BACKUP_FILE_NAME}
 
 	kubectl exec -it redis-cli flushall
