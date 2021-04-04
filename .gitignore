@@ -146,3 +146,4 @@ web/modules/custom/milken_base/js/*.js
 /web.config
 *.d.ts
 /.nova
+/build_k8s
