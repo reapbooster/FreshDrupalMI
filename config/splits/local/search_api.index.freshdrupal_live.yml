@@ -24,7 +24,6 @@ dependencies:
     - field.storage.people.field_centers
     - field.storage.node.field_content
     - field.storage.media.field_content
-    - field.storage.people.field_departments
     - field.storage.event.field_description
     - field.storage.people.field_description
     - field.storage.people.field_email
@@ -37,7 +36,6 @@ dependencies:
     - field.storage.media.field_media_file
     - field.storage.people.field_middle_name
     - field.storage.event.field_name_short
-    - field.storage.people.field_notes
     - field.storage.node.field_page_type
     - field.storage.people.field_photo
     - field.storage.event.field_related_media
@@ -270,14 +268,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_content
-  field_departments:
-    label: Departments
-    datasource_id: 'entity:people'
-    property_path: field_departments
-    type: integer
-    dependencies:
-      config:
-        - field.storage.people.field_departments
   field_description:
     label: Description
     datasource_id: 'entity:event'
@@ -403,14 +393,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.event.field_name_short
-  field_notes:
-    label: Notes
-    datasource_id: 'entity:people'
-    property_path: field_notes
-    type: text
-    dependencies:
-      config:
-        - field.storage.people.field_notes
   field_page_type:
     label: 'Page Type'
     datasource_id: 'entity:node'
