@@ -1,3 +1,6 @@
 /*.page-title {
   color: red !important;
 }*/
+input.field-plugin-settings-edit { 
+  width: 100%; 
+}
