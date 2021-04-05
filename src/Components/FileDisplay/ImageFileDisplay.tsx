@@ -23,7 +23,15 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
   const DataObject = new ImageFile(data);
   const [imageData, setImageData] = useState(DataObject);
   if (!DataObject.valid) {
-    return <ErrorDisplay error={new Error("DataObject is not valid")} />;
+    return (
+      <img
+      src="/sites/default/files/Missing%20Photo_0.jpg"
+      alt="Missing image"
+      style={ style ?? { width: "100%", } }
+      className={className}
+    />
+    )
+    // return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
   if (!imageData?.hasData()) {
     const ecp = new EntityComponentProps(imageData);
@@ -47,6 +55,7 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
   const attributes = {
     width: width ?? "100%",
     height: height ?? "200px,",
+    style: {},
   };
 
   const imageTagStyle = style ?? {
