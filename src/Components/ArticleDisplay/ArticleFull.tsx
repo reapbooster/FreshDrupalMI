@@ -35,6 +35,9 @@ export const ArticleFull = (props: ArticleFullProps) => {
   console.debug("Should have node data now", nodeArticleData);
 
   const ElMainContentWrapper = styled.div`
+    width: 90%;
+    margin: 2em auto;
+    
     & .section-social {
       order: 1;
     }
@@ -52,6 +55,15 @@ export const ArticleFull = (props: ArticleFullProps) => {
       order: 3;
       @media only screen and (max-width: 1199px) {
         order: 2;
+      }
+      & .published-date {
+        font-family: LatoWebItalic;
+        font-size: 1.25em;
+        color: #999AA3;
+        letter-spacing: 0;
+        line-height: 1.8em;
+        margin-top: 0;
+        margin-bottom: 1em;
       }
     }
   `;
@@ -126,7 +138,7 @@ export const ArticleFull = (props: ArticleFullProps) => {
         </Container>
       </Row>
       <Row>
-        <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
+        <ElMainContentWrapper className="container-fluid">
           {/* <Row>
             <Col>
               <ElTitle>{nodeArticleData.title}</ElTitle>
@@ -144,14 +156,10 @@ export const ArticleFull = (props: ArticleFullProps) => {
                 />
               </ErrorBoundary>
             </Col>
-            <Col xs="12" lg="6" xl="3" className="section-tags">
+            <Col xs="12" lg="6" xl="3" className="section-tags pt-4 pt-lg-0">
+              <div className="published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
               <AuthorsDisplay data={{authorList: authorList}} />
-              <TagsDisplay data={
-                {
-                  published_date_string: "Published " + created.format('MMMM D, YYYY'),
-                  tagList: tagList
-                }
-              }></TagsDisplay>
+              <TagsDisplay data={{tagList: tagList}} />
             </Col>
           </Row>
         </ElMainContentWrapper>

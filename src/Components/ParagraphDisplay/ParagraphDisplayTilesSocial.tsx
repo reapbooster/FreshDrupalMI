@@ -71,7 +71,7 @@ const ParagraphDisplayTilesSocial: React.FunctionComponent = (
               : faInstagram;
 
             return (
-              <Col className="col-sm-6 col-md-3">
+              <Col className="col-12 col-sm-6 col-md-3">
                 <a href={item.uri}>
                   <h4>{splitTitle[1]}</h4>
                   <FontAwesomeIcon icon={fontIcon} />

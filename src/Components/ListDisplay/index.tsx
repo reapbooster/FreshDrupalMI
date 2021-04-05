@@ -95,6 +95,12 @@ export const ListDisplay = function (props: ListDisplayProps) {
       style={{ scrollBehavior: "smooth" }}
     >
       {list.map((item: EntityInterface, key: number) => {
+        if( item.id === 'missing' || item.type === 'unknown' ) {
+          return (
+            <div className="col-2">List contains a "missing" item. Please edit this page and delete and re-create this section. List: ${id}.</div>
+          );
+        }
+        
         console.debug(" ==> list item:", item);
         const Component = ListDisplayFactory(item);
         return (

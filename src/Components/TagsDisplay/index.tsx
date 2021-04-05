@@ -26,15 +26,6 @@ export const TagsDisplay = (props: TagsDisplayProps) => {
       white-space: nowrap;
       margin: 10px 10px 10px 0;
     }
-      
-    & .published-date {
-      font-family: LatoWebItalic;
-      font-size: 20px;
-      color: #999AA3;
-      letter-spacing: 0;
-      line-height: 30px;
-      margin-top: 0px;
-    }
   `;
 
   if (data.tagList.length !== undefined && data.tagList.length > 0) {
@@ -55,7 +46,6 @@ export const TagsDisplay = (props: TagsDisplayProps) => {
                 </ErrorBoundary>
               );
             })}
-            <div className="published-date">{data.published_date_string}</div>
           </Col>
         </Row>
       </TagsWrapper>

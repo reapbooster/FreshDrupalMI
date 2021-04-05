@@ -77,21 +77,18 @@ export const ParagraphDisplayBodyContent = (
     & h2 {
       font-family: 'LatoWebBlack';
       font-size: 2.25rem;  
-      margin-top: 1em;    
+      margin: 1em 0 0.5em;
     }
 
     & p {
       font-size: 1.25em;
-      margin: 0 0 1em 0;
+      margin: 0 0 2em 0;
       color: ${(fontColor === "black")?'dimgray':'white'}
-    }
-
-    & .container {
-      padding: 0 !important;
     }
 
     & .row {
       display: block;
+      padding: 0 !important;
     }
 
     & blockquote {
@@ -105,7 +102,7 @@ export const ParagraphDisplayBodyContent = (
       position: relative;
       text-align: left;
       font-family: LatoWebBold;
-      margin: 50px 0px 50px 60px;
+      margin: 0px 0px 50px 60px;
       background-color: #fff;
       box-shadow: 0 0 26px 0 rgb(50 50 50 / 10%);
       padding: 20px; 

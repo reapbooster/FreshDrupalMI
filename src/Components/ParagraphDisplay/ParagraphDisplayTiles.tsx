@@ -100,7 +100,7 @@ export class ParagraphDisplayTiles extends React.Component<
         
       const SectionWrapper = styled.section`
         background-color: ${containerBackgroundColor};
-
+      
         & .tiles-card-large {
           max-width: 1600px;
         }
@@ -157,7 +157,7 @@ export class ParagraphDisplayTiles extends React.Component<
                 {data.field_title}
               </h2>
               {elSubheader}
-              <a className="btn-milken-orange mt-0">Button</a>
+              {/* <a className="btn-milken-orange mt-0">Button</a> */}
             </div>
           </div>
           );

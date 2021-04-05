@@ -76,6 +76,15 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       @media only screen and (max-width: 1199.98px) {
         order: 2;
       }
+      & .published-date {
+        font-family: LatoWebItalic;
+        font-size: 1.25em;
+        color: #999AA3;
+        letter-spacing: 0;
+        line-height: 1.8em;
+        margin-top: 0;
+        margin-bottom: 1em;
+      }
     }
   `;
 
@@ -145,12 +154,8 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
               <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} />
             </Col>
             <Col xs="12" lg="6" xl="3" className="section-tags">
-              <TagsDisplay data={
-                {
-                  published_date_string: "Published " + created.format('MMMM D, YYYY'),
-                  tagList: tagList
-                }
-              }></TagsDisplay>
+            <div className="published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
+              <TagsDisplay data={{tagList: tagList}} />
             </Col>
           </Row>
         </ElMainContentWrapper>

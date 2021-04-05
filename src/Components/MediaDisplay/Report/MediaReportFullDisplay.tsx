@@ -94,6 +94,15 @@ const ElMainContentWrapper = styled.div`
   @media only screen and (max-width: 1199px) {
     order: 2;
   }
+  & .published-date {
+    font-family: LatoWebItalic;
+    font-size: 1.25em;
+    color: #999AA3;
+    letter-spacing: 0;
+    line-height: 1.8em;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
 }
 `;
 
@@ -199,13 +208,9 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
               </ErrorBoundary>
             </Col>
             <Col xs="12" lg="6" xl="3" className="section-tags">
+            <div className="published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
               <AuthorsDisplay data={{authorList: authorList}} />
-              <TagsDisplay data={
-                {
-                  published_date_string: "Published " + created.format('MMMM D, YYYY'),
-                  tagList: tagList
-                }
-              }></TagsDisplay>
+              <TagsDisplay data={{tagList: tagList}} />
             </Col>
           </Row>
         </ElMainContentWrapper>

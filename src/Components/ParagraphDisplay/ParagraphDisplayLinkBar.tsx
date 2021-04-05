@@ -35,7 +35,7 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
       text-decoration: none;
       & h2 {
         font-size: 1.2em;
-        padding: 2.25em 0 !important;
+        padding: 1.5em 0 !important;
         @media (max-width: 992px) {
           font-size: 0.9em;
         }
@@ -50,8 +50,14 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
       background-color: #27262c;
     }
 
-    & .col:hover,
-    .active:hover {
+    & .col { 
+      @media screen and (max-width: 575.98px) {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }    
+    }
+
+    & .col:hover, .active:hover {
       background-color: #07060a !important;
       transition: background-color 0.5s;
     }
@@ -69,7 +75,7 @@ const ParagraphDisplayLinkBar: React.FunctionComponent = (
           let activeLinkClass =
             window.location.pathname == item.uri ? "active" : "";
           return (
-            <Col xs={12} sm={3} className={activeLinkClass} key={key}>
+            <Col className={activeLinkClass} key={key}>
               <a data-link-uri={item.uri} href={item.uri}>
                 <h2 className="text-center text-uppercase m-0">{item.title}</h2>
               </a>

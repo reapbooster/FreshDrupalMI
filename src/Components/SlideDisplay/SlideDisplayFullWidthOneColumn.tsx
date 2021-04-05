@@ -124,6 +124,8 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       & .h3 {
         font-family: 'LatoWeb';
         font-size: 1.5em;
+        text-transform: uppercase;
+        font-style: italic;
 
         @media (max-width: 768px) {
           font-size: 1.4em;
