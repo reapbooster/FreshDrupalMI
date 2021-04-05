@@ -58,8 +58,8 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
     }
     $destination_values = [];
     // phpcs:disable
-    $altTextProperty = $this->configuration['alt_text'] ?? $this->configuration['name'];
-    $titleTextProperty = $this->configuration['title_text'] ?? $this->configuration['name'];
+    $altTextProperty = $this->configuration['alt_text'] ?? 'photo_subject_name';
+    $titleTextProperty = $this->configuration['title_text'] ?? 'photo_subject_title';
     // phpcs:enable
 
     $sources = $row->getSourceProperty($this->configuration['source']);

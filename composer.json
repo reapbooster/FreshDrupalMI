@@ -170,6 +170,7 @@
         "drupal/workflow": "^1.0",
         "drush/drush": "^10",
         "enyo/dropzone": "^5.5",
+        "friendsofphp/php-cs-fixer": "^3.0-beta1",
         "ksubileau/color-thief-php": "^1.4",
         "league/commonmark": "^1.5",
         "mnsami/composer-custom-directory-installer": "^2.0",
