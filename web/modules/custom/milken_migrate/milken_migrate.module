@@ -135,7 +135,7 @@ function milken_migrate_update_video() {
 function milken_migrate_update_grid_join_panel_speaker() {
 
   $results = \Drupal::entityTypeManager()->getStorage('grid_join_panel_speaker')->loadByProperties(['type' => 'join_table']);
-  $i = 0;
+
   // print_r($results);
   foreach ($results as $key => $item) {
 
@@ -240,7 +240,7 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
             // Only add a Speaker ID if the Speaker actually exists.
             $grid_speaker_record = \Drupal::entityTypeManager()->getStorage('grid_speakers')->load((int) $speaker_value['value']);
             if ($grid_speaker_record == NULL) {
-              print('Could not load Speaker: ' . $speaker_value['value'] . ' at Panel ID: ' . $key . "\n");
+              print('Could not load Speaker[' . $speaker_key . '] ' . $speaker_value['value'] . ' at Panel ID: ' . $key . "\n");
               continue;
             }
             else {
@@ -292,7 +292,7 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
             // Only add a Track ID if the Track actually exists.
             $grid_track_record = \Drupal::entityTypeManager()->getStorage('grid_tracks')->load((int) $track_value['value']);
             if ($grid_track_record == NULL) {
-              print('Could not load Track: ' . $track_value['value'] . ' at Panel ID: ' . $key . "\n");
+              print('Could not load Track[' . $track_key . '] ' . $track_value['value'] . ' at Panel ID: ' . $key . "\n");
               continue;
             }
             else {
@@ -327,6 +327,7 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
     // Save updated Panel record.
     $panel_record_rw->save();
     print("Speaker IDs: " . $array_speaker_ids_string . "\n");
+    print("Track IDs: " . $array_track_ids_string . "\n");
     // print_r($array_speaker_ids);
     print('End of Loop Iteration, Panel ID: ' . $key . "; \n\n");
     // Thank you come again.
