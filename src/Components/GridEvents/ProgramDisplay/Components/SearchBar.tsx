@@ -30,15 +30,16 @@ const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
     if (!filterActive) return <Col sm={12} className="mt-5 clearfix" />;
     return (
       <>
-        <Col sm={6} md={4} lg={3}>
+        <Col xs={12} md={4} lg={3}>
           <h5>{count} Sessions</h5>
           <SearchInput
             value={term}
             onChange={onInputChange}
             onKeyPress={onInputPress}
+            style={{ overflow: "hidden" }}
           />
         </Col>
-        <Col sm={6} md={8} lg={9}>
+        <Col xs={12} md={8} lg={9}>
           {terms && terms.length > 0 ? (
             <SearchTermsBox
               terms={terms}

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import ProfileSummary from "./ProfileSummary";
-import { Collapse } from "react-bootstrap";
+import { Collapse, Row, Col } from "react-bootstrap";
 import _ from "lodash";
+import styled from "styled-components";
 
 import { NodeSessionInterface } from "../../../DataTypes/NodeSession";
 
@@ -21,7 +22,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  useEffect(() => {}, [session]);
+  useEffect(() => { }, [session]);
 
   const renderSessionTime = (session: any) => {
     let startTime = moment(session.field_panel_start_time, "hh:mm").format(
@@ -30,20 +31,16 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
       <div>
-        {startTime} <br /> to <br /> {endTime}
+        {startTime} {session.field_pday}<br />to<br />{endTime} {session.field_epday}
       </div>
     );
   };
-
-  const titleNode = (
-    <h5 dangerouslySetInnerHTML={{ __html: session?.title }}></h5>
-  );
 
   const summary = (
     <p dangerouslySetInnerHTML={{ __html: session?.field_description }} />
   );
 
-  const renderSpeakerGroup = (speakers: array) => {
+  const renderSpeakerGroup = (speakers: Array<any>) => {
     return _(speakers)
       .map((s) => getSpeakerById(s.id))
       .sortBy((s) => s?.first_name)
@@ -126,28 +123,56 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     }
   };
 
+  const ProgramDaySessionWrapper = styled.div`
+    & h4 {
+      @media screen and (max-width: 992px) {
+        font-size: 1.7em;
+      }
+      @media screen and (max-width: 768px) {
+        font-size: 1.5em;
+      }
+    }
+
+    & .view-more-link {
+      flex: 0 0 9em;
+      @media screen and (max-width: 576px) {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: right;
+      }
+    }
+  `
+
   const renderTitleOnly = () => {
     return (
       <>
-        <div className="d-flex align-items-center justify-content-between mb-4">
-          {titleNode}
-          <div>
-            <button
-              className="btn"
-              aria-controls="session-collapse-content"
-              aria-expanded={expanded}
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? "View Less" : "View More"}
-            </button>
-          </div>
-        </div>
-        <Collapse in={expanded}>
-          <div id="session-collapse-content">
-            {summary}
-            {renderSpeakers(session)}
-          </div>
-        </Collapse>
+        <ProgramDaySessionWrapper>
+          <Row className="mb-3">
+            <Col>
+              <h4 
+                dangerouslySetInnerHTML={{ __html: session?.title }}
+                className="m-0"
+              ></h4>
+            </Col>
+            <Col className="view-more-link">
+              <button
+                className="btn m-0"
+                aria-controls="session-collapse-content"
+                aria-expanded={expanded}
+                onClick={() => setExpanded(!expanded)}
+                style={{ minWidth: "0" }}
+              >
+                {expanded ? "View Less" : "View More"}
+              </button>
+            </Col>
+          </Row>
+          <Collapse in={expanded}>
+            <div id="session-collapse-content">
+              {summary}
+              {renderSpeakers(session)}
+            </div>
+          </Collapse>
+        </ProgramDaySessionWrapper>
       </>
     );
   };
@@ -155,23 +180,31 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderTitleSummary = () => {
     return (
       <>
-        <div className="d-flex align-items-center justify-content-between mb-4">
-          {titleNode}
-          <div>
-            <button
-              className="btn"
-              aria-controls="session-collapse-content"
-              aria-expanded={expanded}
-              onClick={() => setExpanded(!expanded)}
-            >
-              {expanded ? "View Less" : "View More"}
-            </button>
-          </div>
-        </div>
-        {summary}
-        <Collapse in={expanded}>
-          <div id="session-collapse-content">{renderSpeakers(session)}</div>
-        </Collapse>
+        <ProgramDaySessionWrapper>
+          <Row className="mb-3">
+            <Col>
+              <h4 
+                dangerouslySetInnerHTML={{ __html: session?.title }}
+                className="m-0"
+              ></h4>
+            </Col>
+            <Col className="view-more-link">
+              <button
+                className="btn m-0"
+                aria-controls="session-collapse-content"
+                aria-expanded={expanded}
+                onClick={() => setExpanded(!expanded)}
+                style={{ minWidth: "0" }}
+              >
+                {expanded ? "View Less" : "View More"}
+              </button>
+            </Col>
+          </Row>
+          {summary}
+          <Collapse in={expanded}>
+            <div id="session-collapse-content">{renderSpeakers(session)}</div>
+          </Collapse>
+        </ProgramDaySessionWrapper>
       </>
     );
   };
@@ -179,7 +212,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderDetail = () => {
     return (
       <>
-        {titleNode}
+        {<h4 dangerouslySetInnerHTML={{ __html: session?.title }}></h4>}
         <p
           dangerouslySetInnerHTML={{ __html: session?.field_description }}
           className="mb-4"
@@ -205,8 +238,13 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   return (
     <div className="programday-session">
       <div className="row">
-        <div className="cole-sm-3 col-lg-2">{renderSessionTime(session)}</div>
-        <div className="cole-sm-9 col-lg-10">{renderSessionContent()}</div>
+        <div
+          className="col time-col d-flex justify-content-center text-center"
+          style={{ flex: "0 0 7em" }}
+        >
+          {renderSessionTime(session)}
+        </div>
+        <div className="col">{renderSessionContent()}</div>
       </div>
     </div>
   );

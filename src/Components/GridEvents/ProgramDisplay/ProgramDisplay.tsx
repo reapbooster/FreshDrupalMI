@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import _ from "lodash";
 import moment from "moment";
-
+import styled from "styled-components";
 import FilterDates from "./Components/FilterDates";
 import FilterTracks from "./Components/FilterTracks";
 import FormatSelect from "./Components/FormatSelect";
@@ -63,7 +63,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
 
   const [filterActive, setFilterActive] = useState<boolean>(true);
 
-  useEffect(() => {}, [terms, dates]);
+  useEffect(() => { }, [terms, dates]);
 
   useEffect(() => {
     fetchPanels();
@@ -292,90 +292,102 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
     setTracks([]);
   };
 
+  const ProgramDisplayWrapper = styled.div`
+    & .filter-col {
+      flex: 0 0 25%;
+      min-width: 23em;
+      @media screen and (max-width: 768px) {
+        flex: 0 0 100%;
+      }
+    }
+  `
+
   return (
-    <div id="events-program" className="py-4">
-      <Container>
-        <Row className="my-3">
-          <Col sm={5} md={3}>
-            <button
-              className="btn btn-warning"
-              onClick={handleFilterDisplayToggle}
-            >
-              {filterActive ? "HIDE FILTERS" : "SHOW FILTERS"}
-            </button>
-          </Col>
-          <Col sm={7} md={6} className="form-horizontal">
-            <FormatSelect
-              formatOptions={formatOptions}
-              format={format}
-              onChange={handleFormatChange}
-            />
-          </Col>
-          {/* TODO: Post-launch <Col sm={6} md={3}>
+    <ProgramDisplayWrapper>
+      <div id="events-program" className="py-4">
+        <Container>
+          <Row className="my-3">
+            <Col xs={12} md={3}>
+              <button
+                className="btn btn-warning"
+                onClick={handleFilterDisplayToggle}
+              >
+                {filterActive ? "HIDE FILTERS" : "SHOW FILTERS"}
+              </button>
+            </Col>
+            <Col xs={12} md={6} className="form-horizontal">
+              <FormatSelect
+                formatOptions={formatOptions}
+                format={format}
+                onChange={handleFormatChange}
+              />
+            </Col>
+            {/* TODO: Post-launch <Col sm={6} md={3}>
             <button className="btn btn-warning" onClick={handlePrintPage}>
               PRINT THIS FORMAT
             </button>
           </Col> */}
-        </Row>
-        <SearchBar
-          term={term}
-          terms={terms}
-          count={panels.length}
-          onInputChange={handleInputChange}
-          onInputPress={handleInputPress}
-          onRemoveTerm={handleRemoveTerm}
-          onRemoveAllTerms={handleRemoveAllTerms}
-          filterActive={filterActive}
-        />
-        <Row>
-          {filterActive ? (
-            <Col sm={6} md={4} lg={3}>
-              <FilterDates
-                datesOptions={datesOptions}
-                dates={dates}
-                countPrograms={countPrograms}
-                onClickDate={handleClickDate}
-                onClickAllDates={handleClickAllDates}
-                onClickNoneDates={handleClickNoneDates}
-              />
-              <FilterTracks
-                tracksOptions={tracksOptions}
-                tracks={tracks}
-                countTracks={countTracks}
-                onClickTrack={handleClickTrack}
-                onClickAllTracks={handleClickAllTracks}
-                onClickNoneTracks={handleClickNoneTracks}
-              />
-            </Col>
-          ) : null}
+          </Row>
+          <SearchBar
+            term={term}
+            terms={terms}
+            count={panels.length}
+            onInputChange={handleInputChange}
+            onInputPress={handleInputPress}
+            onRemoveTerm={handleRemoveTerm}
+            onRemoveAllTerms={handleRemoveAllTerms}
+            filterActive={filterActive}
+          />
+          <Row>
+            {filterActive ? (
+              <Col className="filter-col">
+                <FilterDates
+                  datesOptions={datesOptions}
+                  dates={dates}
+                  countPrograms={countPrograms}
+                  onClickDate={handleClickDate}
+                  onClickAllDates={handleClickAllDates}
+                  onClickNoneDates={handleClickNoneDates}
+                />
+                <FilterTracks
+                  tracksOptions={tracksOptions}
+                  tracks={tracks}
+                  countTracks={countTracks}
+                  onClickTrack={handleClickTrack}
+                  onClickAllTracks={handleClickAllTracks}
+                  onClickNoneTracks={handleClickNoneTracks}
+                />
+              </Col>
+            ) : null}
 
-          <Col sm={6} md={8} lg={9} style={{ marginTop: -67 }}>
-            <div className="programday-list">
-              {getFilteredPanelGroups().map((item, index) => {
-                if (item && item.filteredPanels.length > 0)
-                  return (
-                    <div key={item.date}>
-                      <ProgramDay
-                        tracks={[]}
-                        terms={[]}
-                        viewMode={format}
-                        panels={item?.filteredPanels}
-                        getSpeakerById={dataCache.getSpeakerById}
-                        date={item?.date}
-                        open={
-                          item?.filteredPanels.length < 5 ||
-                          groupedPanels.length == 1 ||
-                          index == 0
-                        }
-                      />
-                    </div>
-                  );
-              })}
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+            <Col>
+              <div className="programday-list">
+                {getFilteredPanelGroups().map((item, index) => {
+                  if (item && item.filteredPanels.length > 0)
+                    return (
+                      <div key={item.date}>
+                        <ProgramDay
+                          tracks={[]}
+                          terms={[]}
+                          viewMode={format}
+                          panels={item?.filteredPanels}
+                          getSpeakerById={dataCache.getSpeakerById}
+                          date={item?.date}
+                          open={
+                            item?.filteredPanels.length < 5 ||
+                            groupedPanels.length == 1 ||
+                            index == 0
+                          }
+                        />
+                      </div>
+                    );
+                })}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </ProgramDisplayWrapper>
   );
 };
 

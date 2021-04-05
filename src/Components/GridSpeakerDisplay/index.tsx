@@ -94,7 +94,7 @@ const GridSpeakerDisplay: React.FunctionComponent = (
           <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
         </Col>
         <Col g="8" className="section-content p-3 px-4 px-md-5">
-          <p className="text-justify" dangerouslySetInnerHTML={{__html: data.field_biotext}}></p>
+          <p dangerouslySetInnerHTML={{__html: data.field_biotext}}></p>
         </Col>
         <Col sm="6" lg="3" className="section-tags pt-3">
         </Col>

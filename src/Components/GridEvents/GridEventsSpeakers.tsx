@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import styled from "styled-components";
+import Loading from "../Loading";
 
 interface GridEventsSpeakersProps {
   grid_id: string;
@@ -39,7 +40,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
   if (fetchedData == null) {
     return (
-      <div class="alert alert-warning" role="alert">Loading Speaker Data</div>
+      <Loading />
     );
   }
 
