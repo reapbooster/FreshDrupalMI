@@ -32,10 +32,13 @@ function milken_base_entity_type_alter(array &$entity_types) {
   }
 }
 
+/**
+ * To add a CSS library to the admin theme.
+ */
 function milken_base_page_attachments(array &$attachments) {
   $config = \Drupal::config('system.theme');
   $theme = \Drupal::theme()->getActiveTheme()->getName();
-    if ($theme == $config->get('admin')) {
-       $attachments['#attached']['library'][] = 'milken_base/extra.admin';
-    }
- }
+  if ($theme == $config->get('admin')) {
+    $attachments['#attached']['library'][] = 'milken_base/extra.admin';
+  }
+}
