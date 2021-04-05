@@ -255,7 +255,7 @@
           h6 {
             b {
               .nodetitlecustom {
-                font-family: LatoWebBold;
+                font-family: "LatoWebBold";
                 @media (min-width: $breakpointTablet) {
                   width: 138px;
                   color: #35363C;
@@ -266,7 +266,7 @@
             }
           }
           .extra-spacing-paragraph {
-            font-family: LatoWeb;
+            font-family: "LatoWeb";
             @media (min-width: $breakpointTablet) {
               width: 689px;
               color: $mainParagraphColor;
@@ -275,7 +275,7 @@
             }
           }
           .orangeseemore-center {
-            font-family: LatoWebBlack;
+            font-family: "LatoWebBlack";
             @media (min-width: $breakpointTablet) {
               height: 44px;
               width: 154px;
@@ -297,7 +297,7 @@
 
   .info-center-container .orangeseemore-center {
     line-height: 1;
-    font-family: LatoWebBlack;
+    font-family: "LatoWebBlack";
   }
 
   .upcoming-events {
@@ -316,7 +316,7 @@
     .events-button-phone {
       .orangeseemore-phone {
         @media (max-width: $breakpointPhone - 1) {
-          font-family: LatoWebBlack;
+          font-family: "LatoWebBlack";
         }
       }
     }
@@ -328,7 +328,7 @@
           width: unset;
           padding: 0 8px;
           @media (max-width: $breakpointPhone - 1) {
-            font-family: LatoWebBold;
+            font-family: "LatoWebBold";
           }
         }
       }
@@ -348,7 +348,7 @@
     //height: 550px;
 
     h2 {
-      font-family: LatoWebBold;
+      font-family: "LatoWebBold";
       color: $mainFontColor;
       font-size: 36px;
       margin-top: 53px;
@@ -362,7 +362,7 @@
     p {
       color: $grayFont;
       font-size: 20px;
-      font-family: LatoWeb;
+      font-family: "LatoWeb";
       max-width: 65%;
       margin: 19px auto 33px;
       line-height: 26px;

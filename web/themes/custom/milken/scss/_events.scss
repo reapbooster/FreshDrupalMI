@@ -15,7 +15,8 @@ body.page-view-event-pages {
     background: #f1f5f7;
     color: #3e4d5c;
     direction: ltr;
-    font: 400 13px 'Open Sans', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
 
     @media (min-width: 1300px) {
       .container {

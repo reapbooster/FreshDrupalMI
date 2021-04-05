@@ -105,6 +105,10 @@ body {
   }
 }
 
+.bubble-images.embedded-entity {
+  width: 5em;
+}
+
 blockquote {
   &::before {
     display: inline-block;
