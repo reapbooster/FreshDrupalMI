@@ -13,6 +13,8 @@ export interface MediaPodcastServiceLinkInterface {
 }
 
 export interface MediaPodcastEpisodeInterface extends MediaInterface {
+  name: string;
+  field_promo_image?: any;
   field_body?: TextField;
   field_episode?: number;
   field_media_audio_file?: AudioFileInterface;
@@ -21,6 +23,11 @@ export interface MediaPodcastEpisodeInterface extends MediaInterface {
   field_service_links?: Array<MediaPodcastServiceLinkInterface>;
   field_summary?: TextField;
   field_transcript?: DocumentFileInterface;
+  field_people?: any;
+  field_topics?: any;
+  field_tags?: any;
+  field_centers?: any;
+  field_regions?: any;
   media_type?: MediaType;
   parent_field_name?: string;
   parent_type?: string;
@@ -28,37 +35,29 @@ export interface MediaPodcastEpisodeInterface extends MediaInterface {
   thumbnail: ImageFile;
 }
 
-export class MediaPodcastEpisode
-  extends Media
-  implements MediaPodcastEpisodeInterface {
+export class MediaPodcastEpisode extends Media implements MediaPodcastEpisodeInterface {
+  name: string;
   field_photo_subject_name?: string;
-
   field_photo_subject_title?: string;
-
   parent_field_name?: string;
-
   parent_type?: string;
-
+  field_promo_image?: any;
   field_body?: TextField;
-
   field_episode?: number;
-
   field_media_in_library?: boolean;
-
   field_service_links?: Array<MediaPodcastServiceLinkInterface>;
-
   field_summary?: TextField;
+  field_people?: any;
+  field_topics?: any;
+  field_tags?: any;
+  field_centers?: any;
+  field_regions?: any;
 
   protected _field_media_audio_file?: AudioFile;
-
   protected _field_media_image?: ImageFile;
-
   protected _field_transcript?: DocumentFile;
-
   protected _media_type?: MediaType;
-
   protected _path?: PathObject;
-
   protected _thumbnail?: ImageFile;
 
   constructor(props) {
@@ -67,7 +66,7 @@ export class MediaPodcastEpisode
   }
 
   getIncluded(): string {
-    return "&include=field_media_image,thumbnail,field_media_audio_file";
+    return "&include=field_promo_image.field_media_image,field_media_image,thumbnail,field_media_audio_file,field_people,field_topics,field_tags,field_centers,field_regions";
   }
 
   hasData(): boolean {
