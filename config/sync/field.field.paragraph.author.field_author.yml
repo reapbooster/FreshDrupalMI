@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - eck.eck_type.people.speakers
     - eck.eck_type.people.staff
     - field.storage.paragraph.field_author
     - paragraphs.paragraphs_type.author
@@ -21,10 +20,9 @@ settings:
   handler: 'default:people'
   handler_settings:
     target_bundles:
-      speakers: speakers
       staff: staff
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: speakers
+    auto_create_bundle: null
 field_type: entity_reference

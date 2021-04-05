@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - eck.eck_type.grid_join_panel_speaker.join_table
-    - eck.eck_type.people.grid_speakers
     - field.storage.grid_join_panel_speaker.field_speaker
 id: grid_join_panel_speaker.join_table.field_speaker
 field_name: field_speaker
@@ -19,8 +18,7 @@ default_value_callback: ''
 settings:
   handler: 'default:people'
   handler_settings:
-    target_bundles:
-      grid_speakers: grid_speakers
+    target_bundles: {  }
     sort:
       field: _none
       direction: ASC

@@ -1,9 +1,0 @@
-uuid: fce4667c-1a21-4411-ab20-037457489f34
-langcode: en
-status: true
-dependencies:
-  config:
-    - eck.eck_entity_type.people
-type: experts
-name: Experts
-description: ''
