@@ -12,6 +12,7 @@ dependencies:
     - field.field.media.video.field_event_reference
     - field.field.media.video.field_events
     - field.field.media.video.field_height
+    - field.field.media.video.field_index_weight
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
     - field.field.media.video.field_people
@@ -31,6 +32,7 @@ dependencies:
     - layout_builder_restrictions
     - layout_discovery
     - media
+    - options
 third_party_settings:
   layout_builder:
     allow_custom: false
@@ -237,6 +239,21 @@ third_party_settings:
                 type: entity_reference_label
             additional: {  }
             weight: 11
+          7d3b18a8-cb77-4d5b-93c8-6963ea5fd97a:
+            uuid: 7d3b18a8-cb77-4d5b-93c8-6963ea5fd97a
+            region: content
+            configuration:
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              id: 'field_block:media:video:field_index_weight'
+              formatter:
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+                type: list_default
+            additional: {  }
+            weight: 12
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -280,6 +297,13 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_integer
+    region: content
+  field_index_weight:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_media_oembed_video:
     type: oembed

@@ -12,6 +12,7 @@ dependencies:
     - field.field.people.person.field_event
     - field.field.people.person.field_events
     - field.field.people.person.field_first_name
+    - field.field.people.person.field_index_weight
     - field.field.people.person.field_last_name
     - field.field.people.person.field_middle_name
     - field.field.people.person.field_notes
@@ -25,6 +26,7 @@ dependencies:
     - field.field.people.person.field_topics
   module:
     - image
+    - options
     - social_media
 id: people.person.default
 targetEntityType: people
@@ -100,6 +102,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_index_weight:
+    weight: 20
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_last_name:
     weight: 9

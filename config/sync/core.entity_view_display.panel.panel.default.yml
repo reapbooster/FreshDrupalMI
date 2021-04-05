@@ -12,6 +12,7 @@ dependencies:
     - field.field.panel.panel.field_event
     - field.field.panel.panel.field_events
     - field.field.panel.panel.field_grid_event_id
+    - field.field.panel.panel.field_index_weight
     - field.field.panel.panel.field_links
     - field.field.panel.panel.field_panel_alt_text
     - field.field.panel.panel.field_panel_date_string
@@ -38,6 +39,7 @@ dependencies:
     - datetime_range
     - key_value_field
     - link
+    - options
     - text
     - user
 id: panel.panel.default
@@ -111,6 +113,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_index_weight:
+    weight: 34
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_links:
     weight: 3

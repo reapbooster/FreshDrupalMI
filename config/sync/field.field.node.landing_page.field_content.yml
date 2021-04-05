@@ -13,6 +13,7 @@ dependencies:
     - paragraphs.paragraphs_type.media_tiles
     - paragraphs.paragraphs_type.paragraph_tab
     - paragraphs.paragraphs_type.people
+    - paragraphs.paragraphs_type.podcast_browser
     - paragraphs.paragraphs_type.podcast_episode
     - paragraphs.paragraphs_type.pull_quote
     - paragraphs.paragraphs_type.slide
@@ -54,71 +55,75 @@ settings:
       link_bar: link_bar
       paragraph_tab: paragraph_tab
       event_display: event_display
+      podcast_browser: podcast_browser
     target_bundles_drag_drop:
       author:
-        weight: -31
+        weight: -32
         enabled: false
       block:
-        weight: -30
+        weight: -31
         enabled: false
       body_content:
         enabled: true
-        weight: -45
+        weight: -47
       content_tiles:
         enabled: true
-        weight: -42
+        weight: -44
       event_display:
         enabled: true
-        weight: -32
+        weight: -34
       event_tiles:
-        weight: -29
+        weight: -30
         enabled: false
       facet_explorer:
         enabled: true
-        weight: -36
+        weight: -38
       items_from_an_entityqueue:
-        weight: -28
+        weight: -29
         enabled: false
       link_bar:
         enabled: true
-        weight: -34
+        weight: -36
       media_tiles:
         enabled: true
-        weight: -41
+        weight: -43
       paragraph_tab:
         enabled: true
-        weight: -33
+        weight: -35
       people:
         enabled: true
-        weight: -44
+        weight: -46
+      podcast_browser:
+        enabled: true
+        weight: -33
       podcast_episode:
         enabled: true
-        weight: -35
+        weight: -37
       program_day:
-        weight: -25
+        weight: -26
         enabled: false
       pull_quote:
         enabled: true
-        weight: -43
+        weight: -45
       slide:
         enabled: true
-        weight: -38
+        weight: -40
       slide_tiles:
-        weight: -27
+        weight: -28
         enabled: false
       stats:
         enabled: true
-        weight: -37
+        weight: -39
       tiles_social:
         enabled: true
-        weight: -40
+        weight: -42
       tiles_sponsors:
         enabled: true
-        weight: -39
+        weight: -41
       tiles_taxonomy:
-        weight: -24
+        weight: -25
         enabled: false
       unmigrated_paragraph:
-        weight: -26
+        weight: -27
         enabled: false
 field_type: entity_reference_revisions

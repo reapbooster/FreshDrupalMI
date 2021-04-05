@@ -11,6 +11,7 @@ dependencies:
     - field.field.people.staff.field_event
     - field.field.people.staff.field_events
     - field.field.people.staff.field_first_name
+    - field.field.people.staff.field_index_weight
     - field.field.people.staff.field_last_name
     - field.field.people.staff.field_middle_name
     - field.field.people.staff.field_pgtitle
@@ -102,6 +103,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_index_weight:
+    weight: 22
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_last_name:
     weight: 5

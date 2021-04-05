@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.article.field_content
     - field.field.node.article.field_event
     - field.field.node.article.field_events
+    - field.field.node.article.field_index_weight
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_region
@@ -33,7 +34,7 @@ third_party_settings:
         - group_tags
         - group_hero
       parent_name: ''
-      weight: 2
+      weight: 3
       format_type: tabs
       format_settings:
         direction: horizontal
@@ -197,6 +198,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_index_weight:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_meta_tags:
     type: metatag_firehose
     weight: 8
@@ -297,7 +304,7 @@ content:
     third_party_settings: {  }
   published_at:
     type: publication_date_timestamp
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }

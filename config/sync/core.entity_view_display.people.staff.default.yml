@@ -11,6 +11,7 @@ dependencies:
     - field.field.people.staff.field_event
     - field.field.people.staff.field_events
     - field.field.people.staff.field_first_name
+    - field.field.people.staff.field_index_weight
     - field.field.people.staff.field_last_name
     - field.field.people.staff.field_middle_name
     - field.field.people.staff.field_pgtitle
@@ -24,6 +25,7 @@ dependencies:
     - field.field.people.staff.field_topics
   module:
     - image
+    - options
     - social_media
     - text
 id: people.staff.default
@@ -86,6 +88,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_index_weight:
+    weight: 17
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_last_name:
     weight: 2

@@ -13,6 +13,7 @@ dependencies:
     - field.field.media.video.field_event_reference
     - field.field.media.video.field_events
     - field.field.media.video.field_height
+    - field.field.media.video.field_index_weight
     - field.field.media.video.field_media_oembed_video
     - field.field.media.video.field_meta_tags
     - field.field.media.video.field_people
@@ -100,6 +101,7 @@ hidden:
   field_event_reference: true
   field_events: true
   field_height: true
+  field_index_weight: true
   field_media_oembed_video: true
   field_meta_tags: true
   field_people: true

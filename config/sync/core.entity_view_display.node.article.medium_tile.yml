@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.article.field_content
     - field.field.node.article.field_event
     - field.field.node.article.field_events
+    - field.field.node.article.field_index_weight
     - field.field.node.article.field_meta_tags
     - field.field.node.article.field_promo_slide
     - field.field.node.article.field_region
@@ -59,6 +60,7 @@ hidden:
   field_content: true
   field_event: true
   field_events: true
+  field_index_weight: true
   field_meta_tags: true
   field_promo_slide: true
   field_region: true
