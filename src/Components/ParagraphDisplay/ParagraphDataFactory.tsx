@@ -15,6 +15,7 @@ import {
   ParagraphTilesSponsors,
 } from "../../DataTypes/ParagraphTiles";
 import ParagraphPeople from "../../DataTypes/ParagraphPeople";
+import ParagraphPodcastBrowser from "../../DataTypes/ParagraphPodcastBrowser";
 import ParagraphPodcastEpisode from "../../DataTypes/ParagraphPodcastEpisode";
 import ParagraphProgramDay from "../../DataTypes/ParagraphProgramDay";
 import ParagraphPullQuote from "../../DataTypes/ParagraphPullQuote";
@@ -55,6 +56,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphMediaTiles(incoming);
     case "paragraph--people":
       return new ParagraphPeople(incoming);
+    case "paragraph--podcast_browser":
+      return new ParagraphPodcastBrowser(incoming);
     case "paragraph--podcast_episode":
       return new ParagraphPodcastEpisode(incoming);
     case "paragraph--program_day":

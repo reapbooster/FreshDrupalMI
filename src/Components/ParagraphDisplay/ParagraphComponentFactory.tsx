@@ -6,6 +6,7 @@ import ParagraphDisplayEventDisplay from "./ParagraphDisplayEventDisplay";
 import ParagraphDisplayFacetExplorer from "./ParagraphDisplayFacetExplorer";
 import ParagraphDisplayLinkBar from "./ParagraphDisplayLinkBar";
 import ParagraphDisplayPeople from "./ParagraphDisplayPeople";
+import ParagraphDisplayPodcastBrowser from "./ParagraphDisplayPodcastBrowser";
 import { ParagraphDisplayPodcastEpisode } from "./ParagraphDisplayPodcastEpisode";
 import ParagraphDisplayProgramDay from "./ParagraphDisplayProgramDay";
 import ParagraphDisplayPullQuote from "./ParagraphDisplayPullQuote";
@@ -37,6 +38,8 @@ export const ParagraphComponentFactory = (incoming: ParagraphInterface) => {
       return ParagraphDisplayLinkBar;
     case "paragraph--people":
       return ParagraphDisplayPeople;
+    case "paragraph--podcast_browser":
+      return ParagraphDisplayPodcastBrowser;
     case "paragraph--podcast_episode":
       return ParagraphDisplayPodcastEpisode;
     case "paragraph--program_day":

@@ -7,15 +7,15 @@ import styled, { StyledComponent } from "styled-components";
 import { MediaPodcastEpisodeInterface } from "../../DataTypes/MediaPodcastEpisode";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 
-export interface PodcastEpisodeBodyProps extends MediaPodcastEpisodeInterface {
+export interface PodcastEpisodePanelProps extends MediaPodcastEpisodeInterface {
   data: MediaPodcastEpisodeInterface;
   view_mode: string;
   container: StyledComponent;
 }
 
 
-export const PodcastEpisodeBody: React.FunctionComponent = (
-  props: PodcastEpisodeBodyProps
+export const PodcastEpisodePanel: React.FunctionComponent = (
+  props: PodcastEpisodePanelProps
 ) => {
   const { data, view_mode, container } = props;
 
@@ -24,7 +24,7 @@ export const PodcastEpisodeBody: React.FunctionComponent = (
     font-weight: bold;
   `;
 
-  console.debug("PodcastEpisodeBody", props);
+  console.debug("PodcastEpisodePanel", props);
   return (
     <>
       <Card.Body>
@@ -51,6 +51,9 @@ export const PodcastEpisodeBody: React.FunctionComponent = (
                     }}
                   />
                 </div>
+                <div>
+                  
+                </div>
               </ErrorBoundary>
             </Col>
             <Col xs={12} sm={9}>
@@ -72,6 +75,7 @@ export const PodcastEpisodeBody: React.FunctionComponent = (
                 <Col className={"col-md-10"}>
                   <br />
                   <ErrorBoundary>
+                    {console.debug("PodcastEpisodePanel: AudioFile Render ", data.field_episode)}
                     <AudioFileDisplay
                       data={data.field_media_audio_file}
                       view_mode={"full"}
@@ -91,4 +95,4 @@ export const PodcastEpisodeBody: React.FunctionComponent = (
   );
 };
 
-export default PodcastEpisodeBody;
+export default PodcastEpisodePanel;
