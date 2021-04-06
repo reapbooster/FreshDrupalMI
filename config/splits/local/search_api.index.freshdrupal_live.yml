@@ -4,42 +4,41 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - eck
     - taxonomy
     - taxonomy_machine_name
+    - eck
     - media
     - node
     - search_api
     - milken_base
   config:
+    - field.storage.event.field_campaign_name
+    - field.storage.event.field_centers
+    - field.storage.event.field_description
+    - field.storage.event.field_event_date
+    - field.storage.event.field_name_short
+    - field.storage.event.field_related_media
+    - field.storage.media.field_body
+    - field.storage.media.field_centers
+    - field.storage.media.field_content
+    - field.storage.media.field_event_reference
+    - field.storage.media.field_media_file
+    - field.storage.node.field_body
+    - field.storage.node.field_centers
+    - field.storage.node.field_content
+    - field.storage.node.field_hero_image
+    - field.storage.node.field_long_description
+    - field.storage.node.field_page_type
     - field.storage.node.field_promo_slide
     - field.storage.slide.field_background_image
-    - field.storage.people.field_biotext
-    - field.storage.media.field_body
-    - field.storage.node.field_body
-    - field.storage.event.field_campaign_name
-    - field.storage.node.field_centers
-    - field.storage.event.field_centers
-    - field.storage.media.field_centers
-    - field.storage.people.field_centers
-    - field.storage.node.field_content
-    - field.storage.media.field_content
-    - field.storage.event.field_description
-    - field.storage.people.field_description
-    - field.storage.people.field_email
-    - field.storage.event.field_event_date
-    - field.storage.media.field_event_reference
-    - field.storage.people.field_first_name
-    - field.storage.node.field_hero_image
-    - field.storage.people.field_last_name
-    - field.storage.node.field_long_description
-    - field.storage.media.field_media_file
-    - field.storage.people.field_middle_name
-    - field.storage.event.field_name_short
-    - field.storage.node.field_page_type
-    - field.storage.people.field_photo
-    - field.storage.event.field_related_media
     - field.storage.node.field_short_summary
+    - field.storage.people.field_biotext
+    - field.storage.people.field_centers
+    - field.storage.people.field_email
+    - field.storage.people.field_first_name
+    - field.storage.people.field_last_name
+    - field.storage.people.field_middle_name
+    - field.storage.people.field_photo
     - search_api.server.freshdrupal_live
     - core.entity_view_mode.media.full
     - core.entity_view_mode.node.full
@@ -132,6 +131,17 @@ field_settings:
         - 'entity:node/field_page_type'
         - search_api_bundle
         - search_api_jsonapi_type
+  aggregated_field_weight:
+    label: 'Aggregated field Weight'
+    property_path: aggregated_field
+    type: integer
+    configuration:
+      type: union
+      fields:
+        - 'entity:media/field_index_weight'
+        - 'entity:node/field_index_weight'
+        - 'entity:panel/field_index_weight'
+        - 'entity:people/field_index_weight'
   bundle:
     label: Bundle
     property_path: search_api_bundle
@@ -284,14 +294,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.event.field_description
-  field_description_2:
-    label: Description
-    datasource_id: 'entity:people'
-    property_path: field_description
-    type: text
-    dependencies:
-      config:
-        - field.storage.people.field_description
   field_email:
     label: email
     datasource_id: 'entity:people'
