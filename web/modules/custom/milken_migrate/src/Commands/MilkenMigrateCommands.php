@@ -200,6 +200,10 @@ class MilkenMigrateCommands extends DrushCommands {
             $person->save();
           }
         }
+        $episode->field_guests[] = [
+          'target_id' => $person->id()
+        ];
+        $episode->save();
       }
     }
   }
