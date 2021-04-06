@@ -57,11 +57,6 @@ class RemoteFile extends MilkenProcessPluginBase implements MigrateProcessInterf
       return NULL;
     }
     $destination_values = [];
-    // phpcs:disable
-    $altTextProperty = $this->configuration['alt_text'] ?? 'photo_subject_name';
-    $titleTextProperty = $this->configuration['title_text'] ?? 'photo_subject_title';
-    // phpcs:enable
-
     $sources = $row->getSourceProperty($this->configuration['source']);
     if (isset($sources['data']) && empty($sources['data'])) {
       throw new MigrateSkipRowException("Skip importing remote file: no data");

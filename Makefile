@@ -35,7 +35,7 @@ run-clone-livedb: env ## clone the live DB to the docker mysql instance
 	[[ -f "db/${BACKUP_FILE_NAME}" ]] && make run-clone-restore && true
 
 run-clone-restore:
-	$(shell pv "./db/${BACKUP_FILE_NAME}" | gunzip | mysql -u root --password=${MYSQL_ROOT_PASSWORD} -h localhost --port 33067 --protocol tcp ${DB_NAME}) > /dev/null
+	$(shell pv "./db/${BACKUP_FILE_NAME}" | gunzip | mysql -u root --password=${MYSQL_ROOT_PASSWORD} --host 127.0.0.1 --port 33067 --protocol tcp ${DB_NAME}) > /dev/null
 
 authterminus-%: ## authorize terminus usage:  make authterminus-{EMAIL_ADDRESS}  e.g. make authterminus-you@email.com
 	## This command assumes terminus is correctly set up
@@ -44,6 +44,7 @@ authterminus-%: ## authorize terminus usage:  make authterminus-{EMAIL_ADDRESS} 
 
 firstrun: ## make environemnt vars available
 	cp .envrc.dist .envrc
+	cp .env.dist .env
 	direnv allow
 
 log-me-in:

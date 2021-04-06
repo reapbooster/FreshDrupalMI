@@ -155,5 +155,54 @@ class MilkenMigrateCommands extends DrushCommands {
     exit(-1);
   }
 
+  /**
+   * Drush command: Podcast Persons.
+   *
+   * @command milken_migrate:podcast_persons
+   * @aliases mmpp
+   *
+   * @throws Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+
+  public function podcastPersons() {
+    $storage = Drupal::entityTypeManager()
+      ->getStorage('media');
+    $episodesIDs = $storage->getQuery()
+      ->condition('bundle', 'podcast_episode')
+      ->condition('status', TRUE)
+      ->execute();
+    foreach ($episodesIDs as $epid) {
+      $episode = \Drupal::entityTypeManager()
+        ->getStorage('media')
+        ->load($epid);
+      if ($episode instanceof EntityInterface) {
+        $media_images = $episode
+          ->get('field_media_image')
+          ->referencedEntities();
+        foreach ($media_images as $image) {
+          $person = \Drupal::entityTypeManager()
+            ->getStorage('people')
+            ->create([
+              'type' => 'person'
+            ]);
+          if ($person instanceof EntityInterface) {
+            $person->field_photo[] = [
+              'target_id' => $image->id(),
+            ];
+            $episodeRemoteRecord = RemoteRecord::getRemoteRecord('paragraph', "podcast_episode", $episode->uuid() . "?jsonapi_include=true&include=field_podcast_image");
+            $imageRemoteRecord = @array_shift($episodeRemoteRecord->getField('field_podcast_image'));
+            if (!empty($imageRemoteRecord)) {
+              $person->field_first_name = $imageRemoteRecord['field_photo_subject_name'];
+              $person->field_last_name = $imageRemoteRecord['field_photo_subject_title'];
+            }
+            $person->enforceIsNew();
+            $person->save();
+          }
+        }
+      }
+    }
+  }
+
 
 }
