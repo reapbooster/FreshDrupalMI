@@ -14,11 +14,21 @@ interface ProgramDayProps {
   viewMode: number;
   panels: object[];
   getSpeakerById: any;
+  getTrackById: any;
   open: boolean;
 }
 
 const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
-  const { date, open, terms, tracks, viewMode, panels, getSpeakerById } = props;
+  const {
+    date,
+    open,
+    terms,
+    tracks,
+    viewMode,
+    panels,
+    getSpeakerById,
+    getTrackById,
+  } = props;
 
   const [opened, setOpened] = useState<boolean>(!!open);
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,6 +49,7 @@ const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
                 session={panel}
                 viewMode={viewMode}
                 getSpeakerById={getSpeakerById}
+                getTrackById={getTrackById}
               />
             ))}
           </div>

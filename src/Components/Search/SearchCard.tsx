@@ -78,7 +78,7 @@ function SearchCard(props) {
   const renderImage = (
     <div className="content-image-wrapper">
       <img alt="content" src={imageUrl} className="card-image" />
-      {!!type && <span class="text-uppercase">{cleanType}</span>}
+      {!!type && <span className="text-uppercase">{cleanType}</span>}
     </div>
   );
 
@@ -104,7 +104,7 @@ function SearchCard(props) {
           )}
         </div>
 
-        <small class="d-block mt-4">{publishedDate}</small>
+        <small className="d-block mt-4">{publishedDate}</small>
       </div>
     </SearchCardWrapper>
   );

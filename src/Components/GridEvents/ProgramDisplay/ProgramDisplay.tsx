@@ -30,6 +30,10 @@ let dataCache = {
     // @ts-ignore
     return dataCache?.speakers[id] ?? null;
   },
+  getTrackById(id: string) {
+    // @ts-ignore
+    return dataCache?.tracks[id] ?? null;
+  },
 };
 
 interface ProgramDisplayProps {
@@ -63,7 +67,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
 
   const [filterActive, setFilterActive] = useState<boolean>(true);
 
-  useEffect(() => { }, [terms, dates]);
+  useEffect(() => {}, [terms, dates]);
 
   useEffect(() => {
     fetchPanels();
@@ -300,7 +304,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
         flex: 0 0 100%;
       }
     }
-  `
+  `;
 
   return (
     <ProgramDisplayWrapper>
@@ -372,6 +376,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
                           viewMode={format}
                           panels={item?.filteredPanels}
                           getSpeakerById={dataCache.getSpeakerById}
+                          getTrackById={dataCache.getTrackById}
                           date={item?.date}
                           open={
                             item?.filteredPanels.length < 5 ||
