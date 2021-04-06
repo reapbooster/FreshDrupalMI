@@ -1,22 +1,3 @@
 #!/usr/bin/env bash
 
-echo "** If terminus is set up incorrectly on this machine, the database download will fail. **"
-
-export BACKUP_FILE_NAME=backup.sql.gz
-export DATABASE_NAME=drupal8
-export SITE=milken-insitute
-
-export MYSQL_ROOT_PASSWORD=$(grep MYSQL_ROOT_PASSWORD .env | cut -d '=' -f 2-)
-export DB_HOST=$(grep DB_HOST .env | cut -d '=' -f 2-)
-export DB_PORT=$(grep DB_PORT .env | cut -d '=' -f 2-)
-export DB_NAME=$(grep DB_NAME .env | cut -d '=' -f 2-)
-
-/usr/local/bin/terminus backup:create freshdrupalmi.live --element=database --yes
-
-if [ -f "db/${BACKUP_FILE_NAME}" ]; then rm "db/${BACKUP_FILE_NAME}"; fi
-
-/usr/local/bin/terminus backup:get freshdrupalmi.live --element=database --yes --to=db/${BACKUP_FILE_NAME}
-
-/usr/bin/redis-cli -h $CACHE_HOST flushall
-
-pv db/${BACKUP_FILE_NAME} | gunzip | mysql -u root --password=${MYSQL_ROOT_PASSWORD} -h $DB_HOST --port ${DB_PORT} ${DATABASE_NAME}
+make run-clone-livedb

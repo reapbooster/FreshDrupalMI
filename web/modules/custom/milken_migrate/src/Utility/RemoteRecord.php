@@ -42,11 +42,12 @@ class RemoteRecord extends DrupalBaseRemoteRecord {
   public static function fromUrl(string $url): ?RemoteRecord {
     try {
       $response = \Drupal::httpClient()->get($url);
+      print_r((string) $response->getBody());
       $responseArray = json_decode($response->getBody(), true);
       if (isset($responseArray['data']) && empty($responseArray['data'])) {
         return null;
       }
-      return new static(json_decode($string, true));
+      return new static($responseArray['data']);
     } catch(\Exception $e) {
       \Drupal::logger('milken_migrate')
         ->error($e->getMessage());
@@ -55,6 +56,18 @@ class RemoteRecord extends DrupalBaseRemoteRecord {
         ->critical($t->getMessage());
     }
     return null;
+  }
+
+
+  public static function getRemoteRecord(string $entity, string $bundle, string $id = null) : ? RemoteRecord {
+    $entityUrl = sprintf('/jsonapi/%s/%s/%s',
+      $entity,
+      $bundle,
+      $id
+    );
+    \Drupal::logger('milken_migrate')
+      ->debug(sprintf("Getting record from %s", $entityUrl));
+    return static::fromUrl( $entityUrl );
   }
 
   public function getField(string $fieldName) {
