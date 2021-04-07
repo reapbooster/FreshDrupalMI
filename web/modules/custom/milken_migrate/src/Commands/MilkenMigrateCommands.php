@@ -193,12 +193,36 @@ class MilkenMigrateCommands extends DrushCommands {
             $episodeRemoteRecord = RemoteRecord::getRemoteRecord('paragraph', "podcast_episode", $episode->uuid() . "?jsonapi_include=true&include=field_podcast_image");
             $imageRemoteRecord = @array_shift($episodeRemoteRecord->getField('field_podcast_image'));
             if (!empty($imageRemoteRecord)) {
-              $person->field_first_name = $imageRemoteRecord['field_photo_subject_name'];
-              $person->field_last_name = $imageRemoteRecord['field_photo_subject_title'];
+              
+
+              $personNamesArray = explode( " ", trim($imageRemoteRecord['field_photo_subject_name']) );
+
+              if (count($personNamesArray) == 2) {
+                $person->field_first_name = array_shift($personNamesArray);
+                $person->field_last_name = array_shift($personNamesArray);
+                echo "\nFirst Name & Last Name \n\n";
+              } else if (count($personNamesArray) == 3) {
+                $person->field_first_name = array_shift($personNamesArray);
+                $person->field_middle_name = array_shift($personNamesArray);
+                $person->field_last_name = array_shift($personNamesArray);
+                echo "\nFirst Name, Middle Name & Last Name \n\n";
+              } else if (count($personNamesArray) > 3) {
+                $person->field_first_name = array_shift($personNamesArray);
+                $person->field_middle_name = array_shift($personNamesArray);
+                $person->field_last_name = join(" ", $personNamesArray);
+                echo "\nTOO MANY NAMES!!!!!! \n\n";
+              } else {
+                $person->field_first_name = join(" ", $personNamesArray);
+                echo "\nWHAT IS EVEN THIS???????? \n\n";
+              }
+
+              $person->field_pgtitle = $imageRemoteRecord['field_photo_subject_title'];
+
             }
             $person->enforceIsNew();
             $person->save();
           }
+          echo "End of current loop iteration \n\n\n";
         }
         $episode->field_guests[] = [
           'target_id' => $person->id()
