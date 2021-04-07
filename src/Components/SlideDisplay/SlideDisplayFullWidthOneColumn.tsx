@@ -99,6 +99,16 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
         }  
       }
 
+      & .h2 {
+        font-family: 'LatoWebItalic';
+        text-transform: uppercase;
+        font-size: 1.25em;
+
+        @media (max-width: 768px) {
+          font-size: 1em;
+        }
+      }
+
       & .h1 {
         font-size: 2.5em;
         font-family: 'LatoWebBlack';
@@ -111,21 +121,9 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
         }
       }
 
-      & .h2 {
-        font-family: 'LatoWebItalic';
-        text-transform: uppercase;
-        font-size: 1.25em;
-
-        @media (max-width: 768px) {
-          font-size: 1em;
-        }
-      }
-
       & .h3 {
         font-family: 'LatoWeb';
         font-size: 1.5em;
-        text-transform: uppercase;
-        font-style: italic;
 
         @media (max-width: 768px) {
           font-size: 1.4em;

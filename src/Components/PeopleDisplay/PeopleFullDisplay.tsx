@@ -3,6 +3,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import styled from "styled-components";
 import { TagsDisplay } from "../TagsDisplay"
 import { SocialDisplay } from "../SocialDisplay"
+import ImageFileDisplay from '../FileDisplay/ImageFileDisplay';
 
 const PersonFullDisplay = (props: any) => {
 
@@ -10,11 +11,15 @@ const PersonFullDisplay = (props: any) => {
 
   const PersonElMainWrapper = styled.div`
     & .hero-wrapper {
-      background: var(--color-milken-blue);
+      background: var(--color-milken-blue);\
+
+      & .img-container {
+        max-width: 30em;
+      }
 
       @media only screen and (max-width: 768px) {
         & .justify-content-end {justify-content: center !important;}
-        & img {width: 100%;}
+        & .img-container {max-width: 100%;}
       }
       
       & .name-title {
@@ -82,7 +87,11 @@ const PersonFullDisplay = (props: any) => {
           </div>
         </Col>
         <Col md="6" sm="12" className="p-0">
-          <img className="img-fluid" src={data?.field_photo[0]?.uri?.url} />
+          <ImageFileDisplay
+            data={data?.field_photo[0]}
+            view_mode="medium-raw"
+            className="img-container"
+          />
         </Col>
       </Row>
       <Row className="main-wrapper py-4 mx-lg-5">
