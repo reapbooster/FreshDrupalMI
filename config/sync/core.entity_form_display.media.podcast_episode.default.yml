@@ -10,6 +10,7 @@ dependencies:
     - field.field.media.podcast_episode.field_events
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
+    - field.field.media.podcast_episode.field_guests
     - field.field.media.podcast_episode.field_media_audio_file
     - field.field.media.podcast_episode.field_media_image
     - field.field.media.podcast_episode.field_media_in_library
@@ -97,6 +98,7 @@ third_party_settings:
         - status
         - field_media_in_library
         - field_people
+        - field_guests
         - uid
         - created
         - path
@@ -119,7 +121,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 31
+    weight: 32
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -186,6 +188,16 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_guests:
+    type: entity_reference_autocomplete
+    weight: 30
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_media_audio_file:
     weight: 39
     settings:
@@ -295,7 +307,7 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 33
+    weight: 34
     region: content
     settings:
       include_locked: true
@@ -310,7 +322,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 32
+    weight: 33
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -323,7 +335,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 30
+    weight: 31
     settings:
       match_operator: CONTAINS
       size: 60
