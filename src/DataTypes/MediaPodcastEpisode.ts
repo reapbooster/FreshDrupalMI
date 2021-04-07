@@ -24,6 +24,7 @@ export interface MediaPodcastEpisodeInterface extends MediaInterface {
   field_summary?: TextField;
   field_transcript?: DocumentFileInterface;
   field_people?: any;
+  field_guests?: any;
   field_topics?: any;
   field_tags?: any;
   field_centers?: any;
@@ -48,6 +49,7 @@ export class MediaPodcastEpisode extends Media implements MediaPodcastEpisodeInt
   field_service_links?: Array<MediaPodcastServiceLinkInterface>;
   field_summary?: TextField;
   field_people?: any;
+  field_guests?: any;
   field_topics?: any;
   field_tags?: any;
   field_centers?: any;
@@ -66,7 +68,7 @@ export class MediaPodcastEpisode extends Media implements MediaPodcastEpisodeInt
   }
 
   getIncluded(): string {
-    return "&include=field_promo_image.field_media_image,field_media_image,thumbnail,field_media_audio_file,field_people,field_topics,field_tags,field_centers,field_regions";
+    return "&include=field_promo_image.field_media_image,field_media_image,thumbnail,field_media_audio_file,field_people,field_guests,field_topics,field_tags,field_centers,field_regions";
   }
 
   hasData(): boolean {

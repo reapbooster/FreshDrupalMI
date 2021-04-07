@@ -24,41 +24,68 @@ export const PodcastEpisodePanel: React.FunctionComponent = (
     font-weight: bold;
   `;
 
+  const PodcastEpisodePanel = styled.div`
+    font-size: 0.85em;
+
+    @media (max-width: 399.98px) {
+      justify-content: center;
+    }
+
+    & .bubble-image-container {
+      width: 8em;
+      height: 8em;
+      border-radius: 50%;
+      overflow: hidden;
+
+      & img {
+        width: 8em;
+        height: 8em;
+      }
+    }
+
+    & .podcast-guest-info {
+      & h4 {
+        font-size: 1.2em; 
+        font-weight: bold; 
+        margin: 1em 0 0.2em 0;
+      }
+  
+      & h5 {
+        font-size: 1.2em; 
+        margin: 0 0 0.2em 0;
+      }
+    }
+  `
+
   console.debug("PodcastEpisodePanel", props);
   return (
     <>
-      <Card.Body>
-        <Container className={"col-xs-12 col-lg-12"}>
+      <Card.Body className="px-0 py-3">
           <Row>
-            <Col xs={12} sm={3}>
-              <ErrorBoundary>
-                <div
-                  style={{
-                    width: "8em",
-                    height: "8em",
-                    borderRadius: "50%",
-                    margin: "auto",
-                    overflow: "hidden",
-                  }}
-                >
-                  <ImageFileDisplay
-                    data={data.field_media_image}
-                    view_mode="thumbnail-raw"
-                    style={{
-                      width: "8em",
-                      height: "8em",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
-                <div>
-                  
-                </div>
-              </ErrorBoundary>
+            <Col xs={12} md={3}>
+              {data.field_guests.map((item) => {
+                return (
+                  <PodcastEpisodePanel className="d-flex flex-column align-items-center">
+                    <ErrorBoundary>
+                      <div className="bubble-image-container">
+                        <ImageFileDisplay
+                          data={item.field_photo[0]}
+                          view_mode="thumbnail-raw"
+                          style={{ objectFit: "cover"}}
+                        />
+                      </div>
+                    </ErrorBoundary>
+                    <Col className="podcast-guest-info text-center p-0 my-2">
+                      <h4>{item.field_first_name} {item.field_middle_name} {item.field_last_name}</h4>
+                      <h5>{item.field_pgtitle}</h5>
+                    </Col>
+                  </PodcastEpisodePanel>
+                )
+              })}
             </Col>
-            <Col xs={12} sm={9}>
+            <Col xs={12} md={9}>
               <Row style={{ margin: "auto" }}>
-                <Col cellPadding={"1rem"}>
+                <Col>
                   <span
                     dangerouslySetInnerHTML={{ __html: data.field_body?.value }}
                     className={"text-muted"}
@@ -84,12 +111,11 @@ export const PodcastEpisodePanel: React.FunctionComponent = (
                   <br />
                 </Col>
               </Row>
-              <Row cellPadding={"1rem"}>
+              <Row>
                 <PodcastEpisodeServiceLinks links={data.field_service_links} />
               </Row>
             </Col>
           </Row>
-        </Container>
       </Card.Body>
     </>
   );

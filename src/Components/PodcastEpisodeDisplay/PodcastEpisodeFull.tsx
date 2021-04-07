@@ -8,8 +8,8 @@ import { MediaPodcastEpisodeInterface } from "../../DataTypes/MediaPodcastEpisod
 import ErrorBoundary from "../../Utility/ErrorBoundary";
 import moment from "moment";
 import AuthorsDisplay from "../AuthorsDisplay";
-import {TagsDisplay} from "../TagsDisplay";
-import {SocialDisplay} from "../SocialDisplay";
+import { TagsDisplay } from "../TagsDisplay";
+import { SocialDisplay } from "../SocialDisplay";
 
 export interface PodcastEpisodeFullProps extends MediaPodcastEpisodeInterface {
   data: MediaPodcastEpisodeInterface;
@@ -39,7 +39,7 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
       top: 50%;
       transform: translateY(-50%);
 
-      & h3 {
+      & h2 {
         font-family: 'LatoWebItalic';
         text-transform: uppercase;
         font-size: 1.25em;
@@ -143,7 +143,7 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
     font-weight: bold;
   `;
 
-  
+
   const created = moment(data.created, "ddd MMM DD YYYY Z");
 
   let tagList = [];
@@ -151,21 +151,21 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
   if (data.field_tags?.length !== undefined && data.field_tags.length > 0) {
     data.field_tags.map(
       (item) => {
-        tagList.push({link_uri: '', tag: item.name});
+        tagList.push({ link_uri: '', tag: item.name });
       }
     )
   }
   if (data.field_topics?.length !== undefined && data.field_topics.length > 0) {
     data.field_topics.map(
       (item) => {
-        tagList.push({link_uri: '', tag: item.name});
+        tagList.push({ link_uri: '', tag: item.name });
       }
     )
   }
   if (data.field_regions?.length !== undefined && data.field_regions.length > 0) {
     data.field_regions.map(
       (item) => {
-        tagList.push({link_uri: '', tag: item.name});
+        tagList.push({ link_uri: '', tag: item.name });
       }
     )
   }
@@ -177,10 +177,10 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
   if (data.field_people?.length !== undefined && data.field_people.length > 0) {
     data.field_people.map(
       (item) => {
-        authorList.push({ 
+        authorList.push({
           photo: item.field_photo[0],
-          name: item.field_first_name + " " + item.field_last_name, 
-          pgtitle: item.field_pgtitle, 
+          name: item.field_first_name + " " + item.field_last_name,
+          pgtitle: item.field_pgtitle,
           link: "/people/" + item.drupal_internal__id,
         });
       }
@@ -193,38 +193,42 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
     <>
       <PodcastHero>
         <div className="slide-text">
-          <h3>Podcast Series</h3>
+          <h2>Podcast Series</h2>
           <h1>{data.name}</h1>
         </div>
       </PodcastHero>
       <ElMainContentWrapper className="container-fluid">
         <Row>
           <Col xs="12" lg="6" xl="1" className="section-social">
-            <SocialDisplay data={{"name": data.name}}></SocialDisplay>
+            <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
           </Col>
           <Col xs="12" xl="8" className="section-content">
             <Row>
               <Col>
-                <h3 className='podcast-title'>Episode {data.field_episode}: {data.field_summary?.value}</h3>
+                <h2 className='podcast-title'>Episode {data.field_episode}: {data.field_summary?.value}</h2>
               </Col>
             </Row>
             <Row>
               <Col>
-                <RowPodcastGuests className="row">
-                  <Col className="bubble-image-container">
-                    <ErrorBoundary>
-                      <ImageFileDisplay
-                        data={data.field_media_image}
-                        view_mode="thumbnail-raw"
-                        style={{ objectFit: "cover", }}
-                      />
-                    </ErrorBoundary>
-                  </Col>
-                  <Col className="podcast-guest-info">
-                    <h4>Podcast Guest</h4>
-                    <h5>CEO, Some Company</h5>
-                  </Col>
-                </RowPodcastGuests>
+                {data.field_guests.map((item) => {
+                  return (
+                    <RowPodcastGuests className="row">
+                      <Col className="bubble-image-container">
+                        <ErrorBoundary>
+                          <ImageFileDisplay
+                            data={item.field_photo[0]}
+                            view_mode="thumbnail-raw"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </ErrorBoundary>
+                      </Col>
+                      <Col className="podcast-guest-info">
+                        <h4>{item.field_first_name} {item.field_middle_name} {item.field_last_name}</h4>
+                        <h5>{item.field_pgtitle}</h5>
+                      </Col>
+                    </RowPodcastGuests>
+                  )
+                })}
               </Col>
             </Row>
             <Row>
@@ -263,8 +267,8 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
           </Col>
           <Col xs="12" lg="6" xl="3" className="section-tags pt-4 pt-lg-0">
             <div className="container published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
-            <AuthorsDisplay data={{authorList: authorList}} />
-            <TagsDisplay data={{tagList: tagList}} />
+            <AuthorsDisplay data={{ authorList: authorList }} />
+            <TagsDisplay data={{ tagList: tagList }} />
           </Col>
         </Row>
       </ElMainContentWrapper>

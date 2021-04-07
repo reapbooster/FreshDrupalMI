@@ -27,7 +27,7 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
       <img
       src="/sites/default/files/Missing%20Photo_0.jpg"
       alt="Missing image"
-      style={ style ?? { width: "100%", } }
+      style={ style ?? { width: "100%", height: "100%" } }
       className={className}
     />
     )
@@ -60,6 +60,7 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
 
   const imageTagStyle = style ?? {
     width: "100%",
+    height: "100%",
   };
 
   if (style) {

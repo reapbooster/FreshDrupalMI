@@ -26,7 +26,7 @@ export const PodcastBrowser = (props: PodcastBrowserProps) => {
   const [pageCount, setPageCount] = useState(1);
   const [fetchData, setFetchData] = useState(false);
   const [fetchRan, setFetchRan] = useState(false);
-  const [requestURL, setRequestURL] = useState("/jsonapi/media/podcast_episode?jsonapi_include=1&page[limit]=2&sort[sort-name-episode][direction]=DESC&sort[sort-name-episode][path]=field_episode&include=field_media_image,field_media_audio_file");
+  const [requestURL, setRequestURL] = useState("/jsonapi/media/podcast_episode?jsonapi_include=1&page[limit]=2&sort[sort-name-episode][direction]=DESC&sort[sort-name-episode][path]=field_episode&include=field_guests,field_media_image,field_media_audio_file");
 
   let field_items_per_page = 10;
   let ContentListObject = [];
