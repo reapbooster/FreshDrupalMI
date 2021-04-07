@@ -37,11 +37,12 @@ const ProfileSummary: React.FC<ProfileSummaryProps> = (
               title={profile?.title + " - Profile"}
               target="_blank"
               rel="noreferrer"
-            >
-              {profile?.title}
-            </a>
+              dangerouslySetInnerHTML={{ __html: profile?.title }}
+            ></a>
           </h5>
-          <h6>{profile?.job}</h6>
+          {profile?.job && (
+            <h6 dangerouslySetInnerHTML={{ __html: profile?.job }}></h6>
+          )}
         </div>
       </div>
     </div>

@@ -11,18 +11,19 @@ interface ProgramDaySessionProps {
   session: any;
   viewMode: number;
   getSpeakerById: any;
+  getTrackById: any;
 }
 
-const SPEAKER_PIC_DEFAULT = "http://via.placeholder.com/150/cccccc/ffffff";
+const SPEAKER_PIC_DEFAULT = "/sites/default/files/Missing%20Photo_0.jpg";
 
 const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   props: ProgramDaySessionProps
 ) => {
-  const { session, viewMode, getSpeakerById } = props;
+  const { session, viewMode, getSpeakerById, getTrackById } = props;
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  useEffect(() => { }, [session]);
+  useEffect(() => {}, [session]);
 
   const renderSessionTime = (session: any) => {
     let startTime = moment(session.field_panel_start_time, "hh:mm").format(
@@ -31,7 +32,11 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
       <div>
-        {startTime} {session.field_pday}<br />to<br />{endTime} {session.field_epday}
+        {startTime} {session.field_pday}
+        <br />
+        to
+        <br />
+        {endTime} {session.field_epday}
       </div>
     );
   };
@@ -105,9 +110,16 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         .orderBy("weight")
         .map(({ speakers, mrole }) => {
           let suffix = "";
-          if (["Speaker", "Moderator"].includes(mrole) && speakers.length > 1) {
+          if (
+            ["Speaker", "Moderator", "Guest", "Host"].includes(mrole) &&
+            speakers.length > 1
+          ) {
             suffix = "s";
           }
+          // Split camelcase strings
+          mrole = mrole
+            .replace(/((?<!^)[A-Z](?![A-Z]))(?=\S)/g, " $1")
+            .replace(/^./, (s) => s.toUpperCase());
           return (
             <div className="speaker-role-group" key={mrole}>
               <h5>
@@ -120,6 +132,27 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         })
         .value()
         .filter(Boolean);
+    }
+  };
+
+  const renderTracks = (session: any) => {
+    if (session?.field_tracks && session?.field_tracks.length > 0) {
+      return (
+        <SessionTrackWrapper className="text-center">
+          {session?.field_tracks
+            .split(", ")
+            .map(getTrackById)
+            .filter(Boolean)
+            .map((track) => {
+              return (
+                <span
+                  className="badge badge-secondary"
+                  dangerouslySetInnerHTML={{ __html: track?.title }}
+                ></span>
+              );
+            })}
+        </SessionTrackWrapper>
+      );
     }
   };
 
@@ -141,7 +174,16 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         text-align: right;
       }
     }
-  `
+  `;
+
+  const SessionTrackWrapper = styled.div`
+    & .badge {
+      font-size: 0.8rem;
+      background: #aaa;
+      padding: 0.5rem;
+      margin: 0.25rem;
+    }
+  `;
 
   const renderTitleOnly = () => {
     return (
@@ -149,7 +191,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         <ProgramDaySessionWrapper>
           <Row className="mb-3">
             <Col>
-              <h4 
+              <h4
                 dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
               ></h4>
@@ -170,6 +212,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
             <div id="session-collapse-content">
               {summary}
               {renderSpeakers(session)}
+              {renderTracks(session)}
             </div>
           </Collapse>
         </ProgramDaySessionWrapper>
@@ -183,7 +226,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         <ProgramDaySessionWrapper>
           <Row className="mb-3">
             <Col>
-              <h4 
+              <h4
                 dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
               ></h4>
@@ -202,7 +245,10 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
           </Row>
           {summary}
           <Collapse in={expanded}>
-            <div id="session-collapse-content">{renderSpeakers(session)}</div>
+            <div id="session-collapse-content">
+              {renderSpeakers(session)}
+              {renderTracks(session)}
+            </div>
           </Collapse>
         </ProgramDaySessionWrapper>
       </>
@@ -218,6 +264,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
           className="mb-4"
         />
         {renderSpeakers(session)}
+        {renderTracks(session)}
       </>
     );
   };

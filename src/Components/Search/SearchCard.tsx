@@ -8,6 +8,8 @@ import { theme } from "../Shared/Styles";
 import styled from "styled-components";
 
 const MAX_LENGTH_LIMIT = 100;
+const SEARCH_THUMBNAIL_FALLBACK =
+  "/sites/default/files/full_screen_pattern%402x.png";
 
 const ViewMoreButton = styled.button`
   border: 0;
@@ -70,19 +72,14 @@ function SearchCard(props) {
   const { image, type, title, text, link, published } = props;
 
   const publishedDate = moment.unix(published).format("ll");
+  const imageUrl = image ?? SEARCH_THUMBNAIL_FALLBACK;
+  const cleanType = type.replace("_", " ");
 
-  // TODO: Conditional image output, clean type (when available from backend)
-  const renderImage = image ? (
+  const renderImage = (
     <div className="content-image-wrapper">
-      <img alt="content" src={image} className="card-image" />
-      {!!type && type != "landing_page" ? (
-        <span class="text-uppercase">{type}</span>
-      ) : (
-        ""
-      )}
+      <img alt="content" src={imageUrl} className="card-image" />
+      {!!type && <span className="text-uppercase">{cleanType}</span>}
     </div>
-  ) : (
-    false
   );
 
   return (
@@ -107,7 +104,7 @@ function SearchCard(props) {
           )}
         </div>
 
-        <small class="d-block mt-4">{publishedDate}</small>
+        <small className="d-block mt-4">{publishedDate}</small>
       </div>
     </SearchCardWrapper>
   );

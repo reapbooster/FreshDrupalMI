@@ -39,4 +39,8 @@ export const CustomSelect = styled.div`
     border-radius: 0;
     border-color: ${theme.colors.lightgray};
   }
+  input[id^="react-select"],
+  div[class$="-ValueContainer"] > div[class$="-Input"] {
+    width: 100% !important;
+  }
 `;

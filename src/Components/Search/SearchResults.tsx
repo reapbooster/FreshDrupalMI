@@ -6,10 +6,9 @@ import SearchRow from "./SearchRow";
 export default function SearchResults(props) {
   const { queryString } = props;
   const itemProps = (content) => {
-    return {
-      id: content?.uuid,
-      image: Object.keys(content)
-        .map((key) =>
+    const imagePath = Object.keys(content)
+      .map(
+        (key) =>
           [
             "field_photo",
             "field_thumbnail_uri",
@@ -17,10 +16,13 @@ export default function SearchResults(props) {
             "field_title_card_image",
             "field_cover",
           ].includes(key) && content[key]
-            ? content[key].replace("public://", "/sites/default/files/")
-            : false
-        )
-        .filter(Boolean),
+      )
+      .find(Boolean)
+      ?.replace("public://", "/sites/default/files/");
+
+    return {
+      id: content?.uuid,
+      image: imagePath,
       type: content?.bundle,
       title: content?.label ?? content?.title,
       text: content?.search_api_excerpt,
