@@ -78,26 +78,26 @@ export class ParagraphDisplayTiles extends React.Component<
       );
     }
     if (loaded) {
-      let containerClassNames = (data.field_view_mode == "card") 
-        ? "position-relative overflow-hidden py-5" 
-        : (data.field_view_mode == "card-large") 
-        ? "py-5 tiles-card-large"
-        : (data.field_view_mode == "tile") 
-        ? "text-center pb-5"
-        : "py-5";
+      let containerClassNames = (data.field_view_mode == "card")
+        ? "position-relative overflow-hidden py-5"
+        : (data.field_view_mode == "card-large")
+          ? "py-5 tiles-card-large"
+          : (data.field_view_mode == "tile")
+            ? "text-center pb-5"
+            : "py-5";
 
-      let containerBackgroundColor = ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" )
+      let containerBackgroundColor = (data.field_view_mode == "card" && data.type == "paragraph--media_tiles")
         ? '#e2e7ea'
-        : ( data.field_view_mode == "card" && data.type == "paragraph--content_tiles" )
-        ? '#e2e7ea'
-        : ( data.field_view_mode == "tile" && data.type == "paragraph--content_tiles" )
-        ? '#f0f3f5'
-        : '#FFFFFF';
+        : (data.field_view_mode == "card" && data.type == "paragraph--content_tiles")
+          ? '#e2e7ea'
+          : (data.field_view_mode == "tile" && data.type == "paragraph--content_tiles")
+            ? '#f0f3f5'
+            : '#FFFFFF';
 
       let elSubheader = (data.field_section_subheader !== undefined && data.field_section_subheader !== null)
         ? <p>{data.field_section_subheader}</p>
         : '';
-        
+
       const SectionWrapper = styled.section`
         background-color: ${containerBackgroundColor};
       
@@ -114,6 +114,13 @@ export class ParagraphDisplayTiles extends React.Component<
         }
 
         & .list-display-component {
+
+          @media screen and (max-width: 576px) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+
           & a {
             display: flex;
             flex-direction: column;
@@ -123,43 +130,81 @@ export class ParagraphDisplayTiles extends React.Component<
             display: flex;
           }
         }
+
+        & .subheader {
+          padding-left: 2em;
+          @media screen and (max-width: 992px) {
+            padding: 0 2.3em;
+          }
+
+          & h2 {
+            color: #35363c;
+            font-size: 1.846em;
+            position:relative;
+            margin: 0;
+            padding: 1em 0;
+            
+            &::after {
+              content: "";
+              background: #0063ca;
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 34px;
+              height: 4px;
+            }
+            @media screen and (max-width: 576px) {
+              font-size: 1.6em;
+            }
+          }
+
+          & p {
+            font-size: 1.54em;
+            color: dimgray;
+            line-height: 2em;
+            margin: 1.3em 0;
+            @media screen and (max-width: 576px) {
+              font-size: 1.3em;
+            }
+          }
+        }
       `;
 
-      let titleIcon = 
-      ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--video_stream" )
-      ? faVideo
-      : ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--video" )
-      ? faPlayCircle
-      : ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--report" )
-      ? faBook 
-      : ( data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--podcast_episode" )
-      ? faPodcast
-      : ( data.field_view_mode == "card" && data.type == "paragraph--content_tiles" && data.tiles[0].type === "node--landing_page" )
-      ? faNewspaper
-      : ( data.field_view_mode == "card" && data.type == "paragraph--content_tiles" && data.tiles[0].type === "node--article" )
-      ? faNewspaper
-      : faExclamation;
+      let titleIcon =
+        (data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--video_stream")
+          ? faVideo
+          : (data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--video")
+            ? faPlayCircle
+            : (data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--report")
+              ? faBook
+              : (data.field_view_mode == "card" && data.type == "paragraph--media_tiles" && data.tiles[0].type === "media--podcast_episode")
+                ? faPodcast
+                : (data.field_view_mode == "card" && data.type == "paragraph--content_tiles" && data.tiles[0].type === "node--landing_page")
+                  ? faNewspaper
+                  : (data.field_view_mode == "card" && data.type == "paragraph--content_tiles" && data.tiles[0].type === "node--article")
+                    ? faNewspaper
+                    : faExclamation;
 
-      let headerSection = (data.field_view_mode == "tile") 
+      let headerSection = (data.field_view_mode == "tile")
         ? ''
         : (data.field_view_mode == "card-large")
-        ? (
-            <div className="col-sm-12 col-md-2 col-lg-3">
+          ? (
+            <div className="col-12 col-lg-3 subheader">
               <h2> {data.field_title} </h2>
               {elSubheader}
             </div>
           )
-        : (
-          <div className="row" style={{ margin: "0 -10px 20px", }} >
-            <div className="col d-flex justify-content-between align-items-center">
-              <h2>
-                <FontAwesomeIcon icon={titleIcon} className="mr-2"/>
-                {data.field_title}
-              </h2>
-              {elSubheader}
-              {/* <a className="btn-milken-orange mt-0">Button</a> */}
+          : (
+            <div className="row" style={{ margin: "0 -10px 20px", }} >
+              <div className="col d-flex justify-content-between align-items-center">
+                <h2>
+                  <FontAwesomeIcon icon={titleIcon} className="mr-2" />
+                  {data.field_title}
+                </h2>
+                {elSubheader}
+                {/* <a className="btn-milken-orange mt-0">Button</a> */}
+              </div>
             </div>
-          </div>
           );
 
       return (

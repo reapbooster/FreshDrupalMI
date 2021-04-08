@@ -38,21 +38,21 @@ export const PodcastEpisodePanel: React.FunctionComponent = (
       overflow: hidden;
 
       & img {
-        width: 8em;
-        height: 8em;
+        width: 100%;  
+        height: 100%;
       }
     }
 
     & .podcast-guest-info {
       & h4 {
-        font-size: 1.2em; 
+        font-size: 1.1em; 
         font-weight: bold; 
-        margin: 1em 0 0.2em 0;
+        font-style: italic;
+        margin: 0.7em 0 0;
       }
   
       & h5 {
-        font-size: 1.2em; 
-        margin: 0 0 0.2em 0;
+        font-size: 0.9em; 
       }
     }
   `

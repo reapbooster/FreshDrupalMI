@@ -19,7 +19,7 @@ const ParagraphDisplayPodcastBrowser: React.FunctionComponent = (
   `;
 
   return (
-    <PodcastContainer className="container-fluid">
+    <PodcastContainer className="container-fluid pb-5 mb-5">
       <Row>
         <PodcastBrowser />
       </Row>

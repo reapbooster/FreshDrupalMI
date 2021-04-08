@@ -42,7 +42,7 @@ export class NodeArticle extends Node implements NodeArticleInterface {
   }
 
   getIncluded(): string {
-    return "&include=field_promo_slide,field_tags,field_topics,field_collections,field_region,field_authors.field_photo";
+    return "&include=field_promo_slide,field_tags,field_topics,field_collections,field_region,field_authors,field_authors.field_photo";
   }
 
   getItems(): Array<EntityInterface> {

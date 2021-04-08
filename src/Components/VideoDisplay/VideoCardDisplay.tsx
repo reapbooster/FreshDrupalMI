@@ -33,6 +33,15 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
         font-weight: bold;
       }
     }
+
+    & .tags {
+      color: #999AA3;
+      margin: 0;
+      font-size: 0.95em;
+      text-overflow: ellipsis;
+      white-space: nowrap; 
+      overflow: hidden;
+    }
   `;
 
   const CustomCardHeader = styled.div`
@@ -48,6 +57,15 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
     position: absolute;
     bottom: 0;
   `;
+
+  let tags = '';
+  if (data.field_events.length !== undefined && data.field_events.length > 0) {
+    data.field_events.map((item) => {
+      tags += item.name === null ? '' : item.name 
+      tags += ', ';
+    });
+    tags = tags.trim().slice(0, -1);
+  }
 
   return (
     <div className="col-sm-6 col-lg-3">
@@ -84,7 +102,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
             </Card.Title>
           </Card.Body>
           <Card.Footer className="bg-white border-0">
-            Authors and Tags
+            <p className="tags">{tags}</p>
           </Card.Footer>
         </a>
       </CardWrapper>

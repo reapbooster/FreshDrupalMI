@@ -60,6 +60,15 @@ const ArticleCard = (props: ArticleCardProps) => {
       height: 12.35vw;
       min-height: 146px;
     }
+
+    & .authors {
+      color: #999AA3;
+      margin: 0;
+      font-size: 0.95em;
+      text-overflow: ellipsis;
+      white-space: nowrap; 
+      overflow: hidden;
+    }
   `;
 
   const CustomCardHeader = styled.div`
@@ -76,9 +85,20 @@ const ArticleCard = (props: ArticleCardProps) => {
     bottom: 0;
   `;
 
+  let authors = '';
+  if (data.field_authors.length !== undefined && data.field_authors.length > 0) {
+    data.field_authors.map((item) => {
+      authors += item.field_first_name === null ? '' : item.field_first_name
+      authors += item.field_middle_name === null ? '' : (' ' + item.field_middle_name)
+      authors += item.field_last_name === null ? '' : (' ' + item.field_last_name)
+      authors += ', ';
+    });
+    authors = authors.trim().slice(0, -1);
+  }
+
   return (
     <div className="col-sm-6 col-lg-3">
-      <CardWrapper className="card text-align-left mx-1 mt-1 mb-4">
+      <CardWrapper className="card text-align-left mx-1 mt-1 mb-4 w-100">
         <a
           href={articleData.path.alias}
           data-drupal-id={articleData.drupal_internal__nid}
@@ -103,7 +123,7 @@ const ArticleCard = (props: ArticleCardProps) => {
             </Card.Title>
           </Card.Body>
           <Card.Footer className="bg-white border-0">
-            Authors and Tags
+            <p className="authors">{authors}</p>
           </Card.Footer>
         </a>
       </CardWrapper>

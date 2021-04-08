@@ -29,6 +29,15 @@ const CardWrapper = styled.div`
     }
   }
 
+  & .authors {
+    color: #999AA3;
+    margin: 0;
+    font-size: 0.95em;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    overflow: hidden;
+  }
+
 `;
 
 const CustomCardHeader = styled.div`
@@ -51,6 +60,17 @@ export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
     return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
   const created = moment(data.changed, "ddd MMM DD YYYY Z");
+
+  let authors = '';
+  if (data.field_authors.length !== undefined && data.field_authors.length > 0) {
+    data.field_authors.map((item) => {
+      authors += item.field_first_name === null ? '' : item.field_first_name
+      authors += item.field_middle_name === null ? '' : (' ' + item.field_middle_name)
+      authors += item.field_last_name === null ? '' : (' ' + item.field_last_name)
+      authors += ', ';
+    });
+    authors = authors.trim().slice(0, -1);
+  }
 
   console.debug("Thumbnail: ", data.getThumbnail());
   return (
@@ -85,7 +105,7 @@ export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
             </Card.Title>
           </Card.Body>
           <Card.Footer className="bg-white border-0">
-            Authors and Tags
+            <p className="authors">{authors}</p>
           </Card.Footer>
         </a>
       </ErrorBoundary>

@@ -304,6 +304,33 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
         flex: 0 0 100%;
       }
     }
+    
+    & .program-day-session-wrapper {
+      & h4 {
+        @media screen and (max-width: 992px) {
+          font-size: 1.7em;
+        }
+        @media screen and (max-width: 768px) {
+          font-size: 1.5em;
+        }
+      }
+  
+      & .view-more-link {
+        flex: 0 0 9em;
+        @media screen and (max-width: 576px) {
+          flex: 0 0 100%;
+          max-width: 100%;
+          text-align: right;
+        }
+      }
+      
+      & .badge {
+        font-size: 0.8rem;
+        background: #aaa;
+        padding: 0.5rem;
+        margin: 0.25rem;
+      }
+    }
   `;
 
   return (

@@ -42,7 +42,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const summary = (
-    <p dangerouslySetInnerHTML={{ __html: session?.field_description }} />
+    <p dangerouslySetInnerHTML={{ __html: session?.field_description }} style={{ fontSize: "1.154em" }} />
   );
 
   const renderSpeakerGroup = (speakers: Array<any>) => {
@@ -138,7 +138,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderTracks = (session: any) => {
     if (session?.field_tracks && session?.field_tracks.length > 0) {
       return (
-        <SessionTrackWrapper className="text-center">
+        <div className="text-center">
           {session?.field_tracks
             .split(", ")
             .map(getTrackById)
@@ -151,49 +151,20 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
                 ></span>
               );
             })}
-        </SessionTrackWrapper>
+        </div>
       );
     }
   };
 
-  const ProgramDaySessionWrapper = styled.div`
-    & h4 {
-      @media screen and (max-width: 992px) {
-        font-size: 1.7em;
-      }
-      @media screen and (max-width: 768px) {
-        font-size: 1.5em;
-      }
-    }
-
-    & .view-more-link {
-      flex: 0 0 9em;
-      @media screen and (max-width: 576px) {
-        flex: 0 0 100%;
-        max-width: 100%;
-        text-align: right;
-      }
-    }
-  `;
-
-  const SessionTrackWrapper = styled.div`
-    & .badge {
-      font-size: 0.8rem;
-      background: #aaa;
-      padding: 0.5rem;
-      margin: 0.25rem;
-    }
-  `;
-
   const renderTitleOnly = () => {
     return (
       <>
-        <ProgramDaySessionWrapper>
+        <div className="program-day-session-wrapper">
           <Row className="mb-3">
             <Col>
-              <h4
-                dangerouslySetInnerHTML={{ __html: session?.title }}
+              <h4 dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
+                style={{ fontSize: "1.54em" }}
               ></h4>
             </Col>
             <Col className="view-more-link">
@@ -215,7 +186,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
               {renderTracks(session)}
             </div>
           </Collapse>
-        </ProgramDaySessionWrapper>
+        </div>
       </>
     );
   };
@@ -223,11 +194,10 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderTitleSummary = () => {
     return (
       <>
-        <ProgramDaySessionWrapper>
+        <div className="program-day-session-wrapper">
           <Row className="mb-3">
             <Col>
-              <h4
-                dangerouslySetInnerHTML={{ __html: session?.title }}
+              <h4 dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
               ></h4>
             </Col>
@@ -250,7 +220,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
               {renderTracks(session)}
             </div>
           </Collapse>
-        </ProgramDaySessionWrapper>
+        </div>
       </>
     );
   };

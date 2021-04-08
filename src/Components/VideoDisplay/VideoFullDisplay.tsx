@@ -122,13 +122,6 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       }
     )
   }
-  if (data.field_collections.length !== undefined && data.field_collections.length > 0) {
-    data.field_collections.map(
-      (item) => {
-        tagList.push({link_uri: '', tag: item.name});
-      }
-    )
-  }
   
   return (
     <VideoElMainWrapper className="container-fluid p-0">

@@ -138,13 +138,6 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
       }
     )
   }
-  if (data.field_collections.length !== undefined && data.field_collections.length > 0) {
-    data.field_collections.map(
-      (item) => {
-        tagList.push({link_uri: '', tag: item.name});
-      }
-    )
-  }
 
   let authorList = [];
 

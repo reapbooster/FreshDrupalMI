@@ -10,6 +10,7 @@ import { SlideInterface } from "./Slide";
 export interface ParagraphTilesInterface extends ParagraphInterface {
   tiles?: Array<EntityInterface>;
   field_title?: string;
+  field_section_subheader?: string;
   field_view_mode?: string;
   field_background_color?: ColorObjectInterface;
 }
@@ -103,7 +104,7 @@ export class ParagraphMediaTiles
   }
 
   getIncluded(): string {
-    return super.getIncluded().concat(",field_media_refs");
+    return super.getIncluded().concat(",field_media_refs,field_media_refs.field_authors,field_media_refs.field_events");
   }
 }
 
@@ -130,7 +131,7 @@ export class ParagraphContentTiles
   }
 
   getIncluded(): string {
-    return super.getIncluded().concat(",field_content_refs");
+    return super.getIncluded().concat(",field_content_refs,field_content_refs.field_authors");
   }
 }
 

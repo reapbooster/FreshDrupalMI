@@ -31,9 +31,6 @@ export const ListDisplay = function (props: ListDisplayProps) {
       position: relative;
       -ms-overflow-style: none;
       scrollbar-width: none;
-      &.justify-content-evenly{ 
-        justify-content: space-evenly;
-      }
       &::-webkit-scrollbar {
         display: none;
       }
@@ -84,9 +81,9 @@ export const ListDisplay = function (props: ListDisplayProps) {
         props.view_mode == "tile"
           ? "list-display-component d-flex flex-wrap justify-content-center"
           : props.view_mode == "card"
-          ? "list-display-component row no-gutters justify-content-evenly"
+          ? "list-display-component row no-gutters"
           : props.view_mode == "card-large"
-          ? "col d-flex justify-content-around flex-wrap"
+          ? "col d-flex flex-wrap"
           : props.view_mode == "row"
           ? ""
           : "list-display-component"

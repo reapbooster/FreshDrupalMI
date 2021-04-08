@@ -50,6 +50,10 @@ export const ArticleFull = (props: ArticleFullProps) => {
         order: 3;
         padding-top: 1.5em;
       }
+      & section > .container {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
     }
     & .section-tags {
       order: 3;
@@ -97,13 +101,6 @@ export const ArticleFull = (props: ArticleFullProps) => {
   }
   if (nodeArticleData.field_region.length !== undefined && nodeArticleData.field_region.length > 0) {
     nodeArticleData.field_region.map(
-      (item) => {
-        tagList.push({link_uri: '', tag: item.name});
-      }
-    )
-  }
-  if (nodeArticleData.field_collections.length !== undefined && nodeArticleData.field_collections.length > 0) {
-    nodeArticleData.field_collections.map(
       (item) => {
         tagList.push({link_uri: '', tag: item.name});
       }
