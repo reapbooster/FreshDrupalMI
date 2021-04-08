@@ -6,6 +6,7 @@ dependencies:
     - entity_browser.browser.browse_content
     - field.field.paragraph.content_tiles.field_background_color
     - field.field.paragraph.content_tiles.field_content_refs
+    - field.field.paragraph.content_tiles.field_section_subheader
     - field.field.paragraph.content_tiles.field_title
     - field.field.paragraph.content_tiles.field_view_mode
     - paragraphs.paragraphs_type.content_tiles
@@ -26,7 +27,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_background_color:
-    weight: 4
+    weight: 5
     settings:
       placeholder_color: ''
       placeholder_opacity: ''
@@ -34,7 +35,7 @@ content:
     type: color_field_widget_default
     region: content
   field_content_refs:
-    weight: 3
+    weight: 4
     settings:
       entity_browser: browse_content
       field_widget_display: label
@@ -47,6 +48,14 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
+  field_section_subheader:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_title:
     weight: 1
     settings:
@@ -56,7 +65,7 @@ content:
     type: string_textfield
     region: content
   field_view_mode:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
