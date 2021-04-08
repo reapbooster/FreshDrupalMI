@@ -105,10 +105,10 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
       return;
     }
 
+    console.log(res.tracks);
+
     setPanels(res.panels);
     setSpeakers(res.speakers);
-    setTracksOptions(res.tracks);
-    setTracks(res.tracks.map((t: any) => t?.id));
 
     res?.panels.map((panel: any) => {
       // @ts-ignore
@@ -119,10 +119,15 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
       dataCache.speakers[speaker.id] = speaker;
     });
 
-    res?.tracks.map((track: any) => {
-      // @ts-ignore
-      dataCache.tracks[track.id] = track;
-    });
+    if (res?.tracks.length) {
+      setTracksOptions(res.tracks);
+      setTracks(res.tracks.map((t: any) => t?.id));
+
+      res?.tracks.map((track: any) => {
+        // @ts-ignore
+        dataCache.tracks[track.id] = track;
+      });
+    }
   };
 
   // @ts-ignore
