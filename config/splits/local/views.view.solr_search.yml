@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.event.field_title_card_image
     - field.storage.media.field_cover
     - field.storage.media.field_thumbnail_uri
     - field.storage.node.field_hero_image
@@ -1458,18 +1457,6 @@ display:
             group_items: {  }
           plugin_id: search_api_date
       sorts:
-        aggregated_field_weight:
-          id: aggregated_field_weight
-          table: search_api_index_freshdrupal_live
-          field: aggregated_field_weight
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
         search_api_relevance:
           id: search_api_relevance
           table: search_api_index_freshdrupal_live
@@ -1665,7 +1652,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.event.field_title_card_image'
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
         - 'config:field.storage.node.field_hero_image'
@@ -1751,7 +1737,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.event.field_title_card_image'
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
         - 'config:field.storage.node.field_hero_image'

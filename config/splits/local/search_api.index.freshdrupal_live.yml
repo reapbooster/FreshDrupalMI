@@ -4,31 +4,31 @@ status: true
 dependencies:
   module:
     - search_api_solr
-    - eck
+    - media
     - taxonomy
     - taxonomy_machine_name
-    - media
     - node
+    - eck
     - search_api
     - milken_base
   config:
+    - field.storage.media.field_body
+    - field.storage.media.field_centers
+    - field.storage.media.field_content
+    - field.storage.media.field_event_reference
+    - field.storage.media.field_media_file
+    - field.storage.node.field_centers
+    - field.storage.node.field_content
+    - field.storage.node.field_hero_image
+    - field.storage.node.field_page_type
     - field.storage.node.field_promo_slide
     - field.storage.slide.field_background_image
     - field.storage.people.field_biotext
-    - field.storage.media.field_body
-    - field.storage.node.field_centers
-    - field.storage.media.field_centers
     - field.storage.people.field_centers
-    - field.storage.node.field_content
-    - field.storage.media.field_content
     - field.storage.people.field_email
-    - field.storage.media.field_event_reference
     - field.storage.people.field_first_name
-    - field.storage.node.field_hero_image
     - field.storage.people.field_last_name
-    - field.storage.media.field_media_file
     - field.storage.people.field_middle_name
-    - field.storage.node.field_page_type
     - field.storage.people.field_photo
     - search_api.server.freshdrupal_live
     - core.entity_view_mode.media.full
@@ -83,6 +83,7 @@ field_settings:
     label: 'Aggregated field Centers'
     property_path: aggregated_field
     type: text
+    boost: !!float 8
     configuration:
       type: union
       fields:
@@ -105,6 +106,7 @@ field_settings:
     label: 'Aggregated field Topics'
     property_path: aggregated_field
     type: text
+    boost: !!float 8
     configuration:
       type: union
       fields:
@@ -165,6 +167,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: field_body
     type: text
+    boost: !!float 0
     dependencies:
       config:
         - field.storage.media.field_body
@@ -173,6 +176,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: field_body
     type: text
+    boost: !!float 0
     dependencies:
       config:
         - field.storage.media.field_body
@@ -186,6 +190,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: field_body
     type: text
+    boost: !!float 0
     dependencies:
       config:
         - field.storage.media.field_body
@@ -194,6 +199,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: field_centers
     type: text
+    boost: !!float 8
     dependencies:
       config:
         - field.storage.node.field_centers
@@ -202,6 +208,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: field_centers
     type: text
+    boost: !!float 8
     dependencies:
       config:
         - field.storage.media.field_centers
@@ -210,6 +217,7 @@ field_settings:
     datasource_id: 'entity:people'
     property_path: field_centers
     type: text
+    boost: !!float 5
     dependencies:
       config:
         - field.storage.people.field_centers
@@ -266,6 +274,7 @@ field_settings:
     datasource_id: 'entity:people'
     property_path: field_first_name
     type: text
+    boost: !!float 21
     dependencies:
       config:
         - field.storage.people.field_first_name
@@ -282,6 +291,7 @@ field_settings:
     datasource_id: 'entity:people'
     property_path: field_last_name
     type: text
+    boost: !!float 21
     dependencies:
       config:
         - field.storage.people.field_last_name
@@ -298,6 +308,7 @@ field_settings:
     datasource_id: 'entity:people'
     property_path: field_middle_name
     type: text
+    boost: !!float 21
     dependencies:
       config:
         - field.storage.people.field_middle_name
@@ -338,6 +349,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: 'field_centers:entity:machine_name'
     type: text
+    boost: !!float 8
     dependencies:
       config:
         - field.storage.node.field_centers
@@ -349,6 +361,7 @@ field_settings:
     datasource_id: 'entity:media'
     property_path: name
     type: text
+    boost: !!float 21
     dependencies:
       module:
         - media
@@ -394,6 +407,7 @@ field_settings:
     datasource_id: 'entity:node'
     property_path: title
     type: text
+    boost: !!float 13
     dependencies:
       module:
         - node
@@ -443,14 +457,6 @@ datasource_settings:
     languages:
       default: true
       selected: {  }
-  'entity:panel':
-    bundles:
-      default: false
-      selected:
-        - panel
-    languages:
-      default: true
-      selected: {  }
   'entity:people':
     bundles:
       default: false
@@ -471,16 +477,8 @@ processor_settings:
       - entity_type_id
       - field_body
       - field_body_1
-      - field_campaign_name
-      - field_description
-      - field_long_description
-      - field_name_short
-      - field_short_summary
-      - field_title_1
       - name
-      - parent_type
       - title
-      - title_1
       - uuid
     replacement: '|9999999998|'
     weights:
@@ -488,22 +486,19 @@ processor_settings:
       preprocess_index: -15
       preprocess_query: -15
   entityTypeId: {  }
+  entity_status: {  }
   highlight:
     highlight: always
-    highlight_partial: false
+    highlight_partial: true
     excerpt: true
     excerpt_length: 256
     exclude_fields:
       - bundle
       - entity_type_id
-      - field_name_short
-      - field_name_short_1
       - field_page_type
       - jsonapi_type
       - label
       - title
-      - title_1
-      - title_2
       - type
       - url
       - uuid
@@ -540,11 +535,29 @@ processor_settings:
     weights:
       preprocess_index: 0
   taxonomy_bucket: {  }
+  type_boost:
+    boosts:
+      'entity:media':
+        datasource_boost: !!float 1
+        bundle_boosts:
+          report: !!float 8
+          video: 0.5
+      'entity:node':
+        datasource_boost: !!float 1
+        bundle_boosts:
+          article: !!float 1
+          landing_page: !!float 8
+      'entity:panel':
+        datasource_boost: !!float 1
+      'entity:people':
+        datasource_boost: !!float 13
+    weights:
+      preprocess_index: 0
   uuid: {  }
 tracker_settings:
   default:
     indexing_order: lifo
 options:
   index_directly: false
-  cron_limit: 50
+  cron_limit: 200
 server: freshdrupal_live
