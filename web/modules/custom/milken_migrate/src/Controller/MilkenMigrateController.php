@@ -329,13 +329,13 @@ class MilkenMigrateController extends ControllerBase {
    *
    * @param string $term_name
    *   Term name.
-   * @param int $vid
+   * @param string $vid
    *   Name of the vocabulary to search the term in.
    *
    * @return \Drupal\taxonomy\Entity\Term
    *   Id of the found term or else FALSE.
    */
-  private function get_term_from_name(string $term_name, int $vid) {
+  private function get_term_from_name(string $term_name, string $vid) {
     $term = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
       ->loadByProperties(['name' => $term_name, 'vid' => $vid]);
