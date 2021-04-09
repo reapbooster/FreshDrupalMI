@@ -107,9 +107,7 @@ const getEntityId = (list, machineName) => {
 const fetchTopics = async () => {
   try {
     if (!topics) {
-      const response = await fetch(
-        `${apiPath}/jsonapi/taxonomy_term/milken_tags`
-      );
+      const response = await fetch(`${apiPath}/jsonapi/taxonomy_term/topics`);
       let result = await response.json();
       topics = result.data;
     }
