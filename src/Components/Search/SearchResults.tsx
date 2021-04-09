@@ -23,7 +23,7 @@ export default function SearchResults(props) {
     return {
       id: content?.uuid,
       image: imagePath,
-      type: content?.bundle,
+      type: content?.aggregated_field_type.split(", ")[0] ?? content?.bundle,
       title: content?.label ?? content?.title,
       text: content?.search_api_excerpt,
       // text: "",
