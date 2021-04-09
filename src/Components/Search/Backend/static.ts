@@ -1,11 +1,12 @@
 export const typeOptions = [
   { value: "article", label: "Articles" },
   { value: "center", label: "Centers" },
+  { value: "event", label: "Events" },
   { value: "people", label: "People" },
-  // { value: "speakers", label: "Speakers" },
   { value: "podcast", label: "Podcast" },
   { value: "program", label: "Programs" },
   { value: "report", label: "Reports" },
+  { value: "staff", label: "Staff" },
   { value: "video", label: "Videos" },
 ];
 
