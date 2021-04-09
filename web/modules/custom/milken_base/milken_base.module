@@ -42,3 +42,27 @@ function milken_base_page_attachments(array &$attachments) {
     $attachments['#attached']['library'][] = 'milken_base/extra.admin';
   }
 }
+
+/**
+ * Implements hook_search_api_solr_query_alter().
+ */
+function search_api_custom_search_api_solr_query_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface $query) {
+  // To get a list of solrium events:
+  // @see http://solarium.readthedocs.io/en/stable/customizing-solarium/#plugin-system
+  // $solr_field_names maps search_api field names to real field names in
+  // the Solr index.
+  $solr_field_names = $query->getIndex()->getServerInstance()->getBackend()->getSolrFieldNames($query->getIndex());
+  \Drupal::logger('milken_migrate')->debug('SOLR Field Names: ' . \Kint::dump($solr_field_names, TRUE));
+
+  $solr_date_field = !empty($fields['created']) ? $fields['created'] : '';
+
+  if ($solr_field) {
+    $solarium_query->addParam('bf', "recip(abs(ms(NOW/HOUR,{$solr_date_field})),3.16e-11,1,.4)^21");
+  }
+
+  // Boost documents by date.
+  // @see https://www.drupal.org/project/search_api_solr/issues/2855329
+  // $boost_functions = 'recip(abs(ms(NOW/HOUR,' . $solr_field_names['created'] . ')),3.16e-11,1,.4)^25';
+  // $edismax->setBoostFunctions($boost_functions);
+
+}
