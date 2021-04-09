@@ -42,7 +42,10 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const summary = (
-    <p dangerouslySetInnerHTML={{ __html: session?.field_description }} style={{ fontSize: "1.154em" }} />
+    <p
+      dangerouslySetInnerHTML={{ __html: session?.field_description }}
+      style={{ fontSize: "1.154em" }}
+    />
   );
 
   const renderSpeakerGroup = (speakers: Array<any>) => {
@@ -148,6 +151,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
                 <span
                   className="badge badge-secondary"
                   dangerouslySetInnerHTML={{ __html: track?.title }}
+                  key={track?.title}
                 ></span>
               );
             })}
@@ -162,7 +166,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         <div className="program-day-session-wrapper">
           <Row className="mb-3">
             <Col>
-              <h4 dangerouslySetInnerHTML={{ __html: session?.title }}
+              <h4
+                dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
                 style={{ fontSize: "1.54em" }}
               ></h4>
@@ -197,7 +202,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         <div className="program-day-session-wrapper">
           <Row className="mb-3">
             <Col>
-              <h4 dangerouslySetInnerHTML={{ __html: session?.title }}
+              <h4
+                dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
               ></h4>
             </Col>

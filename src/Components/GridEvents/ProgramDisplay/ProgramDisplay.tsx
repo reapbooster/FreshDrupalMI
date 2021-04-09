@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import _ from "lodash";
 import moment from "moment";
 import styled from "styled-components";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import FilterDates from "./Components/FilterDates";
 import FilterTracks from "./Components/FilterTracks";
 import FormatSelect from "./Components/FormatSelect";
@@ -66,6 +67,8 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
   const [ticker, setTicker] = useState<any>(0);
 
   const [filterActive, setFilterActive] = useState<boolean>(true);
+  const [expandAll, setExpandAll] = useState<boolean>(false);
+  const [expandAllToggled, setExpandAllToggled] = useState<boolean>(false);
 
   useEffect(() => {}, [terms, dates]);
 
@@ -301,6 +304,11 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
     setTracks([]);
   };
 
+  const handleExpandAllToggle = () => {
+    setExpandAllToggled(true);
+    setExpandAll(!expandAll);
+  };
+
   const ProgramDisplayWrapper = styled.div`
     & .filter-col {
       flex: 0 0 25%;
@@ -309,7 +317,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
         flex: 0 0 100%;
       }
     }
-    
+
     & .program-day-session-wrapper {
       & h4 {
         @media screen and (max-width: 992px) {
@@ -319,7 +327,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
           font-size: 1.5em;
         }
       }
-  
+
       & .view-more-link {
         flex: 0 0 9em;
         @media screen and (max-width: 576px) {
@@ -328,7 +336,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
           text-align: right;
         }
       }
-      
+
       & .badge {
         font-size: 0.8rem;
         background: #aaa;
@@ -336,33 +344,55 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
         margin: 0.25rem;
       }
     }
+
+    & .w-sm-100 {
+      @media screen and (max-width: 769px) {
+        width: 100%;
+      }
+    }
   `;
+
+  const expandAllButton = () => (
+    <button
+      className="btn btn-warning w-sm-100 mb-1"
+      onClick={handleExpandAllToggle}
+    >
+      {expandAll ? <FaMinus className="mr-1" /> : <FaPlus className="mr-1" />}
+      {expandAll ? "COLLAPSE" : "EXPAND"} ALL &nbsp;
+      <span className="d-none d-md-inline-block">PANELS</span>
+    </button>
+  );
 
   return (
     <ProgramDisplayWrapper>
       <div id="events-program" className="py-4">
         <Container>
           <Row className="my-3">
-            <Col xs={12} md={3}>
+            <Col xs={12} sm={6} md={3}>
               <button
-                className="btn btn-warning"
+                className="btn btn-warning w-sm-100 mb-1"
                 onClick={handleFilterDisplayToggle}
               >
                 {filterActive ? "HIDE FILTERS" : "SHOW FILTERS"}
               </button>
             </Col>
-            <Col xs={12} md={6} className="form-horizontal">
+            <Col xs={12} sm={6} className="d-md-none">
+              {expandAllButton()}
+            </Col>
+            <Col xs={12} md={5} lg={6} className="form-horizontal">
               <FormatSelect
                 formatOptions={formatOptions}
                 format={format}
                 onChange={handleFormatChange}
               />
             </Col>
-            {/* TODO: Post-launch <Col sm={6} md={3}>
-            <button className="btn btn-warning" onClick={handlePrintPage}>
-              PRINT THIS FORMAT
-            </button>
-          </Col> */}
+            <Col md={4} lg={3} className="text-right d-none d-md-block">
+              {/* TODO: Post-launch
+              <button className="btn btn-warning" onClick={handlePrintPage}>
+                PRINT THIS FORMAT
+              </button> */}
+              {expandAllButton()}
+            </Col>
           </Row>
           <SearchBar
             term={term}
@@ -411,9 +441,10 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
                           getTrackById={dataCache.getTrackById}
                           date={item?.date}
                           open={
+                            expandAll ||
                             item?.filteredPanels.length < 5 ||
                             groupedPanels.length == 1 ||
-                            index == 0
+                            (!expandAllToggled && index == 0)
                           }
                         />
                       </div>
