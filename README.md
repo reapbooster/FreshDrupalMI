@@ -10,3 +10,7 @@ On mac:
 
 - `make how-to-use`
 
+- `make help`
+
+
+The makefile is a work-in-progress. Please be patient. Latest version is here: https://github.com/stovak/project-demigods

@@ -96,8 +96,6 @@ _install_mac:
 
 how-to-use:  ## Instructions for using this makefile
 	@echo
-	@echo "If you want to just use public versions of the docker containers, don't bother"
-	@echo "to build them locally. Docker can pull them docker.io/whevever where they're stored."
 	@echo
 	@echo "Step 1: make authterminus-{pantheon-account-email-address]"
 	@echo "        Authorize terminus to interact with pantheon on your account"
