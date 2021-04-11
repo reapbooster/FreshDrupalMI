@@ -193,7 +193,7 @@ class MilkenMigrateCommands extends DrushCommands {
             $episodeRemoteRecord = RemoteRecord::getRemoteRecord('paragraph', "podcast_episode", $episode->uuid() . "?jsonapi_include=true&include=field_podcast_image");
             $imageRemoteRecord = @array_shift($episodeRemoteRecord->getField('field_podcast_image'));
             if (!empty($imageRemoteRecord)) {
-              
+
 
               $personNamesArray = explode( " ", trim($imageRemoteRecord['field_photo_subject_name']) );
 
@@ -232,5 +232,41 @@ class MilkenMigrateCommands extends DrushCommands {
     }
   }
 
+  /**
+   * Drush command get missing field.
+   *
+   * @command milken_migrate:author_text
+   * @aliases mmat
+   *
+   */
+  public function migrate_field_custom_author_text() {
+    $storage = Drupal::entityTypeManager()
+      ->getStorage('media');
+    $videoIDs = $storage->getQuery()
+      ->condition('bundle', 'video')
+      ->condition('status', TRUE)
+      ->execute();
+    foreach ($videoIDs as $videoID) {
+      $video = $storage->load($videoID);
+      $videoRemoteRecord = RemoteRecord::getRemoteRecord('node', 'video', $video->uuid() . "?jsonapi_include=true");
+      if ($videoRemoteRecord instanceof RemoteRecord) {
+        $remoteField = $videoRemoteRecord->getField('field_custom_author_text');
+        if (isset($remoteField['value'])) {
+          $remoteCompareValue = mb_strtolower(strip_tags($remoteField['value']));
+          $localCompareValue = mb_strtolower(strip_tags($video->get('field_body')->value));
+          // DO NOT DOUBLE-ADD the value to the field. If it's there, no op.
+          if (mb_strpos($localCompareValue, $remoteCompareValue) === false) {
+            $newBodyValue = [
+              'value' =>  $video->get('field_body')->value . $remoteField['value'],
+              'format' => $video->get('field_body')->format,
+            ];
+            $video->field_body = $newBodyValue;
+            $video->save();
+          }
+
+        }
+      }
+    }
+  }
 
 }
