@@ -5,6 +5,7 @@ import ParagraphBodyContent from "../../DataTypes/ParagraphBodyContent";
 import ParagraphEventDisplay from "../../DataTypes/ParagraphEventDisplay";
 import ParagraphFacetExplorer from "../../DataTypes/ParagraphFacetExplorer";
 import ParagraphLinkBar from "../../DataTypes/ParagraphLinkBar";
+import ParagraphOurCenters from "../../DataTypes/ParagraphOurCenters";
 import {
   ParagraphContentTiles,
   ParagraphEntityQueueTiles,
@@ -52,6 +53,8 @@ export const ParagraphDataFactory = (incoming: ParagraphInterface) => {
       return new ParagraphEntityQueueTiles(incoming);
     case "paragraph--link_bar":
       return new ParagraphLinkBar(incoming);
+    case "paragraph--our_centers":
+      return new ParagraphOurCenters(incoming);
     case "paragraph--media_tiles":
       return new ParagraphMediaTiles(incoming);
     case "paragraph--people":
