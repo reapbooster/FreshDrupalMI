@@ -119,6 +119,7 @@ export const ArticleFull = (props: ArticleFullProps) => {
           name: item.field_first_name + " " + item.field_last_name, 
           pgtitle: item.field_pgtitle, 
           link: "/people/" + item.drupal_internal__id,
+          isHidden: item.field_hidden,
         });
       }
     )
