@@ -12,7 +12,7 @@ label: 'Podcast Episode'
 description: 'All of the data relating to and to be viewed with a podcast episode.'
 source: audio_file
 queue_thumbnail_downloads: false
-new_revision: false
+new_revision: true
 source_configuration:
   source_field: field_media_audio_file
 field_map:

@@ -5,14 +5,12 @@ dependencies:
   config:
     - field.storage.media.field_cover
     - field.storage.media.field_thumbnail_uri
-    - field.storage.node.field_hero_image
     - field.storage.people.field_photo
-    - field.storage.slide.field_background_image
+    - image.style.medium
     - search_api.index.freshdrupal_live
   module:
     - hal
     - image
-    - media
     - milken_base
     - rest
     - schemata_json_schema
@@ -498,431 +496,6 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
-        taxonomy:
-          id: taxonomy
-          table: search_api_index_freshdrupal_live
-          field: taxonomy
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          link_to_item: false
-          use_highlighting: false
-          multi_type: separator
-          multi_separator: ', '
-          plugin_id: search_api
-        parent_id:
-          id: parent_id
-          table: search_api_datasource_freshdrupal_live_entity_paragraph
-          field: parent_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          entity_type: paragraph
-          plugin_id: search_api_field
-        parent_type:
-          id: parent_type
-          table: search_api_index_freshdrupal_live
-          field: parent_type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          plugin_id: search_api_field
-        field_hero_image:
-          id: field_hero_image
-          table: search_api_index_freshdrupal_live
-          field: field_hero_image
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: media_thumbnail
-          settings:
-            image_style: ''
-            image_link: ''
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api_entity
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-            display_methods:
-              image:
-                display_method: label
-                view_mode: default
-              podcast_episode:
-                display_method: label
-                view_mode: default
-              report:
-                display_method: label
-                view_mode: default
-              sponsor_logo:
-                display_method: label
-                view_mode: default
-              video:
-                display_method: label
-                view_mode: default
-              video_stream:
-                display_method: label
-                view_mode: default
-          plugin_id: search_api_field
-        field_background_image:
-          id: field_background_image
-          table: search_api_index_freshdrupal_live
-          field: field_background_image
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: image_url
-          settings:
-            image_style: ''
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          plugin_id: search_api_field
-        field_title_card_image:
-          id: field_title_card_image
-          table: search_api_datasource_freshdrupal_live_entity_event
-          field: field_title_card_image
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: image_url
-          settings:
-            image_style: ''
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          field_rendering: true
-          fallback_handler: search_api
-          fallback_options:
-            link_to_item: false
-            use_highlighting: false
-            multi_type: separator
-            multi_separator: ', '
-          entity_type: event
-          plugin_id: search_api_field
         field_cover:
           id: field_cover
           table: search_api_datasource_freshdrupal_live_entity_media
@@ -1067,7 +640,7 @@ display:
           plugin_id: search_api_field
         field_photo:
           id: field_photo
-          table: search_api_index_freshdrupal_live
+          table: search_api_datasource_freshdrupal_live_entity_people
           field: field_photo
           relationship: none
           group_type: group
@@ -1116,7 +689,7 @@ display:
           click_sort_column: target_id
           type: image_url
           settings:
-            image_style: ''
+            image_style: medium
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -1134,6 +707,7 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
+          entity_type: people
           plugin_id: search_api_field
         aggregated_field_centers:
           id: aggregated_field_centers
@@ -1531,8 +1105,21 @@ display:
           break_phrase: false
           not: false
           parse_mode: terms
-          fields: {  }
-          conjunction: AND
+          fields:
+            - field_first_name
+            - field_last_name
+            - field_middle_name
+            - media_authors_field_first_name
+            - media_authors_field_last_name
+            - media_authors_field_middle_name
+            - media_content_field_body
+            - media_name
+            - node_field_body
+            - node_title
+            - people_field_first_name
+            - people_field_last_name
+            - people_field_middle_name
+          conjunction: OR
           plugin_id: search_api_fulltext
         aggregated_field_centers:
           id: aggregated_field_centers
@@ -1654,9 +1241,7 @@ display:
       tags:
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
-        - 'config:field.storage.node.field_hero_image'
         - 'config:field.storage.people.field_photo'
-        - 'config:field.storage.slide.field_background_image'
         - 'config:search_api.index.freshdrupal_live'
   rest_export_1:
     display_plugin: rest_export
@@ -1739,7 +1324,5 @@ display:
       tags:
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
-        - 'config:field.storage.node.field_hero_image'
         - 'config:field.storage.people.field_photo'
-        - 'config:field.storage.slide.field_background_image'
         - 'config:search_api.index.freshdrupal_live'

@@ -91,11 +91,11 @@ third_party_settings:
       region: content
     group_taxonomy:
       children:
+        - field_tags
+        - field_topics
         - field_centers
         - field_term_collection
-        - field_topics
         - field_program_initiatives
-        - field_tags
         - field_events
         - field_related_event
         - field_regions
@@ -143,7 +143,7 @@ content:
     type: text_textarea_with_summary
     region: content
   field_centers:
-    weight: 102
+    weight: 108
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -153,7 +153,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_collections:
-    weight: 110
+    weight: 114
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -205,7 +205,7 @@ content:
     type: link_default
     region: content
   field_events:
-    weight: 107
+    weight: 111
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -251,7 +251,7 @@ content:
     type: metatag_firehose
     region: content
   field_program_initiatives:
-    weight: 105
+    weight: 110
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -261,7 +261,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_regions:
-    weight: 109
+    weight: 113
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -271,7 +271,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_related_event:
-    weight: 108
+    weight: 112
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -284,14 +284,14 @@ content:
     weight: 106
     settings:
       match_operator: CONTAINS
-      match_limit: 10
+      match_limit: 20
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
   field_term_collection:
-    weight: 103
+    weight: 109
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -301,10 +301,10 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_topics:
-    weight: 104
+    weight: 107
     settings:
       match_operator: CONTAINS
-      match_limit: 10
+      match_limit: 20
       size: 60
       placeholder: ''
     third_party_settings: {  }

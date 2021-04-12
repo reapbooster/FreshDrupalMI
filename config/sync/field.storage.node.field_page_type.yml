@@ -12,17 +12,17 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: centers
-      label: Centers
+      value: center
+      label: Center
     -
-      value: events
-      label: Events
+      value: event
+      label: Event
     -
-      value: podcasts
-      label: Podcasts
+      value: podcast
+      label: Podcast
     -
-      value: programs
-      label: Programs
+      value: program
+      label: Program
   allowed_values_function: ''
 module: options
 locked: false

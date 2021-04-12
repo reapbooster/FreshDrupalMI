@@ -11,6 +11,7 @@ dependencies:
     - field.field.people.staff.field_event
     - field.field.people.staff.field_events
     - field.field.people.staff.field_first_name
+    - field.field.people.staff.field_hidden
     - field.field.people.staff.field_index_weight
     - field.field.people.staff.field_last_name
     - field.field.people.staff.field_middle_name
@@ -88,6 +89,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_hidden:
+    weight: 18
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_index_weight:
     weight: 17

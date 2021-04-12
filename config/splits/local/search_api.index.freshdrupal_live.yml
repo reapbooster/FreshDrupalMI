@@ -5,34 +5,27 @@ dependencies:
   module:
     - search_api_solr
     - media
-    - taxonomy
-    - taxonomy_machine_name
-    - node
     - eck
+    - paragraphs
+    - taxonomy
+    - node
     - search_api
     - milken_base
   config:
-    - field.storage.media.field_body
-    - field.storage.media.field_centers
-    - field.storage.media.field_content
-    - field.storage.media.field_event_reference
-    - field.storage.media.field_media_file
-    - field.storage.node.field_centers
-    - field.storage.node.field_content
-    - field.storage.node.field_hero_image
-    - field.storage.node.field_page_type
-    - field.storage.node.field_promo_slide
-    - field.storage.slide.field_background_image
-    - field.storage.people.field_biotext
-    - field.storage.people.field_centers
-    - field.storage.people.field_email
+    - field.storage.media.field_authors
     - field.storage.people.field_first_name
     - field.storage.people.field_last_name
     - field.storage.people.field_middle_name
-    - field.storage.people.field_photo
+    - field.storage.media.field_body
+    - field.storage.media.field_content
+    - field.storage.paragraph.field_body
+    - field.storage.media.field_media_file
+    - field.storage.media.field_tags
+    - field.storage.node.field_authors
+    - field.storage.node.field_content
+    - field.storage.people.field_biotext
+    - field.storage.people.field_email
     - search_api.server.freshdrupal_live
-    - core.entity_view_mode.media.full
-    - core.entity_view_mode.node.full
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -52,8 +45,8 @@ third_party_settings:
       highlightMultiTerm: true
       preserveMulti: false
       highlight:
-        mergeContiguous: false
-        requireFieldMatch: false
+        mergeContiguous: true
+        requireFieldMatch: true
         snippets: 3
         fragsize: 0
     mlt:
@@ -68,7 +61,7 @@ third_party_settings:
       boost: false
       interestingTerms: none
     term_modifiers:
-      slop: 3
+      slop: 1
       fuzzy: 1
     advanced:
       index_prefix: ''
@@ -82,12 +75,11 @@ field_settings:
   aggregated_field_centers:
     label: 'Aggregated field Centers'
     property_path: aggregated_field
-    type: text
+    type: integer
     boost: !!float 8
     configuration:
       type: union
       fields:
-        - 'entity:event/field_centers'
         - 'entity:media/field_centers'
         - 'entity:node/field_centers'
         - 'entity:people/field_centers'
@@ -98,19 +90,17 @@ field_settings:
     configuration:
       type: union
       fields:
-        - 'entity:event/created'
         - 'entity:media/created'
-        - 'entity:node/published_at'
+        - 'entity:node/created'
         - 'entity:people/created'
   aggregated_field_topics:
     label: 'Aggregated field Topics'
     property_path: aggregated_field
-    type: text
+    type: integer
     boost: !!float 8
     configuration:
       type: union
       fields:
-        - 'entity:event/field_topics'
         - 'entity:media/field_topics'
         - 'entity:node/field_topics'
         - 'entity:people/field_topics'
@@ -133,169 +123,79 @@ field_settings:
       fields:
         - 'entity:media/field_index_weight'
         - 'entity:node/field_index_weight'
-        - 'entity:panel/field_index_weight'
         - 'entity:people/field_index_weight'
   bundle:
     label: Bundle
     property_path: search_api_bundle
-    type: text
+    type: solr_string_storage
   entity_type_id:
     label: EntityTypeId
     property_path: search_api_entity_type_id
+    type: solr_string_storage
+  jsonapi_type:
+    label: Type
+    property_path: search_api_jsonapi_type
+    type: solr_string_storage
+  label:
+    label: Label
+    property_path: search_api_label
+    type: solr_string_storage
+  media_authors_field_first_name:
+    label: 'Authors » People » First Name'
+    datasource_id: 'entity:media'
+    property_path: 'field_authors:entity:field_first_name'
     type: text
-  field_background_image:
-    label: 'Promo Slide » Slide » Background Image'
-    datasource_id: 'entity:node'
-    property_path: 'field_promo_slide:entity:field_background_image'
-    type: integer
+    boost: !!float 3
     dependencies:
       config:
-        - field.storage.node.field_promo_slide
-        - field.storage.slide.field_background_image
+        - field.storage.media.field_authors
+        - field.storage.people.field_first_name
       module:
         - eck
-  field_biotext:
-    label: Biotext
-    datasource_id: 'entity:people'
-    property_path: field_biotext
-    type: text
-    dependencies:
-      config:
-        - field.storage.people.field_biotext
-  field_body:
-    label: body
+  media_authors_field_last_name:
+    label: 'Authors » People » Last Name'
     datasource_id: 'entity:media'
-    property_path: field_body
+    property_path: 'field_authors:entity:field_last_name'
     type: text
-    boost: !!float 0
+    boost: !!float 3
     dependencies:
       config:
-        - field.storage.media.field_body
-  field_body_1:
-    label: body
-    datasource_id: 'entity:media'
-    property_path: field_body
-    type: text
-    boost: !!float 0
-    dependencies:
-      config:
-        - field.storage.media.field_body
-  field_body_2:
-    label: 'Reverse reference: <em class="placeholder">Paragraph</em> using <em class="placeholder">Content Refs</em> » body'
-    datasource_id: 'entity:node'
-    property_path: 'search_api_reverse_entity_references_paragraph__field_content_refs:field_body'
-    type: text
-  field_body_3:
-    label: body
-    datasource_id: 'entity:media'
-    property_path: field_body
-    type: text
-    boost: !!float 0
-    dependencies:
-      config:
-        - field.storage.media.field_body
-  field_centers:
-    label: Centers
-    datasource_id: 'entity:node'
-    property_path: field_centers
-    type: text
-    boost: !!float 8
-    dependencies:
-      config:
-        - field.storage.node.field_centers
-  field_centers_2:
-    label: Centers
-    datasource_id: 'entity:media'
-    property_path: field_centers
-    type: text
-    boost: !!float 8
-    dependencies:
-      config:
-        - field.storage.media.field_centers
-  field_centers_4:
-    label: Centers
-    datasource_id: 'entity:people'
-    property_path: field_centers
-    type: text
-    boost: !!float 5
-    dependencies:
-      config:
-        - field.storage.people.field_centers
-  field_content:
-    label: Content
-    datasource_id: 'entity:node'
-    property_path: field_content
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_content
-  field_content_1:
-    label: Content
-    datasource_id: 'entity:media'
-    property_path: field_content
-    type: integer
-    dependencies:
-      config:
-        - field.storage.media.field_content
-  field_content_2:
-    label: Content
-    datasource_id: 'entity:media'
-    property_path: field_content
-    type: integer
-    dependencies:
-      config:
-        - field.storage.media.field_content
-  field_content_3:
-    label: Content
-    datasource_id: 'entity:node'
-    property_path: field_content
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_content
-  field_email:
-    label: email
-    datasource_id: 'entity:people'
-    property_path: field_email
-    type: string
-    dependencies:
-      config:
-        - field.storage.people.field_email
-  field_event_reference:
-    label: 'Event Reference'
-    datasource_id: 'entity:media'
-    property_path: field_event_reference
-    type: integer
-    dependencies:
-      config:
-        - field.storage.media.field_event_reference
-  field_first_name:
-    label: 'First Name'
-    datasource_id: 'entity:people'
-    property_path: field_first_name
-    type: text
-    boost: !!float 21
-    dependencies:
-      config:
-        - field.storage.people.field_first_name
-  field_hero_image:
-    label: 'Hero Image'
-    datasource_id: 'entity:node'
-    property_path: field_hero_image
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_hero_image
-  field_last_name:
-    label: 'Last Name'
-    datasource_id: 'entity:people'
-    property_path: field_last_name
-    type: text
-    boost: !!float 21
-    dependencies:
-      config:
+        - field.storage.media.field_authors
         - field.storage.people.field_last_name
-  field_media_file:
+      module:
+        - eck
+  media_authors_field_middle_name:
+    label: 'Authors » People » Middle Name'
+    datasource_id: 'entity:media'
+    property_path: 'field_authors:entity:field_middle_name'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.media.field_authors
+        - field.storage.people.field_middle_name
+      module:
+        - eck
+  media_content_field_body:
+    label: 'Content » Paragraph » body'
+    datasource_id: 'entity:media'
+    property_path: 'field_content:entity:field_body'
+    type: text
+    dependencies:
+      config:
+        - field.storage.media.field_content
+        - field.storage.paragraph.field_body
+      module:
+        - paragraphs
+  media_created:
+    label: 'Authored on'
+    datasource_id: 'entity:media'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - media
+  media_field_media_file:
     label: 'PDF File'
     datasource_id: 'entity:media'
     property_path: field_media_file
@@ -303,115 +203,168 @@ field_settings:
     dependencies:
       config:
         - field.storage.media.field_media_file
-  field_middle_name:
-    label: 'Middle Name'
-    datasource_id: 'entity:people'
-    property_path: field_middle_name
+  media_name:
+    label: Name
+    datasource_id: 'entity:media'
+    property_path: name
     type: text
-    boost: !!float 21
+    boost: !!float 2
+    dependencies:
+      module:
+        - media
+  media_tags_name:
+    label: 'Tags » Taxonomy term » Name'
+    datasource_id: 'entity:media'
+    property_path: 'field_tags:entity:name'
+    type: string
     dependencies:
       config:
-        - field.storage.people.field_middle_name
-  field_page_type:
-    label: 'Page Type'
-    datasource_id: 'entity:node'
-    property_path: field_page_type
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_page_type
-  field_photo:
-    label: Photo
-    datasource_id: 'entity:people'
-    property_path: field_photo
-    type: integer
-    dependencies:
-      config:
-        - field.storage.people.field_photo
-  field_promo_slide:
-    label: 'Promo Slide'
-    datasource_id: 'entity:node'
-    property_path: field_promo_slide
-    type: integer
-    dependencies:
-      config:
-        - field.storage.node.field_promo_slide
-  jsonapi_type:
-    label: Type
-    property_path: search_api_jsonapi_type
-    type: text
-  label:
-    label: Label
-    property_path: search_api_label
-    type: text
-  machine_name_1:
-    label: 'Centers » Taxonomy term » Machine name'
-    datasource_id: 'entity:node'
-    property_path: 'field_centers:entity:machine_name'
-    type: text
-    boost: !!float 8
-    dependencies:
-      config:
-        - field.storage.node.field_centers
+        - field.storage.media.field_tags
       module:
         - taxonomy
-        - taxonomy_machine_name
-  name:
-    label: Name
-    datasource_id: 'entity:media'
-    property_path: name
+  node_content_field_body:
+    label: 'Content » Paragraph » body'
+    datasource_id: 'entity:node'
+    property_path: 'field_content:entity:field_body'
     type: text
-    boost: !!float 21
+    dependencies:
+      config:
+        - field.storage.node.field_content
+        - field.storage.paragraph.field_body
+      module:
+        - paragraphs
+  node_created:
+    label: 'Authored on'
+    datasource_id: 'entity:node'
+    property_path: created
+    type: date
     dependencies:
       module:
-        - media
-  name_1:
-    label: Name
-    datasource_id: 'entity:media'
-    property_path: name
+        - node
+  node_field_first_name:
+    label: 'Authors » People » First Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_authors:entity:field_first_name'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_authors
+        - field.storage.people.field_first_name
+      module:
+        - eck
+  node_field_last_name:
+    label: 'Authors » People » Last Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_authors:entity:field_last_name'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_authors
+        - field.storage.people.field_last_name
+      module:
+        - eck
+  node_field_middle_name:
+    label: 'Authors » People » Middle Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_authors:entity:field_middle_name'
+    type: text
+    boost: !!float 3
+    dependencies:
+      config:
+        - field.storage.node.field_authors
+        - field.storage.people.field_middle_name
+      module:
+        - eck
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
     type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  node_status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
     dependencies:
       module:
-        - media
-  rendered_item:
-    label: 'Rendered HTML output'
-    property_path: rendered_item
-    type: text
-    configuration:
-      roles:
-        anonymous: anonymous
-      view_mode:
-        'entity:event':
-          conference: default
-          meeting: default
-          summit: default
-        'entity:media':
-          report: full
-          video: full
-        'entity:node':
-          article: full
-          career: full
-          landing_page: full
-          opportunity: full
-          session: full
-        'entity:people':
-          experts: default
-          speakers: default
-          staff: default
-  taxonomy:
-    label: Taxonomy
-    property_path: search_api_taxonomy
-    type: string
-  title:
+        - node
+  node_title:
     label: Title
     datasource_id: 'entity:node'
     property_path: title
     type: text
-    boost: !!float 13
+    boost: !!float 2
     dependencies:
       module:
         - node
-  title_5:
+  node_uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  people_created:
+    label: 'Authored on'
+    datasource_id: 'entity:people'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - eck
+  people_field_biotext:
+    label: Biotext
+    datasource_id: 'entity:people'
+    property_path: field_biotext
+    type: text
+    dependencies:
+      config:
+        - field.storage.people.field_biotext
+  people_field_email:
+    label: email
+    datasource_id: 'entity:people'
+    property_path: field_email
+    type: string
+    dependencies:
+      config:
+        - field.storage.people.field_email
+  people_field_first_name:
+    label: 'First Name'
+    datasource_id: 'entity:people'
+    property_path: field_first_name
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.people.field_first_name
+  people_field_last_name:
+    label: 'Last Name'
+    datasource_id: 'entity:people'
+    property_path: field_last_name
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.people.field_last_name
+  people_field_middle_name:
+    label: 'Middle Name'
+    datasource_id: 'entity:people'
+    property_path: field_middle_name
+    type: text
+    boost: !!float 2
+    dependencies:
+      config:
+        - field.storage.people.field_middle_name
+  people_title:
     label: Title
     datasource_id: 'entity:people'
     property_path: title
@@ -419,24 +372,24 @@ field_settings:
     dependencies:
       module:
         - eck
-  type:
-    label: 'Content type'
-    datasource_id: 'entity:node'
-    property_path: type
+  processed:
+    label: 'body » Processed text'
+    datasource_id: 'entity:media'
+    property_path: 'field_body:processed'
     type: text
     dependencies:
-      module:
-        - node
+      config:
+        - field.storage.media.field_body
   url:
     label: URI
     property_path: search_api_url
-    type: text
+    type: solr_string_storage
     configuration:
       absolute: false
   uuid:
     label: UUID
     property_path: search_api_uuid
-    type: text
+    type: solr_string_storage
 datasource_settings:
   'entity:media':
     bundles:
@@ -470,15 +423,14 @@ processor_settings:
   add_url: {  }
   aggregated_field: {  }
   bundle: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
   double_quote_workaround:
     all_fields: false
     fields:
       - bundle
       - entity_type_id
-      - field_body
-      - field_body_1
-      - name
-      - title
       - uuid
     replacement: '|9999999998|'
     weights:
@@ -493,15 +445,7 @@ processor_settings:
     excerpt: true
     excerpt_length: 256
     exclude_fields:
-      - bundle
-      - entity_type_id
-      - field_page_type
-      - jsonapi_type
-      - label
-      - title
-      - type
-      - url
-      - uuid
+      - node_title
     prefix: '<strong>'
     suffix: '</strong>'
     weights:
@@ -511,9 +455,9 @@ processor_settings:
     fields:
       - bundle
       - entity_type_id
-      - field_body
-      - name
-      - title
+      - media_content_field_body
+      - media_name
+      - node_title
       - uuid
     title: true
     alt: true
@@ -540,23 +484,21 @@ processor_settings:
       'entity:media':
         datasource_boost: !!float 1
         bundle_boosts:
-          report: !!float 8
+          report: !!float 1
           video: 0.5
       'entity:node':
         datasource_boost: !!float 1
         bundle_boosts:
-          article: !!float 1
-          landing_page: !!float 8
-      'entity:panel':
-        datasource_boost: !!float 1
+          article: 0.8
+          landing_page: !!float 1
       'entity:people':
-        datasource_boost: !!float 13
+        datasource_boost: !!float 2
     weights:
       preprocess_index: 0
   uuid: {  }
 tracker_settings:
   default:
-    indexing_order: lifo
+    indexing_order: fifo
 options:
   index_directly: false
   cron_limit: 200

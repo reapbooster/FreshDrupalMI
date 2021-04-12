@@ -10,7 +10,7 @@ field_name: field_tile_label
 entity_type: node
 bundle: landing_page
 label: 'Tile Label'
-description: ''
+description: 'For use when featuring this page as a Tile or Card.'
 required: false
 translatable: false
 default_value: {  }
