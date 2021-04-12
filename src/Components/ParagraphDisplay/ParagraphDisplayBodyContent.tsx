@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ParagraphBodyContent, {
   ParagraphBodyContentInterface,
 } from "../../DataTypes/ParagraphBodyContent";
@@ -117,9 +117,21 @@ export const ParagraphDisplayBodyContent = (
 
     
   `;
+
+  // After render, get all code within script tags and run it (Tableau etc)
+  useEffect(
+    () => {
+      document
+        .querySelectorAll(".paragraph-body-content script")
+        .forEach((item)=>{
+          window.eval(item.innerHTML);
+        });
+    }
+  )
+
     
   return (
-    <WrapperSection>
+    <WrapperSection className="paragraph-body-content">
       <BodyFieldDisplay data={paragraphData.field_body} />
     </WrapperSection>
   );
