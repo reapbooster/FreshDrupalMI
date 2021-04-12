@@ -1,31 +1,3 @@
 #!/usr/bin/env bash
 
-echo "clearing composer's and NPM's cache"
-
-npm cache clear --force
-
-composer clear-cache
-
-echo "removing node_modules"
-
-rm -Rfv node_modules 
-
-echo "removing  vendor dir"
-
-rm -Rfv vendor
-
-echo "removing drupal core, modules/contrib and themes/contrib folders."
-
-rm -Rfv web/modules/contrib
-
-rm -Rfv web/themes/contrib
-
-rm -Rfv web/core
-
-rm package-lock.json
-
-rm composer.lock
-
-echo "Reinstalling"
-
-composer install-vendor-dir && npm install
+make reset-all-dependencies

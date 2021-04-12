@@ -15,11 +15,22 @@ build: env ## install dependencies and compile JS
 
 
 build-composer: env ./composer.json  ## composer install
-	composer install-vendor-dir
+	make install-composer
+
 
 build-webpack: env   ## npm install && npm run build
-	npm install
+	make install-npm
 	npm run build
+
+install:
+	make install-composer
+	make install-npm
+
+install-composer:
+	composer install-vendor-dir
+
+install-npm:
+	npm install
 
 run: ## run the docker containers for a development environment
 	make run-docker
@@ -114,8 +125,31 @@ how-to-use:  ## Instructions for using this makefile
 	@echo
 	@echo
 
+reset-all-dependencies:  ## remove node_modules folder and vendor dir and reinstall everything
+	@echo "this will reset all of your dependencies. Rerun this command with a yes on the end like so:"
+	@echo "make reset-all-dependencies-yes"
 
-
+reset-all-dependencies-yes:
+	@echo "=================================================================="
+	@echo "Removing outdated dependencies"
+	@echo "=================================================================="
+	echo "clearing composer's and NPM's cache"
+	npm cache clear --force
+	composer clear-cache
+	echo "removing node_modules"
+	rm -Rf node_modules
+	echo "removing  vendor dir"
+	rm -Rf vendor
+	echo "removing drupal core, modules/contrib and themes/contrib folders."
+	rm -Rf web/modules/contrib
+	rm -Rf web/themes/contrib
+	rm -Rf web/core
+	rm -Rf package-lock.json
+	rm -Rf composer.lock
+	@echo "=================================================================="
+	@echo "Reinstalling"
+	@echo "=================================================================="
+	make install
 
 
 
