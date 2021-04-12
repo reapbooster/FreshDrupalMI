@@ -5,8 +5,10 @@
  * Contains milken_base.module.
  */
 
+use Solarium\Core\Query\QueryInterface;
 use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Config\Entity\ConfigEntityType;
+use Drupal\search_api\Query\QueryInterface as SearchAPIQueryInterface;
 
 /**
  * Implements hook_entity_type_alter().
@@ -46,7 +48,7 @@ function milken_base_page_attachments(array &$attachments) {
 /**
  * Implements hook_search_api_solr_query_alter().
  */
-function search_api_custom_search_api_solr_query_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface $query) {
+function search_api_custom_search_api_solr_query_alter(QueryInterface $solarium_query, SearchAPIQueryInterface $query) {
   // To get a list of solrium events:
   // @see http://solarium.readthedocs.io/en/stable/customizing-solarium/#plugin-system
   // $solr_field_names maps search_api field names to real field names in
@@ -61,8 +63,8 @@ function search_api_custom_search_api_solr_query_alter(\Solarium\Core\Query\Quer
   }
 
   // Boost documents by date.
-  // @see https://www.drupal.org/project/search_api_solr/issues/2855329
-  // $boost_functions = 'recip(abs(ms(NOW/HOUR,' . $solr_field_names['created'] . ')),3.16e-11,1,.4)^25';
-  // $edismax->setBoostFunctions($boost_functions);
-
+  // @see https://www.drupal.org/project/search_api_solr/issues/2855329.
+  // $boost_functions = 'recip(abs(ms(NOW/HOUR,' . $solr_field_names['created']
+  // . ')),3.16e-11,1,.4)^25';
+  // $edismax->setBoostFunctions($boost_functions).
 }

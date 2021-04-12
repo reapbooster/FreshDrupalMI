@@ -42,7 +42,9 @@ class RemoteRecord extends DrupalBaseRemoteRecord {
   public static function fromUrl(string $url): ?RemoteRecord {
     try {
       $response = \Drupal::httpClient()->get($url);
-      print_r((string) $response->getBody());
+      // to see this print out, do drush COMMAND --verbose --debug
+      \Drupal::logger('milken_migrate')
+        ->info((string) $response->getBody());
       $responseArray = json_decode($response->getBody(), true);
       if (isset($responseArray['data']) && empty($responseArray['data'])) {
         return null;
