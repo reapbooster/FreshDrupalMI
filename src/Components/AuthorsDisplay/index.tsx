@@ -48,7 +48,8 @@ export const AuthorsDisplay = (props: AuthorsDisplayProps) => {
             {data.authorList.map((item: any, key: number) => {
               let linkElement = (
                 <a
-                  href={item.link}
+                  // Check if image should have a link
+                  href={item.isHidden === true ? "javascript:void(0)" : item.link}
                   className="d-flex align-items-center mt-3"
                 >
                   <div style={{ width: "4em", height: "4em"}}>
