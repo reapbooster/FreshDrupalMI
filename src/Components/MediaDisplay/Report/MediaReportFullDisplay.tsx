@@ -7,8 +7,8 @@ import ErrorBoundary from "../../../Utility/ErrorBoundary";
 import ErrorDisplay from "../../../Utility/ErrorDisplay";
 import { Row, Col } from "react-bootstrap";
 import AuthorsDisplay from "../../AuthorsDisplay";
-import {TagsDisplay} from "../../TagsDisplay";
-import {SocialDisplay} from "../../SocialDisplay";
+import { TagsDisplay } from "../../TagsDisplay";
+import { SocialDisplay } from "../../SocialDisplay";
 import ParagraphDisplayList from "../../ParagraphDisplay/ParagraphDisplayList";
 import moment from "moment";
 
@@ -60,7 +60,8 @@ const MobileButtonWrapper = styled.div`
   text-align: center;
 
   @media (max-width: 992px) {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
   @media (min-width: 993px) {
     display: none;
@@ -106,7 +107,6 @@ const ElMainContentWrapper = styled.div`
 }
 `;
 
-
 export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
   const { data, key } = props;
   if (!data.valid) {
@@ -120,21 +120,21 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
   if (data.field_tags.length !== undefined && data.field_tags.length > 0) {
     data.field_tags.map(
       (item) => {
-        tagList.push({link_uri: '', tag: item.name});
+        tagList.push({ link_uri: '', tag: item.name });
       }
     )
   }
   if (data.field_topics.length !== undefined && data.field_topics.length > 0) {
     data.field_topics.map(
       (item) => {
-        tagList.push({link_uri: '', tag: item.name});
+        tagList.push({ link_uri: '', tag: item.name });
       }
     )
   }
   if (data.field_regions.length !== undefined && data.field_regions > 0) {
     data.field_regions.map(
       (item) => {
-        tagList.push({link_uri: '', tag: item.name});
+        tagList.push({ link_uri: '', tag: item.name });
       }
     )
   }
@@ -144,14 +144,24 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
   if (data.field_authors.length !== undefined && data.field_authors.length > 0) {
     data.field_authors.map(
       (item) => {
-        authorList.push({ 
+        authorList.push({
           photo: item.field_photo[0],
-          name: item.field_first_name + " " + item.field_last_name, 
-          pgtitle: item.field_pgtitle, 
+          name: item.field_first_name + " " + item.field_last_name,
+          pgtitle: item.field_pgtitle,
           link: "/people/" + item.drupal_internal__id,
+          isHidden: item.field_hidden,
         });
       }
     )
+  }
+
+  let essayButton;
+  if (data.field_essay.length !== undefined && data.field_essay.length > 0) {
+    essayButton =
+      <a
+        href={data.field_essay[0].uri}
+        className="btn-milken-orange ml-lg-3"
+      >{data.field_essay[0].title}</a>
   }
 
   return (
@@ -172,6 +182,7 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
                 label="Download PDF"
               ></DocumentFileDisplay>
             </ErrorBoundary>
+            {essayButton}
           </MobileButtonWrapper>
         </ReportImageWrapper>
         <TitleWrapper>
@@ -184,29 +195,30 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
                 label="Download PDF"
               ></DocumentFileDisplay>
             </ErrorBoundary>
+            {essayButton}
           </NormalButtonWrapper>
         </TitleWrapper>
       </HeaderWrapper>
       <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
-          <Row>
-            <Col xs="12" lg="6" xl="1" className="section-social">
-              <SocialDisplay data={{"name": data.name}}></SocialDisplay>
-            </Col>
-            <Col xs="12" xl="8" className="section-content">
-              <ErrorBoundary>
-                <ParagraphDisplayList
-                  list={data.field_content}
-                  view_mode="full"
-                />
-              </ErrorBoundary>
-            </Col>
-            <Col xs="12" lg="6" xl="3" className="section-tags">
+        <Row>
+          <Col xs="12" lg="6" xl="1" className="section-social">
+            <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
+          </Col>
+          <Col xs="12" xl="8" className="section-content">
+            <ErrorBoundary>
+              <ParagraphDisplayList
+                list={data.field_content}
+                view_mode="full"
+              />
+            </ErrorBoundary>
+          </Col>
+          <Col xs="12" lg="6" xl="3" className="section-tags">
             <div className="published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
-              <AuthorsDisplay data={{authorList: authorList}} />
-              <TagsDisplay data={{tagList: tagList}} />
-            </Col>
-          </Row>
-        </ElMainContentWrapper>
+            <AuthorsDisplay data={{ authorList: authorList }} />
+            <TagsDisplay data={{ tagList: tagList }} />
+          </Col>
+        </Row>
+      </ElMainContentWrapper>
     </>
   );
 };
