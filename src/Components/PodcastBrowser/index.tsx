@@ -64,21 +64,22 @@ export const PodcastBrowser = (props: PodcastBrowserProps) => {
     <Container>
       <Row className="hero-wrapper">
         <Col>
-          <Accordion defaultActiveKey="1">
+          <Accordion defaultActiveKey={1}>
             {fetchData.data.map(
               (item, key) => {
                 return (
                   <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={(key + 1)}>
                       <strong>
-                        Episode {item.field_episode}:{item.field_summary?.value}
+                        Episode {item.field_episode}: {item.field_summary?.value}
                       </strong>
                     </Accordion.Toggle>
-                    <Accordion.Collapse eventKey={(key + 1)}>
+                    <Accordion.Collapse eventKey={(key + 1)} data-open={((key+1) === 1)? true : false }>
                       <Card.Body>
                         <PodcastEpisodeDisplay
                           data={item}
                           view_mode='panel'
+                          
                         />
                       </Card.Body>
                     </Accordion.Collapse>

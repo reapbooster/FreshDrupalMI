@@ -47,7 +47,7 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
       
       & h1 {
         font-size: 2.5em;
-        font-family: 'LatoWebBlack';
+        font-family: 'LatoWebBold' ;
       }
     }
   `;
