@@ -4,6 +4,7 @@ body {
   padding: 0px;
   border: 0px;
   font-family: $font-family-base;
+  font-variant-ligatures: no-common-ligatures;
   overflow-x: hidden;
 }
 html {
@@ -33,7 +34,7 @@ body {
   .media-body p.text-muted strong {
     color: black !important;
     font-weight: bold;
-    font-family: "LatoWebBlack", Sans-Serif;
+    font-family: "LatoWebBold";
   }
 }
 
@@ -85,7 +86,7 @@ body {
   background: var(--color-milken-orange);
   color: white;
   display: inline-block;
-  font-family: 'LatoWebBlack';
+  font-family: 'LatoWebBold';
   font-size: 0.9em;
   font-weight: bold;
   letter-spacing: 0.1em;
