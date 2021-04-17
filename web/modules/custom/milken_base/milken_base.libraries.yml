@@ -90,7 +90,7 @@ media_sponsor_logo:
 main_navigation:
   version: 1.0
   js:
-    components/main-navigation/main-navigation.entry.js: { source: 'components/main-navigation/main-navigation.entry.ts' }
+    components/main-navigation/main-navigation.entry.js: { source: 'components/main-navigation/main-navigation.entry.tsx' }
 
 people:
   version: 1.0
