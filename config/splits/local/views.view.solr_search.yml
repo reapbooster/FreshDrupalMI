@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.media.field_body
     - field.storage.media.field_cover
     - field.storage.media.field_thumbnail_uri
+    - field.storage.paragraph.field_body
     - field.storage.people.field_photo
     - image.style.medium
     - search_api.index.freshdrupal_live
@@ -16,6 +18,7 @@ dependencies:
     - schemata_json_schema
     - search_api
     - serialization
+    - text
     - user
 id: solr_search
 label: 'Solr Search'
@@ -974,6 +977,213 @@ display:
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
+        node_content_field_body:
+          id: node_content_field_body
+          table: search_api_index_freshdrupal_live
+          field: node_content_field_body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        media_content_field_body:
+          id: media_content_field_body
+          table: search_api_index_freshdrupal_live
+          field: media_content_field_body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: true
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
+        field_body:
+          id: field_body
+          table: search_api_index_freshdrupal_live
+          field: field_body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          field_rendering: false
+          fallback_handler: search_api
+          fallback_options:
+            link_to_item: false
+            use_highlighting: false
+            multi_type: separator
+            multi_separator: ', '
+          plugin_id: search_api_field
       filters:
         aggregated_field_published:
           id: aggregated_field_published
@@ -1106,19 +1316,24 @@ display:
           not: false
           parse_mode: terms
           fields:
-            - field_first_name
-            - field_last_name
-            - field_middle_name
+            - aggregated_field_type
+            - field_body
             - media_authors_field_first_name
             - media_authors_field_last_name
             - media_authors_field_middle_name
             - media_content_field_body
             - media_name
-            - node_field_body
+            - node_content_field_body
+            - node_field_first_name
+            - node_field_last_name
+            - node_field_middle_name
             - node_title
+            - people_field_biotext
             - people_field_first_name
             - people_field_last_name
             - people_field_middle_name
+            - processed
+            - rendered_item
           conjunction: OR
           plugin_id: search_api_fulltext
         aggregated_field_centers:
@@ -1239,8 +1454,10 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_body'
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
+        - 'config:field.storage.paragraph.field_body'
         - 'config:field.storage.people.field_photo'
         - 'config:search_api.index.freshdrupal_live'
   rest_export_1:
@@ -1322,7 +1539,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_body'
         - 'config:field.storage.media.field_cover'
         - 'config:field.storage.media.field_thumbnail_uri'
+        - 'config:field.storage.paragraph.field_body'
         - 'config:field.storage.people.field_photo'
         - 'config:search_api.index.freshdrupal_live'

@@ -3,6 +3,6 @@ langcode: en
 status: true
 dependencies: {  }
 id: global-market-development
-label: 'Global Market Development'
+label: 'Center for Global Market Development'
 description: ''
 locked: false

@@ -10,12 +10,12 @@ field_name: field_visibility
 entity_type: taxonomy_term
 bundle: centers
 label: Visibility
-description: ''
+description: 'If un-checked, the Center will not be visible in various places such as the homepage''s Our Centers carousel.'
 required: false
 translatable: true
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: Visible
