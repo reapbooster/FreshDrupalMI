@@ -24,19 +24,52 @@
 
 
 <milken-menu-{{ menu_name }} class="d-flex">
-  {% for key,value in items %}
-    <menu-column class="col-12 col-lg-3 col-md-6" id="menu-{{ key }}">
-      <h5 slot="column-title">{{ value.title }}</h5>
-      <ul slot="column-content" class="menu-content">
-        {% if value.below %}
-          {% for itemKey,itemValue in value.below %}
-            <li>
-              <h6 slot="item-title"><a href="{{ itemValue.url }}">{{ itemValue.title }}</a></h6>
-              <p slot="item-description">{{ itemValue.entity.toArray.description.0.value }}</p>
-            </li>
+  <div id="main-nav-wrapper" class="container-fluid">
+    <nav class="nav nav-tabs" role="tablist">
+      <a href="#" role="tab" data-rb-event-key="Milken Institute" aria-selected="true" class="nav-item nav-link active d-none">Milken Institute</a>
+    </nav>
+    <div class="tab-content">
+      <div role="tabpanel" aria-hidden="false" class="fade tab-pane active show">
+        <div id="milken-main" class="pb-5 row">
+          {% for key,value in items %}
+            <div class="col {{ value.title == 'Others' ? 'others' : '' }}">
+              <h5 class="menu-title">{{ value.title }}</h5>
+              <ul class="list-group">
+                {% if value.below %}
+                  {% for itemKey,itemValue in value.below %}
+                    <li>
+                      <a href="{{ itemValue.url }}">{{ itemValue.title }}</a>
+                      {% if itemValue.entity.toArray.description.0.value %}
+                        <p>{{ itemValue.entity.toArray.description.0.value }}</p>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+              {# Render Social Media icons if current columns is "Others" #}
+              {% if value.title == 'Others' %}
+                <ul class="social-icons">
+                  <li>
+                    <a href="https://www.facebook.com/milkeninstitute/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/milkeninstitute" target="_blank"><i class="fab fa-twitter"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://www.linkedin.com/company/milkeninstitute/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/milkeninstitute/" target="_blank"><i class="fab fa-instagram"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/channel/UCIRzxohZ6SbwsPqHFQGMJ7A" target="_blank"><i class="fab fa-youtube"></i></a>
+                  </li>
+                </ul>
+              {% endif %}
+            </div>
           {% endfor %}
-        {% endif %}
-      </ul>
-    </menu-column>
-  {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 </milken-main-{{ menu_name }}>

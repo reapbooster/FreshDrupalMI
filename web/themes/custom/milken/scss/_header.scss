@@ -360,6 +360,7 @@ navbar {
     }
 }
 
+// Main Nav Multi-Tab Menu Re-do 2021-04-15
 milken-menu-main {
   display: none;
   height: calc(100vh - 74px);
@@ -373,77 +374,99 @@ milken-menu-main {
     }
   }
 
-  menu-column {
-    padding: 15px;
+  & #main-nav-wrapper {
+    
+    background-color: #E2E7EA;
 
-    @media (min-width: ($breakpointTablet)) {
-      padding: 30px 0 30px 30px !important;
-    }
+    & .nav-tabs {
+      margin-bottom: 1em;
 
-    @media (max-width: ($breakpointTablet)) {
-      &.d-flex {
-        position: relative !important;
-        display: block !important;
-      }
-    }
+      & .nav-link {
+        // display: ${ multiMenu ? 'block' : 'none' }; From React, hide tab if not multi-menu
+        text-transform: uppercase;
+        color: #252d32;
+        font-size: 0.85em;
+        font-weight: bold;
+        letter-spacing: 2px;
 
-    h5 {
-      color: $backgroundLittleBitDarker;
-      text-transform: uppercase;
-      font-size: 18px;
-      @media (max-width: ($breakpointTablet)) {
-        font-size: 20px;
-      }
-    }
-    // .right-column {
-    //   padding-top: 5px;
-    // }
-    ul {
-
-      list-style: none;
-      padding-left: 0px;
-      padding: 0;
-      margin: 0;
-      color: rgba(255, 255, 255, 0);
-
-      li {
-        padding-top: 8px;
-        list-style-image: none;
-
-        @media (max-width: $breakpointPhone) {
-          padding-top: 1px;
+        @media screen and (max-width: 575.98px) {
+          width: 100%;
         }
 
+        &.active {
+          color: var(--color-milken-orange);
+          border-bottom: 3px solid var(--color-milken-orange);
+          background-color: inherit;
+        }
       }
-      h6 {
-        a {
-          text-decoration: none;
-          font-size: 17px;
-          color: $grayFont;
-          font-weight: bold;
-          color: $grayFont;
-          @media (max-width: ($breakpointTablet)) {
-            font-size: 20px;
+    }
+
+    & .tab-content {
+
+      & .menu-title{
+        color: #bbb;
+        text-transform: uppercase;
+        font-size: 1.15em;
+        margin-bottom: 0.5em;
+      }
+
+      & .list-group{
+        list-style-type: none;
+
+        & li {
+          margin-bottom: 1em;
+
+          &  a {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #444;
+            text-decoration: none;
+          }
+  
+          & p {
+            color: #444;
+            font-size: 0.9em;
+            margin: 0;
           }
         }
       }
-      h4 {
-        margin: 0;
-        a {
-          text-decoration: none;
-          font-size: 14px;
-          color: $orangeButtons;
-          font-weight: bold;
-          text-transform: uppercase;
+
+      // Main Menu "Other" column
+      & #milken-main {
+        & .others {
+          
+          & h5 {
+            display: none;
+          }
+
+          & li {
+            margin-bottom: 0.5em;
+            & a {
+              color: var(--color-milken-orange);
+            }
+          }
+          & .social-icons { 
+            display: flex;     
+            justify-content: space-between;
+            list-style: none;
+            padding: 0 1em;
+
+            & a {
+              color: #9899a1;  
+            }
+          }
         }
       }
 
-      p {
-        color: $grayFont;
-        margin-top: -10px;
+      & .col {
+        @media screen and (max-width: 991.98px) {
+          flex: 100%;
+          margin-top: 2em;
+        }
       }
     }
   }
+
 }
 
 
