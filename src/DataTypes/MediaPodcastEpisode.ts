@@ -13,7 +13,7 @@ export interface MediaPodcastServiceLinkInterface {
 }
 
 export interface MediaPodcastEpisodeInterface extends MediaInterface {
-  name: string;
+  name?: string;
   field_promo_image?: any;
   field_body?: TextField;
   field_episode?: number;
@@ -24,7 +24,6 @@ export interface MediaPodcastEpisodeInterface extends MediaInterface {
   field_summary?: TextField;
   field_transcript?: DocumentFileInterface;
   field_people?: any;
-  field_guests?: any;
   field_topics?: any;
   field_tags?: any;
   field_centers?: any;
@@ -33,7 +32,7 @@ export interface MediaPodcastEpisodeInterface extends MediaInterface {
   parent_field_name?: string;
   parent_type?: string;
   path?: PathObject;
-  thumbnail: ImageFile;
+  thumbnail?: ImageFile;
 }
 
 export class MediaPodcastEpisode extends Media implements MediaPodcastEpisodeInterface {
@@ -49,7 +48,6 @@ export class MediaPodcastEpisode extends Media implements MediaPodcastEpisodeInt
   field_service_links?: Array<MediaPodcastServiceLinkInterface>;
   field_summary?: TextField;
   field_people?: any;
-  field_guests?: any;
   field_topics?: any;
   field_tags?: any;
   field_centers?: any;

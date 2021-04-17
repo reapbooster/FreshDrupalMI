@@ -10,12 +10,14 @@ export interface NodeLandingPageInterface
     ListableInterface {
   field_content: Array<ParagraphInterface>;
   field_hero_image: MediaImageInterface;
+  field_secondary_menu: any;
 }
 
 export class NodeLandingPage
   extends Node
   implements NodeLandingPageInterface, ListableInterface {
   field_content: Array<ParagraphInterface>;
+  field_secondary_menu: any;
 
   _field_hero_image: MediaImage;
 
@@ -37,7 +39,7 @@ export class NodeLandingPage
   }
 
   getIncluded(): string {
-    return "&include=field_content,field_hero_image";
+    return "&include=field_content,field_hero_image,field_secondary_menu";
   }
 
   get items(): Array<EntityInterface> {
