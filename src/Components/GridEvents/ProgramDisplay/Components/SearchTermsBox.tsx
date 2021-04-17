@@ -21,7 +21,7 @@ const SearchTermsBox: React.FC<SearchTermsBoxInterface> = (props: SearchTermsBox
                         </span>
                     ))}
                 </div>
-                <FaTimes onClick={onRemoveAllTerms} />
+                { terms.length > 1 ? <FaTimes onClick={onRemoveAllTerms} /> : '' }
             </div>
         );
     } else {

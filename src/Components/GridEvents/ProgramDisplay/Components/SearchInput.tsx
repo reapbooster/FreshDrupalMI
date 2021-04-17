@@ -15,7 +15,7 @@ const SearchInput: React.FC<SearchInputProps> = (props: SearchInputProps) => {
             <input
                 name="keyword"
                 type="text"
-                value={value}
+                // value={value}
                 onChange={onChange}
                 onKeyPress={onKeyPress}
                 placeholder={'Search This Program'}

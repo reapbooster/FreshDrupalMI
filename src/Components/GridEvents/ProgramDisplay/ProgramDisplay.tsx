@@ -50,6 +50,8 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
 
   const [format, setFormat] = useState<number>(0); // TODO: use-location-state
 
+  const [printFlag, setPrintFlag] = useState<boolean>(false); // TODO: use-location-state
+
   const [panels, setPanels] = useState([]);
   const [speakers, setSpeakers] = useState([]);
   const [groupedPanels, setGroupedPanels] = useState([]);
@@ -71,6 +73,13 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
   const [expandAllToggled, setExpandAllToggled] = useState<boolean>(false);
 
   useEffect(() => {}, [terms, dates]);
+
+  useEffect(() => {
+    if (printFlag) { 
+      window.print(); 
+      setPrintFlag(false); 
+    }
+  }, [printFlag]);
 
   useEffect(() => {
     fetchPanels();
@@ -226,20 +235,22 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
 
   const handlePrintPage = () => {
     // print page
-  };
+    setFilterActive(false);
+    setPrintFlag(true);
+  }
 
   /**
    *  Terms filter handlers
    */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTerm(e.target.value);
+    // setTerm(e.target.value);
   };
 
   const handleInputPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key == "Enter") {
-      if (terms.indexOf(term) > -1) return;
+      if (terms.indexOf(e.target.value) > -1) return;
       let arr = [...terms];
-      arr.push(term);
+      arr.push(e.target.value);
       setTerm("");
       setTerms(arr);
     }
@@ -387,11 +398,13 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
               />
             </Col>
             <Col md={4} lg={3} className="text-right d-none d-md-block">
-              {/* TODO: Post-launch
-              <button className="btn btn-warning" onClick={handlePrintPage}>
-                PRINT THIS FORMAT
-              </button> */}
               {expandAllButton()}
+              <button
+                className="btn btn-warning w-sm-100 mb-1 ml-3"
+                onClick={handlePrintPage}
+              >
+                <i class="fas fa-print" />
+              </button>
             </Col>
           </Row>
           <SearchBar
