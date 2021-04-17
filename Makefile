@@ -13,6 +13,9 @@ build: env ## install dependencies and compile JS
 	make build-composer
 	make build-webpack
 
+build-on-centos8: env ## Only use on CentOS8: install compilers + dependencies and compile JS
+	make install-host-build-compilers
+	make build
 
 build-composer: env ./composer.json  ## composer install
 	make install-composer
@@ -32,6 +35,25 @@ install-composer:
 install-npm:
 	npm install
 
+install-host-build-compilers:
+	make install-centos8-php-composer
+	make install-centos8-nodjs-and-npm
+
+install-centos8-php-composer:
+	@echo "** Installing PHP-CLI and tools to install and run php composer. **" \
+	sudo dnf -y install php-cli php-json php-zip wget unzip \
+	&& php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+	&& sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+	&& composer -V
+
+install-centos8-nodjs-and-npm:
+	@echo "** Removing NodeJS and NPM to reinstall NodeJSv14 and NPM. **" \
+	&& sudo dnf -y remove nodejs \
+	&& sudo dnf -y module reset nodejs \
+	&& sudo dnf -y module enable nodejs:14 \
+	&& sudo dnf -y install npm \
+	&& node -v && npm -v 
+
 run: ## run the docker containers for a development environment
 	make run-docker
 
@@ -45,20 +67,15 @@ run-clone-livedb: env ## clone the live DB to the docker mysql instance
 	terminus backup:get ${LIVE_SITE} --element=database --yes --to="./db/${BACKUP_FILE_NAME}" > /dev/null
 	[[ -f "db/${BACKUP_FILE_NAME}" ]] && make run-clone-restore && true
 
-run-clone-livefiles:
-	@echo
+run-clone-livefiles:  ## YOUR SSH KEY MUST BE REGISTERED WITH PANTHEON AND SHARED WITH THE DOCKER CONTAINER FOR THIS TO WORK
+	@echo "**If your SSH key is not registered with Pantheon, this will fail.**"
 	SFTP_COMMAND=$(shell terminus connection:info ${PANTHEON_SITE_NAME}.live --format=json | jq -r ".sftp_command") > /dev/null
 	SSH_COMMAND=${SFTP_COMMAND}/sftp -o Port=/ssh -p /
 	FILES_FOLDER=`realpath db/files`
 	FILES_SYMLINK=`realpath web/sites/default`
-
-  ## YOUR SSH KEY MUST BE REGISTERED WITH PANTHEON AND SHARED WITH THE DOCKER CONTAINER FOR THIS TO WORK
-	rsync -rvlz --copy-unsafe-links --size-only --checksum --ipv4 --progress -e '${SFTP_COMMAND}:files/ ${FILES_FOLDER}
-
+	rsync -rvlz --copy-unsafe-links --size-only --checksum --ipv4 --progress -e ${SFTP_COMMAND}:files/ ${FILES_FOLDER}
 	rm -Rf web/sites/default/files
 	ln -s ${FILES_FOLDER} ${FILES_SYMLINK}
-
-
 
 upgrade:  ## Run upgrade for composer and NPM
 	make upgrade-composer
@@ -108,19 +125,22 @@ _install_mac:
 how-to-use:  ## Instructions for using this makefile
 	@echo
 	@echo
-	@echo "Step 1: make authterminus-{pantheon-account-email-address]"
+	@echo "First: make authterminus-{pantheon-account-email-address]"
 	@echo "        Authorize terminus to interact with pantheon on your account"
 	@echo
-	@echo "Step 2: make build"
+	@echo "Then: If building outside of Docker container, make install-host-build-compilers"
+	@echo "        Installs build compilers directly on Docker Host"
+	@echo
+	@echo "Then: make build"
 	@echo "        Install everything and do an initial supporting files build"
 	@echo
-	@echo "Step 3: make run"
+	@echo "Then: make run"
 	@echo "        starts up some docker containers to host the site locally"
 	@echo
-	@echo "Step 3: make run-clone-livedb"
+	@echo "Then: make run-clone-livedb"
 	@echo "        copies down a pantheon live site database to db/ folder and installs it in docker container"
 	@echo
-	@echo "Step 4: make run-clone-lifefiles"
+	@echo "Then: make run-clone-lifefiles"
 	@echo
 	@echo
 	@echo
@@ -133,24 +153,43 @@ reset-all-dependencies-yes:
 	@echo "=================================================================="
 	@echo "Removing outdated dependencies"
 	@echo "=================================================================="
-	echo "clearing composer's and NPM's cache"
-	npm cache clear --force
-	composer clear-cache
-	echo "removing node_modules"
-	rm -Rf node_modules
-	echo "removing  vendor dir"
-	rm -Rf vendor
-	echo "removing drupal core, modules/contrib and themes/contrib folders."
-	rm -Rf web/modules/contrib
-	rm -Rf web/themes/contrib
-	rm -Rf web/core
-	rm -Rf package-lock.json
 	rm -Rf composer.lock
 	@echo "=================================================================="
 	@echo "Reinstalling"
 	@echo "=================================================================="
 	make install
 
+reset-dependencies-composer:
+	@echo "=================================================================="
+	@echo "Removing outdated Composer dependencies"
+	@echo "=================================================================="
+	echo "clearing composer's cache"
+	composer clear-cache
+	echo "removing  vendor dir"
+	rm -Rf vendor
+	echo "removing drupal core, modules/contrib and themes/contrib folders."
+	rm -Rf web/modules/contrib
+	rm -Rf web/themes/contrib
+	rm -Rf web/core
+	rm -Rf composer.lock
+	@echo "=================================================================="
+	@echo "Reinstalling Composer"
+	@echo "=================================================================="
+	make install-composer
+
+reset-dependencies-npm:
+	@echo "=================================================================="
+	@echo "Removing outdated NPM dependencies"
+	@echo "=================================================================="
+	echo "clearing NPM's cache"
+	npm cache clear --force
+	echo "removing node_modules"
+	rm -Rf node_modules
+	rm -Rf package-lock.json
+	@echo "=================================================================="
+	@echo "Reinstalling NPM"
+	@echo "=================================================================="
+	make install-npm
 
 
 .DEFAULT_GOAL := help
