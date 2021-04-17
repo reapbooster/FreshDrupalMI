@@ -81,6 +81,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
         apiParams.addFilter('field_centers.name', filterCenters, 'IN');
       }
 
+      apiParams.addInclude(['field_authors']);
 
       // Use pageItemOffset for pagination, it skips a number of records. meta.count has the total number
       requestURL = '/jsonapi/node/article?jsonapi_include=true&'
@@ -263,7 +264,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       <FacetExplorerContainer className="container-fluid py-5">
         <Row>
           <Col lg={3}>
-            <div className="filter-area">
+            {/* <div className="filter-area">
               <CustomSelect>
                 <Select
                   isMulti
@@ -304,7 +305,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
                   onChange={selectCenters}
                 />
               </CustomSelect>
-            </div>
+            </div> */}
             <div className="filter-area sidebar-content">
               <div dangerouslySetInnerHTML={{ __html: data.field_sidebar_content?.value }} />
             </div>
@@ -323,6 +324,7 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       <div className="container mb-5 py-4">
         <Row className="pagination-wrapper">
           <Col>
+            {pageCount > 1 ? 
             <ReactPaginate
               previousLabel={'Previous'}
               nextLabel={'Next'}
@@ -330,12 +332,13 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
               breakClassName={'break-me'}
               pageCount={pageCount}
               marginPagesDisplayed={2}
-              pageRangeDisplayed={4}
+              pageRangeDisplayed={2}
               onPageChange={handlePageClick}
               containerClassName={'pagination justify-content-center m-0 react-paginate'}
               subContainerClassName={'pages pagination'}
               activeClassName={'active'}
             />
+            : ''}
           </Col>
         </Row>
       </div>

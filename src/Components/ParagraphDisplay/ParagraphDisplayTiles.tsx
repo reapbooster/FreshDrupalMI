@@ -106,7 +106,7 @@ export class ParagraphDisplayTiles extends React.Component<
         }
 
         & h2 {
-          font-family: LatoWebBlack;
+          font-family: 'LatoWebBold';
           font-size: 1.5em;
           font-weight: bold;
           margin-bottom: 0;

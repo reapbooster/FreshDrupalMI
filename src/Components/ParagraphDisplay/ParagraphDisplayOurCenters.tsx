@@ -1,69 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { Col, Row, Container, Card } from "react-bootstrap";
 import styled from "styled-components";
-
-const data = [
-  {
-    name: "Asia Center",
-    image: "https://milkeninstitute.org/sites/default/files/gettyimages-962204474-170667a_0.jpg",
-    description: "Extends the reach and impact of the Milken Institute to the Asia-Pacific region",
-    link: "https://milkeninstitute.org/centers/asia-center"
-  },
-  {
-    name: "Center for Financial Markets",
-    image: "https://milkeninstitute.org/sites/default/files/gettyimages-637513348-170667a.jpg",
-    description: "Conducts research and constructs programs designed to facilitate the smooth and efficient operation of financial markets",
-    link: "https://milkeninstitute.org/centers/center-for-financial-markets"
-  },
-  {
-    name: "Center for the Future of Aging",
-    image: "https://milkeninstitute.org/sites/default/files/kayak-new-2_1.jpg",
-    description: "Promotes healthy, productive, and purposeful aging",
-    link: "https://milkeninstitute.org/centers/center-for-the-future-of-aging"
-  },
-  {
-    name: "Center for Public Health",
-    image: "https://milkeninstitute.org/sites/default/files/grocery-store-health.jpg",
-    description: "Promotes sustainable solutions that lead to better health for individuals and communities",
-    link: "https://milkeninstitute.org/centers/center-for-public-health"
-  },
-  {
-    name: "Center for Regional Economics and California Center",
-    image: "https://milkeninstitute.org/sites/default/files/future-of-work-program.jpg",
-    description: "Analyzes the dynamics that drive job creation and promote industry expansion",
-    link: "https://milkeninstitute.org/centers/center-for-regional-economics"
-  },
-  {
-    name: "Center for Strategic Philanthropy",
-    image: "https://milkeninstitute.org/sites/default/files/center-for-strategic-philanthropy-hero.jpg",
-    description: "Maximizes social return on investments by improving the deployment of philanthropic capital",
-    link: "https://milkeninstitute.org/centers/center-for-strategic-philanthropy"
-  },
-  {
-    name: "FasterCures",
-    image: "https://milkeninstitute.org/sites/default/files/fastercures-hero-1.jpg",
-    description: "Accelerates biomedical research and treatments for patients, improving the system for all",
-    link: "https://milkeninstitute.org/centers/fastercures"
-  },
-  {
-    name: "Financial Innovations Labs",
-    image: "https://milkeninstitute.org/sites/default/files/financial-innovations-lab-feature%20%281%29.jpg",
-    description: "Financial Innovations Labs tackle funding gaps around a specific economic development issue by holding a microscope to the problem and analyzing it from every angle.",
-    link: "https://milkeninstitute.org/financial-innovations-labs"
-  },
-  {
-    name: "Global Market Development",
-    image: "https://milkeninstitute.org/sites/default/files/gmd.jpg",
-    description: "Working with government partners in emerging and developing economies to build strong, domestic financial markets",
-    link: "https://milkeninstitute.org/centers/global-market-development"
-  },
-  {
-    name: "Milken Center for Advancing the American Dream (MCAAD)",
-    image: "https://milkeninstitute.org/sites/default/files/CAAD%20Hero_Darker.jpg",
-    description: "MCAAD believes anyone with a dream, and the drive to achieve it, should have the opportunity to make it come true.",
-    link: "https://milkeninstitute.org/center-for-advancing-the-american-dream"
-  },
-];
+import Loading from "../Loading";
 
 interface ParagraphDisplayOurCentersProps {
   data: any;
@@ -72,9 +10,31 @@ interface ParagraphDisplayOurCentersProps {
 const ParagraphDisplayOurCenters: React.FunctionComponent = (
   props: ParagraphDisplayOurCentersProps
 ) => {
-  // const { data } = props;
+  const { data } = props;
+  
+  const [fetchRan, setFetchRan] = useState(false);
+  const [centersList, setCentersList] = useState(null);
+  
+  
+  // Fetch Centers List
+  if (!fetchRan) {
+    fetch('/api/v1.0/our_centers?_format=json&vocabulary=centers')
+      .then((res) => res.json())
+      .then((incoming) => {
+        setCentersList(incoming);
+        setFetchRan(true);
+        console.debug("ParagraphDisplayOurCenters: centersList ", centersList);
+      }
+    );
+  }
 
-  const centersList = data.map((item, index) => {
+  if (!fetchRan){
+    return (
+      <Loading />
+    );
+  }
+
+  const centersListHTML = centersList.map((item, index) => {
     return (
       <li
         key={index}
@@ -104,28 +64,21 @@ const ParagraphDisplayOurCenters: React.FunctionComponent = (
       .add("active");
   }
 
-  const centersCard = data.map((item, index) =>
+  const centersCard = centersList.map((item, index) =>
     <Card
       key={index}
       className={"our-centers--center-card" + (index === 0 ? ' active' : '')}
       id={`our-centers--center-card-${index}`}
     >
       <div className="card-header p-0">
-        <a href={item.link}>
-          <img
-            src={item.image}
-            alt="Center Image"
-            className="img-fluid w-100 h-100"
-            style={{ objectFit: "cover" }}
-          />
-        </a>
+        <a href={item.field_link} dangerouslySetInnerHTML={{__html: item.field_image}} />
       </div>
       <div className="card-body d-flex flex-column justify-content-between">
         <div>
-          <a className="center-link" href={item.link}>{item.name}</a>
-          <p>{item.description}</p>
+          <a className="center-link" href={item.field_link}>{item.name}</a>
+          <p>{item.field_summary}</p>
         </div>
-        <a href={item.link} className="btn-milken-orange mt-0 align-self-start">Learn More</a>
+        <a href={item.field_link} className="btn-milken-orange mt-0 align-self-start">Learn More</a>
       </div>
     </Card>
   )
@@ -139,15 +92,17 @@ const ParagraphDisplayOurCenters: React.FunctionComponent = (
     }
 
     & h2 {
-      font-family: "LatoWebBlack";
+      font-family: "LatoWebBold";
       font-size: 2.5em;
     }
 
-    & .centersList {
+    & .centersListHTML {
       & h4 {
         letter-spacing: 2px;
-        color: rgba(53,54,60,0.54);
-        font-size: 1em;
+        color: #000;
+        font-size: 1.25em;
+        font-family: 'LatoWebItalic';
+        text-transform: uppercase;
         font-weight: bold;
         margin-bottom: 1.5em;
       }
@@ -155,8 +110,9 @@ const ParagraphDisplayOurCenters: React.FunctionComponent = (
         cursor: pointer;
         border: none;
         border-left: 3px solid transparent;
-        color: dimgray;
+        color: #000;
         line-height: 1.43;
+        font-family: 'LatoWebMedium';
 
         &.active, :hover {
           color: var(--color-milken-orange);
@@ -177,6 +133,15 @@ const ParagraphDisplayOurCenters: React.FunctionComponent = (
 
         & .card-header {
           height: 18em;
+
+          & a {
+            & img {
+              height: 100% !important;
+              width: 100% !important;
+              max-width: 100%;
+              object-fit: cover;
+            }
+          }
         }
 
         & .card-body {
@@ -206,10 +171,10 @@ const ParagraphDisplayOurCenters: React.FunctionComponent = (
       <Container>
         <h2 className="text-center mb-5">Our centers</h2>
         <Row>
-          <Col xs={12} md={5} className="centersList">
+          <Col xs={12} md={5} className="centersListHTML">
             <h4>CENTERS AND PRACTICE AREAS</h4>
             <ul className="list-group mb-5">
-              {centersList}
+              {centersListHTML}
             </ul>
           </Col>
           <Col xs={12} md={7} className="centersCard">
