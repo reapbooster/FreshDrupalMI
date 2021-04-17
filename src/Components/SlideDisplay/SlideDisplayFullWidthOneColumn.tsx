@@ -111,7 +111,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
 
       & .h1 {
         font-size: 2.5em;
-        font-family: 'LatoWebBlack';
+        font-family: 'LatoWebBold';
         
         @media (max-width: 767.98px) {
           font-size: 1.9em;

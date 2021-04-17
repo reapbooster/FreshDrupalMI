@@ -6,7 +6,7 @@ const PersonWrapper = styled.div`
     border: 1px solid lightgray;
     & .field-tag {
         color: var(--color-milken-blue);
-        font-family: 'LatoWebBlack';
+        font-family: 'LatoWebBold';
     }
 
     & .name {

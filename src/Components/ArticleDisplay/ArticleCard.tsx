@@ -61,13 +61,21 @@ const ArticleCard = (props: ArticleCardProps) => {
       min-height: 146px;
     }
 
-    & .authors {
-      color: #999AA3;
-      margin: 0;
-      font-size: 0.95em;
-      text-overflow: ellipsis;
-      white-space: nowrap; 
-      overflow: hidden;
+    & .card-footer {
+
+      @media only screen and (max-width: 575.98px) {
+        max-width: calc(100vw - 2.5em);
+      }
+
+      & .authors {
+        color: #999AA3;
+        margin: 0;
+        font-size: 0.95em;
+        text-overflow: ellipsis;
+        white-space: nowrap; 
+        overflow: hidden;
+      }
+
     }
   `;
 
@@ -114,8 +122,7 @@ const ArticleCard = (props: ArticleCardProps) => {
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
             <Card.Title
               style={{
-                fontSize: "1.2em",
-                fontWeight: "bold",
+                fontSize: "1em",
                 marginBottom: "0",
               }}
             >

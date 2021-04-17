@@ -55,16 +55,27 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
   `;
 
   const WrapperSlideText = styled.div`
+
+    & .h2 {
+      font-family: 'LatoWebItalic';
+      text-transform: uppercase;
+      font-size: 1.25em;
+
+      @media (max-width: 768px) {
+        font-size: 1em;
+      }
+    }
+    
     & .h1 {
       font-size: 2.25em;
-      font-family: 'LatoWebBlack';
-      @media (max-width: 1200px) {
+      font-family: 'LatoWebBold';
+      @media (max-width: 1199.98px) {
         font-size: 1.6em;
       }
-      @media (max-width: 768px) {
+      @media (max-width: 767.98px) {
         font-size: 2.25em;
       }
-      @media (max-width: 576px) {
+      @media (max-width: 575.98px) {
         font-size: 1.6em;
       }
     }
@@ -78,6 +89,9 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
     & .li {
       display: list-item;
       margin-left: 1em;
+      font-size: 1.25em;
+      font-family: 'LatoWeb';
+      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
     }
 
   `;

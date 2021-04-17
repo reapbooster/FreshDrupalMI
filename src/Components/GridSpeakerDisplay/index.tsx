@@ -33,13 +33,13 @@ const GridSpeakerDisplay: React.FunctionComponent = (
         & a {
           color: var(--color-milken-orange);
           letter-spacing: 2px;
-          font-family: 'LatoWebBlack';
+          font-family: 'LatoWebBold';
           font-size: 0.9em;
           text-transform: uppercase;
         }
     
         & h1 {
-          font-family: 'LatoWebBlack';
+          font-family: 'LatoWebBold';
           font-size: 3rem;
           margin: 27px 0 18px;
         }

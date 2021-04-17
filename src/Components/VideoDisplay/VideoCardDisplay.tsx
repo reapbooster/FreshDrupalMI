@@ -93,8 +93,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
             <Card.Title
               style={{
-                fontSize: "1.2em",
-                fontWeight: "bold",
+                fontSize: "1em",
                 marginBottom: "0",
               }}
             >
