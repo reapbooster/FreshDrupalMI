@@ -48,30 +48,39 @@ function milken_base_page_attachments(array &$attachments) {
 /**
  * Implements hook_search_api_solr_query_alter().
  */
-function search_api_custom_search_api_solr_query_alter(QueryInterface $solarium_query, SearchAPIQueryInterface $query) {
+function milken_base_search_api_solr_query_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface $query) {
   // To get a list of solrium events:
   // @see http://solarium.readthedocs.io/en/stable/customizing-solarium/#plugin-system
+  // $solr_field_names maps search_api field names to real field names in the Solr index.
   // The 3.16e-11 is the inverse number of milliseconds in one year ( 1 / ms ).
   // 6.3411541e-11 ms in 6 months, 1.2683917e-10 in 3 months
-  // 1.58e-11 in 2 years, 1.06e-11 in 3 years
+  // 1.58e-11 in 2 years, 1.06e-11 in 3 years, 7.93e-12 in 4 years
   // 6.3411541e-12 ms in 60 months
   // this number acts as the cut-off for the boost
   // https://solr.apache.org/guide/8_0/function-queries.html#recip-function
   // https://www.hashbangcode.com/article/drupal-8-date-search-boosting-search-api-and-solr-search
+
   $solr_field_names = $query->getIndex()->getServerInstance()->getBackend()->getSolrFieldNames($query->getIndex());
   \Drupal::logger('milken_migrate')->debug('SOLR Hook: milken_base_search_api_solr_query_alter');
 
   $solr_date_field = !empty($solr_field_names['media_created']) ? $solr_field_names['media_created'] : '';
 
   if ($solr_date_field) {
-    $solarium_query->addParam('bf', "recip(abs(ms(NOW," . $solr_date_field . ")),6.3411541e-12,50,1)");
+    $solarium_query->addParam('bf', "recip(abs(ms(NOW/HOUR," . $solr_date_field . ")),7.93e-12,1000,0.1)");
     \Drupal::logger('milken_migrate')->debug('SOLR Hook: Query Param media_created Added ' . $solr_date_field);
   }
 
   $solr_date_field = !empty($solr_field_names['node_created']) ? $solr_field_names['node_created'] : '';
 
   if ($solr_date_field) {
-    $solarium_query->addParam('bf', "recip(abs(ms(NOW," . $solr_date_field . ")),6.3411541e-12,50,1)");
+    $solarium_query->addParam('bf', "recip(abs(ms(NOW/HOUR," . $solr_date_field . ")),7.93e-12,1000,0.1)");
     \Drupal::logger('milken_migrate')->debug('SOLR Hook: Query Param node_created Added ' . $solr_date_field);
+  }
+
+  $solr_date_field = !empty($solr_field_names['aggregated_field_published']) ? $solr_field_names['aggregated_field_published'] : '';
+
+  if ($solr_date_field) {
+    $solarium_query->addParam('bf', "recip(abs(ms(NOW/HOUR," . $solr_date_field . ")),7.93e-12,1000,0.1)");
+    \Drupal::logger('milken_migrate')->debug('SOLR Hook: Query Param created Added ' . $solr_date_field);
   }
 }
