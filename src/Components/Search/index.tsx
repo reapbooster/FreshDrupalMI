@@ -416,8 +416,8 @@ export default function Search() {
 
         {pager && pager?.total_pages > 0 && (
           <ReactPaginate
-            previousLabel={<span class="fa fa-chevron-left"></span>}
-            nextLabel={<span class="fa fa-chevron-right"></span>}
+            previousLabel={<span className="fa fa-chevron-left"></span>}
+            nextLabel={<span className="fa fa-chevron-right"></span>}
             breakLabel={"..."}
             breakClassName={"break-me"}
             pageCount={pager?.total_pages}
