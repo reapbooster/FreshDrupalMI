@@ -3,12 +3,17 @@ langcode: en
 status: true
 dependencies:
   module:
+    - gatsby
     - menu_ui
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
+  gatsby:
+    preview: false
+    iframe: false
+    target: window
 name: 'Landing Page'
 type: landing_page
 description: ''

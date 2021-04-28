@@ -32,6 +32,7 @@ dependencies:
     - media
     - metatag
     - path
+    - publication_date
     - text
 third_party_settings:
   field_group:
@@ -56,6 +57,7 @@ third_party_settings:
         - field_people
         - path
         - status
+        - published_at
         - created
         - uid
       parent_name: group_details
@@ -134,12 +136,15 @@ third_party_settings:
         - field_meta_tags
       parent_name: group_details
       weight: 10
-      format_type: tabs
+      format_type: tab
       region: content
       format_settings:
         id: ''
         classes: ''
         direction: horizontal
+        formatter: closed
+        description: ''
+        required_fields: true
       label: Content
 id: media.video.default
 targetEntityType: media
@@ -148,7 +153,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -370,6 +375,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  published_at:
+    type: publication_date_timestamp
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
@@ -379,7 +390,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60

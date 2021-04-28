@@ -3,11 +3,16 @@ langcode: en
 status: true
 dependencies:
   module:
+    - gatsby
     - menu_ui
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  gatsby:
+    preview: false
+    iframe: false
+    target: window
 name: Opportunity
 type: opportunity
 description: 'Philanthropy Hub Opportunity'

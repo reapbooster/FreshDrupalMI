@@ -1253,6 +1253,18 @@ display:
           expose:
             label: Relevance
           plugin_id: search_api
+        aggregated_field_published:
+          id: aggregated_field_published
+          table: search_api_index_freshdrupal_live
+          field: aggregated_field_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: true
+          expose:
+            label: Published
+          plugin_id: search_api
         label:
           id: label
           table: search_api_index_freshdrupal_live
@@ -1263,19 +1275,7 @@ display:
           order: ASC
           exposed: true
           expose:
-            label: Label
-          plugin_id: search_api
-        aggregated_field_published:
-          id: aggregated_field_published
-          table: search_api_index_freshdrupal_live
-          field: aggregated_field_published
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: true
-          expose:
-            label: Published
+            label: label
           plugin_id: search_api
       header: {  }
       footer: {  }
@@ -1334,7 +1334,7 @@ display:
             - people_field_middle_name
             - processed
             - rendered_item
-          conjunction: OR
+          conjunction: AND
           plugin_id: search_api_fulltext
         aggregated_field_centers:
           id: aggregated_field_centers

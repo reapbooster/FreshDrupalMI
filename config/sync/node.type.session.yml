@@ -3,11 +3,16 @@ langcode: en
 status: true
 dependencies:
   module:
+    - gatsby
     - menu_ui
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  gatsby:
+    preview: false
+    iframe: false
+    target: window
 name: Session
 type: session
 description: "Event => Event Tab => Program Day Paragraph => Session\r\n\r\n( e.g. GLOBAL CONF 2020 => PROGRAM TAB => DAY 1 => Oprah symposium )"

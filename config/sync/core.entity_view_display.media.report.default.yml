@@ -36,7 +36,7 @@ bundle: report
 mode: default
 content:
   field_authors:
-    weight: 18
+    weight: 16
     label: above
     settings:
       link: true
@@ -51,7 +51,7 @@ content:
     type: text_default
     region: content
   field_centers:
-    weight: 2
+    weight: 1
     label: above
     settings:
       link: true
@@ -59,7 +59,7 @@ content:
     type: entity_reference_label
     region: content
   field_collections:
-    weight: 17
+    weight: 15
     label: above
     settings:
       link: true
@@ -67,7 +67,7 @@ content:
     type: entity_reference_label
     region: content
   field_cover:
-    weight: 4
+    weight: 3
     label: above
     settings:
       image_style: ''
@@ -76,14 +76,14 @@ content:
     type: image
     region: content
   field_custom_author:
-    weight: 6
+    weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_essay:
-    weight: 10
+    weight: 8
     label: above
     settings:
       trim_length: 80
@@ -95,7 +95,7 @@ content:
     type: link
     region: content
   field_events:
-    weight: 15
+    weight: 13
     label: above
     settings:
       link: true
@@ -103,7 +103,7 @@ content:
     type: entity_reference_label
     region: content
   field_filemime:
-    weight: 12
+    weight: 10
     label: above
     settings:
       link_to_entity: false
@@ -111,7 +111,7 @@ content:
     type: string
     region: content
   field_filesize:
-    weight: 13
+    weight: 11
     label: above
     settings:
       link_to_entity: false
@@ -119,7 +119,7 @@ content:
     type: string
     region: content
   field_index_weight:
-    weight: 19
+    weight: 17
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -134,14 +134,14 @@ content:
     type: file_default
     region: content
   field_meta_tags:
-    weight: 7
+    weight: 6
     label: above
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
   field_program_initiatives:
-    weight: 11
+    weight: 9
     label: above
     settings:
       link: true
@@ -149,22 +149,6 @@ content:
     type: entity_reference_label
     region: content
   field_regions:
-    weight: 16
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_related_event:
-    weight: 5
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_tags:
     weight: 14
     label: above
     settings:
@@ -172,8 +156,24 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_related_event:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_tags:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_term_collection:
-    weight: 3
+    weight: 2
     label: above
     settings:
       link: true
@@ -181,13 +181,23 @@ content:
     type: entity_reference_label
     region: content
   field_topics:
-    weight: 8
+    weight: 7
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  published_at:
+    type: timestamp
+    weight: 18
+    region: content
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
 hidden:
   created: true
   field_content: true

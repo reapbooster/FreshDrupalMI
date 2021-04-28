@@ -3,6 +3,6 @@ langcode: en
 status: true
 dependencies: {  }
 id: fil
-label: FIL
+label: 'Financial Innovations Labs '
 description: 'Financial Innovations Labs secondary menu'
 locked: false
