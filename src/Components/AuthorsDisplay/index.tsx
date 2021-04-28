@@ -23,7 +23,7 @@ export const AuthorsDisplay = (props: AuthorsDisplayProps) => {
     }
 
     & a h5 {
-      font-family: LatoWebHeavy;
+      font-family: 'LatoWebBold';
       margin: 0;
     }
 
@@ -50,7 +50,7 @@ export const AuthorsDisplay = (props: AuthorsDisplayProps) => {
                 <a
                   // Check if image should have a link
                   href={item.isHidden === true ? "javascript:void(0)" : item.link}
-                  className="d-flex align-items-center mt-3"
+                  className="d-flex align-items-center mt-4"
                 >
                   <div style={{ width: "4em", height: "4em"}}>
                     <div className="rounded-circle overflow-hidden">

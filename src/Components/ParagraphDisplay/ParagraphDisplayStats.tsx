@@ -50,13 +50,26 @@ const ParagraphDisplayStats: React.FunctionComponent = (
       font-size: 1.25em;
     }
 
+    & .stats-header h1 {
+      font-family: 'LatoWebBold';
+    }
+
     & .stats-stat h1 {
       color: var(--color-milken-blue);
       font-family: LatoWebLight;
       font-size: 4em;
 
+      @media screen and (max-width: 767.98px) {
+        font-size: 3.1em;
+      }
+
+      @media screen and (max-width: 575.98px) {
+        font-size: 4em;
+      }
+
       & sub {
         font-size: 0.33em;
+        bottom: unset;
       }
     }
   `;
@@ -67,7 +80,7 @@ const ParagraphDisplayStats: React.FunctionComponent = (
         (typeof(data.field_section_header) === "string") ? 
           <Row>
             <Col className="stats-header text-align-center pb-5">
-              <h1 className="font-weight-bold">
+              <h1>
                 {data.field_section_header}
               </h1>
               <h4 className="text-muted">
@@ -81,7 +94,7 @@ const ParagraphDisplayStats: React.FunctionComponent = (
         {
           statData.map((item, key) => {
             return (
-              <Col className="stats-stat">
+              <Col xs={12} sm={4} className="stats-stat">
                 <h1 className="text-align-center">
                   {item.symbol}{item.number}<sub>{item.subscript}</sub>
                 </h1>

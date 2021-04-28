@@ -57,7 +57,7 @@ const PodcastEpisodeServiceLinks: React.FunctionComponent = (
 
       return (
         <Col
-          sm={6}
+          xs={12}
           md={4}
           style={{ cursor: "pointer" }}
           key={key}

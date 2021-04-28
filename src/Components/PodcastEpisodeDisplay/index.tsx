@@ -3,8 +3,8 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import MediaPodcastEpisode, {
   MediaPodcastEpisodeInterface,
 } from "../../DataTypes/MediaPodcastEpisode";
-import PodcastEpisodeBody from "./PodcastEpisodeBody";
 import PodcastEpisodeFull from "./PodcastEpisodeFull";
+import PodcastEpisodeCard from "./PodcastEpisodeCard";
 import PodcastEpisodePanel from "./PodcastEpisodePanel";
 import { EntityComponentProps } from "../../DataTypes/EntityComponentProps";
 import ErrorBoundary from "../../Utility/ErrorBoundary";
@@ -29,7 +29,7 @@ export const PodcastEpisodeDisplay = (props: PodcastEpisodeProps) => {
     setFetchRan(true);
     const ecp = new EntityComponentProps(episodeData);
     ecp
-      .getData(data.getIncluded())
+      .getData(DataObject.getIncluded())
       .then((res) => res.json())
       .then((ajaxData) => {
         setEpisodeData(new MediaPodcastEpisode(ajaxData.data));
@@ -50,6 +50,14 @@ export const PodcastEpisodeDisplay = (props: PodcastEpisodeProps) => {
       return (
         <ErrorBoundary>
           <PodcastEpisodeFull data={episodeData} open={open} />
+        </ErrorBoundary>
+      );
+
+    case 'card':
+
+      return (
+        <ErrorBoundary>
+          <PodcastEpisodeCard data={episodeData} open={open} />
         </ErrorBoundary>
       );
   }

@@ -12,7 +12,7 @@ export const BodyFieldDisplay = (props: BodyFieldProps) => {
     ? data?.map((fieldData: BodyFieldInterface) => fieldData.processed).join()
     : data.processed;
   return (
-    <div className="container py-5">
+    <div className="container">
       <div className="row">
         <div className="col" dangerouslySetInnerHTML={{ __html: articleText }} />
       </div>

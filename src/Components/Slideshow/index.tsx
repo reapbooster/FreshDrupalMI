@@ -121,7 +121,7 @@ export const SlideShow = (props: SlideShowProps) => {
   `;
 
   const KeyValueTextFieldDisplayContainer = styled.div`
-    margin: 1rem;
+    margin: 0.8rem;
   `;
 
   return (

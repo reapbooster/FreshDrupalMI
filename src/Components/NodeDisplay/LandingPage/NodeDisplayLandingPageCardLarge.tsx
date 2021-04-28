@@ -54,7 +54,7 @@ export const NodeDisplayLandingPageCardLarge = (
     bottom: 0px;
     color: #fff;
     display: ${(data.field_tile_label == null) ? 'none !important' : 'block'};
-    font-family: LatoWebBold;
+    font-family: LatoWebMedium;
     font-size: 1em;
     height: 2em;
     left: 0px;
@@ -106,7 +106,7 @@ export const NodeDisplayLandingPageCardLarge = (
           </CardLinkBox>
         </Card.Body>
         <Card.Title
-          className="text-uppercase py-3 mb-0 mx-2 font-weight-bold"
+          className="py-3 mb-0 mx-2 font-weight-bold"
           style={{ fontSize: "1.0em", color: "#111" }}
         >
           {data.title}

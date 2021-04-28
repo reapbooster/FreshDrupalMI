@@ -59,7 +59,8 @@ export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
   if (!data.valid) {
     return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
-  const created = moment(data.changed, "ddd MMM DD YYYY Z");
+
+  const published_synthetic = data.published_at !== null ? moment(data.published_at) : moment(data.created, "ddd MMM DD YYYY Z");
 
   let authors = '';
   if (data.field_authors.length !== undefined && data.field_authors.length > 0) {
@@ -97,7 +98,7 @@ export const MediaReportCardDisplay = (props: MediaReportCardDisplayProps) => {
               style={{ maxWidth: "100%" }}
               srcsetSizes="(max-width: 1000px) 200px, 400px"
             />
-            <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
+            <DateWrapper>{published_synthetic.format("MMMM D, YYYY")}</DateWrapper>
           </CustomCardHeader>
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>
             <Card.Title style={{ fontSize: "1em", marginBottom: "0" }}>

@@ -81,28 +81,38 @@ const NormalButtonWrapper = styled.div`
 const ElMainContentWrapper = styled.div`
 & .section-social {
   order: 1;
-}
-& .section-content {
-  order: 2;
+
   @media only screen and (max-width: 1199px) {
     order: 3;
-    padding-top: 1.5em;
-
   }
 }
+
+& .section-content {
+  order: 2;
+
+  @media only screen and (max-width: 1199px) {
+    order: 1;
+  }
+
+  & p {
+    color: #000;
+    line-height: 1.25em;
+    margin-bottom: 1.5em;
+  }
+}
+
 & .section-tags {
   order: 3;
+
   @media only screen and (max-width: 1199px) {
     order: 2;
   }
+
   & .published-date {
     font-family: LatoWebItalic;
     font-size: 1.25em;
     color: #999AA3;
-    letter-spacing: 0;
     line-height: 1.8em;
-    margin-top: 0;
-    margin-bottom: 1em;
   }
 }
 `;
@@ -113,7 +123,7 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
     return <ErrorDisplay error={new Error("DataObject is not valid")} />;
   }
 
-  const created = moment(data.created, "ddd MMM DD YYYY Z");
+  const published_synthetic = data.published_at !== null ? moment(data.published_at) : moment(data.created, "ddd MMM DD YYYY Z");
 
   let tagList = [];
 
@@ -159,7 +169,7 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
   if (data.field_essay.length !== undefined && data.field_essay.length > 0) {
     essayButton =
       <a
-        href={data.field_essay[0].uri}
+        href={data.field_essay[0].uri.replace('internal:','').replace('entity:','') || "#"}
         className="btn-milken-orange ml-lg-3"
       >{data.field_essay[0].title}</a>
   }
@@ -180,20 +190,20 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
               <DocumentFileDisplay
                 data={data.field_media_file}
                 label="Download PDF"
-              ></DocumentFileDisplay>
+              />
             </ErrorBoundary>
             {essayButton}
           </MobileButtonWrapper>
         </ReportImageWrapper>
         <TitleWrapper>
-          <i style={{ fontSize: "1.2em", fontWeight: "bold" }}>REPORT</i>
+          <i style={{ fontSize: "1.2em", fontFamily: 'LatoWebItalic' }}>REPORT</i>
           <h1>{data.name}</h1>
           <NormalButtonWrapper>
             <ErrorBoundary>
               <DocumentFileDisplay
                 data={data.field_media_file}
                 label="Download PDF"
-              ></DocumentFileDisplay>
+              />
             </ErrorBoundary>
             {essayButton}
           </NormalButtonWrapper>
@@ -201,8 +211,11 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
       </HeaderWrapper>
       <ElMainContentWrapper className="container-fluid" style={{ width: "90%", margin: "2em auto" }}>
         <Row>
-          <Col xs="12" lg="6" xl="1" className="section-social">
+          <Col xs="12" xl="1" className="section-social">
             <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
+          </Col>
+          <Col className="d-block d-xl-none">
+            <AuthorsDisplay data={{ authorList: authorList }} />
           </Col>
           <Col xs="12" xl="8" className="section-content">
             <ErrorBoundary>
@@ -212,9 +225,11 @@ export const MediaReportFullDisplay = (props: MediaReportFullDisplayProps) => {
               />
             </ErrorBoundary>
           </Col>
-          <Col xs="12" lg="6" xl="3" className="section-tags">
-            <div className="published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
-            <AuthorsDisplay data={{ authorList: authorList }} />
+          <Col xs="12" xl="3" className="section-tags mb-3">
+            <div className="published-date container mb-3">{"Published " + published_synthetic.format('MMMM D, YYYY')}</div>
+            <div className="authors-display d-none d-xl-block">
+              <AuthorsDisplay data={{ authorList: authorList }} />
+            </div>
             <TagsDisplay data={{ tagList: tagList }} />
           </Col>
         </Row>

@@ -36,7 +36,7 @@ const ArticleCard = (props: ArticleCardProps) => {
   }
   console.debug("Article Card", articleData);
 
-  const created = moment(data.created, "ddd MMM DD YYYY Z");
+  const published_synthetic = data.published_at !== null ? moment(data.published_at) : moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`
     border-radius: 0;
@@ -116,7 +116,7 @@ const ArticleCard = (props: ArticleCardProps) => {
           <CustomCardHeader>
             <ErrorBoundary>
               <SlideDisplayImageOnly data={articleData.field_promo_slide} />
-              <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
+              <DateWrapper>{published_synthetic.format('MMMM D, YYYY')}</DateWrapper>
             </ErrorBoundary>
           </CustomCardHeader>
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>

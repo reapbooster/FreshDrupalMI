@@ -72,12 +72,12 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
 
     @media (max-width: 1199.98px) {
       font-size: 0.85em;
-      min-height: ${(isHeroImage === true) ? '45vw' : 'unset'};
+      min-height: ${(isHeroImage === true) ? '50vw' : 'unset'};
     } 
 
     @media (max-width: 575.98px) {
       font-size: 0.75em;
-      min-height: ${(isHeroImage === true) ? ((total_slides > 1) ? '60vw' : '45vw') : 'unset'};
+      min-height: ${(isHeroImage === true) ? ((total_slides > 1) ? '50vw' : '45vw') : 'unset'};
     } 
 
     & .slide-text {
@@ -112,13 +112,18 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       & .h1 {
         font-size: 2.5em;
         font-family: 'LatoWebBold';
+
+        @media (max-width: 1199.98px) {
+          font-size: calc(0.7em + 2.5vw);
+        }
         
-        @media (max-width: 767.98px) {
-          font-size: 1.9em;
-        }
-        @media (max-width: 575.98px) {
-          font-size: 1.7em;
-        }
+        // @media (max-width: 767.98px) {
+        //   font-size: 1.9em;
+        // }
+
+        // @media (max-width: 575.98px) {
+        //   font-size: 1.7em;
+        // }
       }
 
       & .h3 {
@@ -135,7 +140,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
       }
       
       & .p {
-        font-size: 1.5em;
+        font-size: 1.25em;
         margin-bottom: 1em;
         color: ${(slideData.field_text_color?.color === "#000000")
           ?'dimgray !important'

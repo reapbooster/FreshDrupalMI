@@ -49,6 +49,11 @@ const ParagraphDisplayPeople: React.FunctionComponent = (
     @media screen and (min-width: 1200px){
       font-size: 1.25em;
     }
+
+    & .text-align-center h1 {
+      font-size: 2em;
+      font-family: 'LatoWebBold';
+    }
   `;
 
   if (!fetchRan) {
@@ -65,7 +70,7 @@ const ParagraphDisplayPeople: React.FunctionComponent = (
         (typeof(data.field_section_header) === "string") ? 
           <Row>
             <Col className="text-align-center pb-5">
-              <h1 className="font-weight-bold">
+              <h1>
                 {data.field_section_header}
               </h1>
             </Col>

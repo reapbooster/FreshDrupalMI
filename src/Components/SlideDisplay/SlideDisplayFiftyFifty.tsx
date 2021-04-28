@@ -59,7 +59,7 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
     & .h2 {
       font-family: 'LatoWebItalic';
       text-transform: uppercase;
-      font-size: 1.25em;
+      font-size: 1em;
 
       @media (max-width: 768px) {
         font-size: 1em;
@@ -67,23 +67,33 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
     }
     
     & .h1 {
-      font-size: 2.25em;
+      font-size: 2em;
       font-family: 'LatoWebBold';
-      @media (max-width: 1199.98px) {
-        font-size: 1.6em;
-      }
-      @media (max-width: 767.98px) {
-        font-size: 2.25em;
-      }
-      @media (max-width: 575.98px) {
-        font-size: 1.6em;
-      }
+      margin-bottom: 0.6em;
     }
 
     & .p {
       font-size: 1.25em;
-      font-family: 'LatoWeb';
+      line-height: 1.35em;
       color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
+    }
+
+    & .h3 {
+      font-size: 1.4em;
+      line-height: 1.35em;
+    }
+
+    @media screen and (max-width: 1198.98px) {
+      & .h1 { font-size: 1.7em; }
+      & .p { font-size: 1.15em; }
+      & .h3 { font-size: 1.25em; }
+      & a { font-size: 0.8em; }
+    }
+
+    @media screen and (max-width: 575.98px) {
+      & .h1 { font-size: calc(0.9em + 2.9vw); }
+      & .p, .h3 { font-size: calc(0.5em + 2vw); }
+      & a { font-size: 0.7em; }
     }
 
     & .li {

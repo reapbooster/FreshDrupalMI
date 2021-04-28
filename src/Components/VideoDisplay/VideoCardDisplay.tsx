@@ -14,7 +14,7 @@ export interface VideoCardDisplayProps {
 export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
   const { data } = props;
 
-  const created = moment(data.created, "ddd MMM DD YYYY Z");
+  const published_synthetic = data.published_at !== null ? moment(data.published_at) : moment(data.created, "ddd MMM DD YYYY Z");
 
   const CardWrapper = styled.div`
     border-radius: 0;
@@ -87,7 +87,7 @@ export const VideoCardDisplay = (props: VideoCardDisplayProps) => {
                 view_mode="thumbnail"
                 style={{ maxWidth: "100%" }}
               />
-              <DateWrapper>{created.format("MMMM D, YYYY")}</DateWrapper>
+              <DateWrapper>{published_synthetic.format('MMMM D, YYYY')}</DateWrapper>
             </ErrorBoundary>
           </CustomCardHeader>
           <Card.Body style={{ minHeight: "5em", paddingBottom: "0" }}>

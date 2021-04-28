@@ -92,6 +92,7 @@ export class ParagraphMediaTiles
   constructor(props) {
     super(props);
     Object.assign(this, props);
+    console.debug("Paragraph Media Tiles Data Props", props);
   }
 
   get tiles(): Array<MediaInterface> {

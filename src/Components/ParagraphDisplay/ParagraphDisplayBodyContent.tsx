@@ -62,7 +62,7 @@ export const ParagraphDisplayBodyContent = (
     color: ${fontColor};
 
     & h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       font-family: 'LatoWebBold';
 
       @media (max-width: 991.98px){
@@ -82,13 +82,12 @@ export const ParagraphDisplayBodyContent = (
 
     & p {
       font-size: 1.25em;
+      line-height: 1.35;
       margin: 0 0 2em 0;
       color: ${(fontColor === "black")?'dimgray':'white'}
     }
 
     & .row {
-      display: block;
-      padding: 0 !important;
     }
 
     & blockquote {

@@ -50,7 +50,7 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
       return (
         <a
           className="col-sm-6 col-md-4 col-lg-3 p-4 text-center text-decoration-none text-dark"
-          style={{ fontSize: '0.75em', transition: 'all 0.5s ease' }}
+          style={{ transition: 'all 0.5s ease' }}
           href={staffData.path.alias}
         >
           <ImageFileDisplay
@@ -60,8 +60,12 @@ export const PeopleDisplay = (props: PeopleDisplayProps) => {
             style={{ maxWidth: "100%" }}
             srcsetSizes="(max-width: 1000px) 200px, 400px"
           />
-          <p className="font-weight-bold m-0 mt-3">{staffData.field_first_name} {staffData.field_last_name}</p>
-          <p style={{ color: 'dimgray' }}>{staffData.field_pgtitle}</p>
+          <p
+            className="m-0 mt-3"
+            style={{ fontFamily: 'LatoWebBold', fontSize: '1em' }}
+          >{staffData.field_first_name} {staffData.field_last_name}
+          </p>
+          <p style={{ color: 'dimgray', fontSize: '1em' }}>{staffData.field_pgtitle}</p>
         </a>
       );
     case 'row':

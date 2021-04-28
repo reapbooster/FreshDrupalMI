@@ -15,16 +15,14 @@ export const TagsDisplay = (props: TagsDisplayProps) => {
   const TagsWrapper = styled.div`
     & a {
       color: #fff !important;
-      margin-top: 8px;
-      padding: 4px 12px;
+      padding: 0.3em 1em;
       text-decoration: none;
       background-color: #9a6397;
-      font-size: 12px;
-      font-family: 'LatoWebBold';
+      font-size: 0.75em;
+      line-size: 1.4;
       display: inline-block;
-      line-height: 16px;
       white-space: nowrap;
-      margin: 10px 10px 10px 0;
+      margin: 0.8em 0.8em 0.8em 0;
     }
   `;
 

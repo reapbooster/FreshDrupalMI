@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import PodcastEpisodeServiceLinks from "./PodcastEpisodeServiceLinks";
 import AudioFileDisplay from "../FileDisplay/AudioFileDisplay";
 import ImageFileDisplay from "../FileDisplay/ImageFileDisplay";
@@ -56,39 +56,59 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
     width: 90%;
     margin: 2em auto;
 
-    & .podcast-title {
-      font-size: 1.25em;
-      font-style: italic;
-      font-family: 'LatoWebBold';
-      text-transform: uppercase;      
-    }
-
     & .section-social {
       order: 1;
+
+      @media only screen and (max-width: 1199px) {
+        order: 3;
+      }
     }
+
     & .section-content {
       order: 2;
+
+      @media only screen and (max-width: 1199px) {
+        order: 1;
+      }
+
       & .embedded-entity img {
         max-width: 100%;
       }
-      @media only screen and (max-width: 1199px) {
-        order: 3;
-        padding-top: 1.5em;
+
+      & .podcast-title {
+        font-size: 1.25em;
+        font-family: 'LatoWebItalic';
+        text-transform: uppercase;      
+      }
+
+      & .podcast-text {
+        & h4 {
+          font-size: 1.25em;
+          line-height: 1.25em;
+          margin-bottom: 1.5em;
+          font-family: 'LatoWebBold';
+        }
+  
+        & p {
+          font-size: 1.25em;
+          line-height: 1.25em;
+          margin-bottom: 1.5em;
+        }
       }
     }
+    
     & .section-tags {
       order: 3;
+
       @media only screen and (max-width: 1199px) {
         order: 2;
       }
+
       & .published-date {
         font-family: LatoWebItalic;
         font-size: 1.25em;
         color: #999AA3;
-        letter-spacing: 0;
         line-height: 1.8em;
-        margin-top: 0;
-        margin-bottom: 1em;
       }
     }
   `;
@@ -120,6 +140,7 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
       flex-direction: column;
       justify-content: center;
       margin-bottom: 2em;
+
       @media (max-width: 399.98px) {
         align-items: center;
         min-width: 100%;
@@ -127,14 +148,12 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
     }
 
     & h4 {
-      font-size: 1.2em; 
-      font-weight: bold; 
-      margin: 1em 0 0.2em 0;
+      font-size: 1.5em; 
+      font-family: 'LatoWebBold';
     }
 
     & h5 {
-      font-size: 1.2em; 
-      margin: 0 0 0.2em 0;
+      font-size: 1.3em;
     }
   `;
 
@@ -143,8 +162,7 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
     font-weight: bold;
   `;
 
-
-  const created = moment(data.created, "ddd MMM DD YYYY Z");
+  const published_synthetic = data.published_at !== null ? moment(data.published_at) : moment(data.created, "ddd MMM DD YYYY Z");
 
   let tagList = [];
 
@@ -199,75 +217,81 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
       </PodcastHero>
       <ElMainContentWrapper className="container-fluid">
         <Row>
-          <Col xs="12" lg="6" xl="1" className="section-social">
+          <Col xs="12" xl="1" className="section-social">
             <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
           </Col>
-          <Col xs="12" xl="8" className="section-content">
-            <Row>
-              <Col>
-                <h2 className='podcast-title'>Episode {data.field_episode}: {data.field_summary?.value}</h2>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                {data.field_guests.map((item) => {
-                  return (
-                    <RowPodcastGuests className="row">
-                      <Col className="bubble-image-container">
-                        <ErrorBoundary>
-                          <ImageFileDisplay
-                            data={item.field_photo[0]}
-                            view_mode="thumbnail-raw"
-                            style={{ objectFit: "cover" }}
-                          />
-                        </ErrorBoundary>
-                      </Col>
-                      <Col className="podcast-guest-info">
-                        <h4>{item.field_first_name} {item.field_middle_name} {item.field_last_name}</h4>
-                        <h5>{item.field_pgtitle}</h5>
-                      </Col>
-                    </RowPodcastGuests>
-                  )
-                })}
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Row style={{ margin: "auto" }}>
-                  <Col cellPadding={"1rem"}>
-                    <span
-                      dangerouslySetInnerHTML={{ __html: data.field_body?.value }}
-                      className={"text-muted"}
-                    ></span>
-                    <br />
-                    <p>
-                      <LearnMoreLink href={data.path.alias}>
-                        LEARN MORE &gt;
-                      </LearnMoreLink>
-                    </p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <br />
-                    <ErrorBoundary>
-                      <AudioFileDisplay
-                        data={data.field_media_audio_file}
-                        view_mode={"full"}
-                      />
-                    </ErrorBoundary>
-                    <br />
-                  </Col>
-                </Row>
-                <Row cellPadding={"1rem"}>
-                  <PodcastEpisodeServiceLinks links={data.field_service_links} />
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col xs="12" lg="6" xl="3" className="section-tags pt-4 pt-lg-0">
-            <div className="container published-date">{"Published " + created.format('MMMM D, YYYY')}</div>
+          <Col className="d-block d-xl-none">
             <AuthorsDisplay data={{ authorList: authorList }} />
+          </Col>
+          <Col xs="12" xl="8" className="section-content mb-4">
+            <Container>
+              <Row>
+                <Col>
+                  <h2 className='podcast-title'>Episode {data.field_episode}: {data.field_summary?.value}</h2>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {data.field_guests.map((item) => {
+                    return (
+                      <RowPodcastGuests className="row">
+                        <Col className="bubble-image-container">
+                          <ErrorBoundary>
+                            <ImageFileDisplay
+                              data={item.field_photo[0]}
+                              view_mode="thumbnail-raw"
+                              style={{ objectFit: "cover" }}
+                            />
+                          </ErrorBoundary>
+                        </Col>
+                        <Col className="podcast-guest-info">
+                          <h4>{item.field_first_name} {item.field_middle_name} {item.field_last_name}</h4>
+                          <h5>{item.field_pgtitle}</h5>
+                        </Col>
+                      </RowPodcastGuests>
+                    )
+                  })}
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Row style={{ margin: "auto" }}>
+                    <Col cellPadding={"1rem"}>
+                      <span
+                        dangerouslySetInnerHTML={{ __html: data.field_body?.value }}
+                        className="podcast-text"
+                      ></span>
+                      <p>
+                        <LearnMoreLink href={data.path.alias}>
+                          LEARN MORE &gt;
+                      </LearnMoreLink>
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <br />
+                      <ErrorBoundary>
+                        <AudioFileDisplay
+                          data={data.field_media_audio_file}
+                          view_mode={"full"}
+                        />
+                      </ErrorBoundary>
+                      <br />
+                    </Col>
+                  </Row>
+                  <Row cellPadding={"1rem"}>
+                    <PodcastEpisodeServiceLinks links={data.field_service_links} />
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          </Col>
+          <Col xs="12" xl="3" className="section-tags mb-3">
+            <div className="container published-date mb-3">{"Published " + published_synthetic.format('MMMM D, YYYY')}</div>
+            <div className="authors-display d-none d-xl-block">
+              <AuthorsDisplay data={{ authorList: authorList }} />
+            </div>
             <TagsDisplay data={{ tagList: tagList }} />
           </Col>
         </Row>
