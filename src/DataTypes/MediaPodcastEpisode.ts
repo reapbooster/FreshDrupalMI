@@ -70,7 +70,7 @@ export class MediaPodcastEpisode extends Media implements MediaPodcastEpisodeInt
   }
 
   hasData(): boolean {
-    return this.status !== undefined;
+    return this.status !== undefined && this.field_people[0].created !== undefined;
   }
 
   get field_media_audio_file(): AudioFileInterface {
