@@ -73,58 +73,48 @@
 {{ page }}
 {{ page_bottom }}
 
-<!-- Site Footer from html.html.twig -->
+{# 
+/**
+ * Modern footer, breaks at tablet sizes
+ * Requires bootstrap 
+ */
+ #}
 <footer>
-  <div class="footer-desktop">
-    <div class="top-row">
-        <!-- links in html.html.twig -->
-        <div class="footer-links">
-          {{ drupal_menu('footer-links-menu') }}
+  <div class="container-fluid py-4 px-5 text-center text-xl-left">
+    <div class="row">
+      <div class="col-sm-12 col-xl-7">
+        <div class="row">
+          <div class="col footer-links d-flex justify-content-center justify-content-xl-start">
+            {{ drupal_menu('footer-links-menu') }}
+          </div>
         </div>
-
-        <!-- text in html.html.twig -->
-        <div class="newsletter-text">
-          Stay up to date on research and event from the Milken Institute
+        <div class="row">
+          <div class="col footer-social d-flex justify-content-center justify-content-xl-start my-4">
+            {{ drupal_menu('footer-social-menu') }}
+          </div>
         </div>
-    </div>
-
-    <div class="bottom-row">
-      <!-- social menu in html.html.twig -->
-      <div class="footer-social">
-          {{ drupal_menu('footer-social-menu') }}
       </div>
-
-      <!-- button in html.html.twig -->
-      <div class="newsletter-sign-up">
-        <a href="/content/support-milken-institute">
-            Support Us
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-mobile-tablet">
-        <!-- links -->
-        <div class="footer-links">
-          {{ drupal_menu('footer-links-menu') }}
+      <div class="col-sm-12 col-xl-5">
+        <div class="row">
+          <div class="col newsletter-text d-flex justify-content-center justify-content-xl-end">
+            Find out more about sponsorship and engagement opportunities
+          </div>
         </div>
-        <!-- social -->
-        <div class="footer-social">
-          {{ drupal_menu('footer-social-menu') }}
-        </div>
-        <!-- text -->
-        <div class="newsletter-text">
-          Stay up to date on research and event from the Milken Institute
-        </div>
-        <!-- button -->
-        <div class="newsletter-sign-up">
-          <a href="/content/support-milken-institute">
+        <div class="row">
+          <div class="col footer-social d-flex justify-content-center justify-content-xl-end my-4">
+            <a href="/support" class="btn-milken-orange mt-0 px-4 px-sm-5 py-2">
               Support Us
-          </a>
+            </a>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col disabled invisible">
+        <a href="//responsiveweb.io/" style="display: block; height: 0; width: 0;">Developed by Jose Ramirez @ ResponsiveWeb.io</a>
+      </div>
+    </div>
   </div>
-
-
 </footer>
 
 <!-- BEGIN - OVERVIEW DIV ONLY IN HOMEPAGE-->
