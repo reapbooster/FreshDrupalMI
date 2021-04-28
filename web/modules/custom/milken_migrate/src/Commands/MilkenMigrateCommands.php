@@ -269,4 +269,94 @@ class MilkenMigrateCommands extends DrushCommands {
     }
   }
 
+  /**
+   * Drush command get missing published_at field value.
+   *
+   * @command milken_migrate:article_published_at
+   * @aliases mmapa
+   *
+   */
+  public function migrate_article_published_at() {
+    $storage = Drupal::entityTypeManager()
+      ->getStorage('node');
+    $articleIDs = $storage->getQuery()
+      ->condition('type', 'article')
+      ->condition('status', TRUE)
+      ->execute();
+    foreach ($articleIDs as $articleID) {
+      $article = $storage->load($articleID);
+      $articleRemoteRecord = RemoteRecord::getRemoteRecord('node', 'article', $article->uuid() . "?jsonapi_include=true");
+      if ($articleRemoteRecord instanceof RemoteRecord) {
+        $remoteField = $articleRemoteRecord->getField('published_at');
+        \Drupal::logger('milken_migrate REMOTE PUBLISHED_AT FIELD: ')
+          ->info((string) $remoteField);
+        if ($remoteField) {
+          $article->published_at = strtotime($remoteField);
+          $article->save();
+
+        }
+      }
+    }
+  }
+
+  /**
+   * Drush command get missing published_at field value.
+   *
+   * @command milken_migrate:report_published_at
+   * @aliases mmrpa
+   *
+   */
+  public function migrate_report_published_at() {
+    $storage = Drupal::entityTypeManager()
+      ->getStorage('media');
+    $reportIDs = $storage->getQuery()
+      ->condition('bundle', 'report')
+      ->condition('status', TRUE)
+      ->execute();
+    foreach ($reportIDs as $reportID) {
+      $report = $storage->load($reportID);
+      $reportRemoteRecord = RemoteRecord::getRemoteRecord('node', 'report', $report->uuid() . "?jsonapi_include=true");
+      if ($reportRemoteRecord instanceof RemoteRecord) {
+        $remoteField = $reportRemoteRecord->getField('published_at');
+        \Drupal::logger('milken_migrate REMOTE PUBLISHED_AT FIELD: ')
+          ->info((string) $remoteField);
+        if ($remoteField) {
+          $report->published_at = strtotime($remoteField);
+          $report->save();
+
+        }
+      }
+    }
+  }
+
+  /**
+   * Drush command get missing published_at field value.
+   *
+   * @command milken_migrate:video_published_at
+   * @aliases mmvpa
+   *
+   */
+  public function migrate_video_published_at() {
+    $storage = Drupal::entityTypeManager()
+      ->getStorage('media');
+    $videoIDs = $storage->getQuery()
+      ->condition('bundle', 'video')
+      ->condition('status', TRUE)
+      ->execute();
+    foreach ($videoIDs as $videoID) {
+      $video = $storage->load($videoID);
+      $videoRemoteRecord = RemoteRecord::getRemoteRecord('node', 'video', $video->uuid() . "?jsonapi_include=true");
+      if ($videoRemoteRecord instanceof RemoteRecord) {
+        $remoteField = $videoRemoteRecord->getField('published_at');
+        \Drupal::logger('milken_migrate REMOTE PUBLISHED_AT FIELD: ')
+          ->info((string) $remoteField);
+        if ($remoteField) {
+          $video->published_at = strtotime($remoteField);
+          $video->save();
+
+        }
+      }
+    }
+  }
+
 }
