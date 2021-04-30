@@ -76,9 +76,9 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
   useEffect(() => {}, [terms, dates]);
 
   useEffect(() => {
-    if (printFlag) { 
-      window.print(); 
-      setPrintFlag(false); 
+    if (printFlag) {
+      window.print();
+      setPrintFlag(false);
     }
   }, [printFlag]);
 
@@ -172,7 +172,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
                 .split(",")
                 .map((e) => {
                   let speaker = dataCache.getSpeakerById(parseInt(e));
-                  return speaker?.title;
+                  return `${speaker?.title} ${speaker?.field_description}`;
                 })
                 .join(" ");
 
