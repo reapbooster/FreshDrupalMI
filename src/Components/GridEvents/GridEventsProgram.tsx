@@ -15,14 +15,15 @@ const MainContainer = styled.div`
 `;
 
 interface GridEventsProgramProps {
-  grid_id: string;
+  gridId: string;
+  timeZone?: string;
   view_mode?: string;
 }
 
 const GridEventsProgram: React.FunctionComponent = (
   props: GridEventsProgramProps
 ) => {
-  const { grid_id, view_mode } = props;
+  const { gridId, timeZone, view_mode } = props;
 
   let elJumbotron = document.querySelector(".jumbotron"); 
   if (!!elJumbotron) {
@@ -33,7 +34,7 @@ const GridEventsProgram: React.FunctionComponent = (
   
   return (
     <MainContainer id="events">
-      <ProgramDisplay gridId={grid_id} />
+      <ProgramDisplay gridId={gridId} timeZone = {timeZone} />
     </MainContainer>
   );
 };

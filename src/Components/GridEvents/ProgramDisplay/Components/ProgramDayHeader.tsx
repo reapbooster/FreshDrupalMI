@@ -6,18 +6,19 @@ interface ProgramDayHeaderProps {
   opened: boolean;
   date: string;
   onToggleOpen: () => void;
+  timeZone?: string;
 }
 
 const ProgramDayHeader: React.FC<ProgramDayHeaderProps> = (
   props: ProgramDayHeaderProps
 ) => {
-  const { opened, date, onToggleOpen } = props;
+  const { opened, date, onToggleOpen, timeZone } = props;
   return (
     <div className="program-day-header" onClick={onToggleOpen}>
       <div className="program-day-toggler">
         {opened ? <FaChevronDown /> : <FaChevronRight />}
       </div>
-      <h4>{moment(date, "YYYY-MM-DD").format("dddd MMMM DD, YYYY")}</h4>
+      <h4>{moment(date, "YYYY-MM-DD").format("dddd MMMM DD, YYYY")}{timeZone ? ' ( ' + timeZone.toUpperCase() + ' )': '' }</h4>
     </div>
   );
 };

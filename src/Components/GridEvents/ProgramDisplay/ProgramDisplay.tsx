@@ -39,12 +39,13 @@ let dataCache = {
 
 interface ProgramDisplayProps {
   gridId: string;
+  timeZone: string;
 }
 
 const ProgramDisplay: React.FC<ProgramDisplayProps> = (
   props: ProgramDisplayProps
 ) => {
-  const { gridId } = props;
+  const { gridId, timeZone } = props;
 
   if (!gridId) return <div>No event id</div>;
 
@@ -448,6 +449,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
                         <ProgramDay
                           tracks={[]}
                           terms={[]}
+                          timeZone={timeZone}
                           viewMode={format}
                           panels={item?.filteredPanels}
                           getSpeakerById={dataCache.getSpeakerById}

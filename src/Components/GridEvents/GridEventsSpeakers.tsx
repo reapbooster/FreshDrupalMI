@@ -4,16 +4,16 @@ import styled from "styled-components";
 import Loading from "../Loading";
 
 interface GridEventsSpeakersProps {
-  grid_id: string;
+  gridId: string;
   view_mode?: string;
 }
 
 const GridEventsSpeakers: React.FunctionComponent = (
   props: GridEventsSpeakersProps
 ) => {
-  const { grid_id, view_mode } = props;
+  const { gridId, view_mode } = props;
 
-  console.debug("GridEventsSpeakers: grid_id ", grid_id);
+  console.debug("GridEventsSpeakers: gridId ", gridId);
   const [fetchRan, setFetchRan] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
   
@@ -26,14 +26,13 @@ const GridEventsSpeakers: React.FunctionComponent = (
     
   // Fetch Content and Taxonomy Tag Lists
   if(!fetchRan) {
-    setFetchRan(true);
-
     // Fetch Main Content 
-    fetch("/api/v1.0/grid_speakers?_format=json&sort_order=ASC&items_per_page=1000&eventid=" + grid_id)
+    fetch("/api/v1.0/grid_speakers?_format=json&sort_order=ASC&items_per_page=1000&eventid=" + gridId)
     .then((res) => res.json())
     .then((incoming) => {
       setFetchedData(incoming);
       console.debug(": fetchedData ", fetchedData);
+      setFetchRan(true);
     });
     
   }
@@ -149,12 +148,11 @@ const GridEventsSpeakers: React.FunctionComponent = (
             return (
               <a 
                 className="col-sm-6 col-md-4 col-lg-3 p-4 text-center text-decoration-none text-dark"
-                href={`/events/${grid_id}/speakers/${item.id}`}  
+                href={`/events/${gridId}/speakers/${item.id}`}  
               >
                 <img src={imagePath} />
-                <p className="font-weight-bold m-0 mt-3">{item.field_first_name} {item.field_last_name}</p>
-                <p dangerouslySetInnerHTML={{__html: item.field_description}} />
-                {/* <p className="">{item.field_description}</p> */}
+                <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{__html: decodeURIComponent(unescape(item.field_first_name + ' ' + item.field_last_name))}} />
+                <p dangerouslySetInnerHTML={{__html: decodeURIComponent(unescape(item.field_description))}} />
               </a>
             );
           })

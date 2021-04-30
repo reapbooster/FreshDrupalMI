@@ -9,25 +9,27 @@ import NodeSession, {
 
 interface ProgramDayProps {
   date: string;
-  terms: string[];
-  tracks: string[];
-  viewMode: number;
-  panels: object[];
   getSpeakerById: any;
   getTrackById: any;
   open: boolean;
+  panels: object[];
+  terms: string[];
+  timeZone: string;
+  tracks: string[];
+  viewMode: number;
 }
 
 const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
   const {
     date,
-    open,
-    terms,
-    tracks,
-    viewMode,
-    panels,
     getSpeakerById,
     getTrackById,
+    open,
+    panels,
+    terms,
+    timeZone,
+    tracks,
+    viewMode,
   } = props;
 
   const [opened, setOpened] = useState<boolean>(!!open);
@@ -39,17 +41,19 @@ const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
         date={date}
         opened={opened}
         onToggleOpen={() => setOpened(!opened)}
+        timeZone={timeZone}
       />
       {opened ? (
         panels.length > 0 ? (
           <div className="programday-sessions-container">
             {panels.map((panel, index) => (
               <ProgramDaySession
-                key={index}
-                session={panel}
-                viewMode={viewMode}
                 getSpeakerById={getSpeakerById}
                 getTrackById={getTrackById}
+                key={index}
+                session={panel}
+                timeZone={timeZone}
+                viewMode={viewMode}
               />
             ))}
           </div>
