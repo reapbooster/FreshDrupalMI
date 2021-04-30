@@ -91,7 +91,7 @@ export const PodcastEpisodeFull: React.FunctionComponent = (
   
         & p {
           font-size: 1.25em;
-          line-height: 1.25em;
+          line-height: 1.5em;
           margin-bottom: 1.5em;
         }
       }

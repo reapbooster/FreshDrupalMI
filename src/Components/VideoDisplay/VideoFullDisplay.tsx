@@ -16,13 +16,11 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
 
   console.debug("VideoFullDisplay", data);
 
-  const oEmbedObject = (data.field_embedded_oembed != null)
-    ? JSON.parse(data?.field_embedded_oembed)
-    : {
-      "html": '<iframe width="200" height="113" src="https://www.youtube.com/embed/' + data?.field_embedded_id + '?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
-    };
+  const iFrameHTML = (data.field_embedded_oembed != null)
+    ? data?.field_embedded_oembed
+    : '<iframe width="200" height="113" src="https://www.youtube.com/embed/' + data?.field_embedded_id + '?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
-  console.debug("oEmbedObject", oEmbedObject);
+  console.debug("iFrameHTML", iFrameHTML);
 
   const VideoElMainWrapper = styled.div`
   `;
@@ -78,7 +76,7 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       & p {
         color: #000;
         font-size: 1.25em;
-        line-height: 1.25em;
+        line-height: 1.5em;
         margin-bottom: 1.5em;
       }
       
@@ -139,7 +137,7 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
       <Row className="no-gutters">
         <Col>
           <VideoElFrameWrapper
-            dangerouslySetInnerHTML={{ __html: oEmbedObject?.html }}
+            dangerouslySetInnerHTML={{ __html: iFrameHTML }}
           />
         </Col>
       </Row>

@@ -96,7 +96,7 @@ const ElMainContentWrapper = styled.div`
 
   & p {
     color: #000;
-    line-height: 1.25em;
+    line-height: 1.5em;
     margin-bottom: 1.5em;
   }
 }

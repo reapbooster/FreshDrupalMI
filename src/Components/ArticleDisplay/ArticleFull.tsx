@@ -69,7 +69,7 @@ export const ArticleFull = (props: ArticleFullProps) => {
         
         & p {
           color: #000;
-          line-height: 1.25em;
+          line-height: 1.5em;
           margin-bottom: 1.5em;
         }
       }
