@@ -14,7 +14,7 @@ const FormatSelect: React.FC<FormatSelectProps> = (
     <div className="form-group format-select-box">
       <div className="row">
         <label className="col-md-3 control-label" htmlFor="format">
-          Format:
+          Program View:
         </label>
         <div className="col-md-9">
           <select

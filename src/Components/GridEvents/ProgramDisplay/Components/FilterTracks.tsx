@@ -28,7 +28,7 @@ const FilterTracks: React.FC<FilterTracksProps> = (
     return "";
   }
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const isSelected = (track: any) => {
     return tracks.indexOf(track.id) > -1;

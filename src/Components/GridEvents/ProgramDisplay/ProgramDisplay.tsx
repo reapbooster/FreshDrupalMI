@@ -14,9 +14,9 @@ import SearchBar from "./Components/SearchBar";
 import { getEventData } from "./api/index";
 
 const formatOptions = [
-  "Session name only",
-  "Name and short summary",
-  "Session details",
+  "Title Only", // option 0
+  "Title and Summary", // option 1
+  "Full Description", // option 2
 ];
 
 let dataCache = {
@@ -319,6 +319,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
   const handleExpandAllToggle = () => {
     setExpandAllToggled(true);
     setExpandAll(!expandAll);
+    setFormat(2);
   };
 
   const ProgramDisplayWrapper = styled.div`
@@ -370,8 +371,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
       onClick={handleExpandAllToggle}
     >
       {expandAll ? <FaMinus className="mr-1" /> : <FaPlus className="mr-1" />}
-      {expandAll ? "COLLAPSE" : "EXPAND"} ALL &nbsp;
-      <span className="d-none d-md-inline-block">PANELS</span>
+      {expandAll ? "COLLAPSE PROGRAM" : "VIEW FULL PROGRAM"}
     </button>
   );
 

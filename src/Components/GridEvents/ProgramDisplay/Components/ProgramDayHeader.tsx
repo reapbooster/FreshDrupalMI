@@ -18,7 +18,7 @@ const ProgramDayHeader: React.FC<ProgramDayHeaderProps> = (
       <div className="program-day-toggler">
         {opened ? <FaChevronDown /> : <FaChevronRight />}
       </div>
-      <h4>{moment(date, "YYYY-MM-DD").format("dddd MMMM DD, YYYY")}{timeZone ? ' ( ' + timeZone.toUpperCase() + ' )': '' }</h4>
+      <h4>{moment(date, "YYYY-MM-DD").format("dddd MMMM DD, YYYY")}</h4>
     </div>
   );
 };

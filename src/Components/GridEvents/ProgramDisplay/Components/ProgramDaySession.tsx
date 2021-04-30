@@ -8,10 +8,11 @@ import styled from "styled-components";
 import { NodeSessionInterface } from "../../../DataTypes/NodeSession";
 
 interface ProgramDaySessionProps {
-  session: any;
-  viewMode: number;
   getSpeakerById: any;
   getTrackById: any;
+  session: any;
+  timeZone: string;
+  viewMode: number;
 }
 
 const SPEAKER_PIC_DEFAULT = "/sites/default/files/Missing%20Photo_0.jpg";
@@ -19,7 +20,7 @@ const SPEAKER_PIC_DEFAULT = "/sites/default/files/Missing%20Photo_0.jpg";
 const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   props: ProgramDaySessionProps
 ) => {
-  const { session, viewMode, getSpeakerById, getTrackById } = props;
+  const { getSpeakerById, getTrackById, session, timeZone, viewMode } = props;
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -32,11 +33,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
       <div>
-        {startTime} {session.field_pday}
-        <br />
-        to
-        <br />
-        {endTime} {session.field_epday}
+        {startTime} {session.field_pday} - {endTime} {session.field_epday} {timeZone.toUpperCase()}
       </div>
     );
   };
@@ -170,7 +167,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
                 dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
                 style={{ fontSize: "1.54em" }}
-              ></h4>
+              />
+              {renderSessionTime(session)}
             </Col>
             <Col className="view-more-link">
               <button
@@ -205,7 +203,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
               <h4
                 dangerouslySetInnerHTML={{ __html: session?.title }}
                 className="m-0"
-              ></h4>
+              />
+              {renderSessionTime(session)}
             </Col>
             <Col className="view-more-link">
               <button
@@ -235,6 +234,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     return (
       <>
         {<h4 dangerouslySetInnerHTML={{ __html: session?.title }}></h4>}
+        {renderSessionTime(session)}
         <p
           dangerouslySetInnerHTML={{ __html: session?.field_description }}
           className="mb-4"
@@ -265,7 +265,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
           className="col time-col d-flex justify-content-center text-center"
           style={{ flex: "0 0 7em" }}
         >
-          {renderSessionTime(session)}
+          {/* {renderSessionTime(session)} */}
         </div>
         <div className="col">{renderSessionContent()}</div>
       </div>
