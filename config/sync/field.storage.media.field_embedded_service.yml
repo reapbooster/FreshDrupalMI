@@ -12,6 +12,9 @@ type: list_string
 settings:
   allowed_values:
     -
+      value: vimeo
+      label: Vimeo
+    -
       value: youtube
       label: YouTube
   allowed_values_function: ''

@@ -27,3 +27,4 @@ field_map:
   thumbnail_height: field_height
   width: field_video_width
   height: field_video_height
+  html: field_embedded_oembed
