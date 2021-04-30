@@ -68,37 +68,38 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
   }
   const styleObject = imageData.imageStyleObject;
   
-  let imageElement = 
-  (view_mode === 'medium-raw')
-  ? (
-  <img
-    src={imageData.image_style_uri.medium}
-    alt={imageData.filename}
-    style={imageTagStyle}
-    className={className}
-  />
-)
-: (view_mode === 'thumbnail-raw')
-? (
-<img
-  src={imageData.image_style_uri.thumbnail}
-  alt={imageData.filename}
-  style={imageTagStyle}
-  className={className}
-/>
-)
-:(
-  <img
-    data-drupal-id={imageData.id}
-    data-drupal-type={imageData.type}
-    data-uuid={imageData.id}
-    {...styleObject.imageAttributes}
-    sizes={srcsetSizes || ""}
-    style={imageTagStyle}
-    className={className}
-    alt={imageData.filename}
-  />
-)
+  let imageElement = (
+    (view_mode === 'medium-raw')
+    ? (
+    <img
+      src={imageData.image_style_uri.medium}
+      alt={imageData.filename}
+      style={imageTagStyle}
+      className={className}
+    />
+    )
+    : (view_mode === 'thumbnail-raw')
+    ? (
+    <img
+      src={imageData.image_style_uri.thumbnail}
+      alt={imageData.filename}
+      style={imageTagStyle}
+      className={className}
+    />
+    )
+    :(
+      <img
+        data-drupal-id={imageData.id}
+        data-drupal-type={imageData.type}
+        data-uuid={imageData.id}
+        {...styleObject.imageAttributes}
+        sizes={srcsetSizes || ""}
+        style={imageTagStyle}
+        className={className}
+        alt={imageData.filename}
+      />
+    )
+  );
 
   return (
     <>
