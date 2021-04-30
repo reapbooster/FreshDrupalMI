@@ -14,6 +14,11 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
+
+  & .paragraph-body-content {
+    padding-top: 3.5em;
+    padding-bottom: 3em;
+  }
 `;
 
 export const NodeDisplayLandingPageFull = (props) => {
