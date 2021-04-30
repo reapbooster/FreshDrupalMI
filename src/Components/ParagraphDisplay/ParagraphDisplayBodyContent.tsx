@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import ParagraphBodyContent, {
   ParagraphBodyContentInterface,
 } from "../../DataTypes/ParagraphBodyContent";
@@ -7,6 +8,9 @@ import Loading from "../Loading";
 import { BodyFieldDisplay } from "../../Fields/BodyFieldDisplay";
 import styled from "styled-components";
 import { ImageFile } from "../../DataTypes/ImageFile";
+import MediaDisplay from "Components/MediaDisplay";
+
+
 
 export interface ParagraphDisplayBodyContentProps {
   data: ParagraphBodyContentInterface;
@@ -127,6 +131,23 @@ export const ParagraphDisplayBodyContent = (
         });
     }
   )
+
+  useEffect(() => {
+    const MediaDisplayContainers = document.querySelectorAll("media-display");
+
+    MediaDisplayContainers.forEach((item) => {
+
+      let MediaDisplayData = Object.assign({}, item.dataset);
+
+      ReactDOM.render(
+        <MediaDisplay
+          data={MediaDisplayData}
+          view_mode='medium-raw'
+        />,
+        item
+      );
+    });
+  });
 
     
   return (
