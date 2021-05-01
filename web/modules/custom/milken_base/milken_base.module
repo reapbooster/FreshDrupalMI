@@ -5,10 +5,10 @@
  * Contains milken_base.module.
  */
 
-use Solarium\Core\Query\QueryInterface;
+use Solarium\Core\Query\SolarQueryInterface;
 use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Config\Entity\ConfigEntityType;
-use Drupal\search_api\Query\QueryInterface as SearchAPIQueryInterface;
+use Drupal\search_api\Query\QueryInterface;
 
 /**
  * Implements hook_entity_type_alter().
@@ -48,10 +48,10 @@ function milken_base_page_attachments(array &$attachments) {
 /**
  * Implements hook_search_api_solr_query_alter().
  */
-function milken_base_search_api_solr_query_alter(\Solarium\Core\Query\QueryInterface $solarium_query, \Drupal\search_api\Query\QueryInterface $query) {
+function milken_base_search_api_solr_query_alter(SolarQueryInterface $solarium_query, QueryInterface $query) {
   // To get a list of solrium events:
   // @see http://solarium.readthedocs.io/en/stable/customizing-solarium/#plugin-system
-  // $solr_field_names maps search_api field names to real field names in the Solr index.
+  // $solr_field_names maps search_api fields Solr index fields.
   // The 3.16e-11 is the inverse number of milliseconds in one year ( 1 / ms ).
   // 6.3411541e-11 ms in 6 months, 1.2683917e-10 in 3 months
   // 1.58e-11 in 2 years, 1.06e-11 in 3 years, 7.93e-12 in 4 years
@@ -59,7 +59,6 @@ function milken_base_search_api_solr_query_alter(\Solarium\Core\Query\QueryInter
   // this number acts as the cut-off for the boost
   // https://solr.apache.org/guide/8_0/function-queries.html#recip-function
   // https://www.hashbangcode.com/article/drupal-8-date-search-boosting-search-api-and-solr-search
-
   $solr_field_names = $query->getIndex()->getServerInstance()->getBackend()->getSolrFieldNames($query->getIndex());
   \Drupal::logger('milken_migrate')->debug('SOLR Hook: milken_base_search_api_solr_query_alter');
 
