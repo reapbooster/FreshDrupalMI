@@ -151,8 +151,8 @@ const GridEventsSpeakers: React.FunctionComponent = (
                 href={`/events/${gridId}/speakers/${item.id}`}  
               >
                 <img src={imagePath} />
-                <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{__html: decodeURIComponent(unescape(item.field_first_name + ' ' + item.field_last_name))}} />
-                <p dangerouslySetInnerHTML={{__html: decodeURIComponent(unescape(item.field_description))}} />
+                <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{__html: unescape(item.field_first_name + ' ' + item.field_last_name)}} />
+                <p dangerouslySetInnerHTML={{__html: item.field_description.replace(/&amp;/g,"&")}} />
               </a>
             );
           })

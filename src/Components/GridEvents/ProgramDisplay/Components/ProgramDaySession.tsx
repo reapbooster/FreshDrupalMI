@@ -158,13 +158,16 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderTitleOnly = () => {
+    let video = session?.field_video 
+      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>` 
+      : '';
     return (
       <>
         <div className="program-day-session-wrapper">
-          <Row className="mb-3">
+          <Row>
             <Col>
               <h4
-                dangerouslySetInnerHTML={{ __html: session?.title }}
+                dangerouslySetInnerHTML={{ __html: session?.title + video }}
                 className="m-0"
                 style={{ fontSize: "1.54em" }}
               />
@@ -195,13 +198,16 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderTitleSummary = () => {
+    let video = session?.field_video 
+      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>` 
+      : '';
     return (
       <>
         <div className="program-day-session-wrapper">
           <Row className="mb-3">
             <Col>
               <h4
-                dangerouslySetInnerHTML={{ __html: session?.title }}
+                dangerouslySetInnerHTML={{ __html: session?.title + video }}
                 className="m-0"
               />
               {renderSessionTime(session)}
@@ -231,9 +237,12 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderDetail = () => {
+    let video = session?.field_video 
+      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>` 
+      : '';
     return (
       <>
-        {<h4 dangerouslySetInnerHTML={{ __html: session?.title }}></h4>}
+        {<h4 dangerouslySetInnerHTML={{ __html: session?.title + video }}></h4>}
         {renderSessionTime(session)}
         <p
           dangerouslySetInnerHTML={{ __html: session?.field_description }}
