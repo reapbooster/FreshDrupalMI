@@ -82,7 +82,7 @@ const GridSpeakerDisplay: React.FunctionComponent = (
           <div className="name-title p-5 mx-lg-5">
             <a href="#" onClick={() => { history.back() }}>&lt; Back to previous page</a>
             <h1>{data.field_first_name} {data.field_middle_name} {data.field_last_name}</h1>
-            <h5>{data.field_description}</h5>
+            <h5 dangerouslySetInnerHTML={{__html: decodeURIComponent(data.field_description)}}/>
           </div>
         </Col>
         <Col md="6" sm="12" className="p-0">
