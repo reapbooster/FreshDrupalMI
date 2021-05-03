@@ -5,10 +5,10 @@
  * Contains milken_base.module.
  */
 
-use Solarium\Core\Query\SolarQueryInterface;
+use Solarium\Core\Query\QueryInterface as SolarQueryInterface;
 use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Config\Entity\ConfigEntityType;
-use Drupal\search_api\Query\QueryInterface;
+use Drupal\search_api\Query\QueryInterface as SearchAPIQueryInterface;
 
 /**
  * Implements hook_entity_type_alter().
@@ -48,7 +48,7 @@ function milken_base_page_attachments(array &$attachments) {
 /**
  * Implements hook_search_api_solr_query_alter().
  */
-function milken_base_search_api_solr_query_alter(SolarQueryInterface $solarium_query, QueryInterface $query) {
+function milken_base_search_api_solr_query_alter(SolarQueryInterface $solarium_query, SearchAPIQueryInterface $query) {
   // To get a list of solrium events:
   // @see http://solarium.readthedocs.io/en/stable/customizing-solarium/#plugin-system
   // $solr_field_names maps search_api fields Solr index fields.
