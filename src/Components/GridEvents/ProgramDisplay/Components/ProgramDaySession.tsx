@@ -33,7 +33,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
       <div>
-        {startTime} {session.field_pday} - {endTime} {session.field_epday} {timeZone.toUpperCase()}
+        {startTime} {session.field_pday} - {endTime} {session.field_epday} {timeZone?.toUpperCase()}
       </div>
     );
   };
@@ -158,8 +158,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderTitleOnly = () => {
-    let video = session?.field_video 
-      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>` 
+    let video = session?.field_video
+      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
       : '';
     return (
       <>
@@ -198,8 +198,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderTitleSummary = () => {
-    let video = session?.field_video 
-      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>` 
+    let video = session?.field_video
+      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
       : '';
     return (
       <>
@@ -237,8 +237,8 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderDetail = () => {
-    let video = session?.field_video 
-      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>` 
+    let video = session?.field_video
+      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
       : '';
     return (
       <>
