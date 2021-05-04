@@ -12,6 +12,9 @@ $color-lightgray: #dbdbdb;
 
 
 body.page-view-event-pages {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
     background: #f1f5f7;
     color: #3e4d5c;
     direction: ltr;
@@ -24,7 +27,6 @@ body.page-view-event-pages {
       }
     }
 }
-
 
 #events {
     width: 100%;
@@ -185,7 +187,7 @@ body.page-view-event-pages {
             margin-bottom: 24px;
             .program-day-header {
                 display: flex;
-                padding: 10px 0;
+                padding: 12px 0 10px;
                 cursor: pointer;
                 h4 {
                     font-size: 20px;
