@@ -117,9 +117,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
             suffix = "s";
           }
           // Split camelcase strings
-          mrole = mrole
-            .replace(/((?<!^)[A-Z](?![A-Z]))(?=\S)/g, " $1")
-            .replace(/^./, (s) => s.toUpperCase());
+          mrole = mrole.replace(/([A-Z])/g, " $1").replace(/^./, (s) => s.toUpperCase());
           return (
             <div className="speaker-role-group" key={mrole}>
               <h5>
