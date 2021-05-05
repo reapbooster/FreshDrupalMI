@@ -32,7 +32,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     );
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
-      <div>
+      <div className="mt-3">
         {startTime} {session.field_pday} - {endTime} {session.field_epday} {timeZone?.toUpperCase()}
       </div>
     );
@@ -169,7 +169,6 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
               <h4
                 dangerouslySetInnerHTML={{ __html: session?.title + video }}
                 className="m-0"
-                style={{ fontSize: "1.54em" }}
               />
               {renderSessionTime(session)}
             </Col>
@@ -186,7 +185,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
             </Col>
           </Row>
           <Collapse in={expanded}>
-            <div id="session-collapse-content">
+            <div className="mt-3 " id="session-collapse-content">
               {summary}
               {renderSpeakers(session)}
               {renderTracks(session)}
@@ -204,7 +203,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     return (
       <>
         <div className="program-day-session-wrapper">
-          <Row className="mb-3">
+          <Row>
             <Col>
               <h4
                 dangerouslySetInnerHTML={{ __html: session?.title + video }}
@@ -224,7 +223,11 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
               </button>
             </Col>
           </Row>
-          {summary}
+          <Row className="mt-3">
+            <Col>
+              {summary}
+            </Col>
+          </Row>
           <Collapse in={expanded}>
             <div id="session-collapse-content">
               {renderSpeakers(session)}
@@ -242,11 +245,11 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
       : '';
     return (
       <>
-        {<h4 dangerouslySetInnerHTML={{ __html: session?.title + video }}></h4>}
+        {<h4 dangerouslySetInnerHTML={{ __html: session?.title + video }}/>}
         {renderSessionTime(session)}
         <p
+          className="mt-3 mb-4"
           dangerouslySetInnerHTML={{ __html: session?.field_description }}
-          className="mb-4"
         />
         {renderSpeakers(session)}
         {renderTracks(session)}
@@ -272,7 +275,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
       <div className="row">
         <div
           className="col time-col d-flex justify-content-center text-center"
-          style={{ flex: "0 0 7em" }}
+          style={{ flex: "0 0 2vw", padding: 0 }}
         >
           {/* {renderSessionTime(session)} */}
         </div>

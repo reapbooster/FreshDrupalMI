@@ -333,11 +333,11 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
 
     & .program-day-session-wrapper {
       & h4 {
-        @media screen and (max-width: 992px) {
-          font-size: 1.7em;
+        @media screen and (min-width: 768px) {
+          font-size: calc(1.3em + 0.2vw);
         }
         @media screen and (max-width: 768px) {
-          font-size: 1.5em;
+          font-size: calc(1.2em + 0.25vw);
         }
       }
 
