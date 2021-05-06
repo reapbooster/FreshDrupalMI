@@ -381,24 +381,25 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
  * Default index_weight to 5 for Node items.
  */
 function milken_migrate_bulk_set_index_weight(
-  $entity_type = 'node', 
-  $entity_bundle = 'article', 
-  $field_name = 'field_index_weight', 
-  $field_value = '5' ) {
+  $entity_type = 'node',
+  $entity_bundle = 'article',
+  $field_name = 'field_index_weight',
+  $field_value = '5') {
 
-    if( $entity_type == 'node' || $entity_type == 'people' ) {
-      $results = \Drupal::entityTypeManager()->getStorage($entity_type)->loadByProperties(['type' => $entity_bundle]);
-    } else {
-      $results = \Drupal::entityTypeManager()->getStorage($entity_type)->loadByProperties(['bundle' => $entity_bundle]);
-    }
+  if ($entity_type == 'node' || $entity_type == 'people') {
+    $results = \Drupal::entityTypeManager()->getStorage($entity_type)->loadByProperties(['type' => $entity_bundle]);
+  }
+  else {
+    $results = \Drupal::entityTypeManager()->getStorage($entity_type)->loadByProperties(['bundle' => $entity_bundle]);
+  }
 
-    foreach ($results as $key => $item) {
+  foreach ($results as $key => $item) {
 
-      print('Current Node Record: ' . $key . '; ');
+    print('Current Node Record: ' . $key . '; ');
 
-      // Load item by ID.
-      $item_rw = \Drupal::entityTypeManager()->getStorage($entity_type)->load((int) $key);
-      $item_rw->set($field_name, $field_value);
-      $item_rw->save();
-    }
+    // Load item by ID.
+    $item_rw = \Drupal::entityTypeManager()->getStorage($entity_type)->load((int) $key);
+    $item_rw->set($field_name, $field_value);
+    $item_rw->save();
+  }
 }
