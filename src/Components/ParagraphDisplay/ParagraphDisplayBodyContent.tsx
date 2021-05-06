@@ -133,7 +133,7 @@ export const ParagraphDisplayBodyContent = (
   )
 
   useEffect(() => {
-    const MediaDisplayContainers = document.querySelectorAll("media-display");
+    const MediaDisplayContainers = document.querySelectorAll("media-display[data-bundle=image]");
 
     MediaDisplayContainers.forEach((item) => {
 
