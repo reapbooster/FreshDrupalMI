@@ -186,7 +186,12 @@ export class ParagraphDisplayTiles extends React.Component<
                     : faExclamation;
 
       let headerSection = (data.field_view_mode == "tile")
-        ? ''
+        ? (
+          <div className="col">
+            <h2> {data.field_title} </h2>
+            {elSubheader}
+          </div>
+        )
         : (data.field_view_mode == "card-large")
           ? (
             <div className="col-12 col-lg-3 subheader">
