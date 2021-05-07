@@ -35,6 +35,7 @@ dependencies:
     - field.field.panel.panel.field_tags
     - field.field.panel.panel.field_topics
     - field.field.panel.panel.field_tracks
+    - field.field.panel.panel.field_video
   module:
     - datetime_range
     - key_value_field
@@ -306,6 +307,15 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_video:
+    type: entity_reference_entity_view
+    weight: 35
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
     region: content
   title:
     label: hidden

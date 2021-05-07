@@ -22,7 +22,6 @@ dependencies:
     - field.storage.media.field_tags
     - field.storage.node.field_authors
     - field.storage.node.field_content
-    - field.storage.people.field_biotext
     - field.storage.people.field_email
     - search_api.server.freshdrupal_live
 third_party_settings:
@@ -46,7 +45,7 @@ third_party_settings:
       highlight:
         mergeContiguous: true
         requireFieldMatch: true
-        snippets: 3
+        snippets: 1
         fragsize: 0
     mlt:
       mintf: 1
@@ -60,8 +59,8 @@ third_party_settings:
       boost: false
       interestingTerms: none
     term_modifiers:
-      slop: 0
-      fuzzy: 0
+      slop: 1
+      fuzzy: 2
     advanced:
       index_prefix: ''
       collection: ''
@@ -85,7 +84,7 @@ field_settings:
   aggregated_field_index_weight:
     label: 'Aggregated field Index Weight'
     property_path: aggregated_field
-    type: solr_string_storage
+    type: integer
     configuration:
       type: union
       fields:
@@ -323,14 +322,6 @@ field_settings:
     dependencies:
       module:
         - eck
-  people_field_biotext:
-    label: Biotext
-    datasource_id: 'entity:people'
-    property_path: field_biotext
-    type: text
-    dependencies:
-      config:
-        - field.storage.people.field_biotext
   people_field_email:
     label: email
     datasource_id: 'entity:people'
@@ -339,38 +330,12 @@ field_settings:
     dependencies:
       config:
         - field.storage.people.field_email
-  people_field_first_name:
-    label: 'First Name'
-    datasource_id: 'entity:people'
-    property_path: field_first_name
-    type: text
-    boost: !!float 3
-    dependencies:
-      config:
-        - field.storage.people.field_first_name
-  people_field_last_name:
-    label: 'Last Name'
-    datasource_id: 'entity:people'
-    property_path: field_last_name
-    type: text
-    boost: !!float 3
-    dependencies:
-      config:
-        - field.storage.people.field_last_name
-  people_field_middle_name:
-    label: 'Middle Name'
-    datasource_id: 'entity:people'
-    property_path: field_middle_name
-    type: text
-    boost: !!float 3
-    dependencies:
-      config:
-        - field.storage.people.field_middle_name
   people_title:
     label: Title
     datasource_id: 'entity:people'
     property_path: title
-    type: string
+    type: text
+    boost: !!float 3
     dependencies:
       module:
         - eck
@@ -503,7 +468,7 @@ processor_settings:
   uuid: {  }
 tracker_settings:
   default:
-    indexing_order: fifo
+    indexing_order: lifo
 options:
   index_directly: false
   cron_limit: 200

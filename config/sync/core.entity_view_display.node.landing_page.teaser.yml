@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.landing_page.field_secondary_menu
     - field.field.node.landing_page.field_tile_label
     - field.field.node.landing_page.field_topics
+    - field.field.node.landing_page.field_yoast_seo
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
   module:
@@ -43,6 +44,7 @@ hidden:
   field_secondary_menu: true
   field_tile_label: true
   field_topics: true
+  field_yoast_seo: true
   langcode: true
   layout_builder__layout: true
   published_at: true

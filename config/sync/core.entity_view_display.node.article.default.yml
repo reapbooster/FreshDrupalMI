@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.article.field_summary
     - field.field.node.article.field_tags
     - field.field.node.article.field_topics
+    - field.field.node.article.field_yoast_seo
     - node.type.article
   module:
     - entity_reference_revisions
@@ -53,6 +54,14 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_yoast_seo:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
 hidden:
   field_authors: true

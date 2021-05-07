@@ -46,7 +46,7 @@ content:
     third_party_settings: {  }
   field_biotext:
     weight: 3
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string

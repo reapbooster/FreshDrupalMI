@@ -1241,6 +1241,18 @@ display:
             group_items: {  }
           plugin_id: search_api_date
       sorts:
+        aggregated_field_index_weight:
+          id: aggregated_field_index_weight
+          table: search_api_index_freshdrupal_live
+          field: aggregated_field_index_weight
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
         search_api_relevance:
           id: search_api_relevance
           table: search_api_index_freshdrupal_live
@@ -1314,7 +1326,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          parse_mode: terms
+          parse_mode: phrase
           fields:
             - aggregated_field_type
             - field_body
@@ -1328,13 +1340,12 @@ display:
             - node_field_last_name
             - node_field_middle_name
             - node_title
-            - people_field_biotext
             - people_field_first_name
             - people_field_last_name
             - people_field_middle_name
+            - people_title
             - processed
-            - rendered_item
-          conjunction: AND
+          conjunction: OR
           plugin_id: search_api_fulltext
         aggregated_field_centers:
           id: aggregated_field_centers

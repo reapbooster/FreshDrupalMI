@@ -10,6 +10,8 @@ dependencies:
     - field.field.media.podcast_episode.field_events
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
+    - field.field.media.podcast_episode.field_guests
+    - field.field.media.podcast_episode.field_index_weight
     - field.field.media.podcast_episode.field_media_audio_file
     - field.field.media.podcast_episode.field_media_image
     - field.field.media.podcast_episode.field_media_in_library
@@ -28,6 +30,7 @@ dependencies:
     - image
     - key_value_field
     - metatag
+    - options
     - text
 id: media.podcast_episode.default
 targetEntityType: media
@@ -89,6 +92,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_index_weight:
+    weight: 19
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_media_audio_file:
     type: file_audio
@@ -177,10 +187,12 @@ content:
     region: content
 hidden:
   created: true
+  field_guests: true
   field_people: true
   field_transcript: true
   langcode: true
   name: true
+  published_at: true
   search_api_excerpt: true
   thumbnail: true
   uid: true

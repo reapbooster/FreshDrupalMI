@@ -11,6 +11,7 @@ dependencies:
     - field.field.media.podcast_episode.field_filemime
     - field.field.media.podcast_episode.field_filesize
     - field.field.media.podcast_episode.field_guests
+    - field.field.media.podcast_episode.field_index_weight
     - field.field.media.podcast_episode.field_media_audio_file
     - field.field.media.podcast_episode.field_media_image
     - field.field.media.podcast_episode.field_media_in_library
@@ -200,6 +201,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_index_weight:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_media_audio_file:
     weight: 16
     settings:

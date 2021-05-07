@@ -5,19 +5,29 @@ dependencies:
   config:
     - field.field.node.career.field_body
     - field.field.node.career.field_careers_apply
+    - field.field.node.career.field_centers
     - field.field.node.career.field_centers_general
+    - field.field.node.career.field_collections
     - field.field.node.career.field_department
+    - field.field.node.career.field_events
     - field.field.node.career.field_hero_image
     - field.field.node.career.field_link_to_video
     - field.field.node.career.field_location
     - field.field.node.career.field_meta_tags
+    - field.field.node.career.field_region
     - field.field.node.career.field_seniority_level
+    - field.field.node.career.field_terms
+    - field.field.node.career.field_topics
+    - field.field.node.career.field_yoast_seo
     - node.type.career
   module:
     - link
     - metatag
     - path
+    - publication_date
+    - scheduler
     - text
+    - yoast_seo
 id: node.career.default
 targetEntityType: node
 bundle: career
@@ -111,6 +121,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_yoast_seo:
+    weight: 131
+    settings:
+      body: body
+    third_party_settings: {  }
+    type: yoast_seo_widget
+    region: content
   langcode:
     type: language_select
     weight: 2
@@ -130,6 +147,18 @@ content:
       display_label: true
     weight: 15
     region: content
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  published_at:
+    type: publication_date_timestamp
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
@@ -163,4 +192,16 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_centers: true
+  field_collections: true
+  field_events: true
+  field_region: true
+  field_terms: true
+  field_topics: true

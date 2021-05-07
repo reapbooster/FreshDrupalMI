@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.article.field_summary
     - field.field.node.article.field_tags
     - field.field.node.article.field_topics
+    - field.field.node.article.field_yoast_seo
     - node.type.article
   module:
     - entity_browser_entity_form
@@ -26,6 +27,7 @@ dependencies:
     - path
     - publication_date
     - scheduler
+    - yoast_seo
 third_party_settings:
   field_group:
     group_settings:
@@ -272,6 +274,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_yoast_seo:
+    weight: 125
+    settings:
+      body: body
+    third_party_settings: {  }
+    type: yoast_seo_widget
+    region: content
   langcode:
     type: language_select
     weight: 10

@@ -35,11 +35,13 @@ dependencies:
     - field.field.panel.panel.field_tags
     - field.field.panel.panel.field_topics
     - field.field.panel.panel.field_tracks
+    - field.field.panel.panel.field_video
   module:
     - datetime_range
     - field_group
     - key_value_field
     - link
+    - media_library
     - path
     - text
 third_party_settings:
@@ -449,6 +451,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_video:
+    type: media_library_widget
+    weight: 33
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
     region: content
   langcode:
     type: language_select
