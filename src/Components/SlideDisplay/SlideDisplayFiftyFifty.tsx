@@ -75,7 +75,7 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
     & .p {
       font-size: 1.25em;
       line-height: 1.35em;
-      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
+      color: ${(slideData.field_text_color?.color === "#000000")?'#232323 !important':'white !important'};
     }
 
     & .h3 {
@@ -101,7 +101,7 @@ export const SlideDisplayFiftyFifty: React.FunctionComponent = (
       margin-left: 1em;
       font-size: 1.25em;
       font-family: 'LatoWeb';
-      color: ${(slideData.field_text_color?.color === "#000000")?'dimgray !important':'white !important'};
+      color: ${(slideData.field_text_color?.color === "#000000")?'#232323 !important':'white !important'};
     }
 
   `;
