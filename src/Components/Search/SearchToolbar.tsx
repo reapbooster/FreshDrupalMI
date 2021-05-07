@@ -79,6 +79,7 @@ export default function SearchToolbar(props) {
           ))}
         </select>
       </div>
+      {/* Hide the Grid/List buttons since list doesn't work great
       <div className="d-flex mx-3">
         <ToolbarButton
           className={classnames(
@@ -102,7 +103,7 @@ export default function SearchToolbar(props) {
         >
           <FaList />
         </ToolbarButton>
-      </div>
+      </div> */}
     </div>
   );
 }

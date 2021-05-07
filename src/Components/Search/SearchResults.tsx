@@ -10,6 +10,7 @@ export default function SearchResults(props) {
       .map(
         (key) =>
           [
+            "node_hero_image_tile",
             "field_photo",
             "field_thumbnail_uri",
             "field_background_image",

@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const MAX_LENGTH_LIMIT = 100;
 const SEARCH_THUMBNAIL_FALLBACK =
-  "/sites/default/files/full_screen_pattern%402x.png";
+  "/sites/default/files/default-search-thumbnail.png";
 
 const ViewMoreButton = styled.button`
   border: 0;
