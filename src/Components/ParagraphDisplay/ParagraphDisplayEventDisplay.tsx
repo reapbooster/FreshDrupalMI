@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import * as DataObject from "../../DataTypes/ParagraphEventDisplay";
 import styled from "styled-components";
@@ -18,6 +18,12 @@ const ParagraphDisplayEventDisplay: React.FunctionComponent = (
   console.debug("ParagraphDisplayEventDisplay: Data ", data);
 
   const MainContainer = styled.div``;
+
+  useEffect(
+    () => {
+      document.querySelector("body").classList.add('event-pages-smaller-font');
+    }
+  );
 
   let activeTabFromURL = window.location.pathname
     .split("/")
