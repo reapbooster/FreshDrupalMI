@@ -17,13 +17,16 @@ body.page-view-event-pages {
     color: #3e4d5c;
     direction: ltr;
     font-weight: 400;
-    font-size: 13px;
 
     @media (min-width: 1300px) {
       .container {
         max-width: 1200px;
       }
     }
+}
+
+body.event-pages-smaller-font {
+    font-size: 13px;
 }
 
 #events {
