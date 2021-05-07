@@ -24,38 +24,57 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
   console.debug("ParagraphDisplayFacetExplorer: Data from Props ", data);
 
   const [fetchRan, setFetchRan] = useState(false);
-  const [sortOptions, setSortOptions] = useState([{ value: "created", label: "By Date" }, { value: "title", label: "By Title" }]);
+  const [sortOptions, setSortOptions] = useState([
+    { value: "new-old", label: "Newest First" }, 
+    { value: "old-new", label: "Oldest First" }, 
+    { value: "a-z", label: "By Title A to Z" }, 
+    { value: "z-a", label: "By Title Z to A" }
+  ]);
   const [contentList, setContentList] = useState(null);
   const [topicsList, setTopicsList] = useState(null);
   const [centersList, setCentersList] = useState(null);
   const [pageCount, setPageCount] = useState(1);
   const [pageItemOffset, setPageItemOffset] = useState(0);
-  const [filterSort, setFilterSort] = useState([]);
-  const [filterCenters, setFilterCenters] = useState([]);
-  const [filterTopics, setFilterTopics] = useState([]);
+  const [filterSort, setFilterSort] = useState({ value: "new-old", label: "Newest First" });
+  const [filterCenters, setFilterCenters] = useState({ raw: [], list: []});
+  const [filterTopics, setFilterTopics] = useState({ raw: [], list: []});
 
   const filterCollections = data.field_collections?.data !== null ? data.field_collections?.name : null;
   const filterTeams = data.field_teams?.data !== null ? data.field_teams?.name : null;
 
   const apiParams = new DrupalJsonApiParams();
 
+  // Hide filters until Comms approves that they show
+  let hideFilterSort = true;
+  let hideFilterTopics = true;
+  let hideFilterCenters = true;
   let ContentListObject = [];
   let TopicsListObject = [];
   let CentersListObject = [];
   let requestURL = '';
   let resultsCount = null;
-  let field_items_per_page = data.field_items_per_page
+  let field_items_per_page = data.field_items_per_page;
   // Build request URL and URL parameters
   switch (data.field_facet_content_type) {
     case 'article':
 
       // Set Sort filter
-      if (!!filterSort && filterSort?.length !== 0 && !!filterSort.value) {
-        apiParams.addSort(filterSort.value);
+      if (!!filterSort && !!filterSort.value) {
         console.debug("FilterSort was used: ", filterSort)
-      } else {
-        console.debug("FilterSort was not used: ", filterSort)
-        apiParams.addSort('created', 'DESC');
+        switch(filterSort.value) {
+          case 'new-old': 
+            apiParams.addSort('created', 'DESC');
+            break;
+          case 'old-new': 
+            apiParams.addSort('created', 'ASC');
+            break;
+          case 'a-z': 
+            apiParams.addSort('title', 'ASC');
+            break;
+          case 'z-a': 
+            apiParams.addSort('title', 'DESC');
+            break;
+        }
       }
 
       apiParams.addPageLimit(field_items_per_page); // Later, change to data.field_items_per_page
@@ -68,17 +87,14 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
         apiParams.addFilter('field_teams.name', filterTeams);
       }
 
-      // Use this to show content tagged with selected Topics
-      if (filterTopics !== null && filterTopics.length > 0) {
-        // if ( "Include only selected Topics" && false ) {
-        // apiParams.addFilter('field_topics.name', ['Array Of','Topics'], 'IN');
-        apiParams.addFilter('field_topics.name', filterTopics, 'IN');
+      // Add Topics as JSON API filter param
+      if (filterTopics !== null && filterTopics.list?.length > 0) {
+        apiParams.addFilter('field_topics.name', filterTopics.list, 'IN');
       }
 
-      // Use this to show content tagged with selected Centers
-      // if ( "Include only selected Centers" && false ) {
-      if (filterCenters !== null && filterCenters.length > 0) {
-        apiParams.addFilter('field_centers.name', filterCenters, 'IN');
+      // Add Centers as JSON API filter param
+      if (filterCenters !== null && filterCenters.list?.length > 0) {
+        apiParams.addFilter('field_centers.name', filterCenters.list, 'IN');
       }
 
       apiParams.addInclude(['field_authors']);
@@ -96,13 +112,16 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
 
     case 'staff':
 
+      hideFilterSort = true;
+
       // Set Sort filter
-      if (!!filterSort && filterSort?.length !== 0 && !!filterSort.value) {
-        apiParams.addSort(filterSort.value);
+      if (!!filterSort && !!filterSort.value) {
         console.debug("FilterSort was used: ", filterSort)
-      } else {
-        console.debug("FilterSort was not used: ", filterSort)
-        apiParams.addSort('field_last_name', 'ASC');
+        switch(filterSort.value) {
+          default: 
+            apiParams.addSort('field_last_name', 'ASC');
+            break;
+        }
       }
 
       apiParams.addPageLimit(field_items_per_page); // Later, change to data.field_items_per_page
@@ -115,12 +134,14 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
         apiParams.addFilter('field_teams.name', filterTeams);
       }
 
-      if (filterTopics !== null && filterTopics.length > 0) {
-        apiParams.addFilter('field_topics.name', filterTopics, 'IN');
+      // Add Topics as JSON API filter param
+      if (filterTopics !== null && filterTopics.list?.length > 0) {
+        apiParams.addFilter('field_topics.name', filterTopics.list, 'IN');
       }
 
-      if (filterCenters !== null && filterCenters.length > 0) {
-        apiParams.addFilter('field_centers.name', filterCenters, 'IN');
+      // Add Centers as JSON API filter param
+      if (filterCenters !== null && filterCenters.list?.length > 0) {
+        apiParams.addFilter('field_centers.name', filterCenters.list, 'IN');
       }
 
       // Use pageItemOffset for pagination, it skips a number of records. meta.count has the total number
@@ -199,20 +220,30 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
     setFetchRan(false);
   }
 
-  const selectSort = (t) => {
-    setFilterSort(t);
+  const selectSort = (objSelected) => {
+    setFilterSort(objSelected);
     setFetchRan(false);
-    console.debug("FilterSort: ", t)
+    console.debug("FilterSort: ", objSelected);
   }
 
-  const selectTopics = (t) => {
-    setFilterTopics(t);
+  const selectTopics = (objSelected) => {
+    let listTopics = [];
+    objSelected.map(
+      (item) => { listTopics.push(item.value); }
+    );
+    setFilterTopics({ raw: objSelected, list: listTopics});
     setFetchRan(false);
+    console.debug("FilterTopics: ", listTopics);
   }
 
-  const selectCenters = (t) => {
-    setFilterCenters(t);
+  const selectCenters = (objSelected) => {
+    let listCenters = [];
+    objSelected.map(
+      (item) => { listCenters.push(item.value); }
+    );
+    setFilterCenters({ raw: objSelected, list: listCenters});
     setFetchRan(false);
+    console.debug("FilterCenters: ", listCenters);
   }
 
   const FacetExplorerContainer = styled.div`
@@ -264,48 +295,53 @@ const ParagraphDisplayFacetExplorer: React.FunctionComponent = (
       <FacetExplorerContainer className="container-fluid py-5">
         <Row>
           <Col lg={3}>
-            {/* <div className="filter-area">
-              <CustomSelect>
-                <Select
-                  isMulti
-                  closeMenuOnSelect={true}
-                  defaultValue={filterSort}
-                  placeholder={"Sort order"}
-                  options={sortOptions}
-                  getOptionLabel={({ label }) => label}
-                  getOptionValue={({ value }) => value}
-                  onChange={selectSort}
-                />
-              </CustomSelect>
-            </div>
-            <div className="filter-area">
-              <CustomSelect>
-                <Select
-                  isMulti
-                  closeMenuOnSelect={false}
-                  defaultValue={filterTopics}
-                  placeholder={"Topics"}
-                  options={topicsList}
-                  getOptionLabel={({ label }) => label}
-                  getOptionValue={({ value }) => value}
-                  onChange={selectTopics}
-                />
-              </CustomSelect>
-            </div>
-            <div className="filter-area">
-              <CustomSelect>
-                <Select
-                  isMulti
-                  closeMenuOnSelect={false}
-                  defaultValue={filterCenters}
-                  placeholder={"Centers"}
-                  options={centersList}
-                  getOptionLabel={({ label }) => label}
-                  getOptionValue={({ value }) => value}
-                  onChange={selectCenters}
-                />
-              </CustomSelect>
-            </div> */}
+            { !hideFilterSort ? 
+              <div className="filter-area">
+                <CustomSelect>
+                  <Select
+                    closeMenuOnSelect={true}
+                    defaultValue={filterSort}
+                    placeholder={"Sort order"}
+                    options={sortOptions}
+                    getOptionLabel={({ label }) => label}
+                    getOptionValue={({ value }) => value}
+                    onChange={selectSort}
+                  />
+                </CustomSelect>
+              </div>
+            : ''}
+            { !hideFilterTopics ?
+              <div className="filter-area">
+                <CustomSelect>
+                  <Select
+                    isMulti
+                    closeMenuOnSelect={false}
+                    defaultValue={filterTopics.raw}
+                    placeholder={"Topics"}
+                    options={topicsList}
+                    getOptionLabel={({ label }) => label}
+                    getOptionValue={({ value }) => value}
+                    onChange={selectTopics}
+                  />
+                </CustomSelect>
+              </div>
+            : ''}
+            { !hideFilterCenters ?
+              <div className="filter-area">
+                <CustomSelect>
+                  <Select
+                    isMulti
+                    closeMenuOnSelect={false}
+                    defaultValue={filterCenters.raw}
+                    placeholder={"Centers"}
+                    options={centersList}
+                    getOptionLabel={({ label }) => label}
+                    getOptionValue={({ value }) => value}
+                    onChange={selectCenters}
+                  />
+                </CustomSelect>
+              </div>
+            : ''}
             <div className="filter-area sidebar-content">
               <div dangerouslySetInnerHTML={{ __html: data.field_sidebar_content?.value }} />
             </div>
