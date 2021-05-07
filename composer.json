@@ -169,6 +169,7 @@
         "drupal/webform": "^6",
         "drupal/webpack": "^1.0@alpha",
         "drupal/workflow": "^1.0",
+        "drupal/yoast_seo": "^1.7",
         "drush/drush": "^10",
         "enyo/dropzone": "^5.5",
         "friendsofphp/php-cs-fixer": "^3.0-beta1",
