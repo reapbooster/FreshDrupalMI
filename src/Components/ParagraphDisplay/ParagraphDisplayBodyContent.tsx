@@ -88,7 +88,7 @@ export const ParagraphDisplayBodyContent = (
       font-size: 1.25em;
       line-height: 1.35;
       margin: 0 0 2em 0;
-      color: ${(fontColor === "black")?'dimgray':'white'}
+      color: ${(fontColor === "black")?'#232323':'white'}
     }
 
     & .row {
