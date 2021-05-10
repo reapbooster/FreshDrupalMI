@@ -1,4 +1,6 @@
-<?php // @codingStandardsIgnoreStart
+<?php
+
+// @codingStandardsIgnoreStart
 
 namespace Drupal\milken_migrate\Commands;
 
@@ -22,7 +24,8 @@ use Throwable;
  *   - http://cgit.drupalcode.org/devel/tree/src/Commands/DevelCommands.php
  *   - http://cgit.drupalcode.org/devel/tree/drush.services.yml
  */
-class MilkenMigrateCommands extends DrushCommands {
+class MilkenMigrateCommands extends DrushCommands
+{
 
   /**
    * @var \GuzzleHttp\Client
@@ -66,7 +69,7 @@ class MilkenMigrateCommands extends DrushCommands {
     $destinationEntityStorage = Drupal::entityTypeManager()
       ->getStorage($destinationEntityTypeId);
     $field_config_ids = Drupal::entityQuery('field_config')
-      ->accessCheck(FALSE)
+      ->accessCheck(false)
       ->condition('field_type', 'entity_reference')
       ->condition('field_name', $destinationEntityField)
       ->condition('entity_type', $destinationEntityTypeId)
@@ -107,13 +110,13 @@ class MilkenMigrateCommands extends DrushCommands {
             foreach ($fieldData as $record) {
               $record = new RemoteRecord($record);
               // if it's a valid record, get local copy of the UUID match.
-              $localCopyOfAuthor = $record->valid() ? $record->getLocalVersion($referencedEntity) : NULL;
+              $localCopyOfAuthor = $record->valid() ? $record->getLocalVersion($referencedEntity) : null;
               // If this is true, we are a go for replacement.
               if ($localCopyOfAuthor instanceof EntityInterface) {
                 $localCopy->{$destinationEntityField}[] = $localCopyOfAuthor;
                 $localCopy->save();
                 $this->logger()
-                  ->success(dt('Article Author Migrated::' . print_r($localCopy->toArray()[$destinationEntityField], TRUE)));
+                  ->success(dt('Article Author Migrated::' . print_r($localCopy->toArray()[$destinationEntityField], true)));
                 continue;
               }
             }
@@ -131,8 +134,8 @@ class MilkenMigrateCommands extends DrushCommands {
         print_r($t->__toString());
         exit(1);
       }
-      $url = $page['links']['next']['href'] ?? NULL;
-    } while ($url !== NULL);
+      $url = $page['links']['next']['href'] ?? null;
+    } while ($url !== null);
   }
 
   /**
@@ -140,16 +143,17 @@ class MilkenMigrateCommands extends DrushCommands {
    *
    * @return array
    */
-  protected function getPageOfData(string $url): array {
+  protected function getPageOfData(string $url): array
+  {
     $parsed = parse_url($url);
     parse_str($parsed['query'] ?? "", $query);
-    $query['jsonapi_include'] = TRUE;
+    $query['jsonapi_include'] = true;
     $response = Drupal::httpClient()
       ->get($parsed['path'], array_merge($this->defaultOptions, [
         'query' => $query,
       ]));
     if (in_array($response->getStatusCode(), [200, 201, 202])) {
-      return json_decode($response->getBody(), TRUE);
+      return json_decode($response->getBody(), true);
     }
     $this->logger()->warning('URL returned invalid status code: ' . $url);
     exit(-1);
@@ -165,12 +169,13 @@ class MilkenMigrateCommands extends DrushCommands {
    * @throws Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
 
-  public function podcastPersons() {
+  public function podcastPersons()
+  {
     $storage = Drupal::entityTypeManager()
       ->getStorage('media');
     $episodesIDs = $storage->getQuery()
       ->condition('bundle', 'podcast_episode')
-      ->condition('status', TRUE)
+      ->condition('status', true)
       ->execute();
     foreach ($episodesIDs as $epid) {
       $episode = \Drupal::entityTypeManager()
@@ -184,7 +189,7 @@ class MilkenMigrateCommands extends DrushCommands {
           $person = \Drupal::entityTypeManager()
             ->getStorage('people')
             ->create([
-              'type' => 'person'
+              'type' => 'person',
             ]);
           if ($person instanceof EntityInterface) {
             $person->field_photo[] = [
@@ -193,20 +198,18 @@ class MilkenMigrateCommands extends DrushCommands {
             $episodeRemoteRecord = RemoteRecord::getRemoteRecord('paragraph', "podcast_episode", $episode->uuid() . "?jsonapi_include=true&include=field_podcast_image");
             $imageRemoteRecord = @array_shift($episodeRemoteRecord->getField('field_podcast_image'));
             if (!empty($imageRemoteRecord)) {
-
-
-              $personNamesArray = explode( " ", trim($imageRemoteRecord['field_photo_subject_name']) );
+              $personNamesArray = explode(" ", trim($imageRemoteRecord['field_photo_subject_name']));
 
               if (count($personNamesArray) == 2) {
                 $person->field_first_name = array_shift($personNamesArray);
                 $person->field_last_name = array_shift($personNamesArray);
                 echo "\nFirst Name & Last Name \n\n";
-              } else if (count($personNamesArray) == 3) {
+              } elseif (count($personNamesArray) == 3) {
                 $person->field_first_name = array_shift($personNamesArray);
                 $person->field_middle_name = array_shift($personNamesArray);
                 $person->field_last_name = array_shift($personNamesArray);
                 echo "\nFirst Name, Middle Name & Last Name \n\n";
-              } else if (count($personNamesArray) > 3) {
+              } elseif (count($personNamesArray) > 3) {
                 $person->field_first_name = array_shift($personNamesArray);
                 $person->field_middle_name = array_shift($personNamesArray);
                 $person->field_last_name = join(" ", $personNamesArray);
@@ -225,7 +228,7 @@ class MilkenMigrateCommands extends DrushCommands {
           echo "End of current loop iteration \n\n\n";
         }
         $episode->field_guests[] = [
-          'target_id' => $person->id()
+          'target_id' => $person->id(),
         ];
         $episode->save();
       }
@@ -239,12 +242,13 @@ class MilkenMigrateCommands extends DrushCommands {
    * @aliases mmat
    *
    */
-  public function migrate_field_custom_author_text() {
+  public function migrate_field_custom_author_text()
+  {
     $storage = Drupal::entityTypeManager()
       ->getStorage('media');
     $videoIDs = $storage->getQuery()
       ->condition('bundle', 'video')
-      ->condition('status', TRUE)
+      ->condition('status', true)
       ->execute();
     foreach ($videoIDs as $videoID) {
       $video = $storage->load($videoID);
@@ -257,7 +261,7 @@ class MilkenMigrateCommands extends DrushCommands {
           // DO NOT DOUBLE-ADD the value to the field. If it's there, no op.
           if (mb_strpos($localCompareValue, $remoteCompareValue) === false) {
             $newBodyValue = [
-              'value' =>  $video->get('field_body')->value . $remoteField['value'],
+              'value' => $video->get('field_body')->value . $remoteField['value'],
               'format' => $video->get('field_body')->format,
             ];
             $video->field_body = $newBodyValue;
@@ -276,12 +280,13 @@ class MilkenMigrateCommands extends DrushCommands {
    * @aliases mmapa
    *
    */
-  public function migrate_article_published_at() {
+  public function migrate_article_published_at()
+  {
     $storage = Drupal::entityTypeManager()
       ->getStorage('node');
     $articleIDs = $storage->getQuery()
       ->condition('type', 'article')
-      ->condition('status', TRUE)
+      ->condition('status', true)
       ->execute();
     foreach ($articleIDs as $articleID) {
       $article = $storage->load($articleID);
@@ -289,7 +294,7 @@ class MilkenMigrateCommands extends DrushCommands {
       if ($articleRemoteRecord instanceof RemoteRecord) {
         $remoteField = $articleRemoteRecord->getField('published_at');
         \Drupal::logger('milken_migrate REMOTE PUBLISHED_AT FIELD: ')
-          ->info((string) $remoteField);
+          ->info((string)$remoteField);
         if ($remoteField) {
           $article->published_at = strtotime($remoteField);
           $article->save();
@@ -306,12 +311,13 @@ class MilkenMigrateCommands extends DrushCommands {
    * @aliases mmrpa
    *
    */
-  public function migrate_report_published_at() {
+  public function migrate_report_published_at()
+  {
     $storage = Drupal::entityTypeManager()
       ->getStorage('media');
     $reportIDs = $storage->getQuery()
       ->condition('bundle', 'report')
-      ->condition('status', TRUE)
+      ->condition('status', true)
       ->execute();
     foreach ($reportIDs as $reportID) {
       $report = $storage->load($reportID);
@@ -319,7 +325,7 @@ class MilkenMigrateCommands extends DrushCommands {
       if ($reportRemoteRecord instanceof RemoteRecord) {
         $remoteField = $reportRemoteRecord->getField('published_at');
         \Drupal::logger('milken_migrate REMOTE PUBLISHED_AT FIELD: ')
-          ->info((string) $remoteField);
+          ->info((string)$remoteField);
         if ($remoteField) {
           $report->published_at = strtotime($remoteField);
           $report->save();
@@ -336,20 +342,21 @@ class MilkenMigrateCommands extends DrushCommands {
    * @aliases mmvpa
    *
    */
-  public function migrate_video_published_at() {
+  public function migrate_video_published_at()
+  {
     $storage = Drupal::entityTypeManager()
       ->getStorage('media');
     $videoIDs = $storage->getQuery()
       ->condition('bundle', 'video')
-      ->condition('status', TRUE)
+      ->condition('status', true)
       ->execute();
     foreach ($videoIDs as $videoID) {
       $video = $storage->load($videoID);
-      $videoRemoteRecord = RemoteRecord::getRemoteRecord('node', 'video', $video->uuid() . "?jsonapi_include=true");
+      $videoRemoteRecord = RemoteRecord::getRemoteRecord('node', 'video', $video->uuid());
       if ($videoRemoteRecord instanceof RemoteRecord) {
         $remoteField = $videoRemoteRecord->getField('published_at');
         \Drupal::logger('milken_migrate REMOTE PUBLISHED_AT FIELD: ')
-          ->info((string) $remoteField);
+          ->info((string)$remoteField);
         if ($remoteField) {
           $video->published_at = strtotime($remoteField);
           $video->save();
@@ -359,4 +366,76 @@ class MilkenMigrateCommands extends DrushCommands {
     }
   }
 
-}
+  /**
+   * Drush command to migrate MetaTags from old site to new.
+   *
+   * @command milken_migrate:singlefield
+   * @aliases mmmt
+   *
+   * @param string $source
+   * @param string $destination
+   *
+   * @example drush mmmt node:article:field_meta_tags node:article:field_meta_tags
+   * @example drush mmmt node:video:field_meta_tags media:video:field_meta_tags
+   */
+  public function migrateMetaTags(
+    $source, $destination
+  )
+  {
+    [$sourceEntity, $sourceBundle, $sourceField] = explode(":", $source);
+    [$destinationEntity, $destinationBundle, $destinationField] = explode(":", $destination);
+    $remoteList = new Drupal\milken_migrate\Utility\RemoteRecordsList($sourceEntity, $sourceBundle);
+    $remoteList->refresh();
+    $updated = 0;
+    \Drupal::logger('milken_migrate:singlefield')
+      ->info(sprintf("Found %d records", $remoteList->count()) . PHP_EOL);
+    for ($remoteList->rewind(); $remoteList->valid(); $remoteList->next()) {
+      $record = $remoteList->current();
+      if ($record instanceof RemoteRecord) {
+        $valueToSet = $record->getField($sourceField);
+        if (!empty($valueToSet)) {
+          $queryResults = \Drupal::entityTypeManager()
+            ->getStorage($destinationEntity)
+            ->loadByProperties(['uuid' => $record->getId()]);
+          if (
+            !empty($queryResults) &&
+            reset($queryResults) instanceof EntityInterface
+          ) {
+            $localCopy = array_shift($queryResults);
+            $localCopy->{$destinationField} = $valueToSet;
+            \Drupal::logger('milken_migrate:singlefield')
+              ->debug(
+                sprintf("value updated: %s",
+                  print_r($record->getField($sourceField), true)
+                ) . PHP_EOL);
+            $localCopy->save();
+            $updated += 1;
+          }
+        }
+      }
+      // TODO: do this the right way...
+      fwrite(STDERR, $this->progressBar($remoteList->key(), $remoteList->count()));
+    }
+    \Drupal::logger('milken_migrate:singlefield')
+      ->info(sprintf("Updated %d records", $updated) . PHP_EOL);
+  }
+
+
+    /**
+     * @param $done
+     * @param $total
+     */
+    protected
+    function progressBar($done, $total)
+    {
+      $perc = floor(($done / $total) * 100);
+      $left = 100 - $perc;
+      return sprintf(
+        "\033[0G\033[2K[%'={$perc}s>%-{$left}s] - $perc%% - $done/$total",
+        "",
+        ""
+      );
+
+    }
+
+  }
