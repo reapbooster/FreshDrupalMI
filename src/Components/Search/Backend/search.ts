@@ -35,7 +35,7 @@ const fetchSearchResults = async (params) => {
 
     // TODO: Pagination
 
-    let sortBy = "search_api_relevance",
+    let sortBy = "aggregated_field_published",
       sortOrder = "DESC";
 
     if (params?.sortby) {
@@ -44,10 +44,14 @@ const fetchSearchResults = async (params) => {
           sortBy = "label";
           sortOrder = "ASC";
           break;
-        case "date":
-          sortBy = "aggregated_field_published";
+        case "relevance":
+          sortBy = "search_api_relevance";
           sortOrder = "DESC";
           break;
+        // case "date":
+        //   sortBy = "aggregated_field_published";
+        //   sortOrder = "DESC";
+        //   break;
       }
       delete params.sortby;
     }
