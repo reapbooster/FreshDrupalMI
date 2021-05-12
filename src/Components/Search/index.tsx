@@ -30,7 +30,7 @@ const SearchWrapper = styled.div`
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 250;
+    z-index: 150;
   }
 
   .search--results {
