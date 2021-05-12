@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.180.6",
+            "version": "3.181.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1a836be14ba664ea11eb965dec77715e9e607013"
+                "reference": "a8b6535334a3b3d7c02601e8b3c15391dab915d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1a836be14ba664ea11eb965dec77715e9e607013",
-                "reference": "1a836be14ba664ea11eb965dec77715e9e607013",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a8b6535334a3b3d7c02601e8b3c15391dab915d2",
+                "reference": "a8b6535334a3b3d7c02601e8b3c15391dab915d2",
                 "shasum": ""
             },
             "require": {
@@ -148,16 +148,16 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.180.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.181.0"
             },
-            "time": "2021-05-10T18:17:07+00:00"
+            "time": "2021-05-11T18:15:59+00:00"
         },
         {
             "name": "bower-asset/jquery",
             "version": "3.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "e786e3d9707ffd9b0dd330ca135b66344dcef85a"
             },
             "dist": {
@@ -11125,17 +11125,17 @@
         },
         {
             "name": "drupal/uikit_components",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/uikit_components.git",
-                "reference": "8.x-3.1"
+                "reference": "8.x-3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/uikit_components-8.x-3.1.zip",
-                "reference": "8.x-3.1",
-                "shasum": "f3716dc62af8055e3b3a4119ee8f3a0ff1e9a60b"
+                "url": "https://ftp.drupal.org/files/projects/uikit_components-8.x-3.2.zip",
+                "reference": "8.x-3.2",
+                "shasum": "3f3afad6588394d3ac5dd3e191ddfc3185f615e8"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -11143,8 +11143,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.1",
-                    "datestamp": "1598347762",
+                    "version": "8.x-3.2",
+                    "datestamp": "1620760733",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -11167,10 +11167,6 @@
                 {
                     "name": "Richard Buchanan",
                     "homepage": "https://www.drupal.org/user/2638993"
-                },
-                {
-                    "name": "gisle",
-                    "homepage": "https://www.drupal.org/user/409554"
                 }
             ],
             "description": "Companion module to the UIkit base theme to provide additional components and functionality.",
@@ -19214,16 +19210,16 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v14.6.3",
+            "version": "v14.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "e3f807a06c44a04d66f83021b28667983d344a50"
+                "reference": "34aa6dd54cd2ebdf8f36cafe817323333f7eb6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/e3f807a06c44a04d66f83021b28667983d344a50",
-                "reference": "e3f807a06c44a04d66f83021b28667983d344a50",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/34aa6dd54cd2ebdf8f36cafe817323333f7eb6ba",
+                "reference": "34aa6dd54cd2ebdf8f36cafe817323333f7eb6ba",
                 "shasum": ""
             },
             "require": {
@@ -19268,7 +19264,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webonyx/graphql-php/issues",
-                "source": "https://github.com/webonyx/graphql-php/tree/v14.6.3"
+                "source": "https://github.com/webonyx/graphql-php/tree/v14.6.4"
             },
             "funding": [
                 {
@@ -19276,7 +19272,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-05-10T15:30:40+00:00"
+            "time": "2021-05-11T12:37:43+00:00"
         },
         {
             "name": "zaporylie/composer-drupal-optimizations",
