@@ -8,6 +8,7 @@ use Drupal;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\milken_migrate\Utility\RemoteRecord;
+use Drupal\milken_migrate\Utility\RemoteRecordsList;
 use Drush\Commands\DrushCommands;
 use Exception;
 use GuzzleHttp\Client;
@@ -369,7 +370,7 @@ class MilkenMigrateCommands extends DrushCommands
   /**
    * Drush command to migrate MetaTags from old site to new.
    *
-   * @command milken_migrate:singlefield
+   * @command milken_migrate:meta_tags
    * @aliases mmmt
    *
    * @param string $source
@@ -377,18 +378,20 @@ class MilkenMigrateCommands extends DrushCommands
    *
    * @example drush mmmt node:article:field_meta_tags node:article:field_meta_tags
    * @example drush mmmt node:video:field_meta_tags media:video:field_meta_tags
+   *
    */
   public function migrateMetaTags(
     $source, $destination
   )
   {
-    [$sourceEntity, $sourceBundle, $sourceField] = explode(":", $source);
+    @[$sourceEntity, $sourceBundle, $sourceField, $uuid] = explode(":", $source);
     [$destinationEntity, $destinationBundle, $destinationField] = explode(":", $destination);
-    $remoteList = new Drupal\milken_migrate\Utility\RemoteRecordsList($sourceEntity, $sourceBundle);
-    $remoteList->refresh();
+    $remoteList = new RemoteRecordsList($sourceEntity, $sourceBundle);
+    if ($uuid !== null) {
+      $remoteList->addRecord($uuid);
+    }
     $updated = 0;
-    \Drupal::logger('milken_migrate:singlefield')
-      ->info(sprintf("Found %d records", $remoteList->count()) . PHP_EOL);
+    \Drupal::logger(__CLASS__)->info("Refreshing import list...");
     for ($remoteList->rewind(); $remoteList->valid(); $remoteList->next()) {
       $record = $remoteList->current();
       if ($record instanceof RemoteRecord) {
@@ -402,12 +405,7 @@ class MilkenMigrateCommands extends DrushCommands
             reset($queryResults) instanceof EntityInterface
           ) {
             $localCopy = array_shift($queryResults);
-            $localCopy->{$destinationField} = $valueToSet;
-            \Drupal::logger('milken_migrate:singlefield')
-              ->debug(
-                sprintf("value updated: %s",
-                  print_r($record->getField($sourceField), true)
-                ) . PHP_EOL);
+            $localCopy->{$destinationField}->setValue(serialize($valueToSet));
             $localCopy->save();
             $updated += 1;
           }
