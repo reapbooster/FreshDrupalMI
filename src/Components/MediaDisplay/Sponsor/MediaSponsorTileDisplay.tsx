@@ -58,7 +58,7 @@ export const MediaSponsorTileDisplay = (
           data={data.field_media_image}
           view_mode="fullscreen"
           className={"card-img p-3"}
-          style={{ maxWidth: "100%" }}
+          style={{ maxWidth: "100%", objectFit: "contain", }}
           srcsetSizes="(max-width: 1000px) 200px, 400px"
         />
       </ErrorBoundary>
