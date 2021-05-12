@@ -99,9 +99,8 @@ class RemoteRecordsList implements \Iterator {
   /**
    * {@inheritDoc}
    */
-  public function next(): ?RemoteRecord {
+  public function next(): void {
     $this->pointer += 1;
-    return $this->current();
   }
 
   /**
@@ -127,6 +126,9 @@ class RemoteRecordsList implements \Iterator {
    */
   public function rewind(): void {
     $this->pointer = 0;
+    if (count($this->records) === 0) {
+      $this->refresh();
+    }
   }
 
   /**
@@ -134,6 +136,13 @@ class RemoteRecordsList implements \Iterator {
    */
   public function valid(): bool {
     return isset($this->records[$this->pointer]);
+  }
+
+  /**
+   * @param string $uuid
+   */
+  public function addRecord(string $uuid) {
+    $this->records[] = $uuid;
   }
 
 }
