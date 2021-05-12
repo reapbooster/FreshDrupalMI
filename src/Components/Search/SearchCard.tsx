@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { Collapse } from "react-bootstrap";
 import moment from "moment";
 
-import { theme } from "../Shared/Styles";
-
 import styled from "styled-components";
 
 const MAX_LENGTH_LIMIT = 100;
@@ -15,7 +13,7 @@ const ViewMoreButton = styled.button`
   border: 0;
   background: none;
   padding: 5px;
-  color: ${theme.colors.secondary};
+  color: var(--color-milken-orange);
 `;
 
 const SearchCardWrapper = styled.div`

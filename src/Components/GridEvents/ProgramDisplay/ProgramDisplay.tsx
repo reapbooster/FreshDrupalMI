@@ -17,6 +17,7 @@ const formatOptions = [
   "Title Only", // option 0
   "Title and Summary", // option 1
   "Full Description", // option 2
+  "Panels With Video Only", // option 3
 ];
 
 let dataCache = {
@@ -162,6 +163,13 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
         return;
       }
 
+      // Filter panels with views
+      if (format == 3) {
+        filteredPanels = filteredPanels.filter((panel) => {
+          return !!panel?.field_video;
+        });
+      }
+
       if (terms.length > 0) {
         filteredPanels =
           filteredPanels
@@ -238,7 +246,7 @@ const ProgramDisplay: React.FC<ProgramDisplayProps> = (
     // print page
     setFilterActive(false);
     setPrintFlag(true);
-  }
+  };
 
   /**
    *  Terms filter handlers
