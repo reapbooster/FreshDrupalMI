@@ -4,6 +4,7 @@
 namespace Drupal\milken_migrate\Utility;
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
 
 /**
  * Class RemoteRecord
@@ -41,10 +42,14 @@ class RemoteRecord extends DrupalBaseRemoteRecord {
 
   public static function fromUrl(string $url): ?RemoteRecord {
     try {
-      $response = \Drupal::httpClient()->get($url);
+      $parsed = new \Wa72\Url\Url($url);
+      $parsed->setQueryParameter('jsonapi_include', true);
+      //\Drupal::logger('milken_migrate')
+      //  ->debug("URL: " . print_r($parsed, true));
+      $response = \Drupal::httpClient()->get($parsed->toPsr7());
       // to see this print out, do drush COMMAND --verbose --debug
-      \Drupal::logger('milken_migrate')
-        ->info((string) $response->getBody());
+      // \Drupal::logger('milken_migrate')
+      //  ->debug((string) $response->getBody());
       $responseArray = json_decode($response->getBody(), true);
       if (isset($responseArray['data']) && empty($responseArray['data'])) {
         return null;
