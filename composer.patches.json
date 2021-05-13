@@ -16,6 +16,9 @@
     },
     "drupal/simple_oauth": {
       "fix issue with permissions on oAuth cert": "patches/bypass-permissions.patch"
+    },
+    "drupal/publication_date": {
+      "Publication date with media": "patches/publication-date-for-media.patch"
     }
   }
 }
