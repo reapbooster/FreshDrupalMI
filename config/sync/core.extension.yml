@@ -126,6 +126,7 @@ module:
   path_alias: 0
   prlp: 0
   rdf: 0
+  redirect: 0
   redis: 0
   responsive_image: 0
   rest: 0
