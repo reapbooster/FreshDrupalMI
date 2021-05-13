@@ -11,7 +11,7 @@ import {PeopleDisplay} from "../PeopleDisplay";
 export const EntityComponentFactory = (
   source: EntityInterface | SearchResultProps
 ) => {
-  if (source.type !== undefined) {
+  if (typeof source?.type !== "undefined") {
     const entityTypeId = source.type.split("--").shift();
     switch (entityTypeId) {
       case "event":
@@ -33,7 +33,7 @@ export const EntityComponentFactory = (
         );
     }
   }
-  if (source.jsonapi_type !== undefined) {
+  if (typeof source?.jsonapi_type !== "undefined") {
     return SearchResult;
   }
   console.error("Cannot determine Component Class", source);

@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 export interface SearchResultProps {
-  search_api_excerpt: string;
-  search_api_relevance: number;
-  uuid: string;
-  label: string;
-  jsonapi_type: string;
-  url: string;
   bundle: string;
   entity_type_id: string;
+  jsonapi_type: string;
+  label: string;
+  search_api_excerpt: string;
+  search_api_relevance: number;
+  type?: string;
+  url: string;
+  uuid: string;
 }
 const ResultWrapper = styled.div`
   padding: 2em 0;

@@ -12,7 +12,7 @@ import ReactPaginate from "react-paginate";
 
 import styled from "styled-components";
 
-import { Button, CustomSelect, theme } from "../Shared/Styles";
+import { Button, CustomSelect } from "../Shared/Styles";
 
 import SearchFilter from "./SearchFilter";
 import SearchToolbar from "./SearchToolbar";
@@ -30,7 +30,7 @@ const SearchWrapper = styled.div`
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 250;
+    z-index: 150;
   }
 
   .search--results {
@@ -55,7 +55,7 @@ const SearchWrapper = styled.div`
         left: 0;
         bottom: 0;
         padding: 8px 16px;
-        background: ${theme.colors.secondary};
+        background: var(--color-milken-orange);
         color: white;
       }
     }

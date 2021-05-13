@@ -169,7 +169,7 @@ const ParagraphDisplayOurCenters: React.FunctionComponent = (
   return (
     <CentersWrapper className="my-5">
       <Container>
-        <h2 className="text-center mb-5">Our centers</h2>
+        <h2 className="text-center mb-5">Our Centers</h2>
         <Row>
           <Col xs={12} md={5} className="centersListHTML">
             <h4>CENTERS AND PRACTICE AREAS</h4>

@@ -1,20 +1,7 @@
-$color-blue: #001f5f;
-$color-lightblue: #2196f3;
-
-$color-green: #00aea4;
-$color-lightgreen: #00d2b5;
-
-$color-orange: #e94d1c;
-$color-darkorange: #cc3304;
-
-$color-gray: #ccc;
-$color-lightgray: #dbdbdb;
-
-
 body.page-view-event-pages {
     scroll-behavior: smooth;
-    background: #f1f5f7;
-    color: #3e4d5c;
+    background: var(--color-milken-lightgray);
+    color: var(--color-milken-mediumgray);
     direction: ltr;
     font-weight: 400;
 
@@ -34,13 +21,13 @@ body.event-pages-smaller-font {
 
     .btn-warning {
         padding: 7px 14px;
-        background-color: $color-orange;
-        color: #fff;
+        background-color: var(--color-milken-orange);
+        color: white;
         font-size: 14px;
-        border-color: $color-orange;
+        border-color: var(--color-milken-orange);
         border-radius: 0;
         &:hover {
-            background-color: $color-darkorange;
+            background-color: var(--color-milken-darkgray);
         }
     }
 
@@ -71,9 +58,9 @@ body.event-pages-smaller-font {
         .search-input-box {
             display: flex;
             align-items: center;
-            border: 1px solid $color-lightgray;
+            border: 1px solid var(--color-milken-gray);
             svg {
-                fill: $color-gray;
+                fill: var(--color-milken-gray);
                 display: block;
                 position: absolute;
                 margin: 8px;
@@ -82,17 +69,15 @@ body.event-pages-smaller-font {
             }
             input {
                 padding-left: 33px;
-                border-color: #dbdbdb;
-                color: #777;
                 font: 14px Arial, sans-serif;
                 border-radius: 0;
                 box-shadow: none;
                 flex: 1;
                 height: 34px;
                 border: none;
-                color: #212529;
+                color: var(--color-milken-darkgray);
                 &::placeholder {
-                    color: $color-gray;
+                    color: var(--color-milken-gray);
                 }
             }
         }
@@ -102,8 +87,8 @@ body.event-pages-smaller-font {
             span {
                 margin-right: 24px;
                 padding: 4px 8px;
-                background-color: #f1f5f7;
-                border: 1px solid $color-gray;
+                background-color: var(--color-milken-lightgray);
+                border: 1px solid var(--color-milken-gray);
                 border-radius: 4px;
                 svg {
                     fill: #3e4d5c;
@@ -114,13 +99,12 @@ body.event-pages-smaller-font {
 
     .filter-box {
         margin-bottom: 50px;
-        border: 1px solid $color-lightgray;
+        border: 1px solid var(--color-milken-gray);
         border-radius: 3px;
-        background-color: #fff;
-        border: 1px solid #b9b9b9;
+        background-color: white;
         .filter-header {
             padding: 10px;
-            border-bottom: 1px solid $color-lightgray;
+            border-bottom: 1px solid var(--color-milken-gray);
             display: flex;
             justify-content: space-between;
             h6 {
@@ -133,7 +117,7 @@ body.event-pages-smaller-font {
                     cursor: pointer;
                     &:hover {
                         text-decoration: underline;
-                        color: $color-orange;
+                        color: var(--color-milken-orange);
                     }
                 }
             }
@@ -141,7 +125,7 @@ body.event-pages-smaller-font {
         .filter-row {
             padding: 10px;
             display: flex;
-            border-top: 1px solid $color-lightgray;
+            border-top: 1px solid var(--color-milken-gray);
             font-size: 14px;
             font-weight: bold;
             span {
@@ -152,7 +136,7 @@ body.event-pages-smaller-font {
             svg {
                 width: 22px;
                 height: 22px;
-                fill: #3e4d5c;
+                fill: var(--color-milken-darkgray);
             }
         }
     }
@@ -166,16 +150,16 @@ body.event-pages-smaller-font {
         height: 22px;
         margin-right: 14px;
         cursor: pointer;
-        background-color: #fff;
-        border: 1px solid $color-lightgray;
+        background-color: white;
+        border: 1px solid var(--color-milken-gray);
         svg {
             display: none;
         }
         &.selected {
-            background-color: $color-orange;
+            background-color: var(--color-milken-orange);
             border: none;
             svg {
-                fill: #fff;
+                fill: white;
                 display: block;
                 width: 12px;
                 height: 12px;
@@ -197,18 +181,18 @@ body.event-pages-smaller-font {
                 .program-day-toggler {
                     margin-right: 10px;
                     svg {
-                        fill: $color-orange;
+                        fill: var(--color-milken-orange);
                         width: 24px;
                         height: 24px;
                     }
                 }
             }
             .programday-sessions-container {
-                border: 1px solid $color-lightgray;
+                border: 1px solid var(--color-milken-gray);
                 .programday-session {
                     padding: 16px;
-                    border-top: 1px solid $color-lightgray;
-                    background-color: #fff;
+                    border-top: 1px solid var(--color-milken-gray);
+                    background-color: white;
                     h5 {
                         font-size: 15px;
                         font-weight: bold;
@@ -217,7 +201,7 @@ body.event-pages-smaller-font {
                         margin-left: 20px;
                         min-width: 120px;
                         padding: 0;
-                        color: $color-orange;
+                        color: var(--color-milken-orange);
                         font-size: 16px;
                         &:hover,
                         &:focus,
@@ -225,7 +209,7 @@ body.event-pages-smaller-font {
                             outline: none;
                             box-shadow: none;
                             text-decoration: underline;
-                            color: $color-darkorange;
+                            color: var(--color-milken-gray);
                         }
                     }
                     .profile-summary {
@@ -247,7 +231,7 @@ body.event-pages-smaller-font {
                         a {
                             display: block;
                             margin-bottom: 10px;
-                            color: $color-orange;
+                            color: var(--color-milken-orange);
                         }
                     }
                 }

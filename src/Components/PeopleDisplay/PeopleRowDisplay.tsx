@@ -18,6 +18,7 @@ const PersonRowDisplay = ( props: any ) => {
         & .name {
             font-family: 'LatoWebHeavy';
             color: #35363c;
+            white-space: nowrap;
         }
 
         & .job-title {

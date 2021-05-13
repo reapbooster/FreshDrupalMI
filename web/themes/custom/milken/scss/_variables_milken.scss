@@ -58,9 +58,15 @@ $smartbrief-underline: #E1E1E1;
 $imgOverlay: rgba(53, 54, 60, .1);
 $mainParagraphColor: #696969;
 $blueHeaders: #0066cc;
+$selectBorderColor: #ced4da;
 :root {
     --color-milken-orange: #{$orangeButtons};
     --color-milken-blue: #{$newsBlue};
+    --color-milken-borders: #{$selectBorderColor};
+    --color-milken-gray: #{$lightgrayFont};
+    --color-milken-mediumgray: #{$reportsBlack};
+    --color-milken-darkgray: #{$backgroundDark};
+    --color-milken-lightgray: #{$backgroundSocial};
   }
 
 /**** AFTER DEMO ***/

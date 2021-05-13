@@ -7,13 +7,12 @@ import { FaThLarge, FaList } from "react-icons/fa";
 import { sortOptions, perpageOptions } from "./Backend/static";
 import styled from "styled-components";
 
-import { Button, CustomSelect, theme } from "../Shared/Styles";
+import { Button, CustomSelect } from "../Shared/Styles";
 
 const ToolbarButton = styled.button`
   display: flex;
   height: calc(1.5em + 0.75rem + 2px);
   align-self: flex-end;
-  /* border: 1px solid ${theme.colors.gray}; */
   border: transparent;
   background: transparent !important;
 
@@ -25,12 +24,12 @@ const ToolbarButton = styled.button`
   }
   &:not(.disabled) {
     svg {
-      fill: ${theme.colors.primary};
+      fill: var(--color-milken-orange);
     }
   }
   &.disabled {
     svg {
-      fill: ${theme.colors.lightgray};
+      fill: var(--color-milken-gray);
     }
   }
 `;
