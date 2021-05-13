@@ -135,6 +135,7 @@
         "drupal/publication_date": "^2",
         "drupal/purge": "^3.0@beta",
         "drupal/queue_ui": "^2.0",
+        "drupal/redirect": "^1.6",
         "drupal/redis": "^1.1",
         "drupal/restui": "^1",
         "drupal/s3fs": "^3",
