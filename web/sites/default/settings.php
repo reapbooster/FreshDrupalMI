@@ -106,3 +106,5 @@ $settings['http_client_config'] = [
   'allow_redirects' => TRUE,
   'debug' => FALSE,
 ];
+
+$settings['simple_oauth.key_permissions_check'] = FALSE;

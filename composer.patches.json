@@ -13,6 +13,9 @@
     },
     "drupal/page_manager": {
       "Fix issue with default language": "patches/no_language_interface_context-3100095-2.patch"
+    },
+    "drupal/simple_oauth": {
+      "fix issue with permissions on oAuth cert": "patches/bypass-permissions.patch"
     }
   }
 }
