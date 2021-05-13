@@ -139,7 +139,10 @@ class RemoteRecordsList implements \Iterator {
   }
 
   /**
+   * Add single UUID to list.
+   *
    * @param string $uuid
+   *   UUID of record.
    */
   public function addRecord(string $uuid) {
     $this->records[] = $uuid;
