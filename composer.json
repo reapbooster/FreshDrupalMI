@@ -16,6 +16,19 @@
         "1": {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        "simple_oauth": {
+            "type": "package",
+            "package": {
+                "name": "drupal/simple_oauth",
+                "type": "drupal-module",
+                "version": "dev-8.x-5.x",
+                "source": {
+                    "type": "git",
+                    "url": "https://git.drupalcode.org/project/simple_oauth.git",
+                    "reference": "8f2688cadd6b9e364e66d193542bba11b2b25061"
+                }
+            }
         }
     },
     "require": {
