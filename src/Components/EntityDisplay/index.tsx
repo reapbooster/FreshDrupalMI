@@ -7,15 +7,23 @@ export interface EntityDisplayProps {
   data: EntityInterface | string;
   viewMode?: string;
   view_mode?: string;
-  can_edit: boolean;
+  can_edit?: boolean;
 }
 
 export const EntityDisplay = (props) => {
   console.log("Entity Display: ", props);
   const { data, view_mode, viewMode, can_edit } = props;
-  const DataObject = data === data.toString() ? JSON.parse(data).data : data;
+  console.log("Data ", data);
+  console.log("typeof Data ", typeof data);
+  const DataObject = (
+    (typeof data === "string") ? 
+    (typeof JSON.parse(data).data !== 'undefined') ? JSON.parse(data).data 
+    : JSON.parse(data)
+    : data
+  );
   console.log("DataObject", DataObject);
-  const Component = EntityComponentFactory(DataObject);
+  if(typeof DataObject === "undefined") { return <h1>DATA IS NOT DEFINED</h1>; }
+  const Component = (typeof DataObject !== "undefined") ? EntityComponentFactory(DataObject) : '';
   return (
     <ErrorBoundary>
       <Component
