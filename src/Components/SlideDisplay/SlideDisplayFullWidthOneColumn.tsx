@@ -77,7 +77,7 @@ export const SlideDisplayFullWidthOneColumn: React.FunctionComponent = (
 
     @media (max-width: 575.98px) {
       font-size: 0.75em;
-      min-height: ${(isHeroImage === true) ? ((total_slides > 1) ? '50vw' : '45vw') : 'unset'};
+      min-height: ${(isHeroImage === true) ? ((total_slides > 1) ? 'calc(20em + 12vw)' : '45vw') : 'unset'};
     } 
 
     & .slide-text {
