@@ -72,7 +72,7 @@ const ParagraphDisplayTilesSocial: React.FunctionComponent = (
 
             return (
               <Col className="col-12 col-sm-6 col-md-3">
-                <a href={item.uri}>
+                <a href={item.uri} target="_blank">
                   <h4>{splitTitle[1]}</h4>
                   <FontAwesomeIcon icon={fontIcon} />
                 </a>
