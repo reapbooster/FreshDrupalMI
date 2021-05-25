@@ -55,89 +55,92 @@
 <!DOCTYPE html>
 <html {{ html_attributes }}>
 <head>
-    <head-placeholder token="{{ placeholder_token|raw }}">
-				{% if '/events/' in url('<current>')["#markup"] %}
-					<title>{{ url('<current>')["#markup"]|split('/')|last|replace({"-": " "})|capitalize }} {{ head_title|safe_join(' | ') }}</title>
-				{% else %}
-					<title>{{ head_title|safe_join(' | ') }}</title>
-				{% endif %}
-        <css-placeholder token="{{ placeholder_token|raw }}">
-            <js-placeholder token="{{ placeholder_token|raw }}">
-                </head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5G4NXM3');</script>
+  <!-- End Google Tag Manager -->
+
+  {% if '/events/' in url('<current>')["#markup"] %}
+    <title>{{ url('<current>')["#markup"]|split('/')|last|replace({"-": " "})|capitalize }} {{ head_title|safe_join(' | ') }}</title>
+  {% else %}
+    <title>{{ head_title|safe_join(' | ') }}</title>
+  {% endif %}
+  <head-placeholder token="{{ placeholder_token|raw }}">
+  <css-placeholder token="{{ placeholder_token|raw }}">
+  <js-placeholder token="{{ placeholder_token|raw }}">  
+</head>
 <body{{ attributes.addClass(body_classes) }}>
-<a href="#main-content" class="visually-hidden focusable skip-link">
-    {{ 'Skip to main content'|t }}
-</a>
 
-{{ page_top }}
-{{ page }}
-{{ page_bottom }}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5G4NXM3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-{# 
-/**
- * Modern footer, breaks at tablet sizes
- * Requires bootstrap 
- */
- #}
-<footer>
-  <div class="container-fluid py-4 px-5 text-center text-xl-left">
-    <div class="row">
-      <div class="col-sm-12 col-xl-7">
-        <div class="row">
-          <div class="col footer-links d-flex justify-content-center justify-content-xl-start">
-            {{ drupal_menu('footer-links-menu') }}
+  <a href="#main-content" class="visually-hidden focusable skip-link">
+      {{ 'Skip to main content'|t }}
+  </a>
+
+  {{ page_top }}
+  {{ page }}
+  {{ page_bottom }}
+
+  {# 
+  /**
+  * Modern footer, breaks at tablet sizes
+  * Requires bootstrap 
+  */
+  #}
+  <footer>
+    <div class="container-fluid py-4 px-5 text-center text-xl-left">
+      <div class="row">
+        <div class="col-sm-12 col-xl-7">
+          <div class="row">
+            <div class="col footer-links d-flex justify-content-center justify-content-xl-start">
+              {{ drupal_menu('footer-links-menu') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col footer-social d-flex justify-content-center justify-content-xl-start my-4">
+              {{ drupal_menu('footer-social-menu') }}
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col footer-social d-flex justify-content-center justify-content-xl-start my-4">
-            {{ drupal_menu('footer-social-menu') }}
+        <div class="col-sm-12 col-xl-5">
+          <div class="row">
+            <div class="col newsletter-text d-flex justify-content-center justify-content-xl-end">
+              Registered 501(c)(3). EIN: 95-4240775
+            </div>
+          </div>
+          <div class="row">
+            <div class="col footer-social d-flex justify-content-center justify-content-xl-end my-4">
+              <a href="/support" class="btn-milken-orange mt-0 px-4 px-sm-5 py-2">
+                Support Us
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-xl-5">
-        <div class="row">
-          <div class="col newsletter-text d-flex justify-content-center justify-content-xl-end">
-            Find out more about sponsorship and engagement opportunities
-          </div>
-        </div>
-        <div class="row">
-          <div class="col footer-social d-flex justify-content-center justify-content-xl-end my-4">
-            <a href="/support" class="btn-milken-orange mt-0 px-4 px-sm-5 py-2">
-              Support Us
-            </a>
-          </div>
+      <div class="row">
+        <div class="col disabled invisible">
+          <a href="//responsiveweb.io/" style="display: block; height: 0; width: 0;">Developed by Jose Ramirez @ ResponsiveWeb.io</a>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col disabled invisible">
-        <a href="//responsiveweb.io/" style="display: block; height: 0; width: 0;">Developed by Jose Ramirez @ ResponsiveWeb.io</a>
+  </footer>
+
+  <!-- BEGIN - OVERVIEW DIV ONLY IN HOMEPAGE-->
+  <div class="overlay-bkg" id="overlay-container">
+      <div class="form-overlay-ctc">
+          <div class="close-newsform"> <a class="doclose" href="#"></a> </div>
+          {{ page.floating_form }}
       </div>
-    </div>
   </div>
-</footer>
+  <!-- END - OVERVIEW DIV ONLY IN HOMEPAGE-->
 
-<!-- BEGIN - OVERVIEW DIV ONLY IN HOMEPAGE-->
-<div class="overlay-bkg" id="overlay-container">
-    <div class="form-overlay-ctc">
-         <div class="close-newsform"> <a class="doclose" href="#"></a> </div>
-        {{ page.floating_form }}
-    </div>
-</div>
-<!-- END - OVERVIEW DIV ONLY IN HOMEPAGE-->
-
-
-<js-bottom-placeholder token="{{ placeholder_token|raw }}">
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2146008-7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-2146008-7');
-</script>
+  <js-bottom-placeholder token="{{ placeholder_token|raw }}">
 
 </body>
 </html>
