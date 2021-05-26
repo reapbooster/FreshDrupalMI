@@ -65,7 +65,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderSpeakers = (session: any) => {
-    if (session?.field_speakers && session?.field_speakers.length > 0) {
+    if (session?.field_speakers && session?.field_speakers.length > 0 && session?.field_speaker_roles && session?.field_speaker_roles.length > 0) {
       const speakerIds = session.field_speakers
         .split(",")
         .map((id: any) => parseInt(id));
@@ -90,7 +90,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
       return _(speakerRoles)
         .groupBy("role")
         .map((speakers, role) => {
-          if (role == "Cancelled") {
+          if (role == "Cancelled" || role == "Declined" || role == "Invited" || role == "Suggested" || role == "Undefined") {
             return false;
           }
 
