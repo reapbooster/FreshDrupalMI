@@ -18,5 +18,5 @@ composer -n build-assets
 #  --format=compressed > web/themes/custom/milken/css/milken.css
 
 cd web/core
-# npm install && npm run build
-npm install && gulp build
+npm install && npm run build
+# npm install && gulp build  (gulp not found on CI)
