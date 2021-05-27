@@ -45,6 +45,12 @@
 
 22. Site should be up now. Point your browser to https://localhost:8080/
 
+## SSL On Debian NGINX ##
+1. Ensure that the ports 80 and 443 can reach the NGINX container. 
+
+2. Run the following:
+
+3. ```docker exec -u 0 -it mi bash -c "apt update && apt install certbot python3-certbot-nginx && certbot"```
 
 ## Old Installation Method ##
 
