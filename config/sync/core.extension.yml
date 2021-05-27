@@ -142,11 +142,8 @@ module:
   path_alias: 0
   prlp: 0
   rdf: 0
-<<<<<<< Updated upstream
-=======
   redirect: 0
   redirect_404: 0
->>>>>>> Stashed changes
   redis: 0
   responsive_image: 0
   rest: 0

@@ -9,6 +9,7 @@ dependencies:
     - paragraphs
     - taxonomy
     - node
+    - file
     - search_api
     - milken_base
   config:
@@ -22,6 +23,8 @@ dependencies:
     - field.storage.media.field_tags
     - field.storage.node.field_authors
     - field.storage.node.field_content
+    - field.storage.media.field_media_image
+    - field.storage.node.field_hero_image
     - field.storage.people.field_email
     - search_api.server.freshdrupal_live
 third_party_settings:
@@ -285,6 +288,18 @@ field_settings:
     indexed_locked: true
     type_locked: true
     hidden: true
+  node_hero_image_tile:
+    label: 'Tile Thumbnail » Media » Image » File » URI » Root-relative file URL'
+    datasource_id: 'entity:node'
+    property_path: 'field_hero_image:entity:field_media_image:entity:uri:url'
+    type: solr_string_storage
+    dependencies:
+      config:
+        - field.storage.media.field_media_image
+        - field.storage.node.field_hero_image
+      module:
+        - file
+        - media
   node_status:
     label: status
     datasource_id: 'entity:node'

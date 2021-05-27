@@ -12,7 +12,8 @@ export interface MediaVideoInterface extends MediaInterface {
   field_embedded_oembed?: string;
   field_embedded_service?: string;
   field_event_reference?: EventInterface;
-  field_height?: number;
+  field_events?: Array<any>;
+  field_height?: string;
   field_media_oembed_video?: string;
   field_program_initiatives?: Array<TaxonomyTermInterface>;
   field_regions?: Array<any>;
@@ -43,7 +44,8 @@ export class MediaVideo extends Media implements MediaVideoInterface {
   field_embedded_oembed: string;
   field_embedded_service: string;
   field_event_reference: EventInterface;
-  field_height: number;
+  field_events?: Array<any>;
+  field_height?: string;
   field_media_image: ImageFileInterface;
   field_media_in_library: boolean;
   field_media_oembed_video: string;
@@ -77,7 +79,7 @@ export class MediaVideo extends Media implements MediaVideoInterface {
   }
 
   getIncluded() {
-    return "&include=thumbnail,field_tags,field_topics,field_collections,field_regions";
+    return "&include=field_collections,field_events,field_regions,field_tags,field_topics,thumbnail";
   }
 
   get field_term_collection(): Array<TaxonomyTermInterface> {

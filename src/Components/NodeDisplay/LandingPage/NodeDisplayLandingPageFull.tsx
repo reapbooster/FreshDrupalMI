@@ -37,7 +37,7 @@ export const NodeDisplayLandingPageFull = (props) => {
     }
     : false;
 
-  if ( !!secondaryMenuData ) {
+  if ( !!secondaryMenuData && !!document.querySelector("milken-menu-main") ) {
     ReactDOM.render(
       <MenuDisplay 
       data={secondaryMenuData}/>,

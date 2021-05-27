@@ -124,8 +124,8 @@ export class ParagraphDisplayTiles extends React.Component<
           & a {
             display: flex;
             flex-direction: column;
-            height: 100%;
           }
+
           & .col-sm-6, .col-lg-3 {
             display: flex;
           }

@@ -227,7 +227,7 @@ function milken_migrate_update_grid_panel($max_iterations = 0) {
   $i = 0;
 
   foreach ($panels as $key => $item) {
-    if ($i > $max_iterations) {
+    if ($i > $max_iterations && $max_iterations != 0) {
       break;
     }
     else {

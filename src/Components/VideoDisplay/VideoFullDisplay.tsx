@@ -1,6 +1,6 @@
 import React from "react";
 import { MediaVideoInterface } from "../../DataTypes/MediaVideo";
-import { Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import moment from "moment";
 import { TagsDisplay } from "../TagsDisplay"
@@ -97,6 +97,13 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
     }
   `;
 
+  const ElEventTag = styled.span`
+    color: var(--color-milken-blue);
+    font-family: latoWebBlack;
+    font-size: 0.9em;
+    text-transform: uppercase;
+  `;
+
   const ElTitle = styled.h1`
     font-family: 'LatoWebBold';
     margin-bottom: 0.5em;
@@ -109,7 +116,18 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   const published_synthetic = data.published_at !== null ? moment(data.published_at) : moment(data.created, "ddd MMM DD YYYY Z");
 
   let tagList = [];
+  let tagEvents = '';
 
+  if (data.field_events.length !== undefined && data.field_events.length > 0) {
+    tagEvents = data.field_events[0].name;
+  }
+  if (data.field_regions.length !== undefined && data.field_regions.length > 0) {
+    data.field_regions.map(
+      (item) => {
+        tagList.push({ link_uri: '', tag: item.name });
+      }
+    )
+  }
   if (data.field_tags.length !== undefined && data.field_tags.length > 0) {
     data.field_tags.map(
       (item) => {
@@ -119,13 +137,6 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
   }
   if (data.field_topics.length !== undefined && data.field_topics.length > 0) {
     data.field_topics.map(
-      (item) => {
-        tagList.push({ link_uri: '', tag: item.name });
-      }
-    )
-  }
-  if (data.field_regions.length !== undefined && data.field_regions > 0) {
-    data.field_regions.map(
       (item) => {
         tagList.push({ link_uri: '', tag: item.name });
       }
@@ -148,6 +159,9 @@ export const VideoFullDisplay = (props: VideoFullDisplayProps) => {
               <SocialDisplay data={{ "name": data.name }}></SocialDisplay>
             </Col>
             <Col xs="12" xl="8" className="section-content">
+              <Container>
+                <ElEventTag>{tagEvents}</ElEventTag>
+              </Container>
               <ElTitle className="container">{data.name}</ElTitle>
               <div dangerouslySetInnerHTML={{ __html: data.field_body?.value }} className="container"/>
             </Col>

@@ -5,7 +5,7 @@ dependencies: {  }
 open: null
 close: null
 weight: 0
-uid: 216
+uid: null
 template: false
 archive: false
 id: tra
@@ -22,7 +22,7 @@ settings:
   ajax_effect: ''
   ajax_speed: null
   page: true
-  page_submit_path: ''
+  page_submit_path: /form/train
   page_confirm_path: ''
   page_theme_name: ''
   form_title: both
@@ -140,6 +140,11 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  form_disable_remote_addr: false
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  token_delete: false
+  serial_disabled: false
 access:
   create:
     roles:

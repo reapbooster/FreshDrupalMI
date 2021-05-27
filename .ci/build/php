@@ -19,3 +19,4 @@ composer -n build-assets
 
 cd web/core
 npm install && npm run build
+# npm install && gulp build  (gulp not found on CI)
