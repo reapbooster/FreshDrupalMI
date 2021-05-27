@@ -6,4 +6,5 @@ id: node
 label: Content
 tags:
   title: '[node:title] | [site:name]'
+  canonical_url: '[node:url]'
   description: '[node:summary]'

@@ -23,6 +23,7 @@ dependencies:
     - entity_reference_revisions
     - layout_builder
     - layout_builder_restrictions
+    - metatag
     - user
 third_party_settings:
   layout_builder:
@@ -42,12 +43,19 @@ mode: full
 content:
   field_content:
     type: entity_reference_revisions_entity_view
-    weight: 0
+    weight: 1
     region: content
     label: above
     settings:
       view_mode: default
       link: ''
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_empty_formatter
+    weight: 0
+    region: content
+    label: above
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_authors: true
@@ -56,7 +64,6 @@ hidden:
   field_event: true
   field_events: true
   field_index_weight: true
-  field_meta_tags: true
   field_promo_slide: true
   field_promotional_slide: true
   field_region: true

@@ -3,9 +3,9 @@ schemas:
   milken: 8000
 favicon:
   mimetype: image/vnd.microsoft.icon
-  path: ''
+  path: 'public://favicon.ico'
   url: 'https://dev-freshdrupalmi.pantheonsite.io/themes/custom/milken/favicon.ico'
-  use_default: true
+  use_default: false
 features:
   comment_user_picture: true
   comment_user_verification: true
@@ -97,3 +97,10 @@ bootstrap_barrio_system_messages: ''
 bootstrap_barrio_table_style: ''
 bootstrap_barrio_table_hover: 0
 bootstrap_barrio_table_head: ''
+bootstrap_barrio_image_fluid: 0
+bootstrap_barrio_navbar_top_class: ''
+bootstrap_barrio_navbar_class: ''
+bootstrap_barrio_navbar_flyout: 0
+bootstrap_barrio_navbar_slide: 0
+bootstrap_barrio_tabs_style: ''
+bootstrap_barrio_bootstrap_icons: 0

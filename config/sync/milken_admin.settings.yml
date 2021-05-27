@@ -5,12 +5,16 @@ features:
   favicon: 1
 favicon:
   use_default: 1
+  path: 'public://favicon_0.ico'
+  mimetype: image/vnd.microsoft.icon
 enable_darkmode: 0
 preset_accent_color: null
 accent_color: ''
 preset_focus_color: gin
 focus_color: ''
 high_contrast_mode: 0
-classic_toolbar: '1'
-icon_default: 1
+classic_toolbar: classic
+icon_default: 0
 icon_upload: ''
+show_user_theme_settings: 0
+icon_path: 'public://logo.svg'
