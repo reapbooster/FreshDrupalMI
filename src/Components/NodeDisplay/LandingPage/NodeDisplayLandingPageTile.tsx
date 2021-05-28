@@ -72,12 +72,15 @@ export const NodeDisplayLandingPageTile = (
       >
         {data.title}
       </Card.Title>
-      <Card.Body style={{ padding: 0 }}>
+      <Card.Body style={{ position: "relative" }} className="p-0 d-flex justify-content-center align-items-center">
         <ErrorBoundary>
           <MediaDisplayImage
             data={data.field_hero_image}
             view_mode={"thumbnail"}
           />
+          {
+            data.field_tile_label !== null ? <p className="text-white text-center m-0" style={{ position: "absolute", zIndex: "10", fontSize: "1.3em" }} >{data.field_tile_label}</p> : ''
+          }
         </ErrorBoundary>
         <CardLinkBox>
           <FontAwesomeIcon
