@@ -64,17 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.183.8",
+            "version": "3.183.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3b52c4a99faa539c5bdc0a84cf88ee6ea385fd1c"
+                "reference": "3b3aafdceac4cb820e2ae65a8785e4d07db471a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3b52c4a99faa539c5bdc0a84cf88ee6ea385fd1c",
-                "reference": "3b52c4a99faa539c5bdc0a84cf88ee6ea385fd1c",
-
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3b3aafdceac4cb820e2ae65a8785e4d07db471a7",
+                "reference": "3b3aafdceac4cb820e2ae65a8785e4d07db471a7",
                 "shasum": ""
             },
             "require": {
@@ -149,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.183.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.183.9"
             },
-            "time": "2021-05-27T18:13:28+00:00"
+            "time": "2021-05-28T18:28:19+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -14454,16 +14453,16 @@
         },
         {
             "name": "mpratt/embera",
-            "version": "2.0.18",
+            "version": "2.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpratt/Embera.git",
-                "reference": "17358913e299497e464ad17f1310f8a01505fd9c"
+                "reference": "2d12e16d9c4d3b9f026f3537512fd16869604cab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpratt/Embera/zipball/17358913e299497e464ad17f1310f8a01505fd9c",
-                "reference": "17358913e299497e464ad17f1310f8a01505fd9c",
+                "url": "https://api.github.com/repos/mpratt/Embera/zipball/2d12e16d9c4d3b9f026f3537512fd16869604cab",
+                "reference": "2d12e16d9c4d3b9f026f3537512fd16869604cab",
                 "shasum": ""
             },
             "require": {
@@ -14511,9 +14510,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mpratt/Embera/issues",
-                "source": "https://github.com/mpratt/Embera/tree/2.0.18"
+                "source": "https://github.com/mpratt/Embera/tree/2.0.19"
             },
-            "time": "2021-05-14T04:44:48+00:00"
+            "time": "2021-05-28T00:35:13+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
