@@ -90,7 +90,17 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
       return _(speakerRoles)
         .groupBy("role")
         .map((speakers, role) => {
-          if (role == "Cancelled" || role == "Declined" || role == "Invited" || role == "Suggested" || role == "Undefined") {
+          if (
+            role == "Accepted" || 
+            role == "Approved to Invite" || 
+            role == "ApprovedtoInvite" || 
+            role == "Cancelled" || 
+            role == "Declined" || 
+            role == "Invited" || 
+            role == "Pending" || 
+            role == "Suggested" || 
+            role == "Undefined"
+            ) {
             return false;
           }
 
