@@ -213,22 +213,27 @@ function milken_migrate_update_grid_join_panel_speaker() {
 /**
  * Custom function to link Speaker & Track records to a Panel.
  *
- * Usage: drush php:eval 'milken_migrate_update_grid_panel(10)'.
+ * Usage: drush php:eval 'milken_migrate_update_grid_panel(10, 5)'.
  */
-function milken_migrate_update_grid_panel($max_iterations = 0) {
+function milken_migrate_update_grid_panel($max_iterations = 0, $skip_iterations = 0) {
 
   print("Start of milken_migrate_update_grid_panel \n\n");
 
   // Get all Panel records.
   $panels = \Drupal::entityTypeManager()->getStorage('panel')->loadByProperties(['type' => 'panel']);
+  $panels_reversed_preservedkeys = array_reverse($panels, TRUE);
 
   // Count takes for ever...
   // print("Total Panels loaded: " . count($panels) . " \n");.
   $i = 0;
 
-  foreach ($panels as $key => $item) {
+  foreach ($panels_reversed_preservedkeys as $key => $item) {
     if ($i > $max_iterations && $max_iterations != 0) {
       break;
+    }
+    elseif ($i < $skip_iterations && $skip_iterations != 0) {
+      $i++;
+      continue;
     }
     else {
       $i++;
