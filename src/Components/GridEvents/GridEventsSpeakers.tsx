@@ -156,7 +156,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
         </div>
         {
           groupedSpeakers[speakerGroup]?.children?.map((item, key) => {
-            let imagePath = (item.field_biopic == null || item.field_biopic == 'null')
+            let imagePath = (item.field_biopic == null || item.field_biopic == 'null' || item.field_biopic == '')
               ? '/sites/default/files/styles/large/public/Missing%20Photo_0.jpg'
               : 'https://grid.milkeninstitute.org/events/speakers/' + item.field_biopic;
 
