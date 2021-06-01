@@ -92,7 +92,6 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         .map((speakers, role) => {
           if (
             role == "Accepted" || 
-            role == "Approved to Invite" || 
             role == "ApprovedtoInvite" || 
             role == "Cancelled" || 
             role == "Declined" || 
@@ -106,8 +105,20 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
 
           let weight = role.charCodeAt(0);
 
+          if (role == "WelcomingRemarks") {
+            weight = 1;
+          }
+          if (role == "IntroductoryRemarks") {
+            weight = 2;
+          }
+          if (role == "Guest") {
+            weight = 3;
+          }
           if (role == "Moderator") {
-            weight = 0;
+            weight = 4;
+          }
+          if (role == "Speaker") {
+            weight = 5;
           }
 
           return {
