@@ -40,7 +40,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
 
   const summary = (
     <p
-      dangerouslySetInnerHTML={{ __html: session?.field_description }}
+      dangerouslySetInnerHTML={{ __html: session?.field_description.replace('”', '').replace('”', '') }}
       style={{ fontSize: "1.154em" }}
     />
   );
@@ -257,7 +257,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         {renderSessionTime(session)}
         <p
           className="mt-3 mb-4"
-          dangerouslySetInnerHTML={{ __html: session?.field_description }}
+          dangerouslySetInnerHTML={{ __html: session?.field_description.replace('”', '').replace('”', '') }}
         />
         {renderSpeakers(session)}
         {renderTracks(session)}
