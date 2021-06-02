@@ -48,7 +48,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderSpeakerGroup = (speakers: Array<any>) => {
     return _(speakers)
       .map((s) => getSpeakerById(s.id))
-      .sortBy((s) => s?.field_last_name)
+      .sortBy((s) => s?.field_last_name.toLowerCase())
       .map((speakerData: any, index: number) => {
         const profile: any = {
           title: speakerData?.title,
