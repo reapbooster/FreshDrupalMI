@@ -80,7 +80,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
     }
 
     & a {
-      font-size: 0.75em; 
+      font-size: 1em; 
       transition: 'all 0.5s ease';
     }
 
@@ -112,7 +112,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
     }
 
     & .icons a {
-      font-size: 2.5em;
+      font-size: 2em;
       padding: 0.2em 0.3em;
       color: #2d699f;
 
