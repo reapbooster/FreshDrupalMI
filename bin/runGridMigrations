@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+terminus drush freshdrupalmi.live -- migrate:import grid_event --update --limit=10
+terminus drush freshdrupalmi.live -- migrate:import panels --update --limit=500
+terminus drush freshdrupalmi.live -- migrate:import grid_speakers --update --limit=2000
+terminus drush freshdrupalmi.live -- migrate:import grid_panel_speakers --update --limit=2000
+terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 500, 0 )'
+terminus drush freshdrupalmi.live -- cr
+redis-cli -h 34.71.192.0 -p 22461 -a f28ed49903f5481b992aad40c0431aec flushall
