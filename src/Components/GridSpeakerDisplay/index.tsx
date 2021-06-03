@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import styled from "styled-components";
 import { SocialDisplay } from "../SocialDisplay"
@@ -74,6 +74,8 @@ const GridSpeakerDisplay: React.FunctionComponent = (
 
   const ElMainContentWrapper = styled.div`
   `;
+
+  useEffect(() => {document.title = `${data.field_first_name} ${data.field_last_name} | Milken Institute`});
 
   return (
     <MainContainer className="container-fluid">
