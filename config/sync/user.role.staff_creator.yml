@@ -16,7 +16,6 @@ permissions:
   - 'administer people fields'
   - 'administer slide fields'
   - 'administer taxonomy_term fields'
-  - 'create event entities'
   - 'create panel entities'
   - 'create people entities'
   - 'create rooms entities'

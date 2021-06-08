@@ -1,0 +1,14 @@
+uuid: 8530a7f6-0298-4b95-bf6f-5e9a90f2d9ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.limited_access
+  module:
+    - user
+id: user_add_role_action.limited_access
+label: 'Add the Limited Access role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: limited_access

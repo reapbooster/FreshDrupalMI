@@ -7,7 +7,6 @@ label: 'Sponsor Page reviewer'
 weight: 70
 is_admin: false
 permissions:
-  - 'create event entities'
   - 'create panel entities'
   - 'create people entities'
   - 'create rooms entities'
