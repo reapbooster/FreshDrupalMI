@@ -105,6 +105,9 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
 
           let weight = role.charCodeAt(0);
 
+          if (role == "OpeningRemarks") {
+            weight = 1;
+          }
           if (role == "WelcomingRemarks") {
             weight = 1;
           }
