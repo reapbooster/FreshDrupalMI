@@ -105,23 +105,36 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
 
           let weight = role.charCodeAt(0);
 
+          
+          if (role == "WelcomingRemarks" || role == "WelcomeRemarks") {
+            weight = 1;
+          }
           if (role == "OpeningRemarks") {
-            weight = 1;
-          }
-          if (role == "WelcomingRemarks") {
-            weight = 1;
-          }
-          if (role == "IntroductoryRemarks") {
             weight = 2;
           }
-          if (role == "Guest") {
+          if (role == "IntroductoryRemarks" || role == "IntroductionBy") {
             weight = 3;
           }
-          if (role == "Moderator") {
+          if (role == "Host") {
             weight = 4;
           }
-          if (role == "Speaker") {
+          if (role == "Guest") {
             weight = 5;
+          }
+          if (role == "Moderator" || role == "Interviewer" || role == "Judge") {
+            weight = 6;
+          }
+          if (role == "Speaker") {
+            weight = 7;
+          }
+          if (role == "Presenter") {
+            weight = 8;
+          }
+          if (role == "Performer") {
+            weight = 9;
+          }
+          if (role == "ClosingRemarks") {
+            weight = 10;
           }
 
           return {
