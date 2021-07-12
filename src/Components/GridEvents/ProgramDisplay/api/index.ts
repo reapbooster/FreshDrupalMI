@@ -3,6 +3,8 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 
 const API_URL = window.location.hostname.includes("milkeninstitute.org")
   ? ""
+  : window.location.hostname.includes("pantheonsite.io")
+  ? ""
   : "http://localhost:3001/";
 
 // @ts-ignore

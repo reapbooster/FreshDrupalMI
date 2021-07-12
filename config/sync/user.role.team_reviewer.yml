@@ -7,7 +7,6 @@ label: 'Team reviewer'
 weight: 68
 is_admin: false
 permissions:
-  - 'create event entities'
   - 'create panel entities'
   - 'create people entities'
   - 'create rooms entities'

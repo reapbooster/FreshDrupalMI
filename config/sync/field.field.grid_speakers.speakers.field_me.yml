@@ -1,0 +1,21 @@
+uuid: 4b28661d-c19d-4bf4-9cfe-528df79d1b73
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_speakers.speakers
+    - field.storage.grid_speakers.field_me
+  module:
+    - metatag
+id: grid_speakers.speakers.field_me
+field_name: field_me
+entity_type: grid_speakers
+bundle: speakers
+label: 'Meta tags'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

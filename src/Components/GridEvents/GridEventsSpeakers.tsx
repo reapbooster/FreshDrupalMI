@@ -4,9 +4,10 @@ import styled from "styled-components";
 import Loading from "../Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTwitter,
   faFacebookF,
+  faInstagram,
   faLinkedinIn,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
 interface GridEventsSpeakersProps {
@@ -160,9 +161,15 @@ const GridEventsSpeakers: React.FunctionComponent = (
               ? '/sites/default/files/styles/large/public/Missing%20Photo_0.jpg'
               : 'https://grid.milkeninstitute.org/events/speakers/' + item.field_biopic;
 
-            let facebook, linkedin, twitter;
+            let facebook, instagram, linkedin, twitter;
             if (item.field_facebook !== '') {
               facebook = <a href={item.field_facebook}><FontAwesomeIcon icon={faFacebookF} /></a>
+            };
+            if (item.field_instagram !== '') {
+              let intagram_url = item.field_instagram.includes('instagram.com') ? 
+                item.field_instagram : 
+                'https://www.instagram.com/' + item.field_instagram.replace('@','');
+              instagram = <a href={intagram_url}><FontAwesomeIcon icon={faInstagram} /></a>
             };
             if (item.field_linkedin !== '') {
               linkedin = <a href={item.field_linkedin}><FontAwesomeIcon icon={faLinkedinIn} /></a>
@@ -179,7 +186,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
                 <img src={imagePath} />
                 <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{ __html: unescape(item.field_first_name + ' ' + item.field_last_name) }} />
                 <p dangerouslySetInnerHTML={{ __html: item.field_description.replace(/&amp;/g, "&") }} />
-                <p className="icons m-0">{facebook} {linkedin} {twitter}</p>
+                <p className="icons m-0">{facebook} {instagram} {linkedin} {twitter}</p>
               </a>
             );
           })

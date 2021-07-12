@@ -1,0 +1,14 @@
+uuid: 485db1f6-a822-4859-a9d0-2e5ed471e43b
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.limited_access
+  module:
+    - user
+id: user_remove_role_action.limited_access
+label: 'Remove the Limited Access role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: limited_access

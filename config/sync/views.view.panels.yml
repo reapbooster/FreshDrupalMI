@@ -2,6 +2,8 @@ uuid: e6822c22-f3a7-4a41-9081-65d1559e5345
 langcode: en
 status: true
 dependencies:
+  config:
+    - field.storage.panel.field_panel_date_string
   module:
     - eck
     - views_bulk_operations
@@ -264,6 +266,69 @@ display:
           field_api_classes: false
           entity_type: null
           entity_field: title
+          plugin_id: field
+        field_panel_date_string:
+          id: field_panel_date_string
+          table: panel__field_panel_date_string
+          field: field_panel_date_string
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Panel Date String'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
           plugin_id: field
         type:
           id: type
@@ -664,29 +729,26 @@ display:
           entity_type: panel
           entity_field: title
           plugin_id: string
-        field_event_target_id:
-          id: field_event_target_id
-          table: panel__field_event
-          field: field_event_target_id
+        field_grid_event_id_value:
+          id: field_grid_event_id_value
+          table: panel__field_grid_event_id
+          field: field_grid_event_id_value
           relationship: none
           group_type: group
           admin_label: ''
           operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_event_target_id_op
-            label: 'Event (field_event)'
+            operator_id: field_grid_event_id_value_op
+            label: 'Event ID'
             description: ''
             use_operator: false
-            operator: field_event_target_id_op
+            operator: field_grid_event_id_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_event_target_id
+            identifier: field_grid_event_id_value
             required: false
             remember: false
             multiple: false
@@ -702,9 +764,8 @@ display:
               team_reviewer: '0'
               sponsor_page_creator: '0'
               sponsor_page_reviewer: '0'
+              limited_access: '0'
             placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -717,7 +778,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: numeric
+          plugin_id: string
       sorts: {  }
       title: 'Admin Grid Panels'
       header: {  }
@@ -737,7 +798,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-      tags: {  }
+      tags:
+        - 'config:field.storage.panel.field_panel_date_string'
   page_1:
     display_plugin: page
     id: page_1
@@ -753,4 +815,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-      tags: {  }
+      tags:
+        - 'config:field.storage.panel.field_panel_date_string'

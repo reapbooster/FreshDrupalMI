@@ -10,12 +10,10 @@ entity_type_groups:
     career:
       basic: basic
       advanced: advanced
-    event:
-      basic: basic
-      advanced: advanced
     landing_page:
       basic: basic
       advanced: advanced
-    report:
+  grid_speakers:
+    speakers:
       basic: basic
       advanced: advanced
