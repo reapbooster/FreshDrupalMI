@@ -33,14 +33,17 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
       <div className="mt-3">
-        {startTime} {session.field_pday} - {endTime} {session.field_epday} {timeZone?.toUpperCase()}
+        {startTime} {session.field_pday} - {endTime} {session.field_epday}{" "}
+        {timeZone?.toUpperCase()}
       </div>
     );
   };
 
   const summary = (
     <p
-      dangerouslySetInnerHTML={{ __html: session?.field_description.replace('”', '').replace('”', '') }}
+      dangerouslySetInnerHTML={{
+        __html: session?.field_description.replace("”", "").replace("”", ""),
+      }}
       style={{ fontSize: "1.154em" }}
     />
   );
@@ -65,7 +68,12 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   };
 
   const renderSpeakers = (session: any) => {
-    if (session?.field_speakers && session?.field_speakers.length > 0 && session?.field_speaker_roles && session?.field_speaker_roles.length > 0) {
+    if (
+      session?.field_speakers &&
+      session?.field_speakers.length > 0 &&
+      session?.field_speaker_roles &&
+      session?.field_speaker_roles.length > 0
+    ) {
       const speakerIds = session.field_speakers
         .split(",")
         .map((id: any) => parseInt(id));
@@ -91,15 +99,15 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
         .groupBy("role")
         .map((speakers, role) => {
           if (
-            role == "Accepted" || 
-            role == "ApprovedtoInvite" || 
-            role == "Cancelled" || 
-            role == "Declined" || 
-            role == "Invited" || 
-            role == "Pending" || 
-            role == "Suggested" || 
+            role == "Accepted" ||
+            role == "ApprovedtoInvite" ||
+            role == "Cancelled" ||
+            role == "Declined" ||
+            role == "Invited" ||
+            role == "Pending" ||
+            role == "Suggested" ||
             role == "Undefined"
-            ) {
+          ) {
             return false;
           }
 
@@ -154,7 +162,9 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
             suffix = "s";
           }
           // Split camelcase strings
-          mrole = mrole.replace(/([A-Z])/g, " $1").replace(/^./, (s) => s.toUpperCase());
+          mrole = mrole
+            .replace(/([A-Z])/g, " $1")
+            .replace(/^./, (s) => s.toUpperCase());
           return (
             <div className="speaker-role-group" key={mrole}>
               <h5>
@@ -173,7 +183,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderTracks = (session: any) => {
     if (session?.field_tracks && session?.field_tracks.length > 0) {
       return (
-        <div className="text-center">
+        <div className="text-center tracks-wrapper">
           {session?.field_tracks
             .split(", ")
             .map(getTrackById)
@@ -195,7 +205,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderTitleOnly = () => {
     let video = session?.field_video
       ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
-      : '';
+      : "";
     return (
       <>
         <div className="program-day-session-wrapper">
@@ -234,7 +244,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderTitleSummary = () => {
     let video = session?.field_video
       ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
-      : '';
+      : "";
     return (
       <>
         <div className="program-day-session-wrapper">
@@ -259,9 +269,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
             </Col>
           </Row>
           <Row className="mt-3">
-            <Col>
-              {summary}
-            </Col>
+            <Col>{summary}</Col>
           </Row>
           <Collapse in={expanded}>
             <div id="session-collapse-content">
@@ -277,14 +285,18 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   const renderDetail = () => {
     let video = session?.field_video
       ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
-      : '';
+      : "";
     return (
       <>
-        {<h4 dangerouslySetInnerHTML={{ __html: session?.title + video }}/>}
+        {<h4 dangerouslySetInnerHTML={{ __html: session?.title + video }} />}
         {renderSessionTime(session)}
         <p
           className="mt-3 mb-4"
-          dangerouslySetInnerHTML={{ __html: session?.field_description.replace('”', '').replace('”', '') }}
+          dangerouslySetInnerHTML={{
+            __html: session?.field_description
+              .replace("”", "")
+              .replace("”", ""),
+          }}
         />
         {renderSpeakers(session)}
         {renderTracks(session)}
