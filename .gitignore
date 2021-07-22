@@ -2,6 +2,10 @@
 ### GitHub repository .gitignore section
 ###
 
+# Ignore temporary Grid migration cron job files
+gridMigrationStart
+gridMigrationEnd
+
 # Ignore files only needed on CI
 .bashrc
 
