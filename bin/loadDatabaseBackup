@@ -1,3 +1,14 @@
 #!/usr/bin/env bash
 
 make run-clone-livedb
+
+terminus backup:create freshdrupalmi.live --element=database --yes > /dev/null
+terminus backup:get freshdrupalmi.live --element=database --yes --to="./db/freshdrupalmi-live-2021-07-09.sql.gz" > /dev/null
+
+terminus backup:get freshdrupalmi.live --element=files --to=/var/www/db/files.tar.gz
+tar -xzvf /var/www/db/files.tar.gz --directory=/var/www/db/
+rm -rf /var/www/db/files/*
+mv /var/www/db/files_live/* /var/www/db/files/
+chown -R www-data:www-data /var/www/db/files
+rm -Rf web/sites/default/files
+ln -s /var/www/db/files /var/www/web/sites/default
