@@ -22,7 +22,7 @@ export const ParagraphDisplayList = (props: ParagraphDisplayListProps) => {
   if (Array.isArray(list)) {
     return (
       list?.map((item, key) => {
-        console.log("Paragraph Display Item => ", item);
+        // console.log("Paragraph Display Item => ", item);
         if (item.type !== undefined) {
           return (
             <ParagraphDisplay data={item} view_mode={view_mode} key={key} />
