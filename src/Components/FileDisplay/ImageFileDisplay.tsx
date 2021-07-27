@@ -78,6 +78,15 @@ export const ImageFileDisplay = (props: ImageFileDisplayProps) => {
       className={className}
     />
     )
+    : (view_mode === 'large-raw')
+    ? (
+    <img
+      src={imageData.image_style_uri.large}
+      alt={imageData.filename}
+      style={imageTagStyle}
+      className={className}
+    />
+    )
     : (view_mode === 'thumbnail-raw')
     ? (
     <img

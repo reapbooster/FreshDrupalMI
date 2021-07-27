@@ -142,7 +142,7 @@ export const ParagraphDisplayBodyContent = (
       ReactDOM.render(
         <MediaDisplay
           data={MediaDisplayData}
-          view_mode='medium-raw'
+          view_mode='large-raw'
         />,
         item
       );
