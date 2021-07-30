@@ -1,0 +1,79 @@
+@media print {
+
+  .page-view-event-pages #main-wrapper {
+    margin-top: 0;
+  }
+
+  .page-view-event-pages .jumbotron, .page-view-event-pages .jumbotron * {
+    background: none;
+    color: #000 !important;
+  }
+
+
+  .page-view-event-pages div[class^="ParagraphDisplayLinkBar"],
+  .page-view-event-pages .my-3,
+  .page-view-event-pages .search-bar,
+  .tracks-wrapper,
+  .view-more-link,
+  footer {
+    display: none;
+  }
+
+
+  body.page-view-event-pages {
+    background: #FFF;
+  }
+
+  body.page-view-event-pages .slide-text.hero-short {
+    padding: 5em 2em 1em;
+  }
+
+  .programday-session .time-col {
+    display: none !important;
+  }
+
+  .programday-session,
+  .programday-sessions-container {
+    border: none !important;
+  }
+
+  .program-day-header .program-day-toggler { display: none; }
+
+  .program-day-header {
+    padding: 0.6em 1.6em !important;
+    background: #CCC !important;
+    text-transform: uppercase;
+  }
+
+  .program-day-header h4 {
+    margin: 0;
+  }
+
+  .programday-session {
+    margin: 0;
+    border-bottom: 1px solid #ccc !important;
+    background-color: white;
+    padding: 1em;
+  }
+
+  .profile-summary .row {
+    display: table !important;;
+    width: 100% !important;
+  }
+
+  .programday-session .profile-summary .col-sm-6.col-lg-3 {
+    width: 80px !important;
+    display: table-cell !important;
+  }
+
+  .speaker-role-group {
+    display: table;
+    width: 100%;
+  }
+
+  .profile-summary h5 a {
+    color: #000 !important;
+    font-size: 1.2em;
+  }
+
+}
