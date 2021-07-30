@@ -10,6 +10,7 @@ dependencies:
     - field.storage.panel.field_panel_end_time
     - field.storage.panel.field_panel_start_time
     - field.storage.panel.field_pday
+    - field.storage.panel.field_private
     - field.storage.panel.field_speaker_roles
     - field.storage.panel.field_speakers
     - field.storage.panel.field_tracks
@@ -908,6 +909,71 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_private:
+          id: field_private
+          table: panel__field_private
+          field: field_private
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: boolean
+          settings:
+            format: true-false
+            format_custom_true: ''
+            format_custom_false: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       filters:
         field_publish_value:
           id: field_publish_value
@@ -961,6 +1027,44 @@ display:
             label: ''
           granularity: minute
           plugin_id: datetime
+        field_private_value:
+          id: field_private_value
+          table: panel__field_private
+          field: field_private_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
+        field_panel_end_time_value:
+          id: field_panel_end_time_value
+          table: panel__field_panel_end_time
+          field: field_panel_end_time_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
+        title:
+          id: title
+          table: panel_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: panel
+          entity_field: title
+          plugin_id: standard
       header: {  }
       footer: {  }
       empty: {  }
@@ -1028,6 +1132,7 @@ display:
         - 'config:field.storage.panel.field_panel_end_time'
         - 'config:field.storage.panel.field_panel_start_time'
         - 'config:field.storage.panel.field_pday'
+        - 'config:field.storage.panel.field_private'
         - 'config:field.storage.panel.field_speaker_roles'
         - 'config:field.storage.panel.field_speakers'
         - 'config:field.storage.panel.field_tracks'
@@ -1090,6 +1195,7 @@ display:
         - 'config:field.storage.panel.field_panel_end_time'
         - 'config:field.storage.panel.field_panel_start_time'
         - 'config:field.storage.panel.field_pday'
+        - 'config:field.storage.panel.field_private'
         - 'config:field.storage.panel.field_speaker_roles'
         - 'config:field.storage.panel.field_speakers'
         - 'config:field.storage.panel.field_tracks'

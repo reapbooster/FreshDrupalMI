@@ -6,7 +6,10 @@ social_media:
     api_event: href
     default_img: 1
     weight: 1
-    attributes: "target|_blank\nclass|facebook-share\nrel|nooopener noreffer"
+    attributes: |-
+      target|_blank
+      class|facebook-share
+      rel|nooopener noreffer
   facebook_msg:
     enable: 1
     api_url: 'FB.ui({method: ''send'',link: ''[current-page:url]''})'
@@ -16,7 +19,10 @@ social_media:
     text: 'Facebook messenger'
     default_img: 1
     weight: 2
-    attributes: "target|_blank\nclass|facebook-msg\nrel|nooopener noreffer"
+    attributes: |-
+      target|_blank
+      class|facebook-msg
+      rel|nooopener noreffer
   linkedin:
     enable: 1
     api_url: 'http://www.linkedin.com/shareArticle?mini=true&url=[current-page:url]&title=[current-page:title]&source=[current-page:url]'
@@ -24,7 +30,10 @@ social_media:
     text: Linkedin
     default_img: 1
     weight: 3
-    attributes: "target|_blank\nclass|linkedin\nrel|nooopener noreffer"
+    attributes: |-
+      target|_blank
+      class|linkedin
+      rel|nooopener noreffer
   twitter:
     enable: 1
     api_url: 'https://twitter.com/intent/tweet?url=[current-page:url]&url=[current-page:url]&hashtags=Hashtag'
@@ -32,7 +41,10 @@ social_media:
     text: Twitter
     default_img: 1
     weight: 4
-    attributes: "target|_blank\nclass|twitter\nrel|nooopener noreffer"
+    attributes: |-
+      target|_blank
+      class|twitter
+      rel|nooopener noreffer
   pinterest:
     enable: 1
     api_url: 'https://www.pinterest.com/pin/create/button/?url=[current-page:url]&description=[current-page:title]'
@@ -40,13 +52,18 @@ social_media:
     text: Pinterest
     default_img: 1
     weight: 5
-    attributes: "target|_blank\nclass|pinterest\nrel|nooopener noreffer"
+    attributes: |-
+      target|_blank
+      class|pinterest
+      rel|nooopener noreffer
   whatsapp:
     enable: 0
     api_url: 'https://wa.me/?text=[current-page:url]'
     api_event: href
     default_img: 1
-    attributes: "class|whatsapp show-for-small-only\ndata-action|share/whatsapp/share"
+    attributes: |-
+      class|whatsapp show-for-small-only
+      data-action|share/whatsapp/share
     weight: 6
   email:
     enable: 1

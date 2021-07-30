@@ -42,6 +42,7 @@ third_party_settings:
         layout_id: layout_onecol
         layout_settings:
           label: ''
+          context_mapping: {  }
         components:
           6f55cff1-3ba3-4662-b8d1-fa4e302883f4:
             uuid: 6f55cff1-3ba3-4662-b8d1-fa4e302883f4
@@ -387,6 +388,7 @@ hidden:
   field_topics: true
   langcode: true
   name: true
+  published_at: true
   search_api_excerpt: true
   thumbnail: true
   uid: true

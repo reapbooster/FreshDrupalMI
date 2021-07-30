@@ -12,7 +12,24 @@ id: contact_us
 title: 'Contact Us'
 description: 'Contact Us used on Centers'
 category: ''
-elements: "name:\n  '#type': textfield\n  '#title': Name\n  '#placeholder': Name\n  '#required': true\nemail_address:\n  '#type': email\n  '#title': 'Email Address'\n  '#placeholder': 'Email Address'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#placeholder': Message\nactions:\n  '#type': webform_actions\n  '#title': 'Send Message'\n"
+elements: |
+  name:
+    '#type': textfield
+    '#title': Name
+    '#placeholder': Name
+    '#required': true
+  email_address:
+    '#type': email
+    '#title': 'Email Address'
+    '#placeholder': 'Email Address'
+    '#required': true
+  message:
+    '#type': textarea
+    '#title': Message
+    '#placeholder': Message
+  actions:
+    '#type': webform_actions
+    '#title': 'Send Message'
 css: ''
 javascript: ''
 settings:

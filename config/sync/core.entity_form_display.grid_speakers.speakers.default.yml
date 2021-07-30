@@ -34,7 +34,6 @@ dependencies:
     - field.field.grid_speakers.speakers.field_last_name
     - field.field.grid_speakers.speakers.field_linkedin
     - field.field.grid_speakers.speakers.field_location
-    - field.field.grid_speakers.speakers.field_me
     - field.field.grid_speakers.speakers.field_middle_name
     - field.field.grid_speakers.speakers.field_modifiedbyid
     - field.field.grid_speakers.speakers.field_needsfinaledit
@@ -76,20 +75,11 @@ dependencies:
     - field.field.grid_speakers.speakers.field_whoentered
     - field.field.grid_speakers.speakers.field_whosuggested
     - field.field.grid_speakers.speakers.field_womensreport
-  module:
-    - metatag
-    - path
 id: grid_speakers.speakers.default
 targetEntityType: grid_speakers
 bundle: speakers
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_attendeeid:
     weight: 3
     settings:
@@ -328,13 +318,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_me:
-    weight: 74
-    settings:
-      sidebar: true
-    third_party_settings: {  }
-    type: metatag_firehose
     region: content
   field_middle_name:
     weight: 33
@@ -668,12 +651,6 @@ content:
     region: content
     settings:
       include_locked: true
-    third_party_settings: {  }
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
     third_party_settings: {  }
   title:
     type: string_textfield
