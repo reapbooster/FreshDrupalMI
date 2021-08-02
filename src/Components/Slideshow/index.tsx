@@ -124,14 +124,23 @@ export const SlideShow = (props: SlideShowProps) => {
     margin: 0.8rem;
   `;
 
+  let startPos, currentPos;
+
   return (
-    <div className="carousel slide" data-ride="carousel" id="SlideShowCarousel">
+    <div 
+      className="carousel slide"
+      id="SlideShowCarousel" 
+      data-ride="carousel" 
+      onTouchStart={(e) => { startPos = e.touches[0].clientX; }}
+      onTouchMove={(e) => { currentPos = e.touches[0].clientX; }}
+      onTouchEnd={() => { jQuery(document.querySelector('.carousel')).carousel(currentPos < startPos ? 'next' : 'prev'); }}
+    >
       <SlideshowIndicatorsList className="carousel-indicators">
         {items.map((item, key) => {
           return (
             <li
               key={key}
-              className={key === 0 ? " active" : ""}
+              className={key === 0 ? "active" : ""}
               data-target="#SlideShowCarousel"
               data-slide-to={key}
               title={item.title ?? "default-value"}
