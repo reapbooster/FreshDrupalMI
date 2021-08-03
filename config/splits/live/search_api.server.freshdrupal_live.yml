@@ -38,13 +38,13 @@ backend_config:
     port: 8443
     path: /
     core: freshmilken_live
-    timeout: 5
-    index_timeout: 5
+    timeout: 10
+    index_timeout: 10
     optimize_timeout: 10
     finalize_timeout: 30
-    commit_within: 1000
-    solr_version: ''
-    http_method: AUTO
+    commit_within: 3000
+    solr_version: '8'
+    http_method: GET
     skip_schema_check: false
     jmx: true
     solr_install_dir: ''
