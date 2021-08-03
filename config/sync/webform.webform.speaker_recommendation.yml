@@ -169,6 +169,13 @@ elements: |-
     actions:
       '#type': webform_actions
       '#title': 'Submit button(s)'
+  processed_text:
+    '#type': processed_text
+    '#text': |
+      <h4 class="text-align-center"><strong><span style="background-color: #FF713D; color: #ffffff; padding: 20px;"><a href="https://www.cvent.com/pub/eMarketing/Pages/SignUp.aspx?p=f1cdfc9d-b8e0-4327-8cf3-8f14736f93b3&amp;m=" style="color: #ffffff; text-decoration: none;">Sign-Up for Our Newsletter</a></span></strong></h4>
+
+      <p>&nbsp;</p>
+    '#format': full_html
 css: ''
 javascript: ''
 settings:
