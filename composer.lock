@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fb7f806416e811627bb3889ffc46dbe",
+    "content-hash": "afd54a8daedea6741f91b4c371d1f67b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.188.1",
+            "version": "3.189.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "7c84f39290067c6e86b3bc4518f211be0f499dc8"
+                "reference": "f1f9e6cc3f5df8ef53a46d590985ca1b8dabb0f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7c84f39290067c6e86b3bc4518f211be0f499dc8",
-                "reference": "7c84f39290067c6e86b3bc4518f211be0f499dc8",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f1f9e6cc3f5df8ef53a46d590985ca1b8dabb0f8",
+                "reference": "f1f9e6cc3f5df8ef53a46d590985ca1b8dabb0f8",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.188.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.189.0"
             },
-            "time": "2021-08-09T18:29:02+00:00"
+            "time": "2021-08-10T18:17:34+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -4297,17 +4297,17 @@
         },
         {
             "name": "drupal/decoupled_kit",
-            "version": "1.3.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/decoupled_kit.git",
-                "reference": "8.x-1.3"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/decoupled_kit-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "d117405484936116e11fd9893caec3bccc4a3a51"
+                "url": "https://ftp.drupal.org/files/projects/decoupled_kit-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "1c7a0d5fea4a3e3c60638b3dd0012a286e873178"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -4320,8 +4320,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1627732252",
+                    "version": "8.x-1.2",
+                    "datestamp": "1603997137",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
