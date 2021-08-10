@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.187.0",
+            "version": "3.188.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1c7f307e0987bd8eacd2d99d78818a96b42511d1"
+                "reference": "7c84f39290067c6e86b3bc4518f211be0f499dc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1c7f307e0987bd8eacd2d99d78818a96b42511d1",
-                "reference": "1c7f307e0987bd8eacd2d99d78818a96b42511d1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7c84f39290067c6e86b3bc4518f211be0f499dc8",
+                "reference": "7c84f39290067c6e86b3bc4518f211be0f499dc8",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.187.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.188.1"
             },
-            "time": "2021-08-03T18:18:03+00:00"
+            "time": "2021-08-09T18:29:02+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -1554,16 +1554,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.1",
+            "version": "1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f"
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
-                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5b668aef16090008790395c02c893b1ba13f7e08",
+                "reference": "5b668aef16090008790395c02c893b1ba13f7e08",
                 "shasum": ""
             },
             "require": {
@@ -1620,9 +1620,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.1"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.2"
             },
-            "time": "2021-05-16T18:07:53+00:00"
+            "time": "2021-08-05T19:00:23+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -5798,17 +5798,17 @@
         },
         {
             "name": "drupal/entity_usage",
-            "version": "2.0.0-beta3",
+            "version": "2.0.0-beta4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity_usage.git",
-                "reference": "8.x-2.0-beta3"
+                "reference": "8.x-2.0-beta4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_usage-8.x-2.0-beta3.zip",
-                "reference": "8.x-2.0-beta3",
-                "shasum": "cc115349eb533013ec672dadbe8cf0cd880bd8c4"
+                "url": "https://ftp.drupal.org/files/projects/entity_usage-8.x-2.0-beta4.zip",
+                "reference": "8.x-2.0-beta4",
+                "shasum": "436584621b42fd752e715fb36fe964b263e17915"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -5822,13 +5822,13 @@
                 "drupal/entity_reference_revisions": "~1.0",
                 "drupal/inline_entity_form": "^1.0@RC",
                 "drupal/paragraphs": "~1.0",
-                "drupal/webform": "~5.0"
+                "drupal/webform": "^6.0.0-alpha4"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0-beta3",
-                    "datestamp": "1585145909",
+                    "version": "8.x-2.0-beta4",
+                    "datestamp": "1628486017",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -6045,17 +6045,17 @@
         },
         {
             "name": "drupal/field_group",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/field_group.git",
-                "reference": "8.x-3.1"
+                "reference": "8.x-3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/field_group-8.x-3.1.zip",
-                "reference": "8.x-3.1",
-                "shasum": "8a719eaea594f0ba874172831cb28da93c66b77a"
+                "url": "https://ftp.drupal.org/files/projects/field_group-8.x-3.2.zip",
+                "reference": "8.x-3.2",
+                "shasum": "2020bbfe40f6ba43bc733ae7c8761632572433a0"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -6066,8 +6066,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.1",
-                    "datestamp": "1591772567",
+                    "version": "8.x-3.2",
+                    "datestamp": "1628513585",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7206,29 +7206,32 @@
         },
         {
             "name": "drupal/jsonapi_image_styles",
-            "version": "2.0.0-beta1",
+            "version": "2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/jsonapi_image_styles.git",
-                "reference": "2.0.0-beta1"
+                "reference": "2.0.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/jsonapi_image_styles-2.0.0-beta1.zip",
-                "reference": "2.0.0-beta1",
-                "shasum": "d7a362ade6beeb2cdc378106dfe986f0ab464a0f"
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_image_styles-2.0.0-beta3.zip",
+                "reference": "2.0.0-beta3",
+                "shasum": "8588084ad7a78c52eaae81ea8a6566520005376e"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^8.8 || ^9"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-beta1",
-                    "datestamp": "1603349829",
+                    "version": "2.0.0-beta3",
+                    "datestamp": "1628538079",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -7238,18 +7241,30 @@
             ],
             "authors": [
                 {
-                    "name": "jefuri",
-                    "homepage": "https://www.drupal.org/user/2733365"
+                    "name": "Alona O'neill",
+                    "homepage": "https://www.drupal.org/u/alonaoneill"
                 },
                 {
-                    "name": "kirkkala",
-                    "homepage": "https://www.drupal.org/user/390806"
+                    "name": "Timo Kirkkala",
+                    "homepage": "https://www.drupal.org/u/kirkkala"
+                },
+                {
+                    "name": "Jeffrey Bertoen",
+                    "homepage": "https://www.drupal.org/u/jefuri"
+                },
+                {
+                    "name": "Chrsitopher C. Wells (wells)",
+                    "email": "drupal.org@chris-wells.net"
                 }
             ],
-            "description": "Expose image styles to JSON:API",
+            "description": "JSON:API Image Styles provides a means to expose image styles to JSON:API.",
             "homepage": "https://www.drupal.org/project/jsonapi_image_styles",
+            "keywords": [
+                "Drupal"
+            ],
             "support": {
-                "source": "https://git.drupalcode.org/project/jsonapi_image_styles"
+                "source": "https://git.drupalcode.org/project/jsonapi_image_styles",
+                "issues": "https://www.drupal.org/project/issues/jsonapi_image_styles"
             }
         },
         {
@@ -12576,16 +12591,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "64c554bcef3c3b4702fcf34c227a316b47139b66"
+                "reference": "990b979379502feb7f393d6c9aa36cc9b9765f24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/64c554bcef3c3b4702fcf34c227a316b47139b66",
-                "reference": "64c554bcef3c3b4702fcf34c227a316b47139b66",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/990b979379502feb7f393d6c9aa36cc9b9765f24",
+                "reference": "990b979379502feb7f393d6c9aa36cc9b9765f24",
                 "shasum": ""
             },
             "require": {
@@ -12652,7 +12667,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.0.1"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.0.2"
             },
             "funding": [
                 {
@@ -12660,7 +12675,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-02T17:57:52+00:00"
+            "time": "2021-08-04T19:28:19+00:00"
         },
         {
             "name": "galbar/jsonpath",
