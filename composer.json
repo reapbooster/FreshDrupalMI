@@ -164,6 +164,7 @@
         "drupal/simple_sitemap": "^3.10",
         "drupal/slick": "^2.2",
         "drupal/slick_browser": "^2.1",
+        "drupal/smtp": "^1.0",
         "drupal/social_media": "^1.9",
         "drupal/sophron": "^1.0@beta",
         "drupal/subrequests": "^3.0",
