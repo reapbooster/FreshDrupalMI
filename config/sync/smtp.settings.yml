@@ -1,19 +1,19 @@
-smtp_on: false
-smtp_host: ''
+smtp_on: true
+smtp_host: smtp.office365.com
 smtp_hostbackup: ''
-smtp_port: '25'
-smtp_protocol: standard
+smtp_port: '587'
+smtp_protocol: tls
 smtp_autotls: true
 smtp_timeout: 30
-smtp_username: ''
-smtp_password: ''
-smtp_from: ''
-smtp_fromname: ''
+smtp_username: no-reply@milkeninstitute.org
+smtp_password: password 
+smtp_from: no-reply@milkeninstitute.org
+smtp_fromname: 'No-Reply Milken Institute'
 smtp_client_hostname: ''
 smtp_client_helo: ''
-smtp_allowhtml: ''
+smtp_allowhtml: '1'
 smtp_test_address: ''
-smtp_debugging: false
+smtp_debugging: true
 prev_mail_system: php_mail
 smtp_keepalive: false
 _core:
