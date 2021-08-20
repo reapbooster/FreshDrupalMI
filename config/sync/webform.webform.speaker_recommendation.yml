@@ -380,11 +380,49 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: _default
-      body: _default
+      body: "<h1>New speaker recommendation submission received!</h1>\r\n<p>Submitted by: {{ webform_token('[webform_submission:user]', webform_submission, [], options) }}, on {{ webform_token('[webform_submission:created]', webform_submission, [], options) }}</p>\r\n\r\n<h5>Submitted values:</h5>\r\n\r\n<p>Name: {{ webform_token('[webform_submission:values:speaker_name]', webform_submission, [], options) }}</p>\r\n\r\n<p>Affiliation: {{ webform_token('[webform_submission:values:affiliation]', webform_submission, [], options) }}</p>\r\n\r\n<p>Short Biography: {{ webform_token('[webform_submission:values:short_biography]', webform_submission, [], options) }}</p>\r\n\r\n<p>Area of Expertise: {{ webform_token('[webform_submission:values:area_of_expertise]', webform_submission, [], options) }}</p>\r\n\r\n<p>Reason for Recommendation: {{ webform_token('[webform_submission:values:reason_for_recommendation]', webform_submission, [], options) }}</p>\r\n\r\n<p>Events: {{ webform_token('[webform_submission:values:events]', webform_submission, [], options) }}</p>\r\n\r\n<p>Additional Information: {{ webform_token('[webform_submission:values:additional_information]', webform_submission, [], options) }}</p>\r\n\r\n<p>Agent Information: {{ webform_token('[webform_submission:values:agent_information]', webform_submission, [], options) }}</p>\r\n\r\n<p>Your Affiliation: {{ webform_token('[webform_submission:values:your_affiliation]', webform_submission, [], options) }}</p>\r\n\r\n<p>Email: {{ webform_token('[webform_submission:values:email]', webform_submission, [], options) }}</p>\r\n\r\n<p>Telephone: {{ webform_token('[webform_submission:values:telephone]', webform_submission, [], options) }}</p>\r\n\r\n<p>Additional Information or Comments: {{ webform_token('[webform_submission:values:additional_information_comments]', webform_submission, [], options) }}</p>"
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: true
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      exclude_attachments: false
+      parameters: {  }
+  email_confirmation:
+    id: email
+    label: 'Email Confirmation'
+    notes: ''
+    handler_id: email_confirmation
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: "Your speaker recommendation\_submission\_has been received."
+      body: "<h1><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\">Your speaker recommendation&nbsp;submission&nbsp;has been received. Thank you.</span></span></h1>\r\n<span style=\"font-size:11pt\"><span style=\"line-height:105%\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"line-height:105%\">Thank you for submitting your speaker recommendation. Your submission has been received and will be reviewed by our programming team. If we identify an alignment between your recommended speaker and our program, we will follow up with you directly.&nbsp;If you would like updates on future Milken Institute news and events, <span style=\"color:black\">please</span><strong><span style=\"color:#70ad47\"> <span class=\"MsoHyperlink\" style=\"color:#0563c1\"><span style=\"text-decoration:underline\"><span style=\"color:#70ad47\"><a href=\"https://www.cvent.com/Pub/eMarketing/Pages/SignUp.aspx?p=5b49cee6-fb01-4e53-bf27-b8aef82941e6&amp;m=\" style=\"color:#0563c1; text-decoration:underline\"><span style=\"color:#70ad47\">subscribe to our mailing list</span></a></span></span></span></span></strong><span class=\"MsoHyperlink\" style=\"color:#0563c1\"><span style=\"text-decoration:underline\">.</span></span></span></span></span></span></span>"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -394,6 +432,5 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
-      exclude_attachments: false
       parameters: {  }
 variants: {  }
