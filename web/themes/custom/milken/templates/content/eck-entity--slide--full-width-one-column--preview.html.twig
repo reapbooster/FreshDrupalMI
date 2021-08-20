@@ -1,0 +1,4 @@
+{% set view_mode = elements['#view_mode'] %}
+{% set background_image = eck_entity.get('field_background_image').entity %}
+{% set slide_text = eck_entity.get('field_slide_text') %}
+{{ background_image.uri.url }}
