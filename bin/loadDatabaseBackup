@@ -7,6 +7,12 @@ TerminusDBBackupDate=$(date +'%Y-%m-%d-%H%M')
 terminus backup:get freshdrupalmi.live --element=database --yes --to="./db/freshdrupalmi-live-$TerminusDBBackupDate.sql.gz" > /dev/null
 pv db/freshdrupalmi-live-$TerminusDBBackupDate.sql.gz  | zcat | mysql -u root -p -h mysql drupal8 && drush cr && redis-cli -h redis flushall
 
+# For the test site:
+# terminus backup:create freshdrupalmi.test --element=database --yes > /dev/null
+# TerminusDBBackupDate=$(date +'%Y-%m-%d-%H%M')
+# terminus backup:get freshdrupalmi.test --element=database --yes --to="./db/freshdrupalmi-test-$TerminusDBBackupDate.sql.gz" > /dev/null
+# pv db/freshdrupalmi-test-$TerminusDBBackupDate.sql.gz  | zcat | mysql -u root -p -h mysql drupal8 && drush cr && redis-cli -h redis flushall
+
 
 # terminus backup:get freshdrupalmi.live --element=files --to=/var/www/db/files.tar.gz
 # tar -xzvf /var/www/db/files.tar.gz --directory=/var/www/db/
