@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.191.1",
+            "version": "3.191.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "221eb3790a2f5cc73067ec1c13d4c788a0296351"
+                "reference": "6176504bc51ae5ac3a5276e05da0fa6abf71540b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/221eb3790a2f5cc73067ec1c13d4c788a0296351",
-                "reference": "221eb3790a2f5cc73067ec1c13d4c788a0296351",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6176504bc51ae5ac3a5276e05da0fa6abf71540b",
+                "reference": "6176504bc51ae5ac3a5276e05da0fa6abf71540b",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.191.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.191.3"
             },
-            "time": "2021-08-20T18:43:14+00:00"
+            "time": "2021-08-24T18:18:22+00:00"
         },
         {
             "name": "bower-asset/jquery",
@@ -7206,17 +7206,17 @@
         },
         {
             "name": "drupal/jsonapi_image_styles",
-            "version": "2.0.0-beta3",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/jsonapi_image_styles.git",
-                "reference": "2.0.0-beta3"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/jsonapi_image_styles-2.0.0-beta3.zip",
-                "reference": "2.0.0-beta3",
-                "shasum": "8588084ad7a78c52eaae81ea8a6566520005376e"
+                "url": "https://ftp.drupal.org/files/projects/jsonapi_image_styles-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "cc7f8172602cf5bd16483806e77cadc7f8543089"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -7227,11 +7227,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-beta3",
-                    "datestamp": "1628538079",
+                    "version": "2.0.0",
+                    "datestamp": "1629502460",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -8015,17 +8015,17 @@
         },
         {
             "name": "drupal/media_migration",
-            "version": "1.0.0-alpha12",
+            "version": "1.0.0-alpha13",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/media_migration.git",
-                "reference": "8.x-1.0-alpha12"
+                "reference": "8.x-1.0-alpha13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_migration-8.x-1.0-alpha12.zip",
-                "reference": "8.x-1.0-alpha12",
-                "shasum": "d700eaa802df21de73f1d2bd054f50b6738c643c"
+                "url": "https://ftp.drupal.org/files/projects/media_migration-8.x-1.0-alpha13.zip",
+                "reference": "8.x-1.0-alpha13",
+                "shasum": "a28cf340ab98b7dd60c94756170b193ddd4b6364"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9",
@@ -8049,8 +8049,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-alpha12",
-                    "datestamp": "1629376283",
+                    "version": "8.x-1.0-alpha13",
+                    "datestamp": "1629800090",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -8135,7 +8135,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/menu_item_extras.git",
-                "reference": "db5252c4478dda9f3fcfc3cc05582393d127afff"
+                "reference": "e617bab5e724afac9d6fea8d82b0bd51cf0cf107"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -8146,8 +8146,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.14+2-dev",
-                    "datestamp": "1620413076",
+                    "version": "8.x-2.15+5-dev",
+                    "datestamp": "1629829832",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -9342,17 +9342,17 @@
         },
         {
             "name": "drupal/publication_date",
-            "version": "2.0.0-beta2",
+            "version": "2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/publication_date.git",
-                "reference": "8.x-2.0-beta2"
+                "reference": "8.x-2.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/publication_date-8.x-2.0-beta2.zip",
-                "reference": "8.x-2.0-beta2",
-                "shasum": "190c9fd8f5a5ceb05fa26655f356d939d133933c"
+                "url": "https://ftp.drupal.org/files/projects/publication_date-8.x-2.0-beta3.zip",
+                "reference": "8.x-2.0-beta3",
+                "shasum": "e1deac7f77d3b57b93f4f70661b97f70b3e22216"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -9360,8 +9360,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0-beta2",
-                    "datestamp": "1599891406",
+                    "version": "8.x-2.0-beta3",
+                    "datestamp": "1629791784",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -14613,16 +14613,16 @@
         },
         {
             "name": "mpratt/embera",
-            "version": "2.0.20",
+            "version": "2.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mpratt/Embera.git",
-                "reference": "2e15c4bc3e79fd95bbf9de3d6d80fab1475347e3"
+                "reference": "70e29351c5015fd3218dcf32882481083bd86228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpratt/Embera/zipball/2e15c4bc3e79fd95bbf9de3d6d80fab1475347e3",
-                "reference": "2e15c4bc3e79fd95bbf9de3d6d80fab1475347e3",
+                "url": "https://api.github.com/repos/mpratt/Embera/zipball/70e29351c5015fd3218dcf32882481083bd86228",
+                "reference": "70e29351c5015fd3218dcf32882481083bd86228",
                 "shasum": ""
             },
             "require": {
@@ -14670,9 +14670,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mpratt/Embera/issues",
-                "source": "https://github.com/mpratt/Embera/tree/2.0.20"
+                "source": "https://github.com/mpratt/Embera/tree/2.0.21"
             },
-            "time": "2021-07-22T21:48:58+00:00"
+            "time": "2021-08-22T15:44:20+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -15621,16 +15621,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.95",
+            "version": "0.12.96",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "4ffddfe86e85dcc494a47e5f3dcfd1a2dccdce58"
+                "reference": "a98bdc51318f20fcae8c953d266f81a70254917f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4ffddfe86e85dcc494a47e5f3dcfd1a2dccdce58",
-                "reference": "4ffddfe86e85dcc494a47e5f3dcfd1a2dccdce58",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a98bdc51318f20fcae8c953d266f81a70254917f",
+                "reference": "a98bdc51318f20fcae8c953d266f81a70254917f",
                 "shasum": ""
             },
             "require": {
@@ -15661,7 +15661,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.95"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.96"
             },
             "funding": [
                 {
@@ -15681,7 +15681,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-20T12:53:41+00:00"
+            "time": "2021-08-21T11:55:13+00:00"
         },
         {
             "name": "psr/cache",
