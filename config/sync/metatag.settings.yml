@@ -1,21 +1,26 @@
 entity_type_groups:
   media:
+    podcast_episode:
+      basic: basic
+      advanced: advanced
+      twitter_cards: twitter_cards
+    report:
+      basic: basic
+      advanced: advanced
+      twitter_cards: twitter_cards
     video:
       basic: basic
       advanced: advanced
+      twitter_cards: twitter_cards
   node:
     article:
       basic: basic
       advanced: advanced
+      twitter_cards: twitter_cards
     career:
-      basic: basic
-      advanced: advanced
-    event:
       basic: basic
       advanced: advanced
     landing_page:
       basic: basic
       advanced: advanced
-    report:
-      basic: basic
-      advanced: advanced
+      twitter_cards: twitter_cards

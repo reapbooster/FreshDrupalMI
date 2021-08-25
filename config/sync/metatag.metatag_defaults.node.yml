@@ -5,6 +5,10 @@ dependencies: {  }
 id: node
 label: Content
 tags:
-  title: '[node:title] | [site:name]'
   canonical_url: '[node:url]'
+  title: '[node:title] | [site:name]'
   description: '[node:summary]'
+  twitter_cards_title: '[current-page:title] | [site:name]'
+  twitter_cards_image: '[current-page:metatag:image_src:value]'
+  twitter_cards_site: '@MilkenInstitute'
+  twitter_cards_type: summary_large_image
