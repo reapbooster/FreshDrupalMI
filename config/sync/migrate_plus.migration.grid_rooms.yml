@@ -1,0 +1,123 @@
+uuid: 933d8c35-5c0e-42ec-8690-4eed1b0b8cda
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - milken_migrate
+      - eck
+id: grid_rooms
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - grid
+migration_group: milken
+label: 'Grid Rooms'
+source:
+  plugin: url
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/rooms/'
+  data_fetcher_plugin: http
+  data_parser_plugin: jsonapi
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
+  jsonapi_endpoint: /jsonapi/rooms/
+  item_selector: data
+  fields:
+    -
+      name: id
+      label: ID
+      selector: /id
+    -
+      name: rname
+      label: 'Room Name'
+      selector: /attributes/rname
+    -
+      name: schoolhousecap
+      label: schoolhousecap
+      selector: /attributes/schoolhousecap
+    -
+      name: roundscap
+      label: roundscap
+      selector: /attributes/roundscap
+    -
+      name: theatercap
+      label: theatercap
+      selector: /attributes/theatercap
+    -
+      name: hollowsquare
+      label: hollowsquare
+      selector: /attributes/hollowsquare
+    -
+      name: conference
+      label: conference
+      selector: /attributes/conference
+    -
+      name: notes
+      label: notes
+      selector: /attributes/notes
+    -
+      name: sortorder
+      label: sortorder
+      selector: /attributes/sortorder
+    -
+      name: roomgroup
+      label: roomgroup
+      selector: /attributes/roomgroup
+    -
+      name: datecreated
+      label: datecreated
+      selector: /attributes/datecreated
+    -
+      name: datemodified
+      label: datemodified
+      selector: /attributes/datemodified
+    -
+      name: eventtype
+      label: eventtype
+      selector: /attributes/eventtype
+    -
+      name: lounge
+      label: lounge
+      selector: /attributes/lounge
+    -
+      name: reception
+      label: reception
+      selector: /attributes/reception
+    -
+      name: tour
+      label: tour
+      selector: /attributes/tour
+    -
+      name: hollowcircle
+      label: hollowcircle
+      selector: /attributes/hollowcircle
+    -
+      name: ushape
+      label: ushape
+      selector: /attributes/ushape
+  ids:
+    id:
+      type: integer
+process:
+  id: id
+  field_rname: rname
+  field_schoolhousecap: schoolhousecap
+  field_roundscap: roundscap
+  field_theatercap: theatercap
+  field_hollowsquare: hollowsquare
+  field_conference: conference
+  field_notes: notes
+  field_sortorder: sortorder
+  field_roomgroup: roomgroup
+  field_datecreated: datecreated
+  field_datemodified: datemodified
+  field_eventtype: eventtype
+  field_lounge: lounge
+  field_reception: reception
+  field_tour: tour
+  field_hollowcircle: hollowcircle
+  field_ushape: ushape
+destination:
+  plugin: 'entity:grid_rooms'
+  default_bundle: rooms
+migration_dependencies: {  }
