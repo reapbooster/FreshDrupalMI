@@ -1,0 +1,19 @@
+uuid: 1e929f72-8f0f-4aa8-adbe-ea259deed93e
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_join_panel_room.join_table
+    - field.storage.grid_join_panel_room.field_type
+id: grid_join_panel_room.join_table.field_type
+field_name: field_type
+entity_type: grid_join_panel_room
+bundle: join_table
+label: Type
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

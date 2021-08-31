@@ -1,0 +1,23 @@
+uuid: 46cdb065-5a75-4e70-9e7d-973959a58c7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_join_panel_room.join_table
+    - field.storage.grid_join_panel_room.field_room_id
+id: grid_join_panel_room.join_table.field_room_id
+field_name: field_room_id
+entity_type: grid_join_panel_room
+bundle: join_table
+label: 'Room ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

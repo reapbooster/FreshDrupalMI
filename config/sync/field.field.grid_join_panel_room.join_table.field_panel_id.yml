@@ -1,0 +1,23 @@
+uuid: 7679e307-4c17-4705-adf4-23c9da745207
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_join_panel_room.join_table
+    - field.storage.grid_join_panel_room.field_panel_id
+id: grid_join_panel_room.join_table.field_panel_id
+field_name: field_panel_id
+entity_type: grid_join_panel_room
+bundle: join_table
+label: 'Panel ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

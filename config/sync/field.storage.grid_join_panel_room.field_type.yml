@@ -1,0 +1,21 @@
+uuid: 30e229a1-0630-4479-8c8c-4d33b0f81b48
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_join_panel_room.field_type
+field_name: field_type
+entity_type: grid_join_panel_room
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

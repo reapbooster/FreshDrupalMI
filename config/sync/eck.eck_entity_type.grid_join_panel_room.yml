@@ -1,0 +1,10 @@
+uuid: a0724e98-df2e-4e06-b2d6-86f53bd6ab6b
+langcode: en
+status: true
+dependencies: {  }
+id: grid_join_panel_room
+label: 'Grid Join Panel Room'
+created: false
+changed: false
+uid: false
+title: false
