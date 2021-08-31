@@ -1,0 +1,19 @@
+uuid: a752f45a-4ddd-45cc-8efa-fb41141ebd63
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_datemodified
+id: grid_rooms.rooms.field_datemodified
+field_name: field_datemodified
+entity_type: grid_rooms
+bundle: rooms
+label: datemodified
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

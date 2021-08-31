@@ -1,0 +1,21 @@
+uuid: 07e4ea47-8475-43fa-af5d-4e3638c8e9bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_notes
+field_name: field_notes
+entity_type: grid_rooms
+type: string
+settings:
+  max_length: 500
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

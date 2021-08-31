@@ -1,0 +1,20 @@
+uuid: 8ca5c8b4-5966-40a5-9fd4-704a60f5bc51
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_sortorder
+field_name: field_sortorder
+entity_type: grid_rooms
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

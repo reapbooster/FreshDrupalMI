@@ -1,0 +1,23 @@
+uuid: 3bec9332-ddd2-449c-a937-6d9e60a0bf27
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_sortorder
+id: grid_rooms.rooms.field_sortorder
+field_name: field_sortorder
+entity_type: grid_rooms
+bundle: rooms
+label: sortorder
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

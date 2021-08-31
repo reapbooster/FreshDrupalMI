@@ -1,0 +1,20 @@
+uuid: 4791ea47-7895-4a87-ab4b-928b69ce83b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_schoolhousecap
+field_name: field_schoolhousecap
+entity_type: grid_rooms
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

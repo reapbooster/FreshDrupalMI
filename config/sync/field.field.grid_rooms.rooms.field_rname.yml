@@ -1,0 +1,19 @@
+uuid: d59c4bbf-f2b1-4682-916b-e4f43bd1f488
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_rname
+id: grid_rooms.rooms.field_rname
+field_name: field_rname
+entity_type: grid_rooms
+bundle: rooms
+label: 'Room Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

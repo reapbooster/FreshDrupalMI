@@ -1,0 +1,19 @@
+uuid: e7b6ba59-b1dc-45fc-8939-d3a932b97a81
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_conference
+id: grid_rooms.rooms.field_conference
+field_name: field_conference
+entity_type: grid_rooms
+bundle: rooms
+label: conference
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

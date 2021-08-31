@@ -1,0 +1,19 @@
+uuid: 67783808-b53f-4d8c-b22a-9cbb15b01bcd
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_notes
+id: grid_rooms.rooms.field_notes
+field_name: field_notes
+entity_type: grid_rooms
+bundle: rooms
+label: notes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,20 @@
+uuid: 175a1270-8686-429c-87d4-6c578fa8fc4c
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_theatercap
+field_name: field_theatercap
+entity_type: grid_rooms
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

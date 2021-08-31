@@ -1,0 +1,21 @@
+uuid: b77253df-eee2-4e13-bdc1-88d7dd03a49d
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_roomgroup
+field_name: field_roomgroup
+entity_type: grid_rooms
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

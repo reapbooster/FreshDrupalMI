@@ -1,0 +1,21 @@
+uuid: 68ee1c6a-b74e-499b-9e4f-61d2c0c2eb0a
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_conference
+field_name: field_conference
+entity_type: grid_rooms
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

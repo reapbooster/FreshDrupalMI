@@ -1,0 +1,23 @@
+uuid: e2365e0a-df56-4399-887a-0c372fa081a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_hollowsquare
+id: grid_rooms.rooms.field_hollowsquare
+field_name: field_hollowsquare
+entity_type: grid_rooms
+bundle: rooms
+label: hollowsquare
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

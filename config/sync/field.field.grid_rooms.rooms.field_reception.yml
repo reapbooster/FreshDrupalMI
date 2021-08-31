@@ -1,0 +1,23 @@
+uuid: 3704dfc2-13ed-4e98-8a34-8f63f55ceca0
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_reception
+id: grid_rooms.rooms.field_reception
+field_name: field_reception
+entity_type: grid_rooms
+bundle: rooms
+label: reception
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

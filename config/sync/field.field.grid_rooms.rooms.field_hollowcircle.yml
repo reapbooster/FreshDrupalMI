@@ -1,0 +1,19 @@
+uuid: ef738f94-974a-489b-b039-7df4f847db76
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_hollowcircle
+id: grid_rooms.rooms.field_hollowcircle
+field_name: field_hollowcircle
+entity_type: grid_rooms
+bundle: rooms
+label: hollowcircle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

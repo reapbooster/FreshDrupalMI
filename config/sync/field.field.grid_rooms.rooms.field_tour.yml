@@ -1,0 +1,19 @@
+uuid: 193b373c-8121-4df5-a1e2-69973a871e04
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_tour
+id: grid_rooms.rooms.field_tour
+field_name: field_tour
+entity_type: grid_rooms
+bundle: rooms
+label: tour
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

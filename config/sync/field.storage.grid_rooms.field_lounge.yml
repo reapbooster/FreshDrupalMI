@@ -1,0 +1,20 @@
+uuid: 23c7eff0-049c-494d-8a57-ded9602a2904
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_lounge
+field_name: field_lounge
+entity_type: grid_rooms
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

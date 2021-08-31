@@ -1,0 +1,20 @@
+uuid: c07c7ca5-517c-4318-81fe-8f5150d14441
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_reception
+field_name: field_reception
+entity_type: grid_rooms
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: a03ccea5-3cff-447d-97ec-af48deae39ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.storage.grid_rooms.field_schoolhousecap
+id: grid_rooms.rooms.field_schoolhousecap
+field_name: field_schoolhousecap
+entity_type: grid_rooms
+bundle: rooms
+label: schoolhousecap
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

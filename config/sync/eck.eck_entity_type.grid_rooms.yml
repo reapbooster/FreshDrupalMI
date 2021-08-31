@@ -1,0 +1,10 @@
+uuid: c0a7008c-f7ca-43d2-ae8c-babf488a07fe
+langcode: en
+status: true
+dependencies: {  }
+id: grid_rooms
+label: 'Grid Rooms'
+created: false
+changed: false
+uid: false
+title: false

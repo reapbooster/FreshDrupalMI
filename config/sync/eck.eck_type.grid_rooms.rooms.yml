@@ -1,0 +1,9 @@
+uuid: 38259f61-fbd2-4389-a49c-826f39bf3578
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_entity_type.grid_rooms
+type: rooms
+name: Rooms
+description: ''

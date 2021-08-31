@@ -1,0 +1,165 @@
+uuid: 8f8f5677-5010-4a4f-83bf-e47b8add051f
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_rooms.rooms
+    - field.field.grid_rooms.rooms.field_conference
+    - field.field.grid_rooms.rooms.field_datecreated
+    - field.field.grid_rooms.rooms.field_datemodified
+    - field.field.grid_rooms.rooms.field_eventtype
+    - field.field.grid_rooms.rooms.field_hollowcircle
+    - field.field.grid_rooms.rooms.field_hollowsquare
+    - field.field.grid_rooms.rooms.field_lounge
+    - field.field.grid_rooms.rooms.field_notes
+    - field.field.grid_rooms.rooms.field_reception
+    - field.field.grid_rooms.rooms.field_rname
+    - field.field.grid_rooms.rooms.field_roomgroup
+    - field.field.grid_rooms.rooms.field_roundscap
+    - field.field.grid_rooms.rooms.field_schoolhousecap
+    - field.field.grid_rooms.rooms.field_sortorder
+    - field.field.grid_rooms.rooms.field_theatercap
+    - field.field.grid_rooms.rooms.field_tour
+    - field.field.grid_rooms.rooms.field_ushape
+id: grid_rooms.rooms.default
+targetEntityType: grid_rooms
+bundle: rooms
+mode: default
+content:
+  field_conference:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_datecreated:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_datemodified:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_eventtype:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_hollowcircle:
+    weight: 18
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_hollowsquare:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_lounge:
+    weight: 15
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_notes:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_reception:
+    weight: 16
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_rname:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_roomgroup:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_roundscap:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_schoolhousecap:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_sortorder:
+    weight: 10
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_theatercap:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_tour:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ushape:
+    weight: 19
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

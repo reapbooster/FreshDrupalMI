@@ -1,0 +1,20 @@
+uuid: 7dc6082f-19d8-401d-9f2b-33b34040c315
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_rooms.field_roundscap
+field_name: field_roundscap
+entity_type: grid_rooms
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
