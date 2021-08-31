@@ -27,6 +27,7 @@ dependencies:
     - field.field.panel.panel.field_publish
     - field.field.panel.panel.field_regions
     - field.field.panel.panel.field_room
+    - field.field.panel.panel.field_rooms
     - field.field.panel.panel.field_sess
     - field.field.panel.panel.field_speaker_roles
     - field.field.panel.panel.field_speakers
@@ -239,6 +240,14 @@ content:
     region: content
   field_room:
     weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_rooms:
+    weight: 36
     label: above
     settings:
       link: true
