@@ -28,6 +28,10 @@ source:
       label: ID
       selector: /id
     -
+      name: title
+      label: 'Room Name'
+      selector: /attributes/rname
+    -
       name: rname
       label: 'Room Name'
       selector: /attributes/rname
@@ -100,6 +104,7 @@ source:
       type: integer
 process:
   id: id
+  title: title
   field_rname: rname
   field_schoolhousecap: schoolhousecap
   field_roundscap: roundscap
