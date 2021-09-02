@@ -249,6 +249,10 @@ function milken_migrate_update_grid_panel($max_iterations = 0, $skip_iterations 
     $array_track_ids_string = '';
     $array_panel_tracks_entities = NULL;
 
+    $array_room_ids = [];
+    $array_room_ids_string = '';
+    $array_panel_rooms_entities = NULL;
+
     print('Current Panel Record: ' . $key . "\n");
 
     // BEGIN Speaker Reference Linking Block
@@ -348,9 +352,51 @@ function milken_migrate_update_grid_panel($max_iterations = 0, $skip_iterations 
       }
     }
     // END Track Reference Linking Block.
+    // BEGIN Room Reference Linking Block
+    // Get Panel_Room Records by Panel ID.
+    $array_panel_rooms_entities = \Drupal::entityTypeManager()
+      ->getStorage('grid_join_panel_room')
+      ->loadByProperties(['type' => 'join_table', 'field_panel_id' => $key]);
+
+    if ($array_panel_rooms_entities == NULL) {
+      print('No Panel_Room entries for Panel: ' . $key) . "\n";
+    }
+    else {
+      foreach ($array_panel_rooms_entities as $panel_room_key => $panel_room_entity) {
+        // Reset all variables.
+        $panel_room_field_room_id_values = NULL;
+        $grid_room_record = NULL;
+
+        // Get and loop grid_join_panel_room.field_room_id.
+        $panel_room_field_room_id_values = $panel_room_entity->get('field_room_id')->getValue();
+
+        if ($panel_room_field_room_id_values == NULL) {
+          print('NULL field_room_id for Panel_Room: ' . $panel_room_key . ' at Panel ID: ' . $key . "\n");
+          continue;
+        }
+        else {
+          foreach ($panel_room_field_room_id_values as $room_key => $room_value) {
+            // Only add a room ID if the room actually exists.
+            $grid_room_record = \Drupal::entityTypeManager()->getStorage('grid_rooms')->load((int) $room_value['value']);
+            if ($grid_room_record == NULL) {
+              print('Could not load room[' . $room_key . '] ' . $room_value['value'] . ' at Panel ID: ' . $key . "\n");
+              continue;
+            }
+            else {
+              array_push($array_room_ids, ['target_id' => $room_value['value']]);
+              $array_room_ids_string .= $room_value['value'] . ',';
+
+            }
+          }
+        }
+      }
+    }
+
     // If panel_speakers and panel_tracks BOTH returned NULL,
     // Then skip updating and log warning.
-    if ($array_panel_speakers_entities == NULL && $array_panel_tracks_entities == NULL) {
+    if ($array_panel_speakers_entities == NULL
+      && $array_panel_tracks_entities == NULL
+      && $array_panel_rooms_entities == NULL) {
       print('No records found on BOTH Join tables for Panel ID: ' . $key . "\n");
       continue;
     }
@@ -368,10 +414,13 @@ function milken_migrate_update_grid_panel($max_iterations = 0, $skip_iterations 
     $panel_record_rw->set('field_speaker_roles', $array_speaker_roles);
     // Set Track values.
     $panel_record_rw->set('field_tracks', $array_track_ids);
+    // Set Room values.
+    $panel_record_rw->set('field_rooms', $array_room_ids);
     // Save updated Panel record.
     $panel_record_rw->save();
     print("Speaker IDs: " . $array_speaker_ids_string . "\n");
     print("Track IDs: " . $array_track_ids_string . "\n");
+    print("Room IDs: " . $array_room_ids_string . "\n");
     // print_r($array_speaker_ids);
     print('End of Loop Iteration, Panel ID: ' . $key . "; \n\n");
     // Thank you come again.
