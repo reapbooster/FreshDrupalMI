@@ -207,7 +207,7 @@ export class ParagraphDisplayTiles extends React.Component<
                   {data.field_title}
                 </h2>
                 {elSubheader}
-                {/* <a className="btn-milken-orange mt-0">Button</a> */}
+                <a className="btn-milken-orange mt-0">View More</a>
               </div>
             </div>
           );

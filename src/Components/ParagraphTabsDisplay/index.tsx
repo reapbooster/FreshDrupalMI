@@ -57,7 +57,7 @@ export class ParagraphTabsDisplay extends React.Component<ParagraphTabInterface>
    * @return { boolean } Rendered Element.
    */
   smallerHero() {
-    let validPathList = ['program', 'speakers'];
+    let smallHeroPaths = ['program', 'speakers', 'speakspeakspeak', 'superduperprogram'];
     let targetClass = ".event-slide-auto-resize";
     let desiredHeight = '350px';
     // If nothing contains the class, stop processing further
@@ -65,8 +65,8 @@ export class ParagraphTabsDisplay extends React.Component<ParagraphTabInterface>
     let heroImage = document.querySelector(targetClass)?.parentElement?.parentElement;
     let currentPath = window.location.pathname;
     let shouldResize = false;
-    validPathList.map( (validPath) => { 
-      shouldResize = ( shouldResize || currentPath.indexOf(validPath.trim().toLocaleLowerCase()) > -1 ) ? true : false; 
+    smallHeroPaths.map( (path) => { 
+      shouldResize = ( shouldResize || currentPath.indexOf(path.trim().toLocaleLowerCase()) > -1 ) ? true : false; 
     });
     if( shouldResize ) {
       heroImage.style.minHeight = desiredHeight;

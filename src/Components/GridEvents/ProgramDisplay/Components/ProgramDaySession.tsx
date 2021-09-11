@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { NodeSessionInterface } from "../../../DataTypes/NodeSession";
 
 interface ProgramDaySessionProps {
+  displayRooms: boolean;
   getSpeakerById: any;
   getTrackById: any;
   session: any;
@@ -20,11 +21,13 @@ const SPEAKER_PIC_DEFAULT = "/sites/default/files/Missing%20Photo_0.jpg";
 const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
   props: ProgramDaySessionProps
 ) => {
-  const { getSpeakerById, getTrackById, session, timeZone, viewMode } = props;
+  const { displayRooms, getSpeakerById, getTrackById, session, timeZone, viewMode } = props;
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
   useEffect(() => {}, [session]);
+
+  session.displayRooms = displayRooms;
 
   const renderSessionTime = (session: any) => {
     let startTime = moment(session.field_panel_start_time, "hh:mm").format(
@@ -33,8 +36,11 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
     let endTime = moment(session.field_panel_end_time, "kk:mm").format("H:mm");
     return (
       <div className="mt-3">
-        {startTime} {session.field_pday} - {endTime} {session.field_epday}{" "}
-        {timeZone?.toUpperCase()}
+        <div>
+          {startTime} {session.field_pday} - {endTime} {session.field_epday}{" "}
+          {timeZone?.toUpperCase()}
+        </div>
+        {session.displayRooms ? <div>{session.field_rooms}</div> : null}
       </div>
     );
   };
@@ -204,7 +210,7 @@ const ProgramDaySession: React.FC<ProgramDaySessionProps> = (
 
   const renderTitleOnly = () => {
     let video = session?.field_video
-      ? ` <a href="/media/${session?.field_video}"><i class="far fa-play-circle" /></a>`
+      ? ` <a href="/media/${session?.field_video}"><i className="far fa-play-circle" /></a>`
       : "";
     return (
       <>

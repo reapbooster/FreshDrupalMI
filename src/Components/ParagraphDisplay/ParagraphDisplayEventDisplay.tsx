@@ -31,7 +31,7 @@ const ParagraphDisplayEventDisplay: React.FunctionComponent = (
     .pop()
     .toLowerCase();
   let activeComponent =
-    activeTabFromURL === "speakers" ? (
+    activeTabFromURL === "speakers" || activeTabFromURL === "speakspeakspeak" ? (
       <GridEventsSpeakers 
         gridId={data.field_grid_event_id} 
         view_mode="card" 
@@ -40,6 +40,7 @@ const ParagraphDisplayEventDisplay: React.FunctionComponent = (
       <GridEventsProgram
         gridId={data.field_grid_event_id}
         timeZone={data.field_time_zone}
+        displayRooms={!!data.field_display_rooms}
         view_mode="accordion"
       />
     );

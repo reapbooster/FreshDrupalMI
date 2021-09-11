@@ -9,6 +9,7 @@ import NodeSession, {
 
 interface ProgramDayProps {
   date: string;
+  displayRooms: boolean;
   getSpeakerById: any;
   getTrackById: any;
   open: boolean;
@@ -22,6 +23,7 @@ interface ProgramDayProps {
 const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
   const {
     date,
+    displayRooms,
     getSpeakerById,
     getTrackById,
     open,
@@ -48,6 +50,7 @@ const ProgramDay: React.FC<ProgramDayProps> = (props: ProgramDayProps) => {
           <div className="programday-sessions-container">
             {panels.map((panel, index) => (
               <ProgramDaySession
+                displayRooms={displayRooms}
                 getSpeakerById={getSpeakerById}
                 getTrackById={getTrackById}
                 key={index}
