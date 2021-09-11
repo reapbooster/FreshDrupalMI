@@ -106,11 +106,11 @@ elements: |-
         '#type': select
         '#title': Events
         '#multiple': true
-        '#description': |
+        '#description': |-
           Our 2021 event calendar includes:
           <ul>
           	<li>Future of Health Summit | Virtual | June 22&nbsp;&ndash; 23, 2021</li>
-          	<li>Asia Summit&nbsp;| September 29&nbsp;&ndash; 30, 2021</li>
+          	<li>Asia Summit&nbsp;| Fall, 2021</li>
           	<li>Global Conference&nbsp;| October 17 &ndash; 20, 2021</li>
           	<li>Partnering for Patients | Virtual | December 7, 2021</li>
           </ul>

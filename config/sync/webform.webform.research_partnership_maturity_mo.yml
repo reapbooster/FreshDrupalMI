@@ -9,58 +9,60 @@ uid: 67
 template: false
 archive: false
 id: research_partnership_maturity_mo
-title: 'Research Partnership Maturity Model Toolkit Form'
+title: 'Download the Research Partnership Maturity Model'
 description: ''
 category: ''
 elements: |-
-  name:
-    '#type': webform_name
-    '#title': Name
-    '#required': true
-  title:
-    '#type': textfield
-    '#title': Title
-    '#required': true
-  organization:
-    '#type': textfield
-    '#title': Organization
-    '#required': true
-  phone:
-    '#type': tel
-    '#title': Phone
-    '#required': true
-  email:
-    '#type': email
-    '#title': Email
-    '#required': true
-  type_of_organization:
-    '#type': radios
-    '#title': 'Type of Organization'
-    '#options':
-      'Patient Organization': 'Patient Organization'
-      ndustry: ndustry
-      'Academic Organization': 'Academic Organization'
-      Nonprofit: Nonprofit
-      'Government Agency': 'Government Agency'
-      'Other ': 'Other  -- If other, please specify below.'
-    '#required': true
-  if_selected_other_above_please_specify_why_in_text_box_below_:
-    '#type': textarea
-    '#title': 'If selected "Other" above, please specify why in text box below.'
-  download_the_rpmm_toolkit_visualization_:
-    '#type': managed_file
-    '#title': 'Download the RPMM Toolkit Visualization '
-    '#button': true
-    '#button__title': Download
-  enter_date_downloaded:
-    '#type': date
-    '#title': 'Enter Date Downloaded'
-    '#required': true
-  rpmmtoolkit:
-    '#type': webform_link
-    '#title': 'Download the RPMM Toolkit Visualization '
-    '#title__title': 'Link TitleDownload the RPMM Toolkit Visualization '
-    '#url__title': 'https://www.dropbox.com/sh/0m5atcc3b8u8fxg/AADcFxf65wqnBG11OtTPEx04a?dl=0'
+  container:
+    '#type': container
+    processed_text:
+      '#type': processed_text
+      '#text': |
+        <h1>Research Partnership Maturity Model Visualization Form</h1>
+
+        <header>&nbsp;</header>
+      '#format': full_html
+    name:
+      '#type': webform_name
+      '#title': Name
+      '#required': true
+      '#middle__access': false
+      '#suffix__access': false
+      '#degree__access': false
+    title:
+      '#type': textfield
+      '#title': Title
+    organization:
+      '#type': textfield
+      '#title': Organization
+      '#required': true
+    phone:
+      '#type': tel
+      '#title': Phone
+      '#required': true
+    email:
+      '#type': email
+      '#title': Email
+      '#required': true
+    type_of_organization:
+      '#type': radios
+      '#title': 'Type of Organization'
+      '#options':
+        'Patient Organization': 'Patient Organization'
+        Industry: Industry
+        'Academic Organization': 'Academic Organization'
+        Nonprofit: Nonprofit
+        'Government Agency': 'Government Agency'
+        'Other ': 'Other  -- If other, please specify below.'
+      '#required': true
+    processed_text_02:
+      '#type': processed_text
+      '#text': |
+        <h3>Download the Research Partnership Maturity Model Visualization<br />
+        &nbsp;</h3>
+
+        <h4><strong><span style="background-color: #FF713D; color: #ffffff; padding: 20px;"><a href="https://www.dropbox.com/home/RPMM%20TRAIN%20Toolkit%20Zipfile?preview=RPMM+Visualization.zip" style="color: #ffffff; text-decoration: none;">Download Now</a></span></strong></h4>
+      '#format': full_html
 css: ''
 javascript: ''
 settings:
