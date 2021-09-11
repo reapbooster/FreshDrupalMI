@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.event_display.field_display_program
+    - field.field.paragraph.event_display.field_display_rooms
     - field.field.paragraph.event_display.field_display_speakers
     - field.field.paragraph.event_display.field_grid_event_id
     - field.field.paragraph.event_display.field_time_zone
@@ -23,6 +24,13 @@ content:
     third_party_settings: {  }
   field_display_program:
     weight: 3
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_display_rooms:
+    weight: 5
     settings:
       display_label: true
     third_party_settings: {  }

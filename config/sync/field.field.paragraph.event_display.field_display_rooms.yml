@@ -1,0 +1,23 @@
+uuid: c0c45ec3-87d7-411b-abdc-917bd1cb3360
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_rooms
+    - paragraphs.paragraphs_type.event_display
+id: paragraph.event_display.field_display_rooms
+field_name: field_display_rooms
+entity_type: paragraph
+bundle: event_display
+label: 'Display Rooms'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
