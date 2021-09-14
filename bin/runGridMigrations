@@ -1,11 +1,34 @@
 #!/usr/bin/env bash
 
 date > /var/www/gridMigrationStart
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_event
 terminus drush freshdrupalmi.live -- migrate:import grid_event --update --limit=10
+
+terminus drush freshdrupalmi.live -- migrate:reset-status panels
 terminus drush freshdrupalmi.live -- migrate:import panels --update --limit=500
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_speakers
 terminus drush freshdrupalmi.live -- migrate:import grid_speakers --update --limit=2000
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_panel_speakers
 terminus drush freshdrupalmi.live -- migrate:import grid_panel_speakers --update --limit=2000
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_rooms
+terminus drush freshdrupalmi.live -- migrate:import grid_rooms --update --limit=1000
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_panel_room
+terminus drush freshdrupalmi.live -- migrate:import grid_panel_room --update --limit=3000
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_tracks
+terminus drush freshdrupalmi.live -- migrate:import grid_tracks --update --limit=300
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_panel_tracks
+terminus drush freshdrupalmi.live -- migrate:import grid_panel_tracks --update --limit=12000
+
 terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 500, 0 )'
+
 terminus drush freshdrupalmi.live -- cr
-redis-cli -h 34.71.192.0 -p 22461 -a f28ed49903f5481b992aad40c0431aec flushall
+redis-cli -h 35.224.142.126 -p 10334 -a 2de6376ac0ff40c9953846a90d41edc4 flushall
+
 date > /var/www/gridMigrationEnd
