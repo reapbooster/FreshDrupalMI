@@ -163,25 +163,26 @@ const GridEventsSpeakers: React.FunctionComponent = (
 
             let facebook, instagram, linkedin, twitter;
             if (item.field_facebook !== '') {
-              facebook = <a href={item.field_facebook}><FontAwesomeIcon icon={faFacebookF} /></a>
+              facebook = <a href={item.field_facebook} target="_blank"><FontAwesomeIcon icon={faFacebookF} /></a>
             };
             if (item.field_instagram !== '') {
               let intagram_url = item.field_instagram.includes('instagram.com') ? 
                 item.field_instagram : 
                 'https://www.instagram.com/' + item.field_instagram.replace('@','');
-              instagram = <a href={intagram_url}><FontAwesomeIcon icon={faInstagram} /></a>
+              instagram = <a href={intagram_url} target="_blank"><FontAwesomeIcon icon={faInstagram} /></a>
             };
             if (item.field_linkedin !== '') {
-              linkedin = <a href={item.field_linkedin}><FontAwesomeIcon icon={faLinkedinIn} /></a>
+              linkedin = <a href={item.field_linkedin} target="_blank"><FontAwesomeIcon icon={faLinkedinIn} /></a>
             };
             if (item.field_twitter !== '') {
-              twitter = <a href={item.field_twitter.includes('https://twitter.com/') ? item.field_twitter : 'https://twitter.com/' + item.field_twitter}><FontAwesomeIcon icon={faTwitter} /></a>
+              twitter = <a href={item.field_twitter.includes('https://twitter.com/') ? item.field_twitter : 'https://twitter.com/' + item.field_twitter} target="_blank"><FontAwesomeIcon icon={faTwitter} /></a>
             };
 
             return (
               <a
                 className="col-sm-6 col-md-4 col-lg-3 p-4 text-center text-decoration-none text-dark"
                 href={`/events/${gridId}/speakers/${item.id}`}
+                target="_blank"
               >
                 <img src={imagePath} />
                 <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{ __html: unescape(item.field_first_name + ' ' + item.field_last_name) }} />
