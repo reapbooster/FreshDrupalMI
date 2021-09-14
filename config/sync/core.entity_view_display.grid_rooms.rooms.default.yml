@@ -169,6 +169,14 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  title:
+    label: hidden
+    type: string
+    weight: -5
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
 hidden:
   langcode: true
   search_api_excerpt: true
