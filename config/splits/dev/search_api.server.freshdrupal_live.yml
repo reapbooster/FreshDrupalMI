@@ -28,7 +28,7 @@ dependencies:
     - search_api_solr
 id: freshdrupal_live
 name: Fresh
-description: ''
+description: 'FreshDrupalMI Solr 8'
 backend: search_api_solr
 backend_config:
   connector: standard
@@ -47,6 +47,7 @@ backend_config:
     http_method: GET
     skip_schema_check: false
     jmx: true
+    jts: false
     solr_install_dir: ''
   disabled_field_types: {  }
   disabled_caches: {  }

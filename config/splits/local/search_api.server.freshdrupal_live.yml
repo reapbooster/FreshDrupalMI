@@ -28,7 +28,7 @@ dependencies:
     - search_api_solr
 id: freshdrupal_live
 name: Fresh
-description: ''
+description: 'FreshDrupalMI Solr 8'
 backend: search_api_solr
 backend_config:
   connector: standard
