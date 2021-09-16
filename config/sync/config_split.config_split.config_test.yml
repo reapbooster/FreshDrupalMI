@@ -5,6 +5,7 @@ dependencies: {  }
 id: config_test
 label: config_test
 description: ''
+storage: folder
 folder: ../config/splits/test
 module:
   devel: 0
@@ -13,14 +14,12 @@ module:
   search_api_solr: 51
   search_api_attachments: 52
 theme: {  }
-blacklist:
+weight: 0
+complete_list:
   - devel.settings
   - search_api.index.milken_solr
   - search_api.server.solr_dev
   - system.performance
   - views.view.search
   - devel.toolbar
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
-weight: 0
+partial_list: {  }
