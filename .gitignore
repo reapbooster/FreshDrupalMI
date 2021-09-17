@@ -5,6 +5,11 @@
 # Ignore temporary Grid migration cron job files
 gridMigrationStart
 gridMigrationEnd
+gridTestMigrationEnd
+gridTestMigrationStart
+gridLiveMigrationEnd
+gridLiveMigrationStart
+
 
 # Ignore files only needed on CI
 .bashrc
