@@ -18,7 +18,7 @@ elements: |-
     processed_text:
       '#type': processed_text
       '#text': |
-        <h1>Research Partnership Maturity Model Visualization Form</h1>
+        <h1>Access the Research Partnership Maturity Model Resources</h1>
 
         <header>&nbsp;</header>
       '#format': full_html
@@ -26,6 +26,7 @@ elements: |-
       '#type': webform_name
       '#title': Name
       '#required': true
+      '#title__access': false
       '#middle__access': false
       '#suffix__access': false
       '#degree__access': false
@@ -53,16 +54,8 @@ elements: |-
         'Academic Organization': 'Academic Organization'
         Nonprofit: Nonprofit
         'Government Agency': 'Government Agency'
-        'Other ': 'Other  -- If other, please specify below.'
+        'Other ': 'Other '
       '#required': true
-    processed_text_02:
-      '#type': processed_text
-      '#text': |
-        <h3>Download the Research Partnership Maturity Model Visualization<br />
-        &nbsp;</h3>
-
-        <h4><strong><span style="background-color: #FF713D; color: #ffffff; padding: 20px;"><a href="https://www.dropbox.com/home/RPMM%20TRAIN%20Toolkit%20Zipfile?preview=RPMM+Visualization.zip" style="color: #ffffff; text-decoration: none;">Download Now</a></span></strong></h4>
-      '#format': full_html
 css: ''
 javascript: ''
 settings:
@@ -162,9 +155,9 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: page
+  confirmation_type: message
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "Thank you for submitting your information. To download the Research Partnership Maturity Model resources, <a href=\"https://www.dropbox.com/home/RPMM%20TRAIN%20Toolkit%20Zipfile?preview=RPMM+Visualization.zip\">visit this page</a>.<br />\r\n<br />\r\n&nbsp;"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
