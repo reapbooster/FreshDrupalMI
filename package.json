@@ -151,6 +151,7 @@
     "gulp-typescript": "^5.0.1",
     "healthchecks-api": "^0.2.0",
     "holderjs": "^2.9.9",
+    "html-entities": "^1.4.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.5.2",
     "http-build-query": "^0.7.0",
