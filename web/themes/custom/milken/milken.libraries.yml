@@ -18,13 +18,13 @@ bootstrap_cdn:
     //stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js: {}
 
 main_navigation:
-  version: 1.69.1
+  version: 1.69.2
   header: true
   js:
     js/main-navigation.js: { preprocess: 0, source: 'js/main-navigation.ts' }
 
 NodeDisplay:
-  version: 1.69.1
+  version: 1.69.2
   footer: true
   webpack: true
   drupalSettings:
@@ -33,7 +33,7 @@ NodeDisplay:
     js/NodeDisplay.entry.js: { preprocess: 0, source: 'js/NodeDisplay.entry.tsx' }
 
 image_display:
-  version: 1.69.1
+  version: 1.69.2
   header: true
   js:
     js/image-display.js: { preprocess: 0, source: 'js/image-display.ts' }
