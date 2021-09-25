@@ -75,7 +75,7 @@ const GridSpeakerDisplay: React.FunctionComponent = (
   const ElMainContentWrapper = styled.div`
   `;
 
-  useEffect(() => {document.title = `${data.field_first_name} ${data.field_last_name} | Milken Institute`});
+  useEffect(() => {document.querySelector('title').innerHTML = `${data.field_first_name} ${data.field_last_name} | Milken Institute`});
 
   return (
     <MainContainer className="container-fluid">
@@ -83,8 +83,16 @@ const GridSpeakerDisplay: React.FunctionComponent = (
         <Col md="6" sm="12" className="d-flex align-items-center justify-content-end p-0 pr-xl-5">
           <div className="name-title p-5 mx-lg-5">
             <a href="#" onClick={() => { history.back() }}>&lt; Back to previous page</a>
-            <h1>{data.field_first_name} {data.field_middle_name} {data.field_last_name}</h1>
+            <h1 dangerouslySetInnerHTML={{
+                __html: decodeURIComponent(
+                  ( !!data.field_first_name ? ( data.field_first_name + ' ' ) : '' ) + 
+                  ( !!data.field_middle_name ? ( data.field_middle_name + ' ' ) : '' ) + 
+                  ( !!data.field_last_name ? ( data.field_last_name + ' ' ) : '' )
+                ),
+              }} 
+            />
             <h5 dangerouslySetInnerHTML={{__html: decodeURIComponent(data.field_description)}}/>
+            {console.log("FIRSTNAME: ", decodeURIComponent(data.field_first_name))}
           </div>
         </Col>
         <Col md="6" sm="12" className="p-0">

@@ -185,7 +185,10 @@ const GridEventsSpeakers: React.FunctionComponent = (
                 target="_blank"
               >
                 <img src={imagePath} />
-                <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{ __html: unescape(item.field_first_name + ' ' + item.field_last_name) }} />
+                <p className="font-weight-bold m-0 mt-3" dangerouslySetInnerHTML={{
+                    __html: (item.field_first_name + ' ' + item.field_last_name).replace(/&amp;/g, "&"),
+                  }} 
+                />
                 <p dangerouslySetInnerHTML={{ __html: item.field_description.replace(/&amp;/g, "&") }} />
                 <p className="icons m-0">{facebook} {instagram} {linkedin} {twitter}</p>
               </a>
