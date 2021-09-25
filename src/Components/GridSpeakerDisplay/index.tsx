@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import styled from "styled-components";
-import { SocialDisplay } from "../SocialDisplay"
+import { SocialDisplay } from "../SocialDisplay";
+import {AllHtmlEntities} from 'html-entities';
 
 interface GridSpeakerDisplayProps {
   data: any;
@@ -92,7 +93,7 @@ const GridSpeakerDisplay: React.FunctionComponent = (
               }} 
             />
             <h5 dangerouslySetInnerHTML={{__html: decodeURIComponent(data.field_description)}}/>
-            {console.log("FIRSTNAME: ", decodeURIComponent(data.field_first_name))}
+            { console.log(AllHtmlEntities.decode('&lt;&gt;&quot;&apos;&amp;&copy;&reg;&#8710;')) }
           </div>
         </Col>
         <Col md="6" sm="12" className="p-0">
