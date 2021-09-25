@@ -160,7 +160,7 @@
         "drupal/search_api_autocomplete": "^1.4",
         "drupal/search_api_solr": "^4.0.0",
         "drupal/shield": "^1.2",
-        "drupal/simple_oauth": "^5",
+        "drupal/simple_oauth": "5.0.4",
         "drupal/simple_sitemap": "^3.10",
         "drupal/slick": "^2.2",
         "drupal/slick_browser": "^2.1",
@@ -273,7 +273,7 @@
             "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
         ],
         "pre-commit": [
-            "composer validate --strict",
+            "composer validate --strict --no-check-all",
             "composer update --with-dependencies",
             "git add composer.lock",
             "@code-fix",
