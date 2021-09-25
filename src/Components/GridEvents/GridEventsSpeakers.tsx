@@ -9,6 +9,7 @@ import {
   faLinkedinIn,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import {AllHtmlEntities} from 'html-entities';
 
 interface GridEventsSpeakersProps {
   gridId: string;
@@ -131,10 +132,11 @@ const GridEventsSpeakers: React.FunctionComponent = (
     clickedLink.currentTarget.classList.add('active');
   }
 
-  const alphabetArray = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
+  const alphabetArray = "abcdefghijklmnopqrsŞtuvwxyz".toUpperCase().split("");
   let matchingLetters = [];
+  console.log("MATCHINGLETTERS SORTED: ", matchingLetters.sort());
   let groupedSpeakers = fetchedData.reduce((r, e) => {
-    let group = e.field_last_name[0].toUpperCase();
+    let group = AllHtmlEntities.decode(AllHtmlEntities.decode(e.field_last_name))[0].toUpperCase();
     if (!r[group]) {
       r[group] = { group, children: [e] }
       matchingLetters.push(group);
@@ -142,8 +144,20 @@ const GridEventsSpeakers: React.FunctionComponent = (
       r[group].children.push(e);
     }
     return r;
-  }, {})
+  }, {});
   console.debug("SPEAKERS GROUPED: ", groupedSpeakers);
+
+  // Sort groupedSpeakers Object
+  const ordered = Object.keys(groupedSpeakers).sort().reduce(
+    (obj, key) => { 
+      obj[key] = groupedSpeakers[key]; 
+      return obj;
+    }, 
+    {}
+  );
+  
+  console.log('Re-Sorted SPEAKERS GROUPED: ', ordered);
+  groupedSpeakers = ordered;
 
   let speakersHTML = [];
   for (const speakerGroup in groupedSpeakers) {
