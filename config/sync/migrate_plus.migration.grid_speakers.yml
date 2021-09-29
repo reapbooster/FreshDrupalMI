@@ -329,16 +329,28 @@ source:
 process:
   id: id
   title:
-    plugin: concat
-    source:
-      - spkrnm
-      - mname
-      - lname
-    delimiter: ' '
+    -
+      plugin: concat
+      source:
+        - spkrnm
+        - mname
+        - lname
+      delimiter: ' '
+    -
+      plugin: 'milken_migrate:html_entities'
+      action: decode
+    - 
+      plugin: str_replace
+      search: '  '
+      replace: ' '
+
   field_attendeeid: id
   field_biolink: biolink
   field_biopic: biopic
-  field_biotext: biotext
+  field_biotext: 
+    plugin: 'milken_migrate:html_entities'
+    source: biotext
+    action: decode
   field_cancelled: canceled
   field_city: city
   field_connections: connections
@@ -348,7 +360,10 @@ process:
   field_datecreated: datecreated
   field_datemodified: datemodified
   field_datesuggested: datesuggested
-  field_description: description
+  field_description: 
+    plugin: 'milken_migrate:html_entities'
+    source: description
+    action: decode
   field_developmentpriority: developmentpriority
   field_devorganization: devorganization
   field_devrelationcontact: devrelationcontact
@@ -357,15 +372,24 @@ process:
   field_eventid: eventid
   field_facebook: facebook
   field_facebookfollowers: facebookfollowers
-  field_first_name: spkrnm
+  field_first_name: 
+    plugin: 'milken_migrate:html_entities'
+    source: spkrnm
+    action: decode
   field_instagram: instagram
   field_invitationextend: invitationextend
   field_invitationwhom: invitationwhom
   field_ipnum: ipnum
-  field_last_name: lname
+  field_last_name: 
+    plugin: 'milken_migrate:html_entities'
+    source: lname
+    action: decode
   field_linkedin: linkedin
   field_location: location
-  field_middle_name: mname
+  field_middle_name: 
+    plugin: 'milken_migrate:html_entities'
+    source: mname
+    action: decode
   field_modifiedbyid: modifiedbyid
   field_needsfinaledit: needsfinaledit
   field_notes: notes
