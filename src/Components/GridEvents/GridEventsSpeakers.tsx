@@ -157,7 +157,7 @@ const GridEventsSpeakers: React.FunctionComponent = (
   );
   
   console.log('Re-Sorted SPEAKERS GROUPED: ', ordered);
-  groupedSpeakers = ordered;
+  // groupedSpeakers = ordered;
 
   let speakersHTML = [];
   for (const speakerGroup in groupedSpeakers) {
