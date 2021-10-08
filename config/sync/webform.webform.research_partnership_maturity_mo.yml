@@ -155,9 +155,9 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: message
+  confirmation_type: page
   confirmation_title: ''
-  confirmation_message: "Thank you for submitting your information. To download the Research Partnership Maturity Model resources, <a href=\"https://www.dropbox.com/home/RPMM%20TRAIN%20Toolkit%20Zipfile?preview=RPMM+Visualization.zip\">visit this page</a>.<br />\r\n<br />\r\n&nbsp;"
+  confirmation_message: "<h2>Thank you for submitting your information.</h2>\r\n<br />\r\nTo download the Research Partnership Maturity Model resources, <a href=\"https://www.dropbox.com/sh/79kr8wlmd13d5zt/AADM9AYOo_pP0S-gNbSkbu-Za?dl=0\">visit this page</a>.<br />\r\n<br />\r\n&nbsp;"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
