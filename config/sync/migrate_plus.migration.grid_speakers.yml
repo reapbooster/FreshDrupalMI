@@ -339,15 +339,14 @@ process:
     -
       plugin: 'milken_migrate:html_entities'
       action: decode
-    - 
+    -
       plugin: str_replace
       search: '  '
       replace: ' '
-
   field_attendeeid: id
   field_biolink: biolink
   field_biopic: biopic
-  field_biotext: 
+  field_biotext:
     plugin: 'milken_migrate:html_entities'
     source: biotext
     action: decode
@@ -360,7 +359,7 @@ process:
   field_datecreated: datecreated
   field_datemodified: datemodified
   field_datesuggested: datesuggested
-  field_description: 
+  field_description:
     plugin: 'milken_migrate:html_entities'
     source: description
     action: decode
@@ -372,7 +371,7 @@ process:
   field_eventid: eventid
   field_facebook: facebook
   field_facebookfollowers: facebookfollowers
-  field_first_name: 
+  field_first_name:
     plugin: 'milken_migrate:html_entities'
     source: spkrnm
     action: decode
@@ -380,13 +379,13 @@ process:
   field_invitationextend: invitationextend
   field_invitationwhom: invitationwhom
   field_ipnum: ipnum
-  field_last_name: 
+  field_last_name:
     plugin: 'milken_migrate:html_entities'
     source: lname
     action: decode
   field_linkedin: linkedin
   field_location: location
-  field_middle_name: 
+  field_middle_name:
     plugin: 'milken_migrate:html_entities'
     source: mname
     action: decode
