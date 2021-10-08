@@ -53,8 +53,80 @@ function _log_migrate_debug_info($message) {
  * Implements hook_cron().
  */
 function milken_migrate_cron() {
-  module_load_include('inc', 'milken_migrate', "milken_migrate.cron");
-  return milken_migrate_cron_run_migrations();
+  // module_load_include('inc', 'milken_migrate', "milken_migrate.cron");
+  // return milken_migrate_cron_run_migrations();
+}
+
+/**
+ * Custom function to pull thumbnails from oEmbed service.
+ *
+ * Usage: drush php:eval 'milken_migrate_fix_vimeo_urls('url', 'r|rw')'.
+ */
+function milken_migrate_fix_vimeo_urls($filter_url = 'vimeo', $mode = 'r') {
+
+  print ("\n\nThis function fixes Vimeo URLs for oEmbed.");
+  print ("\nIn order to trigger the oEmbed data fetcher module.");
+  print ("\nIt will set the video URL field to a temp Vimeo video URL and then to the correct one.");
+  print ("\nThen to the correct one and trigger oEmbed fetching again.");
+
+  $result = \Drupal::entityQuery("media")
+    ->condition('bundle', 'video')
+    ->condition('field_media_oembed_video', $filter_url, 'CONTAINS')
+    ->execute();
+  $i = 0;
+  $correct_url_counter = 0;
+  $incorrect_url_counter = 0;
+
+  foreach ($result as $id) {
+    $video = Media::load($id);
+
+    // Get old URI from field value.
+    $url = $video->get('field_media_oembed_video')->getValue();
+    $old_uri = $url[0]['value'];
+    $temp_uri = "https://player.vimeo.com/video/35";
+    $new_uri = "TBD in the code down below...";
+
+    print("\n\nCurrent URL: " . $old_uri);
+
+    // Search for correct URL format on old URI.
+    if (stripos($old_uri, "//player.vimeo.com/video/") === FALSE) {
+      $incorrect_url_counter++;
+      $fixed_uri = str_ireplace("//vimeo.com/", "//player.vimeo.com/video/", $old_uri);
+      // Fix the old URI and set that as the new URI.
+      $new_uri = $fixed_uri;
+
+      print ("\nThe Current URL format is INCORRECT :(");
+      print ("\nInstead of: " . $old_uri);
+      print ("\nIt should be: " . $new_uri);
+      print ("\nNot to worry! PHP to the rescue! :)");
+    }
+    else {
+      $correct_url_counter++;
+      print ("\nThe old URL is in the correct format!");
+      // Old URI is fine, use that as the new one.
+      $new_uri = $old_uri;
+    }
+
+    if ($mode == 'rw') {
+      // Save a random URI to trigger oEmbed.
+      $video->set('field_media_oembed_video', $temp_uri);
+      $video->save();
+      print ("\nUpdating to a temp Video URL: " . $temp_uri);
+      $video->set('field_media_oembed_video', $new_uri);
+      $video->save();
+      print ("\nUpdating to correct URL from: " . $old_uri . ' TO ' . $new_uri);
+    }
+    elseif ($mode == 'r') {
+      print ("\nNo write permissions, to modify records run again with 'rw' as the second parameter.");
+    }
+
+    $i++;
+  }
+
+  // Stats for this run.
+  print ("\n\n\nFound " . $incorrect_url_counter . " records with an incorrect URL format.");
+  print ("\nFound " . $correct_url_counter . " records with the correct URL format.");
+  print ("\n\nTotal records processed: " . $i . "\n\n\n");
 }
 
 /**
