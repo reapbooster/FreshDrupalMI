@@ -6,13 +6,16 @@ terminus drush freshdrupalmi.test -- migrate:reset-status grid_event
 terminus drush freshdrupalmi.test -- migrate:import grid_event --update --limit=10
 
 terminus drush freshdrupalmi.test -- migrate:reset-status panels
-terminus drush freshdrupalmi.test -- migrate:import panels --update --limit=500
+# terminus drush freshdrupalmi.test -- migrate:import panels --update --limit=500
+terminus drush freshdrupalmi.test -- migrate:import panels --update --limit=2000
 
 terminus drush freshdrupalmi.test -- migrate:reset-status grid_speakers
-terminus drush freshdrupalmi.test -- migrate:import grid_speakers --update --limit=2000
+# terminus drush freshdrupalmi.test -- migrate:import grid_speakers --update --limit=2000
+terminus drush freshdrupalmi.test -- migrate:import grid_speakers --update --limit=5000
 
 terminus drush freshdrupalmi.test -- migrate:reset-status grid_panel_speakers
-terminus drush freshdrupalmi.test -- migrate:import grid_panel_speakers --update --limit=2000
+# terminus drush freshdrupalmi.test -- migrate:import grid_panel_speakers --update --limit=2000
+terminus drush freshdrupalmi.test -- migrate:import grid_panel_speakers --update --limit=5000
 
 terminus drush freshdrupalmi.test -- migrate:reset-status grid_rooms
 terminus drush freshdrupalmi.test -- migrate:import grid_rooms --update --limit=1000
@@ -24,9 +27,18 @@ terminus drush freshdrupalmi.test -- migrate:reset-status grid_tracks
 terminus drush freshdrupalmi.test -- migrate:import grid_tracks --update --limit=300
 
 terminus drush freshdrupalmi.test -- migrate:reset-status grid_panel_tracks
-terminus drush freshdrupalmi.test -- migrate:import grid_panel_tracks --update --limit=12000
+# terminus drush freshdrupalmi.test -- migrate:import grid_panel_tracks --update --limit=12000
+terminus drush freshdrupalmi.test -- migrate:import grid_panel_tracks --update --limit=1000
 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 500, 0 )'
+# terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 500, 0 )'
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 250, 0 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 500, 249 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 750, 499 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1000, 749 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1250, 999 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1500, 1249 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1750, 1499 )' 
+terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 2000, 1749 )' 
 
 terminus drush freshdrupalmi.test -- cr
 
