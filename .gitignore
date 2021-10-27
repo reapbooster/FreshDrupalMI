@@ -9,7 +9,8 @@ gridTestMigrationEnd
 gridTestMigrationStart
 gridLiveMigrationEnd
 gridLiveMigrationStart
-
+gridSpeakerMigrationStart
+gridSpeakerMigrationEnd
 
 # Ignore files only needed on CI
 .bashrc
