@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+date > /var/www/gridSpeakerMigrationStart
+
+terminus drush freshdrupalmi.live -- migrate:reset-status grid_speakers
+terminus drush freshdrupalmi.live -- migrate:import grid_speakers --update --limit=5000
+
+terminus drush freshdrupalmi.live -- cr
+redis-cli -h 35.224.142.126 -p 10334 -a 2de6376ac0ff40c9953846a90d41edc4 flushall
+
+date > /var/www/gridSpeakerMigrationEnd
