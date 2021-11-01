@@ -86,13 +86,15 @@ const FilterTracks: React.FC<FilterTracksProps> = (
         </div>
       </div>
       {tracksOptions.map((track, index) => {
-        if (index < 2) {
-          return renderOptionRow(index, track);
-        } else {
-          if (expanded) {
+        if (track.field_hidden === "False") {
+          if (index < 2) {
             return renderOptionRow(index, track);
           } else {
-            return null;
+            if (expanded) {
+              return renderOptionRow(index, track);
+            } else {
+              return null;
+            }
           }
         }
       })}
