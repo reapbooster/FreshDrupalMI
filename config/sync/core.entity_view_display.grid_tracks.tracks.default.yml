@@ -6,6 +6,7 @@ dependencies:
     - eck.eck_type.grid_tracks.tracks
     - field.field.grid_tracks.tracks.field_description
     - field.field.grid_tracks.tracks.field_event_id
+    - field.field.grid_tracks.tracks.field_hidden
     - field.field.grid_tracks.tracks.field_track_id
     - field.field.grid_tracks.tracks.field_track_type
   module:
@@ -40,6 +41,16 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_hidden:
+    weight: 5
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_track_id:
     weight: 3

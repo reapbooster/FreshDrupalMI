@@ -6,6 +6,7 @@ dependencies:
     - eck.eck_type.grid_tracks.tracks
     - field.field.grid_tracks.tracks.field_description
     - field.field.grid_tracks.tracks.field_event_id
+    - field.field.grid_tracks.tracks.field_hidden
     - field.field.grid_tracks.tracks.field_track_id
     - field.field.grid_tracks.tracks.field_track_type
   module:
@@ -36,6 +37,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_hidden:
+    weight: 15
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_track_id:
     weight: 13

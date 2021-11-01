@@ -1,0 +1,23 @@
+uuid: 0a377958-4505-4cf1-9b4b-98282b350e80
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.grid_tracks.tracks
+    - field.storage.grid_tracks.field_hidden
+id: grid_tracks.tracks.field_hidden
+field_name: field_hidden
+entity_type: grid_tracks
+bundle: tracks
+label: Hidden
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

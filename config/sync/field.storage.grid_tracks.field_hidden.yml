@@ -1,0 +1,18 @@
+uuid: ceddd855-8140-4935-8386-bea80bb3ec74
+langcode: en
+status: true
+dependencies:
+  module:
+    - eck
+id: grid_tracks.field_hidden
+field_name: field_hidden
+entity_type: grid_tracks
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
