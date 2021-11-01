@@ -23,6 +23,9 @@ settings:
     -
       value: pst
       label: PST
+    -
+      value: sgt
+      label: SGT
   allowed_values_function: ''
 module: options
 locked: false
