@@ -10,3 +10,5 @@ rsync -rvlz --copy-unsafe-links --size-only --checksum --ipv4 --progress -e 'ssh
 
 rm -Rf web/sites/default/files
 ln -s ${FILES_FOLDER} ${FILES_SYMLINK}
+
+chown -R www-data:www-data /var/www/db/files/
