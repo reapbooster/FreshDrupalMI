@@ -34,7 +34,7 @@ backend_config:
   connector: standard
   connector_config:
     scheme: https
-    host: milken-dev.reapbooster.com
+    host: milken-resources.milkeninstitute.org
     port: 8443
     path: /
     core: freshmilken_dev
