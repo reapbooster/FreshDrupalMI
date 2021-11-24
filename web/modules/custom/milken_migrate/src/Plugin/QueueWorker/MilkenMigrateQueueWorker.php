@@ -5,6 +5,7 @@ namespace Drupal\milken_migrate\Plugin\QueueWorker;
 use Drupal\migrate\MigrateMessage;
 use Drupal\migrate\Plugin\Migration;
 use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\Core\Queue\QueueWorkerInterface;
 use Drupal\migrate_tools\MigrateExecutable;
 
 /**
@@ -18,7 +19,7 @@ use Drupal\migrate_tools\MigrateExecutable;
  *   },
  * )
  */
-class MilkenMigrateQueueWorker {
+class MilkenMigrateQueueWorker extends QueueWorkerInterface {
 
   /**
    * Main process function.
