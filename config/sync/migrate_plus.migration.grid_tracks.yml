@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Grid Tracks'
 source:
   plugin: url
-  urls: 'https://milken-resources.milkeninstitute.org:8443/jsonapi/tracks/'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/tracks/'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://milken-resources.milkeninstitute.org:8443'
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
   jsonapi_endpoint: /jsonapi/tracks/
   item_selector: data
   fields:
