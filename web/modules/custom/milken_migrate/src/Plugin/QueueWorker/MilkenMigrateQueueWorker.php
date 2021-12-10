@@ -6,6 +6,7 @@ use Drupal\migrate\MigrateMessage;
 use Drupal\migrate\Plugin\Migration;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\Queue\QueueWorkerInterface;
 use Drupal\migrate_tools\MigrateExecutable;
 
 /**
