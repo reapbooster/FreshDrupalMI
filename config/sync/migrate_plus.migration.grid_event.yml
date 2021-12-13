@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Event VIA JSON API - Text Only'
 source:
   plugin: url
-  urls: 'https://milken-resources.milkeninstitute.org:8443/jsonapi/events/'
+  urls: 'https://159.89.131.2:80/jsonapi/events/'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://milken-resources.milkeninstitute.org:8443'
+  jsonapi_host: 'https://159.89.131.2:80'
   jsonapi_endpoint: /jsonapi/events/
   item_selector: data
   fields:
