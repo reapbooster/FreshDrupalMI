@@ -487,4 +487,5 @@ tracker_settings:
 options:
   index_directly: false
   cron_limit: 200
+  track_changes_in_references: true
 server: freshdrupal_live
