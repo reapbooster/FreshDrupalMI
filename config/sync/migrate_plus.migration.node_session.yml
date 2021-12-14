@@ -15,10 +15,10 @@ migration_group: milken
 label: 'Node => Session VIA JSON API'
 source:
   plugin: url
-  urls: 'https://159.89.131.2:80/jsonapi/panels'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/panels'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://159.89.131.2:80'
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
   jsonapi_endpoint: /jsonapi/panels
   item_selector: data
   jsonapi_include: true

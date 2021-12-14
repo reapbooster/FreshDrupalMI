@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Grid Panel-Rooms Joining Table'
 source:
   plugin: url
-  urls: 'https://159.89.131.2:80/jsonapi/panel/rooms/'
+  urls: 'https://milken-dev.reapbooster.com:8443/jsonapi/panel/rooms/'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://159.89.131.2:80'
+  jsonapi_host: 'https://milken-dev.reapbooster.com:8443'
   jsonapi_endpoint: /jsonapi/panel/rooms/
   item_selector: data
   fields:
