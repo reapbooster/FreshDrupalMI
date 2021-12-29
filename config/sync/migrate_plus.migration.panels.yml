@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Event Panels/Sessions from the Grid'
 source:
   plugin: url
-  urls: 'https://159.89.131.2:80/jsonapi/panels'
+  urls: 'http://159.89.131.2:80/jsonapi/panels'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://159.89.131.2:80'
+  jsonapi_host: 'http://159.89.131.2:80'
   jsonapi_endpoint: /jsonapi/panels
   item_selector: data
   jsonapi_include: true

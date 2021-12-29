@@ -16,10 +16,10 @@ migration_group: milken
 label: 'Grid Panel-Speakers Joining Table'
 source:
   plugin: url
-  urls: 'https://159.89.131.2:80/jsonapi/panel/speakers/'
+  urls: 'http://159.89.131.2:80/jsonapi/panel/speakers/'
   data_fetcher_plugin: http
   data_parser_plugin: jsonapi
-  jsonapi_host: 'https://159.89.131.2:80'
+  jsonapi_host: 'http://159.89.131.2:80'
   jsonapi_endpoint: /jsonapi/panel/speakers/
   item_selector: data
   fields:
