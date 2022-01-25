@@ -3,3 +3,8 @@ services:
     class: \Drupal\milken_migrate\Commands\MilkenMigrateCommands
     tags:
       - { name: drush.command }
+  milken_migrate.update_grid_panel:
+    class: \Drupal\milken_migrate\Commands\UpdateGridPanelCommands
+    tags:
+      - { name: drush.command }
+    arguments: [ '@entity_type.manager', '@logger.factory' ]
