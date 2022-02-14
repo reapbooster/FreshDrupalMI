@@ -31,26 +31,7 @@ terminus drush freshdrupalmi.live -- migrate:reset-status grid_panel_tracks
 terminus drush freshdrupalmi.live -- migrate:import grid_panel_tracks --update --limit=1000
 
 # terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 500, 0 )'
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 250, 0 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 500, 249 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 750, 499 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 1000, 749 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 1250, 999 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 1500, 1249 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 1750, 1499 )' 
-terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 2000, 1749 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 2250, 1999 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 2500, 2249 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 2750, 2499 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 3000, 2749 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 3250, 2999 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 3500, 3249 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 3750, 3499 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 4000, 3749 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 4250, 3999 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 4500, 4249 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 4750, 4499 )' 
-# terminus drush freshdrupalmi.live -- php:eval 'milken_migrate_update_grid_panel( 5000, 4749 )' 
+terminus drush freshdrupalmi.live -- update:grid-panel
 
 terminus drush freshdrupalmi.live -- cr
 redis-cli -h 35.224.142.126 -p 10334 -a 2de6376ac0ff40c9953846a90d41edc4 flushall

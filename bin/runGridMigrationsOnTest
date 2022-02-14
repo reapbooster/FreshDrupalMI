@@ -31,14 +31,7 @@ terminus drush freshdrupalmi.test -- migrate:reset-status grid_panel_tracks
 terminus drush freshdrupalmi.test -- migrate:import grid_panel_tracks --update --limit=1000
 
 # terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 500, 0 )'
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 250, 0 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 500, 249 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 750, 499 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1000, 749 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1250, 999 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1500, 1249 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 1750, 1499 )' 
-terminus drush freshdrupalmi.test -- php:eval 'milken_migrate_update_grid_panel( 2000, 1749 )' 
+terminus drush freshdrupalmi.test -- update:grid-panel
 
 terminus drush freshdrupalmi.test -- cr
 
